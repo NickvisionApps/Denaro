@@ -31,11 +31,10 @@ endif()
 
 find_package(libnick CONFIG REQUIRED)
 find_package(Boost REQUIRED COMPONENTS date_time)
-find_package(LibOFX CONFIG REQUIRED)
 find_package(Matplot++ CONFIG REQUIRED)
 find_package(podofo CONFIG REQUIRED)
 find_path(RAPIDCSV_INCLUDE_DIRS "rapidcsv.h")
-target_link_libraries(libdenaro PUBLIC libnick::libnick Boost::boost Boost::date_time libofx::libofx Matplot++::cimg Matplot++::matplot OpenSP::OpenSP $<IF:$<TARGET_EXISTS:podofo_shared>,podofo_shared,podofo_static>)
+target_link_libraries(libdenaro PUBLIC libnick::libnick Boost::boost Boost::date_time Matplot++::cimg Matplot++::matplot $<IF:$<TARGET_EXISTS:podofo_shared>,podofo_shared,podofo_static>)
 target_include_directories(libdenaro PUBLIC ${RAPIDCSV_INCLUDE_DIRS})
 
 if(HAS_GETTEXT)

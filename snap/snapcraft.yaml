@@ -72,27 +72,6 @@ parts:
       - uuid-dev
     override-prime: ''
 
-  libopensp:
-    after: [build-deps]
-    source: https://downloads.sourceforge.net/project/openjade/opensp/1.5.2/OpenSP-1.5.2.tar.gz
-    source-type: tar
-    plugin: autotools
-
-  libofx:
-    after: [build-deps, libopensp]
-    source: https://github.com/libofx/libofx.git
-    source-tag: '0.10.9'
-    source-depth: 1
-    plugin: cmake
-    cmake-parameters:
-      - -DCMAKE_INSTALL_PREFIX=/usr
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DENABLE_OFX2QIF=OFF
-      - -DENABLE_OFXDUMP=OFF
-      - -DENABLE_OFXCONNECT=OFF
-    build-environment:
-      - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
-
   libxmlplusplus:
     after: [build-deps]
     source: https://github.com/libxmlplusplus/libxmlplusplus.git
@@ -147,7 +126,7 @@ parts:
       - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
 
   denaro:
-    after: [build-deps, maddy, libnick, libofx, libxmlplusplus, matplotplusplus, podofo, rapidcsv]
+    after: [build-deps, maddy, libnick, libxmlplusplus, matplotplusplus, podofo, rapidcsv]
     plugin: cmake
     source: .
     build-snaps:

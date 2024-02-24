@@ -88,4 +88,19 @@ TEST_F(AccountTest, ImportTestAccountOFX)
 {
     ImportResult result{ m_account->importFromFile(Aura::getActive().getExecutableDirectory() / "DenaroTestAccount2.ofx", {}, {}) };
     ASSERT_EQ(result.getNewTransactionIds().size(), 3);
+    const Transaction& t1{ m_account->getTransactions().at(result.getNewTransactionIds()[0]) };
+    const Transaction& t2{ m_account->getTransactions().at(result.getNewTransactionIds()[1]) };
+    const Transaction& t3{ m_account->getTransactions().at(result.getNewTransactionIds()[2]) };
+    ASSERT_EQ(t1.getDescription(), "Lunch");
+    ASSERT_EQ(t1.getAmount(), -25.0);
+    ASSERT_EQ(t1.getType(), TransactionType::Expense);
+    ASSERT_EQ(t1.getDate(), boost::gregorian::date(2023, 1, 27));
+    ASSERT_EQ(t2.getDescription(), "Pay day");
+    ASSERT_EQ(t2.getAmount(), 300);
+    ASSERT_EQ(t2.getType(), TransactionType::Income);
+    ASSERT_EQ(t2.getDate(), boost::gregorian::date(2023, 1, 28));
+    ASSERT_EQ(t3.getDescription(), "Phone bill");
+    ASSERT_EQ(t3.getAmount(), -75.0);
+    ASSERT_EQ(t3.getType(), TransactionType::Expense);
+    ASSERT_EQ(t3.getDate(), boost::gregorian::date(2023, 1, 29));
 }

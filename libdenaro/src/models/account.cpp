@@ -1,7 +1,8 @@
 #include "models/account.h"
 #include <algorithm>
 #include <format>
-#include <libofx/libofx.h>
+#include <fstream>
+#include <regex>
 #include <libnick/app/aura.h>
 #include <libnick/database/sqlstatement.h>
 #include <libnick/helpers/stringhelpers.h>
@@ -917,84 +918,85 @@ namespace Nickvision::Money::Shared::Models
 
     ImportResult Account::importFromOFX(const std::filesystem::path& path, const Color& defaultTransactionColor)
     {
-        LibofxContextPtr libofx{ libofx_get_new_context() };
         ImportResult result;
-        std::tuple<Account*, ImportResult*, Color> cbData{ this, &result, defaultTransactionColor };
-        //Set dtd files
-        std::filesystem::path dtdDir{ Aura::getActive().getExecutableDirectory() / "dtd/" };
-        libofx_set_dtd_dir(libofx, dtdDir.string().c_str());
-        //Callback to read account information
-        ofx_set_account_cb(libofx, [](const struct OfxAccountData accountData, void* data)
+        //Read all lines from ofx file
+        std::ifstream file{ path };
+        std::string ofx;
+        if(file.is_open())
         {
-            Account& account{ *static_cast<Account*>(data) };
-            AccountMetadata metadata{ account.getMetadata() };
-            bool metadataChanged{ false };
-            //Only update the account name if it wasn't already set by the user
-            if(accountData.account_number_valid && metadata.getName() == account.m_path.stem().string())
+            for(std::string line; std::getline(file, line);)
             {
-                metadata.setName(accountData.account_name);
-                metadataChanged = true;
-            }
-            //Only update the account type if it wasn't already set by the user
-            if(accountData.account_type_valid && metadata.getType() == AccountType::Checking)
-            {
-                if(accountData.account_type == OfxAccountData::AccountType::OFX_CHECKING)
+                size_t r{ line.find("\r") };
+                if(r != std::string::npos)
                 {
-                    metadata.setType(AccountType::Checking);
+                    line.erase(r);
                 }
-                else if(accountData.account_type == OfxAccountData::AccountType::OFX_SAVINGS)
-                {
-                    metadata.setType(AccountType::Savings);
-                }
-                metadataChanged = true;
+                ofx += line + "\n";
             }
-            if(metadataChanged)
-            {
-                account.setMetadata(metadata);
-            }
-            return 0;
-        }, this);
-        //Callback to read transactions
-        ofx_set_transaction_cb(libofx, [](const struct OfxTransactionData transactionData, void* data)
+        }
+        //Parse ofx file
+        if(!ofx.empty())
         {
-            std::tuple<Account*, ImportResult*, Color>& cbData{ *static_cast<std::tuple<Account*, ImportResult*, Color>*>(data) };
-            Transaction t{ std::get<0>(cbData)->getNextAvailableTransactionId() };
-            if(transactionData.date_posted_valid)
+            m_database.exec("BEGIN TRANSACTION");
+            std::regex transactionRegex{ "<STMTTRN>([\\s\\S]+?)</STMTTRN>" };
+            std::regex transactionInfoRegex{ "<(.+)>(.+)(\\s|</.+>|$)" };
+            //Find all transaction blocks (<STMTTRN>...</STMTTRN>)
+            for(std::sregex_iterator it{ ofx.begin(), ofx.end(), transactionRegex }, end{}; it != end; it++)
             {
-                t.setDate(boost::gregorian::date_from_tm(*gmtime(&transactionData.date_posted)));
+                Transaction transaction{ getNextAvailableTransactionId() };
+                bool nameSet{ false };
+                bool dateSet{ false };
+                std::string info{ it->str(1) };
+                bool transactionValid{ true };
+                //Populate transaction info
+                transaction.setColor(defaultTransactionColor);
+                for(std::sregex_iterator it2{ info.begin(), info.end(), transactionInfoRegex }; it2 != end; it2++)
+                {
+                    std::string tag{ it2->str(1) };
+                    std::string content{ it2->str(2) };
+                    // Name
+                    if((tag == "NAME") || (tag == "MEMO") && !nameSet)
+                    {
+                        transaction.setDescription(content);
+                        nameSet = true;
+                    }
+                    // Amount
+                    if(tag == "TRNAMT")
+                    {
+                        try
+                        {
+                            transaction.setAmount(std::stod(content));
+                        }
+                        catch(...)
+                        {
+                            transactionValid = false;
+                            break;
+                        }
+                        transaction.setType(transaction.getAmount() >= 0 ? TransactionType::Income : TransactionType::Expense);
+                    }
+                    // Date
+                    if((tag == "DTPOSTED" || tag == "DTUSER") && !dateSet)
+                    {
+                        try
+                        {
+                            transaction.setDate(boost::gregorian::from_undelimited_string(content));
+                        }
+                        catch(...)
+                        {
+                            transactionValid = false;
+                            break;
+                        }
+                        dateSet = true;
+                    }
+                }
+                //Add new transaction
+                if(transactionValid && addTransaction(transaction))
+                {
+                    result.addTransaction(transaction.getId());
+                }
             }
-            else if(transactionData.date_initiated_valid)
-            {
-                t.setDate(boost::gregorian::date_from_tm(*gmtime(&transactionData.date_initiated)));
-            }
-            else if(transactionData.date_funds_available_valid)
-            {
-                t.setDate(boost::gregorian::date_from_tm(*gmtime(&transactionData.date_funds_available)));
-            }
-            if(transactionData.name_valid)
-            {
-                t.setDescription(transactionData.name);
-            }
-            else if(transactionData.memo_valid)
-            {
-                t.setDescription(transactionData.memo);
-            }
-            if(transactionData.amount_valid)
-            {
-                t.setType(transactionData.amount >= 0 ? TransactionType::Income : TransactionType::Expense);
-                t.setAmount(transactionData.amount);
-            }
-            t.setColor(std::get<2>(cbData));
-            if(std::get<0>(cbData)->addTransaction(t))
-            {
-                std::get<1>(cbData)->addTransaction(t.getId());
-            }
-            return 0;
-        }, &cbData);
-        m_database.exec("BEGIN TRANSACTION");
-        libofx_proc_file(libofx, path.string().c_str(), LibofxFileFormat::AUTODETECT);
-        m_database.exec("COMMIT");
-        libofx_free_context(libofx);
+            m_database.exec("COMMIT");
+        }
         return result;
     }
 

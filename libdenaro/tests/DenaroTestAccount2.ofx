@@ -10,56 +10,56 @@ NEWFILEUID:NONE
 
 <OFX>
 <SIGNONMSGSRSV1>
-	<SONRS>
-		<STATUS>
-			<CODE>0
-			<SEVERITY>INFO
-		</STATUS>
-		<DTSERVER>20230128000000
-		<LANGUAGE>FRA
-	</SONRS>
+    <SONRS>
+        <STATUS>
+            <CODE>0
+            <SEVERITY>INFO
+        </STATUS>
+        <DTSERVER>20230128000000
+        <LANGUAGE>FRA
+    </SONRS>
 </SIGNONMSGSRSV1>
 <BANKMSGSRSV1>
-	<STMTTRNRS>
-		<TRNUID>20230128000000
-		<STATUS>
-			<CODE>0
-			<SEVERITY>INFO
-		</STATUS>
-		<STMTRS>
-			<CURDEF>EUR
-			<BANKACCTFROM>
-				<BANKID>10278
-				<BRANCHID>06153
-				<ACCTID>00099999999
-				<ACCTTYPE>CHECKING
-			</BANKACCTFROM>
-			<BANKTRANLIST>
-				<DTSTART>20230127000000
-				<DTEND>20230129000000
-				<STMTTRN>
-					<TRNTYPE>DEBIT
-					<DTPOSTED>20230127
-					<DTUSER>20230127
-					<TRNAMT>-25.00
-					<NAME>Lunch
-				</STMTTRN>
+    <STMTTRNRS>
+        <TRNUID>20230128000000
+        <STATUS>
+            <CODE>0
+            <SEVERITY>INFO
+        </STATUS>
+        <STMTRS>
+            <CURDEF>EUR
+            <BANKACCTFROM>
+                <BANKID>10278
+                <BRANCHID>06153
+                <ACCTID>00099999999
+                <ACCTTYPE>CHECKING
+            </BANKACCTFROM>
+            <BANKTRANLIST>
+                <DTSTART>20230127000000
+                <DTEND>20230129000000
                 <STMTTRN>
-					<TRNTYPE>DEBIT
-					<DTPOSTED>20230128
-					<DTUSER>202301278
-					<TRNAMT>300.00
-					<NAME>Pay day
-				</STMTTRN>
+                    <TRNTYPE>DEBIT
+                    <DTPOSTED>20230127
+                    <DTUSER>20230127
+                    <TRNAMT>-25.00
+                    <NAME>Lunch
+                </STMTTRN>
                 <STMTTRN>
-					<TRNTYPE>DEBIT
-					<DTPOSTED>20230129
-					<DTUSER>20230129
-					<TRNAMT>-75.00
-					<NAME>Phone bill
-				</STMTTRN>
-			</BANKTRANLIST>
-		</STMTRS>
-	</STMTTRNRS>
+                    <TRNTYPE>DEBIT
+                    <DTPOSTED>20230128
+                    <DTUSER>20230128
+                    <TRNAMT>300.00
+                    <NAME>Pay day
+                </STMTTRN>
+                <STMTTRN>
+                    <TRNTYPE>DEBIT
+                    <DTPOSTED>20230129
+                    <DTUSER>20230129
+                    <TRNAMT>-75.00
+                    <NAME>Phone bill
+                </STMTTRN>
+            </BANKTRANLIST>
+        </STMTRS>
+    </STMTTRNRS>
 </BANKMSGSRSV1>
 </OFX>

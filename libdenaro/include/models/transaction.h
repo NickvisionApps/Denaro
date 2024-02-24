@@ -176,7 +176,7 @@ namespace Nickvision::Money::Shared::Models
          * @param newDate The date to use for the repeat transaction
          * @return The new repeat transaction
          */
-        Transaction repeat(int newId, const boost::gregorian::date& newDate) const;
+        Transaction repeat(int newId, const boost::gregorian::date& newDate = boost::gregorian::day_clock::local_day()) const;
         /**
          * @brief Gets whether or not this Transaction is equal to compare Transaction.
          * @param compare The Transaction to compare to

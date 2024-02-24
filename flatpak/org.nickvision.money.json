@@ -94,46 +94,6 @@
             ]
         },
         {
-            "name": "libopensp",
-            "buildsystem": "autotools",
-            "config-opts": [
-                "--disable-doc-build"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://downloads.sourceforge.net/project/openjade/opensp/1.5.2/OpenSP-1.5.2.tar.gz",
-                    "sha512": "a7dcc246ba7f58969ecd6d107c7b82dede811e65f375b7aa3e683621f2c6ff3e7dccefdd79098fcadad6cca8bb94c2933c63f4701be2c002f9a56f1bbe6b047e"
-                },
-                {
-                    "type": "patch",
-                    "path": "opensp_1.5.2-13.diff"
-                },
-                {
-                    "type": "patch",
-                    "path": "use-cpp-using-declarations.patch"
-                }
-            ]
-        },
-        {
-            "name": "libofx",
-            "buildsystem": "cmake-ninja",
-            "builddir": true,
-            "config-opts": [
-                "-DCMAKE_BUILD_TYPE=Release",
-                "-DENABLE_OFX2QIF=OFF",
-                "-DENABLE_OFXDUMP=OFF",
-                "-DENABLE_OFXCONNECT=OFF"
-            ],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://github.com/libofx/libofx",
-                    "tag": "0.10.9"
-                }
-            ]
-        },
-        {
             "name": "libxmlplusplus",
             "buildsystem": "meson",
             "config-opts": [
