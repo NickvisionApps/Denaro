@@ -29,11 +29,6 @@ if(LINUX)
         endforeach()
     endif()
 
-    add_custom_command(TARGET org.nickvision.money.gnome POST_BUILD COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_SOURCE_DIR}/resources/dtd/ofc.dtd" "${CMAKE_CURRENT_BINARY_DIR}/dtd/ofc.dtd")
-    add_custom_command(TARGET org.nickvision.money.gnome POST_BUILD COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_SOURCE_DIR}/resources/dtd/ofx160.dtd" "${CMAKE_CURRENT_BINARY_DIR}/dtd/ofx160.dtd")
-    add_custom_command(TARGET org.nickvision.money.gnome POST_BUILD COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_SOURCE_DIR}/resources/dtd/ofx201.dtd" "${CMAKE_CURRENT_BINARY_DIR}/dtd/ofx201.dtd")
-    add_custom_command(TARGET org.nickvision.money.gnome POST_BUILD COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_SOURCE_DIR}/resources/dtd/opensp.dcl" "${CMAKE_CURRENT_BINARY_DIR}/dtd/opensp.dcl")
-
     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/resources/${PROJECT_NAME}.desktop.in" "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.desktop" @ONLY)
     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/resources/${PROJECT_NAME}.in" "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}" @ONLY)
     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/resources/${PROJECT_NAME}.metainfo.xml.in" "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.metainfo.xml" @ONLY)
