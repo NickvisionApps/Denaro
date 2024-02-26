@@ -59,6 +59,7 @@ TEST_F(AccountTest, ImportTestAccountCSV)
     ASSERT_EQ(result.getNewTransactionIds().size(), 1498);
     ASSERT_EQ(result.getNewGroupIds().size(), 2);
     ASSERT_TRUE(m_account->getTotal() > 0);
+    ASSERT_TRUE(m_account->getIncome() != m_account->getExpense());
 }
 
 TEST_F(AccountTest, ExportTestAccountCSV)
@@ -92,7 +93,7 @@ TEST_F(AccountTest, ImportTestAccountOFX)
     const Transaction& t2{ m_account->getTransactions().at(result.getNewTransactionIds()[1]) };
     const Transaction& t3{ m_account->getTransactions().at(result.getNewTransactionIds()[2]) };
     ASSERT_EQ(t1.getDescription(), "Lunch");
-    ASSERT_EQ(t1.getAmount(), -25.0);
+    ASSERT_EQ(t1.getAmount(), 25.0);
     ASSERT_EQ(t1.getType(), TransactionType::Expense);
     ASSERT_EQ(t1.getDate(), boost::gregorian::date(2023, 1, 27));
     ASSERT_EQ(t2.getDescription(), "Pay day");
@@ -100,7 +101,28 @@ TEST_F(AccountTest, ImportTestAccountOFX)
     ASSERT_EQ(t2.getType(), TransactionType::Income);
     ASSERT_EQ(t2.getDate(), boost::gregorian::date(2023, 1, 28));
     ASSERT_EQ(t3.getDescription(), "Phone bill");
-    ASSERT_EQ(t3.getAmount(), -75.0);
+    ASSERT_EQ(t3.getAmount(), 75.0);
     ASSERT_EQ(t3.getType(), TransactionType::Expense);
     ASSERT_EQ(t3.getDate(), boost::gregorian::date(2023, 1, 29));
+}
+
+TEST_F(AccountTest, ImportTestAccountQIF)
+{
+    ImportResult result{ m_account->importFromFile(Aura::getActive().getExecutableDirectory() / "DenaroTestAccount3.qif", {}, {}) };
+    ASSERT_EQ(result.getNewGroupIds().size(), 1);
+    const Group& g1{ m_account->getGroups().at(result.getNewGroupIds()[0]) };
+    ASSERT_EQ(g1.getName(), "Food");
+    ASSERT_EQ(result.getNewTransactionIds().size(), 2);
+    const Transaction& t1{ m_account->getTransactions().at(result.getNewTransactionIds()[0]) };
+    const Transaction& t2{ m_account->getTransactions().at(result.getNewTransactionIds()[1]) };
+    ASSERT_EQ(t1.getDescription(), "Pay day");
+    ASSERT_EQ(t1.getAmount(), 600);
+    ASSERT_EQ(t1.getType(), TransactionType::Income);
+    ASSERT_EQ(t1.getDate(), boost::gregorian::date(2023, 1, 22));
+    ASSERT_EQ(t1.getGroupId(), 1);
+    ASSERT_EQ(t2.getDescription(), "Some food");
+    ASSERT_EQ(t2.getAmount(), 50);
+    ASSERT_EQ(t2.getType(), TransactionType::Expense);
+    ASSERT_EQ(t2.getDate(), boost::gregorian::date(2023, 1, 22));
+    ASSERT_EQ(t2.getGroupId(), g1.getId());
 }

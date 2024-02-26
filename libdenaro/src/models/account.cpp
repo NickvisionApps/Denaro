@@ -427,6 +427,14 @@ namespace Nickvision::Money::Shared::Models
         {
             return false;
         }
+        //Group names must be unique
+        for(const std::pair<const int, Group>& pair : m_groups)
+        {
+            if(pair.second.getName() == group.getName())
+            {
+                return false;
+            }
+        }
         SqlStatement statement{ m_database.createStatement("INSERT INTO groups (id, name, description, rgba) VALUES (?,?,?,?)") };
         statement.bind(1, group.getId());
         statement.bind(2, group.getName());
@@ -445,6 +453,14 @@ namespace Nickvision::Money::Shared::Models
         if(!m_groups.contains(group.getId()))
         {
             return false;
+        }
+        //Group names must be unique
+        for(const std::pair<const int, Group>& pair : m_groups)
+        {
+            if(pair.second.getName() == group.getName() && pair.second.getId() != group.getId())
+            {
+                return false;
+            }
         }
         SqlStatement statement{ m_database.createStatement("UPDATE groups SET name = ?, description = ?, rgba = ? WHERE id = ?") };
         statement.bind(1, group.getName());
@@ -882,6 +898,10 @@ namespace Nickvision::Money::Shared::Models
             t.setRepeatFrom(csv.GetCell<int>(5, i));
             t.setRepeatEndDate(DateHelpers::fromUSDateString(csv.GetCell<std::string>(6, i)));
             t.setAmount(csv.GetCell<double>(7, i));
+            if(t.getAmount() < 0)
+            {
+                t.setAmount(t.getAmount() * -1);
+            }
             t.setColor({ csv.GetCell<std::string>(8, i) });
             if(!t.getColor())
             {
@@ -965,14 +985,15 @@ namespace Nickvision::Money::Shared::Models
                     {
                         try
                         {
-                            transaction.setAmount(std::stod(content));
+                            double amount{ std::stod(content) };
+                            transaction.setAmount(amount < 0 ? amount * -1 : amount);
+                            transaction.setType(amount >= 0 ? TransactionType::Income : TransactionType::Expense);
                         }
                         catch(...)
                         {
                             transactionValid = false;
                             break;
                         }
-                        transaction.setType(transaction.getAmount() >= 0 ? TransactionType::Income : TransactionType::Expense);
                     }
                     // Date
                     if((tag == "DTPOSTED" || tag == "DTUSER") && !dateSet)
@@ -1002,7 +1023,111 @@ namespace Nickvision::Money::Shared::Models
 
     ImportResult Account::importFromQIF(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor)
     {
-        return {};
+        ImportResult result;
+        //Parse qif file
+        std::ifstream file{ path };
+        std::unique_ptr<Transaction> transaction{ std::make_unique<Transaction>(getNextAvailableTransactionId()) };
+        transaction->setColor(defaultTransactionColor);
+        if(file.is_open())
+        {
+            bool amountSet{ false };
+            bool descriptionSet{ false };
+            bool transactionValid{ true };
+            m_database.exec("BEGIN TRANSACTION");
+            for(std::string line; std::getline(file, line);)
+            {
+                if(line.empty() || line[0] == '!')
+                {
+                    continue;
+                }
+                //Add transaction
+                if(line[0] == '^')
+                {
+                    if(amountSet && descriptionSet && transactionValid)
+                    {
+                        if(addTransaction(*transaction))
+                        {
+                            result.addTransaction(transaction->getId());
+                        }
+                    }
+                    transaction.reset();
+                    transaction = std::make_unique<Transaction>(getNextAvailableTransactionId());
+                    transaction->setColor(defaultTransactionColor);
+                    amountSet = false;
+                    descriptionSet = false;
+                    transactionValid = true;
+                }
+                //Date
+                else if(line[0] == 'D')
+                {
+                    try
+                    {
+                        transaction->setDate(DateHelpers::fromUSDateString(line.substr(1)));
+                    }
+                    catch(...)
+                    {
+                        transactionValid = false;
+                        break;
+                    }
+                }
+                //Amount
+                else if(line[0] == 'T')
+                {
+                    try
+                    {
+                        double amount{ std::stod(line.substr(1)) };
+                        transaction->setAmount(amount < 0 ? amount * -1 : amount);
+                        transaction->setType(amount >= 0 ? TransactionType::Income : TransactionType::Expense);
+                        amountSet = true;
+                    }
+                    catch(...)
+                    {
+                        transactionValid = false;
+                        break;
+                    }
+                }
+                //Description
+                else if((line[0] == 'P' || line[0] == 'M') && !descriptionSet)
+                {
+                    transaction->setDescription(line.substr(1));
+                    descriptionSet = true;
+                }
+                //Group
+                else if(line[0] == 'L')
+                {
+                    std::string name{ line.substr(1) };
+                    if(name.empty())
+                    {
+                        continue;
+                    }
+                    if(name[0] == '[' && name[name.size() - 1] == ']') //remove [] if surrounding group name
+                    {
+                        name = name.substr(1, name.size() - 2);
+                    }
+                    Group g{ getNextAvailableGroupId() };
+                    g.setName(name);
+                    g.setColor(defaultGroupColor);
+                    if(addGroup(g))
+                    {
+                        result.addGroup(g.getId());
+                        transaction->setGroupId(g.getId());
+                    }
+                    else
+                    {
+                        for(const std::pair<const int, Group>& pair : m_groups)
+                        {
+                            if(pair.second.getName() == g.getName())
+                            {
+                                transaction->setGroupId(pair.first);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            m_database.exec("COMMIT");
+        }
+        return result;
     }
 
     Account::operator bool() const
