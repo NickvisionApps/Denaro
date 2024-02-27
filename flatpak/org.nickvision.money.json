@@ -95,7 +95,13 @@
         },
         {
             "name": "gnuplot",
-            "buildsystem": "autotools",
+            "buildsystem": "simple",
+            "build-commands": [
+                "./prepare",
+                "./configure --prefix=/app",
+                "make",
+                "make install"
+            ],
             "sources": [
                 {
                     "type": "archive",
