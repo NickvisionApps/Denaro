@@ -4,15 +4,18 @@
 #include <fstream>
 #include <regex>
 #include <libnick/app/aura.h>
+#include <libnick/filesystem/userdirectories.h>
 #include <libnick/database/sqlstatement.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/localization/gettext.h>
+#include <matplot/matplot.h>
 #include <rapidcsv.h>
 #include "helpers/datehelpers.h"
 #include "models/currency.h"
 
 using namespace Nickvision::App;
 using namespace Nickvision::Database;
+using namespace Nickvision::Filesystem;
 
 namespace Nickvision::Money::Shared::Models
 {
@@ -863,12 +866,50 @@ namespace Nickvision::Money::Shared::Models
 
     bool Account::exportToPDF(const std::filesystem::path& path, const std::string& password, ExportMode exportMode, const std::vector<int>& filteredIds) const
     {
+        //TODO: Implement
         return false;
     }
 
     std::vector<std::uint8_t> Account::generateGraph(GraphType type, bool darkMode, const std::vector<int>& filteredIds, int width, int height, bool showLegend) const
     {
-        return {};
+        std::string tempPath{ StringHelpers::replace((UserDirectories::getApplicationCache() / "graph.png").string(), "\\", "/") };
+        matplot::figure_handle figure{ matplot::figure(true) };
+        //Set graph size
+        if(width != -1 && height != -1)
+        {
+            figure->size(static_cast<unsigned int>(width), static_cast<unsigned int>(height));
+        }
+        //Render graph
+        if(type == GraphType::IncomeExpensePie)
+        {
+            std::vector<double> values{ getIncome(filteredIds), getExpense(filteredIds) };
+            std::vector<std::string> labels{ _("Income"), _("Expense") };
+            figure->current_axes()->pie(values, labels);
+        }
+        else if(type == GraphType::IncomeExpensePerGroup)
+        {
+
+        }
+        else if(type == GraphType::IncomeExpenseOverTime)
+        {
+
+        }
+        else if(type == GraphType::IncomeByGroup)
+        {
+
+        }
+        else if(type == GraphType::ExpenseByGroup)
+        {
+
+        }
+        //Get graph bytes
+        figure->save(tempPath);
+        figure->~figure_type();
+        std::ifstream in{ tempPath, std::ios_base::binary };
+        std::vector<std::uint8_t> bytes{ std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>() };
+        in.close();
+        std::filesystem::remove(tempPath);
+        return bytes;
     }
 
     ImportResult Account::importFromCSV(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor)

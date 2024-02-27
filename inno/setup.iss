@@ -34,6 +34,8 @@ WizardStyle=modern
 PrivilegesRequired=admin
 DirExistsWarning=no
 CloseApplications=force
+ChangesEnvironment=yes
+AlwaysRestart=yes
 
 [Code]
 procedure SetupVC();
@@ -54,6 +56,36 @@ begin
     MsgBox('Unable to install Windows App SDK. Please try again', mbError, MB_OK);
 end;
 
+procedure SetupGnuPlot();
+var
+  ResultCode: Integer;
+begin
+  if not Exec(ExpandConstant('{app}\deps\gnuplot.exe'), '/verysilent /norestart /allusers', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+  then
+    MsgBox('Unable to install gnuplot. Please try again', mbError, MB_OK);
+end;
+
+function NeedsAddPath(Param: string): boolean;
+var
+  OrigPath: string;
+begin
+  if not RegQueryStringValue(HKEY_LOCAL_MACHINE,
+    'SYSTEM\CurrentControlSet\Control\Session Manager\Environment',
+    'Path', OrigPath)
+  then begin
+    Result := True;
+    exit;
+  end;
+  { look for the path with leading and trailing semicolon }
+  { Pos() returns 0 if not found }
+  Result := Pos(';' + Param + ';', ';' + OrigPath + ';') = 0;
+end;
+
+[Registry]
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; \
+    ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};C:\Program Files\gnuplot\bin"; \
+    Check: NeedsAddPath('C:\Program Files\gnuplot\bin')
+
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
@@ -63,6 +95,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "..\..\VC_redist.x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupVC  
 Source: "..\..\WindowsAppRuntimeInstall-x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupWinAppSDK  
+Source: "..\..\gnuplot.exe"; DestDir: "{app}\deps"; AfterInstall: SetupGnuPlot
 Source: "..\build\org.nickvision.money.winui\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "..\build\org.nickvision.money.winui\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files

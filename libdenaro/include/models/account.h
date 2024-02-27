@@ -225,7 +225,7 @@ namespace Nickvision::Money::Shared::Models
          * @param showLegend Whether or not to show the graph's legend
          * @return The byte vector of the graph image
          */
-        std::vector<std::uint8_t> generateGraph(GraphType type, bool darkMode, const std::vector<int>& filteredIds, int width = -1, int height = -1, bool showLegend = true) const;
+        std::vector<std::uint8_t> generateGraph(GraphType type, bool darkMode, const std::vector<int>& filteredIds = {}, int width = -1, int height = -1, bool showLegend = true) const;
         /**
          * @brief Gets whether or not the object is valid or not.
          * @return True if valid (m_loggedIn), else false 

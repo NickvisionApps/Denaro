@@ -58,6 +58,11 @@ namespace Nickvision::Money::Shared::Models
 
     void Transaction::setAmount(double amount)
     {
+        if(amount < 0) //Transaction amounts must not be negative. The type of the transaction determines if the amount should be added or subtracted.
+        {
+            amount *= -1;
+            m_type = TransactionType::Expense;
+        }
         m_amount = amount;
     }
 

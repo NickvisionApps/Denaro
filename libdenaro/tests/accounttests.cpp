@@ -126,3 +126,14 @@ TEST_F(AccountTest, ImportTestAccountQIF)
     ASSERT_EQ(t2.getDate(), boost::gregorian::date(2023, 1, 22));
     ASSERT_EQ(t2.getGroupId(), g1.getId());
 }
+
+TEST_F(AccountTest, IncomeExpensePieGraph)
+{
+#ifdef _WIN32
+    if(!Aura::getActive().getEnvVar("GITHUB_ACTIONS").empty())
+    {
+        return;
+    }
+#endif
+    ASSERT_TRUE(!m_account->generateGraph(GraphType::IncomeExpensePie, false).empty());
+}

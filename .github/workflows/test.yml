@@ -14,8 +14,8 @@ env:
   GITHUB_ACTIONS: true
   VCPKG_ROOT: ${{github.workspace}}/vcpkg
 jobs:
-  test:
-    name: "Test on x64"
+  windows:
+    name: "Test on Windows"
     runs-on: windows-latest
     if: ${{ github.event.pull_request.user.login != 'weblate' }}
     steps:
@@ -39,3 +39,36 @@ jobs:
           cmake --build . --config ${{env.BUILD_TYPE}}
       - name: Test
         run: ${{github.workspace}}/build/libdenaro/Release/libdenaro_test.exe
+  linux:
+    name: "Test on Linux"
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.user.login != 'weblate' }}
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+      - name: "Setup Environment"
+        run: |
+          mkdir build
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa -y
+          sudo apt-get update
+          sudo apt-get install g++-13 gcc-13 xdg-user-dirs gettext tzdata locales gnuplot -y
+          xdg-user-dirs-update
+          sudo locale-gen en_US.UTF-8
+          sudo update-locale LANG=en_US.UTF-8
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100 --slave /usr/bin/g++ g++ /usr/bin/g++-13 --slave /usr/bin/gcov gcov /usr/bin/gcov-13
+      - name: "Vcpkg"
+        uses: johnwason/vcpkg-action@v5
+        id: vcpkg
+        with:
+          pkgs: boost-date-time gtest libnick matplotplusplus podofo rapidcsv
+          triplet: x64-linux
+          cache-key: ubuntu-latest
+          revision: 72d66da23b4332533c82d797bf2f82b8d6d1bf8a
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Build"
+        working-directory: ${{github.workspace}}/build
+        run: |
+          cmake .. -DBUILD_TESTING=ON -DBACKEND_ONLY=ON -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+          cmake --build .
+      - name: Test
+        run: ${{github.workspace}}/build/libdenaro/libdenaro_test

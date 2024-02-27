@@ -40,6 +40,7 @@ parts:
       - libjsoncpp25
       - libboost-date-time1.74.0
       - libstdc++6
+      - gnuplot
     prime:
       - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libstdc++*.so*
       - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libjsoncpp*
