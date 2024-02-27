@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-19 11:20-0500\n"
+"POT-Creation-Date: 2024-02-27 17:08-0500\n"
 "PO-Revision-Date: 2023-08-24 20:09+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -19,74 +19,104 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.0\n"
 
-#: libdenaro/src/models/account.cpp:152
+#: libdenaro/src/models/account.cpp:101
 msgid "Ungrouped"
 msgstr "Ryhmittämätön"
 
-#: libdenaro/src/models/account.cpp:153
+#: libdenaro/src/models/account.cpp:102
 msgid "Transactions without a group"
 msgstr "Tapahtumat ilman ryhmää"
 
-#: libdenaro/src/models/account.cpp:227
+#: libdenaro/src/models/account.cpp:212
 msgid "Tomorrow"
 msgstr "Huomenna"
 
-#: libdenaro/src/models/account.cpp:231
+#: libdenaro/src/models/account.cpp:216
 msgid "One week from now"
 msgstr "Yksi viikko tästä hetkestä"
 
-#: libdenaro/src/models/account.cpp:235
+#: libdenaro/src/models/account.cpp:220
 msgid "One month from now"
 msgstr "Yksi kuukausi tästä hetkestä"
 
-#: libdenaro/src/models/account.cpp:239
+#: libdenaro/src/models/account.cpp:224
 msgid "Two months from now"
 msgstr "Kaksi kuukautta tästä hetkestä"
 
-#: libdenaro/src/models/account.cpp:634
+#: libdenaro/src/models/account.cpp:771
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Siirrä kohteeseen {0}"
 
-#: libdenaro/src/models/account.cpp:651
+#: libdenaro/src/models/account.cpp:788
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Siirrä kohteesta {0}"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:26
+#: libdenaro/src/models/account.cpp:887
+msgid "Income"
+msgstr "Tulo"
+
+#: libdenaro/src/models/account.cpp:887
+msgid "Expense"
+msgstr "Meno"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:29
 msgid "Denaro"
 msgstr "Denaro"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:27
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:30
 msgid "Manage your personal finances"
 msgstr "Hallitse raha-asioitasi"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:31
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
 msgid "Matrix Chat"
 msgstr "Matrix-keskustelu"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:33
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
 #, fuzzy
 msgid "Contributors on GitHub"
 msgstr "Avustajat GitHubissa ❤️"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:35
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:41
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:43
 msgid "translator-credits"
 msgstr "Jiri Grönroos"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:141
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:121
+msgctxt "Night"
+msgid "Good Morning!"
+msgstr "Hyvää huomenta!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:125
+msgctxt "Morning"
+msgid "Good Morning!"
+msgstr "Hyvää huomenta!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:129
+msgid "Good Afternoon!"
+msgstr "Hyvää iltapäivää!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:133
+msgid "Good Evening!"
+msgstr "Hyvää iltaa!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:135
+msgid "Good Day!"
+msgstr "Hyvää päivää!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:176
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:159
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:194
 msgid "Unable to download and install update"
 msgstr ""
 
@@ -120,19 +150,19 @@ msgid "Theme"
 msgstr "Teema"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgctxt "Theme"
 msgid "Light"
 msgstr "Vaalea"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
 msgctxt "Theme"
 msgid "Dark"
 msgstr "Tumma"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
 msgctxt "Theme"
 msgid "System"
 msgstr "Järjestelmä"
@@ -169,65 +199,78 @@ msgid "Quit"
 msgstr "Lopeta"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Open"
 msgstr "Avaa"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "GitHub Repo"
 msgstr "GitHub-tietovarasto"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:64
-#, fuzzy
-msgid "Search for Files"
-msgstr "Tyhjennä tiedosto"
+msgid "Search"
+msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:65
 msgid "Home"
 msgstr "Etusivu"
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+msgid "Dashboard"
+msgstr "Kojelauta"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+msgid "Accounts"
+msgstr "Tilit"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Help"
 msgstr "Ohje"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Vie kaikki tiedot"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Changelog"
 msgstr "Muutosloki"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Report a Bug"
 msgstr "Ilmoita ongelmasta"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "Discussions"
 msgstr "Keskustelut"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "Credits"
 msgstr "Tekijät"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:19
 msgid "Settings"
 msgstr "Asetukset"
 
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#, fuzzy
+msgid "New"
+msgstr "Uusi"
+
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:87
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:91
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:94
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -237,7 +280,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:102
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -249,35 +292,88 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:158
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:163
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:222
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:227
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:284
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:289
 msgid "Debug information copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
-msgid "An application restart is required to change the theme."
-msgstr ""
-
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
 msgid "Automatically Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
 #, fuzzy
 msgid "On"
 msgstr "Avaa"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
 #, fuzzy
 msgid "Off"
 msgstr "Pois"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+msgid "Colors"
+msgstr "Värit"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#, fuzzy
+msgid "Default Transaction Color"
+msgstr "Tapahtuman oletustyyppi"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
+msgid ""
+"A change in this setting will only be applied to newly added transactions."
+msgstr "Muutos tähän asetukseen toteutetaan vain uusiin tapahtumiin."
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
+#, fuzzy
+msgid "Default Transfer Color"
+msgstr "Tapahtuman oletustyyppi"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
+#, fuzzy
+msgid "Default Group Color"
+msgstr "Tapahtuman oletustyyppi"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
+#, fuzzy
+msgid "A change in this setting will only be applied to newly added groups."
+msgstr "Muutos tähän asetukseen toteutetaan vain uusiin ryhmiin."
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
+msgid "Locale"
+msgstr "Maa-asetusto"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
+msgid "Insert Decimal Separator"
+msgstr "Syötä desimaalierotin"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
+msgid ""
+"For the selected keys, the account's decimal separator will be inserted "
+"instead of the keyboard's value."
+msgstr ""
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
+msgid "Numpad period only"
+msgstr ""
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
+msgid "Period and Comma"
+msgstr "Piste ja pilkku"
+
+#, fuzzy
+#~ msgid "Search for Files"
+#~ msgstr "Tyhjennä tiedosto"
 
 #~ msgid "(Copy)"
 #~ msgstr "(Kopio)"
@@ -423,9 +519,6 @@ msgstr "Pois"
 #~ msgid "Destination Account Password (Required)"
 #~ msgstr "Kohdetilin salasana (pakollinen)"
 
-#~ msgid "Expense"
-#~ msgstr "Meno"
-
 #~ msgid "Export to File"
 #~ msgstr "Vie tiedostoon"
 
@@ -435,15 +528,6 @@ msgstr "Pois"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "Luotu: {0}"
-
-#~ msgid "Good Afternoon!"
-#~ msgstr "Hyvää iltapäivää!"
-
-#~ msgid "Good Day!"
-#~ msgstr "Hyvää päivää!"
-
-#~ msgid "Good Evening!"
-#~ msgstr "Hyvää iltaa!"
 
 #~ msgid "Group"
 #~ msgstr "Ryhmä"
@@ -474,9 +558,6 @@ msgstr "Pois"
 #~ msgid_plural "Imported {0} transactions from file."
 #~ msgstr[0] "Tuotu {0} tapahtuma tiedostosta."
 #~ msgstr[1] "Tuotu {0} tapahtumaa tiedostosta."
-
-#~ msgid "Income"
-#~ msgstr "Tulo"
 
 #~ msgid "N/A"
 #~ msgstr "-"
@@ -650,19 +731,8 @@ msgstr "Pois"
 #~ msgid "Your system reported that your currency is"
 #~ msgstr "Järjestelmä ilmoitti, että käyttämäsi valuutta on"
 
-#~ msgctxt "Morning"
-#~ msgid "Good Morning!"
-#~ msgstr "Hyvää huomenta!"
-
-#~ msgctxt "Night"
-#~ msgid "Good Morning!"
-#~ msgstr "Hyvää huomenta!"
-
 #~ msgid "Back"
 #~ msgstr "Takaisin"
-
-#~ msgid "Default Transaction Type"
-#~ msgstr "Tapahtuman oletustyyppi"
 
 #~ msgid "Manage the currency used by the account."
 #~ msgstr "Hallitse tilillä käytettävää valuuttaa."
@@ -741,10 +811,6 @@ msgstr "Pois"
 
 #~ msgid "New Group (Ctrl+G)"
 #~ msgstr "Uusi ryhmä (Ctrl+G)"
-
-#~ msgctxt "Group"
-#~ msgid "New"
-#~ msgstr "Uusi"
 
 #~ msgid "Toggle Groups Visibility"
 #~ msgstr "Näytä/piilota ryhmät"
@@ -873,18 +939,11 @@ msgstr "Pois"
 #~ msgid "Unlock"
 #~ msgstr "Avaa lukitus"
 
-#~ msgid "Colors"
-#~ msgstr "Värit"
-
 #~ msgid "Customize the colors used by Denaro."
 #~ msgstr "Mukauta Denaron käyttämiä värejä."
 
 #~ msgid "Transaction Default Color"
 #~ msgstr "Tapahtuman oletusväri"
-
-#~ msgid ""
-#~ "A change in this setting will only be applied to newly added transactions."
-#~ msgstr "Muutos tähän asetukseen toteutetaan vain uusiin tapahtumiin."
 
 #~ msgid "Transfer Default Color"
 #~ msgstr "Siirron oletusväri"
@@ -895,9 +954,6 @@ msgstr "Pois"
 #~ msgid "Group Default Color"
 #~ msgstr "Ryhmän oletusväri"
 
-#~ msgid "A change in this setting will only be applied to new groups."
-#~ msgstr "Muutos tähän asetukseen toteutetaan vain uusiin ryhmiin."
-
 #~ msgid "Checking Account Color"
 #~ msgstr "Siirtotilin väri"
 
@@ -906,15 +962,6 @@ msgstr "Pois"
 
 #~ msgid "Business Account Color"
 #~ msgstr "Yritystilin väri"
-
-#~ msgid "Locale"
-#~ msgstr "Maa-asetusto"
-
-#~ msgid "Insert Decimal Separator"
-#~ msgstr "Syötä desimaalierotin"
-
-#~ msgid "Period and Comma"
-#~ msgstr "Piste ja pilkku"
 
 #, fuzzy
 #~ msgid "Backup"
@@ -1053,9 +1100,6 @@ msgstr "Pois"
 
 #~ msgid "No Recent Accounts"
 #~ msgstr "Ei viimeisimpiä tilejä"
-
-#~ msgid "Dashboard"
-#~ msgstr "Kojelauta"
 
 #~ msgid ""
 #~ "Create or open an account to get started. You may also drag a file into "
@@ -1217,9 +1261,6 @@ msgstr "Pois"
 
 #~ msgid "New Window"
 #~ msgstr "Uusi ikkuna"
-
-#~ msgid "Accounts"
-#~ msgstr "Tilit"
 
 #~ msgid "No Backup Folder"
 #~ msgstr "Ei varmuuskopiokansiota"

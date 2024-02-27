@@ -61,8 +61,10 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         TitleBar().Loaded([&](const IInspectable sender, const RoutedEventArgs& args) { SetDragRegionForCustomTitleBar(); });
         TitleBar().SizeChanged([&](const IInspectable sender, const SizeChangedEventArgs& args) { SetDragRegionForCustomTitleBar(); });
         //Localize Strings
-        TitleBarSearchBox().PlaceholderText(winrt::to_hstring(_("Search for Files")));
+        TitleBarSearchBox().PlaceholderText(winrt::to_hstring(_("Search")));
         NavViewHome().Content(winrt::box_value(winrt::to_hstring(_("Home"))));
+        NavViewDashboard().Content(winrt::box_value(winrt::to_hstring(_("Dashboard"))));
+        NavViewAccounts().Content(winrt::box_value(winrt::to_hstring(_("Accounts"))));
         NavViewHelp().Content(winrt::box_value(winrt::to_hstring(_("Help"))));
         ToolTipService::SetToolTip(BtnCheckForUpdates(), winrt::box_value(winrt::to_hstring(_("Check for Updates"))));
         ToolTipService::SetToolTip(BtnCopyDebugInfo(), winrt::box_value(winrt::to_hstring(_("Copy Debug Information"))));
@@ -72,6 +74,8 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         BtnDiscussions().Content(winrt::box_value(winrt::to_hstring(_("Discussions"))));
         LblCredits().Text(winrt::to_hstring(_("Credits")));
         NavViewSettings().Content(winrt::box_value(winrt::to_hstring(_("Settings"))));
+        HomeNewAccountLabel().Text(winrt::to_hstring(_("New")));
+        HomeOpenAccountLabel().Text(winrt::to_hstring(_("Open")));
     }
 
     void MainWindow::SetController(const std::shared_ptr<MainWindowController>& controller, ElementTheme systemTheme)
@@ -97,6 +101,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         {
             LblAppCredits().Text(winrt::to_hstring(std::vformat(_("Developers:\n{}\nDesigners:\n{}\nArtists:\n{}\nTranslators:\n{}"), std::make_format_args(StringHelpers::join(keys(m_controller->getAppInfo().getDevelopers()), "\n"), StringHelpers::join(keys(m_controller->getAppInfo().getDesigners()), "\n"), StringHelpers::join(keys(m_controller->getAppInfo().getArtists()), "\n"), StringHelpers::join(m_controller->getAppInfo().getTranslatorNames(), "\n", false)))));
         }
+        StatusPageHome().Title(winrt::to_hstring(m_controller->getGreeting()));
     }
 
     void MainWindow::OnLoaded(const IInspectable& sender, const RoutedEventArgs& args)
@@ -239,9 +244,9 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         {
             ViewStack().CurrentPage(L"Home");
         }
-        else if(tag == L"Folder")
+        else if(tag == L"Dashboard")
         {
-            ViewStack().CurrentPage(L"Folder");
+            ViewStack().CurrentPage(L"Dashboard");
         }
         else if(tag == L"Settings")
         {
@@ -250,7 +255,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
             ViewStack().CurrentPage(L"Custom");
             FrameCustom().Content(winrt::box_value(page));
         }
-        TitleBarSearchBox().Visibility(tag == L"Folder" ? Visibility::Visible : Visibility::Collapsed);
+        TitleBarSearchBox().Visibility(tag != L"Home" && tag != L"Settings" ? Visibility::Visible : Visibility::Collapsed);
         SetDragRegionForCustomTitleBar();
     }
 

@@ -25,13 +25,13 @@ namespace winrt::Nickvision::Money::WinUI::implementation
          */
         void SetController(const std::shared_ptr<::Nickvision::Money::Shared::Controllers::PreferencesViewController>& controller);
         /**
-         * @brief Handles when the theme preference is changed. 
+         * @brief Handles when a combo preference is changed. 
          */
-        void OnThemeChanged(const IInspectable& sender, const Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs& args);
+        void OnCmbChanged(const IInspectable& sender, const Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs& args);
         /**
-         * @brief Handles when the update preference is changed. 
+         * @brief Handles when a switch preference is changed. 
          */
-        void OnUpdatesToggled(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        void OnSwitchToggled(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
 
     private:
         /**

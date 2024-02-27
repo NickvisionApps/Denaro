@@ -112,6 +112,29 @@ namespace Nickvision::Money::Shared::Controllers
         return builder.str();
     }
 
+    std::string MainWindowController::getGreeting() const
+    {
+        std::time_t now{ std::time(nullptr) };
+        std::tm* cal{ std::localtime(&now) };
+        if (cal->tm_hour >= 0 && cal->tm_hour < 6)
+        {
+            return _p("Night", "Good Morning!");
+        }
+        else if (cal->tm_hour < 12)
+        {
+            return _p("Morning", "Good Morning!");
+        }
+        else if (cal->tm_hour < 18)
+        {
+            return _("Good Afternoon!");
+        }
+        else if (cal->tm_hour < 24)
+        {
+            return _("Good Evening!");
+        }
+        return _("Good Day!");
+    }
+
     std::shared_ptr<PreferencesViewController> MainWindowController::createPreferencesViewController() const
     {
         return std::make_shared<PreferencesViewController>();

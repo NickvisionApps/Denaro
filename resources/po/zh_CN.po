@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-19 11:20-0500\n"
+"POT-Creation-Date: 2024-02-27 17:08-0500\n"
 "PO-Revision-Date: 2024-02-02 03:01+0000\n"
 "Last-Translator: aerowolf <aerowolf@tom.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -19,74 +19,104 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 5.4-dev\n"
 
-#: libdenaro/src/models/account.cpp:152
+#: libdenaro/src/models/account.cpp:101
 msgid "Ungrouped"
 msgstr "無組群"
 
-#: libdenaro/src/models/account.cpp:153
+#: libdenaro/src/models/account.cpp:102
 msgid "Transactions without a group"
 msgstr "暫無組群之交易"
 
-#: libdenaro/src/models/account.cpp:227
+#: libdenaro/src/models/account.cpp:212
 msgid "Tomorrow"
 msgstr "明天"
 
-#: libdenaro/src/models/account.cpp:231
+#: libdenaro/src/models/account.cpp:216
 msgid "One week from now"
 msgstr "从现在起一周"
 
-#: libdenaro/src/models/account.cpp:235
+#: libdenaro/src/models/account.cpp:220
 msgid "One month from now"
 msgstr "从现在起一个月"
 
-#: libdenaro/src/models/account.cpp:239
+#: libdenaro/src/models/account.cpp:224
 msgid "Two months from now"
 msgstr "从现在起二个月"
 
-#: libdenaro/src/models/account.cpp:634
+#: libdenaro/src/models/account.cpp:771
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "轉帳到 {0}"
 
-#: libdenaro/src/models/account.cpp:651
+#: libdenaro/src/models/account.cpp:788
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "從 {0} 轉帳"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:26
+#: libdenaro/src/models/account.cpp:887
+msgid "Income"
+msgstr "收入"
+
+#: libdenaro/src/models/account.cpp:887
+msgid "Expense"
+msgstr "支出"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:29
 msgid "Denaro"
 msgstr "Denaro"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:27
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:30
 msgid "Manage your personal finances"
 msgstr "管理你的个人财务"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:31
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
 msgid "Matrix Chat"
 msgstr "Matrix Chat"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:33
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
 #, fuzzy
 msgid "Contributors on GitHub"
 msgstr "GitHub 上的贡献者 ❤️"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:35
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:41
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:43
 msgid "translator-credits"
 msgstr "翻译者荣誉榜"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:141
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:121
+msgctxt "Night"
+msgid "Good Morning!"
+msgstr "早上好！"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:125
+msgctxt "Morning"
+msgid "Good Morning!"
+msgstr "早上好！"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:129
+msgid "Good Afternoon!"
+msgstr "下午好!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:133
+msgid "Good Evening!"
+msgstr "晚上好!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:135
+msgid "Good Day!"
+msgstr "祝你有美好的一天!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:176
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:159
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:194
 msgid "Unable to download and install update"
 msgstr ""
 
@@ -120,19 +150,19 @@ msgid "Theme"
 msgstr "主题"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgctxt "Theme"
 msgid "Light"
 msgstr "亮色"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
 msgctxt "Theme"
 msgid "Dark"
 msgstr "暗色"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
 msgctxt "Theme"
 msgid "System"
 msgstr "跟随系统"
@@ -169,65 +199,79 @@ msgid "Quit"
 msgstr "退出"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Open"
 msgstr "开启"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "GitHub Repo"
 msgstr "GitHub 仓库"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:64
-#, fuzzy
-msgid "Search for Files"
-msgstr "清除文件"
+msgid "Search"
+msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:65
 msgid "Home"
 msgstr "目錄"
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+msgid "Dashboard"
+msgstr "显示看板"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#, fuzzy
+msgid "Accounts"
+msgstr "账户"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Help"
 msgstr "帮助"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "导出所有信息"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Changelog"
 msgstr "變更日誌"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Report a Bug"
 msgstr "Report a Bug"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "Discussions"
 msgstr "Discussions"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "Credits"
 msgstr "鳴謝"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:19
 msgid "Settings"
 msgstr "設定"
 
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#, fuzzy
+msgid "New"
+msgstr "新建"
+
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:87
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:91
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:94
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -237,7 +281,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:102
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -249,36 +293,90 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:158
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:163
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:222
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:227
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:284
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:289
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "结果已复制到剪贴板。"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
-msgid "An application restart is required to change the theme."
-msgstr ""
-
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
 msgid "Automatically Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
 #, fuzzy
 msgid "On"
 msgstr "开启"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
 #, fuzzy
 msgid "Off"
 msgstr "关闭"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+msgid "Colors"
+msgstr "颜色"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#, fuzzy
+msgid "Default Transaction Color"
+msgstr "默认的交易类型"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
+msgid ""
+"A change in this setting will only be applied to newly added transactions."
+msgstr "对此设置的修改仅影响后续新的交易。"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
+#, fuzzy
+msgid "Default Transfer Color"
+msgstr "默认的交易类型"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
+#, fuzzy
+msgid "Default Group Color"
+msgstr "默认的交易类型"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
+#, fuzzy
+msgid "A change in this setting will only be applied to newly added groups."
+msgstr "对此设置的修改将仅影响以后新建的群组。"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
+msgid "Locale"
+msgstr "本地"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
+msgid "Insert Decimal Separator"
+msgstr "插入十进制分隔符"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
+#, fuzzy
+msgid ""
+"For the selected keys, the account's decimal separator will be inserted "
+"instead of the keyboard's value."
+msgstr "设置按键，用于将区域设置的十进制分隔符插入金额字段。"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
+msgid "Numpad period only"
+msgstr "仅数字键盘区域的句号"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
+msgid "Period and Comma"
+msgstr "句号和逗号"
+
+#, fuzzy
+#~ msgid "Search for Files"
+#~ msgstr "清除文件"
 
 #~ msgid "(Copy)"
 #~ msgstr "(复制)"
@@ -440,9 +538,6 @@ msgstr "关闭"
 #~ msgid "Error"
 #~ msgstr "错误"
 
-#~ msgid "Expense"
-#~ msgstr "支出"
-
 #~ msgid "Export to File"
 #~ msgstr "导出到文件"
 
@@ -452,15 +547,6 @@ msgstr "关闭"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "已生成: {0}"
-
-#~ msgid "Good Afternoon!"
-#~ msgstr "下午好!"
-
-#~ msgid "Good Day!"
-#~ msgstr "祝你有美好的一天!"
-
-#~ msgid "Good Evening!"
-#~ msgstr "晚上好!"
 
 #~ msgid "Group"
 #~ msgstr "群组"
@@ -490,9 +576,6 @@ msgstr "关闭"
 #~ msgid "Imported {0} transaction from file."
 #~ msgid_plural "Imported {0} transactions from file."
 #~ msgstr[0] "从文件导入 {0} 笔交易。"
-
-#~ msgid "Income"
-#~ msgstr "收入"
 
 #~ msgid "N/A"
 #~ msgstr "N/A"
@@ -724,19 +807,8 @@ msgstr "关闭"
 #~ msgid "Your system reported that your currency is"
 #~ msgstr "系统报告，您的货币类型为"
 
-#~ msgctxt "Morning"
-#~ msgid "Good Morning!"
-#~ msgstr "早上好！"
-
-#~ msgctxt "Night"
-#~ msgid "Good Morning!"
-#~ msgstr "早上好！"
-
 #~ msgid "Back"
 #~ msgstr "后退"
-
-#~ msgid "Default Transaction Type"
-#~ msgstr "默认的交易类型"
 
 #~ msgid "Transaction Reminders Threshold"
 #~ msgstr "交易提醒阈值"
@@ -836,10 +908,6 @@ msgstr "关闭"
 
 #~ msgid "New Group (Ctrl+G)"
 #~ msgstr "新建群組 (Ctrl+G)"
-
-#~ msgctxt "Group"
-#~ msgid "New"
-#~ msgstr "新建"
 
 #~ msgid "Toggle Groups Visibility"
 #~ msgstr "切换群组可见性"
@@ -990,18 +1058,11 @@ msgstr "关闭"
 #~ msgid "Unlock"
 #~ msgstr "解锁"
 
-#~ msgid "Colors"
-#~ msgstr "颜色"
-
 #~ msgid "Customize the colors used by Denaro."
 #~ msgstr "自定义界面颜色。"
 
 #~ msgid "Transaction Default Color"
 #~ msgstr "默认交易颜色"
-
-#~ msgid ""
-#~ "A change in this setting will only be applied to newly added transactions."
-#~ msgstr "对此设置的修改仅影响后续新的交易。"
 
 #~ msgid "Transfer Default Color"
 #~ msgstr "默认转账颜色"
@@ -1012,9 +1073,6 @@ msgstr "关闭"
 #~ msgid "Group Default Color"
 #~ msgstr "群组默认颜色"
 
-#~ msgid "A change in this setting will only be applied to new groups."
-#~ msgstr "对此设置的修改将仅影响以后新建的群组。"
-
 #~ msgid "Checking Account Color"
 #~ msgstr "支票账户颜色"
 
@@ -1024,9 +1082,6 @@ msgstr "关闭"
 #~ msgid "Business Account Color"
 #~ msgstr "商务账户颜色"
 
-#~ msgid "Locale"
-#~ msgstr "本地"
-
 #~ msgid "Use Native Digits"
 #~ msgstr "使用原生数字"
 
@@ -1034,20 +1089,6 @@ msgstr "关闭"
 #~ "Whether to use numerals that are native for your locale instead of latin "
 #~ "digits."
 #~ msgstr "是否使用您所在地区的原生数字，而不是拉丁数字。"
-
-#~ msgid "Insert Decimal Separator"
-#~ msgstr "插入十进制分隔符"
-
-#~ msgid ""
-#~ "Set for which keys pressed will the locale's decimal separator be "
-#~ "inserted into an amount field."
-#~ msgstr "设置按键，用于将区域设置的十进制分隔符插入金额字段。"
-
-#~ msgid "Numpad period only"
-#~ msgstr "仅数字键盘区域的句号"
-
-#~ msgid "Period and Comma"
-#~ msgstr "句号和逗号"
 
 #~ msgid "Backup"
 #~ msgstr "备份"
@@ -1065,9 +1106,6 @@ msgstr "关闭"
 
 #~ msgid "No Reminders"
 #~ msgstr "不提醒"
-
-#~ msgid "Account"
-#~ msgstr "账户"
 
 #~ msgid "Close Account"
 #~ msgstr "关闭账户"
@@ -1190,9 +1228,6 @@ msgstr "关闭"
 
 #~ msgid "Toggle Graphs"
 #~ msgstr "切换图表"
-
-#~ msgid "Dashboard"
-#~ msgstr "显示看板"
 
 #~ msgid ""
 #~ "Create or open an account to get started. You may also drag a file into "

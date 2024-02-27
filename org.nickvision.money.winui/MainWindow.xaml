@@ -42,6 +42,16 @@
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE80F;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+
+                <NavigationViewItem x:Name="NavViewDashboard" Tag="Dashboard">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF246;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
+                <NavigationViewItemSeparator/>
+
+                <NavigationViewItemHeader x:Name="NavViewAccounts"/>
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
@@ -134,6 +144,57 @@
                         </nickvision:ViewStackPage>
 
                         <nickvision:ViewStackPage PageName="Home">
+                            <nickvision:StatusPage x:Name="StatusPageHome" UseAppIcon="True">
+                                <nickvision:StatusPage.Child>
+                                    <StackPanel Orientation="Vertical" Spacing="6">
+                                        <TextBlock Text="Recent Accounts" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                                        
+                                        <Border CornerRadius="{ThemeResource ControlCornerRadius}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                                            <ListView MinWidth="400" MinHeight="200">
+
+                                            </ListView>
+                                        </Border>
+
+                                        <Grid Margin="0,12,0,0" ColumnSpacing="6">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Button Grid.Column="0" HorizontalAlignment="Stretch" Style="{ThemeResource AccentButtonStyle}">
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>
+
+                                                        <TextBlock x:Name="HomeNewAccountLabel" TextWrapping="WrapWholeWords"/>
+                                                    </StackPanel>
+                                                </Button.Content>
+
+                                                <Button.KeyboardAccelerators>
+                                                    <KeyboardAccelerator Modifiers="Control" Key="O"/>
+                                                </Button.KeyboardAccelerators>
+                                            </Button>
+
+                                            <Button Grid.Column="1" HorizontalAlignment="Stretch">
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8E5;"/>
+
+                                                        <TextBlock x:Name="HomeOpenAccountLabel" TextWrapping="WrapWholeWords"/>
+                                                    </StackPanel>
+                                                </Button.Content>
+
+                                                <Button.KeyboardAccelerators>
+                                                    <KeyboardAccelerator Modifiers="Control" Key="O"/>
+                                                </Button.KeyboardAccelerators>
+                                            </Button>
+                                        </Grid>
+                                    </StackPanel>
+                                </nickvision:StatusPage.Child>
+                            </nickvision:StatusPage>
+                        </nickvision:ViewStackPage>
+
+                        <nickvision:ViewStackPage PageName="Dashboard">
                             
                         </nickvision:ViewStackPage>
                     </nickvision:ViewStack.Pages>

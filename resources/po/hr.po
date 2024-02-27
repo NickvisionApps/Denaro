@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-19 11:20-0500\n"
+"POT-Creation-Date: 2024-02-27 17:08-0500\n"
 "PO-Revision-Date: 2023-09-26 13:22+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -20,74 +20,104 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.1-dev\n"
 
-#: libdenaro/src/models/account.cpp:152
+#: libdenaro/src/models/account.cpp:101
 msgid "Ungrouped"
 msgstr "Negrupirano"
 
-#: libdenaro/src/models/account.cpp:153
+#: libdenaro/src/models/account.cpp:102
 msgid "Transactions without a group"
 msgstr "Transakcije bez grupe"
 
-#: libdenaro/src/models/account.cpp:227
+#: libdenaro/src/models/account.cpp:212
 msgid "Tomorrow"
 msgstr "Sutra"
 
-#: libdenaro/src/models/account.cpp:231
+#: libdenaro/src/models/account.cpp:216
 msgid "One week from now"
 msgstr "Za tjedan dana"
 
-#: libdenaro/src/models/account.cpp:235
+#: libdenaro/src/models/account.cpp:220
 msgid "One month from now"
 msgstr "Za mjesec dana"
 
-#: libdenaro/src/models/account.cpp:239
+#: libdenaro/src/models/account.cpp:224
 msgid "Two months from now"
 msgstr "Za dva mjeseca"
 
-#: libdenaro/src/models/account.cpp:634
+#: libdenaro/src/models/account.cpp:771
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Transferiraj na {0}"
 
-#: libdenaro/src/models/account.cpp:651
+#: libdenaro/src/models/account.cpp:788
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Transferiraj sa {0}"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:26
+#: libdenaro/src/models/account.cpp:887
+msgid "Income"
+msgstr "Prihod"
+
+#: libdenaro/src/models/account.cpp:887
+msgid "Expense"
+msgstr "Rashod"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:29
 msgid "Denaro"
 msgstr "Denaro"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:27
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:30
 msgid "Manage your personal finances"
 msgstr "Upravljaj osobnim financijama"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:31
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
 msgid "Matrix Chat"
 msgstr "Chat na Matrixu"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:33
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
 #, fuzzy
 msgid "Contributors on GitHub"
 msgstr "Doprinositelji na GitHub-u ❤️"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:35
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:41
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:43
 msgid "translator-credits"
 msgstr "Milo Ivir <mail@milotype.de>"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:141
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:121
+msgctxt "Night"
+msgid "Good Morning!"
+msgstr "Dobro jutro!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:125
+msgctxt "Morning"
+msgid "Good Morning!"
+msgstr "Dobro jutro!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:129
+msgid "Good Afternoon!"
+msgstr "Dobar dan!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:133
+msgid "Good Evening!"
+msgstr "Dobra večer!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:135
+msgid "Good Day!"
+msgstr "Dobar dan!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:176
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:159
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:194
 msgid "Unable to download and install update"
 msgstr ""
 
@@ -121,19 +151,19 @@ msgid "Theme"
 msgstr "Tema"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgctxt "Theme"
 msgid "Light"
 msgstr "Svijetla"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
 msgctxt "Theme"
 msgid "Dark"
 msgstr "Tamna"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
 msgctxt "Theme"
 msgid "System"
 msgstr "Sustav"
@@ -170,65 +200,78 @@ msgid "Quit"
 msgstr "Zatvori program"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Open"
 msgstr "Otvori"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "GitHub Repo"
 msgstr "GitHub repozitorij"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:64
-#, fuzzy
-msgid "Search for Files"
-msgstr "Izbriši datoteku"
+msgid "Search"
+msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:65
 msgid "Home"
 msgstr "Početna stranica"
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+msgid "Dashboard"
+msgstr "Pregledna ploča"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+msgid "Accounts"
+msgstr "Računi"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Help"
 msgstr "Pomoć"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Izvezi sve informacije"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Changelog"
 msgstr "Dnevnik promjena"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Report a Bug"
 msgstr "Prijavi grešku"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "Discussions"
 msgstr "Rasprave"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "Credits"
 msgstr "Zasluge"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:19
 msgid "Settings"
 msgstr "Postavke"
 
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#, fuzzy
+msgid "New"
+msgstr "Nova"
+
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:87
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:91
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:94
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -238,7 +281,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:102
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -250,36 +293,92 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:158
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:163
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:222
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:227
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:284
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:289
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "Rezultat je kopiran u međuspremnik."
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
-msgid "An application restart is required to change the theme."
-msgstr ""
-
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
 msgid "Automatically Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
 #, fuzzy
 msgid "On"
 msgstr "Otvori"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
 #, fuzzy
 msgid "Off"
 msgstr "Isključeno"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+msgid "Colors"
+msgstr "Boje"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#, fuzzy
+msgid "Default Transaction Color"
+msgstr "Standardna vrsta transakcije"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
+msgid ""
+"A change in this setting will only be applied to newly added transactions."
+msgstr ""
+"Promjena ove postavke primijenit će se samo na novo dodane transakcije."
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
+#, fuzzy
+msgid "Default Transfer Color"
+msgstr "Standardna vrsta transakcije"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
+#, fuzzy
+msgid "Default Group Color"
+msgstr "Standardna vrsta transakcije"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
+#, fuzzy
+msgid "A change in this setting will only be applied to newly added groups."
+msgstr "Promjena u ovoj postavki će se primijeniti samo na nove grupe."
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
+msgid "Locale"
+msgstr "Jezično područje"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
+msgid "Insert Decimal Separator"
+msgstr "Umetni decimalni znak"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
+#, fuzzy
+msgid ""
+"For the selected keys, the account's decimal separator will be inserted "
+"instead of the keyboard's value."
+msgstr ""
+"Odredi tipke za umetanje decimalnog znaka jezičnog područja u polju iznosa."
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
+msgid "Numpad period only"
+msgstr "Samo točka numeričke tipkovnice"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
+msgid "Period and Comma"
+msgstr "Točka i zarez"
+
+#, fuzzy
+#~ msgid "Search for Files"
+#~ msgstr "Izbriši datoteku"
 
 #~ msgid "(Copy)"
 #~ msgstr "(kopija)"
@@ -445,9 +544,6 @@ msgstr "Isključeno"
 #~ msgid "Error"
 #~ msgstr "Greška"
 
-#~ msgid "Expense"
-#~ msgstr "Rashod"
-
 #~ msgid "Export to File"
 #~ msgstr "Izvezi u datoteku"
 
@@ -457,15 +553,6 @@ msgstr "Isključeno"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "Stvoreno: {0}"
-
-#~ msgid "Good Afternoon!"
-#~ msgstr "Dobar dan!"
-
-#~ msgid "Good Day!"
-#~ msgstr "Dobar dan!"
-
-#~ msgid "Good Evening!"
-#~ msgstr "Dobra večer!"
 
 #~ msgid "Group"
 #~ msgstr "Grupa"
@@ -497,9 +584,6 @@ msgstr "Isključeno"
 #~ msgstr[0] "Uvezena je {0} transakcija iz datoteke."
 #~ msgstr[1] "Uvezene su {0} transakcije iz datoteke."
 #~ msgstr[2] "Uvezeno je {0} transakcija iz datoteke."
-
-#~ msgid "Income"
-#~ msgstr "Prihod"
 
 #~ msgid "N/A"
 #~ msgstr "--"
@@ -739,19 +823,8 @@ msgstr "Isključeno"
 #~ msgid "Your system reported that your currency is"
 #~ msgstr "Tvoj sustav je prijavio da je tvoja valuta"
 
-#~ msgctxt "Morning"
-#~ msgid "Good Morning!"
-#~ msgstr "Dobro jutro!"
-
-#~ msgctxt "Night"
-#~ msgid "Good Morning!"
-#~ msgstr "Dobro jutro!"
-
 #~ msgid "Back"
 #~ msgstr "Natrag"
-
-#~ msgid "Default Transaction Type"
-#~ msgstr "Standardna vrsta transakcije"
 
 #~ msgid "Transaction Reminders Threshold"
 #~ msgstr "Prag podsjetnika za transakcije"
@@ -851,10 +924,6 @@ msgstr "Isključeno"
 
 #~ msgid "New Group (Ctrl+G)"
 #~ msgstr "Nova grupa (Ctrl+G)"
-
-#~ msgctxt "Group"
-#~ msgid "New"
-#~ msgstr "Nova"
 
 #~ msgid "Toggle Groups Visibility"
 #~ msgstr "Uključi/isključi vidljivost grupa"
@@ -1006,19 +1075,11 @@ msgstr "Isključeno"
 #~ msgid "Unlock"
 #~ msgstr "Otključaj"
 
-#~ msgid "Colors"
-#~ msgstr "Boje"
-
 #~ msgid "Customize the colors used by Denaro."
 #~ msgstr "Prilagodi boje za Denaro."
 
 #~ msgid "Transaction Default Color"
 #~ msgstr "Standardna boja transakcija"
-
-#~ msgid ""
-#~ "A change in this setting will only be applied to newly added transactions."
-#~ msgstr ""
-#~ "Promjena ove postavke primijenit će se samo na novo dodane transakcije."
 
 #~ msgid "Transfer Default Color"
 #~ msgstr "Standardna boja transfera"
@@ -1029,9 +1090,6 @@ msgstr "Isključeno"
 #~ msgid "Group Default Color"
 #~ msgstr "Standardna boja grupa"
 
-#~ msgid "A change in this setting will only be applied to new groups."
-#~ msgstr "Promjena u ovoj postavki će se primijeniti samo na nove grupe."
-
 #~ msgid "Checking Account Color"
 #~ msgstr "Boja žiro računa"
 
@@ -1041,9 +1099,6 @@ msgstr "Isključeno"
 #~ msgid "Business Account Color"
 #~ msgstr "Boja poslovnog računa"
 
-#~ msgid "Locale"
-#~ msgstr "Jezično područje"
-
 #~ msgid "Use Native Digits"
 #~ msgstr "Koristi brojke jezika"
 
@@ -1052,22 +1107,6 @@ msgstr "Isključeno"
 #~ "digits."
 #~ msgstr ""
 #~ "Da li umjesto arapskih brojki koristiti brojke tvog jezičnog područja."
-
-#~ msgid "Insert Decimal Separator"
-#~ msgstr "Umetni decimalni znak"
-
-#~ msgid ""
-#~ "Set for which keys pressed will the locale's decimal separator be "
-#~ "inserted into an amount field."
-#~ msgstr ""
-#~ "Odredi tipke za umetanje decimalnog znaka jezičnog područja u polju "
-#~ "iznosa."
-
-#~ msgid "Numpad period only"
-#~ msgstr "Samo točka numeričke tipkovnice"
-
-#~ msgid "Period and Comma"
-#~ msgstr "Točka i zarez"
 
 #~ msgid "Backup"
 #~ msgstr "Sigurnosna kopija"
@@ -1213,9 +1252,6 @@ msgstr "Isključeno"
 
 #~ msgid "Toggle Graphs"
 #~ msgstr "Uključi/Isključi dijagrame"
-
-#~ msgid "Dashboard"
-#~ msgstr "Pregledna ploča"
 
 #~ msgid ""
 #~ "Create or open an account to get started. You may also drag a file into "
@@ -1391,9 +1427,6 @@ msgstr "Isključeno"
 
 #~ msgid "No Backup Folder"
 #~ msgstr "Nema mape sigurnosne kopije"
-
-#~ msgid "Accounts"
-#~ msgstr "Računi"
 
 #~ msgid "Account Settings (Ctrl+.)"
 #~ msgstr "Postavke računa (Ctrl+.)"

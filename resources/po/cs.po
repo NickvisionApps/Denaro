@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-19 11:20-0500\n"
+"POT-Creation-Date: 2024-02-27 17:08-0500\n"
 "PO-Revision-Date: 2023-11-17 11:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -19,74 +19,104 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Weblate 5.2\n"
 
-#: libdenaro/src/models/account.cpp:152
+#: libdenaro/src/models/account.cpp:101
 msgid "Ungrouped"
 msgstr "Neseskupené"
 
-#: libdenaro/src/models/account.cpp:153
+#: libdenaro/src/models/account.cpp:102
 msgid "Transactions without a group"
 msgstr "Transakce bez skupiny"
 
-#: libdenaro/src/models/account.cpp:227
+#: libdenaro/src/models/account.cpp:212
 msgid "Tomorrow"
 msgstr "Zítra"
 
-#: libdenaro/src/models/account.cpp:231
+#: libdenaro/src/models/account.cpp:216
 msgid "One week from now"
 msgstr "Jeden týden ode dneška"
 
-#: libdenaro/src/models/account.cpp:235
+#: libdenaro/src/models/account.cpp:220
 msgid "One month from now"
 msgstr "Jeden měsíc ode dneška"
 
-#: libdenaro/src/models/account.cpp:239
+#: libdenaro/src/models/account.cpp:224
 msgid "Two months from now"
 msgstr "Dva měsíce ode dneška"
 
-#: libdenaro/src/models/account.cpp:634
+#: libdenaro/src/models/account.cpp:771
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Převést na {0}"
 
-#: libdenaro/src/models/account.cpp:651
+#: libdenaro/src/models/account.cpp:788
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Převést z {0}"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:26
+#: libdenaro/src/models/account.cpp:887
+msgid "Income"
+msgstr "Příjem"
+
+#: libdenaro/src/models/account.cpp:887
+msgid "Expense"
+msgstr "Výdaj"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:29
 msgid "Denaro"
 msgstr "Denaro"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:27
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:30
 msgid "Manage your personal finances"
 msgstr "Správa osobních financí"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:31
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
 msgid "Matrix Chat"
 msgstr "Matrix chat"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:33
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
 #, fuzzy
 msgid "Contributors on GitHub"
 msgstr "Přispěvatelé na GitHubu ❤️"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:35
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:41
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:43
 msgid "translator-credits"
 msgstr "Jonáš Loskot <jonas.loskot@pm.me>, 2023"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:141
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:121
+msgctxt "Night"
+msgid "Good Morning!"
+msgstr "Dobré ráno!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:125
+msgctxt "Morning"
+msgid "Good Morning!"
+msgstr "Dobré ráno!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:129
+msgid "Good Afternoon!"
+msgstr "Dobré odpoledne!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:133
+msgid "Good Evening!"
+msgstr "Dobrý večer!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:135
+msgid "Good Day!"
+msgstr "Dobrý den!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:176
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:159
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:194
 msgid "Unable to download and install update"
 msgstr ""
 
@@ -120,19 +150,19 @@ msgid "Theme"
 msgstr "Motiv"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgctxt "Theme"
 msgid "Light"
 msgstr "Světlý"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
 msgctxt "Theme"
 msgid "Dark"
 msgstr "Tmavý"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
 msgctxt "Theme"
 msgid "System"
 msgstr "Systémový"
@@ -169,65 +199,78 @@ msgid "Quit"
 msgstr "Opustit"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Open"
 msgstr "Otevřít"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "GitHub Repo"
 msgstr "Repozitář GitHub"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:64
-#, fuzzy
-msgid "Search for Files"
-msgstr "Vymazat soubor"
+msgid "Search"
+msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:65
 msgid "Home"
 msgstr "Domů"
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+msgid "Dashboard"
+msgstr "Nástěnka"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+msgid "Accounts"
+msgstr "Účty"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Help"
 msgstr "Nápověda"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Exportovat všechny informace"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Changelog"
 msgstr "Seznam změn"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Report a Bug"
 msgstr "Nahlásit chybu"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "Discussions"
 msgstr "Diskuze"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "Credits"
 msgstr "Zásluhy"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:19
 msgid "Settings"
 msgstr "Nastavení"
 
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#, fuzzy
+msgid "New"
+msgstr "Nová"
+
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:87
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:91
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:94
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -237,7 +280,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:102
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -249,36 +292,92 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:158
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:163
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:222
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:227
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:284
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:289
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "Výsledek zkopírován do schránky."
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
-msgid "An application restart is required to change the theme."
-msgstr ""
-
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
 msgid "Automatically Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
 #, fuzzy
 msgid "On"
 msgstr "Otevřít"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
 #, fuzzy
 msgid "Off"
 msgstr "Vypnout"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+msgid "Colors"
+msgstr "Barvy"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#, fuzzy
+msgid "Default Transaction Color"
+msgstr "Výchozí typ transakce"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
+msgid ""
+"A change in this setting will only be applied to newly added transactions."
+msgstr "Změna tohoto nastavení se projeví pouze u nově přidaných transakcí."
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
+#, fuzzy
+msgid "Default Transfer Color"
+msgstr "Výchozí typ transakce"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
+#, fuzzy
+msgid "Default Group Color"
+msgstr "Výchozí typ transakce"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
+#, fuzzy
+msgid "A change in this setting will only be applied to newly added groups."
+msgstr "Změna tohoto nastavení se projeví pouze u nových skupin."
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
+msgid "Locale"
+msgstr "Národní prostředí"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
+msgid "Insert Decimal Separator"
+msgstr "Vložení desetinného oddělovače"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
+#, fuzzy
+msgid ""
+"For the selected keys, the account's decimal separator will be inserted "
+"instead of the keyboard's value."
+msgstr ""
+"Nastavte, pro které stisknuté klávesy se do pole částky vloží desetinný "
+"oddělovač místního jazyka."
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
+msgid "Numpad period only"
+msgstr "Pouze čárka na numerické klávesnici"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
+msgid "Period and Comma"
+msgstr "Tečka a čárka"
+
+#, fuzzy
+#~ msgid "Search for Files"
+#~ msgstr "Vymazat soubor"
 
 #~ msgid "(Copy)"
 #~ msgstr "(Kopírovat)"
@@ -445,9 +544,6 @@ msgstr "Vypnout"
 #~ msgid "Error"
 #~ msgstr "Chyba"
 
-#~ msgid "Expense"
-#~ msgstr "Výdaj"
-
 #~ msgid "Export to File"
 #~ msgstr "Export do souboru"
 
@@ -457,15 +553,6 @@ msgstr "Vypnout"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "Vygenerováno: {0}"
-
-#~ msgid "Good Afternoon!"
-#~ msgstr "Dobré odpoledne!"
-
-#~ msgid "Good Day!"
-#~ msgstr "Dobrý den!"
-
-#~ msgid "Good Evening!"
-#~ msgstr "Dobrý večer!"
 
 #~ msgid "Group"
 #~ msgstr "Skupina"
@@ -497,9 +584,6 @@ msgstr "Vypnout"
 #~ msgstr[0] "Importována {0} transakce ze souboru."
 #~ msgstr[1] "Importovány {0} transakce ze souboru."
 #~ msgstr[2] "Importováno {0} transakcí ze souboru."
-
-#~ msgid "Income"
-#~ msgstr "Příjem"
 
 #~ msgid "N/A"
 #~ msgstr "N/A"
@@ -739,19 +823,8 @@ msgstr "Vypnout"
 #~ msgid "Your system reported that your currency is"
 #~ msgstr "Váš systém hlásí, že vaší měnou je"
 
-#~ msgctxt "Morning"
-#~ msgid "Good Morning!"
-#~ msgstr "Dobré ráno!"
-
-#~ msgctxt "Night"
-#~ msgid "Good Morning!"
-#~ msgstr "Dobré ráno!"
-
 #~ msgid "Back"
 #~ msgstr "Zpět"
-
-#~ msgid "Default Transaction Type"
-#~ msgstr "Výchozí typ transakce"
 
 #~ msgid "Transaction Reminders Threshold"
 #~ msgstr "Hranice pro připomenutí transakcí"
@@ -851,10 +924,6 @@ msgstr "Vypnout"
 
 #~ msgid "New Group (Ctrl+G)"
 #~ msgstr "Nová skupina (Ctrl+G)"
-
-#~ msgctxt "Group"
-#~ msgid "New"
-#~ msgstr "Nová"
 
 #~ msgid "Toggle Groups Visibility"
 #~ msgstr "Přepnout viditelnost skupin"
@@ -1008,18 +1077,11 @@ msgstr "Vypnout"
 #~ msgid "Unlock"
 #~ msgstr "Odemknout"
 
-#~ msgid "Colors"
-#~ msgstr "Barvy"
-
 #~ msgid "Customize the colors used by Denaro."
 #~ msgstr "Přizpůsobit barvy používané Denarem."
 
 #~ msgid "Transaction Default Color"
 #~ msgstr "Výchozí barva transakce"
-
-#~ msgid ""
-#~ "A change in this setting will only be applied to newly added transactions."
-#~ msgstr "Změna tohoto nastavení se projeví pouze u nově přidaných transakcí."
 
 #~ msgid "Transfer Default Color"
 #~ msgstr "Výchozí barva převodu"
@@ -1030,9 +1092,6 @@ msgstr "Vypnout"
 #~ msgid "Group Default Color"
 #~ msgstr "Výchozí barva skupiny"
 
-#~ msgid "A change in this setting will only be applied to new groups."
-#~ msgstr "Změna tohoto nastavení se projeví pouze u nových skupin."
-
 #~ msgid "Checking Account Color"
 #~ msgstr "Barva běžného účtu"
 
@@ -1041,9 +1100,6 @@ msgstr "Vypnout"
 
 #~ msgid "Business Account Color"
 #~ msgstr "Barva firemního účtu"
-
-#~ msgid "Locale"
-#~ msgstr "Národní prostředí"
 
 #~ msgid "Use Native Digits"
 #~ msgstr "Použít nativní číslice"
@@ -1054,22 +1110,6 @@ msgstr "Vypnout"
 #~ msgstr ""
 #~ "Zda se mají místo latinských číslic používat číslice, které jsou pro "
 #~ "danou oblast přirozené."
-
-#~ msgid "Insert Decimal Separator"
-#~ msgstr "Vložení desetinného oddělovače"
-
-#~ msgid ""
-#~ "Set for which keys pressed will the locale's decimal separator be "
-#~ "inserted into an amount field."
-#~ msgstr ""
-#~ "Nastavte, pro které stisknuté klávesy se do pole částky vloží desetinný "
-#~ "oddělovač místního jazyka."
-
-#~ msgid "Numpad period only"
-#~ msgstr "Pouze čárka na numerické klávesnici"
-
-#~ msgid "Period and Comma"
-#~ msgstr "Tečka a čárka"
 
 #~ msgid "Backup"
 #~ msgstr "Záloha"
@@ -1215,9 +1255,6 @@ msgstr "Vypnout"
 
 #~ msgid "Toggle Graphs"
 #~ msgstr "Přepnout grafy"
-
-#~ msgid "Dashboard"
-#~ msgstr "Nástěnka"
 
 #~ msgid ""
 #~ "Create or open an account to get started. You may also drag a file into "
@@ -1394,9 +1431,6 @@ msgstr "Vypnout"
 #~ msgstr ""
 #~ "Překladatelé na Weblate ❤️ https://hosted.weblate.org/projects/nickvision-"
 #~ "money/app/"
-
-#~ msgid "Accounts"
-#~ msgstr "Účty"
 
 #~ msgid "Transfer Money (Ctrl+T)"
 #~ msgstr "Převod peněz (Ctrl+T)"

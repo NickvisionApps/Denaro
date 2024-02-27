@@ -66,6 +66,11 @@ namespace Nickvision::Money::Shared::Controllers
          */
         std::string getDebugInformation(const std::string& extraInformation = "") const;
         /**
+         * @brief Gets the string for greeting on the home page.
+         * @return The greeting string
+         */
+        std::string getGreeting() const;
+        /**
          * @brief Gets a PreferencesViewController.
          * @return The PreferencesViewController
          */

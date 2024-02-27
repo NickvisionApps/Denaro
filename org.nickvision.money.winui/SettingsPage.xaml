@@ -13,15 +13,73 @@
 
             <TextBlock x:Name="LblUserInterface" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
 
-            <nickvision:SettingsRow x:Name="RowTheme" Glyph="&#xE790;">
+            <nickvision:SettingsRow x:Name="RowTheme" Glyph="&#xE793;">
                 <nickvision:SettingsRow.Child>
-                    <ComboBox x:Name="CmbTheme" SelectionChanged="OnThemeChanged"/>
+                    <ComboBox x:Name="CmbTheme" SelectionChanged="OnCmbChanged"/>
                 </nickvision:SettingsRow.Child>
             </nickvision:SettingsRow>
 
             <nickvision:SettingsRow x:Name="RowAutomaticallyCheckForUpdates" Glyph="&#xE117;">
                 <nickvision:SettingsRow.Child>
-                    <ToggleSwitch x:Name="TglAutomaticallyCheckForUpdates" Toggled="OnUpdatesToggled"/>
+                    <ToggleSwitch x:Name="TglAutomaticallyCheckForUpdates" Toggled="OnSwitchToggled"/>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+
+            <TextBlock x:Name="LblColors" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
+
+            <nickvision:SettingsRow x:Name="RowDefaultTransaction" Glyph="&#xE790;">
+                <nickvision:SettingsRow.Child>
+                    <Button>
+                        <Button.Content>
+                            <Rectangle x:Name="RctDefaultTransaction" Width="20" Height="20"/>
+                        </Button.Content>
+
+                        <Button.Flyout>
+                            <Flyout>
+                                <ColorPicker x:Name="ClrDefaultTransaction"/>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+
+            <nickvision:SettingsRow x:Name="RowDefaultTransfer" Glyph="&#xE790;">
+                <nickvision:SettingsRow.Child>
+                    <Button>
+                        <Button.Content>
+                            <Rectangle x:Name="RctDefaultTransfer" Width="20" Height="20"/>
+                        </Button.Content>
+
+                        <Button.Flyout>
+                            <Flyout>
+                                <ColorPicker x:Name="ClrDefaultTransfer"/>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+
+            <nickvision:SettingsRow x:Name="RowDefaultGroup" Glyph="&#xE790;">
+                <nickvision:SettingsRow.Child>
+                    <Button>
+                        <Button.Content>
+                            <Rectangle x:Name="RctDefaultGroup" Width="20" Height="20"/>
+                        </Button.Content>
+
+                        <Button.Flyout>
+                            <Flyout>
+                                <ColorPicker x:Name="ClrDefaultGroup"/>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+
+            <TextBlock x:Name="LblLocale" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
+
+            <nickvision:SettingsRow x:Name="RowInsertSeparator" Glyph="&#xE92E;">
+                <nickvision:SettingsRow.Child>
+                    <ComboBox x:Name="CmbInsertSeparator" SelectionChanged="OnCmbChanged"/>
                 </nickvision:SettingsRow.Child>
             </nickvision:SettingsRow>
         </StackPanel>

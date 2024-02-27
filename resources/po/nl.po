@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-19 11:20-0500\n"
-"PO-Revision-Date: 2024-02-15 21:03+0000\n"
+"POT-Creation-Date: 2024-02-27 17:08-0500\n"
+"PO-Revision-Date: 2024-02-21 14:02+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
 "app/nl/>\n"
@@ -17,76 +17,106 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4\n"
+"X-Generator: Weblate 5.5-dev\n"
 
-#: libdenaro/src/models/account.cpp:152
+#: libdenaro/src/models/account.cpp:101
 msgid "Ungrouped"
 msgstr "Ongegroepeerd"
 
-#: libdenaro/src/models/account.cpp:153
+#: libdenaro/src/models/account.cpp:102
 msgid "Transactions without a group"
 msgstr "Transacties die geen deel uitmaken van een groep"
 
-#: libdenaro/src/models/account.cpp:227
+#: libdenaro/src/models/account.cpp:212
 msgid "Tomorrow"
 msgstr "Morgen"
 
-#: libdenaro/src/models/account.cpp:231
+#: libdenaro/src/models/account.cpp:216
 msgid "One week from now"
-msgstr ""
+msgstr "Over een week"
 
-#: libdenaro/src/models/account.cpp:235
+#: libdenaro/src/models/account.cpp:220
 msgid "One month from now"
-msgstr ""
+msgstr "Over een maand"
 
-#: libdenaro/src/models/account.cpp:239
+#: libdenaro/src/models/account.cpp:224
 msgid "Two months from now"
-msgstr ""
+msgstr "Over twee maanden"
 
-#: libdenaro/src/models/account.cpp:634
+#: libdenaro/src/models/account.cpp:771
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Overmaken naar {0}"
 
-#: libdenaro/src/models/account.cpp:651
+#: libdenaro/src/models/account.cpp:788
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Overmaken van {0}"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:26
+#: libdenaro/src/models/account.cpp:887
+msgid "Income"
+msgstr "Inkomst"
+
+#: libdenaro/src/models/account.cpp:887
+msgid "Expense"
+msgstr "Uitgave"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:29
 msgid "Denaro"
 msgstr "Denaro"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:27
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:30
 msgid "Manage your personal finances"
 msgstr "Beheer uw persoonlijke financiën"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:31
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
 msgid "Matrix Chat"
 msgstr "Matrix-kamer"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:33
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
 #, fuzzy
 msgid "Contributors on GitHub"
 msgstr "Bijdragers op GitHub ❤️"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:35
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:41
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:43
 msgid "translator-credits"
 msgstr "Philip Goto https://philipgoto.nl/"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:141
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:121
+msgctxt "Night"
+msgid "Good Morning!"
+msgstr "Goedenacht!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:125
+msgctxt "Morning"
+msgid "Good Morning!"
+msgstr "Goedemorgen!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:129
+msgid "Good Afternoon!"
+msgstr "Goedemiddag!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:133
+msgid "Good Evening!"
+msgstr "Goedenavond!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:135
+msgid "Good Day!"
+msgstr "Goedendag!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:176
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:159
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:194
 msgid "Unable to download and install update"
 msgstr ""
 
@@ -120,19 +150,19 @@ msgid "Theme"
 msgstr "Thema"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgctxt "Theme"
 msgid "Light"
 msgstr "Licht"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
 msgctxt "Theme"
 msgid "Dark"
 msgstr "Donker"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
 msgctxt "Theme"
 msgid "System"
 msgstr "Systeemthema"
@@ -169,65 +199,78 @@ msgid "Quit"
 msgstr "Sluiten"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Open"
 msgstr "Openen"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "GitHub Repo"
 msgstr "GitHub-repo"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:64
-#, fuzzy
-msgid "Search for Files"
-msgstr "Bestand wissen"
+msgid "Search"
+msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:65
 msgid "Home"
 msgstr "Overzicht"
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+msgid "Accounts"
+msgstr "Accounts"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Help"
 msgstr "Hulp"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Alle informatie exporteren"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Changelog"
 msgstr "Wijzigingslog"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Report a Bug"
 msgstr "Bug melden"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "Discussions"
 msgstr "Discussies"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "Credits"
 msgstr "Met dank aan"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:19
 msgid "Settings"
 msgstr "Instellingen"
 
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#, fuzzy
+msgid "New"
+msgstr "Nieuw"
+
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:87
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:91
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:94
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -237,7 +280,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:102
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -249,35 +292,92 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:158
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:163
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:222
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:227
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:284
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:289
+#, fuzzy
 msgid "Debug information copied to clipboard."
-msgstr ""
+msgstr "Resultaat is gekopieerd naar klem­bord."
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
-msgid "An application restart is required to change the theme."
-msgstr ""
-
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
 msgid "Automatically Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
 #, fuzzy
 msgid "On"
 msgstr "Openen"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
 #, fuzzy
 msgid "Off"
 msgstr "Uitgeschakeld"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+msgid "Colors"
+msgstr "Kleuren"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#, fuzzy
+msgid "Default Transaction Color"
+msgstr "Standaardtransactietype"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
+msgid ""
+"A change in this setting will only be applied to newly added transactions."
+msgstr "Let op: wijzigingen worden alléén toegepast op nieuwe overboekingen."
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
+#, fuzzy
+msgid "Default Transfer Color"
+msgstr "Standaardtransactietype"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
+#, fuzzy
+msgid "Default Group Color"
+msgstr "Standaardtransactietype"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
+#, fuzzy
+msgid "A change in this setting will only be applied to newly added groups."
+msgstr ""
+"Een wijziging in deze instelling wordt alleen toegepast op nieuwe groepen."
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
+msgid "Locale"
+msgstr "Regio"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
+msgid "Insert Decimal Separator"
+msgstr "Decimaal scheidings­teken invoegen"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
+#, fuzzy
+msgid ""
+"For the selected keys, the account's decimal separator will be inserted "
+"instead of the keyboard's value."
+msgstr ""
+"Stelt in voor welke toetsen het decimale scheidingsteken zal worden ingevoerd"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
+msgid "Numpad period only"
+msgstr "Alleen numpad-punt"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
+msgid "Period and Comma"
+msgstr "Punt en komma"
+
+#, fuzzy
+#~ msgid "Search for Files"
+#~ msgstr "Bestand wissen"
 
 #~ msgid "(Copy)"
 #~ msgstr "(kopie)"
@@ -441,9 +541,6 @@ msgstr "Uitgeschakeld"
 #~ msgid "Error"
 #~ msgstr "Fout"
 
-#~ msgid "Expense"
-#~ msgstr "Uitgave"
-
 #~ msgid "Export to File"
 #~ msgstr "Exporteren naar bestand"
 
@@ -453,15 +550,6 @@ msgstr "Uitgeschakeld"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "Gegenereerd: {0}"
-
-#~ msgid "Good Afternoon!"
-#~ msgstr "Goedemiddag!"
-
-#~ msgid "Good Day!"
-#~ msgstr "Goedendag!"
-
-#~ msgid "Good Evening!"
-#~ msgstr "Goedenavond!"
 
 #~ msgid "Group"
 #~ msgstr "Groep"
@@ -492,9 +580,6 @@ msgstr "Uitgeschakeld"
 #~ msgid_plural "Imported {0} transactions from file."
 #~ msgstr[0] "{0} transactie uit bestand geïmporteerd"
 #~ msgstr[1] "{0} transacties uit bestand geïmporteerd"
-
-#~ msgid "Income"
-#~ msgstr "Inkomst"
 
 #~ msgid "N/A"
 #~ msgstr "n/b"
@@ -535,6 +620,9 @@ msgstr "Uitgeschakeld"
 
 #~ msgid "Notes"
 #~ msgstr "Aantekeningen"
+
+#~ msgid "Nothing to import from the file."
+#~ msgstr "Niets om uit het bestand te importeren."
 
 #~ msgid "Open Account"
 #~ msgstr "Account openen"
@@ -719,19 +807,8 @@ msgstr "Uitgeschakeld"
 #~ msgid "Your system reported that your currency is"
 #~ msgstr "Volgens uw besturingssysteem is uw valuta"
 
-#~ msgctxt "Morning"
-#~ msgid "Good Morning!"
-#~ msgstr "Goedemorgen!"
-
-#~ msgctxt "Night"
-#~ msgid "Good Morning!"
-#~ msgstr "Goedenacht!"
-
 #~ msgid "Back"
 #~ msgstr "Terug"
-
-#~ msgid "Default Transaction Type"
-#~ msgstr "Standaardtransactietype"
 
 #~ msgid "Transaction Reminders Threshold"
 #~ msgstr "Drempelwaarde voor transactie­herinneringen"
@@ -756,6 +833,9 @@ msgstr "Uitgeschakeld"
 
 #~ msgid "Use Custom Currency"
 #~ msgstr "Aangepaste valuta gebruiken"
+
+#~ msgid "Amount Display Style"
+#~ msgstr "Weergave­stijl van hoeveel­heid"
 
 #~ msgid "Other"
 #~ msgstr "Andere"
@@ -831,10 +911,6 @@ msgstr "Uitgeschakeld"
 #~ msgid "New Group (Ctrl+G)"
 #~ msgstr "Nieuwe groep (Ctrl+G)"
 
-#~ msgctxt "Group"
-#~ msgid "New"
-#~ msgstr "Nieuw"
-
 #~ msgid "Toggle Groups Visibility"
 #~ msgstr "Groepen tonen/verbergen"
 
@@ -847,9 +923,8 @@ msgstr "Uitgeschakeld"
 #~ msgid "Toggle Tags Visibility"
 #~ msgstr "Tags tonen/verbergen"
 
-#, fuzzy
 #~ msgid "Select All Tags Filters"
-#~ msgstr "Alle groepsfilters selecteren"
+#~ msgstr "Alle tag-filters selecteren"
 
 #~ msgid "Unselect Tags Filters"
 #~ msgstr "Tag-filters deselecteren"
@@ -917,9 +992,8 @@ msgstr "Uitgeschakeld"
 #~ msgid "Result"
 #~ msgstr "Resultaat"
 
-#, fuzzy
 #~ msgid "Copy Result Amount"
-#~ msgstr "Geen recente accounts"
+#~ msgstr "Resultaat­hoeveelheid kopiëren"
 
 #~ msgid "All Accounts"
 #~ msgstr "Alle accounts"
@@ -980,19 +1054,11 @@ msgstr "Uitgeschakeld"
 #~ msgid "Unlock"
 #~ msgstr "Ontgrendelen"
 
-#~ msgid "Colors"
-#~ msgstr "Kleuren"
-
 #~ msgid "Customize the colors used by Denaro."
 #~ msgstr "Pas de door Denaro gebruikte kleuren aan"
 
 #~ msgid "Transaction Default Color"
 #~ msgstr "Standaardkleur van transacties"
-
-#~ msgid ""
-#~ "A change in this setting will only be applied to newly added transactions."
-#~ msgstr ""
-#~ "Let op: wijzigingen worden alléén toegepast op nieuwe overboekingen."
 
 #~ msgid "Transfer Default Color"
 #~ msgstr "Standaardkleur van overdrachten"
@@ -1004,10 +1070,6 @@ msgstr "Uitgeschakeld"
 #~ msgid "Group Default Color"
 #~ msgstr "Standaardgroepskleur"
 
-#~ msgid "A change in this setting will only be applied to new groups."
-#~ msgstr ""
-#~ "Een wijziging in deze instelling wordt alleen toegepast op nieuwe groepen."
-
 #~ msgid "Checking Account Color"
 #~ msgstr "Kleur van betaal­rekening"
 
@@ -1016,9 +1078,6 @@ msgstr "Uitgeschakeld"
 
 #~ msgid "Business Account Color"
 #~ msgstr "Kleur van bedrijfs­rekening"
-
-#~ msgid "Locale"
-#~ msgstr "Regio"
 
 #~ msgid "Use Native Digits"
 #~ msgstr "Lokale decimale notatie gebruiken"
@@ -1029,22 +1088,6 @@ msgstr "Uitgeschakeld"
 #~ msgstr ""
 #~ "Of cijfertekens van uw taal moeten worden gebruikt in plaats van latijnse "
 #~ "cijfers."
-
-#~ msgid "Insert Decimal Separator"
-#~ msgstr "Decimaal scheidings­teken invoegen"
-
-#~ msgid ""
-#~ "Set for which keys pressed will the locale's decimal separator be "
-#~ "inserted into an amount field."
-#~ msgstr ""
-#~ "Stelt in voor welke toetsen het decimale scheidingsteken zal worden "
-#~ "ingevoerd"
-
-#~ msgid "Numpad period only"
-#~ msgstr "Alleen numpad-punt"
-
-#~ msgid "Period and Comma"
-#~ msgstr "Punt en komma"
 
 #~ msgid "Backup"
 #~ msgstr "Back-up"
@@ -1117,6 +1160,9 @@ msgstr "Uitgeschakeld"
 #~ msgid "Use unique color"
 #~ msgstr "Unieke kleur gebruiken"
 
+#~ msgid "Enter a new tag name..."
+#~ msgstr "Voer nieuwe tag-naam in…"
+
 #~ msgid "Add Tag"
 #~ msgstr "Tag toevoegen"
 
@@ -1155,13 +1201,11 @@ msgstr "Uitgeschakeld"
 #~ msgid "Conversion Needed"
 #~ msgstr "Conversie benodigd"
 
-#, fuzzy
 #~ msgid "Use Custom Rates"
-#~ msgstr "Aangepaste valuta gebruiken"
+#~ msgstr "Aangepaste wissel­koersen gebruiken"
 
-#, fuzzy
 #~ msgid "Enter the conversion rates manually"
-#~ msgstr "Voer conversie hier in"
+#~ msgstr "Voer wisselkoersen handmatig in"
 
 #~ msgctxt "Button"
 #~ msgid "Transfer"
@@ -1188,9 +1232,6 @@ msgstr "Uitgeschakeld"
 
 #~ msgid "Toggle Graphs"
 #~ msgstr "Grafieken omschakelen"
-
-#~ msgid "Dashboard"
-#~ msgstr "Dashboard"
 
 #~ msgid ""
 #~ "Create or open an account to get started. You may also drag a file into "
@@ -1375,9 +1416,6 @@ msgstr "Uitgeschakeld"
 
 #~ msgid "No Backup Folder"
 #~ msgstr "Geen back-up-map"
-
-#~ msgid "Accounts"
-#~ msgstr "Accounts"
 
 #~ msgid "Reset All Filters"
 #~ msgstr "Alle filters resetten"

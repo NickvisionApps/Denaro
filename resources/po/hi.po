@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-19 11:20-0500\n"
+"POT-Creation-Date: 2024-02-27 17:08-0500\n"
 "PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
@@ -19,74 +19,104 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 5.4-dev\n"
 
-#: libdenaro/src/models/account.cpp:152
+#: libdenaro/src/models/account.cpp:101
 msgid "Ungrouped"
 msgstr "असमूहीकृत"
 
-#: libdenaro/src/models/account.cpp:153
+#: libdenaro/src/models/account.cpp:102
 msgid "Transactions without a group"
 msgstr "समूह के बिना लेन-देन"
 
-#: libdenaro/src/models/account.cpp:227
+#: libdenaro/src/models/account.cpp:212
 msgid "Tomorrow"
 msgstr "कल"
 
-#: libdenaro/src/models/account.cpp:231
+#: libdenaro/src/models/account.cpp:216
 msgid "One week from now"
 msgstr "अब से एक सप्ताह बाद"
 
-#: libdenaro/src/models/account.cpp:235
+#: libdenaro/src/models/account.cpp:220
 msgid "One month from now"
 msgstr "अब से एक महीना"
 
-#: libdenaro/src/models/account.cpp:239
+#: libdenaro/src/models/account.cpp:224
 msgid "Two months from now"
 msgstr "अब से दो महीने बाद"
 
-#: libdenaro/src/models/account.cpp:634
+#: libdenaro/src/models/account.cpp:771
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "{0} पर स्थानांतरण"
 
-#: libdenaro/src/models/account.cpp:651
+#: libdenaro/src/models/account.cpp:788
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "{0} से स्थानांतरण"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:26
+#: libdenaro/src/models/account.cpp:887
+msgid "Income"
+msgstr "आय"
+
+#: libdenaro/src/models/account.cpp:887
+msgid "Expense"
+msgstr "लागत/खर्च"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:29
 msgid "Denaro"
 msgstr "Denaro"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:27
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:30
 msgid "Manage your personal finances"
 msgstr "अपने व्यक्तिगत वित्त का प्रबंधन करें"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:31
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
 msgid "Matrix Chat"
 msgstr "Matrix Chat"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:33
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
 #, fuzzy
 msgid "Contributors on GitHub"
 msgstr "GitHub पर योगदानकर्ता ❤️"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:35
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
 msgid "Fyodor Sobolev"
 msgstr "फ्योडोर सोबोलेव"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:41
 msgid "David Lapshin"
 msgstr "डेविड लैपशिन"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:43
 msgid "translator-credits"
 msgstr "Scrambled777 <weblate.scrambled777@simplelogin.com>"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:141
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:121
+msgctxt "Night"
+msgid "Good Morning!"
+msgstr "शुभ प्रभात!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:125
+msgctxt "Morning"
+msgid "Good Morning!"
+msgstr "शुभ प्रभात!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:129
+msgid "Good Afternoon!"
+msgstr "शुभ दोपहर!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:133
+msgid "Good Evening!"
+msgstr "शुभ संध्या!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:135
+msgid "Good Day!"
+msgstr "शुभ दिन!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:176
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:159
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:194
 msgid "Unable to download and install update"
 msgstr ""
 
@@ -120,19 +150,19 @@ msgid "Theme"
 msgstr "थीम"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgctxt "Theme"
 msgid "Light"
 msgstr "हल्का"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
 msgctxt "Theme"
 msgid "Dark"
 msgstr "गहरा"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
 msgctxt "Theme"
 msgid "System"
 msgstr "सिस्टम"
@@ -169,66 +199,80 @@ msgid "Quit"
 msgstr "छोड़ें"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Open"
 msgstr "खोलें"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "GitHub Repo"
 msgstr "GitHub रेपो"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:64
-#, fuzzy
-msgid "Search for Files"
-msgstr "फाइल साफ़ करें"
+msgid "Search"
+msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:65
 msgid "Home"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+msgid "Dashboard"
+msgstr "डैशबोर्ड"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#, fuzzy
+msgid "Accounts"
+msgstr "खाता"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Help"
 msgstr "सहायता"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "सभी जानकारी निर्यात करें"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Changelog"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Report a Bug"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "Discussions"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "Credits"
 msgstr ""
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:19
 #, fuzzy
 msgid "Settings"
 msgstr "Account Settings"
 
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#, fuzzy
+msgid "New"
+msgstr "नया"
+
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:87
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:91
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:94
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -238,7 +282,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:98
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:102
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -250,36 +294,91 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:158
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:163
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:222
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:227
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:284
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:289
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "परिणाम को क्लिपबोर्ड पर कॉपी किया गया।"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
-msgid "An application restart is required to change the theme."
-msgstr ""
-
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
 msgid "Automatically Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
 #, fuzzy
 msgid "On"
 msgstr "खोलें"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
 #, fuzzy
 msgid "Off"
 msgstr "बंद"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+msgid "Colors"
+msgstr "रंग"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#, fuzzy
+msgid "Default Transaction Color"
+msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
+msgid ""
+"A change in this setting will only be applied to newly added transactions."
+msgstr "इस सेटिंग में बदलाव केवल नए जोड़े गए लेनदेन पर लागू किया जाएगा।"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
+#, fuzzy
+msgid "Default Transfer Color"
+msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
+#, fuzzy
+msgid "Default Group Color"
+msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
+#, fuzzy
+msgid "A change in this setting will only be applied to newly added groups."
+msgstr "इस सेटिंग में बदलाव केवल नए समूहों पर लागू किया जाएगा।"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
+msgid "Locale"
+msgstr "स्थानीय"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
+msgid "Insert Decimal Separator"
+msgstr "दशमलव विभाजक डालें"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
+#, fuzzy
+msgid ""
+"For the selected keys, the account's decimal separator will be inserted "
+"instead of the keyboard's value."
+msgstr ""
+"सेट करें कि कौन सी कुंजी दबाने पर स्थान का दशमलव विभाजक राशि फ़ील्ड में डाला जाएगा।"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
+msgid "Numpad period only"
+msgstr "केवल नमपाद अवधि"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
+msgid "Period and Comma"
+msgstr "अवधि और अल्पविराम"
+
+#, fuzzy
+#~ msgid "Search for Files"
+#~ msgstr "फाइल साफ़ करें"
 
 #~ msgid "(Copy)"
 #~ msgstr "(प्रतिलिपि)"
@@ -443,9 +542,6 @@ msgstr "बंद"
 #~ msgid "Error"
 #~ msgstr "त्रुटि"
 
-#~ msgid "Expense"
-#~ msgstr "लागत/खर्च"
-
 #~ msgid "Export to File"
 #~ msgstr "फाइल में निर्यात करें"
 
@@ -455,15 +551,6 @@ msgstr "बंद"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "उत्पन्न: {0}"
-
-#~ msgid "Good Afternoon!"
-#~ msgstr "शुभ दोपहर!"
-
-#~ msgid "Good Day!"
-#~ msgstr "शुभ दिन!"
-
-#~ msgid "Good Evening!"
-#~ msgstr "शुभ संध्या!"
 
 #~ msgid "Group"
 #~ msgstr "समूह"
@@ -494,9 +581,6 @@ msgstr "बंद"
 #~ msgid_plural "Imported {0} transactions from file."
 #~ msgstr[0] "फाइल से आयातित {0} लेनदेन।"
 #~ msgstr[1] "फाइल से आयातित {0} लेनदेन।"
-
-#~ msgid "Income"
-#~ msgstr "आय"
 
 #~ msgid "N/A"
 #~ msgstr "N/A"
@@ -736,19 +820,8 @@ msgstr "बंद"
 #~ msgid "Your system reported that your currency is"
 #~ msgstr "आपके सिस्टम ने बताया कि आपकी मुद्रा है"
 
-#~ msgctxt "Morning"
-#~ msgid "Good Morning!"
-#~ msgstr "शुभ प्रभात!"
-
-#~ msgctxt "Night"
-#~ msgid "Good Morning!"
-#~ msgstr "शुभ प्रभात!"
-
 #~ msgid "Back"
 #~ msgstr "पीछे"
-
-#~ msgid "Default Transaction Type"
-#~ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
 #~ msgid "Transaction Reminders Threshold"
 #~ msgstr "लेन-देन अनुस्मारक सीमा"
@@ -848,10 +921,6 @@ msgstr "बंद"
 
 #~ msgid "New Group (Ctrl+G)"
 #~ msgstr "नया समूह (Ctrl+G)"
-
-#~ msgctxt "Group"
-#~ msgid "New"
-#~ msgstr "नया"
 
 #~ msgid "Toggle Groups Visibility"
 #~ msgstr "समूह दृश्यता टॉगल करें"
@@ -1005,18 +1074,11 @@ msgstr "बंद"
 #~ msgid "Unlock"
 #~ msgstr "अनलॉक"
 
-#~ msgid "Colors"
-#~ msgstr "रंग"
-
 #~ msgid "Customize the colors used by Denaro."
 #~ msgstr "Denaro द्वारा उपयोग किए गए रंगों को अनुकूलित करें।"
 
 #~ msgid "Transaction Default Color"
 #~ msgstr "लेन-देन डिफ़ॉल्ट रंग"
-
-#~ msgid ""
-#~ "A change in this setting will only be applied to newly added transactions."
-#~ msgstr "इस सेटिंग में बदलाव केवल नए जोड़े गए लेनदेन पर लागू किया जाएगा।"
 
 #~ msgid "Transfer Default Color"
 #~ msgstr "डिफ़ॉल्ट रंग स्थानांतरित करें"
@@ -1027,9 +1089,6 @@ msgstr "बंद"
 #~ msgid "Group Default Color"
 #~ msgstr "समूह डिफ़ॉल्ट रंग"
 
-#~ msgid "A change in this setting will only be applied to new groups."
-#~ msgstr "इस सेटिंग में बदलाव केवल नए समूहों पर लागू किया जाएगा।"
-
 #~ msgid "Checking Account Color"
 #~ msgstr "खाते का रंग जांचा जा रहा है"
 
@@ -1039,9 +1098,6 @@ msgstr "बंद"
 #~ msgid "Business Account Color"
 #~ msgstr "बिजनेस अकाउंट का रंग"
 
-#~ msgid "Locale"
-#~ msgstr "स्थानीय"
-
 #~ msgid "Use Native Digits"
 #~ msgstr "मूल अंकों का प्रयोग करें"
 
@@ -1049,21 +1105,6 @@ msgstr "बंद"
 #~ "Whether to use numerals that are native for your locale instead of latin "
 #~ "digits."
 #~ msgstr "क्या लैटिन अंकों के बजाय उन अंकों का उपयोग करना है जो आपके स्थान के लिए मूल हैं।"
-
-#~ msgid "Insert Decimal Separator"
-#~ msgstr "दशमलव विभाजक डालें"
-
-#~ msgid ""
-#~ "Set for which keys pressed will the locale's decimal separator be "
-#~ "inserted into an amount field."
-#~ msgstr ""
-#~ "सेट करें कि कौन सी कुंजी दबाने पर स्थान का दशमलव विभाजक राशि फ़ील्ड में डाला जाएगा।"
-
-#~ msgid "Numpad period only"
-#~ msgstr "केवल नमपाद अवधि"
-
-#~ msgid "Period and Comma"
-#~ msgstr "अवधि और अल्पविराम"
 
 #~ msgid "Backup"
 #~ msgstr "बैकअप"
@@ -1083,9 +1124,6 @@ msgstr "बंद"
 
 #~ msgid "No Reminders"
 #~ msgstr "कोई अनुस्मारक नहीं"
-
-#~ msgid "Account"
-#~ msgstr "खाता"
 
 #~ msgid "Close Account"
 #~ msgstr "खाता बंद करें"
@@ -1209,9 +1247,6 @@ msgstr "बंद"
 
 #~ msgid "Toggle Graphs"
 #~ msgstr "ग्राफ़ टॉगल करें"
-
-#~ msgid "Dashboard"
-#~ msgstr "डैशबोर्ड"
 
 #~ msgid ""
 #~ "Create or open an account to get started. You may also drag a file into "
