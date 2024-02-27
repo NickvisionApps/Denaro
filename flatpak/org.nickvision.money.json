@@ -97,7 +97,6 @@
             "name": "gnuplot",
             "buildsystem": "simple",
             "build-commands": [
-                "./prepare",
                 "./configure --prefix=/app",
                 "make",
                 "make install"
