@@ -870,37 +870,40 @@ namespace Nickvision::Money::Shared::Models
         return false;
     }
 
-    std::vector<std::uint8_t> Account::generateGraph(GraphType type, bool darkMode, const std::vector<int>& filteredIds, int width, int height, bool showLegend) const
+    std::vector<std::uint8_t> Account::generateGraph(GraphType type, bool darkMode, const std::vector<int>& filteredIds, int width, int height) const
     {
-        std::string tempPath{ StringHelpers::replace((UserDirectories::getApplicationCache() / "graph.png").string(), "\\", "/") };
+        std::string tempPath{ StringHelpers::replace((UserDirectories::getApplicationCache() / "TEMP_DENARO_GRAPH.png").string(), "\\", "/") }; //gnuplot accepts paths with only / as separator
         matplot::figure_handle figure{ matplot::figure(true) };
         //Set graph size
         if(width != -1 && height != -1)
         {
             figure->size(static_cast<unsigned int>(width), static_cast<unsigned int>(height));
         }
+        //TODO: Support dark mode
         //Render graph
         if(type == GraphType::IncomeExpensePie)
         {
             std::vector<double> values{ getIncome(filteredIds), getExpense(filteredIds) };
             std::vector<std::string> labels{ _("Income"), _("Expense") };
-            figure->current_axes()->pie(values, labels);
+            matplot::circles_handle pie{ figure->current_axes()->pie(values, labels) };
+            pie->labels()->color(darkMode ? "white" : "black");
+            //TODO: Change pie colors
         }
         else if(type == GraphType::IncomeExpensePerGroup)
         {
-
+            //TODO: Implement
         }
         else if(type == GraphType::IncomeExpenseOverTime)
         {
-
+            //TODO: Implement
         }
         else if(type == GraphType::IncomeByGroup)
         {
-
+            //TODO: Implement
         }
         else if(type == GraphType::ExpenseByGroup)
         {
-
+            //TODO: Implement
         }
         //Get graph bytes
         figure->save(tempPath);
