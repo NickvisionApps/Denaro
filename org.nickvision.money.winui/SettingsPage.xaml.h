@@ -32,6 +32,10 @@ namespace winrt::Nickvision::Money::WinUI::implementation
          * @brief Handles when a switch preference is changed. 
          */
         void OnSwitchToggled(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        /**
+         * @brief Handles when a color preference is changed. 
+         */
+        void OnColorChanged(const Microsoft::UI::Xaml::Controls::ColorPicker& sender, const Microsoft::UI::Xaml::Controls::ColorChangedEventArgs& args);
 
     private:
         /**

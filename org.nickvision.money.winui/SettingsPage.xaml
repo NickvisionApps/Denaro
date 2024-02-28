@@ -36,7 +36,7 @@
 
                         <Button.Flyout>
                             <Flyout>
-                                <ColorPicker x:Name="ClrDefaultTransaction"/>
+                                <ColorPicker x:Name="ClrDefaultTransaction" ColorChanged="OnColorChanged"/>
                             </Flyout>
                         </Button.Flyout>
                     </Button>
@@ -52,7 +52,7 @@
 
                         <Button.Flyout>
                             <Flyout>
-                                <ColorPicker x:Name="ClrDefaultTransfer"/>
+                                <ColorPicker x:Name="ClrDefaultTransfer" ColorChanged="OnColorChanged"/>
                             </Flyout>
                         </Button.Flyout>
                     </Button>
@@ -68,7 +68,55 @@
 
                         <Button.Flyout>
                             <Flyout>
-                                <ColorPicker x:Name="ClrDefaultGroup"/>
+                                <ColorPicker x:Name="ClrDefaultGroup" ColorChanged="OnColorChanged"/>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+
+            <nickvision:SettingsRow x:Name="RowCheckingAccount" Glyph="&#xE790;">
+                <nickvision:SettingsRow.Child>
+                    <Button>
+                        <Button.Content>
+                            <Rectangle x:Name="RctCheckingAccount" Width="20" Height="20"/>
+                        </Button.Content>
+
+                        <Button.Flyout>
+                            <Flyout>
+                                <ColorPicker x:Name="ClrCheckingAccount" ColorChanged="OnColorChanged"/>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+
+            <nickvision:SettingsRow x:Name="RowSavingsAccount" Glyph="&#xE790;">
+                <nickvision:SettingsRow.Child>
+                    <Button>
+                        <Button.Content>
+                            <Rectangle x:Name="RctSavingsAccount" Width="20" Height="20"/>
+                        </Button.Content>
+
+                        <Button.Flyout>
+                            <Flyout>
+                                <ColorPicker x:Name="ClrSavingsAccount" ColorChanged="OnColorChanged"/>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+
+            <nickvision:SettingsRow x:Name="RowBusinessAccount" Glyph="&#xE790;">
+                <nickvision:SettingsRow.Child>
+                    <Button>
+                        <Button.Content>
+                            <Rectangle x:Name="RctBusinessAccount" Width="20" Height="20"/>
+                        </Button.Content>
+
+                        <Button.Flyout>
+                            <Flyout>
+                                <ColorPicker x:Name="ClrBusinessAccount" ColorChanged="OnColorChanged"/>
                             </Flyout>
                         </Button.Flyout>
                     </Button>
