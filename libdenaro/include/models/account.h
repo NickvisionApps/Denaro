@@ -11,7 +11,6 @@
 #include <libnick/database/sqldatabase.h>
 #include "accountmetadata.h"
 #include "color.h"
-#include "exportmode.h"
 #include "graphtype.h"
 #include "group.h"
 #include "importresult.h"
@@ -203,18 +202,17 @@ namespace Nickvision::Money::Shared::Models
         /**
          * @brief Exports the account to a CSV file.
          * @param path THe path to the CSV file
-         * @param exportMode ExportMode
-         * @param filetedIds The list of transaction ids to use for ExportMode::CurrentView
+         * @param filetedIds The list of transaction ids to use to restrict the export. Empty list to export all transactions.
          */
-        bool exportToCSV(const std::filesystem::path& path, ExportMode exportMode = ExportMode::All, const std::vector<int>& filteredIds = {}) const;
+        bool exportToCSV(const std::filesystem::path& path, const std::vector<int>& filteredIds = {}) const;
         /**
          * @brief Exports the account to a PDF file.
          * @param path The path to the PDF file
          * @param password The password to use to lock the PDF file. Empty string for no password on the PDF file
          * @param exportMode ExportMode
-         * @param filetedIds The list of transaction ids to use for ExportMode::CurrentView
+         * @param filetedIds The list of transaction ids to use to restrict the export. Empty list to export all transactions.
          */
-        bool exportToPDF(const std::filesystem::path& path, const std::string& password, ExportMode exportMode = ExportMode::All, const std::vector<int>& filteredIds = {}) const;
+        bool exportToPDF(const std::filesystem::path& path, const std::string& password, const std::vector<int>& filteredIds = {}) const;
         /**
          * @brief Generates a graph.
          * @param type GraphType

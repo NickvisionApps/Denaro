@@ -65,7 +65,7 @@ TEST_F(AccountTest, ImportTestAccountCSV)
 TEST_F(AccountTest, ExportTestAccountCSV)
 {
     std::filesystem::path exportPath{ Aura::getActive().getExecutableDirectory() / "export.csv" };
-    ASSERT_TRUE(m_account->exportToCSV(exportPath, {}, {}));
+    ASSERT_TRUE(m_account->exportToCSV(exportPath, {}));
     ASSERT_TRUE(std::filesystem::exists(exportPath));
     std::filesystem::remove(exportPath);
 }

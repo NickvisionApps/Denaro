@@ -815,7 +815,7 @@ namespace Nickvision::Money::Shared::Models
         return {};
     }
 
-    bool Account::exportToCSV(const std::filesystem::path& path, ExportMode exportMode, const std::vector<int>& filteredIds) const
+    bool Account::exportToCSV(const std::filesystem::path& path, const std::vector<int>& filteredIds) const
     {
         /**
          * CSV Header:
@@ -864,7 +864,7 @@ namespace Nickvision::Money::Shared::Models
         return true;
     }
 
-    bool Account::exportToPDF(const std::filesystem::path& path, const std::string& password, ExportMode exportMode, const std::vector<int>& filteredIds) const
+    bool Account::exportToPDF(const std::filesystem::path& path, const std::string& password, const std::vector<int>& filteredIds) const
     {
         //TODO: Implement
         return false;
@@ -1019,7 +1019,7 @@ namespace Nickvision::Money::Shared::Models
                     std::string tag{ it2->str(1) };
                     std::string content{ it2->str(2) };
                     // Name
-                    if((tag == "NAME") || (tag == "MEMO") && !nameSet)
+                    if(((tag == "NAME") || (tag == "MEMO")) && !nameSet)
                     {
                         transaction.setDescription(content);
                         nameSet = true;
