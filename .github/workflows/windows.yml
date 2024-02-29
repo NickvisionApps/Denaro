@@ -30,7 +30,7 @@ jobs:
           pkgs: boost-date-time libnick matplotplusplus podofo rapidcsv
           triplet: x64-windows
           cache-key: windows-latest
-          revision: 72d66da23b4332533c82d797bf2f82b8d6d1bf8a
+          revision: 2ac6ba173be85207a7bac4f0f02f5486f9fd4c0f
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: "Build"
         working-directory: ${{github.workspace}}/build
