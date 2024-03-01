@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2024-02-21 14:02+0000\n"
+"PO-Revision-Date: 2024-03-01 15:00+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
 "app/nl/>\n"
@@ -732,9 +732,8 @@ msgid ""
 msgstr ""
 
 #: ../../../Controllers/AccountViewController.cs:973
-#, fuzzy
 msgid "Unable to import transactions from the file."
-msgstr "Voeg een transactie toe of importeer deze uit een bestand"
+msgstr "Kan trans­acties niet uit bestand importeren."
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:109
 msgid ""
@@ -754,14 +753,12 @@ msgid ""
 msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:280
-#, fuzzy
 msgid "Unable to overwrite an existing account."
-msgstr "Een account kan slechts eenmaal worden geopend."
+msgstr "Kan bestaand account niet over­schrijven."
 
 #: ../../../Controllers/MainWindowController.cs:269
-#, fuzzy
 msgid "Unable to overwrite an opened account."
-msgstr "Een account kan slechts eenmaal worden geopend."
+msgstr "Kan geopend account niet over­schrijven."
 
 #: ../../../Controllers/AccountViewController.cs:452
 #: ../../../Controllers/AccountViewController.cs:829
@@ -1166,7 +1163,7 @@ msgstr "Nieuw account"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:49
 msgid "Use this wizard to get the most out of your account"
-msgstr ""
+msgstr "Gebruik deze wizard om het meeste uit uw account te halen"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:54
 msgid "Let's Start"
