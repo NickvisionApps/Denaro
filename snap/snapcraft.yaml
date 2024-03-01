@@ -79,6 +79,8 @@ parts:
     source-tag: '5.2.0'
     source-depth: 1
     plugin: meson
+    build-packages:
+      - libicu-dev
     meson-parameters:
       - --prefix=/usr
       - -Dmaintainer-mode=false
