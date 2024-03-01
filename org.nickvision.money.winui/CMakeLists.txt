@@ -17,8 +17,8 @@ if(WIN32)
     set_property(SOURCE "App.xaml" PROPERTY VS_XAML_TYPE "ApplicationDefinition")
     set_property(TARGET org.nickvision.money.winui PROPERTY VS_PACKAGE_REFERENCES
         "Microsoft.Windows.CppWinRT_2.0.240111.5"
-        "Microsoft.WindowsAppSDK_1.4.240211001"
-        "Microsoft.Windows.SDK.BuildTools_10.0.22621.2428"
+        "Microsoft.WindowsAppSDK_1.5.240227000"
+        "Microsoft.Windows.SDK.BuildTools_10.0.22621.3233"
         "Microsoft.Windows.ImplementationLibrary_1.0.240122.1"
     )
     target_include_directories(org.nickvision.money.winui PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
