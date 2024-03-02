@@ -97,7 +97,7 @@
             "name": "gnuplot",
             "buildsystem": "simple",
             "build-commands": [
-                "./configure --prefix=/app",
+                "./configure --prefix=/app --without-qt --with-bitmap-terminals --without-wx-single-threaded",
                 "make",
                 "make install"
             ],
