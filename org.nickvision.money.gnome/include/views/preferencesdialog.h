@@ -27,15 +27,20 @@ namespace Nickvision::Money::GNOME::Views
          * @brief Shows the PreferencesDialog and waits for it to close. 
          */
         void run();
+
+    private:
+        /**
+         * @brief Applies the changes to the app's configuration object.
+         */
+        void applyChanges();
         /**
          * @brief Handles when the theme preference is changed. 
          */
         void onThemeChanged();
-
-    private:
         std::shared_ptr<Shared::Controllers::PreferencesViewController> m_controller;
         GtkBuilder* m_builder;
         AdwPreferencesWindow* m_dialog;
+        GtkColorDialog* m_colorDialog;
     };
 }
 
