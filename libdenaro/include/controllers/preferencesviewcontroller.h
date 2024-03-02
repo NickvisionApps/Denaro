@@ -3,7 +3,7 @@
 
 #include <string>
 #include "models/color.h"
-#include "models/insertSeparatorTrigger.h"
+#include "models/insertseparatortrigger.h"
 #include "models/theme.h"
 
 namespace Nickvision::Money::Shared::Controllers
