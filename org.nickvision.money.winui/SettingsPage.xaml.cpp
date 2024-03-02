@@ -91,12 +91,12 @@ namespace winrt::Nickvision::Money::WinUI::implementation
                 m_controller->setTheme(static_cast<Theme>(CmbTheme().SelectedIndex()));
             }
             m_controller->setAutomaticallyCheckForUpdates(TglAutomaticallyCheckForUpdates().IsOn());
-            m_controller->setTransactionDefaultColor({ ClrDefaultTransaction().Color().A, ClrDefaultTransaction().Color().R, ClrDefaultTransaction().Color().G, ClrDefaultTransaction().Color().B });
-            m_controller->setTransferDefaultColor({ ClrDefaultTransfer().Color().A, ClrDefaultTransfer().Color().R, ClrDefaultTransfer().Color().G, ClrDefaultTransfer().Color().B });
-            m_controller->setGroupDefaultColor({ ClrDefaultGroup().Color().A, ClrDefaultGroup().Color().R, ClrDefaultGroup().Color().G, ClrDefaultGroup().Color().B });
-            m_controller->setAccountCheckingColor({ ClrCheckingAccount().Color().A, ClrCheckingAccount().Color().R, ClrCheckingAccount().Color().G, ClrCheckingAccount().Color().B });
-            m_controller->setAccountSavingsColor({ ClrSavingsAccount().Color().A, ClrSavingsAccount().Color().R, ClrSavingsAccount().Color().G, ClrSavingsAccount().Color().B });
-            m_controller->setAccountBusinessColor({ ClrBusinessAccount().Color().A, ClrBusinessAccount().Color().R, ClrBusinessAccount().Color().G, ClrBusinessAccount().Color().B });
+            m_controller->setTransactionDefaultColor({ ClrDefaultTransaction().Color().R, ClrDefaultTransaction().Color().G, ClrDefaultTransaction().Color().B, ClrDefaultTransaction().Color().A });
+            m_controller->setTransferDefaultColor({ ClrDefaultTransfer().Color().R, ClrDefaultTransfer().Color().G, ClrDefaultTransfer().Color().B, ClrDefaultTransfer().Color().A });
+            m_controller->setGroupDefaultColor({ ClrDefaultGroup().Color().R, ClrDefaultGroup().Color().G, ClrDefaultGroup().Color().B, ClrDefaultGroup().Color().A });
+            m_controller->setAccountCheckingColor({ ClrCheckingAccount().Color().R, ClrCheckingAccount().Color().G, ClrCheckingAccount().Color().B, ClrCheckingAccount().Color().A });
+            m_controller->setAccountSavingsColor({ ClrSavingsAccount().Color().R, ClrSavingsAccount().Color().G, ClrSavingsAccount().Color().B, ClrSavingsAccount().Color().A });
+            m_controller->setAccountBusinessColor({ ClrBusinessAccount().Color().R, ClrBusinessAccount().Color().G, ClrBusinessAccount().Color().B, ClrBusinessAccount().Color().A });
             m_controller->setInsertSeparator(static_cast<InsertSeparatorTrigger>(CmbInsertSeparator().SelectedIndex()));
             m_controller->saveConfiguration();
         }
