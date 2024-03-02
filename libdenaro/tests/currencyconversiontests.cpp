@@ -20,7 +20,7 @@ public:
 
 TEST_F(CurrencyConversionTest, ServiceGetRates)
 {
-    std::unordered_map<std::string, double> rates{ CurrencyConversionService::getConversionRates("USD") };
+    std::map<std::string, double> rates{ CurrencyConversionService::getConversionRates("USD") };
     ASSERT_TRUE(rates.size() > 0);
     ASSERT_TRUE(std::filesystem::exists(UserDirectories::getApplicationCache() / ("currency_USD.json")));
 }

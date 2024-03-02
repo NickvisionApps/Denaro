@@ -32,7 +32,20 @@ namespace Nickvision::Money::GNOME::Views
         g_signal_connect(gtk_builder_get_object(m_builder, "accountBusinessColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec* pspec, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "insertSeparatorRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec* pspec, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
         //Load
+        GdkRGBA color;
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "themeRow")), static_cast<unsigned int>(m_controller->getTheme()));
+        gdk_rgba_parse(&color, m_controller->getTransactionDefaultColor().toRGBString(true));
+        gtk_color_dialog_button_set_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "transactionColorButton")), &color);
+        gdk_rgba_parse(&color, m_controller->getTransferDefaultColor().toRGBString(true));
+        gtk_color_dialog_button_set_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "transferColorButton")), &color); 
+        gdk_rgba_parse(&color, m_controller->getGroupDefaultColor().toRGBString(true));
+        gtk_color_dialog_button_set_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "groupColorButton")), &color); 
+        gdk_rgba_parse(&color, m_controller->getAccountCheckingColor().toRGBString(true));
+        gtk_color_dialog_button_set_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "accountCheckingColorButton")), &color); 
+        gdk_rgba_parse(&color, m_controller->getAccountSavingsColor().toRGBString(true));
+        gtk_color_dialog_button_set_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "accountSavingsColorButton")), &color);
+        gdk_rgba_parse(&color, m_controller->getAccountBusinessColor().toRGBString(true));
+        gtk_color_dialog_button_set_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "accountBusinessColorButton")), &color);
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "insertSeparatorRow")), static_cast<unsigned int>(m_controller->getInsertSeparator()));
     }
 

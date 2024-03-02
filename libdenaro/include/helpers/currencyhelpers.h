@@ -10,7 +10,7 @@ namespace Nickvision::Money::Shared::CurrencyHelpers
      * @brief Gets the currency of the system's locale.
      * @return The system currency
      */
-    Models::Currency getSystemCurrency();
+    const Models::Currency& getSystemCurrency();
     /**
      * @brief Converts an amount to a currency string.
      * @param amount The amount to convert

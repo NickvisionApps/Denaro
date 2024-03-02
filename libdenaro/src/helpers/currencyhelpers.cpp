@@ -36,40 +36,44 @@ private:
 
 namespace Nickvision::Money::Shared
 {
-    Currency CurrencyHelpers::getSystemCurrency()
+    const Currency& CurrencyHelpers::getSystemCurrency()
     {
-        Currency curr;
-        curr.setSymbol(std::use_facet<std::moneypunct<char>>(std::locale("")).curr_symbol());
-        curr.setCode(std::use_facet<std::moneypunct<char, true>>(std::locale("")).curr_symbol());
-        curr.setDecimalSeparator(std::use_facet<std::moneypunct<char>>(std::locale("")).decimal_point());
-        curr.setGroupSeparator(std::use_facet<std::moneypunct<char>>(std::locale("")).thousands_sep());
-        int numberIndex{ -1 };
-        int signIndex{ -1 };
-        int spaceIndex{ -1 };
-        for(int i = 0; i < 4; i++)
+        static std::unique_ptr<Currency> systemCurrency{ nullptr };
+        if(!systemCurrency)
         {
-            if(std::use_facet<std::moneypunct<char>>(std::locale("")).pos_format().field[i] == std::moneypunct<char>::value)
+            systemCurrency = std::make_unique<Currency>();
+            systemCurrency->setSymbol(std::use_facet<std::moneypunct<char>>(std::locale("")).curr_symbol());
+            systemCurrency->setCode(std::use_facet<std::moneypunct<char, true>>(std::locale("")).curr_symbol());
+            systemCurrency->setDecimalSeparator(std::use_facet<std::moneypunct<char>>(std::locale("")).decimal_point());
+            systemCurrency->setGroupSeparator(std::use_facet<std::moneypunct<char>>(std::locale("")).thousands_sep());
+            int numberIndex{ -1 };
+            int signIndex{ -1 };
+            int spaceIndex{ -1 };
+            for(int i = 0; i < 4; i++)
             {
-                numberIndex = i;
-            }
-            if(std::use_facet<std::moneypunct<char>>(std::locale("")).pos_format().field[i] == std::moneypunct<char>::sign)
+                if(std::use_facet<std::moneypunct<char>>(std::locale("")).pos_format().field[i] == std::moneypunct<char>::value)
+                {
+                    numberIndex = i;
+                }
+                if(std::use_facet<std::moneypunct<char>>(std::locale("")).pos_format().field[i] == std::moneypunct<char>::sign)
+                {
+                    signIndex = i;
+                }
+                if(std::use_facet<std::moneypunct<char>>(std::locale("")).pos_format().field[i] == std::moneypunct<char>::space)
+                {
+                    spaceIndex = i;
+                }
+            }     
+            if(signIndex < numberIndex)
             {
-                signIndex = i;
+                systemCurrency->setAmountStyle(spaceIndex == -1 ? AmountStyle::SymbolNumber : AmountStyle::SymbolSpaceNumber);
             }
-            if(std::use_facet<std::moneypunct<char>>(std::locale("")).pos_format().field[i] == std::moneypunct<char>::space)
+            else
             {
-                spaceIndex = i;
+                systemCurrency->setAmountStyle(spaceIndex == -1 ? AmountStyle::NumberSymbol : AmountStyle::NumberSpaceSymbol);
             }
-        }     
-        if(signIndex < numberIndex)
-        {
-            curr.setAmountStyle(spaceIndex == -1 ? AmountStyle::SymbolNumber : AmountStyle::SymbolSpaceNumber);
         }
-        else
-        {
-            curr.setAmountStyle(spaceIndex == -1 ? AmountStyle::NumberSymbol : AmountStyle::NumberSpaceSymbol);
-        }
-        return curr;
+        return *systemCurrency;
     }
 
     std::string CurrencyHelpers::toAmountString(double amount, const Currency& currency, bool showCurrencySymbol, bool overwriteDecimal)

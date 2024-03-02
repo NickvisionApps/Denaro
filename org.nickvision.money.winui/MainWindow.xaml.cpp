@@ -8,6 +8,7 @@
 #include <libnick/notifications/shellnotification.h>
 #include <libnick/localization/gettext.h>
 #include "SettingsPage.xaml.h"
+#include "Controls/CurrencyConverterDialog.xaml.h"
 #include "Helpers/WinUI.h"
 
 using namespace ::Nickvision;
@@ -73,6 +74,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         BtnReportABug().Content(winrt::box_value(winrt::to_hstring(_("Report a Bug"))));
         BtnDiscussions().Content(winrt::box_value(winrt::to_hstring(_("Discussions"))));
         LblCredits().Text(winrt::to_hstring(_("Credits")));
+        NavViewCurrencyConverter().Content(winrt::box_value(winrt::to_hstring(_("Currency Converter"))));
         NavViewSettings().Content(winrt::box_value(winrt::to_hstring(_("Settings"))));
         HomeNewAccountLabel().Text(winrt::to_hstring(_("New")));
         HomeOpenAccountLabel().Text(winrt::to_hstring(_("Open")));
@@ -302,6 +304,14 @@ namespace winrt::Nickvision::Money::WinUI::implementation
     Windows::Foundation::IAsyncAction MainWindow::Discussions(const IInspectable& sender, const RoutedEventArgs& args)
     {
         co_await Launcher::LaunchUriAsync(Windows::Foundation::Uri{ winrt::to_hstring(m_controller->getAppInfo().getSupportUrl()) });
+    }
+
+    Windows::Foundation::IAsyncAction MainWindow::CurrencyConverter(const IInspectable& sender, const TappedRoutedEventArgs& args)
+    {
+        ContentDialog dialog{ winrt::make<Controls::implementation::CurrencyConverterDialog>() };
+        dialog.XamlRoot(MainGrid().XamlRoot());
+        dialog.RequestedTheme(MainGrid().RequestedTheme());
+        co_await dialog.ShowAsync();
     }
 
     void MainWindow::SetDragRegionForCustomTitleBar()

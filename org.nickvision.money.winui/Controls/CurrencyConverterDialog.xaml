@@ -1,0 +1,55 @@
+<ContentDialog
+    x:Class="Nickvision.Money.WinUI.Controls.CurrencyConverterDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nickvision.Money.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
+    DefaultButton="Close" Opened="OnOpened">
+    <StackPanel x:Name="StackPanel" MinWidth="420" Orientation="Vertical" Spacing="6">
+        <TextBlock x:Name="LblCurrency" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
+        
+        <local:SettingsRow x:Name="RowSourceCurrency" Glyph="&#xE825;">
+            <local:SettingsRow.Child>
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <ComboBox x:Name="CmbSourceCurrency" SelectionChanged="OnCmbSourceCurrencyChanged"/>
+
+                    <Button x:Name="BtnSwitch" Click="SwitchCurrencies">
+                        <Button.Content>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="18" Glyph="&#xE8AB;"/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </local:SettingsRow.Child>
+        </local:SettingsRow>
+
+        <local:SettingsRow x:Name="RowResultCurrency" Glyph="&#xE825;">
+            <local:SettingsRow.Child>
+                <ComboBox x:Name="CmbResultCurrency" SelectionChanged="OnCmbResultCurrencyChanged"/>
+            </local:SettingsRow.Child>
+        </local:SettingsRow>
+
+        <TextBlock x:Name="LblAmount" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
+
+        <local:SettingsRow x:Name="RowSourceAmount">
+            <local:SettingsRow.Child>
+                <TextBox x:Name="TxtSourceAmount" TextChanged="OnTxtSourceAmountChanged"/>
+            </local:SettingsRow.Child>
+        </local:SettingsRow>
+
+        <local:SettingsRow x:Name="RowResultAmount">
+            <local:SettingsRow.Child>
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <TextBox x:Name="TxtResultAmount" IsReadOnly="true"/>
+
+                    <Button x:Name="BtnCopy" Click="CopyResult">
+                        <Button.Content>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="18" Glyph="&#xE8C8;"/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </local:SettingsRow.Child>
+        </local:SettingsRow>
+    </StackPanel>
+</ContentDialog>

@@ -1,9 +1,9 @@
 #ifndef CURRENCYCONVERSIONSERVICE_H
 #define CURRENCYCONVERSIONSERVICE_H
 
+#include <map>
 #include <string>
 #include <optional>
-#include <unordered_map>
 #include "currencyconversion.h"
 
 namespace Nickvision::Money::Shared::Models::CurrencyConversionService
@@ -22,7 +22,7 @@ namespace Nickvision::Money::Shared::Models::CurrencyConversionService
      * @param sourceCurrency The currency code to get converting rates for 
      * @return The map of conversion rates
      */
-    std::unordered_map<std::string, double> getConversionRates(const std::string& sourceCurrency);
+    const std::map<std::string, double>& getConversionRates(const std::string& sourceCurrency);
 }
 
 #endif //CURRENCYCONVERSIONSERVICE_H

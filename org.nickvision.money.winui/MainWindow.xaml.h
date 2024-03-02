@@ -126,6 +126,12 @@ namespace winrt::Nickvision::Money::WinUI::implementation
          * @param args Microsoft::UI::Xaml::RoutedEventArgs
          */
         Windows::Foundation::IAsyncAction Discussions(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        /**
+         * @brief Opens the currency converter dialog.
+         * @param sender IInspectable
+         * @param args Microsoft::UI::Xaml::Input::TappedRoutedEventArgs 
+         */
+        Windows::Foundation::IAsyncAction CurrencyConverter(const IInspectable& sender, const Microsoft::UI::Xaml::Input::TappedRoutedEventArgs& args);
 
     private:
         /**

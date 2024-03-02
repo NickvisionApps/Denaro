@@ -125,6 +125,12 @@
                     </FlyoutBase.AttachedFlyout>
                 </NavigationViewItem>
 
+                <NavigationViewItem x:Name="NavViewCurrencyConverter" SelectsOnInvoked="False" Tapped="CurrencyConverter">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE81E;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
                 <NavigationViewItem x:Name="NavViewSettings" Tag="Settings">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE713;"/>

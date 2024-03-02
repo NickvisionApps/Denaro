@@ -3,6 +3,7 @@
 #include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <unordered_map>
 #include <json/json.h>
 #include <libnick/filesystem/userdirectories.h>
 #include <libnick/helpers/webhelpers.h>
@@ -17,20 +18,21 @@ namespace Nickvision::Money::Shared::Models
         {
             return CurrencyConversion{ sourceCurrency, sourceAmount, resultCurrency, 1 };
         }
-        std::unordered_map<std::string, double> rates{ getConversionRates(sourceCurrency) };
+        const std::map<std::string, double>& rates{ getConversionRates(sourceCurrency) };
         if(rates.empty() || !rates.contains(resultCurrency))
         {
             return std::nullopt;
         }
-        return CurrencyConversion{ sourceCurrency, sourceAmount, resultCurrency, rates[resultCurrency] };
+        return CurrencyConversion{ sourceCurrency, sourceAmount, resultCurrency, rates.at(resultCurrency) };
     }
 
-    std::unordered_map<std::string, double> CurrencyConversionService::getConversionRates(const std::string& sourceCurrency)
+    const std::map<std::string, double>& CurrencyConversionService::getConversionRates(const std::string& sourceCurrency)
     {
+        static std::unordered_map<std::string, std::map<std::string, double>> cache;
         std::filesystem::path path{ UserDirectories::getApplicationCache() / ("currency_" + sourceCurrency + ".json") };
         bool needsUpdate{ !std::filesystem::exists(path) };
         Json::Value json;
-        if(!needsUpdate) //std::filesystem::exists(path)
+        if(std::filesystem::exists(path))
         {
             std::ifstream in{ path };
             in >> json;
@@ -40,7 +42,13 @@ namespace Nickvision::Money::Shared::Models
             {
                 needsUpdate = true;
                 json.clear();
+                cache[sourceCurrency].clear();
             }
+            else if(!cache[sourceCurrency].empty())
+            {
+                return cache[sourceCurrency];
+            }
+            //empty: load from file
         }
         if(needsUpdate)
         {
@@ -60,7 +68,7 @@ namespace Nickvision::Money::Shared::Models
             Json::Value ratesJson{ json.get("rates", {}) };
             if(!ratesJson.empty())
             {
-                std::unordered_map<std::string, double> rates;
+                std::map<std::string, double>& rates{ cache[sourceCurrency] };
                 double sourceRate{ ratesJson.get(sourceCurrency, 0.0).asDouble() };
                 for(const std::string& rate : ratesJson.getMemberNames())
                 {
@@ -71,9 +79,8 @@ namespace Nickvision::Money::Shared::Models
                     std::ofstream out{ path };
                     out << json;
                 }
-                return rates;
             }
         }
-        return {};
+        return cache[sourceCurrency];
     }
 }
