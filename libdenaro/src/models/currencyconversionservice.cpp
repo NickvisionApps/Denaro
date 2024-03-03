@@ -57,10 +57,7 @@ namespace Nickvision::Money::Shared::Models
             if(!response.empty())
             {
                 Json::Reader reader;
-                if(!reader.parse(response, json, false) || json.get("result", "").asString() != "success")
-                {
-                    return {};
-                }
+                reader.parse(response, json, false);
             }
         }
         if(!json.empty())
