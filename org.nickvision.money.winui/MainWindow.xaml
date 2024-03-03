@@ -155,13 +155,9 @@
                                     <StackPanel Orientation="Vertical" Spacing="6">
                                         <TextBlock Text="Recent Accounts" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
                                         
-                                        <Border CornerRadius="{ThemeResource ControlCornerRadius}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
-                                            <ListView MinWidth="400" MinHeight="200">
+                                        <StackPanel x:Name="ListRecentAccounts" MinWidth="400"/>
 
-                                            </ListView>
-                                        </Border>
-
-                                        <Grid Margin="0,12,0,0" ColumnSpacing="6">
+                                        <Grid Margin="0,6,0,0" ColumnSpacing="6">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>

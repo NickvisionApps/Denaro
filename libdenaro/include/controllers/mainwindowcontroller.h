@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 #include <libnick/app/appinfo.h>
 #include <libnick/events/event.h>
 #include <libnick/notifications/notificationsenteventargs.h>
@@ -14,6 +15,9 @@
 #include <libnick/taskbar/taskbaritem.h>
 #include <libnick/update/updater.h>
 #include "controllers/preferencesviewcontroller.h"
+#include "models/accounttype.h"
+#include "models/color.h"
+#include "models/recentaccount.h"
 #include "models/theme.h"
 
 namespace Nickvision::Money::Shared::Controllers
@@ -44,6 +48,16 @@ namespace Nickvision::Money::Shared::Controllers
          * @return The preferred theme
          */
         Models::Theme getTheme() const;
+        /**
+         * @brief Gets the list of recently opened accounts.
+         * @return The list of recent accounts 
+         */
+        std::vector<Models::RecentAccount> getRecentAccounts() const;
+        /**
+         * @brief Gets the color for the specified account type, based on the users configuration.
+         * @return The color for the account type
+         */
+        Models::Color getAccountTypeColor(Models::AccountType accountType) const;
         /**
          * @brief Gets the Saved event for the application's configuration.
          * @return The configuration Saved event

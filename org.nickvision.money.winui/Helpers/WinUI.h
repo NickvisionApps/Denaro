@@ -15,11 +15,7 @@ namespace Helpers::WinUI
     T LookupAppResource(const winrt::hstring& key)
     {
         winrt::Windows::Foundation::IInspectable res{ winrt::Microsoft::UI::Xaml::Application::Current().Resources().Lookup(winrt::box_value(key)) };
-        if (res)
-        {
-            return winrt::unbox_value<T>(res);
-        }
-        return T();
+        return winrt::unbox_value<T>(res);
     } 
 }
 

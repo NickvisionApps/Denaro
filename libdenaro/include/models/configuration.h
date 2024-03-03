@@ -44,10 +44,9 @@ namespace Nickvision::Money::Shared::Models
         void setAutomaticallyCheckForUpdates(bool check);
         /**
          * @brief Gets the list of valid RecentAccount objects.
-         * @brief This method may reorder the recent account lists if a recent is invalid and save the Configuration object to disk.
          * @return The list of valid RecentAccount objects
          */
-        std::vector<RecentAccount> getAndSyncRecentAccounts();
+        std::vector<RecentAccount> getRecentAccounts();
         /**
          * @brief Adds a new recent account to the list.
          * @param recent The recent account to add

@@ -25,7 +25,7 @@ namespace Nickvision::Money::Shared::Controllers
     {
         Aura::getActive().init("org.nickvision.money", "Nickvision Denaro", "Denaro");
         AppInfo& appInfo{ Aura::getActive().getAppInfo() };
-        appInfo.setVersion({ "2024.2.1-next" });
+        appInfo.setVersion({ "2024.3.0-next" });
         appInfo.setShortName(_("Denaro"));
         appInfo.setDescription(_("Manage your personal finances"));
         appInfo.setSourceRepo("https://github.com/NickvisionApps/Denaro");
@@ -56,6 +56,26 @@ namespace Nickvision::Money::Shared::Controllers
     Theme MainWindowController::getTheme() const
     {
         return Aura::getActive().getConfig<Configuration>("config").getTheme();
+    }
+
+    std::vector<Models::RecentAccount> MainWindowController::getRecentAccounts() const
+    {
+        return Aura::getActive().getConfig<Configuration>("config").getRecentAccounts();
+    }
+
+    Color MainWindowController::getAccountTypeColor(AccountType accountType) const
+    {
+        switch(accountType)
+        {
+        case AccountType::Checking:
+            return Aura::getActive().getConfig<Configuration>("config").getAccountCheckingColor();
+        case AccountType::Savings:
+            return Aura::getActive().getConfig<Configuration>("config").getAccountSavingsColor();
+        case AccountType::Business:
+            return Aura::getActive().getConfig<Configuration>("config").getAccountBusinessColor();
+        default:
+            return {};
+        }
     }
 
     Event<EventArgs>& MainWindowController::configurationSaved()

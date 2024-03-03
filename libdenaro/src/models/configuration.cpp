@@ -32,7 +32,7 @@ namespace Nickvision::Money::Shared::Models
         m_json["AutomaticallyCheckForUpdates"] = check;
     }
 
-    std::vector<RecentAccount> Configuration::getAndSyncRecentAccounts()
+    std::vector<RecentAccount> Configuration::getRecentAccounts()
     {
         std::vector<RecentAccount> recents;
         bool update{ false };
@@ -83,7 +83,6 @@ namespace Nickvision::Money::Shared::Models
                 setRecentAccount(2, recents[1]);
                 setRecentAccount(3, {});
             }
-            save();
         }
         return recents;
     }
