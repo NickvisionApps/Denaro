@@ -108,7 +108,7 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
             GlyphIcon().FontSize(30);
             AppIcon().Width(64);
             AppIcon().Height(64);
-            LblTitle().Style(Helpers::WinUI::LookupAppResource<Microsoft::UI::Xaml::Style>(L"SubtitleTextBlockStyle"));
+            LblTitle().Style(WinUIHelpers::LookupAppResource<Microsoft::UI::Xaml::Style>(L"SubtitleTextBlockStyle"));
         }
         else
         {
@@ -116,7 +116,7 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
             GlyphIcon().FontSize(60);
             AppIcon().Width(128);
             AppIcon().Height(128);
-            LblTitle().Style(Helpers::WinUI::LookupAppResource<Microsoft::UI::Xaml::Style>(L"TitleTextBlockStyle"));
+            LblTitle().Style(WinUIHelpers::LookupAppResource<Microsoft::UI::Xaml::Style>(L"TitleTextBlockStyle"));
         }
         m_propertyChanged(*this, PropertyChangedEventArgs{ L"IsCompact" });
     }

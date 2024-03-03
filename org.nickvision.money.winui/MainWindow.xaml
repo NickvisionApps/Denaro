@@ -163,7 +163,7 @@
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <Button Grid.Column="0" HorizontalAlignment="Stretch" Style="{ThemeResource AccentButtonStyle}">
+                                            <Button Grid.Column="0" Height="36" HorizontalAlignment="Stretch" Style="{ThemeResource AccentButtonStyle}">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" Spacing="6">
                                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>
@@ -177,7 +177,7 @@
                                                 </Button.KeyboardAccelerators>
                                             </Button>
 
-                                            <Button Grid.Column="1" HorizontalAlignment="Stretch">
+                                            <Button Grid.Column="1" Height="36" HorizontalAlignment="Stretch">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" Spacing="6">
                                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8E5;"/>

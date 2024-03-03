@@ -138,6 +138,10 @@ namespace winrt::Nickvision::Money::WinUI::implementation
          * @brief Establishes drag regions for the main window's title bar. 
          */
         void SetDragRegionForCustomTitleBar();
+        /**
+         * @brief Loads the recent accounts list.
+         */
+        void LoadRecentAccounts();
         std::shared_ptr<::Nickvision::Money::Shared::Controllers::MainWindowController> m_controller;
         bool m_opened;
         bool m_isActivated;

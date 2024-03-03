@@ -9,6 +9,7 @@ using namespace ::Nickvision::Money::Shared::Models;
 using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Microsoft::UI::Xaml::Controls;
 using namespace winrt::Microsoft::UI::Xaml::Media;
+using namespace winrt::Windows::UI;
 
 namespace winrt::Nickvision::Money::WinUI::implementation 
 {
@@ -51,12 +52,12 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         m_constructing = true;
         CmbTheme().SelectedIndex(static_cast<int>(m_controller->getTheme()));
         TglAutomaticallyCheckForUpdates().IsOn(m_controller->getAutomaticallyCheckForUpdates());
-        ClrDefaultTransaction().Color(Windows::UI::ColorHelper::FromArgb(m_controller->getTransactionDefaultColor().getA(), m_controller->getTransactionDefaultColor().getR(), m_controller->getTransactionDefaultColor().getG(), m_controller->getTransactionDefaultColor().getB()));
-        ClrDefaultTransfer().Color(Windows::UI::ColorHelper::FromArgb(m_controller->getTransferDefaultColor().getA(), m_controller->getTransferDefaultColor().getR(), m_controller->getTransferDefaultColor().getG(), m_controller->getTransferDefaultColor().getB()));
-        ClrDefaultGroup().Color(Windows::UI::ColorHelper::FromArgb(m_controller->getGroupDefaultColor().getA(), m_controller->getGroupDefaultColor().getR(), m_controller->getGroupDefaultColor().getG(), m_controller->getGroupDefaultColor().getB()));
-        ClrCheckingAccount().Color(Windows::UI::ColorHelper::FromArgb(m_controller->getAccountCheckingColor().getA(), m_controller->getAccountCheckingColor().getR(), m_controller->getAccountCheckingColor().getG(), m_controller->getAccountCheckingColor().getB()));
-        ClrSavingsAccount().Color(Windows::UI::ColorHelper::FromArgb(m_controller->getAccountSavingsColor().getA(), m_controller->getAccountSavingsColor().getR(), m_controller->getAccountSavingsColor().getG(), m_controller->getAccountSavingsColor().getB()));
-        ClrBusinessAccount().Color(Windows::UI::ColorHelper::FromArgb(m_controller->getAccountBusinessColor().getA(), m_controller->getAccountBusinessColor().getR(), m_controller->getAccountBusinessColor().getG(), m_controller->getAccountBusinessColor().getB()));
+        ClrDefaultTransaction().Color(ColorHelper::FromArgb(m_controller->getTransactionDefaultColor().getA(), m_controller->getTransactionDefaultColor().getR(), m_controller->getTransactionDefaultColor().getG(), m_controller->getTransactionDefaultColor().getB()));
+        ClrDefaultTransfer().Color(ColorHelper::FromArgb(m_controller->getTransferDefaultColor().getA(), m_controller->getTransferDefaultColor().getR(), m_controller->getTransferDefaultColor().getG(), m_controller->getTransferDefaultColor().getB()));
+        ClrDefaultGroup().Color(ColorHelper::FromArgb(m_controller->getGroupDefaultColor().getA(), m_controller->getGroupDefaultColor().getR(), m_controller->getGroupDefaultColor().getG(), m_controller->getGroupDefaultColor().getB()));
+        ClrCheckingAccount().Color(ColorHelper::FromArgb(m_controller->getAccountCheckingColor().getA(), m_controller->getAccountCheckingColor().getR(), m_controller->getAccountCheckingColor().getG(), m_controller->getAccountCheckingColor().getB()));
+        ClrSavingsAccount().Color(ColorHelper::FromArgb(m_controller->getAccountSavingsColor().getA(), m_controller->getAccountSavingsColor().getR(), m_controller->getAccountSavingsColor().getG(), m_controller->getAccountSavingsColor().getB()));
+        ClrBusinessAccount().Color(ColorHelper::FromArgb(m_controller->getAccountBusinessColor().getA(), m_controller->getAccountBusinessColor().getR(), m_controller->getAccountBusinessColor().getG(), m_controller->getAccountBusinessColor().getB()));
         CmbInsertSeparator().SelectedIndex(static_cast<int>(m_controller->getInsertSeparator()));
         m_constructing = false;
     }

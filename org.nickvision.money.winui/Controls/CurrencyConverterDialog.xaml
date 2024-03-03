@@ -17,7 +17,7 @@
 
                     <Button x:Name="BtnSwitch" Click="SwitchCurrencies">
                         <Button.Content>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="18" Glyph="&#xE8AB;"/>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8AB;"/>
                         </Button.Content>
                     </Button>
                 </StackPanel>
@@ -45,7 +45,7 @@
 
                     <Button x:Name="BtnCopy" Click="CopyResult">
                         <Button.Content>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="18" Glyph="&#xE8C8;"/>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8C8;"/>
                         </Button.Content>
                     </Button>
                 </StackPanel>

@@ -3,7 +3,7 @@
 
 #include "includes.h"
 
-namespace Helpers::WinUI
+namespace WinUIHelpers
 {
     /**
      * @brief Looks up a WinUI resource for the application.

@@ -2,13 +2,13 @@
 #if __has_include("MainWindow.g.cpp")
 #include "MainWindow.g.cpp"
 #endif
-#include <cmath>
 #include <format>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/notifications/shellnotification.h>
 #include <libnick/localization/gettext.h>
 #include "SettingsPage.xaml.h"
 #include "Controls/CurrencyConverterDialog.xaml.h"
+#include "Controls/SettingsRow.xaml.h"
 #include "Helpers/WinUI.h"
 
 using namespace ::Nickvision;
@@ -117,6 +117,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
             m_controller->connectTaskbar(m_hwnd);
             m_controller->startup();
             NavViewHome().IsSelected(true);
+            LoadRecentAccounts();
             m_opened = true;
         }
     }
@@ -257,7 +258,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
             ViewStack().CurrentPage(L"Custom");
             FrameCustom().Content(winrt::box_value(page));
         }
-        TitleBarSearchBox().Visibility(tag != L"Home" && tag != L"Settings" ? Visibility::Visible : Visibility::Collapsed);
+        TitleBarSearchBox().Visibility(tag == L"Account" ? Visibility::Visible : Visibility::Collapsed);
         SetDragRegionForCustomTitleBar();
     }
 
@@ -325,5 +326,44 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         RectInt32 rectArray[1]{ searchBoxRect };
         InputNonClientPointerSource nonClientInputSrc{ InputNonClientPointerSource::GetForWindowId(AppWindow().Id()) };
         nonClientInputSrc.SetRegionRects(NonClientRegionKind::Passthrough, rectArray);
+    }
+
+    void MainWindow::LoadRecentAccounts()
+    {
+        std::vector<RecentAccount> recentAccounts{ m_controller->getRecentAccounts() };
+        ListRecentAccounts().Children().Clear();
+        if(recentAccounts.size() == 0)
+        {
+            UserControl row{ winrt::make<Controls::implementation::SettingsRow>() };
+            row.as<Controls::implementation::SettingsRow>()->Glyph(L"\uE121");
+            row.as<Controls::implementation::SettingsRow>()->Title(winrt::to_hstring(_("No Recent Accounts")));
+            ListRecentAccounts().Children().Append(row);
+        }
+        for(const RecentAccount& recentAccount : m_controller->getRecentAccounts())
+        {
+            Color color{ m_controller->getAccountTypeColor(recentAccount.getType()) };
+            Shapes::Rectangle rect;
+            rect.Width(32);
+            rect.Height(32);
+            rect.Fill(SolidColorBrush{ Windows::UI::ColorHelper::FromArgb(255, color.getR(), color.getG(), color.getB()) });
+            FontIcon icon;
+            icon.FontFamily(WinUIHelpers::LookupAppResource<FontFamily>(L"SymbolThemeFontFamily"));
+            icon.FontSize(16);
+            icon.Glyph(L"\uE711");
+            Button button;
+            button.Content(winrt::box_value(icon));
+            ToolTipService::SetToolTip(button, winrt::box_value(winrt::to_hstring(_("Remove"))));
+            StackPanel stack;
+            stack.Orientation(Orientation::Horizontal);
+            stack.Spacing(6);
+            stack.Children().Append(rect);
+            stack.Children().Append(button);
+            UserControl row{ winrt::make<Controls::implementation::SettingsRow>() };
+            row.as<Controls::implementation::SettingsRow>()->Glyph(L"\uE8C7");
+            row.as<Controls::implementation::SettingsRow>()->Title(winrt::to_hstring(recentAccount.getName()));
+            row.as<Controls::implementation::SettingsRow>()->Description(winrt::to_hstring(recentAccount.getPath().string()));
+            row.as<Controls::implementation::SettingsRow>()->Child(winrt::box_value(stack));
+            ListRecentAccounts().Children().Append(row);
+        }
     }
 }
