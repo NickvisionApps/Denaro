@@ -134,62 +134,62 @@ namespace Nickvision::Money::Shared::Models
 
     Color Configuration::getTransactionDefaultColor() const
     {
-        return { m_json.get("TransactionDefaultColor", "53,132,228").asString() };
+        return { m_json.get("TransactionDefaultColor", "rgb(53,132,228)").asString() };
     }
 
     void Configuration::setTransactionDefaultColor(const Color& color)
     {
-        m_json["TransactionDefaultColor"] = color.toRGBAString(false);
+        m_json["TransactionDefaultColor"] = color.toRGBAString(true);
     }
 
     Color Configuration::getTransferDefaultColor() const
     {
-        return { m_json.get("TransferDefaultColor", "192,97,203").asString() };
+        return { m_json.get("TransferDefaultColor", "rgb(192,97,203)").asString() };
     }
 
     void Configuration::setTransferDefaultColor(const Color& color)
     {
-        m_json["TransferDefaultColor"] = color.toRGBAString(false);
+        m_json["TransferDefaultColor"] = color.toRGBAString(true);
     }
 
     Color Configuration::getGroupDefaultColor() const
     {
-        return { m_json.get("GroupDefaultColor", "51,209,122").asString() };
+        return { m_json.get("GroupDefaultColor", "rgb(51,209,122)").asString() };
     }
 
     void Configuration::setGroupDefaultColor(const Color& color)
     {
-        m_json["GroupDefaultColor"] = color.toRGBAString(false);
+        m_json["GroupDefaultColor"] = color.toRGBAString(true);
     }
 
     Color Configuration::getAccountCheckingColor() const
     {
-        return { m_json.get("AccountCheckingColor", "129,61,156").asString() };
+        return { m_json.get("AccountCheckingColor", "rgb(129,61,156)").asString() };
     }
 
     void Configuration::setAccountCheckingColor(const Color& color)
     {
-        m_json["AccountCheckingColor"] = color.toRGBAString(false);
+        m_json["AccountCheckingColor"] = color.toRGBAString(true);
     }
 
     Color Configuration::getAccountSavingsColor() const
     {
-        return { m_json.get("AccountSavingsColor", "53,132,228").asString() };
+        return { m_json.get("AccountSavingsColor", "rgb(53,132,228)").asString() };
     }
 
     void Configuration::setAccountSavingsColor(const Color& color)
     {
-        m_json["AccountSavingsColor"] = color.toRGBAString(false);
+        m_json["AccountSavingsColor"] = color.toRGBAString(true);
     }
 
     Color Configuration::getAccountBusinessColor() const
     {
-        return { m_json.get("AccountBusinessColor", "38,162,10").asString() };
+        return { m_json.get("AccountBusinessColor", "rgb(38,162,10)").asString() };
     }
 
     void Configuration::setAccountBusinessColor(const Color& color)
     {
-        m_json["AccountBusinessColor"] = color.toRGBAString(false);
+        m_json["AccountBusinessColor"] = color.toRGBAString(true);
     }
 
     InsertSeparatorTrigger Configuration::getInsertSeparator() const
