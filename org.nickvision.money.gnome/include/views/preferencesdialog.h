@@ -40,7 +40,6 @@ namespace Nickvision::Money::GNOME::Views
         std::shared_ptr<Shared::Controllers::PreferencesViewController> m_controller;
         GtkBuilder* m_builder;
         AdwPreferencesWindow* m_dialog;
-        GtkColorDialog* m_colorDialog;
     };
 }
 
