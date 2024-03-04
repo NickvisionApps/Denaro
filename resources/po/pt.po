@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-01 23:56-0500\n"
+"POT-Creation-Date: 2024-03-03 21:14-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,89 +86,100 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:121
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:141
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "Bom Dia!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:125
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:145
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "Bom Dia!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:129
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:149
 msgid "Good Afternoon!"
 msgstr "Boa Tarde!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:133
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:153
 msgid "Good Evening!"
 msgstr "Boa Noite!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:135
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:155
 msgid "Good Day!"
 msgstr "Bom Dia!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:176
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:196
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:194
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:214
 msgid "Unable to download and install update"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#, fuzzy
+msgid "Currency Converter"
+msgstr "Currency Code"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:30
 msgid "Preferences"
 msgstr "Configurações"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:6
+#: org.nickvision.money.gnome/blueprints/main_window.blp:9
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:35
 msgid "Keyboard Shortcuts"
 msgstr "Atalhos do Teclado"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:7
+#: org.nickvision.money.gnome/blueprints/main_window.blp:10
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+msgid "Help"
+msgstr "Ajuda"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:11
 #, fuzzy
 msgid "About Denaro"
 msgstr "Denaro"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:23
+#: org.nickvision.money.gnome/blueprints/main_window.blp:28
 msgid "Main Menu"
 msgstr "Menu principal"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
 msgstr "Interface de usuário"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
 msgid "Theme"
 msgstr "Tema"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
 #, fuzzy
 msgctxt "Theme"
 msgid "Light"
 msgstr "Claro"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
 #, fuzzy
 msgctxt "Theme"
 msgid "Dark"
 msgstr "Escuro"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
 #, fuzzy
 msgctxt "Theme"
 msgid "System"
 msgstr "Sistema"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:29
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
 msgid "Colors"
 msgstr "Cores"
 
@@ -181,7 +192,7 @@ msgid "Transaction Default Color"
 msgstr "Cor padrão de transações"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:39
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
 msgid ""
 "A change in this setting will only be applied to newly added transactions."
 msgstr ""
@@ -192,7 +203,7 @@ msgid "Transfer Default Color"
 msgstr "Cor padrão de transferências"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:50
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
 msgid "A change in this setting will only be applied to new transfers."
 msgstr ""
 "Alterações nessa configuração serão aplicadas somente em novas "
@@ -203,38 +214,38 @@ msgid "Group Default Color"
 msgstr "Cor Padrão do Grupo"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:61
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
 #, fuzzy
 msgid "A change in this setting will only be applied to newly added groups."
 msgstr "Mudanças nesta configuração apenas serão aplicadas em novos grupos."
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:71
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
 msgid "Checking Account Color"
 msgstr "Cor da Conta Corrente"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:81
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
 msgid "Savings Account Color"
 msgstr "Cor da Conta de Poupança"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:91
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
 msgid "Business Account Color"
 msgstr "Cor da Conta Empresarial"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:103
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
 msgid "Locale"
 msgstr "Localidade"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:106
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:41
 msgid "Insert Decimal Separator"
 msgstr "Inserir Separador Decimal"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:107
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:41
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:42
 #, fuzzy
 msgid ""
 "For the selected keys, the account's decimal separator will be inserted "
@@ -244,19 +255,19 @@ msgstr ""
 "será inserido em um campo de valor."
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:110
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:42
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:43
 #, fuzzy
 msgid "Off"
 msgstr "Desligado"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:110
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:43
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:44
 msgid "Numpad period only"
 msgstr "Apenas ponto do teclado numérico"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:110
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:44
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:45
 msgid "Period and Comma"
 msgstr "Ponto Final e Vírgula"
 
@@ -318,10 +329,6 @@ msgstr "Painel"
 msgid "Accounts"
 msgstr "Contas"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
-msgid "Help"
-msgstr "Ajuda"
-
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Check for Updates"
 msgstr ""
@@ -347,14 +354,9 @@ msgstr "Discussões"
 msgid "Credits"
 msgstr "Créditos"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
-#, fuzzy
-msgid "Currency Converter"
-msgstr "Currency Code"
-
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:78
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:20
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Configurações"
 
@@ -390,41 +392,65 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:165
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:166
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:229
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:230
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:291
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:292
 msgid "Debug information copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:339
+msgid "No Recent Accounts"
+msgstr "Nenhuma Conta Recente"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:358
+msgid "Remove"
+msgstr "Remover"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:365
+msgid "Checking"
+msgstr "Verificando"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:368
+msgid "Savings"
+msgstr "Economias"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:371
+msgid "Business"
+msgstr "Negócio"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
 #, fuzzy
 msgid "On"
 msgstr "Abrir"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
 #, fuzzy
 msgid "Default Transaction Color"
 msgstr "Tipo de Transação Padrão"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
 #, fuzzy
 msgid "Default Transfer Color"
 msgstr "Tipo de Transação Padrão"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
 #, fuzzy
 msgid "Default Group Color"
 msgstr "Tipo de Transação Padrão"
+
+#, fuzzy
+#~ msgid "Let's get you started."
+#~ msgstr "Início"
 
 #, fuzzy
 #~ msgid "Search for Files"
@@ -496,9 +522,6 @@ msgstr "Tipo de Transação Padrão"
 #~ "Tem certeza de que deseja excluir esta transação?\n"
 #~ "Esta ação não pode ser desfeita."
 
-#~ msgid "Business"
-#~ msgstr "Negócio"
-
 #~ msgid "Can't access the selected folder, check Flatpak permissions."
 #~ msgstr ""
 #~ "Não é possível acessar a pasta selecionada. Verifique as permissões do "
@@ -509,9 +532,6 @@ msgstr "Tipo de Transação Padrão"
 
 #~ msgid "Change Password"
 #~ msgstr "Alterar Senha"
-
-#~ msgid "Checking"
-#~ msgstr "Verificando"
 
 #~ msgid "Close"
 #~ msgstr "Fechar"
@@ -693,9 +713,6 @@ msgstr "Tipo de Transação Padrão"
 #~ msgid "Repeat Interval Changed"
 #~ msgstr "Intervalo de Repetição Alterado"
 
-#~ msgid "Savings"
-#~ msgstr "Economias"
-
 #, fuzzy
 #~ msgid "Select Account"
 #~ msgstr "Contas Recentes"
@@ -873,9 +890,6 @@ msgstr "Tipo de Transação Padrão"
 #~ msgstr ""
 #~ "Se a palavra-passe for perdida, não será possível restaurar o ficheiro!"
 
-#~ msgid "Remove"
-#~ msgstr "Remover"
-
 #~ msgid "Transfer Money"
 #~ msgstr "Transferir Dinheiro"
 
@@ -972,10 +986,6 @@ msgstr "Tipo de Transação Padrão"
 
 #~ msgid "New Account"
 #~ msgstr "Nova Conta"
-
-#, fuzzy
-#~ msgid "Let's Start"
-#~ msgstr "Início"
 
 #, fuzzy
 #~ msgid "Account Password (Optional)"
@@ -1160,9 +1170,6 @@ msgstr "Tipo de Transação Padrão"
 
 #~ msgid "Open Account (Ctrl+O)"
 #~ msgstr "Abrir Conta (Ctrl+O)"
-
-#~ msgid "No Recent Accounts"
-#~ msgstr "Nenhuma Conta Recente"
 
 #~ msgid ""
 #~ "Create or open an account to get started. You may also drag a file into "

@@ -155,9 +155,9 @@
                                     <StackPanel Orientation="Vertical" Spacing="6">
                                         <TextBlock Text="Recent Accounts" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
                                         
-                                        <StackPanel x:Name="ListRecentAccounts" MinWidth="400"/>
+                                        <StackPanel x:Name="ListRecentAccounts" MinWidth="400" Orientation="Vertical" Spacing="6"/>
 
-                                        <Grid Margin="0,6,0,0" ColumnSpacing="6">
+                                        <Grid ColumnSpacing="6">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>

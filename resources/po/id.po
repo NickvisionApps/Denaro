@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-01 23:56-0500\n"
+"POT-Creation-Date: 2024-03-03 21:14-0500\n"
 "PO-Revision-Date: 2023-06-07 19:40+0000\n"
 "Last-Translator: Krindog7337 <igstkrisna2006@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/nickvision-"
@@ -92,85 +92,96 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:121
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:141
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "Selamat Pagi!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:125
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:145
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "Selamat Pagi!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:129
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:149
 msgid "Good Afternoon!"
 msgstr "Selamat Siang!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:133
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:153
 msgid "Good Evening!"
 msgstr "Selamat Malam!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:135
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:155
 msgid "Good Day!"
 msgstr "Halo!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:176
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:196
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:194
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:214
 msgid "Unable to download and install update"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#, fuzzy
+msgid "Currency Converter"
+msgstr "Kode Mata Uang"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:30
 msgid "Preferences"
 msgstr "Preferensi"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:6
+#: org.nickvision.money.gnome/blueprints/main_window.blp:9
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:35
 msgid "Keyboard Shortcuts"
 msgstr "Pintasan Papan Tik"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:7
+#: org.nickvision.money.gnome/blueprints/main_window.blp:10
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+msgid "Help"
+msgstr "Bantuan"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:11
 msgid "About Denaro"
 msgstr "Tentang Denaro"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:23
+#: org.nickvision.money.gnome/blueprints/main_window.blp:28
 msgid "Main Menu"
 msgstr "Menu Utama"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
 msgstr "Tampilan Pengguna"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
 msgid "Theme"
 msgstr "Tema"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
 msgctxt "Theme"
 msgid "Light"
 msgstr "Terang"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
 msgctxt "Theme"
 msgid "Dark"
 msgstr "Gelap"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
 msgctxt "Theme"
 msgid "System"
 msgstr "Sistem"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:29
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
 msgid "Colors"
 msgstr "Warna"
 
@@ -183,7 +194,7 @@ msgid "Transaction Default Color"
 msgstr "Warna Bawaan Transaksi"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:39
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
 msgid ""
 "A change in this setting will only be applied to newly added transactions."
 msgstr ""
@@ -194,7 +205,7 @@ msgid "Transfer Default Color"
 msgstr "Warna Bawaan Transfer"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:50
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
 msgid "A change in this setting will only be applied to new transfers."
 msgstr ""
 "Perubahan pada pengaturan ini hanya akan diterapkan pada transfer baru."
@@ -204,38 +215,38 @@ msgid "Group Default Color"
 msgstr "Warna Bawaan Grup"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:61
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
 #, fuzzy
 msgid "A change in this setting will only be applied to newly added groups."
 msgstr "Perubahan dalam setelan ini hanya akan diterapkan ke grup baru."
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:71
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
 msgid "Checking Account Color"
 msgstr "Warna Rekening Giro"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:81
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
 msgid "Savings Account Color"
 msgstr "Warna Rekening Tabungan"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:91
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
 msgid "Business Account Color"
 msgstr "Warna Rekening Bisnis"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:103
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
 msgid "Locale"
 msgstr "Lokal"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:106
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:41
 msgid "Insert Decimal Separator"
 msgstr "Masukkan Pemisah Desimal"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:107
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:41
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:42
 #, fuzzy
 msgid ""
 "For the selected keys, the account's decimal separator will be inserted "
@@ -245,19 +256,19 @@ msgstr ""
 "dimasukkan ke dalam kolom jumlah."
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:110
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:42
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:43
 #, fuzzy
 msgid "Off"
 msgstr "Mati"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:110
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:43
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:44
 msgid "Numpad period only"
 msgstr "Titik numpad saja"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:110
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:44
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:45
 msgid "Period and Comma"
 msgstr "Titik dan Koma"
 
@@ -319,10 +330,6 @@ msgstr "Dasbor"
 msgid "Accounts"
 msgstr "Rekening"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
-msgid "Help"
-msgstr "Bantuan"
-
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Check for Updates"
 msgstr ""
@@ -348,14 +355,9 @@ msgstr "Diskusi"
 msgid "Credits"
 msgstr "Kredit"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
-#, fuzzy
-msgid "Currency Converter"
-msgstr "Kode Mata Uang"
-
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:78
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:20
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Pengaturan"
 
@@ -391,41 +393,65 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:165
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:166
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:229
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:230
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:291
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:292
 msgid "Debug information copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:339
+msgid "No Recent Accounts"
+msgstr "Tidak Ada Rekening Baru-baru Ini"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:358
+msgid "Remove"
+msgstr "Hapus"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:365
+msgid "Checking"
+msgstr "Giro"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:368
+msgid "Savings"
+msgstr "Tabungan"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:371
+msgid "Business"
+msgstr "Bisnis"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
 #, fuzzy
 msgid "On"
 msgstr "Buka"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
 #, fuzzy
 msgid "Default Transaction Color"
 msgstr "Tipe Transaksi Bawaan"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
 #, fuzzy
 msgid "Default Transfer Color"
 msgstr "Tipe Transaksi Bawaan"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
 #, fuzzy
 msgid "Default Group Color"
 msgstr "Tipe Transaksi Bawaan"
+
+#, fuzzy
+#~ msgid "Let's get you started."
+#~ msgstr "Ayo Mulai"
 
 #, fuzzy
 #~ msgid "Search for Files"
@@ -495,9 +521,6 @@ msgstr "Tipe Transaksi Bawaan"
 #~ "Apakah anda yakin ingin menghapus transaksi ini?\n"
 #~ "Tindakan ini tidak dapat diurungkan."
 
-#~ msgid "Business"
-#~ msgstr "Bisnis"
-
 #~ msgid "Can't access the selected folder, check Flatpak permissions."
 #~ msgstr ""
 #~ "Tidak dapat mengakses folder yang dipilih, periksa perizinan Flatpak."
@@ -507,9 +530,6 @@ msgstr "Tipe Transaksi Bawaan"
 
 #~ msgid "Change Password"
 #~ msgstr "Ubah Kata Sandi"
-
-#~ msgid "Checking"
-#~ msgstr "Giro"
 
 #~ msgid "Close"
 #~ msgstr "Tutup"
@@ -691,9 +711,6 @@ msgstr "Tipe Transaksi Bawaan"
 
 #~ msgid "Repeat Interval Changed"
 #~ msgstr "Interval Pengulangan diubah"
-
-#~ msgid "Savings"
-#~ msgstr "Tabungan"
 
 #~ msgid "Select Account"
 #~ msgstr "Pilih Rekening"
@@ -885,9 +902,6 @@ msgstr "Tipe Transaksi Bawaan"
 #~ msgstr ""
 #~ "Jika kata sandi hilang, tidak ada cara untuk mengembalikan berkas ini!"
 
-#~ msgid "Remove"
-#~ msgstr "Hapus"
-
 #~ msgid "Transfer Money"
 #~ msgstr "Transfer Uang"
 
@@ -991,9 +1005,6 @@ msgstr "Tipe Transaksi Bawaan"
 #~ msgid "Use this wizard to get the most out of your account"
 #~ msgstr ""
 #~ "Gunakan wizard ini untuk mendapatkan hasil maksimal dari rekening Anda"
-
-#~ msgid "Let's Start"
-#~ msgstr "Ayo Mulai"
 
 #~ msgid "Storage Location"
 #~ msgstr "Lokasi Penyimpanan"
@@ -1171,9 +1182,6 @@ msgstr "Tipe Transaksi Bawaan"
 
 #~ msgid "Open Account (Ctrl+O)"
 #~ msgstr "Buka Rekening (Ctrl+O)"
-
-#~ msgid "No Recent Accounts"
-#~ msgstr "Tidak Ada Rekening Baru-baru Ini"
 
 #~ msgid ""
 #~ "Create or open an account to get started. You may also drag a file into "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-01 23:56-0500\n"
+"POT-Creation-Date: 2024-03-03 21:14-0500\n"
 "PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
@@ -90,85 +90,95 @@ msgstr "डेविड लैपशिन"
 msgid "translator-credits"
 msgstr "Scrambled777 <weblate.scrambled777@simplelogin.com>"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:121
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:141
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "शुभ प्रभात!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:125
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:145
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "शुभ प्रभात!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:129
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:149
 msgid "Good Afternoon!"
 msgstr "शुभ दोपहर!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:133
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:153
 msgid "Good Evening!"
 msgstr "शुभ संध्या!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:135
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:155
 msgid "Good Day!"
 msgstr "शुभ दिन!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:176
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:196
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:194
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:214
 msgid "Unable to download and install update"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+msgid "Currency Converter"
+msgstr "मुद्रा परिवर्तक"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:30
 msgid "Preferences"
 msgstr "प्राथमिकताएं"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:6
+#: org.nickvision.money.gnome/blueprints/main_window.blp:9
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:35
 msgid "Keyboard Shortcuts"
 msgstr "कीबोर्ड शॉर्टकट"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:7
+#: org.nickvision.money.gnome/blueprints/main_window.blp:10
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+msgid "Help"
+msgstr "सहायता"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:11
 msgid "About Denaro"
 msgstr "Denaro के बारे में"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:23
+#: org.nickvision.money.gnome/blueprints/main_window.blp:28
 msgid "Main Menu"
 msgstr "मुख्य मेन्यू"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
 msgstr "उपयोगकर्ता इंटरफ़ेस"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
 msgid "Theme"
 msgstr "थीम"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
 msgctxt "Theme"
 msgid "Light"
 msgstr "हल्का"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
 msgctxt "Theme"
 msgid "Dark"
 msgstr "गहरा"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
 msgctxt "Theme"
 msgid "System"
 msgstr "सिस्टम"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:29
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
 msgid "Colors"
 msgstr "रंग"
 
@@ -181,7 +191,7 @@ msgid "Transaction Default Color"
 msgstr "लेन-देन डिफ़ॉल्ट रंग"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:39
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
 msgid ""
 "A change in this setting will only be applied to newly added transactions."
 msgstr "इस सेटिंग में बदलाव केवल नए जोड़े गए लेनदेन पर लागू किया जाएगा।"
@@ -191,7 +201,7 @@ msgid "Transfer Default Color"
 msgstr "डिफ़ॉल्ट रंग स्थानांतरित करें"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:50
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
 msgid "A change in this setting will only be applied to new transfers."
 msgstr "इस सेटिंग में बदलाव केवल नए स्थानांतरणों पर लागू किया जाएगा।"
 
@@ -200,38 +210,38 @@ msgid "Group Default Color"
 msgstr "समूह डिफ़ॉल्ट रंग"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:61
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
 #, fuzzy
 msgid "A change in this setting will only be applied to newly added groups."
 msgstr "इस सेटिंग में बदलाव केवल नए समूहों पर लागू किया जाएगा।"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:71
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
 msgid "Checking Account Color"
 msgstr "खाते का रंग जांचा जा रहा है"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:81
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
 msgid "Savings Account Color"
 msgstr "बचत खाते का रंग"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:91
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
 msgid "Business Account Color"
 msgstr "बिजनेस अकाउंट का रंग"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:103
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
 msgid "Locale"
 msgstr "स्थानीय"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:106
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:41
 msgid "Insert Decimal Separator"
 msgstr "दशमलव विभाजक डालें"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:107
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:41
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:42
 #, fuzzy
 msgid ""
 "For the selected keys, the account's decimal separator will be inserted "
@@ -240,19 +250,19 @@ msgstr ""
 "सेट करें कि कौन सी कुंजी दबाने पर स्थान का दशमलव विभाजक राशि फ़ील्ड में डाला जाएगा।"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:110
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:42
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:43
 #, fuzzy
 msgid "Off"
 msgstr "बंद"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:110
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:43
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:44
 msgid "Numpad period only"
 msgstr "केवल नमपाद अवधि"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:110
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:44
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:45
 msgid "Period and Comma"
 msgstr "अवधि और अल्पविराम"
 
@@ -315,10 +325,6 @@ msgstr "डैशबोर्ड"
 msgid "Accounts"
 msgstr "खाता"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
-msgid "Help"
-msgstr "सहायता"
-
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Check for Updates"
 msgstr ""
@@ -344,13 +350,9 @@ msgstr ""
 msgid "Credits"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
-msgid "Currency Converter"
-msgstr "मुद्रा परिवर्तक"
-
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:78
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:20
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 #, fuzzy
 msgid "Settings"
 msgstr "Account Settings"
@@ -387,42 +389,66 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:165
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:166
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:229
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:230
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:291
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:292
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "परिणाम को क्लिपबोर्ड पर कॉपी किया गया।"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:339
+msgid "No Recent Accounts"
+msgstr "कोई हालिया खाता नहीं"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:358
+msgid "Remove"
+msgstr "हटाएँ"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:365
+msgid "Checking"
+msgstr "चेकिंग"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:368
+msgid "Savings"
+msgstr "जमा पूंजी"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:371
+msgid "Business"
+msgstr "व्यवसाय"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
 #, fuzzy
 msgid "On"
 msgstr "खोलें"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
 #, fuzzy
 msgid "Default Transaction Color"
 msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
 #, fuzzy
 msgid "Default Transfer Color"
 msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
 #, fuzzy
 msgid "Default Group Color"
 msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
+
+#, fuzzy
+#~ msgid "Let's get you started."
+#~ msgstr "आइए शुरू करें"
 
 #, fuzzy
 #~ msgid "Search for Files"
@@ -497,9 +523,6 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 #~ "क्या आप वाकई इस लेनदेन को हटाना चाहते हैं?\n"
 #~ "यह क्रिया अपरिवर्तनीय है।"
 
-#~ msgid "Business"
-#~ msgstr "व्यवसाय"
-
 #~ msgid "Can't access the selected folder, check Flatpak permissions."
 #~ msgstr "चयनित फ़ोल्डर तक नहीं पहुँच सकते, Flatpak अनुमतियाँ जाँचें।"
 
@@ -508,9 +531,6 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
 #~ msgid "Change Password"
 #~ msgstr "पासवर्ड बदलें"
-
-#~ msgid "Checking"
-#~ msgstr "चेकिंग"
 
 #~ msgid "Close"
 #~ msgstr "बंद करें"
@@ -704,9 +724,6 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
 #~ msgid "Repeat Interval Changed"
 #~ msgstr "दोहराव अंतराल बदला गया"
-
-#~ msgid "Savings"
-#~ msgstr "जमा पूंजी"
 
 #~ msgid "Select Account"
 #~ msgstr "खाता चुनें"
@@ -937,9 +954,6 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 #~ msgid "If the password is lost, there is no way to restore the file!"
 #~ msgstr "यदि पासवर्ड खो गया है, तो फाइल को पुनर्स्थापित करने का कोई तरीका नहीं है!"
 
-#~ msgid "Remove"
-#~ msgstr "हटाएँ"
-
 #~ msgid "Transfer Money"
 #~ msgstr "धनराशि ट्रांसफ़र करें"
 
@@ -1071,9 +1085,6 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
 #~ msgid "Use this wizard to get the most out of your account"
 #~ msgstr "अपने खाते से अधिकतम लाभ प्राप्त करने के लिए इस विज़ार्ड का उपयोग करें"
-
-#~ msgid "Let's Start"
-#~ msgstr "आइए शुरू करें"
 
 #~ msgid "Storage Location"
 #~ msgstr "स्टोरेज स्थान"
@@ -1262,9 +1273,6 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
 #~ msgid "Open Account (Ctrl+O)"
 #~ msgstr "खाता खोलें (Ctrl+O)"
-
-#~ msgid "No Recent Accounts"
-#~ msgstr "कोई हालिया खाता नहीं"
 
 #~ msgid "Toggle Graphs"
 #~ msgstr "ग्राफ़ टॉगल करें"

@@ -341,28 +341,37 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         }
         for(const RecentAccount& recentAccount : m_controller->getRecentAccounts())
         {
-            Color color{ m_controller->getAccountTypeColor(recentAccount.getType()) };
-            Shapes::Rectangle rect;
-            rect.Width(32);
-            rect.Height(32);
-            rect.Fill(SolidColorBrush{ Windows::UI::ColorHelper::FromArgb(255, color.getR(), color.getG(), color.getB()) });
             FontIcon icon;
             icon.FontFamily(WinUIHelpers::LookupAppResource<FontFamily>(L"SymbolThemeFontFamily"));
             icon.FontSize(16);
             icon.Glyph(L"\uE711");
             Button button;
+            button.Height(38);
+            button.Background(SolidColorBrush{ Colors::Transparent() });
+            button.BorderBrush(SolidColorBrush{ Colors::Transparent() });
             button.Content(winrt::box_value(icon));
+            button.Click([this, recentAccount](const IInspectable&, const RoutedEventArgs&)
+            {
+                m_controller->removeRecentAccount(recentAccount);
+                LoadRecentAccounts();
+            });
             ToolTipService::SetToolTip(button, winrt::box_value(winrt::to_hstring(_("Remove"))));
-            StackPanel stack;
-            stack.Orientation(Orientation::Horizontal);
-            stack.Spacing(6);
-            stack.Children().Append(rect);
-            stack.Children().Append(button);
             UserControl row{ winrt::make<Controls::implementation::SettingsRow>() };
             row.as<Controls::implementation::SettingsRow>()->Glyph(L"\uE8C7");
             row.as<Controls::implementation::SettingsRow>()->Title(winrt::to_hstring(recentAccount.getName()));
-            row.as<Controls::implementation::SettingsRow>()->Description(winrt::to_hstring(recentAccount.getPath().string()));
-            row.as<Controls::implementation::SettingsRow>()->Child(winrt::box_value(stack));
+            switch(recentAccount.getType())
+            {
+            case AccountType::Checking:
+                row.as<Controls::implementation::SettingsRow>()->Description(winrt::to_hstring(_("Checking")));
+                break;
+            case AccountType::Savings:
+                row.as<Controls::implementation::SettingsRow>()->Description(winrt::to_hstring(_("Savings")));
+                break;
+            case AccountType::Business:
+                row.as<Controls::implementation::SettingsRow>()->Description(winrt::to_hstring(_("Business")));
+                break;
+            }
+            row.as<Controls::implementation::SettingsRow>()->Child(button);
             ListRecentAccounts().Children().Append(row);
         }
     }

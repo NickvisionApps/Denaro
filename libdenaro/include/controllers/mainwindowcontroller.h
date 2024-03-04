@@ -119,6 +119,11 @@ namespace Nickvision::Money::Shared::Controllers
          */
         bool connectTaskbar(const std::string& desktopFile);
 #endif
+        /**
+         * @brief Removes a recent account.
+         * @param recent The RecentAccount to remove 
+         */
+        void removeRecentAccount(const Models::RecentAccount& recent);
 
     private:
         bool m_started;

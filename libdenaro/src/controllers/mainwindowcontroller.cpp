@@ -228,4 +228,11 @@ namespace Nickvision::Money::Shared::Controllers
         return m_taskbar.connect(desktopFile);
     }
 #endif
+
+    void MainWindowController::removeRecentAccount(const RecentAccount& account)
+    {
+        Configuration& config{ Aura::getActive().getConfig<Configuration>("config") };
+        config.removeRecentAccount(account);
+        config.save();
+    }
 }
