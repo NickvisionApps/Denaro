@@ -26,7 +26,7 @@ jobs:
           path: ${{ steps.snapcraft-build.outputs.snap }}    
       - name: Upload and Release Edge
         uses: snapcore/action-publish@v1
-        if: ${{ github.event.pull_request.head.ref == 'main' }}
+        if: ${{ github.event_name != 'pull_request' }}
         env:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
         with:
