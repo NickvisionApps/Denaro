@@ -96,6 +96,7 @@ namespace Nickvision::Money::Shared::Controllers
     std::string MainWindowController::getDebugInformation(const std::string& extraInformation) const
     {
         std::stringstream builder;
+        //App ID and Ver
         builder << Aura::getActive().getAppInfo().getId();
 #ifdef _WIN32
         builder << ".winui" << std::endl;
@@ -103,6 +104,7 @@ namespace Nickvision::Money::Shared::Controllers
         builder << ".gnome" << std::endl;
 #endif
         builder << Aura::getActive().getAppInfo().getVersion().toString() << std::endl << std::endl;
+        //System Information
         if(Aura::getActive().isRunningViaFlatpak())
         {
             builder << "Running under Flatpak" << std::endl;
@@ -125,9 +127,12 @@ namespace Nickvision::Money::Shared::Controllers
 #elif defined(__linux__)
         builder << std::locale("").name() << std::endl;
 #endif
+        //Gnuplot
+        builder << std::endl << Aura::getActive().sysExec("gnuplot --version") << std::endl;
+        //Extra Information
         if (!extraInformation.empty())
         {
-            builder << extraInformation << std::endl;
+            builder << std::endl << extraInformation << std::endl;
         }
         return builder.str();
     }

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-03 21:14-0500\n"
+"POT-Creation-Date: 2024-03-05 11:08-0500\n"
 "PO-Revision-Date: 2023-12-29 06:12+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
 "weblate.org>\n"
@@ -91,33 +91,33 @@ msgstr "David Lapshin"
 msgid "translator-credits"
 msgstr "Óscar Fernández Díaz <oscfdezdz@tuta.io>"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:141
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:146
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "¡Buenos días!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:145
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:150
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "¡Buenos días!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:149
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:154
 msgid "Good Afternoon!"
 msgstr "¡Buenas tardes!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:153
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:158
 msgid "Good Evening!"
 msgstr "¡Buenas noches!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:155
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:160
 msgid "Good Day!"
 msgstr "¡Buen día!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:196
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:201
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:214
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:219
 msgid "Unable to download and install update"
 msgstr ""
 
