@@ -76,7 +76,8 @@ namespace Nickvision::Money::Shared::Models
             }
             else
             {
-                throw std::invalid_argument("Invalid bytes vector");
+                m_type = ReceiptType::Unknown;
+                return;
             }
             //Remove type from bytes
             m_bytes.erase(m_bytes.begin());
@@ -114,7 +115,8 @@ namespace Nickvision::Money::Shared::Models
             }
             else
             {
-                throw std::invalid_argument("Invalid receipt base64 string");
+                m_type = ReceiptType::Unknown;
+                return;
             }
             //Remove type from bytes
             m_bytes.erase(m_bytes.begin());

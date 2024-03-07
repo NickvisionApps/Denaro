@@ -28,6 +28,11 @@ namespace Nickvision::Money::Shared::Models
 
     }
 
+    const std::filesystem::path& Account::getPath() const
+    {
+        return m_path;
+    }
+
     bool Account::isEncrypted() const
     {
         return m_database.isEncrypted();
@@ -748,8 +753,10 @@ namespace Nickvision::Money::Shared::Models
                     if(it->second.getDate() < m_transactions.at(it->second.getRepeatFrom()).getDate())
                     {
                         m_transactions.erase(it->first);
+                        continue;
                     }
                 }
+                it++;
             }
         }
         //TODO: Add missing repeat transactions up until today

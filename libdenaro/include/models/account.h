@@ -31,6 +31,11 @@ namespace Nickvision::Money::Shared::Models
          */
         Account(std::filesystem::path path);
         /**
+         * @brief Gets the path of the account database file.
+         * @return The path of the account database file
+         */
+        const std::filesystem::path& getPath() const;
+        /**
          * @brief Gets whether or not the account file is encrypted.
          * @return True if encrypted, else false 
          */

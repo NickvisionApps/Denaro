@@ -2,11 +2,13 @@
 #include <ctime>
 #include <format>
 #include <locale>
+#include <stdexcept>
 #include <sstream>
 #include <thread>
 #include <libnick/app/aura.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/localization/gettext.h>
+#include "models/account.h"
 #include "models/configuration.h"
 #ifdef _WIN32
 #include <windows.h>
@@ -93,6 +95,11 @@ namespace Nickvision::Money::Shared::Controllers
         return m_shellNotificationSent;
     }
 
+    Event<ParamEventArgs<std::shared_ptr<AccountViewController>>>& MainWindowController::accountAdded()
+    {
+        return m_accountAdded;
+    }
+
     std::string MainWindowController::getDebugInformation(const std::string& extraInformation) const
     {
         std::stringstream builder;
@@ -165,6 +172,11 @@ namespace Nickvision::Money::Shared::Controllers
         return std::make_shared<PreferencesViewController>();
     }
 
+    const std::shared_ptr<AccountViewController>& MainWindowController::getAccountViewController(const std::filesystem::path& path) const
+    {
+        return m_accountViewControllers.at(path);
+    }
+
     void MainWindowController::startup()
     {
         if (!m_started)
@@ -233,6 +245,48 @@ namespace Nickvision::Money::Shared::Controllers
         return m_taskbar.connect(desktopFile);
     }
 #endif
+
+    bool MainWindowController::isAccountPasswordProtected(const std::filesystem::path& path) const
+    {
+        if(StringHelpers::toLower(path.extension().string()) != ".nmoney")
+        {
+            return false;
+        }
+        Account a{ path }; 
+        return a.isEncrypted();
+    }
+
+    void MainWindowController::openAccount(std::filesystem::path path, const std::string& password)
+    {
+        //Check if the file is a Denaro account file
+        if(StringHelpers::toLower(path.extension().string()) != ".nmoney")
+        {
+            m_notificationSent.invoke({ _("The file is not a Denaro account file."), NotificationSeverity::Error });
+        }
+        //Check if the account is already open
+        if(m_accountViewControllers.contains(path))
+        {
+            m_notificationSent.invoke({ _("The account is already open."), NotificationSeverity::Warning });
+        }
+        //Create the controller and open the account
+        std::shared_ptr<AccountViewController> controller{ nullptr };
+        try
+        {
+            controller = std::make_shared<AccountViewController>(path, password);
+        }
+        catch(const std::exception& e)
+        {
+            m_notificationSent.invoke({ e.what(), NotificationSeverity::Error });
+        }
+        if(controller)
+        {
+            m_accountViewControllers[path] = controller;
+            Configuration& config{ Aura::getActive().getConfig<Configuration>("config") };
+            config.addRecentAccount(controller->toRecentAccount());
+            config.save();
+            m_accountAdded.invoke(controller);
+        }
+    }
 
     void MainWindowController::removeRecentAccount(const RecentAccount& account)
     {

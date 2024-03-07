@@ -5,15 +5,19 @@
 #ifndef MAINWINDOWCONTROLLER_H
 #define MAINWINDOWCONTROLLER_H
 
+#include <filesystem>
 #include <memory>
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include <libnick/app/appinfo.h>
 #include <libnick/events/event.h>
+#include <libnick/events/parameventargs.h>
 #include <libnick/notifications/notificationsenteventargs.h>
 #include <libnick/notifications/shellnotificationsenteventargs.h>
 #include <libnick/taskbar/taskbaritem.h>
 #include <libnick/update/updater.h>
+#include "controllers/accountviewcontroller.h"
 #include "controllers/preferencesviewcontroller.h"
 #include "models/accounttype.h"
 #include "models/color.h"
@@ -74,6 +78,11 @@ namespace Nickvision::Money::Shared::Controllers
          */
         Nickvision::Events::Event<Nickvision::Notifications::ShellNotificationSentEventArgs>& shellNotificationSent();
         /**
+         * @brief Gets the event for when an account is added.
+         * @return The account added event
+         */
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::shared_ptr<AccountViewController>>>& accountAdded();
+        /**
          * @brief Gets the debugging information for the application.
          * @param extraInformation Extra, ui-specific, information to include in the debug info statement
          * @return The application's debug information
@@ -89,6 +98,12 @@ namespace Nickvision::Money::Shared::Controllers
          * @return The PreferencesViewController
          */
         std::shared_ptr<PreferencesViewController> createPreferencesViewController() const;
+        /**
+         * @brief Gets a AccountViewController.
+         * @param path The path of the account
+         * @return The AccountViewController for the account 
+         */
+        const std::shared_ptr<AccountViewController>& getAccountViewController(const std::filesystem::path& path) const;
         /**
          * @brief Starts the application.
          * @brief Will only have an effect on the first time called.
@@ -120,6 +135,18 @@ namespace Nickvision::Money::Shared::Controllers
         bool connectTaskbar(const std::string& desktopFile);
 #endif
         /**
+         * @brief Gets whether or not an account file requires a password to open.
+         * @param path The path of the account file 
+         */
+        bool isAccountPasswordProtected(const std::filesystem::path& path) const;
+        /**
+         * @brief Opens an account.
+         * @brief This method will invoke the AccountAdded event if the account is successfully opened.
+         * @param path The path of the account to open
+         * @param password The password of the account
+         */
+        void openAccount(std::filesystem::path path, const std::string& password);
+        /**
          * @brief Removes a recent account.
          * @param recent The RecentAccount to remove 
          */
@@ -131,6 +158,8 @@ namespace Nickvision::Money::Shared::Controllers
         Nickvision::Taskbar::TaskbarItem m_taskbar;
         Nickvision::Events::Event<Nickvision::Notifications::NotificationSentEventArgs> m_notificationSent;
         Nickvision::Events::Event<Nickvision::Notifications::ShellNotificationSentEventArgs> m_shellNotificationSent;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::shared_ptr<AccountViewController>>> m_accountAdded;
+        std::unordered_map<std::filesystem::path, std::shared_ptr<Controllers::AccountViewController>> m_accountViewControllers;
     };
 }
 
