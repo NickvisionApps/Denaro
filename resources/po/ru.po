@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-05 11:08-0500\n"
+"POT-Creation-Date: 2024-03-06 19:57-0500\n"
 "PO-Revision-Date: 2023-09-08 14:21+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -20,109 +20,119 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0.1-dev\n"
 
-#: libdenaro/src/models/account.cpp:101
+#: libdenaro/src/models/account.cpp:106
 msgid "Ungrouped"
 msgstr "Несгруппированные"
 
-#: libdenaro/src/models/account.cpp:102
+#: libdenaro/src/models/account.cpp:107
 msgid "Transactions without a group"
 msgstr "Транзакции без группы"
 
-#: libdenaro/src/models/account.cpp:212
+#: libdenaro/src/models/account.cpp:217
 msgid "Tomorrow"
 msgstr "Завтра"
 
-#: libdenaro/src/models/account.cpp:216
+#: libdenaro/src/models/account.cpp:221
 msgid "One week from now"
 msgstr "Через неделю"
 
-#: libdenaro/src/models/account.cpp:220
+#: libdenaro/src/models/account.cpp:225
 msgid "One month from now"
 msgstr "Через месяц"
 
-#: libdenaro/src/models/account.cpp:224
+#: libdenaro/src/models/account.cpp:229
 msgid "Two months from now"
 msgstr "Через два месяца"
 
-#: libdenaro/src/models/account.cpp:771
+#: libdenaro/src/models/account.cpp:778
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Перевод на {0}"
 
-#: libdenaro/src/models/account.cpp:788
+#: libdenaro/src/models/account.cpp:795
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Перевод из {0}"
 
-#: libdenaro/src/models/account.cpp:887
+#: libdenaro/src/models/account.cpp:894
 msgid "Income"
 msgstr "Доходы"
 
-#: libdenaro/src/models/account.cpp:887
+#: libdenaro/src/models/account.cpp:894
 msgid "Expense"
 msgstr "Расходы"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:29
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Denaro"
 msgstr "Denaro"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:30
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:32
 msgid "Manage your personal finances"
 msgstr "Управляйте своими личными финансами"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
 msgid "Matrix Chat"
 msgstr "Matrix Чат"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
 #, fuzzy
 msgid "Contributors on GitHub"
 msgstr "Соавторы на GitHub ❤️"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
 msgid "Fyodor Sobolev"
 msgstr "Фёдор Соболев"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:41
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:43
 msgid "David Lapshin"
 msgstr "Давид Лапшин"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:43
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:45
 msgid "translator-credits"
 msgstr "Фёдор Соболев https://github.com/fsobolev"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:146
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:153
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "Доброй ночи!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:150
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:157
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "Доброе утро!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:154
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:161
 msgid "Good Afternoon!"
 msgstr "Добрый день!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:158
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:165
 msgid "Good Evening!"
 msgstr "Добрый вечер!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:160
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:167
 msgid "Good Day!"
 msgstr "Здравствуйте!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:201
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:213
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:219
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:231
 msgid "Unable to download and install update"
 msgstr ""
 
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:264
+#, fuzzy
+msgid "The file is not a Denaro account file."
+msgstr "Невозможно экспортировать счёт в файл."
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:269
+#, fuzzy
+msgid "The account is already open."
+msgstr "Этот счёт уже открыт."
+
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Currency Converter"
 msgstr "Конвертер валют"
 
@@ -138,7 +148,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Комбинации клавиш"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:10
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Help"
 msgstr "Справка"
 
@@ -300,74 +310,74 @@ msgid "Quit"
 msgstr "Выход"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
 msgid "Open"
 msgstr "Открыть"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "GitHub Repo"
 msgstr "Репозиторий GitHub"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
 msgid "Search"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
 msgid "Home"
 msgstr "Домашняя страница"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Dashboard"
 msgstr "Обзор"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Accounts"
 msgstr "Счета"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Экспортировать всю информацию"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Changelog"
 msgstr "Список изменений"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "Report a Bug"
 msgstr "Сообщить об ошибке"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 msgid "Discussions"
 msgstr "Обсуждения"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
 msgid "Credits"
 msgstr "Авторы"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Настройки"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
 #, fuzzy
 msgid "New"
 msgstr "Новая"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:93
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:95
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:100
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:102
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -377,7 +387,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:104
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:106
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -389,36 +399,53 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:166
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:168
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:230
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:232
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:292
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:301
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "Результат скопирован в буфер обмена."
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:339
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:365
+msgid "Enter password here"
+msgstr "Введите пароль"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:371
+#, fuzzy
+msgid "Unlock Account"
+msgstr "Закрыть счёт"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:373
+msgid "Unlock"
+msgstr "Разблокировать"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
+msgid "Cancel"
+msgstr "Отмена"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:409
 msgid "No Recent Accounts"
 msgstr "Нет недавних счетов"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:358
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:428
 msgid "Remove"
 msgstr "Удалить"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:365
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:435
 msgid "Checking"
 msgstr "Расчётный"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:368
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:438
 msgid "Savings"
 msgstr "Сберегательный"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:371
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:441
 msgid "Business"
 msgstr "Бизнес"
 
@@ -445,6 +472,11 @@ msgstr "Тип транзакций по умолчанию"
 #, fuzzy
 msgid "Default Group Color"
 msgstr "Тип транзакций по умолчанию"
+
+#, fuzzy
+#~ msgid ""
+#~ "Unable to login to the account. The provided password may be invalid."
+#~ msgstr "Невозможно открыть счёт. Неправильный пароль."
 
 #, fuzzy
 #~ msgid "Let's get you started."
@@ -527,9 +559,6 @@ msgstr "Тип транзакций по умолчанию"
 
 #~ msgid "Can't access the selected folder, check Flatpak permissions."
 #~ msgstr "Невозможно получить доступ к папке, проверьте разрешения Flatpak."
-
-#~ msgid "Cancel"
-#~ msgstr "Отмена"
 
 #~ msgid "Change Password"
 #~ msgstr "Изменить пароль"
@@ -773,9 +802,6 @@ msgstr "Тип транзакций по умолчанию"
 #~ msgid "This account has no money available to transfer."
 #~ msgstr "На этом счёте нет средств для перевода."
 
-#~ msgid "This account is already opened."
-#~ msgstr "Этот счёт уже открыт."
-
 #~ msgid ""
 #~ "This transaction is a source repeat transaction.\n"
 #~ "What would you like to do with the repeat transactions?\n"
@@ -817,9 +843,6 @@ msgstr "Тип транзакций по умолчанию"
 #~ msgid "Type"
 #~ msgstr "Тип"
 
-#~ msgid "Unable to export account to file."
-#~ msgstr "Невозможно экспортировать счёт в файл."
-
 #~ msgid ""
 #~ "Unable to import information from the file. Please ensure that the app "
 #~ "has permissions to access the file and try again."
@@ -836,9 +859,6 @@ msgstr "Тип транзакций по умолчанию"
 #~ msgstr ""
 #~ "Невозможно загрузить данные о валютах. Пожалуйста, попробуйте снова. Если "
 #~ "ошибка не проходит, сообщите о ней."
-
-#~ msgid "Unable to login to account. Provided password is invalid."
-#~ msgstr "Невозможно открыть счёт. Неправильный пароль."
 
 #~ msgid ""
 #~ "Unable to open the account. Please ensure that the app has permissions to "
@@ -1134,9 +1154,6 @@ msgstr "Тип транзакций по умолчанию"
 #~ msgid "Password"
 #~ msgstr "Пароль"
 
-#~ msgid "Unlock"
-#~ msgstr "Разблокировать"
-
 #~ msgid "Use Native Digits"
 #~ msgstr "Использовать местные цифры"
 
@@ -1168,9 +1185,6 @@ msgstr "Тип транзакций по умолчанию"
 
 #~ msgid "Account"
 #~ msgstr "Счёт"
-
-#~ msgid "Close Account"
-#~ msgstr "Закрыть счёт"
 
 #~ msgctxt "Title"
 #~ msgid "Transfer"
@@ -1480,9 +1494,6 @@ msgstr "Тип транзакций по умолчанию"
 
 #~ msgid "New Window"
 #~ msgstr "Новое окно"
-
-#~ msgid "Enter password here"
-#~ msgstr "Введите пароль"
 
 #~ msgid "Transaction ({0})"
 #~ msgstr "Транзакция ({0})"

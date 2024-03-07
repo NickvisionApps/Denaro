@@ -1,0 +1,15 @@
+<UserControl
+    x:Class="Nickvision.Money.WinUI.AccountPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nickvision.Money.WinUI"
+    xmlns:nickvision="using:Nickvision.Money.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto">
+        <StackPanel x:Name="StackPanel" Margin="40,24,40,24" Orientation="Vertical" Spacing="6">
+            <TextBlock x:Name="LblTitle" Margin="0,0,0,24" Style="{ThemeResource NavigationViewItemHeaderTextStyle}" FontSize="26"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

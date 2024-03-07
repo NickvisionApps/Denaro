@@ -173,11 +173,11 @@
                                                 </Button.Content>
 
                                                 <Button.KeyboardAccelerators>
-                                                    <KeyboardAccelerator Modifiers="Control" Key="O"/>
+                                                    <KeyboardAccelerator Modifiers="Control" Key="N"/>
                                                 </Button.KeyboardAccelerators>
                                             </Button>
 
-                                            <Button Grid.Column="1" Height="36" HorizontalAlignment="Stretch">
+                                            <Button Grid.Column="1" Height="36" HorizontalAlignment="Stretch" Click="OpenAccount">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" Spacing="6">
                                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8E5;"/>
@@ -194,10 +194,6 @@
                                     </StackPanel>
                                 </nickvision:StatusPage.Child>
                             </nickvision:StatusPage>
-                        </nickvision:ViewStackPage>
-
-                        <nickvision:ViewStackPage PageName="Dashboard">
-                            
                         </nickvision:ViewStackPage>
                     </nickvision:ViewStack.Pages>
                 </nickvision:ViewStack>

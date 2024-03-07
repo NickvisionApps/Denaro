@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-05 11:08-0500\n"
+"POT-Creation-Date: 2024-03-06 19:57-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,109 +16,119 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libdenaro/src/models/account.cpp:101
+#: libdenaro/src/models/account.cpp:106
 msgid "Ungrouped"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:102
+#: libdenaro/src/models/account.cpp:107
 #, fuzzy
 msgid "Transactions without a group"
 msgstr "Hittade Inga Transaktioner"
 
-#: libdenaro/src/models/account.cpp:212
+#: libdenaro/src/models/account.cpp:217
 msgid "Tomorrow"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:216
+#: libdenaro/src/models/account.cpp:221
 msgid "One week from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:220
+#: libdenaro/src/models/account.cpp:225
 msgid "One month from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:224
+#: libdenaro/src/models/account.cpp:229
 msgid "Two months from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:771
+#: libdenaro/src/models/account.cpp:778
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Överför Pengar"
 
-#: libdenaro/src/models/account.cpp:788
+#: libdenaro/src/models/account.cpp:795
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Överför Pengar"
 
-#: libdenaro/src/models/account.cpp:887
+#: libdenaro/src/models/account.cpp:894
 msgid "Income"
 msgstr "Inkomst"
 
-#: libdenaro/src/models/account.cpp:887
+#: libdenaro/src/models/account.cpp:894
 msgid "Expense"
 msgstr "Kostnad"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:29
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Denaro"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:30
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:32
 msgid "Manage your personal finances"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
 msgid "Matrix Chat"
 msgstr "Matrix Chat"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
 msgid "Contributors on GitHub"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
 msgid "Fyodor Sobolev"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:41
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:43
 msgid "David Lapshin"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:43
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:45
 msgid "translator-credits"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:146
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:153
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "God Morgon!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:150
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:157
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "God Morgon!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:154
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:161
 msgid "Good Afternoon!"
 msgstr "God Eftermiddag!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:158
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:165
 msgid "Good Evening!"
 msgstr "Go kväll!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:160
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:167
 msgid "Good Day!"
 msgstr "God Dag!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:201
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:213
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:219
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:231
 msgid "Unable to download and install update"
 msgstr ""
 
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:264
+#, fuzzy
+msgid "The file is not a Denaro account file."
+msgstr "Kan inte skriva över ett öppet konto."
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:269
+#, fuzzy
+msgid "The account is already open."
+msgstr "Detta konto är redan öppet."
+
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Currency Converter"
 msgstr ""
 
@@ -134,7 +144,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Tangentbordsgenvägar"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:10
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Help"
 msgstr "Hjälp"
 
@@ -298,75 +308,75 @@ msgid "Quit"
 msgstr "Quit"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
 msgid "Open"
 msgstr "Öppna"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "GitHub Repo"
 msgstr "GitHub Repo"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
 msgid "Search"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
 msgid "Home"
 msgstr "Hem"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Dashboard"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 #, fuzzy
 msgid "Accounts"
 msgstr "Konto"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "Copy Debug Information"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Changelog"
 msgstr "Vad är nytt"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "Report a Bug"
 msgstr "Rapportera en Bugg"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 msgid "Discussions"
 msgstr "Diskussioner"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
 msgid "Credits"
 msgstr "Tack till"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 #, fuzzy
 msgid "Settings"
 msgstr "Inställningar"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
 #, fuzzy
 msgid "New"
 msgstr "Ny"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:93
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:95
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:100
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:102
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -376,7 +386,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:104
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:106
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -388,37 +398,55 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:166
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:168
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:230
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:232
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:292
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:301
 msgid "Debug information copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:339
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:365
+#, fuzzy
+msgid "Enter password here"
+msgstr "Enter password here"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:371
+#, fuzzy
+msgid "Unlock Account"
+msgstr "Nytt Konto"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:373
+msgid "Unlock"
+msgstr "Unlock"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:409
 #, fuzzy
 msgid "No Recent Accounts"
 msgstr "Senaste Konton"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:358
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:428
 msgid "Remove"
 msgstr "Ta bort"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:365
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:435
 msgid "Checking"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:368
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:438
 #, fuzzy
 msgid "Savings"
 msgstr "Inställningar"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:371
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:441
 msgid "Business"
 msgstr ""
 
@@ -445,6 +473,11 @@ msgstr "Ny Transaktion"
 #, fuzzy
 msgid "Default Group Color"
 msgstr "Ny Transaktion"
+
+#, fuzzy
+#~ msgid ""
+#~ "Unable to login to the account. The provided password may be invalid."
+#~ msgstr "Kan inte logga in till konto. Tilldelat lösenord är fel."
 
 #~ msgid "(Copy)"
 #~ msgstr "(Copy)"
@@ -487,9 +520,6 @@ msgstr "Ny Transaktion"
 
 #~ msgid "Apply"
 #~ msgstr "Tillämpa"
-
-#~ msgid "Cancel"
-#~ msgstr "Avbryt"
 
 #~ msgid "Change Password"
 #~ msgstr "Change Password"
@@ -599,9 +629,6 @@ msgstr "Ny Transaktion"
 #~ msgid "The passwords do not match."
 #~ msgstr "The password of the account was changed."
 
-#~ msgid "This account is already opened."
-#~ msgstr "Detta konto är redan öppet."
-
 #~ msgid "Total"
 #~ msgstr "Total"
 
@@ -613,15 +640,8 @@ msgstr "Ny Transaktion"
 #~ msgstr "Transaktioner"
 
 #, fuzzy
-#~ msgid "Unable to export account to file."
-#~ msgstr "Kan inte skriva över ett öppet konto."
-
-#, fuzzy
 #~ msgid "Unable to import transactions from the file."
 #~ msgstr "Kan inte skriva över ett öppet konto."
-
-#~ msgid "Unable to login to account. Provided password is invalid."
-#~ msgstr "Kan inte logga in till konto. Tilldelat lösenord är fel."
 
 #, fuzzy
 #~ msgid "Unable to overwrite an existing account."
@@ -726,16 +746,9 @@ msgstr "Ny Transaktion"
 #~ msgid "Password"
 #~ msgstr "Password"
 
-#~ msgid "Unlock"
-#~ msgstr "Unlock"
-
 #, fuzzy
 #~ msgid "Backup"
 #~ msgstr "Tillbaka"
-
-#, fuzzy
-#~ msgid "Close Account"
-#~ msgstr "Nytt Konto"
 
 #, fuzzy
 #~ msgctxt "Title"
@@ -809,10 +822,6 @@ msgstr "Ny Transaktion"
 
 #, fuzzy
 #~ msgid "Enter symbol here"
-#~ msgstr "Enter password here"
-
-#, fuzzy
-#~ msgid "Enter code here"
 #~ msgstr "Enter password here"
 
 #~ msgid "Save"

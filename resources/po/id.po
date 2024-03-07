@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-05 11:08-0500\n"
+"POT-Creation-Date: 2024-03-06 19:57-0500\n"
 "PO-Revision-Date: 2023-06-07 19:40+0000\n"
 "Last-Translator: Krindog7337 <igstkrisna2006@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/nickvision-"
@@ -19,111 +19,121 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.18-dev\n"
 
-#: libdenaro/src/models/account.cpp:101
+#: libdenaro/src/models/account.cpp:106
 msgid "Ungrouped"
 msgstr "Tidak digrup"
 
-#: libdenaro/src/models/account.cpp:102
+#: libdenaro/src/models/account.cpp:107
 msgid "Transactions without a group"
 msgstr "Transaksi Tanpa Grup"
 
-#: libdenaro/src/models/account.cpp:212
+#: libdenaro/src/models/account.cpp:217
 msgid "Tomorrow"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:216
+#: libdenaro/src/models/account.cpp:221
 msgid "One week from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:220
+#: libdenaro/src/models/account.cpp:225
 msgid "One month from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:224
+#: libdenaro/src/models/account.cpp:229
 msgid "Two months from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:771
+#: libdenaro/src/models/account.cpp:778
 #, fuzzy
 msgid "Transfer to {}"
 msgstr "Transfer ke {0}"
 
-#: libdenaro/src/models/account.cpp:788
+#: libdenaro/src/models/account.cpp:795
 #, fuzzy
 msgid "Transfer from {}"
 msgstr "Transfer dari {0}"
 
-#: libdenaro/src/models/account.cpp:887
+#: libdenaro/src/models/account.cpp:894
 msgid "Income"
 msgstr "Pemasukan"
 
-#: libdenaro/src/models/account.cpp:887
+#: libdenaro/src/models/account.cpp:894
 msgid "Expense"
 msgstr "Pengeluaran"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:29
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Denaro"
 msgstr "Denaro"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:30
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:32
 msgid "Manage your personal finances"
 msgstr "Kelola keuangan pribadi anda"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
 msgid "Matrix Chat"
 msgstr "Obrolan Matrix"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
 #, fuzzy
 msgid "Contributors on GitHub"
 msgstr ""
 "Nicholas Logozzo {0}\n"
 "Kontributor di GitHub ❤️ {1}"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
 msgid "Fyodor Sobolev"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:41
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:43
 msgid "David Lapshin"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:43
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:45
 msgid "translator-credits"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:146
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:153
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "Selamat Pagi!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:150
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:157
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "Selamat Pagi!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:154
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:161
 msgid "Good Afternoon!"
 msgstr "Selamat Siang!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:158
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:165
 msgid "Good Evening!"
 msgstr "Selamat Malam!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:160
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:167
 msgid "Good Day!"
 msgstr "Halo!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:201
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:213
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:219
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:231
 msgid "Unable to download and install update"
 msgstr ""
 
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:264
+#, fuzzy
+msgid "The file is not a Denaro account file."
+msgstr "Tidak dapat mengekspor rekening ke berkas."
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:269
+#, fuzzy
+msgid "The account is already open."
+msgstr "Rekening ini sudah dibuka."
+
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 #, fuzzy
 msgid "Currency Converter"
 msgstr "Kode Mata Uang"
@@ -140,7 +150,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Pintasan Papan Tik"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:10
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Help"
 msgstr "Bantuan"
 
@@ -304,74 +314,74 @@ msgid "Quit"
 msgstr "Keluar"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
 msgid "Open"
 msgstr "Buka"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "GitHub Repo"
 msgstr "Repo Github"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:65
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
 msgid "Search"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
 msgid "Home"
 msgstr "Beranda"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Dashboard"
 msgstr "Dasbor"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Accounts"
 msgstr "Rekening"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Ekspor Semua Informasi"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Changelog"
 msgstr "Perubahan"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "Report a Bug"
 msgstr "Laporkan Masalah"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 msgid "Discussions"
 msgstr "Diskusi"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
 msgid "Credits"
 msgstr "Kredit"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Pengaturan"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
 #, fuzzy
 msgid "New"
 msgstr "Baru"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:93
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:95
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:100
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:102
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -381,7 +391,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:104
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:106
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -393,35 +403,52 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:166
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:168
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:230
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:232
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:292
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:301
 msgid "Debug information copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:339
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:365
+msgid "Enter password here"
+msgstr "Masukkan kata sandi disini"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:371
+#, fuzzy
+msgid "Unlock Account"
+msgstr "Tutup Rekening"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:373
+msgid "Unlock"
+msgstr "Unlock"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
+msgid "Cancel"
+msgstr "Batal"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:409
 msgid "No Recent Accounts"
 msgstr "Tidak Ada Rekening Baru-baru Ini"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:358
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:428
 msgid "Remove"
 msgstr "Hapus"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:365
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:435
 msgid "Checking"
 msgstr "Giro"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:368
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:438
 msgid "Savings"
 msgstr "Tabungan"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:371
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:441
 msgid "Business"
 msgstr "Bisnis"
 
@@ -448,6 +475,11 @@ msgstr "Tipe Transaksi Bawaan"
 #, fuzzy
 msgid "Default Group Color"
 msgstr "Tipe Transaksi Bawaan"
+
+#, fuzzy
+#~ msgid ""
+#~ "Unable to login to the account. The provided password may be invalid."
+#~ msgstr "Tidak dapat masuk ke rekening. Sandi yang diberikan tidak valid."
 
 #, fuzzy
 #~ msgid "Let's get you started."
@@ -524,9 +556,6 @@ msgstr "Tipe Transaksi Bawaan"
 #~ msgid "Can't access the selected folder, check Flatpak permissions."
 #~ msgstr ""
 #~ "Tidak dapat mengakses folder yang dipilih, periksa perizinan Flatpak."
-
-#~ msgid "Cancel"
-#~ msgstr "Batal"
 
 #~ msgid "Change Password"
 #~ msgstr "Ubah Kata Sandi"
@@ -754,9 +783,6 @@ msgstr "Tipe Transaksi Bawaan"
 #~ msgid "This account has no money available to transfer."
 #~ msgstr "Rekening ini tidak mempunyai uang untuk ditransfer."
 
-#~ msgid "This account is already opened."
-#~ msgstr "Rekening ini sudah dibuka."
-
 #, fuzzy
 #~ msgid ""
 #~ "This transaction is a source repeat transaction.\n"
@@ -796,9 +822,6 @@ msgstr "Tipe Transaksi Bawaan"
 #~ msgid "Type"
 #~ msgstr "Tipe"
 
-#~ msgid "Unable to export account to file."
-#~ msgstr "Tidak dapat mengekspor rekening ke berkas."
-
 #~ msgid ""
 #~ "Unable to import information from the file. Please ensure that the app "
 #~ "has permissions to access the file and try again."
@@ -809,9 +832,6 @@ msgstr "Tipe Transaksi Bawaan"
 #, fuzzy
 #~ msgid "Unable to import transactions from the file."
 #~ msgstr "Tambahkan transaksi baru atau impor transaksi dari berkas."
-
-#~ msgid "Unable to login to account. Provided password is invalid."
-#~ msgstr "Tidak dapat masuk ke rekening. Sandi yang diberikan tidak valid."
 
 #~ msgid ""
 #~ "Unable to open the account. Please ensure that the app has permissions to "
@@ -1048,9 +1068,6 @@ msgstr "Tipe Transaksi Bawaan"
 #~ msgid "Password"
 #~ msgstr "Kata Sandi"
 
-#~ msgid "Unlock"
-#~ msgstr "Unlock"
-
 #~ msgid "Use Native Digits"
 #~ msgstr "Gunakan Digit Bawaan"
 
@@ -1072,9 +1089,6 @@ msgstr "Tipe Transaksi Bawaan"
 
 #~ msgid "Account"
 #~ msgstr "Rekening"
-
-#~ msgid "Close Account"
-#~ msgstr "Tutup Rekening"
 
 #~ msgctxt "Title"
 #~ msgid "Transfer"
@@ -1355,9 +1369,6 @@ msgstr "Tipe Transaksi Bawaan"
 
 #~ msgid "New Window"
 #~ msgstr "Jendela Baru"
-
-#~ msgid "Enter password here"
-#~ msgstr "Masukkan kata sandi disini"
 
 #~ msgid "Transaction ({0})"
 #~ msgstr "Transaksi ({0})"

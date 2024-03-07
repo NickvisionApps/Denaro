@@ -6,6 +6,7 @@
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/notifications/shellnotification.h>
 #include <libnick/localization/gettext.h>
+#include "AccountPage.xaml.h"
 #include "SettingsPage.xaml.h"
 #include "Controls/CurrencyConverterDialog.xaml.h"
 #include "Controls/SettingsRow.xaml.h"
@@ -89,6 +90,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         m_controller->configurationSaved() += [&](const EventArgs& args) { OnConfigurationSaved(args); };
         m_controller->notificationSent() += [&](const NotificationSentEventArgs& args) { OnNotificationSent(args); };
         m_controller->shellNotificationSent() += [&](const ShellNotificationSentEventArgs& args) { OnShellNotificationSent(args); };
+        m_controller->accountAdded() += [&](const ParamEventArgs<std::shared_ptr<AccountViewController>>& args) { OnAccountAdded(args); };
         //Localize Strings
         NavView().PaneTitle(m_controller->isDevVersion() ? winrt::to_hstring(_("PREVIEW")) : L"");
         LblAppName().Text(winrt::to_hstring(m_controller->getAppInfo().getShortName()));
@@ -176,7 +178,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
             IVectorView<IStorageItem> items{ co_await args.DataView().GetStorageItemsAsync() };
             if (items.Size() > 0)
             {
-                
+                //TODO: DnD Support
             }
         }
     }
@@ -249,7 +251,14 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         }
         else if(tag == L"Dashboard")
         {
-            ViewStack().CurrentPage(L"Dashboard");
+            ViewStack().CurrentPage(L"Custom");
+            FrameCustom().Content(winrt::box_value(UserControl{}));
+        }
+        else if(tag == L"Account")
+        {
+            winrt::hstring path{ ToolTipService::GetToolTip(NavView().SelectedItem().as<NavigationViewItem>()).as<winrt::hstring>() };
+            ViewStack().CurrentPage(L"Custom");
+            FrameCustom().Content(winrt::box_value(m_accountPages.at(winrt::to_string(path))));
         }
         else if(tag == L"Settings")
         {
@@ -313,6 +322,67 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         dialog.XamlRoot(MainGrid().XamlRoot());
         dialog.RequestedTheme(MainGrid().RequestedTheme());
         co_await dialog.ShowAsync();
+    }
+
+    void MainWindow::OnAccountAdded(const ParamEventArgs<std::shared_ptr<AccountViewController>>& args)
+    {
+        LoadRecentAccounts();
+        //Create NavViewItem for account
+        FontIcon icon;
+        icon.FontFamily(WinUIHelpers::LookupAppResource<FontFamily>(L"SymbolThemeFontFamily"));
+        icon.Glyph(L"\uE8C7");
+        NavigationViewItem item;
+        item.Icon(icon);
+        item.Tag(winrt::box_value(L"Account"));
+        item.Content(winrt::box_value(winrt::to_hstring(args.getParam()->getMetadata().getName())));
+        ToolTipService::SetToolTip(item, winrt::box_value(winrt::to_hstring(args.getParam()->getPath().string())));
+        NavView().MenuItems().Append(winrt::box_value(item));
+        //Create view for account
+        UserControl page{ winrt::make<AccountPage>() };
+        page.as<AccountPage>()->SetController(args.getParam());
+        m_accountPages[args.getParam()->getPath()] = page;
+        //Set AccountView
+        NavView().SelectedItem(item);
+    }
+
+    Windows::Foundation::IAsyncAction MainWindow::OpenAccount(const IInspectable& sender, const RoutedEventArgs& args)
+    {
+        //Select account file
+        FileOpenPicker picker;
+        picker.as<::IInitializeWithWindow>()->Initialize(m_hwnd);
+        picker.SuggestedStartLocation(PickerLocationId::DocumentsLibrary);
+        picker.FileTypeFilter().Append(L".nmoney");
+        StorageFile file{ co_await picker.PickSingleFileAsync() };
+        if(file)
+        {
+            std::filesystem::path path{ winrt::to_string(file.Path()) };
+            std::string password;
+            //Get password if needed
+            if(m_controller->isAccountPasswordProtected(path))
+            {
+                PasswordBox txtPassword;
+                txtPassword.Width(240);
+                txtPassword.PlaceholderText(winrt::to_hstring(_("Enter password here")));
+                UserControl row{ winrt::make<Controls::implementation::SettingsRow>() };
+                row.as<Controls::implementation::SettingsRow>()->Glyph(L"\uE72E");
+                row.as<Controls::implementation::SettingsRow>()->Title(winrt::to_hstring(path.filename().string()));
+                row.as<Controls::implementation::SettingsRow>()->Child(txtPassword);
+                ContentDialog passwordDialog;
+                passwordDialog.Title(winrt::box_value(winrt::to_hstring(_("Unlock Account"))));
+                passwordDialog.Content(winrt::box_value(row));
+                passwordDialog.PrimaryButtonText(winrt::to_hstring(_("Unlock")));
+                passwordDialog.SecondaryButtonText(winrt::to_hstring(_("Cancel")));
+                passwordDialog.DefaultButton(ContentDialogButton::Primary);
+                passwordDialog.XamlRoot(MainGrid().XamlRoot());
+                ContentDialogResult result{ co_await passwordDialog.ShowAsync() };
+                if(result == ContentDialogResult::Primary)
+                {
+                    password = winrt::to_string(txtPassword.Password());
+                }
+            }
+            //Open account
+            m_controller->openAccount(path, password);
+        }
     }
 
     void MainWindow::SetDragRegionForCustomTitleBar()

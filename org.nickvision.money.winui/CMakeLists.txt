@@ -13,6 +13,7 @@ if(WIN32)
         "Controls/ViewStack.xaml.cpp" "Controls/ViewStack.xaml.h" "Controls/ViewStack.xaml" "Controls/ViewStack.idl"
         "Controls/ViewStackPage.xaml.cpp" "Controls/ViewStackPage.xaml.h" "Controls/ViewStackPage.xaml" "Controls/ViewStackPage.idl"
         "Helpers/WinUI.cpp" "Helpers/WinUI.h"
+        "AccountPage.xaml.cpp" "AccountPage.xaml.h" "AccountPage.xaml" "AccountPage.idl"
         "MainWindow.xaml.cpp" "MainWindow.xaml.h" "MainWindow.xaml" "MainWindow.idl"
         "SettingsPage.xaml.cpp" "SettingsPage.xaml.h" "SettingsPage.xaml" "SettingsPage.idl")
     set_property(SOURCE "App.xaml" PROPERTY VS_XAML_TYPE "ApplicationDefinition")

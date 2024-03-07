@@ -2,11 +2,14 @@
 #define MAINWINDOW_H
 
 #include "includes.h"
+#include <filesystem>
 #include <memory>
+#include <unordered_map>
 #include "Controls/StatusPage.g.h"
 #include "Controls/ViewStack.g.h"
 #include "Controls/ViewStackPage.g.h"
 #include "MainWindow.g.h"
+#include "controllers/accountviewcontroller.h"
 #include "controllers/mainwindowcontroller.h"
 
 namespace winrt::Nickvision::Money::WinUI::implementation 
@@ -132,6 +135,17 @@ namespace winrt::Nickvision::Money::WinUI::implementation
          * @param args Microsoft::UI::Xaml::Input::TappedRoutedEventArgs 
          */
         Windows::Foundation::IAsyncAction CurrencyConverter(const IInspectable& sender, const Microsoft::UI::Xaml::Input::TappedRoutedEventArgs& args);
+        /**
+         * @brief Handles when an account is added.
+         * @param args Nickvision::Events::ParamEventArgs<Nickvision::Money::Shared::Controllers::AccountViewController>
+         */
+        void OnAccountAdded(const ::Nickvision::Events::ParamEventArgs<std::shared_ptr<::Nickvision::Money::Shared::Controllers::AccountViewController>>& args);
+        /**
+         * @brief Prompts the user to open an account.
+         * @param sender IInspectable
+         * @param args Microsoft::UI::Xaml::RoutedEventArgs
+         */
+        Windows::Foundation::IAsyncAction OpenAccount(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
 
     private:
         /**
@@ -148,6 +162,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         HWND m_hwnd;
         Microsoft::UI::Xaml::ElementTheme m_systemTheme;
         winrt::event_token m_notificationClickToken;
+        std::unordered_map<std::filesystem::path, Microsoft::UI::Xaml::Controls::UserControl> m_accountPages;
     };
 }
 
