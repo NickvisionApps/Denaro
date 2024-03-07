@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-06 19:57-0500\n"
+"POT-Creation-Date: 2024-03-06 22:58-0500\n"
 "PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
@@ -131,7 +131,7 @@ msgid "The account is already open."
 msgstr "यह खाता पहले ही खोला जा चुका है।"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
 msgid "Currency Converter"
 msgstr "मुद्रा परिवर्तक"
 
@@ -147,7 +147,7 @@ msgid "Keyboard Shortcuts"
 msgstr "कीबोर्ड शॉर्टकट"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:10
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Help"
 msgstr "सहायता"
 
@@ -308,76 +308,76 @@ msgid "Quit"
 msgstr "छोड़ें"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "खोलें"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub रेपो"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
 msgid "Search"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Home"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Dashboard"
 msgstr "डैशबोर्ड"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 #, fuzzy
 msgid "Accounts"
 msgstr "खाता"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "सभी जानकारी निर्यात करें"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "Changelog"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 msgid "Report a Bug"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
 msgid "Discussions"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Credits"
 msgstr ""
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 #, fuzzy
 msgid "Settings"
 msgstr "Account Settings"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
 #, fuzzy
 msgid "New"
 msgstr "नया"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:95
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:96
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:102
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:103
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -387,7 +387,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:106
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:107
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -399,53 +399,53 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:168
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:169
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:232
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:233
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:301
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:302
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "परिणाम को क्लिपबोर्ड पर कॉपी किया गया।"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:365
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:366
 msgid "Enter password here"
 msgstr "Enter password here"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:371
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:372
 #, fuzzy
 msgid "Unlock Account"
 msgstr "खाता बंद करें"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:373
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
 msgid "Unlock"
 msgstr "अनलॉक"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:375
 msgid "Cancel"
 msgstr "रद्द करें"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:409
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
 msgid "No Recent Accounts"
 msgstr "कोई हालिया खाता नहीं"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:428
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:429
 msgid "Remove"
 msgstr "हटाएँ"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:435
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:436
 msgid "Checking"
 msgstr "चेकिंग"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:438
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:439
 msgid "Savings"
 msgstr "जमा पूंजी"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:441
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
 msgid "Business"
 msgstr "व्यवसाय"
 

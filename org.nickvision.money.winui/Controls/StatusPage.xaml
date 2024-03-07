@@ -7,15 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-    <StackPanel x:Name="StackPanel">
-        <FontIcon x:Name="GlyphIcon" HorizontalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="{x:Bind Glyph, Mode=OneWay}" Visibility="Collapsed"/>
+    <StackPanel Spacing="{x:Bind CompactSpacing, Mode=OneWay}">
+        <FontIcon Visibility="{x:Bind GlyphIconVisibility, Mode=OneWay}" HorizontalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="{x:Bind Glyph, Mode=OneWay}" FontSize="{x:Bind IconSize, Mode=OneWay}"/>
 
-        <Image x:Name="AppIcon" HorizontalAlignment="Center" Visibility="Collapsed" Source="../resources/org.nickvision.money.ico"/>
+        <Image Visibility="{x:Bind AppIconVisibility, Mode=OneWay}" HorizontalAlignment="Center" Width="{x:Bind IconWidth, Mode=OneWay}" Height="{x:Bind IconHeight, Mode=OneWay}"  Source="../resources/org.nickvision.money.ico"/>
 
-        <TextBlock x:Name="LblTitle" HorizontalAlignment="Center" TextWrapping="WrapWholeWords" Text="{x:Bind Title, Mode=OneWay}"/>
+        <TextBlock Visibility="{x:Bind TitleVisibility, Mode=OneWay}" HorizontalAlignment="Center" TextWrapping="WrapWholeWords" Text="{x:Bind Title, Mode=OneWay}" Style="{x:Bind TitleStyle, Mode=OneWay}"/>
 
-        <TextBlock x:Name="LblDescription" HorizontalAlignment="Center" Text="{x:Bind Description, Mode=OneWay}" TextWrapping="WrapWholeWords"/>
+        <TextBlock Visibility="{x:Bind DescriptionVisibility, Mode=OneWay}" HorizontalAlignment="Center" Text="{x:Bind Description, Mode=OneWay}" TextWrapping="WrapWholeWords"/>
 
-        <Frame x:Name="FrameChild" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{x:Bind Child, Mode=OneWay}"/>
+        <Frame Visibility="{x:Bind ChildVisibility, Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{x:Bind Child, Mode=OneWay}"/>
     </StackPanel>
 </UserControl>

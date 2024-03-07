@@ -34,12 +34,8 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
     void StatusPage::Glyph(const winrt::hstring& glyph)
     {
         SetValue(m_glyphProperty, winrt::box_value(glyph));
-        if(!glyph.empty())
-        {
-            GlyphIcon().Visibility(Visibility::Visible);
-            AppIcon().Visibility(Visibility::Collapsed);
-        }
         m_propertyChanged(*this, PropertyChangedEventArgs{ L"Glyph" });
+        m_propertyChanged(*this, PropertyChangedEventArgs{ L"GlyphIconVisibility" });
     }
     
     bool StatusPage::UseAppIcon() const
@@ -50,12 +46,8 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
     void StatusPage::UseAppIcon(bool useAppIcon)
     {
         SetValue(m_useAppIconProperty, winrt::box_value(useAppIcon));
-        if(useAppIcon)
-        {
-            GlyphIcon().Visibility(Visibility::Collapsed);
-            AppIcon().Visibility(Visibility::Visible);
-        }
         m_propertyChanged(*this, PropertyChangedEventArgs{ L"UseAppIcon" });
+        m_propertyChanged(*this, PropertyChangedEventArgs{ L"AppIconVisibility" });
     }
 
     winrt::hstring StatusPage::Title() const
@@ -66,8 +58,8 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
     void StatusPage::Title(const winrt::hstring& title)
     {
         SetValue(m_titleProperty, winrt::box_value(title));
-        LblTitle().Visibility(!title.empty() ? Visibility::Visible : Visibility::Collapsed);
         m_propertyChanged(*this, PropertyChangedEventArgs{ L"Title" });
+        m_propertyChanged(*this, PropertyChangedEventArgs{ L"TitleVisibility" });
     }
 
     winrt::hstring StatusPage::Description() const
@@ -78,8 +70,8 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
     void StatusPage::Description(const winrt::hstring& description)
     {
         SetValue(m_descriptionProperty, winrt::box_value(description));
-        LblDescription().Visibility(!description.empty() ? Visibility::Visible : Visibility::Collapsed);
         m_propertyChanged(*this, PropertyChangedEventArgs{ L"Description" });
+        m_propertyChanged(*this, PropertyChangedEventArgs{ L"DescriptionVisibility" });
     }
 
     IInspectable StatusPage::Child() const
@@ -90,8 +82,8 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
     void StatusPage::Child(const IInspectable& child)
     {
         SetValue(m_childProperty, child);
-        FrameChild().Visibility(child ? Visibility::Visible : Visibility::Collapsed);
         m_propertyChanged(*this, PropertyChangedEventArgs{ L"Child" });
+        m_propertyChanged(*this, PropertyChangedEventArgs{ L"ChildVisibility" });
     }
 
     bool StatusPage::IsCompact() const
@@ -102,23 +94,62 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
     void StatusPage::IsCompact(bool isCompact)
     {
         SetValue(m_isCompactProperty, winrt::box_value(isCompact));
-        if(isCompact)
-        {
-            StackPanel().Spacing(6);
-            GlyphIcon().FontSize(30);
-            AppIcon().Width(64);
-            AppIcon().Height(64);
-            LblTitle().Style(WinUIHelpers::LookupAppResource<Microsoft::UI::Xaml::Style>(L"SubtitleTextBlockStyle"));
-        }
-        else
-        {
-            StackPanel().Spacing(12);
-            GlyphIcon().FontSize(60);
-            AppIcon().Width(128);
-            AppIcon().Height(128);
-            LblTitle().Style(WinUIHelpers::LookupAppResource<Microsoft::UI::Xaml::Style>(L"TitleTextBlockStyle"));
-        }
         m_propertyChanged(*this, PropertyChangedEventArgs{ L"IsCompact" });
+        m_propertyChanged(*this, PropertyChangedEventArgs{ L"CompactSpacing" });
+        m_propertyChanged(*this, PropertyChangedEventArgs{ L"IconSize" });
+        m_propertyChanged(*this, PropertyChangedEventArgs{ L"IconWidth" });
+        m_propertyChanged(*this, PropertyChangedEventArgs{ L"IconHeight" });
+        m_propertyChanged(*this, PropertyChangedEventArgs{ L"TitleStyle" });
+    }
+
+    Visibility StatusPage::GlyphIconVisibility() const
+    {
+        return UseAppIcon() ? Visibility::Collapsed : Visibility::Visible;
+    }
+
+    Visibility StatusPage::AppIconVisibility() const
+    {
+        return UseAppIcon() ? Visibility::Visible : Visibility::Collapsed;
+    }
+
+    Visibility StatusPage::TitleVisibility() const
+    {
+        return Title().empty() ? Visibility::Collapsed : Visibility::Visible;
+    }
+
+    Visibility StatusPage::DescriptionVisibility() const
+    {
+        return Description().empty() ? Visibility::Collapsed : Visibility::Visible;
+    }
+
+    Visibility StatusPage::ChildVisibility() const
+    {
+        return Child() ? Visibility::Visible : Visibility::Collapsed;
+    }
+
+    double StatusPage::CompactSpacing() const
+    {
+        return IsCompact() ? 6 : 12;
+    }
+
+    double StatusPage::IconSize() const
+    {
+        return IsCompact() ? 30 : 60;
+    }
+
+    double StatusPage::IconWidth() const
+    {
+        return IsCompact() ? 64 : 128;
+    }
+
+    double StatusPage::IconHeight() const
+    {
+        return IsCompact() ? 64 : 128;
+    }
+
+    Style StatusPage::TitleStyle() const
+    {
+        return WinUIHelpers::LookupAppResource<Microsoft::UI::Xaml::Style>(IsCompact() ? L"SubtitleTextBlockStyle" : L"TitleTextBlockStyle");
     }
 
     winrt::event_token StatusPage::PropertyChanged(const PropertyChangedEventHandler& handler)
@@ -169,26 +200,36 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
             if(args.Property() == m_glyphProperty)
             {
                 ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"Glyph" });
+                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"GlyphIconVisibility" });
             }
             else if(args.Property() == m_useAppIconProperty)
             {
                 ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"UseAppIcon" });
+                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"AppIconVisibility" });
             }
             else if(args.Property() == m_titleProperty)
             {
                 ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"Title" });
+                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"TitleVisibility" });
             }
             else if(args.Property() == m_descriptionProperty)
             {
                 ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"Description" });
+                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"DescriptionVisibility" });
             }
             else if(args.Property() == m_childProperty)
             {
                 ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"Child" });
+                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"ChildVisibility" });
             }
             else if(args.Property() == m_isCompactProperty)
             {
                 ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"IsCompact" });
+                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"CompactSpacing" });
+                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"IconSize" });
+                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"IconWidth" });
+                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"IconHeight" });
+                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"TitleStyle" });
             }
         }
     }

@@ -1,21 +1,21 @@
-#ifndef SETTINGSROW_H
-#define SETTINGSROW_H
+#ifndef CLICKABLESETTINGSROW_H
+#define CLICKABLESETTINGSROW_H
 
 #include "includes.h"
-#include "Controls/SettingsRow.g.h"
+#include "Controls/ClickableSettingsRow.g.h"
 
 namespace winrt::Nickvision::Money::WinUI::Controls::implementation 
 {
     /**
      * @brief A row control to display a configurable application setting. 
      */
-    class SettingsRow : public SettingsRowT<SettingsRow>
+    class ClickableSettingsRow : public ClickableSettingsRowT<ClickableSettingsRow>
     {
     public:
         /**
-         * @brief Constructs a SettingsRow. 
+         * @brief Constructs a ClickableSettingsRow. 
          */
-        SettingsRow();
+        ClickableSettingsRow();
         /**
          * @brief Gets the icon glyph for the row.
          * @returns The row icon glyph
@@ -81,6 +81,16 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
          * @param token The token of the handler to unsubscribe. 
          */
         void PropertyChanged(const winrt::event_token& token);
+        /**
+         * @brief Subscribes a handler to the clicked event.
+         * @return The token for the newly subscribed handler.
+         */
+        winrt::event_token Clicked(const Microsoft::UI::Xaml::RoutedEventHandler& handler);
+        /**
+         * @brief Unsubscribes a handler from the clicked event.
+         * @param token The token of the handler to unsubscribe. 
+         */
+        void Clicked(const winrt::event_token& token);
 
     private:
         winrt::event<Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> m_propertyChangedEvent;
@@ -117,16 +127,16 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
         static Microsoft::UI::Xaml::DependencyProperty m_glyphProperty;
         static Microsoft::UI::Xaml::DependencyProperty m_titleProperty;
         static Microsoft::UI::Xaml::DependencyProperty m_descriptionProperty;
-        static Microsoft::UI::Xaml::DependencyProperty m_childProperty;    
+        static Microsoft::UI::Xaml::DependencyProperty m_childProperty;
     };
 }
 
 namespace winrt::Nickvision::Money::WinUI::Controls::factory_implementation 
 {
-    class SettingsRow : public SettingsRowT<SettingsRow, implementation::SettingsRow>
+    class ClickableSettingsRow : public ClickableSettingsRowT<ClickableSettingsRow, implementation::ClickableSettingsRow>
     {
 
     };
 }
 
-#endif //SETTINGSROW_H
+#endif //CLICKABLESETTINGSROW_H

@@ -79,7 +79,57 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
          * @param isCompact True for compact spacing, else false
          */
         void IsCompact(bool isCompact);
-/**
+        /**
+         * @brief Gets the visibility of the glyph icon.
+         * @return The visibility of the glyph icon 
+         */
+        Microsoft::UI::Xaml::Visibility GlyphIconVisibility() const;
+        /**
+         * @brief Gets the visibility of the app icon.
+         * @return The visibility of the app icon 
+         */
+        Microsoft::UI::Xaml::Visibility AppIconVisibility() const;
+        /**
+         * @brief Gets the visibility of the title control.
+         * @return The visibility of the title control
+         */
+        Microsoft::UI::Xaml::Visibility TitleVisibility() const;
+        /**
+         * @brief Gets the visibility of the description control.
+         * @return The visibility of the description control
+         */
+        Microsoft::UI::Xaml::Visibility DescriptionVisibility() const;
+        /**
+         * @brief Gets the visibility of the child control.
+         * @return The visibility of the child control
+         */
+        Microsoft::UI::Xaml::Visibility ChildVisibility() const;
+        /**
+         * @brief Gets the spacing between the controls.
+         * @return The spacing between the controls
+         */
+        double CompactSpacing() const;
+        /**
+         * @brief Gets the font size of the icon.
+         * @return The font size of the icon
+         */
+        double IconSize() const;
+        /**
+         * @brief Gets the width of the icon.
+         * @return The width of the icon
+         */
+        double IconWidth() const;
+        /**
+         * @brief Gets the height of the icon.
+         * @return The height of the icon
+         */
+        double IconHeight() const;
+        /**
+         * @brief Gets the style of the title control.
+         * @return The style of the title control
+         */
+        Microsoft::UI::Xaml::Style TitleStyle() const;
+        /**
          * @brief Subscribes a handler to the property changed event.
          * @return The token for the newly subscribed handler.
          */

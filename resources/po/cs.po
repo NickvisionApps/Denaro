@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-06 19:57-0500\n"
+"POT-Creation-Date: 2024-03-06 22:58-0500\n"
 "PO-Revision-Date: 2023-11-17 11:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -131,7 +131,7 @@ msgid "The account is already open."
 msgstr "Tento účet je již otevřen."
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
 msgid "Currency Converter"
 msgstr "Převodník měn"
 
@@ -147,7 +147,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Klávesové zkratky"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:10
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Help"
 msgstr "Nápověda"
 
@@ -309,74 +309,74 @@ msgid "Quit"
 msgstr "Opustit"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Otevřít"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repozitář GitHub"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
 msgid "Search"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Home"
 msgstr "Domů"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Dashboard"
 msgstr "Nástěnka"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Accounts"
 msgstr "Účty"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Exportovat všechny informace"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "Changelog"
 msgstr "Seznam změn"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 msgid "Report a Bug"
 msgstr "Nahlásit chybu"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
 msgid "Discussions"
 msgstr "Diskuze"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Credits"
 msgstr "Zásluhy"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Nastavení"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
 #, fuzzy
 msgid "New"
 msgstr "Nová"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:95
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:96
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:102
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:103
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -386,7 +386,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:106
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:107
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -398,53 +398,53 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:168
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:169
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:232
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:233
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:301
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:302
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "Výsledek zkopírován do schránky."
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:365
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:366
 msgid "Enter password here"
 msgstr "Sem zadejte heslo"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:371
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:372
 #, fuzzy
 msgid "Unlock Account"
 msgstr "Uzavřít účet"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:373
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
 msgid "Unlock"
 msgstr "Odemknout"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:375
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:409
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
 msgid "No Recent Accounts"
 msgstr "Žádné nedávné účty"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:428
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:429
 msgid "Remove"
 msgstr "Odebrat"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:435
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:436
 msgid "Checking"
 msgstr "Běžný"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:438
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:439
 msgid "Savings"
 msgstr "Spořicí"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:441
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
 msgid "Business"
 msgstr "Firemní"
 

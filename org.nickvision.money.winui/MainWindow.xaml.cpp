@@ -8,6 +8,7 @@
 #include <libnick/localization/gettext.h>
 #include "AccountPage.xaml.h"
 #include "SettingsPage.xaml.h"
+#include "Controls/ClickableSettingsRow.xaml.h"
 #include "Controls/CurrencyConverterDialog.xaml.h"
 #include "Controls/SettingsRow.xaml.h"
 #include "Helpers/WinUI.h"
@@ -426,22 +427,22 @@ namespace winrt::Nickvision::Money::WinUI::implementation
                 LoadRecentAccounts();
             });
             ToolTipService::SetToolTip(button, winrt::box_value(winrt::to_hstring(_("Remove"))));
-            UserControl row{ winrt::make<Controls::implementation::SettingsRow>() };
-            row.as<Controls::implementation::SettingsRow>()->Glyph(L"\uE8C7");
-            row.as<Controls::implementation::SettingsRow>()->Title(winrt::to_hstring(recentAccount.getName()));
+            UserControl row{ winrt::make<Controls::implementation::ClickableSettingsRow>() };
+            row.as<Controls::implementation::ClickableSettingsRow>()->Glyph(L"\uE8C7");
+            row.as<Controls::implementation::ClickableSettingsRow>()->Title(winrt::to_hstring(recentAccount.getName()));
             switch(recentAccount.getType())
             {
             case AccountType::Checking:
-                row.as<Controls::implementation::SettingsRow>()->Description(winrt::to_hstring(_("Checking")));
+                row.as<Controls::implementation::ClickableSettingsRow>()->Description(winrt::to_hstring(_("Checking")));
                 break;
             case AccountType::Savings:
-                row.as<Controls::implementation::SettingsRow>()->Description(winrt::to_hstring(_("Savings")));
+                row.as<Controls::implementation::ClickableSettingsRow>()->Description(winrt::to_hstring(_("Savings")));
                 break;
             case AccountType::Business:
-                row.as<Controls::implementation::SettingsRow>()->Description(winrt::to_hstring(_("Business")));
+                row.as<Controls::implementation::ClickableSettingsRow>()->Description(winrt::to_hstring(_("Business")));
                 break;
             }
-            row.as<Controls::implementation::SettingsRow>()->Child(button);
+            row.as<Controls::implementation::ClickableSettingsRow>()->Child(button);
             ListRecentAccounts().Children().Append(row);
         }
     }

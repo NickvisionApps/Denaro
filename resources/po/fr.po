@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-06 19:57-0500\n"
+"POT-Creation-Date: 2024-03-06 22:58-0500\n"
 "PO-Revision-Date: 2023-11-15 11:53+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-money/"
@@ -131,7 +131,7 @@ msgid "The account is already open."
 msgstr "Ce compte est déjà ouvert."
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
 msgid "Currency Converter"
 msgstr "Convertisseur monétaire"
 
@@ -147,7 +147,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:10
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Help"
 msgstr "Aide"
 
@@ -314,74 +314,74 @@ msgid "Quit"
 msgstr "Quitter"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Ouvrir"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Dépôt GitHub"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:66
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
 msgid "Search"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Home"
 msgstr "Accueil"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Accounts"
 msgstr "Comptes"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Exporter toutes les informations"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 msgid "Changelog"
 msgstr "Journal des modifications"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 msgid "Report a Bug"
 msgstr "Signaler une erreur"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
 msgid "Discussions"
 msgstr "Discussions"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Credits"
 msgstr "Crédits"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Paramètres"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
 #, fuzzy
 msgid "New"
 msgstr "Nouveau"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:95
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:96
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:102
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:103
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -391,7 +391,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:106
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:107
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -403,53 +403,53 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:168
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:169
 msgid "Drop here to open folder"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:232
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:233
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:301
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:302
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "Le résultat a été copié vers le presse-papiers."
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:365
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:366
 msgid "Enter password here"
 msgstr "Entrez le mot de passe ici"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:371
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:372
 #, fuzzy
 msgid "Unlock Account"
 msgstr "Fermer le compte"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:373
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
 msgid "Unlock"
 msgstr "Déverrouiller"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:375
 msgid "Cancel"
 msgstr "Annuler"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:409
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
 msgid "No Recent Accounts"
 msgstr "Aucun compte récent"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:428
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:429
 msgid "Remove"
 msgstr "Retirer"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:435
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:436
 msgid "Checking"
 msgstr "Chèques"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:438
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:439
 msgid "Savings"
 msgstr "Épargne"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:441
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
 msgid "Business"
 msgstr "Affaires"
 

@@ -2,6 +2,7 @@
 #if __has_include("Controls/SettingsRow.g.cpp")
 #include "Controls/SettingsRow.g.cpp"
 #endif
+#include "helpers/WinUI.h"
 
 using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Microsoft::UI::Xaml::Data;
@@ -30,8 +31,8 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
     void SettingsRow::Glyph(const winrt::hstring& glyph)
     {
         SetValue(m_glyphProperty, winrt::box_value(glyph));
-        Icon().Visibility(!glyph.empty() ? Visibility::Visible : Visibility::Collapsed);
-        m_propertyChanged(*this, PropertyChangedEventArgs{ L"Glyph" });
+        m_propertyChangedEvent(*this, PropertyChangedEventArgs{ L"Glyph" });
+        m_propertyChangedEvent(*this, PropertyChangedEventArgs{ L"IconVisibility" });
     }
 
     winrt::hstring SettingsRow::Title() const
@@ -42,8 +43,8 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
     void SettingsRow::Title(const winrt::hstring& title)
     {
         SetValue(m_titleProperty, winrt::box_value(title));
-        LblTitle().Visibility(!title.empty() ? Visibility::Visible : Visibility::Collapsed);
-        m_propertyChanged(*this, PropertyChangedEventArgs{ L"Title" });
+        m_propertyChangedEvent(*this, PropertyChangedEventArgs{ L"Title" });
+        m_propertyChangedEvent(*this, PropertyChangedEventArgs{ L"TitleVisibility" });
     }
 
     winrt::hstring SettingsRow::Description() const
@@ -54,8 +55,8 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
     void SettingsRow::Description(const winrt::hstring& description)
     {
         SetValue(m_descriptionProperty, winrt::box_value(description));
-        LblDescription().Visibility(!description.empty() ? Visibility::Visible : Visibility::Collapsed);
-        m_propertyChanged(*this, PropertyChangedEventArgs{ L"Description" });
+        m_propertyChangedEvent(*this, PropertyChangedEventArgs{ L"Description" });
+        m_propertyChangedEvent(*this, PropertyChangedEventArgs{ L"DescriptionVisibility" });
     }
 
     IInspectable SettingsRow::Child() const
@@ -66,17 +67,32 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
     void SettingsRow::Child(const IInspectable& child)
     {
         SetValue(m_childProperty, child);
-        m_propertyChanged(*this, PropertyChangedEventArgs{ L"Child" });
+        m_propertyChangedEvent(*this, PropertyChangedEventArgs{ L"Child" });
+    }
+
+    Visibility SettingsRow::IconVisibility() const
+    {
+        return Glyph().empty() ? Visibility::Collapsed : Visibility::Visible;
+    }
+
+    Visibility SettingsRow::TitleVisibility() const
+    {
+        return Title().empty() ? Visibility::Collapsed : Visibility::Visible;
+    }
+
+    Visibility SettingsRow::DescriptionVisibility() const
+    {
+        return Description().empty() ? Visibility::Collapsed : Visibility::Visible;
     }
 
     winrt::event_token SettingsRow::PropertyChanged(const PropertyChangedEventHandler& handler)
     {
-        return m_propertyChanged.add(handler);
+        return m_propertyChangedEvent.add(handler);
     }
 
     void SettingsRow::PropertyChanged(const winrt::event_token& token)
     {
-        m_propertyChanged.remove(token);
+        m_propertyChangedEvent.remove(token);
     }
 
     const DependencyProperty& SettingsRow::GlyphProperty()
@@ -106,19 +122,22 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
             SettingsRow* ptr{ winrt::get_self<SettingsRow>(settingsRow) };
             if(args.Property() == m_glyphProperty)
             {
-                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"Glyph" });
+                ptr->m_propertyChangedEvent(*ptr, PropertyChangedEventArgs{ L"Glyph" });
+                ptr->m_propertyChangedEvent(*ptr, PropertyChangedEventArgs{ L"IconVisibility" });
             }
             else if(args.Property() == m_titleProperty)
             {
-                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"Title" });
+                ptr->m_propertyChangedEvent(*ptr, PropertyChangedEventArgs{ L"Title" });
+                ptr->m_propertyChangedEvent(*ptr, PropertyChangedEventArgs{ L"TitleVisibility" });
             }
             else if(args.Property() == m_descriptionProperty)
             {
-                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"Description" });
+                ptr->m_propertyChangedEvent(*ptr, PropertyChangedEventArgs{ L"Description" });
+                ptr->m_propertyChangedEvent(*ptr, PropertyChangedEventArgs{ L"DescriptionVisibility" });
             }
             else if(args.Property() == m_childProperty)
             {
-                ptr->m_propertyChanged(*ptr, PropertyChangedEventArgs{ L"Child" });
+                ptr->m_propertyChangedEvent(*ptr, PropertyChangedEventArgs{ L"Child" });
             }
         }
     }

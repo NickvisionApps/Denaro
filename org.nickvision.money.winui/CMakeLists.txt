@@ -7,6 +7,7 @@ if(WIN32)
     add_executable(org.nickvision.money.winui WIN32 
         "org.nickvision.money.winui.manifest" "org.nickvision.money.winui.rc"
         "App.xaml.cpp" "App.xaml.h" "App.xaml" "App.idl"
+        "Controls/ClickableSettingsRow.xaml.cpp" "Controls/ClickableSettingsRow.xaml.h" "Controls/ClickableSettingsRow.xaml" "Controls/ClickableSettingsRow.idl"
         "Controls/CurrencyConverterDialog.xaml.cpp" "Controls/CurrencyConverterDialog.xaml.h" "Controls/CurrencyConverterDialog.xaml" "Controls/CurrencyConverterDialog.idl"
         "Controls/SettingsRow.xaml.cpp" "Controls/SettingsRow.xaml.h" "Controls/SettingsRow.xaml" "Controls/SettingsRow.idl"
         "Controls/StatusPage.xaml.cpp" "Controls/StatusPage.xaml.h" "Controls/StatusPage.xaml" "Controls/StatusPage.idl"

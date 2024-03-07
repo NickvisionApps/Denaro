@@ -1,9 +1,9 @@
 namespace Nickvision.Money.WinUI.Controls
 {
     [default_interface]
-    runtimeclass SettingsRow : Microsoft.UI.Xaml.Controls.UserControl, Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+    runtimeclass ClickableSettingsRow : Microsoft.UI.Xaml.Controls.UserControl, Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {
-        SettingsRow();
+        ClickableSettingsRow();
         static Microsoft.UI.Xaml.DependencyProperty GlyphProperty{ get; };
         static Microsoft.UI.Xaml.DependencyProperty TitleProperty{ get; };
         static Microsoft.UI.Xaml.DependencyProperty DescriptionProperty{ get; };
@@ -15,5 +15,6 @@ namespace Nickvision.Money.WinUI.Controls
         Microsoft.UI.Xaml.Visibility IconVisibility{ get; };
         Microsoft.UI.Xaml.Visibility TitleVisibility{ get; };
         Microsoft.UI.Xaml.Visibility DescriptionVisibility{ get; };
+        event Microsoft.UI.Xaml.RoutedEventHandler Clicked;
     }
 }

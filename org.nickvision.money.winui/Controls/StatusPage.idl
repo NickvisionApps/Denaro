@@ -16,5 +16,15 @@ namespace Nickvision.Money.WinUI.Controls
         String Description;
         Object Child;
         Boolean IsCompact;
+        Microsoft.UI.Xaml.Visibility GlyphIconVisibility{ get; };
+        Microsoft.UI.Xaml.Visibility AppIconVisibility{ get; };
+        Microsoft.UI.Xaml.Visibility TitleVisibility{ get; };
+        Microsoft.UI.Xaml.Visibility DescriptionVisibility{ get; };
+        Microsoft.UI.Xaml.Visibility ChildVisibility{ get; };
+        Double CompactSpacing{ get; };
+        Double IconSize{ get; };
+        Double IconWidth{ get; };
+        Double IconHeight{ get; };
+        Microsoft.UI.Xaml.Style TitleStyle{ get; };
     }
 }
