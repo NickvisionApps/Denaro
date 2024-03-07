@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-06 22:58-0500\n"
+"POT-Creation-Date: 2024-03-07 11:06-0500\n"
 "PO-Revision-Date: 2023-10-20 04:03+0000\n"
 "Last-Translator: Nicolás Vieites Sueiro <vacamaribu@hotmail.es>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/nickvision-"
@@ -394,7 +394,7 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:169
-msgid "Drop here to open folder"
+msgid "Drop here to open account"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:233
@@ -405,44 +405,44 @@ msgstr ""
 msgid "Debug information copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:366
-msgid "Enter password here"
-msgstr ""
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:372
-#, fuzzy
-msgid "Unlock Account"
-msgstr "Importe"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
-msgid "Unlock"
-msgstr ""
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:375
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:384
 #, fuzzy
 msgid "No Recent Accounts"
 msgstr "Importe"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:429
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:403
 msgid "Remove"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:436
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
 msgid "Checking"
 msgstr "Corrente"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:439
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:413
 #, fuzzy
 msgid "Savings"
 msgstr "Axustes da conta"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:416
 msgid "Business"
 msgstr "Empresa"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:441
+msgid "Enter password here"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:447
+#, fuzzy
+msgid "Unlock Account"
+msgstr "Importe"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:449
+msgid "Unlock"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:450
+msgid "Cancel"
+msgstr "Cancelar"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"

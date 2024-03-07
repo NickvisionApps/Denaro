@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-06 22:58-0500\n"
+"POT-Creation-Date: 2024-03-07 11:06-0500\n"
 "PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
@@ -400,8 +400,9 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:169
-msgid "Drop here to open folder"
-msgstr ""
+#, fuzzy
+msgid "Drop here to open account"
+msgstr "खोले गए खाते को अधिलेखित करने में असमर्थ।"
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:233
 msgid "Update"
@@ -412,42 +413,42 @@ msgstr ""
 msgid "Debug information copied to clipboard."
 msgstr "परिणाम को क्लिपबोर्ड पर कॉपी किया गया।"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:366
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:384
+msgid "No Recent Accounts"
+msgstr "कोई हालिया खाता नहीं"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:403
+msgid "Remove"
+msgstr "हटाएँ"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
+msgid "Checking"
+msgstr "चेकिंग"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:413
+msgid "Savings"
+msgstr "जमा पूंजी"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:416
+msgid "Business"
+msgstr "व्यवसाय"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:441
 msgid "Enter password here"
 msgstr "Enter password here"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:372
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:447
 #, fuzzy
 msgid "Unlock Account"
 msgstr "खाता बंद करें"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:449
 msgid "Unlock"
 msgstr "अनलॉक"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:375
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:450
 msgid "Cancel"
 msgstr "रद्द करें"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
-msgid "No Recent Accounts"
-msgstr "कोई हालिया खाता नहीं"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:429
-msgid "Remove"
-msgstr "हटाएँ"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:436
-msgid "Checking"
-msgstr "चेकिंग"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:439
-msgid "Savings"
-msgstr "जमा पूंजी"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
-msgid "Business"
-msgstr "व्यवसाय"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"
@@ -865,9 +866,6 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
 #~ msgid "Unable to overwrite an existing account."
 #~ msgstr "किसी मौजूदा खाते को अधिलेखित करने में असमर्थ।"
-
-#~ msgid "Unable to overwrite an opened account."
-#~ msgstr "खोले गए खाते को अधिलेखित करने में असमर्थ।"
 
 #~ msgid "Untagged"
 #~ msgstr "अनटैग किया गया"

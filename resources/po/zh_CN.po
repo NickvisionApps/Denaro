@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-06 22:58-0500\n"
+"POT-Creation-Date: 2024-03-07 11:06-0500\n"
 "PO-Revision-Date: 2024-02-02 03:01+0000\n"
 "Last-Translator: aerowolf <aerowolf@tom.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -398,8 +398,9 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:169
-msgid "Drop here to open folder"
-msgstr ""
+#, fuzzy
+msgid "Drop here to open account"
+msgstr "不能覆盖打开的账号。"
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:233
 msgid "Update"
@@ -410,42 +411,42 @@ msgstr ""
 msgid "Debug information copied to clipboard."
 msgstr "结果已复制到剪贴板。"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:366
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:384
+msgid "No Recent Accounts"
+msgstr "无近期账户"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:403
+msgid "Remove"
+msgstr "删除"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
+msgid "Checking"
+msgstr "支票"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:413
+msgid "Savings"
+msgstr "储蓄"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:416
+msgid "Business"
+msgstr "商务"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:441
 msgid "Enter password here"
 msgstr "Enter password here"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:372
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:447
 #, fuzzy
 msgid "Unlock Account"
 msgstr "关闭账户"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:449
 msgid "Unlock"
 msgstr "解锁"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:375
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:450
 msgid "Cancel"
 msgstr "取消"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
-msgid "No Recent Accounts"
-msgstr "无近期账户"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:429
-msgid "Remove"
-msgstr "删除"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:436
-msgid "Checking"
-msgstr "支票"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:439
-msgid "Savings"
-msgstr "储蓄"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
-msgid "Business"
-msgstr "商务"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"
@@ -852,9 +853,6 @@ msgstr "默认的交易类型"
 
 #~ msgid "Unable to overwrite an existing account."
 #~ msgstr "不能覆盖已有的账号。"
-
-#~ msgid "Unable to overwrite an opened account."
-#~ msgstr "不能覆盖打开的账号。"
 
 #~ msgid "Untagged"
 #~ msgstr "未加标签"

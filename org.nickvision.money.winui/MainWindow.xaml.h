@@ -156,6 +156,11 @@ namespace winrt::Nickvision::Money::WinUI::implementation
          * @brief Loads the recent accounts list.
          */
         void LoadRecentAccounts();
+        /**
+         * @brief Opens an account.
+         * @param path The path of the account file to open 
+         */
+        Windows::Foundation::IAsyncAction OpenAccount(const std::filesystem::path& path);
         std::shared_ptr<::Nickvision::Money::Shared::Controllers::MainWindowController> m_controller;
         bool m_opened;
         bool m_isActivated;

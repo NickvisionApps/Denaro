@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-06 22:58-0500\n"
+"POT-Creation-Date: 2024-03-07 11:06-0500\n"
 "PO-Revision-Date: 2023-11-17 11:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -399,8 +399,9 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:169
-msgid "Drop here to open folder"
-msgstr ""
+#, fuzzy
+msgid "Drop here to open account"
+msgstr "Nelze přepsat otevřený účet."
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:233
 msgid "Update"
@@ -411,42 +412,42 @@ msgstr ""
 msgid "Debug information copied to clipboard."
 msgstr "Výsledek zkopírován do schránky."
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:366
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:384
+msgid "No Recent Accounts"
+msgstr "Žádné nedávné účty"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:403
+msgid "Remove"
+msgstr "Odebrat"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
+msgid "Checking"
+msgstr "Běžný"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:413
+msgid "Savings"
+msgstr "Spořicí"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:416
+msgid "Business"
+msgstr "Firemní"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:441
 msgid "Enter password here"
 msgstr "Sem zadejte heslo"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:372
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:447
 #, fuzzy
 msgid "Unlock Account"
 msgstr "Uzavřít účet"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:449
 msgid "Unlock"
 msgstr "Odemknout"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:375
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:450
 msgid "Cancel"
 msgstr "Zrušit"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
-msgid "No Recent Accounts"
-msgstr "Žádné nedávné účty"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:429
-msgid "Remove"
-msgstr "Odebrat"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:436
-msgid "Checking"
-msgstr "Běžný"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:439
-msgid "Savings"
-msgstr "Spořicí"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
-msgid "Business"
-msgstr "Firemní"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"
@@ -868,9 +869,6 @@ msgstr "Výchozí typ transakce"
 
 #~ msgid "Unable to overwrite an existing account."
 #~ msgstr "Nelze přepsat existující účet."
-
-#~ msgid "Unable to overwrite an opened account."
-#~ msgstr "Nelze přepsat otevřený účet."
 
 #~ msgid "Untagged"
 #~ msgstr "Bez štítku"

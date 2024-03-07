@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-06 22:58-0500\n"
+"POT-Creation-Date: 2024-03-07 11:06-0500\n"
 "PO-Revision-Date: 2023-09-08 14:21+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -400,8 +400,9 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:169
-msgid "Drop here to open folder"
-msgstr ""
+#, fuzzy
+msgid "Drop here to open account"
+msgstr "Невозможно перезаписать открытый счёт."
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:233
 msgid "Update"
@@ -412,42 +413,42 @@ msgstr ""
 msgid "Debug information copied to clipboard."
 msgstr "Результат скопирован в буфер обмена."
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:366
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:384
+msgid "No Recent Accounts"
+msgstr "Нет недавних счетов"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:403
+msgid "Remove"
+msgstr "Удалить"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
+msgid "Checking"
+msgstr "Расчётный"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:413
+msgid "Savings"
+msgstr "Сберегательный"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:416
+msgid "Business"
+msgstr "Бизнес"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:441
 msgid "Enter password here"
 msgstr "Введите пароль"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:372
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:447
 #, fuzzy
 msgid "Unlock Account"
 msgstr "Закрыть счёт"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:449
 msgid "Unlock"
 msgstr "Разблокировать"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:375
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:450
 msgid "Cancel"
 msgstr "Отмена"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
-msgid "No Recent Accounts"
-msgstr "Нет недавних счетов"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:429
-msgid "Remove"
-msgstr "Удалить"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:436
-msgid "Checking"
-msgstr "Расчётный"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:439
-msgid "Savings"
-msgstr "Сберегательный"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
-msgid "Business"
-msgstr "Бизнес"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"
@@ -869,9 +870,6 @@ msgstr "Тип транзакций по умолчанию"
 
 #~ msgid "Unable to overwrite an existing account."
 #~ msgstr "Невозможно перезаписать существующий счёт."
-
-#~ msgid "Unable to overwrite an opened account."
-#~ msgstr "Невозможно перезаписать открытый счёт."
 
 #~ msgid "Untagged"
 #~ msgstr "Без меток"

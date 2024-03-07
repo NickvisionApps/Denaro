@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-06 22:58-0500\n"
+"POT-Creation-Date: 2024-03-07 11:06-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -403,8 +403,9 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:169
-msgid "Drop here to open folder"
-msgstr ""
+#, fuzzy
+msgid "Drop here to open account"
+msgstr "Não é possível substituir uma conta aberta."
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:233
 msgid "Update"
@@ -414,42 +415,42 @@ msgstr ""
 msgid "Debug information copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:366
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:384
+msgid "No Recent Accounts"
+msgstr "Nenhuma Conta Recente"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:403
+msgid "Remove"
+msgstr "Remover"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
+msgid "Checking"
+msgstr "Verificando"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:413
+msgid "Savings"
+msgstr "Economias"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:416
+msgid "Business"
+msgstr "Negócio"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:441
 msgid "Enter password here"
 msgstr "Insira a senha aqui"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:372
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:447
 #, fuzzy
 msgid "Unlock Account"
 msgstr "Fechar conta"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:374
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:449
 msgid "Unlock"
 msgstr "Desbloquear"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:375
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:450
 msgid "Cancel"
 msgstr "Cancelar"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:410
-msgid "No Recent Accounts"
-msgstr "Nenhuma Conta Recente"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:429
-msgid "Remove"
-msgstr "Remover"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:436
-msgid "Checking"
-msgstr "Verificando"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:439
-msgid "Savings"
-msgstr "Economias"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
-msgid "Business"
-msgstr "Negócio"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"
@@ -830,10 +831,6 @@ msgstr "Tipo de Transação Padrão"
 
 #, fuzzy
 #~ msgid "Unable to overwrite an existing account."
-#~ msgstr "Não é possível substituir uma conta aberta."
-
-#, fuzzy
-#~ msgid "Unable to overwrite an opened account."
 #~ msgstr "Não é possível substituir uma conta aberta."
 
 #, fuzzy

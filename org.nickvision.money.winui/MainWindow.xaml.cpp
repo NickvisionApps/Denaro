@@ -166,7 +166,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
     void MainWindow::OnDragOver(const IInspectable& sender, const DragEventArgs& args)
     {
         args.AcceptedOperation(DataPackageOperation::Copy | DataPackageOperation::Link);
-        args.DragUIOverride().Caption(winrt::to_hstring(_("Drop here to open folder")));
+        args.DragUIOverride().Caption(winrt::to_hstring(_("Drop here to open account")));
         args.DragUIOverride().IsGlyphVisible(true);
         args.DragUIOverride().IsContentVisible(true);
         args.DragUIOverride().IsCaptionVisible(true);
@@ -179,7 +179,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
             IVectorView<IStorageItem> items{ co_await args.DataView().GetStorageItemsAsync() };
             if (items.Size() > 0)
             {
-                //TODO: DnD Support
+                co_await OpenAccount(winrt::to_string(items.GetAt(0).Path()));
             }
         }
     }
@@ -356,33 +356,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         StorageFile file{ co_await picker.PickSingleFileAsync() };
         if(file)
         {
-            std::filesystem::path path{ winrt::to_string(file.Path()) };
-            std::string password;
-            //Get password if needed
-            if(m_controller->isAccountPasswordProtected(path))
-            {
-                PasswordBox txtPassword;
-                txtPassword.Width(240);
-                txtPassword.PlaceholderText(winrt::to_hstring(_("Enter password here")));
-                UserControl row{ winrt::make<Controls::implementation::SettingsRow>() };
-                row.as<Controls::implementation::SettingsRow>()->Glyph(L"\uE72E");
-                row.as<Controls::implementation::SettingsRow>()->Title(winrt::to_hstring(path.filename().string()));
-                row.as<Controls::implementation::SettingsRow>()->Child(txtPassword);
-                ContentDialog passwordDialog;
-                passwordDialog.Title(winrt::box_value(winrt::to_hstring(_("Unlock Account"))));
-                passwordDialog.Content(winrt::box_value(row));
-                passwordDialog.PrimaryButtonText(winrt::to_hstring(_("Unlock")));
-                passwordDialog.SecondaryButtonText(winrt::to_hstring(_("Cancel")));
-                passwordDialog.DefaultButton(ContentDialogButton::Primary);
-                passwordDialog.XamlRoot(MainGrid().XamlRoot());
-                ContentDialogResult result{ co_await passwordDialog.ShowAsync() };
-                if(result == ContentDialogResult::Primary)
-                {
-                    password = winrt::to_string(txtPassword.Password());
-                }
-            }
-            //Open account
-            m_controller->openAccount(path, password);
+            co_await OpenAccount(winrt::to_string(file.Path()));
         }
     }
 
@@ -443,7 +417,46 @@ namespace winrt::Nickvision::Money::WinUI::implementation
                 break;
             }
             row.as<Controls::implementation::ClickableSettingsRow>()->Child(button);
+            ToolTipService::SetToolTip(row, winrt::box_value(winrt::to_hstring(recentAccount.getPath().string())));
+            row.as<Controls::implementation::ClickableSettingsRow>()->Clicked([&, recentAccount](const IInspectable&, const RoutedEventArgs&) -> Windows::Foundation::IAsyncAction
+            {
+                co_await OpenAccount(recentAccount.getPath());
+            });
             ListRecentAccounts().Children().Append(row);
         }
+    }
+
+    Windows::Foundation::IAsyncAction MainWindow::OpenAccount(const std::filesystem::path& path)
+    {
+        if(StringHelpers::toLower(path.extension().string()) != ".nmoney")
+        {
+            co_return;
+        }
+        std::string password;
+        //Get password if needed
+        if(m_controller->isAccountPasswordProtected(path))
+        {
+            PasswordBox txtPassword;
+            txtPassword.Width(240);
+            txtPassword.PlaceholderText(winrt::to_hstring(_("Enter password here")));
+            UserControl row{ winrt::make<Controls::implementation::SettingsRow>() };
+            row.as<Controls::implementation::SettingsRow>()->Glyph(L"\uE72E");
+            row.as<Controls::implementation::SettingsRow>()->Title(winrt::to_hstring(path.filename().string()));
+            row.as<Controls::implementation::SettingsRow>()->Child(txtPassword);
+            ContentDialog passwordDialog;
+            passwordDialog.Title(winrt::box_value(winrt::to_hstring(_("Unlock Account"))));
+            passwordDialog.Content(winrt::box_value(row));
+            passwordDialog.PrimaryButtonText(winrt::to_hstring(_("Unlock")));
+            passwordDialog.SecondaryButtonText(winrt::to_hstring(_("Cancel")));
+            passwordDialog.DefaultButton(ContentDialogButton::Primary);
+            passwordDialog.XamlRoot(MainGrid().XamlRoot());
+            ContentDialogResult result{ co_await passwordDialog.ShowAsync() };
+            if(result == ContentDialogResult::Primary)
+            {
+                password = winrt::to_string(txtPassword.Password());
+            }
+        }
+        //Open account
+        m_controller->openAccount(path, password);
     }
 }

@@ -60,7 +60,6 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
                 }
                 i++;
             }
-            TxtSourceAmount().Text(L"1");
         }
     }
 
