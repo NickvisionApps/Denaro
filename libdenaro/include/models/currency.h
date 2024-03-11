@@ -3,6 +3,7 @@
 
 #include <string>
 #include "amountstyle.h"
+#include "currencycheckstatus.h"
 
 namespace Nickvision::Money::Shared::Models
 {
@@ -23,10 +24,10 @@ namespace Nickvision::Money::Shared::Models
          */
         Currency(const std::string& symbol, const std::string& code);
         /**
-         * @brief Gets whether or not the Currency object represents an empty value.
-         * @return True if empty, else false 
+         * @brief Checks the validity of the Currency object.
+         * @return CurrencyCheckStatus
          */
-        bool empty() const;
+        CurrencyCheckStatus validate() const;
         /**
          * @brief Gets the symbol of the currency.
          * @return The symbol of the currency
@@ -91,7 +92,7 @@ namespace Nickvision::Money::Shared::Models
         void setAmountStyle(AmountStyle style);
         /**
          * @brief Gets whether or not the object is valid or not.
-         * @return True if valid (!empty), else false 
+         * @return True if valid (check() == CurrencyCheckStatus::Valid), else false 
          */
         operator bool() const;
 

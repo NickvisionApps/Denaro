@@ -22,9 +22,33 @@ namespace Nickvision::Money::Shared::Models
 
     }
 
-    bool Currency::empty() const
+    CurrencyCheckStatus Currency::validate() const
     {
-        return m_symbol.empty() && m_code.empty();
+        if(m_symbol.empty())
+        {
+            return CurrencyCheckStatus::EmptySymbol;
+        }
+        else if(m_code.empty())
+        {
+            return CurrencyCheckStatus::EmptyCode;
+        }
+        else if(m_decimalSeparator == '\0')
+        {
+            return CurrencyCheckStatus::EmptyDecimalSeparator;
+        }
+        else if(m_decimalSeparator == m_groupSeparator)
+        {
+            return CurrencyCheckStatus::SameSeparators;
+        }
+        else if(m_symbol.find(m_decimalSeparator) != std::string::npos)
+        {
+            return CurrencyCheckStatus::SameSymbolAndDecimalSeparator;
+        }
+        else if(m_symbol.find(m_groupSeparator) != std::string::npos)
+        {
+            return CurrencyCheckStatus::SameSymbolAndGroupSeparator;
+        }
+        return CurrencyCheckStatus::Valid;
     }
 
     const std::string& Currency::getSymbol() const
@@ -100,6 +124,6 @@ namespace Nickvision::Money::Shared::Models
 
     Currency::operator bool() const
     {
-        return !empty();
+        return validate() == CurrencyCheckStatus::Valid;
     }
 }

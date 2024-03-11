@@ -35,6 +35,7 @@ TEST(CurrencyHelpers, CustomCurrency1)
     currency.setDecimalSeparator(',');
     currency.setGroupSeparator('.');
     currency.setAmountStyle(Models::AmountStyle::NumberSpaceSymbol);
+    ASSERT_TRUE(currency.validate() == CurrencyCheckStatus::Valid);
     ASSERT_EQ(CurrencyHelpers::toAmountString(12347.89, currency), "12.347,89 #");
     ASSERT_EQ(CurrencyHelpers::toAmountString(12347.89, currency, false), "12.347,89");
 }
@@ -45,5 +46,14 @@ TEST(CurrencyHelpers, CustomCurrency2)
     currency.setDecimalSeparator('-');
     currency.setGroupSeparator('*');
     currency.setAmountStyle(Models::AmountStyle::SymbolSpaceNumber);
+    ASSERT_TRUE(currency.validate() == CurrencyCheckStatus::Valid);
     ASSERT_EQ(CurrencyHelpers::toAmountString(2765.9, currency), "@ 2*765-90");
+}
+
+TEST(CurrencyHelpers, CustomCurrency3)
+{
+    Currency currency{ "@", "HAS" };
+    currency.setDecimalSeparator('-');
+    currency.setGroupSeparator('-');
+    ASSERT_TRUE(currency.validate() == CurrencyCheckStatus::SameSeparators);
 }

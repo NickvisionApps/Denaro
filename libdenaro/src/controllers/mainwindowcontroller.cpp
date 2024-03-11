@@ -172,6 +172,16 @@ namespace Nickvision::Money::Shared::Controllers
         return std::make_shared<PreferencesViewController>();
     }
 
+    std::shared_ptr<NewAccountDialogController> MainWindowController::createNewAccountDialogController() const
+    {
+        std::vector<std::filesystem::path> openAccounts;
+        for(const std::pair<const std::filesystem::path, std::shared_ptr<AccountViewController>>& pair : m_accountViewControllers)
+        {
+            openAccounts.push_back(pair.first);
+        }
+        return std::make_shared<NewAccountDialogController>(openAccounts);
+    }
+
     const std::shared_ptr<AccountViewController>& MainWindowController::getAccountViewController(const std::filesystem::path& path) const
     {
         return m_accountViewControllers.at(path);
@@ -282,7 +292,7 @@ namespace Nickvision::Money::Shared::Controllers
             }
             if(controller)
             {
-                m_accountViewControllers[path] = controller;
+                m_accountViewControllers.emplace(std::make_pair(path, controller));
                 Configuration& config{ Aura::getActive().getConfig<Configuration>("config") };
                 config.addRecentAccount(controller->toRecentAccount());
                 config.save();

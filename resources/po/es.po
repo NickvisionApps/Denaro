@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 11:06-0500\n"
+"POT-Creation-Date: 2024-03-07 22:59-0500\n"
 "PO-Revision-Date: 2023-12-29 06:12+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
 "weblate.org>\n"
@@ -113,20 +113,20 @@ msgstr "¡Buenas noches!"
 msgid "Good Day!"
 msgstr "¡Buen día!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:213
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:223
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:231
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:241
 msgid "Unable to download and install update"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:264
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:274
 #, fuzzy
 msgid "The file is not a Denaro account file."
 msgstr "No se puede exportar la cuenta a un archivo."
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:269
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:279
 #, fuzzy
 msgid "The account is already open."
 msgstr "Esta cuenta ya está abierta."

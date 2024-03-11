@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 11:06-0500\n"
+"POT-Creation-Date: 2024-03-07 22:59-0500\n"
 "PO-Revision-Date: 2023-09-26 13:22+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -113,20 +113,20 @@ msgstr "Dobra večer!"
 msgid "Good Day!"
 msgstr "Dobar dan!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:213
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:223
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:231
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:241
 msgid "Unable to download and install update"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:264
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:274
 #, fuzzy
 msgid "The file is not a Denaro account file."
 msgstr "Nije moguće izvesti račun u datoteku."
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:269
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:279
 #, fuzzy
 msgid "The account is already open."
 msgstr "Ovaj je račun već otvoren."

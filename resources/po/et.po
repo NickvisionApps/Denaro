@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 11:06-0500\n"
+"POT-Creation-Date: 2024-03-07 22:59-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,19 +109,19 @@ msgstr "Tere õhtust!"
 msgid "Good Day!"
 msgstr "Tere päevast!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:213
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:223
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:231
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:241
 msgid "Unable to download and install update"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:264
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:274
 msgid "The file is not a Denaro account file."
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:269
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:279
 msgid "The account is already open."
 msgstr ""
 
