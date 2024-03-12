@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 22:59-0500\n"
+"POT-Creation-Date: 2024-03-12 19:14-0400\n"
 "PO-Revision-Date: 2024-03-01 15:00+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
@@ -44,12 +44,12 @@ msgid "Two months from now"
 msgstr "Over twee maanden"
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Overmaken naar {0}"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Overmaken van {0}"
 
@@ -130,10 +130,49 @@ msgstr "De rekening kan niet worden geëxporteerd."
 msgid "The account is already open."
 msgstr "Dit account is al geopend"
 
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
 msgid "Currency Converter"
 msgstr "Valuta­conversie"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
+msgid "Currency"
+msgstr "Valuta"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:36
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+#, fuzzy
+msgid "Switch Currencies"
+msgstr "Valuta wisselen"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:39
+msgid "Switch"
+msgstr "Wisselen"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:48
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:100
+msgid "Source"
+msgstr "Bron"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:52
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
+msgid "Result"
+msgstr "Resultaat"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:57
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+msgid "Amount"
+msgstr "Bedrag"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:67
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:29
+msgid "Copy Result Amount"
+msgstr "Resultaat­hoeveelheid kopiëren"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
@@ -308,12 +347,34 @@ msgstr "App"
 msgid "Quit"
 msgstr "Sluiten"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:39
+msgid "Error"
+msgstr "Fout"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
+msgid ""
+"Unable to load currency data. Please try again. If the error still persists, "
+"report a bug."
+msgstr ""
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
+msgid "Close"
+msgstr "Sluiten"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:109
+#, fuzzy
+msgid "Result was copied to clipboard."
+msgstr "Resultaat is gekopieerd naar klem­bord."
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Openen"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub-repo"
@@ -377,6 +438,7 @@ msgid "PREVIEW"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:103
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -387,6 +449,7 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:107
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -473,6 +536,25 @@ msgstr "Standaardkleur van overdrachten"
 msgid "Default Group Color"
 msgstr "Standaardgroepskleur"
 
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
+#, fuzzy
+msgid "Enter source amount"
+msgstr "Voer een bedrag in"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
+msgid "OK"
+msgstr "Oké"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:115
+#, fuzzy
+msgid "Source (Error)"
+msgstr "Bron"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:128
+#, fuzzy
+msgid "Result (Error)"
+msgstr "Resultaat"
+
 #, fuzzy
 #~ msgid ""
 #~ "Unable to login to the account. The provided password may be invalid."
@@ -525,9 +607,6 @@ msgstr "Standaardgroepskleur"
 #~ msgid "All files"
 #~ msgstr "Alle bestanden"
 
-#~ msgid "Amount"
-#~ msgstr "Bedrag"
-
 #~ msgid "Amount (Invalid)"
 #~ msgstr "Bedrag (ongeldig)"
 
@@ -553,12 +632,6 @@ msgstr "Standaardgroepskleur"
 
 #~ msgid "Change Password"
 #~ msgstr "Wachtwoord wijzigen"
-
-#~ msgid "Close"
-#~ msgstr "Sluiten"
-
-#~ msgid "Currency"
-#~ msgstr "Valuta"
 
 #~ msgid "Currency Code"
 #~ msgstr "Valutacode"
@@ -628,9 +701,6 @@ msgstr "Standaardgroepskleur"
 
 #~ msgid "Disassociate Existing"
 #~ msgstr "Huidige loskoppelen"
-
-#~ msgid "Error"
-#~ msgstr "Fout"
 
 #~ msgid "Export to File"
 #~ msgstr "Exporteren naar bestand"
@@ -1046,23 +1116,8 @@ msgstr "Standaardgroepskleur"
 #~ msgid "Converter"
 #~ msgstr "Conversie"
 
-#~ msgid "Switch currencies"
-#~ msgstr "Valuta wisselen"
-
-#~ msgid "Switch"
-#~ msgstr "Wisselen"
-
 #~ msgid "Loading..."
 #~ msgstr "Laden…"
-
-#~ msgid "Source"
-#~ msgstr "Bron"
-
-#~ msgid "Result"
-#~ msgstr "Resultaat"
-
-#~ msgid "Copy Result Amount"
-#~ msgstr "Resultaat­hoeveelheid kopiëren"
 
 #~ msgid "All Accounts"
 #~ msgstr "Alle accounts"
@@ -1287,9 +1342,6 @@ msgstr "Standaardgroepskleur"
 #~ "money;finance;wallet;cash;bank;Nickvision;geld;financie;portemonnee;"
 #~ "contant;pin;"
 
-#~ msgid "OK"
-#~ msgstr "Oké"
-
 #, csharp-format
 #~ msgid ""
 #~ "David Lapshin {0}\n"
@@ -1410,9 +1462,6 @@ msgstr "Standaardgroepskleur"
 
 #~ msgid "Enter description here"
 #~ msgstr "Voer een beschrijving in"
-
-#~ msgid "Enter amount here"
-#~ msgstr "Voer een bedrag in"
 
 #~ msgid "Money Account (*.nmoney)"
 #~ msgstr "Money-rekening (*.nmoney)"

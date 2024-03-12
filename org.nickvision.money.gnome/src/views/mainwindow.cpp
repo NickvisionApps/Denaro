@@ -3,9 +3,11 @@
 #include <libnick/app/appinfo.h>
 #include <libnick/notifications/shellnotification.h>
 #include <libnick/localization/gettext.h>
+#include "controls/currencyconverterdialog.h"
 #include "helpers/builder.h"
 #include "views/preferencesdialog.h"
 
+using namespace Nickvision::Money::GNOME::Controls;
 using namespace Nickvision::Money::Shared::Controllers;
 using namespace Nickvision::App;
 using namespace Nickvision::Events;
@@ -37,6 +39,10 @@ namespace Nickvision::Money::GNOME::Views
         g_signal_connect(actQuit, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->quit(); }), this);
         g_action_map_add_action(G_ACTION_MAP(m_window), G_ACTION(actQuit));
         SET_ACCEL_FOR_ACTION(m_app, "win.quit", "<Ctrl>Q");
+        //Currency Converter Action
+        GSimpleAction* actCurrencyConverter{ g_simple_action_new("currencyConverter", nullptr) };
+        g_signal_connect(actCurrencyConverter, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->currencyConverter(); }), this);
+        g_action_map_add_action(G_ACTION_MAP(m_window), G_ACTION(actCurrencyConverter));
         //Preferences Action
         GSimpleAction* actPreferences{ g_simple_action_new("preferences", nullptr) };
         g_signal_connect(actPreferences, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->preferences(); }), this);
@@ -52,6 +58,12 @@ namespace Nickvision::Money::GNOME::Views
         g_signal_connect(actAbout, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->about(); }), this);
         g_action_map_add_action(G_ACTION_MAP(m_window), G_ACTION(actAbout));
         SET_ACCEL_FOR_ACTION(m_app, "win.about", "F1");
+    }
+
+    MainWindow::~MainWindow()
+    {
+        gtk_window_destroy(GTK_WINDOW(m_window));
+        g_object_unref(m_builder);
     }
 
     GObject* MainWindow::gobj() const
@@ -88,6 +100,12 @@ namespace Nickvision::Money::GNOME::Views
         {
             g_application_quit(G_APPLICATION(m_app));
         }
+    }
+
+    void MainWindow::currencyConverter()
+    {
+        CurrencyConverterDialog currencyConverter{ GTK_WINDOW(m_window), m_controller->getAppInfo().getId() };
+        currencyConverter.run();
     }
 
     void MainWindow::preferences()

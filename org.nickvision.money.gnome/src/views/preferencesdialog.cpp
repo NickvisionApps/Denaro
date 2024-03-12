@@ -43,19 +43,20 @@ namespace Nickvision::Money::GNOME::Views
         gtk_color_dialog_button_set_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "accountBusinessColorButton")), &color);
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "insertSeparatorRow")), static_cast<unsigned int>(m_controller->getInsertSeparator()));
         //Signals
-        g_signal_connect(gtk_builder_get_object(m_builder, "themeRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec* pspec, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->onThemeChanged(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "transactionColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec* pspec, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "transferColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec* pspec, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "groupColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec* pspec, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "accountCheckingColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec* pspec, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "accountSavingsColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec* pspec, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "accountBusinessColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec* pspec, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "insertSeparatorRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec* pspec, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "themeRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->onThemeChanged(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "transactionColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "transferColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "groupColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "accountCheckingColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "accountSavingsColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "accountBusinessColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "insertSeparatorRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
     }
 
     PreferencesDialog::~PreferencesDialog()
     {
         gtk_window_destroy(GTK_WINDOW(m_dialog));
+        g_object_unref(m_builder);
     }
 
     void PreferencesDialog::run()

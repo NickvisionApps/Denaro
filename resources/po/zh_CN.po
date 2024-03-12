@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 22:59-0500\n"
+"POT-Creation-Date: 2024-03-12 19:14-0400\n"
 "PO-Revision-Date: 2024-02-02 03:01+0000\n"
 "Last-Translator: aerowolf <aerowolf@tom.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -44,12 +44,12 @@ msgid "Two months from now"
 msgstr "从现在起二个月"
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "轉帳到 {0}"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "從 {0} 轉帳"
 
@@ -130,10 +130,49 @@ msgstr "无法将账号导出到文件。"
 msgid "The account is already open."
 msgstr "此账户已经开启。"
 
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
 msgid "Currency Converter"
 msgstr "汇率换算"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
+msgid "Currency"
+msgstr "货币"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:36
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+#, fuzzy
+msgid "Switch Currencies"
+msgstr "切换货币"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:39
+msgid "Switch"
+msgstr "切换"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:48
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:100
+msgid "Source"
+msgstr "源交易"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:52
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
+msgid "Result"
+msgstr "结果"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:57
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+msgid "Amount"
+msgstr "金额"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:67
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:29
+msgid "Copy Result Amount"
+msgstr "复制结果金额"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
@@ -306,12 +345,34 @@ msgstr "应用"
 msgid "Quit"
 msgstr "退出"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:39
+msgid "Error"
+msgstr "错误"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
+msgid ""
+"Unable to load currency data. Please try again. If the error still persists, "
+"report a bug."
+msgstr "不能载入货币数据。请重试。如果错误依旧，请报告bug。"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
+msgid "Close"
+msgstr "关闭"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:109
+#, fuzzy
+msgid "Result was copied to clipboard."
+msgstr "结果已复制到剪贴板。"
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "开启"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub 仓库"
@@ -376,6 +437,7 @@ msgid "PREVIEW"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:103
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -386,6 +448,7 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:107
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -472,6 +535,25 @@ msgstr "默认的交易类型"
 msgid "Default Group Color"
 msgstr "默认的交易类型"
 
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
+#, fuzzy
+msgid "Enter source amount"
+msgstr "請在此輸入數額"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
+msgid "OK"
+msgstr "OK"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:115
+#, fuzzy
+msgid "Source (Error)"
+msgstr "源交易"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:128
+#, fuzzy
+msgid "Result (Error)"
+msgstr "结果"
+
 #, fuzzy
 #~ msgid ""
 #~ "Unable to login to the account. The provided password may be invalid."
@@ -529,9 +611,6 @@ msgstr "默认的交易类型"
 #~ msgid "All files"
 #~ msgstr "所有文件"
 
-#~ msgid "Amount"
-#~ msgstr "金额"
-
 #~ msgid "Amount (Invalid)"
 #~ msgstr "金额 (无效)"
 
@@ -557,12 +636,6 @@ msgstr "默认的交易类型"
 
 #~ msgid "Change Password"
 #~ msgstr "更改密码"
-
-#~ msgid "Close"
-#~ msgstr "关闭"
-
-#~ msgid "Currency"
-#~ msgstr "货币"
 
 #~ msgid "Currency Code"
 #~ msgstr "货币代码"
@@ -632,9 +705,6 @@ msgstr "默认的交易类型"
 
 #~ msgid "Disassociate Existing"
 #~ msgstr "解除已有关联"
-
-#~ msgid "Error"
-#~ msgstr "错误"
 
 #~ msgid "Export to File"
 #~ msgstr "导出到文件"
@@ -840,11 +910,6 @@ msgstr "默认的交易类型"
 
 #~ msgid "Unable to import transactions from the file."
 #~ msgstr "不能从文件中导入交易。"
-
-#~ msgid ""
-#~ "Unable to load currency data. Please try again. If the error still "
-#~ "persists, report a bug."
-#~ msgstr "不能载入货币数据。请重试。如果错误依旧，请报告bug。"
 
 #~ msgid ""
 #~ "Unable to open the account. Please ensure that the app has permissions to "
@@ -1055,23 +1120,8 @@ msgstr "默认的交易类型"
 #~ msgid "Converter"
 #~ msgstr "换算器"
 
-#~ msgid "Switch currencies"
-#~ msgstr "切换货币"
-
-#~ msgid "Switch"
-#~ msgstr "切换"
-
 #~ msgid "Loading..."
 #~ msgstr "正在载入……"
-
-#~ msgid "Source"
-#~ msgstr "源交易"
-
-#~ msgid "Result"
-#~ msgstr "结果"
-
-#~ msgid "Copy Result Amount"
-#~ msgstr "复制结果金额"
 
 #~ msgid "All Accounts"
 #~ msgstr "所有账户"
@@ -1284,9 +1334,6 @@ msgstr "默认的交易类型"
 #~ msgid "money;finance;wallet;cash;bank;Nickvision;"
 #~ msgstr "money;finance;wallet;cash;bank;GTK;Nickvision;"
 
-#~ msgid "OK"
-#~ msgstr "OK"
-
 #~ msgid "Please wait while transactions import..."
 #~ msgstr "正在导入交易，请稍候..."
 
@@ -1388,9 +1435,6 @@ msgstr "默认的交易类型"
 
 #~ msgid "Enter description here"
 #~ msgstr "請在此輸入資料"
-
-#~ msgid "Enter amount here"
-#~ msgstr "請在此輸入數額"
 
 #~ msgid "Money Account (*.nmoney)"
 #~ msgstr "軟體Money的帳戶 (*.nmoney)"

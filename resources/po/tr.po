@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 22:59-0500\n"
+"POT-Creation-Date: 2024-03-12 19:14-0400\n"
 "PO-Revision-Date: 2023-09-10 21:21+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -44,12 +44,12 @@ msgid "Two months from now"
 msgstr "Bu günden, iki ay sonra"
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Şuraya Aktar: {0}"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Şuradan Aktar: {0}"
 
@@ -132,10 +132,49 @@ msgstr "Hesap dosyaya dışa aktarılamıyor."
 msgid "The account is already open."
 msgstr "Bu hesap zaten açıldı."
 
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
 msgid "Currency Converter"
 msgstr "Para Birimi Dönüştürücü"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
+msgid "Currency"
+msgstr "Para Birimi"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:36
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+#, fuzzy
+msgid "Switch Currencies"
+msgstr "Para birimleri arasında geçiş yap"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:39
+msgid "Switch"
+msgstr "Geçiş yap"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:48
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:100
+msgid "Source"
+msgstr "Kaynak"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:52
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
+msgid "Result"
+msgstr "Sonuç"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:57
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+msgid "Amount"
+msgstr "Tutar"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:67
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:29
+msgid "Copy Result Amount"
+msgstr "Sonuç Miktarı Kopyala"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
@@ -311,12 +350,36 @@ msgstr "Uygulama"
 msgid "Quit"
 msgstr "Çık"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:39
+msgid "Error"
+msgstr "Hata"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
+msgid ""
+"Unable to load currency data. Please try again. If the error still persists, "
+"report a bug."
+msgstr ""
+"Para birimi verileri yüklenemedi. Lütfen tekrar deneyin. Hata devam ediyorsa "
+"hatayı bildirin."
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
+msgid "Close"
+msgstr "Kapat"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:109
+#, fuzzy
+msgid "Result was copied to clipboard."
+msgstr "Sonuç panoya kopyalandı."
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Aç"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub Deposu"
@@ -380,6 +443,7 @@ msgid "PREVIEW"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:103
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -390,6 +454,7 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:107
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -476,6 +541,25 @@ msgstr "Öntanımlı İşlem Türü"
 msgid "Default Group Color"
 msgstr "Öntanımlı İşlem Türü"
 
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
+#, fuzzy
+msgid "Enter source amount"
+msgstr "Tutarı buraya girin"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
+msgid "OK"
+msgstr "Tamam"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:115
+#, fuzzy
+msgid "Source (Error)"
+msgstr "Kaynak"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:128
+#, fuzzy
+msgid "Result (Error)"
+msgstr "Sonuç"
+
 #, fuzzy
 #~ msgid ""
 #~ "Unable to login to the account. The provided password may be invalid."
@@ -535,9 +619,6 @@ msgstr "Öntanımlı İşlem Türü"
 #~ msgid "All files"
 #~ msgstr "Tüm dosyalar"
 
-#~ msgid "Amount"
-#~ msgstr "Tutar"
-
 #~ msgid "Amount (Invalid)"
 #~ msgstr "Tutar (Geçersiz)"
 
@@ -563,12 +644,6 @@ msgstr "Öntanımlı İşlem Türü"
 
 #~ msgid "Change Password"
 #~ msgstr "Parola Değiştir"
-
-#~ msgid "Close"
-#~ msgstr "Kapat"
-
-#~ msgid "Currency"
-#~ msgstr "Para Birimi"
 
 #~ msgid "Currency Code"
 #~ msgstr "Para Birimi Kodu"
@@ -638,9 +713,6 @@ msgstr "Öntanımlı İşlem Türü"
 
 #~ msgid "Disassociate Existing"
 #~ msgstr "Mevcut İlişkiyi Kes"
-
-#~ msgid "Error"
-#~ msgstr "Hata"
 
 #~ msgid "Export to File"
 #~ msgstr "Dosyaya Dışa Aktar"
@@ -853,13 +925,6 @@ msgstr "Öntanımlı İşlem Türü"
 #~ msgstr "İşlemler dosyadan içe aktarılamıyor."
 
 #~ msgid ""
-#~ "Unable to load currency data. Please try again. If the error still "
-#~ "persists, report a bug."
-#~ msgstr ""
-#~ "Para birimi verileri yüklenemedi. Lütfen tekrar deneyin. Hata devam "
-#~ "ediyorsa hatayı bildirin."
-
-#~ msgid ""
 #~ "Unable to open the account. Please ensure that the app has permissions to "
 #~ "access the file and try again."
 #~ msgstr ""
@@ -1070,23 +1135,8 @@ msgstr "Öntanımlı İşlem Türü"
 #~ msgid "Converter"
 #~ msgstr "Dönüştürücü"
 
-#~ msgid "Switch currencies"
-#~ msgstr "Para birimleri arasında geçiş yap"
-
-#~ msgid "Switch"
-#~ msgstr "Geçiş yap"
-
 #~ msgid "Loading..."
 #~ msgstr "Yükleniyor..."
-
-#~ msgid "Source"
-#~ msgstr "Kaynak"
-
-#~ msgid "Result"
-#~ msgstr "Sonuç"
-
-#~ msgid "Copy Result Amount"
-#~ msgstr "Sonuç Miktarı Kopyala"
 
 #~ msgid "All Accounts"
 #~ msgstr "Tüm Hesaplar"
@@ -1331,9 +1381,6 @@ msgstr "Öntanımlı İşlem Türü"
 #~ "— Hesabı CSV dosyası olarak dışa aktarın ya da hesaba toplu işlem eklemek "
 #~ "için CSV, OFX veya QIF dosyası kullanın"
 
-#~ msgid "OK"
-#~ msgstr "Tamam"
-
 #~ msgid "Unable to import information from the file. Unsupported file type."
 #~ msgstr "Dosyadan bilgiler içe aktarılamadı. Desteklenmeyen dosya türü."
 
@@ -1491,9 +1538,6 @@ msgstr "Öntanımlı İşlem Türü"
 
 #~ msgid "Enter description here"
 #~ msgstr "Açıklamayı buraya girin"
-
-#~ msgid "Enter amount here"
-#~ msgstr "Tutarı buraya girin"
 
 #~ msgid "Money Account (*.nmoney)"
 #~ msgstr "Para Hesabı (*.nmoney)"

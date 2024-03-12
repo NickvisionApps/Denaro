@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 22:59-0500\n"
+"POT-Creation-Date: 2024-03-12 19:14-0400\n"
 "PO-Revision-Date: 2023-12-29 06:12+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
 "weblate.org>\n"
@@ -45,12 +45,12 @@ msgid "Two months from now"
 msgstr "Dentro de dos meses"
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Transferir a {0}"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Transferir desde {0}"
 
@@ -131,10 +131,49 @@ msgstr "No se puede exportar la cuenta a un archivo."
 msgid "The account is already open."
 msgstr "Esta cuenta ya está abierta."
 
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
 msgid "Currency Converter"
 msgstr "Conversor de divisas"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
+msgid "Currency"
+msgstr "Moneda"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:36
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+#, fuzzy
+msgid "Switch Currencies"
+msgstr "Cambiar de divisa"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:39
+msgid "Switch"
+msgstr "Cambiar"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:48
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:100
+msgid "Source"
+msgstr "Fuente"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:52
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
+msgid "Result"
+msgstr "Resultado"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:57
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+msgid "Amount"
+msgstr "Importe"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:67
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:29
+msgid "Copy Result Amount"
+msgstr "Copiar el resultado del importe"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
@@ -312,12 +351,36 @@ msgstr "Aplicación"
 msgid "Quit"
 msgstr "Salir"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:39
+msgid "Error"
+msgstr "Error"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
+msgid ""
+"Unable to load currency data. Please try again. If the error still persists, "
+"report a bug."
+msgstr ""
+"No se han podido cargar los datos de la divisa. Por favor, vuelva a "
+"intentarlo. Si el error persiste, notifique un error."
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
+msgid "Close"
+msgstr "Cerrar"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:109
+#, fuzzy
+msgid "Result was copied to clipboard."
+msgstr "Resultado copiado al portapapeles."
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Abrir"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repositorio de GitHub"
@@ -381,6 +444,7 @@ msgid "PREVIEW"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:103
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -391,6 +455,7 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:107
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -477,6 +542,25 @@ msgstr "Tipo de transacción predeterminado"
 msgid "Default Group Color"
 msgstr "Tipo de transacción predeterminado"
 
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
+#, fuzzy
+msgid "Enter source amount"
+msgstr "Introduzca aquí el importe"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
+msgid "OK"
+msgstr "Aceptar"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:115
+#, fuzzy
+msgid "Source (Error)"
+msgstr "Fuente"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:128
+#, fuzzy
+msgid "Result (Error)"
+msgstr "Resultado"
+
 #, fuzzy
 #~ msgid ""
 #~ "Unable to login to the account. The provided password may be invalid."
@@ -538,9 +622,6 @@ msgstr "Tipo de transacción predeterminado"
 #~ msgid "All files"
 #~ msgstr "Todos los archivos"
 
-#~ msgid "Amount"
-#~ msgstr "Importe"
-
 #~ msgid "Amount (Invalid)"
 #~ msgstr "Importe (no válido)"
 
@@ -568,12 +649,6 @@ msgstr "Tipo de transacción predeterminado"
 
 #~ msgid "Change Password"
 #~ msgstr "Cambiar contraseña"
-
-#~ msgid "Close"
-#~ msgstr "Cerrar"
-
-#~ msgid "Currency"
-#~ msgstr "Moneda"
 
 #~ msgid "Currency Code"
 #~ msgstr "Código de moneda"
@@ -643,9 +718,6 @@ msgstr "Tipo de transacción predeterminado"
 
 #~ msgid "Disassociate Existing"
 #~ msgstr "Disociar existente"
-
-#~ msgid "Error"
-#~ msgstr "Error"
 
 #~ msgid "Export to File"
 #~ msgstr "Exportar a archivo"
@@ -859,13 +931,6 @@ msgstr "Tipo de transacción predeterminado"
 #~ msgstr "No se pueden importar las transacciones del archivo."
 
 #~ msgid ""
-#~ "Unable to load currency data. Please try again. If the error still "
-#~ "persists, report a bug."
-#~ msgstr ""
-#~ "No se han podido cargar los datos de la divisa. Por favor, vuelva a "
-#~ "intentarlo. Si el error persiste, notifique un error."
-
-#~ msgid ""
 #~ "Unable to open the account. Please ensure that the app has permissions to "
 #~ "access the file and try again."
 #~ msgstr ""
@@ -1076,23 +1141,8 @@ msgstr "Tipo de transacción predeterminado"
 #~ msgid "Converter"
 #~ msgstr "Conversor"
 
-#~ msgid "Switch currencies"
-#~ msgstr "Cambiar de divisa"
-
-#~ msgid "Switch"
-#~ msgstr "Cambiar"
-
 #~ msgid "Loading..."
 #~ msgstr "Cargando..."
-
-#~ msgid "Source"
-#~ msgstr "Fuente"
-
-#~ msgid "Result"
-#~ msgstr "Resultado"
-
-#~ msgid "Copy Result Amount"
-#~ msgstr "Copiar el resultado del importe"
 
 #~ msgid "All Accounts"
 #~ msgstr "Todas las cuentas"
@@ -1338,9 +1388,6 @@ msgstr "Tipo de transacción predeterminado"
 #~ "— Exporte una cuenta como un archivo CSV e importe un archivo CSV, OFX o "
 #~ "QIF para añadir las transacciones en bloque a una cuenta"
 
-#~ msgid "OK"
-#~ msgstr "Aceptar"
-
 #~ msgid "Please wait while transactions import..."
 #~ msgstr "Espere mientras se importan las transacciones..."
 
@@ -1500,9 +1547,6 @@ msgstr "Tipo de transacción predeterminado"
 
 #~ msgid "Enter description here"
 #~ msgstr "Introduzca aquí la descripción"
-
-#~ msgid "Enter amount here"
-#~ msgstr "Introduzca aquí el importe"
 
 #~ msgid "Money Account (*.nmoney)"
 #~ msgstr "Cuenta bancaria (*.nmoney)"

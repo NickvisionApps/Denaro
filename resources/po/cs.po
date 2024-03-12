@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 22:59-0500\n"
+"POT-Creation-Date: 2024-03-12 19:14-0400\n"
 "PO-Revision-Date: 2023-11-17 11:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -44,12 +44,12 @@ msgid "Two months from now"
 msgstr "Dva měsíce ode dneška"
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Převést na {0}"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Převést z {0}"
 
@@ -130,10 +130,49 @@ msgstr "Nepodařilo se exportovat účet do souboru."
 msgid "The account is already open."
 msgstr "Tento účet je již otevřen."
 
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
 msgid "Currency Converter"
 msgstr "Převodník měn"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
+msgid "Currency"
+msgstr "Měna"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:36
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+#, fuzzy
+msgid "Switch Currencies"
+msgstr "Prohodit měny"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:39
+msgid "Switch"
+msgstr "Prohodit"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:48
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:100
+msgid "Source"
+msgstr "Zdroj"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:52
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
+msgid "Result"
+msgstr "Výsledek"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:57
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+msgid "Amount"
+msgstr "Množství"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:67
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:29
+msgid "Copy Result Amount"
+msgstr "Zkopírovat množství výsledku"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
@@ -308,12 +347,36 @@ msgstr "Aplikace"
 msgid "Quit"
 msgstr "Opustit"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:39
+msgid "Error"
+msgstr "Chyba"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
+msgid ""
+"Unable to load currency data. Please try again. If the error still persists, "
+"report a bug."
+msgstr ""
+"Nepodařilo se načíst informace o měnách. Zkuste to prosím znovu. Pokud chyba "
+"nezmizí, nahlaste to prosím jako chybu."
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
+msgid "Close"
+msgstr "Zavřít"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:109
+#, fuzzy
+msgid "Result was copied to clipboard."
+msgstr "Výsledek zkopírován do schránky."
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Otevřít"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repozitář GitHub"
@@ -377,6 +440,7 @@ msgid "PREVIEW"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:103
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -387,6 +451,7 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:107
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -473,6 +538,25 @@ msgstr "Výchozí typ transakce"
 msgid "Default Group Color"
 msgstr "Výchozí typ transakce"
 
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
+#, fuzzy
+msgid "Enter source amount"
+msgstr "Sem zadejte částku"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
+msgid "OK"
+msgstr "OK"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:115
+#, fuzzy
+msgid "Source (Error)"
+msgstr "Zdroj"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:128
+#, fuzzy
+msgid "Result (Error)"
+msgstr "Výsledek"
+
 #, fuzzy
 #~ msgid ""
 #~ "Unable to login to the account. The provided password may be invalid."
@@ -534,9 +618,6 @@ msgstr "Výchozí typ transakce"
 #~ msgid "All files"
 #~ msgstr "Všechny soubory"
 
-#~ msgid "Amount"
-#~ msgstr "Množství"
-
 #~ msgid "Amount (Invalid)"
 #~ msgstr "Částka (neplatná)"
 
@@ -563,12 +644,6 @@ msgstr "Výchozí typ transakce"
 
 #~ msgid "Change Password"
 #~ msgstr "Změnit heslo"
-
-#~ msgid "Close"
-#~ msgstr "Zavřít"
-
-#~ msgid "Currency"
-#~ msgstr "Měna"
 
 #~ msgid "Currency Code"
 #~ msgstr "Kód měny"
@@ -638,9 +713,6 @@ msgstr "Výchozí typ transakce"
 
 #~ msgid "Disassociate Existing"
 #~ msgstr "Odpojit stávající"
-
-#~ msgid "Error"
-#~ msgstr "Chyba"
 
 #~ msgid "Export to File"
 #~ msgstr "Export do souboru"
@@ -854,13 +926,6 @@ msgstr "Výchozí typ transakce"
 #~ msgstr "Nepodařilo se importovat transakce ze souboru."
 
 #~ msgid ""
-#~ "Unable to load currency data. Please try again. If the error still "
-#~ "persists, report a bug."
-#~ msgstr ""
-#~ "Nepodařilo se načíst informace o měnách. Zkuste to prosím znovu. Pokud "
-#~ "chyba nezmizí, nahlaste to prosím jako chybu."
-
-#~ msgid ""
 #~ "Unable to open the account. Please ensure that the app has permissions to "
 #~ "access the file and try again."
 #~ msgstr ""
@@ -1071,23 +1136,8 @@ msgstr "Výchozí typ transakce"
 #~ msgid "Converter"
 #~ msgstr "Převodník"
 
-#~ msgid "Switch currencies"
-#~ msgstr "Prohodit měny"
-
-#~ msgid "Switch"
-#~ msgstr "Prohodit"
-
 #~ msgid "Loading..."
 #~ msgstr "Načítání..."
-
-#~ msgid "Source"
-#~ msgstr "Zdroj"
-
-#~ msgid "Result"
-#~ msgstr "Výsledek"
-
-#~ msgid "Copy Result Amount"
-#~ msgstr "Zkopírovat množství výsledku"
 
 #~ msgid "All Accounts"
 #~ msgstr "Všechny účty"
@@ -1332,9 +1382,6 @@ msgstr "Výchozí typ transakce"
 #~ "— Export účtu do souboru CSV a import souboru CSV, OFX nebo QIF pro "
 #~ "hromadné přidání transakcí na účet"
 
-#~ msgid "OK"
-#~ msgstr "OK"
-
 #~ msgid "Please wait while transactions import..."
 #~ msgstr "Počkejte prosím na import transakcí..."
 
@@ -1523,9 +1570,6 @@ msgstr "Výchozí typ transakce"
 
 #~ msgid "Enter description here"
 #~ msgstr "Sem zadejte popis"
-
-#~ msgid "Enter amount here"
-#~ msgstr "Sem zadejte částku"
 
 #~ msgid "Enter decimal separator"
 #~ msgstr "Zadejte oddělovač desetinných míst"

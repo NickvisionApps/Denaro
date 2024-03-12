@@ -22,11 +22,11 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
         LblCurrency().Text(winrt::to_hstring(_("Currency")));
         RowSourceCurrency().Title(winrt::to_hstring(_("Source")));
         RowResultCurrency().Title(winrt::to_hstring(_("Result")));
-        ToolTipService::SetToolTip(BtnSwitch(), winrt::box_value(winrt::to_hstring(_("Switch currencies"))));
+        ToolTipService::SetToolTip(BtnSwitch(), winrt::box_value(winrt::to_hstring(_("Switch Currencies"))));
         LblAmount().Text(winrt::to_hstring(_("Amount")));
         TxtSourceAmount().PlaceholderText(winrt::to_hstring(_("Enter source amount")));
         TxtResultAmount().PlaceholderText(L"0");
-        ToolTipService::SetToolTip(BtnCopy(), winrt::box_value(winrt::to_hstring(_("Copy to Clipboard"))));
+        ToolTipService::SetToolTip(BtnCopy(), winrt::box_value(winrt::to_hstring(_("Copy Result Amount"))));
     }
 
     Windows::Foundation::IAsyncAction CurrencyConverterDialog::OnOpened(const ContentDialog& sender, const ContentDialogOpenedEventArgs& args)

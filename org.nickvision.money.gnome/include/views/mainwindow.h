@@ -25,6 +25,10 @@ namespace Nickvision::Money::GNOME::Views
          */
         MainWindow(const std::shared_ptr<Shared::Controllers::MainWindowController>& controller, GtkApplication* app);
         /**
+         * @brief Destructs a MainWindow. 
+         */
+        ~MainWindow();
+        /**
          * @brief Gets the GObject object for the main window.
          * @return The GObject for the main window 
          */
@@ -48,6 +52,10 @@ namespace Nickvision::Money::GNOME::Views
          * @param args Nickvision::Notifications::ShellNotificationSentEventArgs
          */
         void onShellNotificationSent(const Nickvision::Notifications::ShellNotificationSentEventArgs& args);
+        /**
+         * @brief Displays the currency converter dialog.
+         */
+        void currencyConverter();
         /**
          * @brief Quits the application. 
          */

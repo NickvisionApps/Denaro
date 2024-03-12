@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 22:59-0500\n"
+"POT-Creation-Date: 2024-03-12 19:14-0400\n"
 "PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
@@ -44,12 +44,12 @@ msgid "Two months from now"
 msgstr "अब से दो महीने बाद"
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "{0} पर स्थानांतरण"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "{0} से स्थानांतरण"
 
@@ -130,10 +130,49 @@ msgstr "खाते को फाइल में निर्यात कर�
 msgid "The account is already open."
 msgstr "यह खाता पहले ही खोला जा चुका है।"
 
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
 msgid "Currency Converter"
 msgstr "मुद्रा परिवर्तक"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
+msgid "Currency"
+msgstr "मुद्रा"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:36
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+#, fuzzy
+msgid "Switch Currencies"
+msgstr "मुद्राएँ बदलें"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:39
+msgid "Switch"
+msgstr "स्विच"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:48
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:100
+msgid "Source"
+msgstr "स्रोत"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:52
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
+msgid "Result"
+msgstr "परिणाम"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:57
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+msgid "Amount"
+msgstr "राशि"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:67
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:29
+msgid "Copy Result Amount"
+msgstr "परिणाम राशि कॉपी करें"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
@@ -307,12 +346,36 @@ msgstr "एप्लिकेशन"
 msgid "Quit"
 msgstr "छोड़ें"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:39
+msgid "Error"
+msgstr "त्रुटि"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
+msgid ""
+"Unable to load currency data. Please try again. If the error still persists, "
+"report a bug."
+msgstr ""
+"मुद्रा डेटा लोड करने में असमर्थ. कृपया पुन: प्रयास करें। यदि त्रुटि अभी भी बनी रहती है, तो "
+"बग की रिपोर्ट करें।"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
+msgid "Close"
+msgstr "बंद करें"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:109
+#, fuzzy
+msgid "Result was copied to clipboard."
+msgstr "परिणाम को क्लिपबोर्ड पर कॉपी किया गया।"
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "खोलें"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub रेपो"
@@ -378,6 +441,7 @@ msgid "PREVIEW"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:103
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -388,6 +452,7 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:107
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -474,6 +539,24 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 msgid "Default Group Color"
 msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
+msgid "Enter source amount"
+msgstr ""
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
+msgid "OK"
+msgstr "ठीक (OK)"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:115
+#, fuzzy
+msgid "Source (Error)"
+msgstr "स्रोत"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:128
+#, fuzzy
+msgid "Result (Error)"
+msgstr "परिणाम"
+
 #, fuzzy
 #~ msgid ""
 #~ "Unable to login to the account. The provided password may be invalid."
@@ -533,9 +616,6 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 #~ msgid "All files"
 #~ msgstr "सभी फाइलें"
 
-#~ msgid "Amount"
-#~ msgstr "राशि"
-
 #~ msgid "Amount (Invalid)"
 #~ msgstr "धनराशि (अवैध)"
 
@@ -561,12 +641,6 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
 #~ msgid "Change Password"
 #~ msgstr "पासवर्ड बदलें"
-
-#~ msgid "Close"
-#~ msgstr "बंद करें"
-
-#~ msgid "Currency"
-#~ msgstr "मुद्रा"
 
 #~ msgid "Currency Code"
 #~ msgstr "मुद्रा कोड"
@@ -636,9 +710,6 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
 #~ msgid "Disassociate Existing"
 #~ msgstr "मौजूदा को अलग करना"
-
-#~ msgid "Error"
-#~ msgstr "त्रुटि"
 
 #~ msgid "Export to File"
 #~ msgstr "फाइल में निर्यात करें"
@@ -851,13 +922,6 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 #~ msgstr "फाइल से लेनदेन आयात करने में असमर्थ।"
 
 #~ msgid ""
-#~ "Unable to load currency data. Please try again. If the error still "
-#~ "persists, report a bug."
-#~ msgstr ""
-#~ "मुद्रा डेटा लोड करने में असमर्थ. कृपया पुन: प्रयास करें। यदि त्रुटि अभी भी बनी रहती है, "
-#~ "तो बग की रिपोर्ट करें।"
-
-#~ msgid ""
 #~ "Unable to open the account. Please ensure that the app has permissions to "
 #~ "access the file and try again."
 #~ msgstr ""
@@ -1068,23 +1132,8 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 #~ msgid "Converter"
 #~ msgstr "परिवर्तक"
 
-#~ msgid "Switch currencies"
-#~ msgstr "मुद्राएँ बदलें"
-
-#~ msgid "Switch"
-#~ msgstr "स्विच"
-
 #~ msgid "Loading..."
 #~ msgstr "लोड हो रहा है..।"
-
-#~ msgid "Source"
-#~ msgstr "स्रोत"
-
-#~ msgid "Result"
-#~ msgstr "परिणाम"
-
-#~ msgid "Copy Result Amount"
-#~ msgstr "परिणाम राशि कॉपी करें"
 
 #~ msgid "All Accounts"
 #~ msgstr "सभी खाते"
@@ -1303,9 +1352,6 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 #, fuzzy
 #~ msgid "money;finance;wallet;cash;bank;Nickvision;"
 #~ msgstr "money;finance;wallet;cash;bank;GTK;Nickvision;"
-
-#~ msgid "OK"
-#~ msgstr "ठीक (OK)"
 
 #~ msgid "Customize the application's user interface."
 #~ msgstr "एप्लिकेशन के इंटरफ़ेस को अनुकूलित करें।"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 22:59-0500\n"
+"POT-Creation-Date: 2024-03-12 19:14-0400\n"
 "PO-Revision-Date: 2023-12-06 07:04+0000\n"
 "Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/nickvision-money/"
@@ -45,12 +45,12 @@ msgid "Two months from now"
 msgstr "بعد شهرين من الآن"
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "حوِّل إلى {0}"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "حوِّل من {0}"
 
@@ -131,10 +131,48 @@ msgstr "تعذَّر تصدير الحساب للملفِّ."
 msgid "The account is already open."
 msgstr "هذا الحساب مفتوح بالفعل."
 
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
 msgid "Currency Converter"
 msgstr "مُحوّل عملات"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
+msgid "Currency"
+msgstr "العملة"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:36
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+msgid "Switch Currencies"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:39
+msgid "Switch"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:48
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:100
+msgid "Source"
+msgstr "المصدر"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:52
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
+msgid "Result"
+msgstr "النتيجة"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:57
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+msgid "Amount"
+msgstr "المَبلغ"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:67
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:29
+msgid "Copy Result Amount"
+msgstr "نسخ نتيجة المبلغ"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
@@ -309,12 +347,34 @@ msgstr "التطبيق"
 msgid "Quit"
 msgstr "أنهِ"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:39
+msgid "Error"
+msgstr "خطأ"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
+msgid ""
+"Unable to load currency data. Please try again. If the error still persists, "
+"report a bug."
+msgstr ""
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
+msgid "Close"
+msgstr "أغلق"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:109
+#, fuzzy
+msgid "Result was copied to clipboard."
+msgstr "تم نسخ النتائج إلى الحافظة."
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "افتح"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "مستودع جت‌هب"
@@ -378,6 +438,7 @@ msgid "PREVIEW"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:103
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -388,6 +449,7 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:107
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -474,6 +536,25 @@ msgstr "نوع المعاملة المبدئيُّ"
 msgid "Default Group Color"
 msgstr "نوع المعاملة المبدئيُّ"
 
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
+#, fuzzy
+msgid "Enter source amount"
+msgstr "أدخل المقدار هنا"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
+msgid "OK"
+msgstr "حسنًا"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:115
+#, fuzzy
+msgid "Source (Error)"
+msgstr "المصدر"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:128
+#, fuzzy
+msgid "Result (Error)"
+msgstr "النتيجة"
+
 #, fuzzy
 #~ msgid ""
 #~ "Unable to login to the account. The provided password may be invalid."
@@ -531,9 +612,6 @@ msgstr "نوع المعاملة المبدئيُّ"
 #~ msgid "All files"
 #~ msgstr "كلُّ الملفَّات"
 
-#~ msgid "Amount"
-#~ msgstr "المَبلغ"
-
 #~ msgid "Amount (Invalid)"
 #~ msgstr "المبلغ (غير صالح)"
 
@@ -559,12 +637,6 @@ msgstr "نوع المعاملة المبدئيُّ"
 
 #~ msgid "Change Password"
 #~ msgstr "غيِّر كلمة السرِّ"
-
-#~ msgid "Close"
-#~ msgstr "أغلق"
-
-#~ msgid "Currency"
-#~ msgstr "العملة"
 
 #~ msgid "Currency Code"
 #~ msgstr "رمز العملة"
@@ -634,9 +706,6 @@ msgstr "نوع المعاملة المبدئيُّ"
 
 #~ msgid "Disassociate Existing"
 #~ msgstr "افصل المعاملات الموجودة"
-
-#~ msgid "Error"
-#~ msgstr "خطأ"
 
 #~ msgid "Export to File"
 #~ msgstr "صدِّر إلى ملفٍّ"
@@ -1055,15 +1124,6 @@ msgstr "نوع المعاملة المبدئيُّ"
 #~ msgid "Loading..."
 #~ msgstr "جارٍ التحميل…"
 
-#~ msgid "Source"
-#~ msgstr "المصدر"
-
-#~ msgid "Result"
-#~ msgstr "النتيجة"
-
-#~ msgid "Copy Result Amount"
-#~ msgstr "نسخ نتيجة المبلغ"
-
 #~ msgid "All Accounts"
 #~ msgstr "كلُّ الحسابات"
 
@@ -1296,9 +1356,6 @@ msgstr "نوع المعاملة المبدئيُّ"
 #~ "— تصدير الحسابات في صورة ملفات سي‌إس‌في، واستيراد ملفات سي‌إس‌في وأو‌إف‌إكس "
 #~ "وكيو‌آي‌إف لإضافة الكثير من المعاملات لحساب آنًا"
 
-#~ msgid "OK"
-#~ msgstr "حسنًا"
-
 #~ msgid "Please wait while transactions import..."
 #~ msgstr "اصبر ريثما تُستورد المعاملات..."
 
@@ -1454,9 +1511,6 @@ msgstr "نوع المعاملة المبدئيُّ"
 
 #~ msgid "Enter description here"
 #~ msgstr "أدخل الوصف هنا"
-
-#~ msgid "Enter amount here"
-#~ msgstr "أدخل المقدار هنا"
 
 #~ msgid "Money Account (*.nmoney)"
 #~ msgstr "حساب مال (*.nmoney)"

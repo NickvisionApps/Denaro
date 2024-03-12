@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 22:59-0500\n"
+"POT-Creation-Date: 2024-03-12 19:14-0400\n"
 "PO-Revision-Date: 2023-06-07 19:40+0000\n"
 "Last-Translator: Krindog7337 <igstkrisna2006@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/nickvision-"
@@ -44,12 +44,12 @@ msgid "Two months from now"
 msgstr ""
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Transfer ke {0}"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Transfer dari {0}"
 
@@ -132,11 +132,50 @@ msgstr "Tidak dapat mengekspor rekening ke berkas."
 msgid "The account is already open."
 msgstr "Rekening ini sudah dibuka."
 
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
 #, fuzzy
 msgid "Currency Converter"
 msgstr "Kode Mata Uang"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
+msgid "Currency"
+msgstr "Mata Uang"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:36
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+msgid "Switch Currencies"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:39
+msgid "Switch"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:48
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:100
+msgid "Source"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:52
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
+msgid "Result"
+msgstr "Hasil"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:57
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+msgid "Amount"
+msgstr "Jumlah"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:67
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:29
+#, fuzzy
+msgid "Copy Result Amount"
+msgstr "Tidak Ada Rekening Baru-baru Ini"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
@@ -313,12 +352,33 @@ msgstr "Aplikasi"
 msgid "Quit"
 msgstr "Keluar"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:39
+msgid "Error"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
+msgid ""
+"Unable to load currency data. Please try again. If the error still persists, "
+"report a bug."
+msgstr ""
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
+msgid "Close"
+msgstr "Tutup"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:109
+msgid "Result was copied to clipboard."
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Buka"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repo Github"
@@ -382,6 +442,7 @@ msgid "PREVIEW"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:103
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -392,6 +453,7 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:107
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -477,6 +539,24 @@ msgstr "Tipe Transaksi Bawaan"
 msgid "Default Group Color"
 msgstr "Tipe Transaksi Bawaan"
 
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
+#, fuzzy
+msgid "Enter source amount"
+msgstr "Masukan jumlah disini"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
+msgid "OK"
+msgstr "OK"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:115
+msgid "Source (Error)"
+msgstr ""
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:128
+#, fuzzy
+msgid "Result (Error)"
+msgstr "Hasil"
+
 #, fuzzy
 #~ msgid ""
 #~ "Unable to login to the account. The provided password may be invalid."
@@ -531,9 +611,6 @@ msgstr "Tipe Transaksi Bawaan"
 #~ msgid "All files"
 #~ msgstr "Semua Berkas"
 
-#~ msgid "Amount"
-#~ msgstr "Jumlah"
-
 #~ msgid "Amount (Invalid)"
 #~ msgstr "Jumlah (Tidak Sah)"
 
@@ -560,12 +637,6 @@ msgstr "Tipe Transaksi Bawaan"
 
 #~ msgid "Change Password"
 #~ msgstr "Ubah Kata Sandi"
-
-#~ msgid "Close"
-#~ msgstr "Tutup"
-
-#~ msgid "Currency"
-#~ msgstr "Mata Uang"
 
 #~ msgid "Currency Code"
 #~ msgstr "Kode Mata Uang"
@@ -997,13 +1068,6 @@ msgstr "Tipe Transaksi Bawaan"
 #~ msgid "Suggestions"
 #~ msgstr "Saran"
 
-#~ msgid "Result"
-#~ msgstr "Hasil"
-
-#, fuzzy
-#~ msgid "Copy Result Amount"
-#~ msgstr "Tidak Ada Rekening Baru-baru Ini"
-
 #~ msgid "All Accounts"
 #~ msgstr "Semua Rekening"
 
@@ -1234,9 +1298,6 @@ msgstr "Tipe Transaksi Bawaan"
 #~ "— Ekspor rekening sebagai berkas CSV dan impor berkas CSV, OFX, atau QIF "
 #~ "untuk menambahkan transaksi secara massal ke akun"
 
-#~ msgid "OK"
-#~ msgstr "OK"
-
 #~ msgid "Unable to import information from the file. Unsupported file type."
 #~ msgstr ""
 #~ "Tidak dapat mengimpor informasi dari berkas. Tipe berkas tidak didukung."
@@ -1348,9 +1409,6 @@ msgstr "Tipe Transaksi Bawaan"
 
 #~ msgid "Enter description here"
 #~ msgstr "Masukkan deskripsi disini"
-
-#~ msgid "Enter amount here"
-#~ msgstr "Masukan jumlah disini"
 
 #~ msgid "Money Account (*.nmoney)"
 #~ msgstr "Rekening Money (*.nmoney)"

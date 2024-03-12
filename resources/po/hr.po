@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 22:59-0500\n"
+"POT-Creation-Date: 2024-03-12 19:14-0400\n"
 "PO-Revision-Date: 2023-09-26 13:22+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.1-dev\n"
 
 #: libdenaro/src/models/account.cpp:106
@@ -45,12 +45,12 @@ msgid "Two months from now"
 msgstr "Za dva mjeseca"
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Transferiraj na {0}"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Transferiraj sa {0}"
 
@@ -131,10 +131,49 @@ msgstr "Nije moguće izvesti račun u datoteku."
 msgid "The account is already open."
 msgstr "Ovaj je račun već otvoren."
 
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
 msgid "Currency Converter"
 msgstr "Konverter valuta"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
+msgid "Currency"
+msgstr "Valuta"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:36
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+#, fuzzy
+msgid "Switch Currencies"
+msgstr "Zamijeni valutu"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:39
+msgid "Switch"
+msgstr "Zamijeni"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:48
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:100
+msgid "Source"
+msgstr "Izvor"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:52
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
+msgid "Result"
+msgstr "Rezultat"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:57
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+msgid "Amount"
+msgstr "Iznos"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:67
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:29
+msgid "Copy Result Amount"
+msgstr "Kopiraj iznos rezultata"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
@@ -309,12 +348,36 @@ msgstr "Program"
 msgid "Quit"
 msgstr "Zatvori program"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:39
+msgid "Error"
+msgstr "Greška"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
+msgid ""
+"Unable to load currency data. Please try again. If the error still persists, "
+"report a bug."
+msgstr ""
+"Nije moguće učitati podatke o valuti. Pokušaj ponovo. Ako to ne pomogne "
+"prijavi grešku."
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
+msgid "Close"
+msgstr "Zatvori"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:109
+#, fuzzy
+msgid "Result was copied to clipboard."
+msgstr "Rezultat je kopiran u međuspremnik."
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Otvori"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub repozitorij"
@@ -378,6 +441,7 @@ msgid "PREVIEW"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:103
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -388,6 +452,7 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:107
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -474,6 +539,25 @@ msgstr "Standardna vrsta transakcije"
 msgid "Default Group Color"
 msgstr "Standardna vrsta transakcije"
 
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
+#, fuzzy
+msgid "Enter source amount"
+msgstr "Ovdje upiši iznos"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
+msgid "OK"
+msgstr "U redu"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:115
+#, fuzzy
+msgid "Source (Error)"
+msgstr "Izvor"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:128
+#, fuzzy
+msgid "Result (Error)"
+msgstr "Rezultat"
+
 #, fuzzy
 #~ msgid ""
 #~ "Unable to login to the account. The provided password may be invalid."
@@ -535,9 +619,6 @@ msgstr "Standardna vrsta transakcije"
 #~ msgid "All files"
 #~ msgstr "Sve datoteke"
 
-#~ msgid "Amount"
-#~ msgstr "Iznos"
-
 #~ msgid "Amount (Invalid)"
 #~ msgstr "Iznos (neispravno)"
 
@@ -563,12 +644,6 @@ msgstr "Standardna vrsta transakcije"
 
 #~ msgid "Change Password"
 #~ msgstr "Promijeni lozinku"
-
-#~ msgid "Close"
-#~ msgstr "Zatvori"
-
-#~ msgid "Currency"
-#~ msgstr "Valuta"
 
 #~ msgid "Currency Code"
 #~ msgstr "Kôd valute"
@@ -638,9 +713,6 @@ msgstr "Standardna vrsta transakcije"
 
 #~ msgid "Disassociate Existing"
 #~ msgstr "Odspoji postojeće"
-
-#~ msgid "Error"
-#~ msgstr "Greška"
 
 #~ msgid "Export to File"
 #~ msgstr "Izvezi u datoteku"
@@ -854,13 +926,6 @@ msgstr "Standardna vrsta transakcije"
 #~ msgstr "Nije moguće uvesti transakcije iz datoteke."
 
 #~ msgid ""
-#~ "Unable to load currency data. Please try again. If the error still "
-#~ "persists, report a bug."
-#~ msgstr ""
-#~ "Nije moguće učitati podatke o valuti. Pokušaj ponovo. Ako to ne pomogne "
-#~ "prijavi grešku."
-
-#~ msgid ""
 #~ "Unable to open the account. Please ensure that the app has permissions to "
 #~ "access the file and try again."
 #~ msgstr ""
@@ -1071,23 +1136,8 @@ msgstr "Standardna vrsta transakcije"
 #~ msgid "Converter"
 #~ msgstr "Konverter"
 
-#~ msgid "Switch currencies"
-#~ msgstr "Zamijeni valutu"
-
-#~ msgid "Switch"
-#~ msgstr "Zamijeni"
-
 #~ msgid "Loading..."
 #~ msgstr "Učitavanje …"
-
-#~ msgid "Source"
-#~ msgstr "Izvor"
-
-#~ msgid "Result"
-#~ msgstr "Rezultat"
-
-#~ msgid "Copy Result Amount"
-#~ msgstr "Kopiraj iznos rezultata"
 
 #~ msgid "All Accounts"
 #~ msgstr "Svi računi"
@@ -1326,9 +1376,6 @@ msgstr "Standardna vrsta transakcije"
 #~ "– Izvezi račun kao CSV datoteku i uvezi CSV, OFX ili QIF datoteku za "
 #~ "skupno dodavanje transakcija računu"
 
-#~ msgid "OK"
-#~ msgstr "U redu"
-
 #~ msgid "Customize the application's user interface."
 #~ msgstr "Prilagodi korisničko sučelje programa."
 
@@ -1432,9 +1479,6 @@ msgstr "Standardna vrsta transakcije"
 
 #~ msgid "Enter description here"
 #~ msgstr "Ovdje upiši opis"
-
-#~ msgid "Enter amount here"
-#~ msgstr "Ovdje upiši iznos"
 
 #~ msgid "Money Account (*.nmoney)"
 #~ msgstr "Money račun (*.nmoney)"

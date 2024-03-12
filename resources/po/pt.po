@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 22:59-0500\n"
+"POT-Creation-Date: 2024-03-12 19:14-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,12 +41,12 @@ msgid "Two months from now"
 msgstr ""
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Transferir Para {0}"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Transferir De {0}"
 
@@ -126,11 +126,50 @@ msgstr "Não foi possível exportar conta para o ficheiro."
 msgid "The account is already open."
 msgstr "Esta conta já está aberta."
 
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
 #, fuzzy
 msgid "Currency Converter"
 msgstr "Currency Code"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
+msgid "Currency"
+msgstr "Currency"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:36
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+msgid "Switch Currencies"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:39
+msgid "Switch"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:48
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:100
+msgid "Source"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:52
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
+msgid "Result"
+msgstr "Resultado"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:57
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+msgid "Amount"
+msgstr "Valor"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:67
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:29
+#, fuzzy
+msgid "Copy Result Amount"
+msgstr "Nenhuma Conta Recente"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
@@ -312,12 +351,33 @@ msgstr "Aplicação"
 msgid "Quit"
 msgstr "Sair"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:82
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:39
+msgid "Error"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
+msgid ""
+"Unable to load currency data. Please try again. If the error still persists, "
+"report a bug."
+msgstr ""
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
+msgid "Close"
+msgstr "Fechar"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:109
+msgid "Result was copied to clipboard."
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Abrir"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:128
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repositório do GitHub"
@@ -381,6 +441,7 @@ msgid "PREVIEW"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:103
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -391,6 +452,7 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:107
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -476,6 +538,24 @@ msgstr "Tipo de Transação Padrão"
 msgid "Default Group Color"
 msgstr "Tipo de Transação Padrão"
 
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
+#, fuzzy
+msgid "Enter source amount"
+msgstr "Insira o valor aqui"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
+msgid "OK"
+msgstr "OK"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:115
+msgid "Source (Error)"
+msgstr ""
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:128
+#, fuzzy
+msgid "Result (Error)"
+msgstr "Resultado"
+
 #, fuzzy
 #~ msgid ""
 #~ "Unable to login to the account. The provided password may be invalid."
@@ -533,9 +613,6 @@ msgstr "Tipo de Transação Padrão"
 #~ msgid "All files"
 #~ msgstr "Todos os ficheiros"
 
-#~ msgid "Amount"
-#~ msgstr "Valor"
-
 #~ msgid "Amount (Invalid)"
 #~ msgstr "Valor (inválido)"
 
@@ -563,12 +640,6 @@ msgstr "Tipo de Transação Padrão"
 
 #~ msgid "Change Password"
 #~ msgstr "Alterar Senha"
-
-#~ msgid "Close"
-#~ msgstr "Fechar"
-
-#~ msgid "Currency"
-#~ msgstr "Currency"
 
 #~ msgid "Currency Code"
 #~ msgstr "Currency Code"
@@ -982,13 +1053,6 @@ msgstr "Tipo de Transação Padrão"
 #~ msgid "New"
 #~ msgstr "Novo"
 
-#~ msgid "Result"
-#~ msgstr "Resultado"
-
-#, fuzzy
-#~ msgid "Copy Result Amount"
-#~ msgstr "Nenhuma Conta Recente"
-
 #~ msgid "All Accounts"
 #~ msgstr "Todas as Contas"
 
@@ -1198,9 +1262,6 @@ msgstr "Tipo de Transação Padrão"
 #~ msgstr ""
 #~ "dinheiro;finanças;carteira;dinheiro em espécie;banco;GTK;Nickvision;"
 
-#~ msgid "OK"
-#~ msgstr "OK"
-
 #~ msgid "Customize the application's user interface."
 #~ msgstr "Customizar a interface da aplicação."
 
@@ -1304,9 +1365,6 @@ msgstr "Tipo de Transação Padrão"
 
 #~ msgid "Enter description here"
 #~ msgstr "Insira a descrição aqui"
-
-#~ msgid "Enter amount here"
-#~ msgstr "Insira o valor aqui"
 
 #~ msgid "Money Account (*.nmoney)"
 #~ msgstr "Conta Denaro (*.nmoney)"
