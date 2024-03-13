@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -215,6 +215,26 @@ msgstr "Cap de compte recent"
 msgid "Remove"
 msgstr "Levar"
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#, fuzzy
+msgid "New"
+msgstr "Novèla"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr "Compte novèl (Ctrl+N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "Dobrir"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr "Dobrir compte (Ctrl+O)"
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -332,18 +352,16 @@ msgstr "Ponch e virgula"
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
 #, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr "Seleccionar l’interval"
+msgid "Account"
+msgstr "Compte"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-#, fuzzy
-msgid "Open Folder"
-msgstr "Seleccionar l’interval"
+msgid "New Account"
+msgstr "Compte novèl"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#, fuzzy
-msgid "Close Folder"
-msgstr "Seleccionar l’interval"
+msgid "Open Account"
+msgstr "Dobrir compte"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 #, fuzzy
@@ -381,27 +399,22 @@ msgstr "Tampar"
 msgid "Result was copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "Dobrir"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Depaus GitHub"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Chècs"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "Estalvis"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Afars"
@@ -452,11 +465,6 @@ msgstr "Crèdits"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Paramètres"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-#, fuzzy
-msgid "New"
-msgstr "Novèla"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -554,6 +562,19 @@ msgstr "D'acòrdi"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "Resultat"
+
+#, fuzzy
+#~ msgctxt "Shortcut"
+#~ msgid "Folder"
+#~ msgstr "Seleccionar l’interval"
+
+#, fuzzy
+#~ msgid "Open Folder"
+#~ msgstr "Seleccionar l’interval"
+
+#, fuzzy
+#~ msgid "Close Folder"
+#~ msgstr "Seleccionar l’interval"
 
 #~ msgid "Checking Account Color"
 #~ msgstr "Color del compte chèc"
@@ -787,9 +808,6 @@ msgstr "Resultat"
 #~ msgid "Notes"
 #~ msgstr "Nòtas"
 
-#~ msgid "Open Account"
-#~ msgstr "Dobrir compte"
-
 #~ msgid "Overview"
 #~ msgstr "Vista d'ensemble"
 
@@ -1013,9 +1031,6 @@ msgstr "Resultat"
 #~ msgid "Edit Group"
 #~ msgstr "Modificar lo grop"
 
-#~ msgid "New Account"
-#~ msgstr "Compte novèl"
-
 #, fuzzy
 #~ msgid "Account Password (Optional)"
 #~ msgstr "Senhal del compte de destinacion (invalid)"
@@ -1054,9 +1069,6 @@ msgstr "Resultat"
 #, fuzzy
 #~ msgid "Backup"
 #~ msgstr "Tornar"
-
-#~ msgid "Account"
-#~ msgstr "Compte"
 
 #, fuzzy
 #~ msgctxt "Title"
@@ -1148,16 +1160,10 @@ msgstr "Resultat"
 #~ msgid "Account Menu"
 #~ msgstr "Menú del compte"
 
-#~ msgid "New Account (Ctrl+N)"
-#~ msgstr "Compte novèl (Ctrl+N)"
-
 #, fuzzy
 #~ msgctxt "Account"
 #~ msgid "New"
 #~ msgstr "Novèla"
-
-#~ msgid "Open Account (Ctrl+O)"
-#~ msgstr "Dobrir compte (Ctrl+O)"
 
 #, fuzzy
 #~ msgid "result"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: 2023-08-29 18:53+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
@@ -218,6 +218,26 @@ msgstr "Keine kürzlichen Konten"
 msgid "Remove"
 msgstr "Entfernen"
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#, fuzzy
+msgid "New"
+msgstr "Neu"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr "Neues Konto (Strg+N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "Öffnen"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr "Konto öffnen (Strg+O)"
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -328,18 +348,16 @@ msgstr "Punkt und Komma"
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
 #, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr "Ordner"
+msgid "Account"
+msgstr "Konto"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-#, fuzzy
-msgid "Open Folder"
-msgstr "Ordner"
+msgid "New Account"
+msgstr "Neues Konto"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#, fuzzy
-msgid "Close Folder"
-msgstr "Ordner auswählen"
+msgid "Open Account"
+msgstr "Konto öffnen"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 #, fuzzy
@@ -380,27 +398,22 @@ msgstr "Schließen"
 msgid "Result was copied to clipboard."
 msgstr "Ergebnis wurde in die Zwischenablage kopiert."
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "Öffnen"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub-Repo"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Girokonto"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "Sparkonto"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Geschäftskonto"
@@ -452,11 +465,6 @@ msgstr "Anerkennungen"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Einstellungen"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-#, fuzzy
-msgid "New"
-msgstr "Neu"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -555,6 +563,19 @@ msgstr "OK"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "Ergebnis"
+
+#, fuzzy
+#~ msgctxt "Shortcut"
+#~ msgid "Folder"
+#~ msgstr "Ordner"
+
+#, fuzzy
+#~ msgid "Open Folder"
+#~ msgstr "Ordner"
+
+#, fuzzy
+#~ msgid "Close Folder"
+#~ msgstr "Ordner auswählen"
 
 #~ msgid "Checking Account Color"
 #~ msgstr "Girokonto-Farbe"
@@ -804,9 +825,6 @@ msgstr "Ergebnis"
 
 #~ msgid "Notes"
 #~ msgstr "Notizen"
-
-#~ msgid "Open Account"
-#~ msgstr "Konto öffnen"
 
 #~ msgid "Overview"
 #~ msgstr "Übersicht"
@@ -1162,9 +1180,6 @@ msgstr "Ergebnis"
 #~ msgid "Edit Group"
 #~ msgstr "Gruppe Editieren"
 
-#~ msgid "New Account"
-#~ msgstr "Neues Konto"
-
 #~ msgid "Use this wizard to get the most out of your account"
 #~ msgstr "Nutzen Sie diesen Assistenten, um Ihr Konto optimal zu nutzen"
 
@@ -1241,9 +1256,6 @@ msgstr "Ergebnis"
 
 #~ msgid "No Reminders"
 #~ msgstr "Keine Erinnerungen"
-
-#~ msgid "Account"
-#~ msgstr "Konto"
 
 #~ msgctxt "Title"
 #~ msgid "Transfer"
@@ -1346,15 +1358,9 @@ msgstr "Ergebnis"
 #~ msgid "Account Menu"
 #~ msgstr "Konto-Menü"
 
-#~ msgid "New Account (Ctrl+N)"
-#~ msgstr "Neues Konto (Strg+N)"
-
 #~ msgctxt "Account"
 #~ msgid "New"
 #~ msgstr "Neu"
-
-#~ msgid "Open Account (Ctrl+O)"
-#~ msgstr "Konto öffnen (Strg+O)"
 
 #~ msgid "Toggle Graphs"
 #~ msgstr "Diagramm umschalten"

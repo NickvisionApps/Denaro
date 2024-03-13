@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: 2023-11-17 11:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -218,6 +218,26 @@ msgstr "Žádné nedávné účty"
 msgid "Remove"
 msgstr "Odebrat"
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#, fuzzy
+msgid "New"
+msgstr "Nová"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr "Nový účet (Ctrl+N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "Otevřít"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr "Otevřít účet (Ctrl+O)"
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -324,18 +344,16 @@ msgstr "Tečka a čárka"
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
 #, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr "Složka"
+msgid "Account"
+msgstr "Účet"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-#, fuzzy
-msgid "Open Folder"
-msgstr "Složka"
+msgid "New Account"
+msgstr "Nový účet"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#, fuzzy
-msgid "Close Folder"
-msgstr "Vybrat složku"
+msgid "Open Account"
+msgstr "Otevřít účet"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 #, fuzzy
@@ -376,27 +394,22 @@ msgstr "Zavřít"
 msgid "Result was copied to clipboard."
 msgstr "Výsledek zkopírován do schránky."
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "Otevřít"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repozitář GitHub"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Běžný"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "Spořicí"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Firemní"
@@ -448,11 +461,6 @@ msgstr "Zásluhy"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Nastavení"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-#, fuzzy
-msgid "New"
-msgstr "Nová"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -551,6 +559,19 @@ msgstr "OK"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "Výsledek"
+
+#, fuzzy
+#~ msgctxt "Shortcut"
+#~ msgid "Folder"
+#~ msgstr "Složka"
+
+#, fuzzy
+#~ msgid "Open Folder"
+#~ msgstr "Složka"
+
+#, fuzzy
+#~ msgid "Close Folder"
+#~ msgstr "Vybrat složku"
 
 #~ msgid "Checking Account Color"
 #~ msgstr "Barva běžného účtu"
@@ -804,9 +825,6 @@ msgstr "Výsledek"
 
 #~ msgid "Nothing to import from the file."
 #~ msgstr "Nic k importování ze souboru."
-
-#~ msgid "Open Account"
-#~ msgstr "Otevřít účet"
 
 #~ msgid "Overview"
 #~ msgstr "Přehled"
@@ -1159,9 +1177,6 @@ msgstr "Výsledek"
 #~ msgid "Edit Group"
 #~ msgstr "Upravit skupinu"
 
-#~ msgid "New Account"
-#~ msgstr "Nový účet"
-
 #~ msgid "Use this wizard to get the most out of your account"
 #~ msgstr "Pomocí tohoto průvodce získáte ze svého účtu maximum"
 
@@ -1237,9 +1252,6 @@ msgstr "Výsledek"
 
 #~ msgid "No Reminders"
 #~ msgstr "Žádné připomínky"
-
-#~ msgid "Account"
-#~ msgstr "Účet"
 
 #~ msgctxt "Title"
 #~ msgid "Transfer"
@@ -1342,15 +1354,9 @@ msgstr "Výsledek"
 #~ msgid "Account Menu"
 #~ msgstr "Nabídka účtu"
 
-#~ msgid "New Account (Ctrl+N)"
-#~ msgstr "Nový účet (Ctrl+N)"
-
 #~ msgctxt "Account"
 #~ msgid "New"
 #~ msgstr "Nová"
-
-#~ msgid "Open Account (Ctrl+O)"
-#~ msgstr "Otevřít účet (Ctrl+O)"
 
 #~ msgid "Toggle Graphs"
 #~ msgstr "Přepnout grafy"

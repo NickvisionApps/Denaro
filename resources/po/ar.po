@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: 2023-12-06 07:04+0000\n"
 "Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/nickvision-money/"
@@ -218,6 +218,26 @@ msgstr "لا توجد حسابات استخدمت مؤخَّرًا"
 msgid "Remove"
 msgstr "أزل"
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#, fuzzy
+msgid "New"
+msgstr "جديد"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr "حساب جديد (Ctrl + N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "افتح"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr "افتح حسابًا (Ctrl + O)"
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -324,18 +344,16 @@ msgstr "النقطة والفاصلة"
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
 #, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr "مجلد"
+msgid "Account"
+msgstr "الحساب"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-#, fuzzy
-msgid "Open Folder"
-msgstr "مجلد"
+msgid "New Account"
+msgstr "حساب جديد"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#, fuzzy
-msgid "Close Folder"
-msgstr "حدِّد مجلدًا"
+msgid "Open Account"
+msgstr "افتح حسابًا"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 #, fuzzy
@@ -374,27 +392,22 @@ msgstr "أغلق"
 msgid "Result was copied to clipboard."
 msgstr "تم نسخ النتائج إلى الحافظة."
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "افتح"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "مستودع جت‌هب"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "جارٍ"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "ادِّخار"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "أعمال"
@@ -446,11 +459,6 @@ msgstr "الإشادات"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "اﻹعدادات"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-#, fuzzy
-msgid "New"
-msgstr "جديد"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -549,6 +557,19 @@ msgstr "حسنًا"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "النتيجة"
+
+#, fuzzy
+#~ msgctxt "Shortcut"
+#~ msgid "Folder"
+#~ msgstr "مجلد"
+
+#, fuzzy
+#~ msgid "Open Folder"
+#~ msgstr "مجلد"
+
+#, fuzzy
+#~ msgid "Close Folder"
+#~ msgstr "حدِّد مجلدًا"
 
 #~ msgid "Checking Account Color"
 #~ msgstr "لون الحساب الجاري"
@@ -800,9 +821,6 @@ msgstr "النتيجة"
 
 #~ msgid "Nothing to import from the file."
 #~ msgstr "لا شيء للاستيراد من الملف."
-
-#~ msgid "Open Account"
-#~ msgstr "افتح حسابًا"
 
 #~ msgid "Overview"
 #~ msgstr "ملخَّص"
@@ -1144,9 +1162,6 @@ msgstr "النتيجة"
 #~ msgid "Edit Group"
 #~ msgstr "حرِّر المجموعة"
 
-#~ msgid "New Account"
-#~ msgstr "حساب جديد"
-
 #~ msgid "Use this wizard to get the most out of your account"
 #~ msgstr "يرشدك هذا المرشد نحو أحسن استفادة من حسابك"
 
@@ -1219,9 +1234,6 @@ msgstr "النتيجة"
 
 #~ msgid "No Reminders"
 #~ msgstr "لا مفكرات"
-
-#~ msgid "Account"
-#~ msgstr "الحساب"
 
 #~ msgctxt "Title"
 #~ msgid "Transfer"
@@ -1320,15 +1332,9 @@ msgstr "النتيجة"
 #~ msgid "Account Menu"
 #~ msgstr "قائمة الحساب"
 
-#~ msgid "New Account (Ctrl+N)"
-#~ msgstr "حساب جديد (Ctrl + N)"
-
 #~ msgctxt "Account"
 #~ msgid "New"
 #~ msgstr "جديد"
-
-#~ msgid "Open Account (Ctrl+O)"
-#~ msgstr "افتح حسابًا (Ctrl + O)"
 
 #, fuzzy
 #~ msgid "result"

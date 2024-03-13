@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: 2023-08-27 17:36+0000\n"
 "Last-Translator: Victor Mihalache <victormihalache@duck.com>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/nickvision-"
@@ -222,6 +222,25 @@ msgstr "Selectați contul"
 msgid "Remove"
 msgstr ""
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+msgid "New"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "Deschide"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr ""
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -327,18 +346,18 @@ msgstr ""
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
 #, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr "Selectați folderul"
+msgid "Account"
+msgstr "Sumă"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
 #, fuzzy
-msgid "Open Folder"
-msgstr "Selectați folderul"
+msgid "New Account"
+msgstr "Sumă"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
 #, fuzzy
-msgid "Close Folder"
-msgstr "Selectați folderul"
+msgid "Open Account"
+msgstr "Sumă"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 msgctxt "Shortcut"
@@ -374,27 +393,22 @@ msgstr ""
 msgid "Result was copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "Deschide"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repertoriu GitHub"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Cont curent"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "Cont de depozit"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Afacere"
@@ -447,10 +461,6 @@ msgstr ""
 #, fuzzy
 msgid "Settings"
 msgstr "Setările contului"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-msgid "New"
-msgstr ""
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -545,6 +555,19 @@ msgstr ""
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:117
 msgid "Result (Error)"
 msgstr ""
+
+#, fuzzy
+#~ msgctxt "Shortcut"
+#~ msgid "Folder"
+#~ msgstr "Selectați folderul"
+
+#, fuzzy
+#~ msgid "Open Folder"
+#~ msgstr "Selectați folderul"
+
+#, fuzzy
+#~ msgid "Close Folder"
+#~ msgstr "Selectați folderul"
 
 #~ msgid "(Copy)"
 #~ msgstr "(Copie)"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -216,6 +216,26 @@ msgstr "Nenhuma Conta Recente"
 msgid "Remove"
 msgstr "Remover"
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#, fuzzy
+msgid "New"
+msgstr "Novo"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr "Nova Conta (Ctrl+N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "Abrir"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr "Abrir Conta (Ctrl+O)"
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -328,18 +348,16 @@ msgstr "Ponto Final e Vírgula"
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
 #, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr "Selecione a Pasta de Backup"
+msgid "Account"
+msgstr "Conta"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-#, fuzzy
-msgid "Open Folder"
-msgstr "Selecione a Pasta de Backup"
+msgid "New Account"
+msgstr "Nova Conta"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#, fuzzy
-msgid "Close Folder"
-msgstr "Selecione a Pasta de Backup"
+msgid "Open Account"
+msgstr "Abrir Conta"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 #, fuzzy
@@ -377,27 +395,22 @@ msgstr "Fechar"
 msgid "Result was copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "Abrir"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repositório do GitHub"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Verificando"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "Economias"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Negócio"
@@ -449,11 +462,6 @@ msgstr "Créditos"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Configurações"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-#, fuzzy
-msgid "New"
-msgstr "Novo"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -551,6 +559,19 @@ msgstr "OK"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "Resultado"
+
+#, fuzzy
+#~ msgctxt "Shortcut"
+#~ msgid "Folder"
+#~ msgstr "Selecione a Pasta de Backup"
+
+#, fuzzy
+#~ msgid "Open Folder"
+#~ msgstr "Selecione a Pasta de Backup"
+
+#, fuzzy
+#~ msgid "Close Folder"
+#~ msgstr "Selecione a Pasta de Backup"
 
 #~ msgid "Checking Account Color"
 #~ msgstr "Cor da Conta Corrente"
@@ -789,9 +810,6 @@ msgstr "Resultado"
 
 #~ msgid "Notes"
 #~ msgstr "Notas"
-
-#~ msgid "Open Account"
-#~ msgstr "Abrir Conta"
 
 #~ msgid "Overview"
 #~ msgstr "Visão Geral"
@@ -1070,9 +1088,6 @@ msgstr "Resultado"
 #~ msgid "Edit Group"
 #~ msgstr "Editar Grupo"
 
-#~ msgid "New Account"
-#~ msgstr "Nova Conta"
-
 #, fuzzy
 #~ msgid "Account Password (Optional)"
 #~ msgstr "Senha da Conta de Destino (Inválida)"
@@ -1137,9 +1152,6 @@ msgstr "Resultado"
 
 #~ msgid "Clear Backup Folder"
 #~ msgstr "Limpar a Pasta de Backup"
-
-#~ msgid "Account"
-#~ msgstr "Conta"
 
 #, fuzzy
 #~ msgctxt "Title"
@@ -1240,16 +1252,10 @@ msgstr "Resultado"
 #~ msgid "Account Menu"
 #~ msgstr "Menu de contas"
 
-#~ msgid "New Account (Ctrl+N)"
-#~ msgstr "Nova Conta (Ctrl+N)"
-
 #, fuzzy
 #~ msgctxt "Account"
 #~ msgid "New"
 #~ msgstr "Novo"
-
-#~ msgid "Open Account (Ctrl+O)"
-#~ msgstr "Abrir Conta (Ctrl+O)"
 
 #, fuzzy
 #~ msgid "result"

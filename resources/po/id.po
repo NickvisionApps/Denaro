@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: 2023-06-07 19:40+0000\n"
 "Last-Translator: Krindog7337 <igstkrisna2006@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/nickvision-"
@@ -221,6 +221,26 @@ msgstr "Tidak Ada Rekening Baru-baru Ini"
 msgid "Remove"
 msgstr "Hapus"
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#, fuzzy
+msgid "New"
+msgstr "Baru"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr "Rekening Baru (Ctrl+N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "Buka"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr "Buka Rekening (Ctrl+O)"
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -329,18 +349,16 @@ msgstr "Titik dan Koma"
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
 #, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr "Folder"
+msgid "Account"
+msgstr "Rekening"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-#, fuzzy
-msgid "Open Folder"
-msgstr "Folder"
+msgid "New Account"
+msgstr "Rekening Baru"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#, fuzzy
-msgid "Close Folder"
-msgstr "Pilih Folder"
+msgid "Open Account"
+msgstr "Buka Rekening"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 #, fuzzy
@@ -378,27 +396,22 @@ msgstr "Tutup"
 msgid "Result was copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "Buka"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repo Github"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Giro"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "Tabungan"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Bisnis"
@@ -450,11 +463,6 @@ msgstr "Kredit"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Pengaturan"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-#, fuzzy
-msgid "New"
-msgstr "Baru"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -552,6 +560,19 @@ msgstr "OK"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "Hasil"
+
+#, fuzzy
+#~ msgctxt "Shortcut"
+#~ msgid "Folder"
+#~ msgstr "Folder"
+
+#, fuzzy
+#~ msgid "Open Folder"
+#~ msgstr "Folder"
+
+#, fuzzy
+#~ msgid "Close Folder"
+#~ msgstr "Pilih Folder"
 
 #~ msgid "Checking Account Color"
 #~ msgstr "Warna Rekening Giro"
@@ -784,9 +805,6 @@ msgstr "Hasil"
 
 #~ msgid "Notes"
 #~ msgstr "Catatan"
-
-#~ msgid "Open Account"
-#~ msgstr "Buka Rekening"
 
 #~ msgid "Overview"
 #~ msgstr "Gambaran"
@@ -1085,9 +1103,6 @@ msgstr "Hasil"
 #~ msgid "Edit Group"
 #~ msgstr "Edit Grup"
 
-#~ msgid "New Account"
-#~ msgstr "Rekening Baru"
-
 #~ msgid "Use this wizard to get the most out of your account"
 #~ msgstr ""
 #~ "Gunakan wizard ini untuk mendapatkan hasil maksimal dari rekening Anda"
@@ -1152,9 +1167,6 @@ msgstr "Hasil"
 
 #~ msgid "Clear Backup Folder"
 #~ msgstr "Bersihkan Folder Cadangan"
-
-#~ msgid "Account"
-#~ msgstr "Rekening"
 
 #~ msgctxt "Title"
 #~ msgid "Transfer"
@@ -1253,15 +1265,9 @@ msgstr "Hasil"
 #~ msgid "Account Menu"
 #~ msgstr "Menu Rekening"
 
-#~ msgid "New Account (Ctrl+N)"
-#~ msgstr "Rekening Baru (Ctrl+N)"
-
 #~ msgctxt "Account"
 #~ msgid "New"
 #~ msgstr "Baru"
-
-#~ msgid "Open Account (Ctrl+O)"
-#~ msgstr "Buka Rekening (Ctrl+O)"
 
 #, fuzzy
 #~ msgid "result"

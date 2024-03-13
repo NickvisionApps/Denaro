@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: 2023-09-26 13:22+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -219,6 +219,26 @@ msgstr "Nema nedavno korištenih računa"
 msgid "Remove"
 msgstr "Ukloni"
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#, fuzzy
+msgid "New"
+msgstr "Nova"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr "Novi račun (Ctrl+N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "Otvori"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr "Otvori račun (Ctrl+O)"
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -325,18 +345,16 @@ msgstr "Točka i zarez"
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
 #, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr "Mapa"
+msgid "Account"
+msgstr "Račun"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-#, fuzzy
-msgid "Open Folder"
-msgstr "Mapa"
+msgid "New Account"
+msgstr "Novi račun"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#, fuzzy
-msgid "Close Folder"
-msgstr "Odaberi mapu"
+msgid "Open Account"
+msgstr "Otvori račun"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 #, fuzzy
@@ -377,27 +395,22 @@ msgstr "Zatvori"
 msgid "Result was copied to clipboard."
 msgstr "Rezultat je kopiran u međuspremnik."
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "Otvori"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub repozitorij"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Žiro račun"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "Štedni račun"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Poslovni"
@@ -449,11 +462,6 @@ msgstr "Zasluge"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Postavke"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-#, fuzzy
-msgid "New"
-msgstr "Nova"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -552,6 +560,19 @@ msgstr "U redu"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "Rezultat"
+
+#, fuzzy
+#~ msgctxt "Shortcut"
+#~ msgid "Folder"
+#~ msgstr "Mapa"
+
+#, fuzzy
+#~ msgid "Open Folder"
+#~ msgstr "Mapa"
+
+#, fuzzy
+#~ msgid "Close Folder"
+#~ msgstr "Odaberi mapu"
 
 #~ msgid "Checking Account Color"
 #~ msgstr "Boja žiro računa"
@@ -804,9 +825,6 @@ msgstr "Rezultat"
 
 #~ msgid "Nothing to import from the file."
 #~ msgstr "Nema ničega što bi se moglo uvesti iz datoteke."
-
-#~ msgid "Open Account"
-#~ msgstr "Otvori račun"
 
 #~ msgid "Overview"
 #~ msgstr "Pregled"
@@ -1159,9 +1177,6 @@ msgstr "Rezultat"
 #~ msgid "Edit Group"
 #~ msgstr "Uredi grupu"
 
-#~ msgid "New Account"
-#~ msgstr "Novi račun"
-
 #~ msgid "Use this wizard to get the most out of your account"
 #~ msgstr "Koristi ovog čarobnjaka za maksimalno iskorištavanje tvog računa"
 
@@ -1234,9 +1249,6 @@ msgstr "Rezultat"
 
 #~ msgid "No Reminders"
 #~ msgstr "Bez podsjetnika"
-
-#~ msgid "Account"
-#~ msgstr "Račun"
 
 #~ msgctxt "Title"
 #~ msgid "Transfer"
@@ -1339,15 +1351,9 @@ msgstr "Rezultat"
 #~ msgid "Account Menu"
 #~ msgstr "Izbornik računa"
 
-#~ msgid "New Account (Ctrl+N)"
-#~ msgstr "Novi račun (Ctrl+N)"
-
 #~ msgctxt "Account"
 #~ msgid "New"
 #~ msgstr "Novi"
-
-#~ msgid "Open Account (Ctrl+O)"
-#~ msgstr "Otvori račun (Ctrl+O)"
 
 #~ msgid "Toggle Graphs"
 #~ msgstr "Uključi/Isključi dijagrame"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: 2023-09-08 14:21+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -219,6 +219,26 @@ msgstr "Нет недавних счетов"
 msgid "Remove"
 msgstr "Удалить"
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#, fuzzy
+msgid "New"
+msgstr "Новая"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr "Новый счёт (Ctrl+N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "Открыть"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr "Открыть счёт (Ctrl+O)"
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -325,18 +345,16 @@ msgstr "Точка и запятая"
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
 #, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr "Папка"
+msgid "Account"
+msgstr "Счёт"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-#, fuzzy
-msgid "Open Folder"
-msgstr "Папка"
+msgid "New Account"
+msgstr "Новый счёт"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#, fuzzy
-msgid "Close Folder"
-msgstr "Выбрать папку"
+msgid "Open Account"
+msgstr "Открыть счёт"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 #, fuzzy
@@ -377,27 +395,22 @@ msgstr "Закрыть"
 msgid "Result was copied to clipboard."
 msgstr "Результат скопирован в буфер обмена."
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "Открыть"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Репозиторий GitHub"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Расчётный"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "Сберегательный"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Бизнес"
@@ -449,11 +462,6 @@ msgstr "Авторы"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Настройки"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-#, fuzzy
-msgid "New"
-msgstr "Новая"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -552,6 +560,19 @@ msgstr "ОК"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "Результат"
+
+#, fuzzy
+#~ msgctxt "Shortcut"
+#~ msgid "Folder"
+#~ msgstr "Папка"
+
+#, fuzzy
+#~ msgid "Open Folder"
+#~ msgstr "Папка"
+
+#, fuzzy
+#~ msgid "Close Folder"
+#~ msgstr "Выбрать папку"
 
 #~ msgid "Checking Account Color"
 #~ msgstr "Цвет расчётного счёта"
@@ -804,9 +825,6 @@ msgstr "Результат"
 
 #~ msgid "Nothing to import from the file."
 #~ msgstr "Нечего импортировать из файла."
-
-#~ msgid "Open Account"
-#~ msgstr "Открыть счёт"
 
 #~ msgid "Overview"
 #~ msgstr "Обзор"
@@ -1160,9 +1178,6 @@ msgstr "Результат"
 #~ msgid "Edit Group"
 #~ msgstr "Редактировать группу"
 
-#~ msgid "New Account"
-#~ msgstr "Новый счёт"
-
 #~ msgid "Use this wizard to get the most out of your account"
 #~ msgstr ""
 #~ "Используйте этот мастер настройки, чтобы извлечь максимум пользы из "
@@ -1238,9 +1253,6 @@ msgstr "Результат"
 
 #~ msgid "No Reminders"
 #~ msgstr "Нет напоминаний"
-
-#~ msgid "Account"
-#~ msgstr "Счёт"
 
 #~ msgctxt "Title"
 #~ msgid "Transfer"
@@ -1342,15 +1354,9 @@ msgstr "Результат"
 #~ msgid "Account Menu"
 #~ msgstr "Меню счёта"
 
-#~ msgid "New Account (Ctrl+N)"
-#~ msgstr "Новый счёт (Ctrl+N)"
-
 #~ msgctxt "Account"
 #~ msgid "New"
 #~ msgstr "Новый"
-
-#~ msgid "Open Account (Ctrl+O)"
-#~ msgstr "Открыть счёт (Ctrl+O)"
 
 #~ msgid "Toggle Graphs"
 #~ msgstr "Переключить отображение графиков"

@@ -120,7 +120,7 @@ namespace Nickvision::Money::Shared::Controllers
         builder << std::locale("").name() << std::endl;
 #endif
         //Gnuplot
-        builder << std::endl << Aura::getActive().sysExec("gnuplot --version") << std::endl;
+        builder << std::endl << Aura::getActive().sysExec("gnuplot --version");
         //Extra Information
         if (!extraInformation.empty())
         {

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -215,6 +215,26 @@ msgstr "Ingen seneste kontier"
 msgid "Remove"
 msgstr "Fjern"
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#, fuzzy
+msgid "New"
+msgstr "Ny"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr "Ny konto (Ctrl+N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "Åbn"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr "Åbn konto (Ctrl+O)"
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -326,18 +346,16 @@ msgstr "Punktum og komma"
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
 #, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr "Vælg rækkevidde"
+msgid "Account"
+msgstr "Konto"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-#, fuzzy
-msgid "Open Folder"
-msgstr "Vælg rækkevidde"
+msgid "New Account"
+msgstr "Ny konto"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#, fuzzy
-msgid "Close Folder"
-msgstr "Vælg rækkevidde"
+msgid "Open Account"
+msgstr "Åbn konto"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 #, fuzzy
@@ -375,27 +393,22 @@ msgstr "Luk"
 msgid "Result was copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "Åbn"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub Depot"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Indkomst"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "Opsparing"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Virksomhed"
@@ -447,11 +460,6 @@ msgstr "Kreditter"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Indstillinger"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-#, fuzzy
-msgid "New"
-msgstr "Ny"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -549,6 +557,19 @@ msgstr "OK"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "Resultat"
+
+#, fuzzy
+#~ msgctxt "Shortcut"
+#~ msgid "Folder"
+#~ msgstr "Vælg rækkevidde"
+
+#, fuzzy
+#~ msgid "Open Folder"
+#~ msgstr "Vælg rækkevidde"
+
+#, fuzzy
+#~ msgid "Close Folder"
+#~ msgstr "Vælg rækkevidde"
 
 #~ msgid "Checking Account Color"
 #~ msgstr "Indkomstkonto farve"
@@ -769,9 +790,6 @@ msgstr "Resultat"
 
 #~ msgid "No transactions match the specified filters."
 #~ msgstr "Ingen overførsler ud fra de valgte filtre."
-
-#~ msgid "Open Account"
-#~ msgstr "Åbn konto"
 
 #~ msgid "Overview"
 #~ msgstr "Oversigt"
@@ -1024,9 +1042,6 @@ msgstr "Resultat"
 #~ msgid "Edit Group"
 #~ msgstr "Ret gruppe"
 
-#~ msgid "New Account"
-#~ msgstr "Ny konto"
-
 #, fuzzy
 #~ msgid "Account Password (Optional)"
 #~ msgstr "Kodeord på destinations konto (ugyldig)"
@@ -1152,16 +1167,10 @@ msgstr "Resultat"
 #~ msgid "Account Menu"
 #~ msgstr "Konto menu"
 
-#~ msgid "New Account (Ctrl+N)"
-#~ msgstr "Ny konto (Ctrl+N)"
-
 #, fuzzy
 #~ msgctxt "Account"
 #~ msgid "New"
 #~ msgstr "Ny"
-
-#~ msgid "Open Account (Ctrl+O)"
-#~ msgstr "Åbn konto (Ctrl+O)"
 
 #, fuzzy
 #~ msgid "result"

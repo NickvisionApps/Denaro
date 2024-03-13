@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: 2023-10-20 04:03+0000\n"
 "Last-Translator: Nicolás Vieites Sueiro <vacamaribu@hotmail.es>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/nickvision-"
@@ -221,6 +221,25 @@ msgstr "Importe"
 msgid "Remove"
 msgstr ""
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+msgid "New"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr ""
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -324,17 +343,20 @@ msgid "Period and Comma"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
+#, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr ""
+msgid "Account"
+msgstr "Importe"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-msgid "Open Folder"
-msgstr ""
+#, fuzzy
+msgid "New Account"
+msgstr "Importe"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-msgid "Close Folder"
-msgstr ""
+#, fuzzy
+msgid "Open Account"
+msgstr "Importe"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 msgctxt "Shortcut"
@@ -370,28 +392,23 @@ msgstr "Pechar"
 msgid "Result was copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr ""
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repositorio de GitHub"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Corrente"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 #, fuzzy
 msgid "Savings"
 msgstr "Axustes da conta"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Empresa"
@@ -444,10 +461,6 @@ msgstr ""
 #, fuzzy
 msgid "Settings"
 msgstr "Axustes da conta"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-msgid "New"
-msgstr ""
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96

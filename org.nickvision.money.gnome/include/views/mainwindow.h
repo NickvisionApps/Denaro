@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <string>
 #include <memory>
 #include <adwaita.h>
 #include "controllers/mainwindowcontroller.h"
@@ -43,6 +44,12 @@ namespace Nickvision::Money::GNOME::Views
          */
         bool onCloseRequested();
         /**
+         * @brief Handles when a file is dropped on the window.
+         * @param value The GValue dropped on the window
+         * @return True if drop was accepted, else false
+         */
+        bool onDrop(const GValue* value);
+        /**
          * @brief Handles when a notification is sent to the window.
          * @param args Nickvision::Notifications::NotificationSentEventArgs 
          */
@@ -76,6 +83,19 @@ namespace Nickvision::Money::GNOME::Views
          * @brief Opens the application's about dialog. 
          */
         void about();
+        /**
+         * @brief Handles when an account is added.
+         * @param args Nickvision::Events::ParamEventArgs<Nickvision::Money::Shared::Controllers::AccountViewController>
+         */
+        void onAccountAdded(const ::Nickvision::Events::ParamEventArgs<std::shared_ptr<::Nickvision::Money::Shared::Controllers::AccountViewController>>& args);
+        /**
+         * @brief Opens the new account dialog for account creation. 
+         */
+        void newAccount();
+        /**
+         * @brief Prompts the user to open an account.
+         */
+        void openAccount();
 
     private:
         /**

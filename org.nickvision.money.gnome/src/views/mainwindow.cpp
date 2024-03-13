@@ -1,6 +1,7 @@
 #include "views/mainwindow.h"
 #include <format>
 #include <libnick/app/appinfo.h>
+#include <libnick/helpers/stringhelpers.h>
 #include <libnick/notifications/shellnotification.h>
 #include <libnick/localization/gettext.h>
 #include <libnick/localization/documentation.h>
@@ -8,6 +9,7 @@
 #include "helpers/builder.h"
 #include "views/preferencesdialog.h"
 
+using namespace Nickvision;
 using namespace Nickvision::App;
 using namespace Nickvision::Events;
 using namespace Nickvision::Localization;
@@ -38,6 +40,11 @@ namespace Nickvision::Money::GNOME::Views
         g_signal_connect(m_window, "close_request", G_CALLBACK(+[](GtkWindow*, gpointer data) -> bool { return reinterpret_cast<MainWindow*>(data)->onCloseRequested(); }), this);
         m_controller->notificationSent() += [&](const NotificationSentEventArgs& args) { onNotificationSent(args); };
         m_controller->shellNotificationSent() += [&](const ShellNotificationSentEventArgs& args) { onShellNotificationSent(args); };
+        m_controller->accountAdded() += [&](const ParamEventArgs<std::shared_ptr<AccountViewController>>& args) { onAccountAdded(args); };
+        //Drop Target
+        GtkDropTarget* dropTarget{ gtk_drop_target_new(G_TYPE_FILE, GDK_ACTION_COPY) };
+        g_signal_connect(dropTarget, "drop", G_CALLBACK(+[](GtkDropTarget*, const GValue* value, double, double, gpointer data) -> bool { return reinterpret_cast<MainWindow*>(data)->onDrop(value); }), this);
+        gtk_widget_add_controller(GTK_WIDGET(m_window), GTK_EVENT_CONTROLLER(dropTarget));
         //Quit Action
         GSimpleAction* actQuit{ g_simple_action_new("quit", nullptr) };
         g_signal_connect(actQuit, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->quit(); }), this);
@@ -67,12 +74,22 @@ namespace Nickvision::Money::GNOME::Views
         g_signal_connect(actAbout, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->about(); }), this);
         g_action_map_add_action(G_ACTION_MAP(m_window), G_ACTION(actAbout));
         SET_ACCEL_FOR_ACTION(m_app, "win.about", "F1");
+        //New Account Action
+        GSimpleAction* actNewAccount{ g_simple_action_new("newAccount", nullptr) };
+        g_signal_connect(actNewAccount, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->newAccount(); }), this);
+        g_action_map_add_action(G_ACTION_MAP(m_window), G_ACTION(actNewAccount));
+        SET_ACCEL_FOR_ACTION(m_app, "win.newAccount", "<Ctrl>N");
+        //Open Account Action
+        GSimpleAction* actOpenAccount{ g_simple_action_new("openAccount", nullptr) };
+        g_signal_connect(actOpenAccount, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->openAccount(); }), this);
+        g_action_map_add_action(G_ACTION_MAP(m_window), G_ACTION(actOpenAccount));
+        SET_ACCEL_FOR_ACTION(m_app, "win.openAccount", "<Ctrl>O");
         //Recent Account Callbacks
-        g_signal_connect(gtk_builder_get_object(m_builder, "recentAccount1Row"), "activate", G_CALLBACK(+[](AdwActionRow* row, gpointer data){ reinterpret_cast<MainWindow*>(data)->openAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(row))); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "recentAccount1Row"), "activated", G_CALLBACK(+[](AdwActionRow* row, gpointer data){ reinterpret_cast<MainWindow*>(data)->openAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(row))); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "removeRecentAccount1Button"), "clicked", G_CALLBACK(+[](GtkButton* button, gpointer data){ reinterpret_cast<MainWindow*>(data)->removeRecentAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(gtk_builder_get_object(reinterpret_cast<MainWindow*>(data)->m_builder, "recentAccount1Row")))); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "recentAccount2Row"), "activate", G_CALLBACK(+[](AdwActionRow* row, gpointer data){ reinterpret_cast<MainWindow*>(data)->openAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(row))); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "recentAccount2Row"), "activated", G_CALLBACK(+[](AdwActionRow* row, gpointer data){ reinterpret_cast<MainWindow*>(data)->openAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(row))); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "removeRecentAccount2Button"), "clicked", G_CALLBACK(+[](GtkButton* button, gpointer data){ reinterpret_cast<MainWindow*>(data)->removeRecentAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(gtk_builder_get_object(reinterpret_cast<MainWindow*>(data)->m_builder, "recentAccount2Row")))); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "recentAccount3Row"), "activate", G_CALLBACK(+[](AdwActionRow* row, gpointer data){ reinterpret_cast<MainWindow*>(data)->openAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(row))); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "recentAccount3Row"), "activated", G_CALLBACK(+[](AdwActionRow* row, gpointer data){ reinterpret_cast<MainWindow*>(data)->openAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(row))); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "removeRecentAccount3Button"), "clicked", G_CALLBACK(+[](GtkButton* button, gpointer data){ reinterpret_cast<MainWindow*>(data)->removeRecentAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(gtk_builder_get_object(reinterpret_cast<MainWindow*>(data)->m_builder, "recentAccount3Row")))); }), this);
     }
 
@@ -98,6 +115,16 @@ namespace Nickvision::Money::GNOME::Views
 
     bool MainWindow::onCloseRequested()
     {
+        return false;
+    }
+
+    bool MainWindow::onDrop(const GValue* value)
+    {
+        if(G_VALUE_HOLDS(value, G_TYPE_FILE))
+        {
+            openAccount(g_file_get_path(G_FILE(g_value_get_object(value))));
+            return true;
+        }
         return false;
     }
 
@@ -201,6 +228,37 @@ namespace Nickvision::Money::GNOME::Views
         gtk_window_present(GTK_WINDOW(dialog));
     }
 
+    void MainWindow::onAccountAdded(const ParamEventArgs<std::shared_ptr<AccountViewController>>& args)
+    {
+        loadRecentAccounts();
+    }
+
+    void MainWindow::newAccount()
+    {
+        
+    }
+
+    void MainWindow::openAccount()
+    {
+        GtkFileDialog* fileDialog{ gtk_file_dialog_new() };
+        gtk_file_dialog_set_title(fileDialog, _("Open Account"));
+        GtkFileFilter* filter{ gtk_file_filter_new() };
+        gtk_file_filter_set_name(filter, _("Nickvision Denaro Account (*.nmoney)"));
+        gtk_file_filter_add_pattern(filter, "*.nmoney");
+        gtk_file_filter_add_pattern(filter, "*.NMONEY");
+        GListStore* filters{ g_list_store_new(gtk_file_filter_get_type()) };
+        g_list_store_append(filters, G_OBJECT(filter));
+        gtk_file_dialog_set_filters(fileDialog, G_LIST_MODEL(filters));
+        gtk_file_dialog_open(fileDialog, GTK_WINDOW(m_window), nullptr, GAsyncReadyCallback(+[](GObject* self, GAsyncResult* res, gpointer data) 
+        {
+            GFile* file{ gtk_file_dialog_open_finish(GTK_FILE_DIALOG(self), res, nullptr) };
+            if(file)
+            {
+                reinterpret_cast<MainWindow*>(data)->openAccount(g_file_get_path(file));
+            }
+        }), this);
+    }
+
     void MainWindow::loadRecentAccounts()
     {
         std::vector<RecentAccount> recentAccounts{ m_controller->getRecentAccounts() };
@@ -239,6 +297,47 @@ namespace Nickvision::Money::GNOME::Views
 
     void MainWindow::openAccount(const std::filesystem::path& path)
     {
-
+        if(StringHelpers::toLower(path.extension().string()) != ".nmoney")
+        {
+            return;
+        }
+        std::string password;
+        //Get password if needed
+        if(m_controller->isAccountPasswordProtected(path))
+        {
+            GValue valTrue;
+            g_value_init(&valTrue, G_TYPE_BOOLEAN);
+            g_value_set_boolean(&valTrue, true);
+            GValue valPlaceholderText;
+            g_value_init(&valPlaceholderText, G_TYPE_STRING);
+            g_value_set_string(&valPlaceholderText, _("Enter password here"));
+            GtkPasswordEntry* passwordEntry{ GTK_PASSWORD_ENTRY(gtk_password_entry_new()) };
+            gtk_password_entry_set_show_peek_icon(passwordEntry, true);
+            g_object_set_property(G_OBJECT(passwordEntry), "activates-default", &valTrue);
+            g_object_set_property(G_OBJECT(passwordEntry), "placeholder-text", &valPlaceholderText);
+            g_signal_connect(passwordEntry, "changed", G_CALLBACK(+[](GtkEditable* self, gpointer data){ *(reinterpret_cast<std::string*>(data)) = gtk_editable_get_text(self); }), &password);
+            AdwMessageDialog* messageDialog{ ADW_MESSAGE_DIALOG(adw_message_dialog_new(GTK_WINDOW(m_window), _("Unlock Account"), path.filename().string().c_str())) };
+            adw_message_dialog_set_extra_child(messageDialog, GTK_WIDGET(passwordEntry));
+            adw_message_dialog_add_response(messageDialog, "cancel", _("Cancel"));
+            adw_message_dialog_add_response(messageDialog, "unlock", _("Unlock"));
+            adw_message_dialog_set_default_response(messageDialog, "unlock");
+            adw_message_dialog_set_close_response(messageDialog, "cancel");
+            adw_message_dialog_set_response_appearance(messageDialog, "unlock", ADW_RESPONSE_SUGGESTED);
+            g_signal_connect(messageDialog, "response", G_CALLBACK(+[](AdwMessageDialog* self, const char* response, gpointer data)
+            { 
+                if(std::string(response) != "unlock")
+                {
+                    *(reinterpret_cast<std::string*>(data)) = "";
+                }
+                gtk_window_destroy(GTK_WINDOW(self));
+            }), &password);
+            gtk_window_present(GTK_WINDOW(messageDialog));
+            while(gtk_widget_is_visible(GTK_WIDGET(messageDialog)))
+            {
+                g_main_context_iteration(g_main_context_default(), false);
+            }
+        }
+        //Open account
+        m_controller->openAccount(path, password);
     }
 }

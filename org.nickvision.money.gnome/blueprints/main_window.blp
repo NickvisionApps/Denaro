@@ -117,6 +117,24 @@ Adw.ApplicationWindow root {
                 Gtk.Box {
                   orientation: horizontal;
                   spacing: 6;
+
+                  Gtk.Button newAccountButton {
+                    hexpand: true;
+                    label: _("New");
+                    tooltip-text: _("New Account (Ctrl+N)");
+                    action-name: "win.newAccount";
+
+                    styles ["pill"]
+                  }
+
+                  Gtk.Button openAccountButton {
+                    hexpand: true;
+                    label: _("Open");
+                    tooltip-text: _("Open Account (Ctrl+O)");
+                    action-name: "win.openAccount";
+
+                    styles ["pill", "suggested-action"]
+                  }
                 }
               }
             };

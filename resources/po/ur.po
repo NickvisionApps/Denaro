@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -213,6 +213,28 @@ msgstr "میزانیں"
 msgid "Remove"
 msgstr "اڑا دیں"
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#, fuzzy
+msgid "New"
+msgstr "نیا"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+#, fuzzy
+msgid "New Account (Ctrl+N)"
+msgstr "میزان"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "کھولیں"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+#, fuzzy
+msgid "Open Account (Ctrl+O)"
+msgstr "میزان"
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -312,17 +334,20 @@ msgid "Period and Comma"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
+#, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr ""
+msgid "Account"
+msgstr "میزان"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-msgid "Open Folder"
-msgstr ""
+#, fuzzy
+msgid "New Account"
+msgstr "میزان"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-msgid "Close Folder"
-msgstr ""
+#, fuzzy
+msgid "Open Account"
+msgstr "میزان"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 msgctxt "Shortcut"
@@ -359,28 +384,23 @@ msgstr "بند کریں"
 msgid "Result was copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "کھولیں"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "گٹہب ریپو"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 #, fuzzy
 msgid "Savings"
 msgstr "ترتیبات"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr ""
@@ -433,11 +453,6 @@ msgstr ""
 #, fuzzy
 msgid "Settings"
 msgstr "ترتیبات"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-#, fuzzy
-msgid "New"
-msgstr "نیا"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -560,10 +575,6 @@ msgstr ""
 #~ msgstr "نہیں"
 
 #, fuzzy
-#~ msgid "Open Account"
-#~ msgstr "میزان"
-
-#, fuzzy
 #~ msgid "Select Account"
 #~ msgstr "میزان"
 
@@ -581,10 +592,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "All Accounts"
 #~ msgstr "میزانیں"
-
-#, fuzzy
-#~ msgid "New Account"
-#~ msgstr "میزان"
 
 #, fuzzy
 #~ msgid "Backup"

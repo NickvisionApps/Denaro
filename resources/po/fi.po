@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: 2023-08-24 20:09+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -219,6 +219,26 @@ msgstr "Ei viimeisimpiä tilejä"
 msgid "Remove"
 msgstr "Poista"
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#, fuzzy
+msgid "New"
+msgstr "Uusi"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr "Uusi tili (Ctrl+N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "Avaa"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr "Avaa tili (Ctrl+O)"
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -322,18 +342,16 @@ msgstr "Piste ja pilkku"
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
 #, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr "Kansio"
+msgid "Account"
+msgstr "Tili"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-#, fuzzy
-msgid "Open Folder"
-msgstr "Kansio"
+msgid "New Account"
+msgstr "Uusi tili"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#, fuzzy
-msgid "Close Folder"
-msgstr "Valitse kansio"
+msgid "Open Account"
+msgstr "Avaa tili"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 #, fuzzy
@@ -371,27 +389,22 @@ msgstr "Sulje"
 msgid "Result was copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "Avaa"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub-tietovarasto"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Siirto"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "Säästöt"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Yritys"
@@ -443,11 +456,6 @@ msgstr "Tekijät"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Asetukset"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-#, fuzzy
-msgid "New"
-msgstr "Uusi"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -545,6 +553,19 @@ msgstr "OK"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "Tulos"
+
+#, fuzzy
+#~ msgctxt "Shortcut"
+#~ msgid "Folder"
+#~ msgstr "Kansio"
+
+#, fuzzy
+#~ msgid "Open Folder"
+#~ msgstr "Kansio"
+
+#, fuzzy
+#~ msgid "Close Folder"
+#~ msgstr "Valitse kansio"
 
 #~ msgid "Checking Account Color"
 #~ msgstr "Siirtotilin väri"
@@ -772,9 +793,6 @@ msgstr "Tulos"
 
 #~ msgid "Nothing to import from the file."
 #~ msgstr "Ei mitään tuotavaa tiedostosta."
-
-#~ msgid "Open Account"
-#~ msgstr "Avaa tili"
 
 #~ msgid "Overview"
 #~ msgstr "Yleisnäkymä"
@@ -1042,9 +1060,6 @@ msgstr "Tulos"
 #~ msgid "Edit Group"
 #~ msgstr "Muokkaa ryhmää"
 
-#~ msgid "New Account"
-#~ msgstr "Uusi tili"
-
 #~ msgid "Storage Location"
 #~ msgstr "Tallennustilan sijainti"
 
@@ -1091,9 +1106,6 @@ msgstr "Tulos"
 
 #~ msgid "Clear Backup Folder"
 #~ msgstr "Tyhjennä varmuuskopiokansio"
-
-#~ msgid "Account"
-#~ msgstr "Tili"
 
 #~ msgctxt "Title"
 #~ msgid "Transfer"
@@ -1200,15 +1212,9 @@ msgstr "Tulos"
 #~ msgid "Account Menu"
 #~ msgstr "Tilivalikko"
 
-#~ msgid "New Account (Ctrl+N)"
-#~ msgstr "Uusi tili (Ctrl+N)"
-
 #~ msgctxt "Account"
 #~ msgid "New"
 #~ msgstr "Uusi"
-
-#~ msgid "Open Account (Ctrl+O)"
-#~ msgstr "Avaa tili (Ctrl+O)"
 
 #, fuzzy
 #~ msgid "result"

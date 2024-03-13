@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:34-0400\n"
+"POT-Creation-Date: 2024-03-12 23:50-0400\n"
 "PO-Revision-Date: 2023-09-10 21:21+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -220,6 +220,26 @@ msgstr "Son Hesap Yok"
 msgid "Remove"
 msgstr "Kaldır"
 
+#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#, fuzzy
+msgid "New"
+msgstr "Yeni"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+msgid "New Account (Ctrl+N)"
+msgstr "Yeni Hesap (Ctrl+N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Open"
+msgstr "Aç"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+msgid "Open Account (Ctrl+O)"
+msgstr "Hesap Aç (Ctrl+O)"
+
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
@@ -327,18 +347,16 @@ msgstr "Nokta ve Virgül"
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
 #, fuzzy
 msgctxt "Shortcut"
-msgid "Folder"
-msgstr "Klasör"
+msgid "Account"
+msgstr "Hesap"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-#, fuzzy
-msgid "Open Folder"
-msgstr "Klasör"
+msgid "New Account"
+msgstr "Yeni Hesap"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#, fuzzy
-msgid "Close Folder"
-msgstr "Klasör Seç"
+msgid "Open Account"
+msgstr "Hesap Aç"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
 #, fuzzy
@@ -379,27 +397,22 @@ msgstr "Kapat"
 msgid "Result was copied to clipboard."
 msgstr "Sonuç panoya kopyalandı."
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:112
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
-msgid "Open"
-msgstr "Aç"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:171
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub Deposu"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:221
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Çek"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:224
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "Tasarruf"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:227
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Kurumsal"
@@ -451,11 +464,6 @@ msgstr "Geliştirenler"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Ayarlar"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
-#, fuzzy
-msgid "New"
-msgstr "Yeni"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:96
@@ -554,6 +562,19 @@ msgstr "Tamam"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "Sonuç"
+
+#, fuzzy
+#~ msgctxt "Shortcut"
+#~ msgid "Folder"
+#~ msgstr "Klasör"
+
+#, fuzzy
+#~ msgid "Open Folder"
+#~ msgstr "Klasör"
+
+#, fuzzy
+#~ msgid "Close Folder"
+#~ msgstr "Klasör Seç"
 
 #~ msgid "Checking Account Color"
 #~ msgstr "Çek Hesabı Rengi"
@@ -803,9 +824,6 @@ msgstr "Sonuç"
 
 #~ msgid "Nothing to import from the file."
 #~ msgstr "Dosyadan içe aktarılacak bir şey yok."
-
-#~ msgid "Open Account"
-#~ msgstr "Hesap Aç"
 
 #~ msgid "Overview"
 #~ msgstr "Genel Görünüm"
@@ -1158,9 +1176,6 @@ msgstr "Sonuç"
 #~ msgid "Edit Group"
 #~ msgstr "Grubu Düzenle"
 
-#~ msgid "New Account"
-#~ msgstr "Yeni Hesap"
-
 #~ msgid "Use this wizard to get the most out of your account"
 #~ msgstr "Hesabınızdan en iyi şekilde yararlanmak için bu sihirbazı kullanın"
 
@@ -1237,9 +1252,6 @@ msgstr "Sonuç"
 
 #~ msgid "No Reminders"
 #~ msgstr "Hatırlatıcı Yok"
-
-#~ msgid "Account"
-#~ msgstr "Hesap"
 
 #~ msgctxt "Title"
 #~ msgid "Transfer"
@@ -1341,15 +1353,9 @@ msgstr "Sonuç"
 #~ msgid "Account Menu"
 #~ msgstr "Hesap Menüsü"
 
-#~ msgid "New Account (Ctrl+N)"
-#~ msgstr "Yeni Hesap (Ctrl+N)"
-
 #~ msgctxt "Account"
 #~ msgid "New"
 #~ msgstr "Yeni"
-
-#~ msgid "Open Account (Ctrl+O)"
-#~ msgstr "Hesap Aç (Ctrl+O)"
 
 #~ msgid "Toggle Graphs"
 #~ msgstr "Grafikleri Aç/Kapa"
