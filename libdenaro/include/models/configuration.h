@@ -88,36 +88,6 @@ namespace Nickvision::Money::Shared::Models
          */
         void setGroupDefaultColor(const Color& color);
         /**
-         * @brief Gets the color for checking accounts.
-         * @return The color for checking accounts 
-         */
-        Color getAccountCheckingColor() const;
-        /**
-         * @brief Sets the color for checking accounts.
-         * @param color The new checking accounts color
-         */
-        void setAccountCheckingColor(const Color& color);
-        /**
-         * @brief Gets the color for savings accounts.
-         * @return The color for savings accounts 
-         */
-        Color getAccountSavingsColor() const;
-        /**
-         * @brief Sets the color for savings accounts.
-         * @param color The new savings accounts color
-         */
-        void setAccountSavingsColor(const Color& color);
-        /**
-         * @brief Gets the color for business accounts.
-         * @return The color for business accounts 
-         */
-        Color getAccountBusinessColor() const;
-        /**
-         * @brief Sets the color for business accounts.
-         * @param color The new business accounts color
-         */
-        void setAccountBusinessColor(const Color& color);
-        /**
          * @brief Gets the trigger for inserting decimal separators.
          * @return InsertSeparatorTrigger
          */

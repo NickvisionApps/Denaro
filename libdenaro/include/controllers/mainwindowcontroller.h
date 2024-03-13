@@ -59,11 +59,6 @@ namespace Nickvision::Money::Shared::Controllers
          */
         std::vector<Models::RecentAccount> getRecentAccounts() const;
         /**
-         * @brief Gets the color for the specified account type, based on the users configuration.
-         * @return The color for the account type
-         */
-        Models::Color getAccountTypeColor(Models::AccountType accountType) const;
-        /**
          * @brief Gets the Saved event for the application's configuration.
          * @return The configuration Saved event
          */

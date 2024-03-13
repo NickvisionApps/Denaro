@@ -920,6 +920,7 @@ namespace Nickvision::Money::Shared::Models
         in.close();
         std::filesystem::remove(tempPath);
         return bytes;
+        //TODO: Fix segfault on Linux
     }
 
     ImportResult Account::importFromCSV(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor)

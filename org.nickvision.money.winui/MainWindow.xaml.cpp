@@ -107,6 +107,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
             LblAppCredits().Text(winrt::to_hstring(std::vformat(_("Developers:\n{}\nDesigners:\n{}\nArtists:\n{}\nTranslators:\n{}"), std::make_format_args(StringHelpers::join(keys(m_controller->getAppInfo().getDevelopers()), "\n"), StringHelpers::join(keys(m_controller->getAppInfo().getDesigners()), "\n"), StringHelpers::join(keys(m_controller->getAppInfo().getArtists()), "\n"), StringHelpers::join(m_controller->getAppInfo().getTranslatorNames(), "\n", false)))));
         }
         StatusPageHome().Title(winrt::to_hstring(m_controller->getGreeting()));
+        StatusPageHome().Description(winrt::to_hstring(_("Create or open an account to get started. You may also drag a file into the app from your file browser.")));
     }
 
     void MainWindow::OnLoaded(const IInspectable& sender, const RoutedEventArgs& args)
@@ -384,7 +385,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
             row.as<Controls::implementation::SettingsRow>()->Title(winrt::to_hstring(_("No Recent Accounts")));
             ListRecentAccounts().Children().Append(row);
         }
-        for(const RecentAccount& recentAccount : m_controller->getRecentAccounts())
+        for(const RecentAccount& recentAccount : recentAccounts)
         {
             FontIcon icon;
             icon.FontFamily(WinUIHelpers::LookupAppResource<FontFamily>(L"SymbolThemeFontFamily"));

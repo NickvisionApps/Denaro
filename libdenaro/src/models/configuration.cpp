@@ -162,36 +162,6 @@ namespace Nickvision::Money::Shared::Models
         m_json["GroupDefaultColor"] = color.toRGBAString(true);
     }
 
-    Color Configuration::getAccountCheckingColor() const
-    {
-        return { m_json.get("AccountCheckingColor", "rgb(129,61,156)").asString() };
-    }
-
-    void Configuration::setAccountCheckingColor(const Color& color)
-    {
-        m_json["AccountCheckingColor"] = color.toRGBAString(true);
-    }
-
-    Color Configuration::getAccountSavingsColor() const
-    {
-        return { m_json.get("AccountSavingsColor", "rgb(53,132,228)").asString() };
-    }
-
-    void Configuration::setAccountSavingsColor(const Color& color)
-    {
-        m_json["AccountSavingsColor"] = color.toRGBAString(true);
-    }
-
-    Color Configuration::getAccountBusinessColor() const
-    {
-        return { m_json.get("AccountBusinessColor", "rgb(38,162,10)").asString() };
-    }
-
-    void Configuration::setAccountBusinessColor(const Color& color)
-    {
-        m_json["AccountBusinessColor"] = color.toRGBAString(true);
-    }
-
     InsertSeparatorTrigger Configuration::getInsertSeparator() const
     {
         return static_cast<InsertSeparatorTrigger>(m_json.get("InsertSeparator", static_cast<int>(InsertSeparatorTrigger::NumpadOnly)).asInt());

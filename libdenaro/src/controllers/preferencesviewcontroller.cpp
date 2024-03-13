@@ -62,36 +62,6 @@ namespace Nickvision::Money::Shared::Controllers
         Aura::getActive().getConfig<Configuration>("config").setGroupDefaultColor(color);
     }
 
-    Color PreferencesViewController::getAccountCheckingColor() const
-    {
-        return Aura::getActive().getConfig<Configuration>("config").getAccountCheckingColor();
-    }
-
-    void PreferencesViewController::setAccountCheckingColor(const Color& color)
-    {
-        Aura::getActive().getConfig<Configuration>("config").setAccountCheckingColor(color);
-    }
-
-    Color PreferencesViewController::getAccountSavingsColor() const
-    {
-        return Aura::getActive().getConfig<Configuration>("config").getAccountSavingsColor();
-    }
-
-    void PreferencesViewController::setAccountSavingsColor(const Color& color)
-    {
-        Aura::getActive().getConfig<Configuration>("config").setAccountSavingsColor(color);
-    }
-
-    Color PreferencesViewController::getAccountBusinessColor() const
-    {
-        return Aura::getActive().getConfig<Configuration>("config").getAccountBusinessColor();
-    }
-
-    void PreferencesViewController::setAccountBusinessColor(const Color& color)
-    {
-        Aura::getActive().getConfig<Configuration>("config").setAccountBusinessColor(color);
-    }
-
     InsertSeparatorTrigger PreferencesViewController::getInsertSeparator() const
     {
         return Aura::getActive().getConfig<Configuration>("config").getInsertSeparator();

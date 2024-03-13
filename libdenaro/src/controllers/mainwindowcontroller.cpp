@@ -65,21 +65,6 @@ namespace Nickvision::Money::Shared::Controllers
         return Aura::getActive().getConfig<Configuration>("config").getRecentAccounts();
     }
 
-    Color MainWindowController::getAccountTypeColor(AccountType accountType) const
-    {
-        switch(accountType)
-        {
-        case AccountType::Checking:
-            return Aura::getActive().getConfig<Configuration>("config").getAccountCheckingColor();
-        case AccountType::Savings:
-            return Aura::getActive().getConfig<Configuration>("config").getAccountSavingsColor();
-        case AccountType::Business:
-            return Aura::getActive().getConfig<Configuration>("config").getAccountBusinessColor();
-        default:
-            return {};
-        }
-    }
-
     Event<EventArgs>& MainWindowController::configurationSaved()
     {
         return Aura::getActive().getConfig<Configuration>("config").saved();

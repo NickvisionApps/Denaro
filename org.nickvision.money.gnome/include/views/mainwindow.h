@@ -78,6 +78,20 @@ namespace Nickvision::Money::GNOME::Views
         void about();
 
     private:
+        /**
+         * @brief Loads the recent accounts list.
+         */
+        void loadRecentAccounts();
+        /**
+         * @brief Removes a recent account from the list.
+         * @param path The path of the account file to remove 
+         */
+        void removeRecentAccount(const std::filesystem::path& path);
+        /**
+         * @brief Opens an account.
+         * @param path The path of the account file to open 
+         */
+        void openAccount(const std::filesystem::path& path);
         std::shared_ptr<Shared::Controllers::MainWindowController> m_controller;
         GtkApplication* m_app;
         GtkBuilder* m_builder;
