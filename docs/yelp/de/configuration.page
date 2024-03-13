@@ -41,28 +41,8 @@
 		<p>A color that will be selected by default when adding a new group. This is also a color for «Ungrouped» group.</p>
 	</item>
 	<item>
-		<title>Checking Account Color</title>
-		<p>A color used to mark <link xref="account">accounts</link> with the <em>Checking</em> type in a recent accounts list.</p>
-	</item>
-	<item>
-		<title>Savings Account Color</title>
-		<p>A color used to mark <link xref="account">accounts</link> with the <em>Savings</em> type in a recent accounts list.</p>
-	</item>
-	<item>
-		<title>Geschäftskontofarbe</title>
-		<p>A color used to mark <link xref="account">accounts</link> with the <em>Business</em> type in a recent accounts list.</p>
-	</item>
-	<item>
-		<title>Native Ziffern verwenden</title>
-		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numerals.</p>
-	</item>
-	<item>
 		<title>Dezimaltrennzeichen einfügen</title>
 		<p>Set for which keys pressed will the locale's decimal separator be inserted into an amount field: numpad period, any period and comma, or none. If decimal separator is already presented in a field, it will not be inserted.</p>
-	</item>
-	<item>
-		<title>CSV-Sicherungsordner</title>
-		<p>A folder where your data will be automatically <link xref="import-export">exported to CSV</link> after every change. This feature doesn't work for password-protected accounts, because CSV files can't be password-protected.</p>
 	</item>
 </terms>
 </page>

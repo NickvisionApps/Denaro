@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-02-02 10:25-0500\n"
+"POT-Creation-Date: 2024-03-12 23:36-0400\n"
 "PO-Revision-Date: 2023-11-15 11:53+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-money/"
@@ -512,70 +512,11 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: docs/yelp/C/configuration.page:41
-msgid "Checking Account Color"
-msgstr "Couleur des comptes de chèques"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:42
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Checking</em> type in a recent accounts list."
-msgstr ""
-"Couleur utilisée pour marquer les <link xref=\"account\">comptes</link> avec "
-"le type <em>Chèques</em> dans une liste des comptes récents."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:45
-msgid "Savings Account Color"
-msgstr "Couleur des comptes d’épargne"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:46
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Savings</em> type in a recent accounts list."
-msgstr ""
-"Couleur utilisée pour marquer les <link xref=\"account\">comptes</link> avec "
-"le type <em>Épargne</em> dans une liste des comptes récents."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:49
-msgid "Business Account Color"
-msgstr "Couleur du compte d’affaires"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:50
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Business</em> type in a recent accounts list."
-msgstr ""
-"Couleur utilisée pour marquer les <link xref=\"account\">comptes</link> avec "
-"le type <em>affaires</em> dans une liste des comptes récents."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:53
-msgid "Use Native Digits"
-msgstr "Utiliser des chiffres natifs"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:54
-msgid ""
-"Whether to use numerals that are native for your locale instead of latin "
-"digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
-"instead of <em>012</em> for locales that use Eastern Arabic numerals."
-msgstr ""
-"Indique s’il faut utiliser des chiffres natifs de votre langue à la place de "
-"chiffres latins. Par exemple, si ce paramètre est activé <em>٠١٢</em> sera "
-"utilisé à la place de <em>012</em> pour les langues locales utilisant des "
-"chiffres de l’arabe oriental."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:57
 msgid "Insert Decimal Separator"
 msgstr "Insérer un séparateur de décimales"
 
 #. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:58
+#: docs/yelp/C/configuration.page:42
 msgid ""
 "Set for which keys pressed will the locale's decimal separator be inserted "
 "into an amount field: numpad period, any period and comma, or none. If "
@@ -585,24 +526,6 @@ msgstr ""
 "locale sera inséré lors de la saisie d’un montant : point du pavé numérique, "
 "n’importe quel point ou virgule du clavier, ou aucune. Si le séparateur des "
 "décimales est déjà présent dans le champ de saisie, il ne sera pas inséré."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:61
-msgid "CSV Backup Folder"
-msgstr "Dossier de sauvegarde CSV"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:62
-msgid ""
-"A folder where your data will be automatically <link xref=\"import-"
-"export\">exported to CSV</link> after every change. This feature doesn't "
-"work for password-protected accounts, because CSV files can't be password-"
-"protected."
-msgstr ""
-"Un dossier où vos données seront automatiquement <link xref=\"import-"
-"export\">exportées au format CSV</link> après chaque modification. Cette "
-"fonctionnalité ne fonctionne pas pour les comptes protégés par mot de passe, "
-"car les fichiers CSV ne peuvent être protégés par un mot de passe."
 
 #. (itstool) path: info/title
 #: docs/yelp/C/import-export.page:8
@@ -1192,6 +1115,63 @@ msgid ""
 msgstr ""
 "Si vous créez un transfert entre des comptes avec différentes devises, il "
 "vous sera demander de fournir un taux de change."
+
+#~ msgid "Checking Account Color"
+#~ msgstr "Couleur des comptes de chèques"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Checking</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Couleur utilisée pour marquer les <link xref=\"account\">comptes</link> "
+#~ "avec le type <em>Chèques</em> dans une liste des comptes récents."
+
+#~ msgid "Savings Account Color"
+#~ msgstr "Couleur des comptes d’épargne"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Savings</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Couleur utilisée pour marquer les <link xref=\"account\">comptes</link> "
+#~ "avec le type <em>Épargne</em> dans une liste des comptes récents."
+
+#~ msgid "Business Account Color"
+#~ msgstr "Couleur du compte d’affaires"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Business</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Couleur utilisée pour marquer les <link xref=\"account\">comptes</link> "
+#~ "avec le type <em>affaires</em> dans une liste des comptes récents."
+
+#~ msgid "Use Native Digits"
+#~ msgstr "Utiliser des chiffres natifs"
+
+#~ msgid ""
+#~ "Whether to use numerals that are native for your locale instead of latin "
+#~ "digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
+#~ "instead of <em>012</em> for locales that use Eastern Arabic numerals."
+#~ msgstr ""
+#~ "Indique s’il faut utiliser des chiffres natifs de votre langue à la place "
+#~ "de chiffres latins. Par exemple, si ce paramètre est activé <em>٠١٢</em> "
+#~ "sera utilisé à la place de <em>012</em> pour les langues locales "
+#~ "utilisant des chiffres de l’arabe oriental."
+
+#~ msgid "CSV Backup Folder"
+#~ msgstr "Dossier de sauvegarde CSV"
+
+#~ msgid ""
+#~ "A folder where your data will be automatically <link xref=\"import-"
+#~ "export\">exported to CSV</link> after every change. This feature doesn't "
+#~ "work for password-protected accounts, because CSV files can't be password-"
+#~ "protected."
+#~ msgstr ""
+#~ "Un dossier où vos données seront automatiquement <link xref=\"import-"
+#~ "export\">exportées au format CSV</link> après chaque modification. Cette "
+#~ "fonctionnalité ne fonctionne pas pour les comptes protégés par mot de "
+#~ "passe, car les fichiers CSV ne peuvent être protégés par un mot de passe."
 
 #~ msgid "2023"
 #~ msgstr "2023"

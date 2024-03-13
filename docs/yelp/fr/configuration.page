@@ -35,28 +35,8 @@
 		<p>Couleur sélectionnée par défaut lorsqu’un nouveau groupe sera ajouté. C’est également la couleur du groupe « Sans groupe ».</p>
 	</item>
 	<item>
-		<title>Couleur des comptes de chèques</title>
-		<p>Couleur utilisée pour marquer les <link xref="account">comptes</link> avec le type <em>Chèques</em> dans une liste des comptes récents.</p>
-	</item>
-	<item>
-		<title>Couleur des comptes d’épargne</title>
-		<p>Couleur utilisée pour marquer les <link xref="account">comptes</link> avec le type <em>Épargne</em> dans une liste des comptes récents.</p>
-	</item>
-	<item>
-		<title>Couleur du compte d’affaires</title>
-		<p>Couleur utilisée pour marquer les <link xref="account">comptes</link> avec le type <em>affaires</em> dans une liste des comptes récents.</p>
-	</item>
-	<item>
-		<title>Utiliser des chiffres natifs</title>
-		<p>Indique s’il faut utiliser des chiffres natifs de votre langue à la place de chiffres latins. Par exemple, si ce paramètre est activé <em>٠١٢</em> sera utilisé à la place de <em>012</em> pour les langues locales utilisant des chiffres de l’arabe oriental.</p>
-	</item>
-	<item>
 		<title>Insérer un séparateur de décimales</title>
 		<p>Définissez pour quelles touches pressées le séparateur décimal de la langue locale sera inséré lors de la saisie d’un montant : point du pavé numérique, n’importe quel point ou virgule du clavier, ou aucune. Si le séparateur des décimales est déjà présent dans le champ de saisie, il ne sera pas inséré.</p>
-	</item>
-	<item>
-		<title>Dossier de sauvegarde CSV</title>
-		<p>Un dossier où vos données seront automatiquement <link xref="import-export">exportées au format CSV</link> après chaque modification. Cette fonctionnalité ne fonctionne pas pour les comptes protégés par mot de passe, car les fichiers CSV ne peuvent être protégés par un mot de passe.</p>
 	</item>
 </terms>
 </page>

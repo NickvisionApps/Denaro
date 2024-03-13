@@ -41,28 +41,8 @@
 		<p>Barva, která bude ve výchozím nastavení vybrána při přidávání nové skupiny. Je to také barva pro skupinu „Neseskupené“.</p>
 	</item>
 	<item>
-		<title>Barva běžného účtu</title>
-		<p>Barva používaná k označení <link xref="account">účtů</link> s typem <em>Běžný</em> v seznamu nedávných účtů.</p>
-	</item>
-	<item>
-		<title>Barva spořicího účtu</title>
-		<p>Barva používaná k označení <link xref="account">účtů</link> s typem <em>Spořicí</em> v seznamu nedávných účtů.</p>
-	</item>
-	<item>
-		<title>Barva firemního účtu</title>
-		<p>Barva používaná k označení <link xref="account">účtů</link> s typem <em>Firemní</em> v seznamu nedávných účtů.</p>
-	</item>
-	<item>
-		<title>Použít nativní číslice</title>
-		<p>Nastavení, zda se mají místo latinských číslic používat číslice, které jsou pro vaši oblast přirozené. Pokud je toto nastavení povoleno, bude například <em>٠١٢</em> použito místo <em>012</em> pro lokality, které používají východoarabské číslice.</p>
-	</item>
-	<item>
 		<title>Vložení desetinného oddělovače</title>
 		<p>Nastavení, pro které stisknuté klávesy se do pole částky vloží desetinný oddělovač lokálního jazyka: tečka na numerickém bloku, libovolná tečka a čárka nebo žádný. Pokud již je desetinný oddělovač v poli, nebude vložen.</p>
-	</item>
-	<item>
-		<title>Složka zálohy CSV</title>
-		<p>Složka, do které budou vaše data po každé změně automaticky <link xref="import-export">exportována jako soubor CSV</link>. Tato funkce nefunguje pro účty chráněné heslem, protože soubory CSV nelze chránit heslem.</p>
 	</item>
 </terms>
 </page>

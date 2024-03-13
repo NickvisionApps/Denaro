@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-02-02 10:25-0500\n"
+"POT-Creation-Date: 2024-03-12 23:36-0400\n"
 "PO-Revision-Date: 2023-11-16 18:17+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -492,70 +492,11 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: docs/yelp/C/configuration.page:41
-msgid "Checking Account Color"
-msgstr "Barva běžného účtu"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:42
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Checking</em> type in a recent accounts list."
-msgstr ""
-"Barva používaná k označení <link xref=\"account\">účtů</link> s typem "
-"<em>Běžný</em> v seznamu nedávných účtů."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:45
-msgid "Savings Account Color"
-msgstr "Barva spořicího účtu"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:46
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Savings</em> type in a recent accounts list."
-msgstr ""
-"Barva používaná k označení <link xref=\"account\">účtů</link> s typem "
-"<em>Spořicí</em> v seznamu nedávných účtů."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:49
-msgid "Business Account Color"
-msgstr "Barva firemního účtu"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:50
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Business</em> type in a recent accounts list."
-msgstr ""
-"Barva používaná k označení <link xref=\"account\">účtů</link> s typem "
-"<em>Firemní</em> v seznamu nedávných účtů."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:53
-msgid "Use Native Digits"
-msgstr "Použít nativní číslice"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:54
-msgid ""
-"Whether to use numerals that are native for your locale instead of latin "
-"digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
-"instead of <em>012</em> for locales that use Eastern Arabic numerals."
-msgstr ""
-"Nastavení, zda se mají místo latinských číslic používat číslice, které jsou "
-"pro vaši oblast přirozené. Pokud je toto nastavení povoleno, bude například "
-"<em>٠١٢</em> použito místo <em>012</em> pro lokality, které používají "
-"východoarabské číslice."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:57
 msgid "Insert Decimal Separator"
 msgstr "Vložení desetinného oddělovače"
 
 #. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:58
+#: docs/yelp/C/configuration.page:42
 msgid ""
 "Set for which keys pressed will the locale's decimal separator be inserted "
 "into an amount field: numpad period, any period and comma, or none. If "
@@ -564,23 +505,6 @@ msgstr ""
 "Nastavení, pro které stisknuté klávesy se do pole částky vloží desetinný "
 "oddělovač lokálního jazyka: tečka na numerickém bloku, libovolná tečka a "
 "čárka nebo žádný. Pokud již je desetinný oddělovač v poli, nebude vložen."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:61
-msgid "CSV Backup Folder"
-msgstr "Složka zálohy CSV"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:62
-msgid ""
-"A folder where your data will be automatically <link xref=\"import-"
-"export\">exported to CSV</link> after every change. This feature doesn't "
-"work for password-protected accounts, because CSV files can't be password-"
-"protected."
-msgstr ""
-"Složka, do které budou vaše data po každé změně automaticky <link "
-"xref=\"import-export\">exportována jako soubor CSV</link>. Tato funkce "
-"nefunguje pro účty chráněné heslem, protože soubory CSV nelze chránit heslem."
 
 #. (itstool) path: info/title
 #: docs/yelp/C/import-export.page:8
@@ -1142,3 +1066,60 @@ msgid ""
 msgstr ""
 "Pokud vytváříte převod mezi účty v různých měnách, budete vyzváni k zadání "
 "převodního kurzu."
+
+#~ msgid "Checking Account Color"
+#~ msgstr "Barva běžného účtu"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Checking</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Barva používaná k označení <link xref=\"account\">účtů</link> s typem "
+#~ "<em>Běžný</em> v seznamu nedávných účtů."
+
+#~ msgid "Savings Account Color"
+#~ msgstr "Barva spořicího účtu"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Savings</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Barva používaná k označení <link xref=\"account\">účtů</link> s typem "
+#~ "<em>Spořicí</em> v seznamu nedávných účtů."
+
+#~ msgid "Business Account Color"
+#~ msgstr "Barva firemního účtu"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Business</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Barva používaná k označení <link xref=\"account\">účtů</link> s typem "
+#~ "<em>Firemní</em> v seznamu nedávných účtů."
+
+#~ msgid "Use Native Digits"
+#~ msgstr "Použít nativní číslice"
+
+#~ msgid ""
+#~ "Whether to use numerals that are native for your locale instead of latin "
+#~ "digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
+#~ "instead of <em>012</em> for locales that use Eastern Arabic numerals."
+#~ msgstr ""
+#~ "Nastavení, zda se mají místo latinských číslic používat číslice, které "
+#~ "jsou pro vaši oblast přirozené. Pokud je toto nastavení povoleno, bude "
+#~ "například <em>٠١٢</em> použito místo <em>012</em> pro lokality, které "
+#~ "používají východoarabské číslice."
+
+#~ msgid "CSV Backup Folder"
+#~ msgstr "Složka zálohy CSV"
+
+#~ msgid ""
+#~ "A folder where your data will be automatically <link xref=\"import-"
+#~ "export\">exported to CSV</link> after every change. This feature doesn't "
+#~ "work for password-protected accounts, because CSV files can't be password-"
+#~ "protected."
+#~ msgstr ""
+#~ "Složka, do které budou vaše data po každé změně automaticky <link "
+#~ "xref=\"import-export\">exportována jako soubor CSV</link>. Tato funkce "
+#~ "nefunguje pro účty chráněné heslem, protože soubory CSV nelze chránit "
+#~ "heslem."

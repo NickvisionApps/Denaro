@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-02-14 09:24-0500\n"
+"POT-Creation-Date: 2024-03-12 23:36-0400\n"
 "PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
@@ -483,69 +483,11 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: docs/yelp/C/configuration.page:41
-msgid "Checking Account Color"
-msgstr "खाते का रंग जांचा जा रहा है"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:42
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Checking</em> type in a recent accounts list."
-msgstr ""
-"हाल की खातों की सूची में <link xref=\"account\">खातों</link> को <em>चेकिंग</em> "
-"प्रकार से चिह्नित करने के लिए उपयोग किया जाने वाला रंग।"
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:45
-msgid "Savings Account Color"
-msgstr "बचत खाते का रंग"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:46
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Savings</em> type in a recent accounts list."
-msgstr ""
-"हाल की खातों की सूची में <link xref=\"account\">खातों</link> को <em>बचत</em> "
-"प्रकार से चिह्नित करने के लिए उपयोग किया जाने वाला रंग।"
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:49
-msgid "Business Account Color"
-msgstr "बिजनेस अकाउंट का रंग"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:50
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Business</em> type in a recent accounts list."
-msgstr ""
-"हाल की खातों की सूची में <link xref=\"account\">खातों</link> को <em>व्यवसाय</em> "
-"प्रकार से चिह्नित करने के लिए उपयोग किया जाने वाला रंग।"
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:53
-msgid "Use Native Digits"
-msgstr "मूल अंकों का प्रयोग करें"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:54
-msgid ""
-"Whether to use numerals that are native for your locale instead of latin "
-"digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
-"instead of <em>012</em> for locales that use Eastern Arabic numerals."
-msgstr ""
-"क्या लैटिन अंकों के बजाय उन अंकों का उपयोग करना चाहिए जो आपके स्थान के मूल निवासी हैं। "
-"उदाहरण के लिए, यदि यह सेटिंग सक्षम है तो पूर्वी अरबी अंकों का उपयोग करने वाले स्थानों के "
-"लिए <em>012</em> के बजाय <em>٠١٢</em> का उपयोग किया जाएगा।"
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:57
 msgid "Insert Decimal Separator"
 msgstr "दशमलव विभाजक डालें"
 
 #. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:58
+#: docs/yelp/C/configuration.page:42
 msgid ""
 "Set for which keys pressed will the locale's decimal separator be inserted "
 "into an amount field: numpad period, any period and comma, or none. If "
@@ -554,23 +496,6 @@ msgstr ""
 "सेट करें कि कौन सी कुंजी दबाए जाने पर लोकेल का दशमलव विभाजक राशि फ़ील्ड में डाला जाएगा: "
 "संख्यापैड अवधि, कोई भी अवधि और अल्पविराम, या कोई नहीं। यदि दशमलव विभाजक पहले से ही "
 "किसी फ़ील्ड में प्रस्तुत किया गया है, तो इसे सम्मिलित नहीं किया जाएगा।"
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:61
-msgid "CSV Backup Folder"
-msgstr "CSV बैकअप फ़ोल्डर"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:62
-msgid ""
-"A folder where your data will be automatically <link xref=\"import-"
-"export\">exported to CSV</link> after every change. This feature doesn't "
-"work for password-protected accounts, because CSV files can't be password-"
-"protected."
-msgstr ""
-"एक फोल्डर जहां आपका डेटा प्रत्येक परिवर्तन के बाद स्वचालित रूप से <link xref=\"import-"
-"export\">CSV में निर्यात किया जाएगा</link>। यह सुविधा पासवर्ड-सुरक्षित खातों के लिए "
-"काम नहीं करती, क्योंकि CSV फाइलें पासवर्ड-सुरक्षित नहीं की जा सकतीं।"
 
 #. (itstool) path: info/title
 #: docs/yelp/C/import-export.page:8
@@ -1118,3 +1043,59 @@ msgid ""
 msgstr ""
 "यदि आप विभिन्न मुद्राओं वाले खातों के बीच स्थानांतरण करते हैं, तो आपसे रूपांतरण दर प्रदान "
 "करने के लिए कहा जाएगा।"
+
+#~ msgid "Checking Account Color"
+#~ msgstr "खाते का रंग जांचा जा रहा है"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Checking</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "हाल की खातों की सूची में <link xref=\"account\">खातों</link> को <em>चेकिंग</em> "
+#~ "प्रकार से चिह्नित करने के लिए उपयोग किया जाने वाला रंग।"
+
+#~ msgid "Savings Account Color"
+#~ msgstr "बचत खाते का रंग"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Savings</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "हाल की खातों की सूची में <link xref=\"account\">खातों</link> को <em>बचत</em> "
+#~ "प्रकार से चिह्नित करने के लिए उपयोग किया जाने वाला रंग।"
+
+#~ msgid "Business Account Color"
+#~ msgstr "बिजनेस अकाउंट का रंग"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Business</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "हाल की खातों की सूची में <link xref=\"account\">खातों</link> को <em>व्यवसाय</"
+#~ "em> प्रकार से चिह्नित करने के लिए उपयोग किया जाने वाला रंग।"
+
+#~ msgid "Use Native Digits"
+#~ msgstr "मूल अंकों का प्रयोग करें"
+
+#~ msgid ""
+#~ "Whether to use numerals that are native for your locale instead of latin "
+#~ "digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
+#~ "instead of <em>012</em> for locales that use Eastern Arabic numerals."
+#~ msgstr ""
+#~ "क्या लैटिन अंकों के बजाय उन अंकों का उपयोग करना चाहिए जो आपके स्थान के मूल निवासी हैं। "
+#~ "उदाहरण के लिए, यदि यह सेटिंग सक्षम है तो पूर्वी अरबी अंकों का उपयोग करने वाले स्थानों "
+#~ "के लिए <em>012</em> के बजाय <em>٠١٢</em> का उपयोग किया जाएगा।"
+
+#~ msgid "CSV Backup Folder"
+#~ msgstr "CSV बैकअप फ़ोल्डर"
+
+#~ msgid ""
+#~ "A folder where your data will be automatically <link xref=\"import-"
+#~ "export\">exported to CSV</link> after every change. This feature doesn't "
+#~ "work for password-protected accounts, because CSV files can't be password-"
+#~ "protected."
+#~ msgstr ""
+#~ "एक फोल्डर जहां आपका डेटा प्रत्येक परिवर्तन के बाद स्वचालित रूप से <link "
+#~ "xref=\"import-export\">CSV में निर्यात किया जाएगा</link>। यह सुविधा पासवर्ड-"
+#~ "सुरक्षित खातों के लिए काम नहीं करती, क्योंकि CSV फाइलें पासवर्ड-सुरक्षित नहीं की जा "
+#~ "सकतीं।"

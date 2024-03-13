@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-02-02 10:25-0500\n"
+"POT-Creation-Date: 2024-03-12 23:36-0400\n"
 "PO-Revision-Date: 2023-09-26 13:22+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -495,70 +495,11 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: docs/yelp/C/configuration.page:41
-msgid "Checking Account Color"
-msgstr "Boja žiro računa"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:42
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Checking</em> type in a recent accounts list."
-msgstr ""
-"Boja za označavanje <link xref=\"account\">računa</link> vrste <em>žiro "
-"račun</em> u popisu nedavnih računa."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:45
-msgid "Savings Account Color"
-msgstr "Boja štednog računa"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:46
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Savings</em> type in a recent accounts list."
-msgstr ""
-"Boja za označavanje <link xref=\"account\">računa</link> vrste <em>štedni "
-"račun</em> u popisu nedavnih računa."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:49
-msgid "Business Account Color"
-msgstr "Boja poslovnog računa"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:50
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Business</em> type in a recent accounts list."
-msgstr ""
-"Boja za označavanje <link xref=\"account\">računa</link> vrste <em>poslovni "
-"račun</em> u popisu nedavnih računa."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:53
-msgid "Use Native Digits"
-msgstr "Koristi brojke jezika"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:54
-msgid ""
-"Whether to use numerals that are native for your locale instead of latin "
-"digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
-"instead of <em>012</em> for locales that use Eastern Arabic numerals."
-msgstr ""
-"Da li umjesto arapskih brojki koristiti brojke tvog tvoje jezičnog područja. "
-"Na primjer, ako je ova postavka deaktivirana, umjesto <em>012</em> će se "
-"koristiti <em>٠١٢</em> za jezična područja koja koriste istočnoarapske "
-"brojeve."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:57
 msgid "Insert Decimal Separator"
 msgstr "Umetni decimalni znak"
 
 #. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:58
+#: docs/yelp/C/configuration.page:42
 msgid ""
 "Set for which keys pressed will the locale's decimal separator be inserted "
 "into an amount field: numpad period, any period and comma, or none. If "
@@ -567,24 +508,6 @@ msgstr ""
 "Odredi tipke za umetanje decimalnog znaka jezičnog područja u polju iznosa: "
 "točka na numeričkoj tipkovnici, bilo koja točka i zarez ili ništa. Ako "
 "decimalni znak već postoji u polju onda se on neće umetnuti."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:61
-msgid "CSV Backup Folder"
-msgstr "Mapa sigurnosnih kopija u CSV formatu"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:62
-msgid ""
-"A folder where your data will be automatically <link xref=\"import-"
-"export\">exported to CSV</link> after every change. This feature doesn't "
-"work for password-protected accounts, because CSV files can't be password-"
-"protected."
-msgstr ""
-"Mapa u kojoj će se tvoji podaci automatski <link xref=\"import-"
-"export\">izvesti u CSV datoteku</link> nakon svake promjene. Ova funkcija ne "
-"radi za račune koji su zaštićeni lozinkom jer CSV datoteke ne mogu biti "
-"zaštićene lozinkom."
 
 #. (itstool) path: info/title
 #: docs/yelp/C/import-export.page:8
@@ -1147,3 +1070,60 @@ msgid ""
 msgstr ""
 "Ako stvoriš transfer između računa s različitim valutama morat ćeš zadati "
 "stopu konverzije."
+
+#~ msgid "Checking Account Color"
+#~ msgstr "Boja žiro računa"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Checking</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Boja za označavanje <link xref=\"account\">računa</link> vrste <em>žiro "
+#~ "račun</em> u popisu nedavnih računa."
+
+#~ msgid "Savings Account Color"
+#~ msgstr "Boja štednog računa"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Savings</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Boja za označavanje <link xref=\"account\">računa</link> vrste <em>štedni "
+#~ "račun</em> u popisu nedavnih računa."
+
+#~ msgid "Business Account Color"
+#~ msgstr "Boja poslovnog računa"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Business</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Boja za označavanje <link xref=\"account\">računa</link> vrste "
+#~ "<em>poslovni račun</em> u popisu nedavnih računa."
+
+#~ msgid "Use Native Digits"
+#~ msgstr "Koristi brojke jezika"
+
+#~ msgid ""
+#~ "Whether to use numerals that are native for your locale instead of latin "
+#~ "digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
+#~ "instead of <em>012</em> for locales that use Eastern Arabic numerals."
+#~ msgstr ""
+#~ "Da li umjesto arapskih brojki koristiti brojke tvog tvoje jezičnog "
+#~ "područja. Na primjer, ako je ova postavka deaktivirana, umjesto <em>012</"
+#~ "em> će se koristiti <em>٠١٢</em> za jezična područja koja koriste "
+#~ "istočnoarapske brojeve."
+
+#~ msgid "CSV Backup Folder"
+#~ msgstr "Mapa sigurnosnih kopija u CSV formatu"
+
+#~ msgid ""
+#~ "A folder where your data will be automatically <link xref=\"import-"
+#~ "export\">exported to CSV</link> after every change. This feature doesn't "
+#~ "work for password-protected accounts, because CSV files can't be password-"
+#~ "protected."
+#~ msgstr ""
+#~ "Mapa u kojoj će se tvoji podaci automatski <link xref=\"import-"
+#~ "export\">izvesti u CSV datoteku</link> nakon svake promjene. Ova funkcija "
+#~ "ne radi za račune koji su zaštićeni lozinkom jer CSV datoteke ne mogu "
+#~ "biti zaštićene lozinkom."

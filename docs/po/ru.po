@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-02-02 10:25-0500\n"
+"POT-Creation-Date: 2024-03-12 23:36-0400\n"
 "PO-Revision-Date: 2023-08-24 10:19+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -504,70 +504,11 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: docs/yelp/C/configuration.page:41
-msgid "Checking Account Color"
-msgstr "Цвет расчётного счёта"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:42
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Checking</em> type in a recent accounts list."
-msgstr ""
-"Цвет, которым отмечаются <em>Расчётные</em> <link xref=\"account\">счета</"
-"link> в списке недавних счетов."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:45
-msgid "Savings Account Color"
-msgstr "Цвет сберегательного счёта"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:46
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Savings</em> type in a recent accounts list."
-msgstr ""
-"Цвет, которым отмечаются <em>Сберегательные</em> <link "
-"xref=\"account\">счета</link> в списке недавних счетов."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:49
-msgid "Business Account Color"
-msgstr "Цвет бизнес счёта"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:50
-msgid ""
-"A color used to mark <link xref=\"account\">accounts</link> with the "
-"<em>Business</em> type in a recent accounts list."
-msgstr ""
-"Цвет, которым отмечаются <em>Бизнес</em> <link xref=\"account\">счета</link> "
-"в списке недавних счетов."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:53
-msgid "Use Native Digits"
-msgstr "Использовать местные цифры"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:54
-msgid ""
-"Whether to use numerals that are native for your locale instead of latin "
-"digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
-"instead of <em>012</em> for locales that use Eastern Arabic numerals."
-msgstr ""
-"Должно ли приложение использовать цифры, родные для вашего региона, вместо "
-"арабских цифр. Например, если эта настройка включена, <em>٠١٢</em> будут "
-"отображаться вместо <em>012</em> при региональных настройках, которые "
-"используют восточные арабские цифры."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:57
 msgid "Insert Decimal Separator"
 msgstr "Вставка десятичного разделителя"
 
 #. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:58
+#: docs/yelp/C/configuration.page:42
 msgid ""
 "Set for which keys pressed will the locale's decimal separator be inserted "
 "into an amount field: numpad period, any period and comma, or none. If "
@@ -577,24 +518,6 @@ msgstr ""
 "поля сумм: точка на Numpad, любая точка или запятая, либо можно отключить "
 "эту функцию. Если десятичный разделитель уже присутствует в строке, он не "
 "будет добавлен."
-
-#. (itstool) path: item/title
-#: docs/yelp/C/configuration.page:61
-msgid "CSV Backup Folder"
-msgstr "Папка резервных копий CSV"
-
-#. (itstool) path: item/p
-#: docs/yelp/C/configuration.page:62
-msgid ""
-"A folder where your data will be automatically <link xref=\"import-"
-"export\">exported to CSV</link> after every change. This feature doesn't "
-"work for password-protected accounts, because CSV files can't be password-"
-"protected."
-msgstr ""
-"Папка, в которую ваши данные будут автоматически <link xref=\"import-"
-"export\">экспортироваться в формате CSV</link> после каждого изменения. Эта "
-"функция не работает для счетов, защищённых паролем, т.к. CSV файлы не могут "
-"быть защищены паролем."
 
 #. (itstool) path: info/title
 #: docs/yelp/C/import-export.page:8
@@ -1169,3 +1092,60 @@ msgid ""
 msgstr ""
 "Если вы производите перевод средств между счетами с разными валютами, "
 "<app>Denaro</app> попросит вас указать обменный курс."
+
+#~ msgid "Checking Account Color"
+#~ msgstr "Цвет расчётного счёта"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Checking</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Цвет, которым отмечаются <em>Расчётные</em> <link xref=\"account\">счета</"
+#~ "link> в списке недавних счетов."
+
+#~ msgid "Savings Account Color"
+#~ msgstr "Цвет сберегательного счёта"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Savings</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Цвет, которым отмечаются <em>Сберегательные</em> <link "
+#~ "xref=\"account\">счета</link> в списке недавних счетов."
+
+#~ msgid "Business Account Color"
+#~ msgstr "Цвет бизнес счёта"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Business</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Цвет, которым отмечаются <em>Бизнес</em> <link xref=\"account\">счета</"
+#~ "link> в списке недавних счетов."
+
+#~ msgid "Use Native Digits"
+#~ msgstr "Использовать местные цифры"
+
+#~ msgid ""
+#~ "Whether to use numerals that are native for your locale instead of latin "
+#~ "digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
+#~ "instead of <em>012</em> for locales that use Eastern Arabic numerals."
+#~ msgstr ""
+#~ "Должно ли приложение использовать цифры, родные для вашего региона, "
+#~ "вместо арабских цифр. Например, если эта настройка включена, <em>٠١٢</em> "
+#~ "будут отображаться вместо <em>012</em> при региональных настройках, "
+#~ "которые используют восточные арабские цифры."
+
+#~ msgid "CSV Backup Folder"
+#~ msgstr "Папка резервных копий CSV"
+
+#~ msgid ""
+#~ "A folder where your data will be automatically <link xref=\"import-"
+#~ "export\">exported to CSV</link> after every change. This feature doesn't "
+#~ "work for password-protected accounts, because CSV files can't be password-"
+#~ "protected."
+#~ msgstr ""
+#~ "Папка, в которую ваши данные будут автоматически <link xref=\"import-"
+#~ "export\">экспортироваться в формате CSV</link> после каждого изменения. "
+#~ "Эта функция не работает для счетов, защищённых паролем, т.к. CSV файлы не "
+#~ "могут быть защищены паролем."

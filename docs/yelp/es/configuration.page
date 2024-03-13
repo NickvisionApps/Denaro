@@ -41,28 +41,8 @@
 		<p>Color que se seleccionará por defecto al añadir un grupo nuevo. También es un color para el grupo "No agrupado".</p>
 	</item>
 	<item>
-		<title>Color de la cuenta corriente</title>
-		<p>Color usado para marcar <link xref="account">cuentas</link> con el tipo <em>Corriente</em> en una lista de cuentas recientes.</p>
-	</item>
-	<item>
-		<title>Color de la cuenta de ahorros</title>
-		<p>Color usado para marcar <link xref="account">cuentas</link> con el tipo <em>Ahorros</em> en una lista de cuentas recientes.</p>
-	</item>
-	<item>
-		<title>Color de la cuenta de la empresa</title>
-		<p>Color usado para marcar <link xref="account">cuentas</link> con el tipo <em>Empresas</em> en una lista de cuentas recientes.</p>
-	</item>
-	<item>
-		<title>Usar dígitos nativos</title>
-		<p>Si usar numerales que son nativos para su localización en lugar de dígitos latinos. Por ejemplo, si esta opción está activada <em>٠١٢</em> se usará en lugar de <em>012</em> para las localizaciones que usan numerales arábigos orientales.</p>
-	</item>
-	<item>
 		<title>Insertar separador decimal</title>
 		<p>Establece para qué teclas pulsadas se insertará el separador decimal de la configuración regional en un campo de importe: punto del teclado numérico, cualquier punto y coma, o ninguno. Si el separador decimal ya aparece en un campo, no se insertará.</p>
-	</item>
-	<item>
-		<title>Carpeta de copia de seguridad CSV</title>
-		<p>Una carpeta donde sus datos se <link xref="import-export">exportarán a CSV</link> después de cada cambio. Esta función no funciona con cuentas protegidas con contraseña, ya que los archivos CSV no pueden protegerse con contraseña.</p>
 	</item>
 </terms>
 </page>
