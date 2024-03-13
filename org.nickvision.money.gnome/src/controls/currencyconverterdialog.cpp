@@ -114,7 +114,6 @@ namespace Nickvision::Money::GNOME::Controls
     {
         std::string sourceText{ gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "sourceAmountRow"))) };
         std::string resultText{ gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "resultAmountRow"))) };
-        gtk_widget_remove_css_class(GTK_WIDGET(gtk_builder_get_object(m_builder, "sourceAmountRow")), "error");
         gtk_widget_remove_css_class(GTK_WIDGET(gtk_builder_get_object(m_builder, "resultAmountRow")), "error");
         if(sourceText.empty())
         {
@@ -122,17 +121,7 @@ namespace Nickvision::Money::GNOME::Controls
         }
         else
         {
-            double sourceAmount{ 0 };
-            try
-            {
-                sourceAmount = std::stod(sourceText);
-            }
-            catch(const std::exception&)
-            {
-                gtk_widget_add_css_class(GTK_WIDGET(gtk_builder_get_object(m_builder, "sourceAmountRow")), "error");
-                gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "resultAmountRow")), "");
-                return;
-            }
+            double sourceAmount{ CurrencyHelpers::toAmount(sourceText, CurrencyHelpers::getSystemCurrency()) };
             std::string sourceCurrency{ gtk_string_list_get_string(m_currencyList, adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "sourceCurrencyRow")))) };
             std::string resultCurrency{ gtk_string_list_get_string(m_currencyList, adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "resultCurrencyRow")))) };
             std::optional<CurrencyConversion> conversion{ CurrencyConversionService::convert(sourceCurrency, sourceAmount, resultCurrency) };

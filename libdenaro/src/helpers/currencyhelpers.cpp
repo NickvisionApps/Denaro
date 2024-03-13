@@ -3,7 +3,9 @@
 #include <locale>
 #include <memory>
 #include <sstream>
+#include <libnick/helpers/stringhelpers.h>
 
+using namespace Nickvision;
 using namespace Nickvision::Money::Shared::Models;
 
 class NumberFormat : public std::numpunct<char>
@@ -109,5 +111,19 @@ namespace Nickvision::Money::Shared
             }
         }
         return builder.str();
+    }
+
+    double CurrencyHelpers::toAmount(std::string amount, const Currency& currency)
+    {
+        if(amount.find(currency.getSymbol()) != std::string::npos)
+        {
+            amount = StringHelpers::replace(amount, currency.getSymbol(), "");
+        }
+        std::stringstream builder;
+        builder.imbue({ builder.getloc(), new NumberFormat(currency) });
+        builder << amount;
+        double result{ 0 };
+        builder >> result;
+        return result;
     }
 }

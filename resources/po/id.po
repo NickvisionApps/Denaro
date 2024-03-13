@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 19:14-0400\n"
+"POT-Creation-Date: 2024-03-12 22:03-0400\n"
 "PO-Revision-Date: 2023-06-07 19:40+0000\n"
 "Last-Translator: Krindog7337 <igstkrisna2006@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/nickvision-"
@@ -373,12 +373,12 @@ msgstr "Tutup"
 msgid "Result was copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:101
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Buka"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:160
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repo Github"

@@ -69,6 +69,10 @@ namespace Nickvision::Money::Shared::Models
     void Currency::setCode(const std::string& code)
     {
         m_code = code;
+        if(m_code[m_code.size() - 1] == ' ')
+        {
+            m_code = m_code.substr(0, m_code.size() - 1);
+        }
     }
 
     char Currency::getDecimalSeparator() const

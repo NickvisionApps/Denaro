@@ -97,7 +97,6 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
 
     void CurrencyConverterDialog::onCurrencyChange()
     {
-        RowSourceCurrency().Title(winrt::to_hstring(_("Source")));
         RowResultCurrency().Title(winrt::to_hstring(_("Result")));
         if(TxtSourceAmount().Text().empty())
         {
@@ -105,17 +104,7 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
         }
         else
         {
-            double sourceAmount{ 0 };
-            try
-            {
-                sourceAmount = std::stod(winrt::to_string(TxtSourceAmount().Text()));
-            }
-            catch(const std::exception&)
-            {
-                RowSourceCurrency().Title(winrt::to_hstring(_("Source (Error)")));
-                TxtResultAmount().Text(L"");
-                return;
-            }
+            double sourceAmount{ CurrencyHelpers::toAmount(winrt::to_string(TxtSourceAmount().Text()), CurrencyHelpers::getSystemCurrency())};
             std::string sourceCurrency{ winrt::to_string(CmbSourceCurrency().SelectedItem().as<winrt::hstring>()) };
             std::string resultCurrency{ winrt::to_string(CmbResultCurrency().SelectedItem().as<winrt::hstring>()) };
             std::optional<CurrencyConversion> conversion{ CurrencyConversionService::convert(sourceCurrency, sourceAmount, resultCurrency) };

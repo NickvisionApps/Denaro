@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 19:14-0400\n"
+"POT-Creation-Date: 2024-03-12 22:03-0400\n"
 "PO-Revision-Date: 2023-11-17 11:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -371,12 +371,12 @@ msgstr "Zavřít"
 msgid "Result was copied to clipboard."
 msgstr "Výsledek zkopírován do schránky."
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:101
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Otevřít"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:160
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repozitář GitHub"

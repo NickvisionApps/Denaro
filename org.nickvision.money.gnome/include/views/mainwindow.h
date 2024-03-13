@@ -69,6 +69,10 @@ namespace Nickvision::Money::GNOME::Views
          */
         void keyboardShortcuts();
         /**
+         * @brief Opens the application's help documentation. 
+         */
+        void help();
+        /**
          * @brief Opens the application's about dialog. 
          */
         void about();

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 19:14-0400\n"
+"POT-Creation-Date: 2024-03-12 22:03-0400\n"
 "PO-Revision-Date: 2023-11-15 11:53+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-money/"
@@ -376,12 +376,12 @@ msgstr "Fermer"
 msgid "Result was copied to clipboard."
 msgstr "Le résultat a été copié vers le presse-papiers."
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:94
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:101
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Ouvrir"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:146
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:160
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Dépôt GitHub"

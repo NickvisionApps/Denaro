@@ -3,14 +3,16 @@
 #include <libnick/app/appinfo.h>
 #include <libnick/notifications/shellnotification.h>
 #include <libnick/localization/gettext.h>
+#include <libnick/localization/documentation.h>
 #include "controls/currencyconverterdialog.h"
 #include "helpers/builder.h"
 #include "views/preferencesdialog.h"
 
-using namespace Nickvision::Money::GNOME::Controls;
-using namespace Nickvision::Money::Shared::Controllers;
 using namespace Nickvision::App;
 using namespace Nickvision::Events;
+using namespace Nickvision::Localization;
+using namespace Nickvision::Money::GNOME::Controls;
+using namespace Nickvision::Money::Shared::Controllers;
 using namespace Nickvision::Notifications;
 
 namespace Nickvision::Money::GNOME::Views
@@ -53,6 +55,11 @@ namespace Nickvision::Money::GNOME::Views
         g_signal_connect(actKeyboardShortcuts, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->keyboardShortcuts(); }), this);
         g_action_map_add_action(G_ACTION_MAP(m_window), G_ACTION(actKeyboardShortcuts));
         SET_ACCEL_FOR_ACTION(m_app, "win.keyboardShortcuts", "<Ctrl>question");
+        //Preferences Action
+        GSimpleAction* actHelp{ g_simple_action_new("help", nullptr) };
+        g_signal_connect(actHelp, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->help(); }), this);
+        g_action_map_add_action(G_ACTION_MAP(m_window), G_ACTION(actHelp));
+        SET_ACCEL_FOR_ACTION(m_app, "win.help", "F1");
         //About Action
         GSimpleAction* actAbout{ g_simple_action_new("about", nullptr) };
         g_signal_connect(actAbout, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->about(); }), this);
@@ -121,6 +128,13 @@ namespace Nickvision::Money::GNOME::Views
         gtk_window_set_transient_for(GTK_WINDOW(shortcuts), GTK_WINDOW(m_window));
         gtk_window_set_icon_name(GTK_WINDOW(shortcuts), m_controller->getAppInfo().getId().c_str());
         gtk_window_present(GTK_WINDOW(shortcuts));
+    }
+
+    void MainWindow::help()
+    {
+        std::string helpUrl{ Documentation::getHelpUrl("index") };
+        GtkUriLauncher* launcher{ gtk_uri_launcher_new(helpUrl.c_str()) };
+        gtk_uri_launcher_launch(launcher, GTK_WINDOW(m_window), nullptr, GAsyncReadyCallback(+[](GObject* source, GAsyncResult* res, gpointer) { gtk_uri_launcher_launch_finish(GTK_URI_LAUNCHER(source), res, nullptr); }), nullptr);
     }
 
     void MainWindow::about()
