@@ -159,12 +159,7 @@ namespace Nickvision::Money::Shared::Controllers
 
     std::shared_ptr<NewAccountDialogController> MainWindowController::createNewAccountDialogController() const
     {
-        std::vector<std::filesystem::path> openAccounts;
-        for(const std::pair<const std::filesystem::path, std::shared_ptr<AccountViewController>>& pair : m_accountViewControllers)
-        {
-            openAccounts.push_back(pair.first);
-        }
-        return std::make_shared<NewAccountDialogController>(openAccounts);
+        return std::make_shared<NewAccountDialogController>();
     }
 
     const std::shared_ptr<AccountViewController>& MainWindowController::getAccountViewController(const std::filesystem::path& path) const
@@ -249,6 +244,51 @@ namespace Nickvision::Money::Shared::Controllers
         }
         Account a{ path }; 
         return a.isEncrypted();
+    }
+
+    void MainWindowController::newAccount(const std::shared_ptr<NewAccountDialogController>& newAccountDialogController)
+    {
+        if(std::filesystem::exists(newAccountDialogController->getFilePath()))
+        {
+            //Check if overwrite is allowed
+            if(!newAccountDialogController->getOverwriteExisting())
+            {
+                m_notificationSent.invoke({ _("This account already exists."), NotificationSeverity::Error });
+                return;
+            }
+            //Check if the account is open in the app (cannot delete if open)
+            if(m_accountViewControllers.contains(newAccountDialogController->getFilePath()))
+            {
+                m_notificationSent.invoke({ _("This account cannot be overwritten."), NotificationSeverity::Error });
+                return;
+            }
+            std::filesystem::remove(newAccountDialogController->getFilePath());
+        }
+        Configuration& config{ Aura::getActive().getConfig<Configuration>("config") };
+        //Create the new account
+        std::unique_ptr<Account> account{ std::make_unique<Account>(newAccountDialogController->getFilePath()) };
+        account->login("");
+        account->setMetadata(newAccountDialogController->getMetadata());
+        account->importFromFile(newAccountDialogController->getImportFile(), config.getTransactionDefaultColor(), config.getGroupDefaultColor());
+        account->changePassword(newAccountDialogController->getPassword());
+        account.reset();
+        //Create the controller and open the account
+        std::shared_ptr<AccountViewController> controller{ nullptr };
+        try
+        {
+            controller = std::make_shared<AccountViewController>(newAccountDialogController->getFilePath(), newAccountDialogController->getPassword());
+        }
+        catch(const std::exception& e)
+        {
+            m_notificationSent.invoke({ e.what(), NotificationSeverity::Error });
+        }
+        if(controller)
+        {
+            m_accountViewControllers.emplace(std::make_pair(newAccountDialogController->getFilePath(), controller));
+            config.addRecentAccount(controller->toRecentAccount());
+            config.save();
+            m_accountAdded.invoke(controller);
+        }
     }
 
     void MainWindowController::openAccount(std::filesystem::path path, const std::string& password)

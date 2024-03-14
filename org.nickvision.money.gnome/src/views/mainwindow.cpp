@@ -316,7 +316,7 @@ namespace Nickvision::Money::GNOME::Views
             g_object_set_property(G_OBJECT(passwordEntry), "activates-default", &valTrue);
             g_object_set_property(G_OBJECT(passwordEntry), "placeholder-text", &valPlaceholderText);
             g_signal_connect(passwordEntry, "changed", G_CALLBACK(+[](GtkEditable* self, gpointer data){ *(reinterpret_cast<std::string*>(data)) = gtk_editable_get_text(self); }), &password);
-            AdwMessageDialog* messageDialog{ ADW_MESSAGE_DIALOG(adw_message_dialog_new(GTK_WINDOW(m_window), _("Unlock Account"), path.filename().string().c_str())) };
+            AdwMessageDialog* messageDialog{ ADW_MESSAGE_DIALOG(adw_message_dialog_new(GTK_WINDOW(m_window), path.filename().string().c_str(), nullptr)) };
             adw_message_dialog_set_extra_child(messageDialog, GTK_WIDGET(passwordEntry));
             adw_message_dialog_add_response(messageDialog, "cancel", _("Cancel"));
             adw_message_dialog_add_response(messageDialog, "unlock", _("Unlock"));

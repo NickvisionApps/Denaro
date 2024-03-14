@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-12 23:50-0400\n"
+"POT-Creation-Date: 2024-03-14 00:10-0400\n"
 "PO-Revision-Date: 2024-03-01 15:00+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
@@ -112,20 +112,30 @@ msgstr "Goedenavond!"
 msgid "Good Day!"
 msgstr "Goedendag!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:208
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:203
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:226
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:221
 msgid "Unable to download and install update"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:259
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:256
+#, fuzzy
+msgid "This account already exists."
+msgstr "Dit account is al geopend"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:262
+#, fuzzy
+msgid "This account cannot be overwritten."
+msgstr "Er staat geen geld op deze rekening."
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:299
 #, fuzzy
 msgid "The file is not a Denaro account file."
 msgstr "De rekening kan niet worden geëxporteerd."
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:264
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:304
 #, fuzzy
 msgid "The account is already open."
 msgstr "Dit account is al geopend"
@@ -229,7 +239,7 @@ msgid "New Account (Ctrl+N)"
 msgstr "Nieuw account (Ctrl+N)"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:132
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:123
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:139
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Openen"
@@ -352,6 +362,7 @@ msgid "New Account"
 msgstr "Nieuw account"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:244
 msgid "Open Account"
 msgstr "Account openen"
 
@@ -392,25 +403,45 @@ msgstr "Sluiten"
 msgid "Result was copied to clipboard."
 msgstr "Resultaat is gekopieerd naar klem­bord."
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:182
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:198
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub-repo"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:246
+#, fuzzy
+msgid "Nickvision Denaro Account (*.nmoney)"
+msgstr "Nickvision Denaro-account"
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:279
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:411
 msgid "Checking"
 msgstr "Cheques"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:282
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:414
 msgid "Savings"
 msgstr "Spaarrekeningen"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:253
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:285
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Business"
 msgstr "Zakelijk"
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:313
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
+msgid "Enter password here"
+msgstr "Voer wachtwoord hier in"
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:321
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:451
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:322
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:450
+msgid "Unlock"
+msgstr "Ontgrendelen"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:67
@@ -503,22 +534,10 @@ msgstr ""
 msgid "Debug information copied to clipboard."
 msgstr "Resultaat is gekopieerd naar klem­bord."
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
-msgid "Enter password here"
-msgstr "Voer wachtwoord hier in"
-
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:448
 #, fuzzy
 msgid "Unlock Account"
 msgstr "Rekening sluiten"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:450
-msgid "Unlock"
-msgstr "Ontgrendelen"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:451
-msgid "Cancel"
-msgstr "Annuleren"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"
@@ -789,9 +808,6 @@ msgstr "Resultaat"
 #~ msgid "Nicholas Logozzo"
 #~ msgstr "Nicholas Logozzo"
 
-#~ msgid "Nickvision Denaro Account"
-#~ msgstr "Nickvision Denaro-account"
-
 #~ msgid "No"
 #~ msgstr "Nee"
 
@@ -886,9 +902,6 @@ msgstr "Resultaat"
 #~ "\n"
 #~ "Nieuwe opeenvolgende transacties worden op basis van de nieuwe periode "
 #~ "ingepland."
-
-#~ msgid "This account has no money available to transfer."
-#~ msgstr "Er staat geen geld op deze rekening."
 
 #, fuzzy
 #~ msgid ""

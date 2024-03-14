@@ -141,6 +141,12 @@ namespace Nickvision::Money::Shared::Controllers
          */
         bool isAccountPasswordProtected(const std::filesystem::path& path) const;
         /**
+         * @brief Creates a new account.
+         * @brief This method will invoke the AccountAdded event if the account is successfully created.
+         * @param newAccountDialogController The NewAccountDialogController for the new account
+         */
+        void newAccount(const std::shared_ptr<NewAccountDialogController>& newAccountDialogController);
+        /**
          * @brief Opens an account.
          * @brief This method will invoke the AccountAdded event if the account is successfully opened.
          * @param path The path of the account to open
