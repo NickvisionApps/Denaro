@@ -30,7 +30,7 @@ jobs:
           pkgs: boost-date-time gtest libnick matplotplusplus podofo rapidcsv
           triplet: x64-windows
           cache-key: windows-latest
-          revision: d8160798747ac9953d3374f9473393868d76dfe6
+          revision: 7f9f0e44db287e8e67c0e888141bfa200ab45121
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: "Build"
         working-directory: ${{github.workspace}}/build
@@ -63,7 +63,7 @@ jobs:
           pkgs: boost-date-time gtest libnick matplotplusplus podofo rapidcsv
           triplet: x64-linux
           cache-key: ubuntu-latest
-          revision: d8160798747ac9953d3374f9473393868d76dfe6
+          revision: 7f9f0e44db287e8e67c0e888141bfa200ab45121
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: "Build"
         working-directory: ${{github.workspace}}/build
