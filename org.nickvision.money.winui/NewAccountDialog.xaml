@@ -27,7 +27,7 @@
             </SelectorBarItem>
         </SelectorBar>
 
-        <nickvision:ViewStack x:Name="ViewStack" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <nickvision:ViewStack x:Name="ViewStack" MinHeight="500" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <nickvision:ViewStack.Pages>
                 <nickvision:ViewStackPage PageName="Storage">
                     <StackPanel Orientation="Vertical" Spacing="6">
@@ -93,7 +93,23 @@
 
                 <nickvision:ViewStackPage PageName="Import">
                     <StackPanel Orientation="Vertical" Spacing="6">
-                        
+                        <TextBlock x:Name="LblImportFile" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="Gray"/>
+
+                        <nickvision:SettingsRow x:Name="RowImportFile" Glyph="&#xE8B7;">
+                            <nickvision:SettingsRow.Child>
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <TextBlock x:Name="LblImportFile" VerticalAlignment="Center"/>
+
+                                    <Button x:Name="BtnSelectImportFile">
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE838;"/>
+                                    </Button>
+
+                                    <Button x:Name="BtnClearImportFile" Visibility="Collapsed">
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE894;"/>
+                                    </Button>
+                                </StackPanel>
+                            </nickvision:SettingsRow.Child>
+                        </nickvision:SettingsRow>
                     </StackPanel>
                 </nickvision:ViewStackPage>
             </nickvision:ViewStack.Pages>

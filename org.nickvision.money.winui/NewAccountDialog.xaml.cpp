@@ -46,6 +46,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         CmbTransactionReminders().Items().Append(winrt::box_value(winrt::to_hstring(_("Two Months Before"))));
         SelectorItemCurrency().Text(winrt::to_hstring(_("Currency")));
         SelectorItemImport().Text(winrt::to_hstring(_("Import")));
+        LblImportFile().Text(winrt::to_hstring(_("Upload a supported file to use to import existing information into the new account. Denaro supports CSV, OFX, and QIF files.")));
     }
 
     void NewAccountDialog::SetController(const std::shared_ptr<NewAccountDialogController>& controller)

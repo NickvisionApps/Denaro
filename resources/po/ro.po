@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 01:39-0700\n"
+"POT-Creation-Date: 2024-03-15 11:30-0700\n"
 "PO-Revision-Date: 2023-08-27 17:36+0000\n"
 "Last-Translator: Victor Mihalache <victormihalache@duck.com>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/nickvision-"
@@ -402,6 +402,7 @@ msgid "Import Existing Information"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:280
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:49
 msgid ""
 "Upload a supported file to use to import existing information into the new "
 "account. Denaro supports CSV, OFX, and QIF files."

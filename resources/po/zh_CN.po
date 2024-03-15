@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 01:39-0700\n"
+"POT-Creation-Date: 2024-03-15 11:30-0700\n"
 "PO-Revision-Date: 2024-02-02 03:01+0000\n"
 "Last-Translator: aerowolf <aerowolf@tom.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -391,6 +391,7 @@ msgid "Import Existing Information"
 msgstr "导入已有信息"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:280
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:49
 #, fuzzy
 msgid ""
 "Upload a supported file to use to import existing information into the new "
