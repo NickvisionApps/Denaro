@@ -20,7 +20,7 @@ namespace Nickvision::Money::GNOME::Views
         gtk_window_set_transient_for(GTK_WINDOW(m_dialog), m_parent);
         gtk_window_set_icon_name(GTK_WINDOW(m_dialog), m_controller->getId().c_str());
         //Load
-        adw_action_row_set_subtitle(ADW_ACTION_ROW(gtk_builder_get_object(m_builder, "accountFolderRow")), m_controller->getFolder().filename().c_str());
+        adw_action_row_set_subtitle(ADW_ACTION_ROW(gtk_builder_get_object(m_builder, "accountFolderRow")), m_controller->getFolder().filename().string().c_str());
         adw_switch_row_set_active(ADW_SWITCH_ROW(gtk_builder_get_object(m_builder, "accountOverwriteRow")), m_controller->getOverwriteExisting());
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "accountTypeRow")), static_cast<unsigned int>(m_controller->getMetadata().getType()));
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionTypeRow")), static_cast<unsigned int>(m_controller->getMetadata().getDefaultTransactionType()));
@@ -97,11 +97,6 @@ namespace Nickvision::Money::GNOME::Views
         g_object_unref(m_builder);
     }
 
-    const std::shared_ptr<NewAccountDialogController>& NewAccountDialog::getController() const
-    {
-        return m_controller;
-    }
-
     bool NewAccountDialog::run()
     {
         gtk_window_present(GTK_WINDOW(m_dialog));
@@ -157,7 +152,7 @@ namespace Nickvision::Money::GNOME::Views
                 bool result{ dialog->m_controller->setFolder(folderPath) };
                 if(result)
                 {
-                    adw_action_row_set_subtitle(ADW_ACTION_ROW(gtk_builder_get_object(dialog->m_builder, "accountFolderRow")), folderPath.filename().c_str());
+                    adw_action_row_set_subtitle(ADW_ACTION_ROW(gtk_builder_get_object(dialog->m_builder, "accountFolderRow")), folderPath.filename().string().c_str());
                 }
                 gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(dialog->m_builder, "storagePageNextButton")), result && !dialog->m_controller->getMetadata().getName().empty());
             }

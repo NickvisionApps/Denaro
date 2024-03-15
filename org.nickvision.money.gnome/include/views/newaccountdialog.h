@@ -7,6 +7,9 @@
 
 namespace Nickvision::Money::GNOME::Views
 {
+    /**
+     * @brief A dialog for creating a new account.
+     */
     class NewAccountDialog 
     {
     public:
@@ -20,11 +23,6 @@ namespace Nickvision::Money::GNOME::Views
          * @brief Destructs a NewAccountDialog. 
          */
         ~NewAccountDialog();
-        /**
-         * @brief Gets the NewAccountDialogController.
-         * @return NewAccountDialogController
-         */
-        const std::shared_ptr<Shared::Controllers::NewAccountDialogController>& getController() const;
         /**
          * @brief Shows the NewAccountDialog and waits for it to close.
          * @return True if the dialog was finished, else false if canceled by the user

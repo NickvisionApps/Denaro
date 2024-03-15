@@ -141,6 +141,12 @@ namespace winrt::Nickvision::Money::WinUI::implementation
          */
         void OnAccountAdded(const ::Nickvision::Events::ParamEventArgs<std::shared_ptr<::Nickvision::Money::Shared::Controllers::AccountViewController>>& args);
         /**
+         * @brief Prompts the user to create an account.
+         * @param sender IInspectable
+         * @param args Microsoft::UI::Xaml::RoutedEventArgs
+         */
+        Windows::Foundation::IAsyncAction NewAccount(const IInspectable& sender, const Microsoft::UI::Xaml::RoutedEventArgs& args);
+        /**
          * @brief Prompts the user to open an account.
          * @param sender IInspectable
          * @param args Microsoft::UI::Xaml::RoutedEventArgs

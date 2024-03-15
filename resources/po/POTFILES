@@ -9,6 +9,7 @@ org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp
 org.nickvision.money.gnome/src/views/newaccountdialog.cpp
 org.nickvision.money.gnome/src/views/mainwindow.cpp
 org.nickvision.money.winui/AccountPage.xaml.cpp
+org.nickvision.money.winui/NewAccountDialog.xaml.cpp
 org.nickvision.money.winui/MainWindow.xaml.cpp
 org.nickvision.money.winui/SettingsPage.xaml.cpp
 org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp

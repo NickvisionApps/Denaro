@@ -163,7 +163,7 @@
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <Button Grid.Column="0" Height="36" HorizontalAlignment="Stretch">
+                                            <Button Grid.Column="0" Height="36" HorizontalAlignment="Stretch" Click="NewAccount">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" Spacing="6">
                                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>

@@ -7,6 +7,7 @@
 #include <libnick/notifications/shellnotification.h>
 #include <libnick/localization/gettext.h>
 #include "AccountPage.xaml.h"
+#include "NewAccountDialog.xaml.h"
 #include "SettingsPage.xaml.h"
 #include "Controls/ClickableSettingsRow.xaml.h"
 #include "Controls/CurrencyConverterDialog.xaml.h"
@@ -345,6 +346,19 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         m_accountPages[args.getParam()->getPath()] = page;
         //Set AccountView
         NavView().SelectedItem(item);
+    }
+
+    Windows::Foundation::IAsyncAction MainWindow::NewAccount(const IInspectable& sender, const RoutedEventArgs& args)
+    {
+        std::shared_ptr<NewAccountDialogController> controller{ m_controller->createNewAccountDialogController() };
+        ContentDialog dialog{ winrt::make<implementation::NewAccountDialog>() };
+        dialog.as<NewAccountDialog>()->SetController(controller);
+        dialog.XamlRoot(MainGrid().XamlRoot());
+        dialog.RequestedTheme(MainGrid().RequestedTheme());
+        if(co_await dialog.ShowAsync() == ContentDialogResult::Primary)
+        {
+            m_controller->newAccount(controller);
+        }
     }
 
     Windows::Foundation::IAsyncAction MainWindow::OpenAccount(const IInspectable& sender, const RoutedEventArgs& args)

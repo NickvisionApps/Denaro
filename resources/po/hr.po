@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 22:35-0400\n"
+"POT-Creation-Date: 2024-03-15 01:39-0700\n"
 "PO-Revision-Date: 2023-09-26 13:22+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.1-dev\n"
 
 #: libdenaro/src/models/account.cpp:106
@@ -45,22 +45,24 @@ msgid "Two months from now"
 msgstr "Za dva mjeseca"
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy, c++-format
+#, fuzzy
 msgid "Transfer to {}"
 msgstr "Transferiraj na {0}"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy, c++-format
+#, fuzzy
 msgid "Transfer from {}"
 msgstr "Transferiraj sa {0}"
 
 #: libdenaro/src/models/account.cpp:894
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:38
 msgid "Income"
 msgstr "Prihod"
 
 #: libdenaro/src/models/account.cpp:894
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:39
 msgid "Expense"
 msgstr "Rashod"
 
@@ -145,12 +147,13 @@ msgstr "Ovaj je račun već otvoren."
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
 msgid "Currency Converter"
 msgstr "Konverter valuta"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:47
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
 msgid "Currency"
 msgstr "Valuta"
@@ -190,8 +193,10 @@ msgstr "Kopiraj iznos rezultata"
 msgid "Back"
 msgstr "Natrag"
 
+#. Localize Strings
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:41
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:19
 msgid "New Account"
 msgstr "Novi račun"
 
@@ -210,26 +215,31 @@ msgid "Storage Location"
 msgstr "Mjesto spremišta"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:73
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:23
 msgid "Account Name"
 msgstr "Ime računa"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:77
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:25
 #, fuzzy
 msgid "Account Password"
 msgstr "Lozinka za račun (opcionalno)"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:81
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:27
 #, fuzzy
 msgid "Folder"
 msgstr "Mapa"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:88
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:149
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:144
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:28
 #, fuzzy
 msgid "Select Folder"
 msgstr "Odaberi datoteku"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:97
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:29
 msgid "Overwrite Existing Accounts"
 msgstr "Prepiši postojeće račune"
 
@@ -244,59 +254,70 @@ msgid "Account Options"
 msgstr "Opcije računa"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:33
 msgid "Account Type"
 msgstr "Vrsta računa"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:284
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:411
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:285
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:34
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:425
 msgid "Checking"
 msgstr "Žiro račun"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:287
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:414
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:288
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:428
 msgid "Savings"
 msgstr "Štedni račun"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:290
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:417
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:291
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:36
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:431
 msgid "Business"
 msgstr "Poslovni"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:37
 #, fuzzy
 msgid "Default Transaction Type"
 msgstr "Standardna vrsta transakcije"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:146
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:40
 msgid "Transaction Reminders Threshold"
 msgstr "Prag podsjetnika za transakcije"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:147
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:41
 msgid ""
 "Determines how far in advanced Denaro should remind users of upcoming "
 "transactions in the account."
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:42
 msgid "Never"
 msgstr "Nikada"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:43
 msgid "One Day Before"
 msgstr "Jedan dan prije"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "One Week Before"
 msgstr "Jedan tjedan prije"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "One Month Before"
 msgstr "Jedan mjesec prije"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:46
 msgid "Two Months Before"
 msgstr "Dva mjeseca prije"
 
@@ -392,6 +413,7 @@ msgid "Clear File"
 msgstr "Izbriši mapu sigurnosne kopije"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:320
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:21
 msgid "Create"
 msgstr "Stvori"
 
@@ -407,7 +429,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Tipkovni prečaci"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:10
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "Help"
 msgstr "Pomoć"
 
@@ -420,7 +442,7 @@ msgid "Main Menu"
 msgstr "Glavni izbornik"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:42
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:110
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:111
 msgid ""
 "Create or open an account to get started. You may also drag a file into the "
 "app from your file browser."
@@ -429,19 +451,19 @@ msgstr ""
 "program iz preglednika datoteka."
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:54
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:385
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:399
 msgid "No Recent Accounts"
 msgstr "Nema nedavno korištenih računa"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:74
 #: org.nickvision.money.gnome/blueprints/main_window.blp:92
 #: org.nickvision.money.gnome/blueprints/main_window.blp:110
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:404
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:418
 msgid "Remove"
 msgstr "Ukloni"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:123
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #, fuzzy
 msgid "New"
 msgstr "Nova"
@@ -452,7 +474,7 @@ msgstr "Novi račun (Ctrl+N)"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:132
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:140
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:83
 msgid "Open"
 msgstr "Otvori"
 
@@ -547,6 +569,7 @@ msgstr ""
 "Odredi tipke za umetanje decimalnog znaka jezičnog područja u polju iznosa."
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:80
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:31
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
 #, fuzzy
@@ -570,7 +593,7 @@ msgid "Account"
 msgstr "Račun"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:249
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 msgid "Open Account"
 msgstr "Otvori račun"
 
@@ -604,6 +627,7 @@ msgstr ""
 "prijavi grešku."
 
 #: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:20
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
 msgid "Close"
 msgstr "Zatvori"
@@ -617,107 +641,137 @@ msgstr "Rezultat je kopiran u međuspremnik."
 msgid "Your system reported that your currency is"
 msgstr "Tvoj sustav je prijavio da je tvoja valuta"
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:266
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:261
 #, fuzzy
 msgid "Select Import File"
 msgstr "Uvezi datoteku"
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:268
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:263
 msgid "All Files (*.csv, *.ofx, *.qif)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:276
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:271
 msgid "CSV (*.csv)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:280
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:275
 msgid "Open Financial Exchange (*.ofx)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:284
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:279
 msgid "Quicken Interchange Format (*.qif)"
 msgstr ""
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:199
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 msgid "GitHub Repo"
 msgstr "GitHub repozitorij"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:251
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:252
 #, fuzzy
 msgid "Nickvision Denaro Account (*.nmoney)"
 msgstr "Nickvision Denaro račun"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:318
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:319
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:26
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:456
 msgid "Enter password here"
 msgstr "Ovdje upiši lozinku"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:326
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:451
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:327
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:465
 msgid "Cancel"
 msgstr "Odustani"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:327
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:450
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:328
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:464
 msgid "Unlock"
 msgstr "Otključaj"
 
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:22
+#, fuzzy
+msgid "Storage"
+msgstr "Mjesto spremišta"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:24
+msgid "Enter name here"
+msgstr "Ovdje upiši ime"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:30
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+#, fuzzy
+msgid "On"
+msgstr "Otvori"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:32
+#, fuzzy
+msgid "Options"
+msgstr "Radnje"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:35
+#, fuzzy
+msgid "Saving"
+msgstr "Štedni račun"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:48
+#, fuzzy
+msgid "Import"
+msgstr "Uvezi datoteku"
+
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Search"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Home"
 msgstr "Početna stranica"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Dashboard"
 msgstr "Pregledna ploča"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Accounts"
 msgstr "Računi"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Izvezi sve informacije"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "Changelog"
 msgstr "Dnevnik promjena"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
 msgid "Report a Bug"
 msgstr "Prijavi grešku"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Discussions"
 msgstr "Rasprave"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
 msgid "Credits"
 msgstr "Zasluge"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Postavke"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:96
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:97
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:103
-#, c++-format
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:104
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -727,8 +781,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:107
-#, c++-format
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:108
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -740,21 +793,21 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:170
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:171
 #, fuzzy
 msgid "Drop here to open account"
 msgstr "Nije moguće prepisati otvoreni račun."
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:234
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:235
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:303
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:304
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "Rezultat je kopiran u međuspremnik."
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:448
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:462
 #, fuzzy
 msgid "Unlock Account"
 msgstr "Zatvori račun"
@@ -762,11 +815,6 @@ msgstr "Zatvori račun"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"
 msgstr ""
-
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
-#, fuzzy
-msgid "On"
-msgstr "Otvori"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
 #, fuzzy
@@ -796,6 +844,9 @@ msgstr "U redu"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "Rezultat"
+
+#~ msgid "Password"
+#~ msgstr "Lozinka"
 
 #~ msgid "Password Strength"
 #~ msgstr "Kvaliteta lozinke"
@@ -1246,9 +1297,6 @@ msgstr "Rezultat"
 #~ msgid "Reminders"
 #~ msgstr "Podsjetnici"
 
-#~ msgid "Actions"
-#~ msgstr "Radnje"
-
 #~ msgid "Select All Overview Filters"
 #~ msgstr "Odaberi sve filtre pregleda"
 
@@ -1334,9 +1382,6 @@ msgstr "Rezultat"
 
 #~ msgid "Enter Password To Login:"
 #~ msgstr "Za prijavu upiši lozinku:"
-
-#~ msgid "Password"
-#~ msgstr "Lozinka"
 
 #~ msgid "Use Native Digits"
 #~ msgstr "Koristi brojke jezika"
@@ -1593,9 +1638,6 @@ msgstr "Rezultat"
 
 #~ msgid "Imported {0} transactions from file."
 #~ msgstr "Uvezene su {0} transakcije iz datoteke."
-
-#~ msgid "Enter name here"
-#~ msgstr "Ovdje upiši ime"
 
 #~ msgid "Enter description here"
 #~ msgstr "Ovdje upiši opis"

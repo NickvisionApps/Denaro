@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 22:35-0400\n"
+"POT-Creation-Date: 2024-03-15 01:39-0700\n"
 "PO-Revision-Date: 2023-09-10 21:21+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -44,22 +44,24 @@ msgid "Two months from now"
 msgstr "Bu günden, iki ay sonra"
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy, c++-format
+#, fuzzy
 msgid "Transfer to {}"
 msgstr "Şuraya Aktar: {0}"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy, c++-format
+#, fuzzy
 msgid "Transfer from {}"
 msgstr "Şuradan Aktar: {0}"
 
 #: libdenaro/src/models/account.cpp:894
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:38
 msgid "Income"
 msgstr "Gelir"
 
 #: libdenaro/src/models/account.cpp:894
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:39
 msgid "Expense"
 msgstr "Gider"
 
@@ -146,12 +148,13 @@ msgstr "Bu hesap zaten açıldı."
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
 msgid "Currency Converter"
 msgstr "Para Birimi Dönüştürücü"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:47
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
 msgid "Currency"
 msgstr "Para Birimi"
@@ -191,8 +194,10 @@ msgstr "Sonuç Miktarı Kopyala"
 msgid "Back"
 msgstr "Geri"
 
+#. Localize Strings
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:41
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:19
 msgid "New Account"
 msgstr "Yeni Hesap"
 
@@ -211,26 +216,31 @@ msgid "Storage Location"
 msgstr "Depolama Konumu"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:73
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:23
 msgid "Account Name"
 msgstr "Hesap Adı"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:77
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:25
 #, fuzzy
 msgid "Account Password"
 msgstr "Hesap Parolası (İsteğe bağlı)"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:81
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:27
 #, fuzzy
 msgid "Folder"
 msgstr "Klasör"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:88
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:149
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:144
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:28
 #, fuzzy
 msgid "Select Folder"
 msgstr "Dosya Seç"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:97
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:29
 msgid "Overwrite Existing Accounts"
 msgstr "Var Olan Hesapların Üzerine Yaz"
 
@@ -245,59 +255,70 @@ msgid "Account Options"
 msgstr "Hesap Seçenekleri"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:33
 msgid "Account Type"
 msgstr "Hesap Türü"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:284
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:411
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:285
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:34
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:425
 msgid "Checking"
 msgstr "Çek"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:287
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:414
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:288
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:428
 msgid "Savings"
 msgstr "Tasarruf"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:290
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:417
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:291
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:36
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:431
 msgid "Business"
 msgstr "Kurumsal"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:37
 #, fuzzy
 msgid "Default Transaction Type"
 msgstr "Öntanımlı İşlem Türü"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:146
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:40
 msgid "Transaction Reminders Threshold"
 msgstr "İşlem Hatırlatma Eşiği"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:147
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:41
 msgid ""
 "Determines how far in advanced Denaro should remind users of upcoming "
 "transactions in the account."
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:42
 msgid "Never"
 msgstr "Asla"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:43
 msgid "One Day Before"
 msgstr "Bir Gün Önce"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "One Week Before"
 msgstr "Bir Hafta Önce"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "One Month Before"
 msgstr "Bir Ay Önce"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:46
 msgid "Two Months Before"
 msgstr "İki Ay Önce"
 
@@ -395,6 +416,7 @@ msgid "Clear File"
 msgstr "Yedekleme Klasörünü Temizle"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:320
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:21
 msgid "Create"
 msgstr "Oluştur"
 
@@ -410,7 +432,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:10
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
 msgid "Help"
 msgstr "Yardım"
 
@@ -423,7 +445,7 @@ msgid "Main Menu"
 msgstr "Ana Menü"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:42
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:110
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:111
 msgid ""
 "Create or open an account to get started. You may also drag a file into the "
 "app from your file browser."
@@ -432,19 +454,19 @@ msgstr ""
 "tarayıcınızdan uygulamaya da sürükleyebilirsiniz."
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:54
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:385
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:399
 msgid "No Recent Accounts"
 msgstr "Son Hesap Yok"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:74
 #: org.nickvision.money.gnome/blueprints/main_window.blp:92
 #: org.nickvision.money.gnome/blueprints/main_window.blp:110
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:404
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:418
 msgid "Remove"
 msgstr "Kaldır"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:123
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #, fuzzy
 msgid "New"
 msgstr "Yeni"
@@ -455,7 +477,7 @@ msgstr "Yeni Hesap (Ctrl+N)"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:132
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:140
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:83
 msgid "Open"
 msgstr "Aç"
 
@@ -551,6 +573,7 @@ msgstr ""
 "basıldığında ekleneceğini ayarlayın."
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:80
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:31
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
 #, fuzzy
@@ -574,7 +597,7 @@ msgid "Account"
 msgstr "Hesap"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:249
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 msgid "Open Account"
 msgstr "Hesap Aç"
 
@@ -608,6 +631,7 @@ msgstr ""
 "hatayı bildirin."
 
 #: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:20
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
 msgid "Close"
 msgstr "Kapat"
@@ -621,107 +645,137 @@ msgstr "Sonuç panoya kopyalandı."
 msgid "Your system reported that your currency is"
 msgstr "Sisteminiz para biriminizin şu olduğunu bildirdi"
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:266
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:261
 #, fuzzy
 msgid "Select Import File"
 msgstr "Dosya İçe Aktar"
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:268
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:263
 msgid "All Files (*.csv, *.ofx, *.qif)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:276
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:271
 msgid "CSV (*.csv)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:280
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:275
 msgid "Open Financial Exchange (*.ofx)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:284
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:279
 msgid "Quicken Interchange Format (*.qif)"
 msgstr ""
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:199
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 msgid "GitHub Repo"
 msgstr "GitHub Deposu"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:251
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:252
 #, fuzzy
 msgid "Nickvision Denaro Account (*.nmoney)"
 msgstr "Nickvision Denaro Hesabı"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:318
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:442
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:319
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:26
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:456
 msgid "Enter password here"
 msgstr "Parolayı buraya girin"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:326
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:451
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:327
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:465
 msgid "Cancel"
 msgstr "İptal Et"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:327
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:450
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:328
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:464
 msgid "Unlock"
 msgstr "Kilidi Aç"
 
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:22
+#, fuzzy
+msgid "Storage"
+msgstr "Depolama Konumu"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:24
+msgid "Enter name here"
+msgstr "Buraya ad girin"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:30
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+#, fuzzy
+msgid "On"
+msgstr "Aç"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:32
+#, fuzzy
+msgid "Options"
+msgstr "Eylemler"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:35
+#, fuzzy
+msgid "Saving"
+msgstr "Tasarruf"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:48
+#, fuzzy
+msgid "Import"
+msgstr "Dosya İçe Aktar"
+
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:67
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
 msgid "Search"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:68
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Home"
 msgstr "Ev"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Dashboard"
 msgstr "Tablo"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Accounts"
 msgstr "Hesaplar"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Check for Updates"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
 #, fuzzy
 msgid "Copy Debug Information"
 msgstr "Tüm Bilgileri Dışa Aktar"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "Changelog"
 msgstr "Değişim günlüğü"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
 msgid "Report a Bug"
 msgstr "Hata Raporla"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
 msgid "Discussions"
 msgstr "Tartışmalar"
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
 msgid "Credits"
 msgstr "Geliştirenler"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Ayarlar"
 
 #. Localize Strings
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:96
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:97
 msgid "PREVIEW"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:103
-#, c++-format
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:104
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -731,8 +785,7 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:107
-#, c++-format
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:108
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -744,21 +797,21 @@ msgid ""
 "{}"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:170
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:171
 #, fuzzy
 msgid "Drop here to open account"
 msgstr "Açılmış bir hesabın üzerine yazılamıyor."
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:234
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:235
 msgid "Update"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:303
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:304
 #, fuzzy
 msgid "Debug information copied to clipboard."
 msgstr "Sonuç panoya kopyalandı."
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:448
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:462
 #, fuzzy
 msgid "Unlock Account"
 msgstr "Hesabı Kapat"
@@ -766,11 +819,6 @@ msgstr "Hesabı Kapat"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"
 msgstr ""
-
-#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
-#, fuzzy
-msgid "On"
-msgstr "Aç"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
 #, fuzzy
@@ -800,6 +848,9 @@ msgstr "Tamam"
 #, fuzzy
 msgid "Result (Error)"
 msgstr "Sonuç"
+
+#~ msgid "Password"
+#~ msgstr "Parola"
 
 #~ msgid "Password Strength"
 #~ msgstr "Parola Kuvveti"
@@ -1247,9 +1298,6 @@ msgstr "Sonuç"
 #~ msgid "Reminders"
 #~ msgstr "Hatırlatıcılar"
 
-#~ msgid "Actions"
-#~ msgstr "Eylemler"
-
 #~ msgid "Select All Overview Filters"
 #~ msgstr "Tüm Genel Görünüm Süzgeçlerini Seç"
 
@@ -1337,9 +1385,6 @@ msgstr "Sonuç"
 
 #~ msgid "Enter Password To Login:"
 #~ msgstr "Giriş Yapmak İçin Parolayı Girin:"
-
-#~ msgid "Password"
-#~ msgstr "Parola"
 
 #~ msgid "Use Native Digits"
 #~ msgstr "Yerel Rakamları Kullan"
@@ -1653,9 +1698,6 @@ msgstr "Sonuç"
 
 #~ msgid "Imported {0} transactions from file."
 #~ msgstr "{0} işlem dosyadan içe aktarıldı."
-
-#~ msgid "Enter name here"
-#~ msgstr "Buraya ad girin"
 
 #~ msgid "Enter description here"
 #~ msgstr "Açıklamayı buraya girin"

@@ -236,10 +236,11 @@ namespace Nickvision::Money::GNOME::Views
 
     void MainWindow::newAccount()
     {
-        NewAccountDialog newAccountDialog{ m_controller->createNewAccountDialogController(), GTK_WINDOW(m_window) };
+        std::shared_ptr<NewAccountDialogController> controller{ m_controller->createNewAccountDialogController() };
+        NewAccountDialog newAccountDialog{ controller, GTK_WINDOW(m_window) };
         if(newAccountDialog.run())
         {
-            m_controller->newAccount(newAccountDialog.getController());
+            m_controller->newAccount(controller);
         }
     }
 
