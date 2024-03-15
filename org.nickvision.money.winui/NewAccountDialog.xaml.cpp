@@ -47,6 +47,10 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         SelectorItemCurrency().Text(winrt::to_hstring(_("Currency")));
         SelectorItemImport().Text(winrt::to_hstring(_("Import")));
         LblImportFile().Text(winrt::to_hstring(_("Upload a supported file to use to import existing information into the new account. Denaro supports CSV, OFX, and QIF files.")));
+        RowImportFile().Title(winrt::to_hstring(_("Import File")));
+        LblImportFile().Text(winrt::to_hstring(_("No File Selected")));
+        ToolTipService::SetToolTip(BtnSelectImportFile(), winrt::box_value(winrt::to_hstring(_("Select File"))));
+        ToolTipService::SetToolTip(BtnClearImportFile(), winrt::box_value(winrt::to_hstring(_("Clear File"))));
     }
 
     void NewAccountDialog::SetController(const std::shared_ptr<NewAccountDialogController>& controller)
