@@ -32,39 +32,39 @@ namespace Nickvision::Money::GNOME::Views
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customCodeRow")), m_controller->getMetadata().getCustomCurrency().getCode().c_str());
         switch(m_controller->getMetadata().getCustomCurrency().getDecimalSeparator())
         {
-            case '.':
-                adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customDecimalSeparatorRow")), 0);
-                break;
-            case ',':
-                adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customDecimalSeparatorRow")), 1);
-                break;
-            default:
-                adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customDecimalSeparatorRow")), 2);
-                gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customDecimalSeparatorEntry")), true);
-                std::string separator{ std::to_string(m_controller->getMetadata().getCustomCurrency().getDecimalSeparator()) };
-                gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customDecimalSeparatorEntry")), separator.c_str());
-                break;
+        case '.':
+            adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customDecimalSeparatorRow")), 0);
+            break;
+        case ',':
+            adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customDecimalSeparatorRow")), 1);
+            break;
+        default:
+            adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customDecimalSeparatorRow")), 2);
+            gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customDecimalSeparatorEntry")), true);
+            std::string separator{ std::to_string(m_controller->getMetadata().getCustomCurrency().getDecimalSeparator()) };
+            gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customDecimalSeparatorEntry")), separator.c_str());
+            break;
         }
         switch(m_controller->getMetadata().getCustomCurrency().getGroupSeparator())
         {
-            case '.':
-                adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customGroupSeparatorRow")), 0);
-                break;
-            case ',':
-                adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customGroupSeparatorRow")), 1);
-                break;
-            case '\'':
-                adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customGroupSeparatorRow")), 2);
-                break;
-            case '\0':
-                adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customGroupSeparatorRow")), 3);
-                break;
-            default:
-                adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customGroupSeparatorRow")), 4);
-                gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), true);
-                std::string separator{ std::to_string(m_controller->getMetadata().getCustomCurrency().getGroupSeparator()) };
-                gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), separator.c_str());
-                break;
+        case '.':
+            adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customGroupSeparatorRow")), 0);
+            break;
+        case ',':
+            adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customGroupSeparatorRow")), 1);
+            break;
+        case '\'':
+            adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customGroupSeparatorRow")), 2);
+            break;
+        case '\0':
+            adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customGroupSeparatorRow")), 3);
+            break;
+        default:
+            adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customGroupSeparatorRow")), 4);
+            gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), true);
+            std::string separator{ std::to_string(m_controller->getMetadata().getCustomCurrency().getGroupSeparator()) };
+            gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), separator.c_str());
+            break;
         }
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customDecimalDigitsRow")), static_cast<unsigned int>(m_controller->getMetadata().getCustomCurrency().getDecimalDigits() - 2));
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customAmountStyleRow")), static_cast<unsigned int>(m_controller->getMetadata().getCustomCurrency().getAmountStyle()));
@@ -184,42 +184,42 @@ namespace Nickvision::Money::GNOME::Views
             char decimalSeparator;
             switch(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customDecimalSeparatorRow"))))
             {
-                case 0:
-                    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customDecimalSeparatorEntry")), false);
-                    decimalSeparator = '.';
-                    break;
-                case 1:
-                    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customDecimalSeparatorEntry")), false);
-                    decimalSeparator = ',';
-                    break;
-                default:
-                    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customDecimalSeparatorEntry")), true);
-                    decimalSeparator = gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customDecimalSeparatorEntry")))[0];
-                    break;
+            case 0:
+                gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customDecimalSeparatorEntry")), false);
+                decimalSeparator = '.';
+                break;
+            case 1:
+                gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customDecimalSeparatorEntry")), false);
+                decimalSeparator = ',';
+                break;
+            default:
+                gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customDecimalSeparatorEntry")), true);
+                decimalSeparator = gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customDecimalSeparatorEntry")))[0];
+                break;
             }
             char groupSeparator;
             switch(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customGroupSeparatorRow"))))
             {
-                case 0:
-                    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), false);
-                    groupSeparator = '.';
-                    break;
-                case 1:
-                    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), false);
-                    groupSeparator = ',';
-                    break;
-                case 2:
-                    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), false);
-                    groupSeparator = '\'';
-                    break;
-                case 3:
-                    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), false);
-                    groupSeparator = '\0';
-                    break;
-                default:
-                    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), true);
-                    groupSeparator = gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")))[0];
-                    break;
+            case 0:
+                gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), false);
+                groupSeparator = '.';
+                break;
+            case 1:
+                gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), false);
+                groupSeparator = ',';
+                break;
+            case 2:
+                gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), false);
+                groupSeparator = '\'';
+                break;
+            case 3:
+                gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), false);
+                groupSeparator = '\0';
+                break;
+            default:
+                gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")), true);
+                groupSeparator = gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customGroupSeparatorEntry")))[0];
+                break;
             }
             int decimalDigits{ static_cast<int>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customDecimalDigitsRow")))) + 2 };
             AmountStyle amountStyle{ static_cast<AmountStyle>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customAmountStyleRow")))) };

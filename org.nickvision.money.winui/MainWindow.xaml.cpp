@@ -352,7 +352,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
     {
         std::shared_ptr<NewAccountDialogController> controller{ m_controller->createNewAccountDialogController() };
         ContentDialog dialog{ winrt::make<implementation::NewAccountDialog>() };
-        dialog.as<NewAccountDialog>()->SetController(controller);
+        dialog.as<NewAccountDialog>()->SetController(controller, m_hwnd);
         dialog.XamlRoot(MainGrid().XamlRoot());
         dialog.RequestedTheme(MainGrid().RequestedTheme());
         if(co_await dialog.ShowAsync() == ContentDialogResult::Primary)
@@ -363,7 +363,6 @@ namespace winrt::Nickvision::Money::WinUI::implementation
 
     Windows::Foundation::IAsyncAction MainWindow::OpenAccount(const IInspectable& sender, const RoutedEventArgs& args)
     {
-        //Select account file
         FileOpenPicker picker;
         picker.as<::IInitializeWithWindow>()->Initialize(m_hwnd);
         picker.SuggestedStartLocation(PickerLocationId::DocumentsLibrary);
