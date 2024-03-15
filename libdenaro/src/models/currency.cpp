@@ -126,6 +126,11 @@ namespace Nickvision::Money::Shared::Models
         m_amountStyle = style;
     }
 
+    std::string Currency::toString() const
+    {
+        return m_symbol + " (" + m_code + ")";
+    }
+
     Currency::operator bool() const
     {
         return validate() == CurrencyCheckStatus::Valid;

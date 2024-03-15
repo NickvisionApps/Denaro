@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 00:10-0400\n"
+"POT-Creation-Date: 2024-03-14 22:31-0400\n"
 "PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
@@ -54,10 +54,12 @@ msgid "Transfer from {}"
 msgstr "{0} से स्थानांतरण"
 
 #: libdenaro/src/models/account.cpp:894
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
 msgid "Income"
 msgstr "आय"
 
 #: libdenaro/src/models/account.cpp:894
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
 msgid "Expense"
 msgstr "लागत/खर्च"
 
@@ -183,6 +185,215 @@ msgstr "राशि"
 msgid "Copy Result Amount"
 msgstr "परिणाम राशि कॉपी करें"
 
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:22
+msgid "Back"
+msgstr "पीछे"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:41
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
+msgid "New Account"
+msgstr "नया खाता"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:42
+#, fuzzy
+msgid "Use this wizard to get the most out of your new account"
+msgstr "अपने खाते से अधिकतम लाभ प्राप्त करने के लिए इस विज़ार्ड का उपयोग करें"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:47
+#, fuzzy
+msgid "Let's Start"
+msgstr "प्रारंभ"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:64
+msgid "Storage Location"
+msgstr "स्टोरेज स्थान"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:73
+msgid "Account Name"
+msgstr "खाता नाम"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:77
+msgid "Account Password (Optional)"
+msgstr "खाता पासवर्ड (वैकल्पिक)"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:81
+#, fuzzy
+msgid "Folder"
+msgstr "फ़ोल्डर"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:88
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:149
+#, fuzzy
+msgid "Select Folder"
+msgstr "फाइल का चयन करें"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:97
+msgid "Overwrite Existing Accounts"
+msgstr "मौजूदा खातों को अधिलेखित करें"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:106
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:159
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:254
+msgid "Next"
+msgstr "अगला"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:123
+msgid "Account Options"
+msgstr "खाता विकल्प"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
+msgid "Account Type"
+msgstr "खाते का प्रकार"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:284
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:411
+msgid "Checking"
+msgstr "चेकिंग"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:287
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:414
+msgid "Savings"
+msgstr "जमा पूंजी"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:290
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:417
+msgid "Business"
+msgstr "व्यवसाय"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
+#, fuzzy
+msgid "Default Transaction Type"
+msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:146
+msgid "Transaction Reminders Threshold"
+msgstr "लेन-देन अनुस्मारक सीमा"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:147
+msgid ""
+"Determines how far in advanced Denaro should remind users of upcoming "
+"transactions in the account."
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "Never"
+msgstr "कभी नहीं"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "One Day Before"
+msgstr "एक दिन पहले"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "One Week Before"
+msgstr "एक सप्ताह पहले"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "One Month Before"
+msgstr "एक महीना पहले"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "Two Months Before"
+msgstr "दो महीने पहले"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:176
+msgid "Account Currency"
+msgstr "खाते का पैसा"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:190
+msgid "Use Custom Currency"
+msgstr "कस्टम मुद्रा का प्रयोग करें"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:195
+msgid "Symbol"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:199
+msgid "Code"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:203
+msgid "Decimal Separator"
+msgstr "दशमलव विभाजक"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:205
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:220
+msgid "Custom"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:218
+msgid "Group Separator"
+msgstr "समूह विभाजक"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:220
+msgid "None"
+msgstr "कोई नहीं"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
+msgid "Decimal Digits"
+msgstr "दशमलव अंक"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Two"
+msgstr "दो"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Three"
+msgstr "तीन"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Four"
+msgstr "चार"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Five"
+msgstr "पाँच"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Six"
+msgstr "छह"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:240
+msgid "Amount Display Style"
+msgstr "राशि प्रदर्शन शैली"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:241
+#, fuzzy
+msgid "$ is the currency's symbol."
+msgstr "मुद्रा चिन्ह"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:271
+msgid "Import Existing Information"
+msgstr "मौजूदा जानकारी आयात करें"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:280
+#, fuzzy
+msgid ""
+"Upload a supported file to use to import existing information into the new "
+"account. Denaro supports CSV, OFX, and QIF files."
+msgstr ""
+"मौजूदा जानकारी को नए खाते में आयात करने के लिए उपयोग करने के लिए एक वैध फाइल अपलोड करें।"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:287
+msgid "Import File"
+msgstr "फाइल आयात करें"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:297
+#, fuzzy
+msgid "Select File"
+msgstr "फाइल का चयन करें"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:306
+#, fuzzy
+msgid "Clear File"
+msgstr "बैकअप फ़ोल्डर साफ़ करें"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:320
+msgid "Create"
+msgstr "बनाएं"
+
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:30
@@ -239,7 +450,7 @@ msgid "New Account (Ctrl+N)"
 msgstr "नया खाता (Ctrl+N)"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:132
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:139
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:140
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "खोलें"
@@ -356,12 +567,8 @@ msgctxt "Shortcut"
 msgid "Account"
 msgstr "खाता"
 
-#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-msgid "New Account"
-msgstr "नया खाता"
-
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:244
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:249
 msgid "Open Account"
 msgstr "खाता खोलें"
 
@@ -404,42 +611,52 @@ msgstr "बंद करें"
 msgid "Result was copied to clipboard."
 msgstr "परिणाम को क्लिपबोर्ड पर कॉपी किया गया।"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:198
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:28
+msgid "Your system reported that your currency is"
+msgstr "आपके सिस्टम ने बताया कि आपकी मुद्रा है"
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:266
+#, fuzzy
+msgid "Select Import File"
+msgstr "फाइल आयात करें"
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:268
+msgid "All Files (*.csv, *.ofx, *.qif)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:276
+msgid "CSV (*.csv)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:280
+msgid "Open Financial Exchange (*.ofx)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:284
+msgid "Quicken Interchange Format (*.qif)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:199
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub रेपो"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:246
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:251
 #, fuzzy
 msgid "Nickvision Denaro Account (*.nmoney)"
 msgstr "Nickvision Denaro खाता"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:279
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:411
-msgid "Checking"
-msgstr "चेकिंग"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:282
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:414
-msgid "Savings"
-msgstr "जमा पूंजी"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:285
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:417
-msgid "Business"
-msgstr "व्यवसाय"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:313
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:318
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:442
 msgid "Enter password here"
 msgstr "Enter password here"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:321
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:326
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:451
 msgid "Cancel"
 msgstr "रद्द करें"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:322
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:327
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:450
 msgid "Unlock"
 msgstr "अनलॉक"
@@ -579,10 +796,8 @@ msgstr "ठीक (OK)"
 msgid "Result (Error)"
 msgstr "परिणाम"
 
-#, fuzzy
-#~ msgctxt "Shortcut"
-#~ msgid "Folder"
-#~ msgstr "फ़ोल्डर"
+#~ msgid "Password Strength"
+#~ msgstr "पासवर्ड की मजबूती"
 
 #, fuzzy
 #~ msgid "Open Folder"
@@ -637,9 +852,6 @@ msgstr "परिणाम"
 #~ msgstr[0] "{0} लेन-देन"
 #~ msgstr[1] "{0} लेनदेन"
 
-#~ msgid "Account Name"
-#~ msgstr "खाता नाम"
-
 #~ msgid "Account Name (Exists)"
 #~ msgstr "खाता नाम (मौजूद)"
 
@@ -648,9 +860,6 @@ msgstr "परिणाम"
 
 #~ msgid "Account Settings"
 #~ msgstr "खाता सेटिंग"
-
-#~ msgid "Account Type"
-#~ msgstr "खाते का प्रकार"
 
 #~ msgid "Add"
 #~ msgstr "जोड़ें"
@@ -696,9 +905,6 @@ msgstr "परिणाम"
 #~ msgid "Currency Code (Empty)"
 #~ msgstr "मुद्रा कोड (खाली)"
 
-#~ msgid "Currency Symbol"
-#~ msgstr "मुद्रा चिन्ह"
-
 #~ msgid "Currency Symbol (Empty)"
 #~ msgstr "मुद्रा चिह्न (खाली)"
 
@@ -710,9 +916,6 @@ msgstr "परिणाम"
 
 #~ msgid "Date"
 #~ msgstr "तारीख"
-
-#~ msgid "Decimal Separator"
-#~ msgstr "दशमलव विभाजक"
 
 #~ msgid "Decimal Separator (Empty)"
 #~ msgstr "दशमलव विभाजक (खाली)"
@@ -775,9 +978,6 @@ msgstr "परिणाम"
 #~ msgid "Group Name"
 #~ msgstr "समूह नाम"
 
-#~ msgid "Group Separator"
-#~ msgstr "समूह विभाजक"
-
 #~ msgid "Group Separator (Invalid)"
 #~ msgstr "समूह विभाजक (अमान्य)"
 
@@ -810,9 +1010,6 @@ msgstr "परिणाम"
 
 #~ msgid "Name (Exists)"
 #~ msgstr "नाम (पहले से मौजूद है)"
-
-#~ msgid "Never"
-#~ msgstr "कभी नहीं"
 
 #~ msgid "Nicholas Logozzo"
 #~ msgstr "निकोलस लोगोज़ो"
@@ -1003,62 +1200,14 @@ msgstr "परिणाम"
 #~ msgid "Yes"
 #~ msgstr "हाँ"
 
-#~ msgid "Your system reported that your currency is"
-#~ msgstr "आपके सिस्टम ने बताया कि आपकी मुद्रा है"
-
-#~ msgid "Back"
-#~ msgstr "पीछे"
-
-#~ msgid "Transaction Reminders Threshold"
-#~ msgstr "लेन-देन अनुस्मारक सीमा"
-
-#~ msgid "One Day Before"
-#~ msgstr "एक दिन पहले"
-
-#~ msgid "One Week Before"
-#~ msgstr "एक सप्ताह पहले"
-
-#~ msgid "One Month Before"
-#~ msgstr "एक महीना पहले"
-
-#~ msgid "Two Months Before"
-#~ msgstr "दो महीने पहले"
-
 #~ msgid "Manage the currency used by the account."
 #~ msgstr "खाते द्वारा उपयोग की जाने वाली मुद्रा का प्रबंधन करें।"
 
 #~ msgid "Set a new password or remove one."
 #~ msgstr "नया पासवर्ड सेट करें या एक हटा दें।"
 
-#~ msgid "Use Custom Currency"
-#~ msgstr "कस्टम मुद्रा का प्रयोग करें"
-
-#~ msgid "Amount Display Style"
-#~ msgstr "राशि प्रदर्शन शैली"
-
 #~ msgid "Other"
 #~ msgstr "अन्य"
-
-#~ msgid "None"
-#~ msgstr "कोई नहीं"
-
-#~ msgid "Decimal Digits"
-#~ msgstr "दशमलव अंक"
-
-#~ msgid "Two"
-#~ msgstr "दो"
-
-#~ msgid "Three"
-#~ msgstr "तीन"
-
-#~ msgid "Four"
-#~ msgstr "चार"
-
-#~ msgid "Five"
-#~ msgstr "पाँच"
-
-#~ msgid "Six"
-#~ msgstr "छह"
 
 #~ msgid "Unlimited"
 #~ msgstr "असीमित"
@@ -1068,9 +1217,6 @@ msgstr "परिणाम"
 
 #~ msgid "Confirm Password"
 #~ msgstr "पासवर्ड की पुष्टि कीजिये"
-
-#~ msgid "Password Strength"
-#~ msgstr "पासवर्ड की मजबूती"
 
 #~ msgid "If the password is lost, there is no way to restore the file!"
 #~ msgstr "यदि पासवर्ड खो गया है, तो फाइल को पुनर्स्थापित करने का कोई तरीका नहीं है!"
@@ -1139,18 +1285,11 @@ msgstr "परिणाम"
 #~ msgstr "दायरे का चयन करें"
 
 #~ msgctxt "DateRange"
-#~ msgid "Start"
-#~ msgstr "प्रारंभ"
-
-#~ msgctxt "DateRange"
 #~ msgid "End"
 #~ msgstr "समाप्त"
 
 #~ msgid "Visualize"
 #~ msgstr "कल्पना"
-
-#~ msgid "Next"
-#~ msgstr "अगला"
 
 #~ msgid "Sort From First To Last"
 #~ msgstr "प्रथम से अंतिम तक क्रमबद्ध करें"
@@ -1186,46 +1325,9 @@ msgstr "परिणाम"
 #~ msgid "Edit Group"
 #~ msgstr "समूह में परिवर्तन करें"
 
-#~ msgid "Use this wizard to get the most out of your account"
-#~ msgstr "अपने खाते से अधिकतम लाभ प्राप्त करने के लिए इस विज़ार्ड का उपयोग करें"
-
-#~ msgid "Storage Location"
-#~ msgstr "स्टोरेज स्थान"
-
-#~ msgid "Account Password (Optional)"
-#~ msgstr "खाता पासवर्ड (वैकल्पिक)"
-
-#~ msgid "Overwrite Existing Accounts"
-#~ msgstr "मौजूदा खातों को अधिलेखित करें"
-
-#~ msgid "Account Options"
-#~ msgstr "खाता विकल्प"
-
 #~ msgid "This is only a useful label that doesn't affect how the app works."
 #~ msgstr ""
 #~ "यह केवल एक उपयोगी लेबल है जो ऐप के काम करने के तरीके को प्रभावित नहीं करता है।"
-
-#~ msgid "Account Currency"
-#~ msgstr "खाते का पैसा"
-
-#~ msgid "Import Existing Information"
-#~ msgstr "मौजूदा जानकारी आयात करें"
-
-#~ msgid ""
-#~ "Upload a valid file to use to import existing information into the new "
-#~ "account."
-#~ msgstr ""
-#~ "मौजूदा जानकारी को नए खाते में आयात करने के लिए उपयोग करने के लिए एक वैध फाइल अपलोड "
-#~ "करें।"
-
-#~ msgid "Import File"
-#~ msgstr "फाइल आयात करें"
-
-#~ msgid "Select File"
-#~ msgstr "फाइल का चयन करें"
-
-#~ msgid "Create"
-#~ msgstr "बनाएं"
 
 #~ msgid "Enter Password To Login:"
 #~ msgstr "लॉगिन करने के लिए पासवर्ड दर्ज करें:"
@@ -1253,9 +1355,6 @@ msgstr "परिणाम"
 #~ msgstr ""
 #~ "परिवर्तन किए जाने पर अनएन्क्रिप्टेड खाते स्वचालित रूप से इस फोल्डर में CSV फाइलों के रूप "
 #~ "में निर्यात हो जाएंगे।"
-
-#~ msgid "Clear Backup Folder"
-#~ msgstr "बैकअप फ़ोल्डर साफ़ करें"
 
 #~ msgid "No Reminders"
 #~ msgstr "कोई अनुस्मारक नहीं"

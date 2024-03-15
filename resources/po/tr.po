@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 00:10-0400\n"
+"POT-Creation-Date: 2024-03-14 22:31-0400\n"
 "PO-Revision-Date: 2023-09-10 21:21+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -54,10 +54,12 @@ msgid "Transfer from {}"
 msgstr "Şuradan Aktar: {0}"
 
 #: libdenaro/src/models/account.cpp:894
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
 msgid "Income"
 msgstr "Gelir"
 
 #: libdenaro/src/models/account.cpp:894
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
 msgid "Expense"
 msgstr "Gider"
 
@@ -185,6 +187,216 @@ msgstr "Tutar"
 msgid "Copy Result Amount"
 msgstr "Sonuç Miktarı Kopyala"
 
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:22
+msgid "Back"
+msgstr "Geri"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:41
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
+msgid "New Account"
+msgstr "Yeni Hesap"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:42
+#, fuzzy
+msgid "Use this wizard to get the most out of your new account"
+msgstr "Hesabınızdan en iyi şekilde yararlanmak için bu sihirbazı kullanın"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:47
+#, fuzzy
+msgid "Let's Start"
+msgstr "Başlangıç"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:64
+msgid "Storage Location"
+msgstr "Depolama Konumu"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:73
+msgid "Account Name"
+msgstr "Hesap Adı"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:77
+msgid "Account Password (Optional)"
+msgstr "Hesap Parolası (İsteğe bağlı)"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:81
+#, fuzzy
+msgid "Folder"
+msgstr "Klasör"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:88
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:149
+#, fuzzy
+msgid "Select Folder"
+msgstr "Dosya Seç"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:97
+msgid "Overwrite Existing Accounts"
+msgstr "Var Olan Hesapların Üzerine Yaz"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:106
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:159
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:254
+msgid "Next"
+msgstr "Sonraki"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:123
+msgid "Account Options"
+msgstr "Hesap Seçenekleri"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
+msgid "Account Type"
+msgstr "Hesap Türü"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:284
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:411
+msgid "Checking"
+msgstr "Çek"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:287
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:414
+msgid "Savings"
+msgstr "Tasarruf"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:290
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:417
+msgid "Business"
+msgstr "Kurumsal"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
+#, fuzzy
+msgid "Default Transaction Type"
+msgstr "Öntanımlı İşlem Türü"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:146
+msgid "Transaction Reminders Threshold"
+msgstr "İşlem Hatırlatma Eşiği"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:147
+msgid ""
+"Determines how far in advanced Denaro should remind users of upcoming "
+"transactions in the account."
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "Never"
+msgstr "Asla"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "One Day Before"
+msgstr "Bir Gün Önce"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "One Week Before"
+msgstr "Bir Hafta Önce"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "One Month Before"
+msgstr "Bir Ay Önce"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "Two Months Before"
+msgstr "İki Ay Önce"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:176
+msgid "Account Currency"
+msgstr "Hesap Para Birimi"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:190
+msgid "Use Custom Currency"
+msgstr "Özel Para Birimi Kullan"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:195
+msgid "Symbol"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:199
+msgid "Code"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:203
+msgid "Decimal Separator"
+msgstr "Ondalık Ayırıcı"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:205
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:220
+msgid "Custom"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:218
+msgid "Group Separator"
+msgstr "Grup Ayırıcı"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:220
+msgid "None"
+msgstr "Hiçbiri"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
+msgid "Decimal Digits"
+msgstr "Ondalık Basamaklar"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Two"
+msgstr "İki"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Three"
+msgstr "Üç"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Four"
+msgstr "Dört"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Five"
+msgstr "Beş"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Six"
+msgstr "Altı"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:240
+msgid "Amount Display Style"
+msgstr "Miktar Gösterim Biçimi"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:241
+#, fuzzy
+msgid "$ is the currency's symbol."
+msgstr "Para Birimi Simgesi"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:271
+msgid "Import Existing Information"
+msgstr "Var Olan Bilgileri İçe Aktar"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:280
+#, fuzzy
+msgid ""
+"Upload a supported file to use to import existing information into the new "
+"account. Denaro supports CSV, OFX, and QIF files."
+msgstr ""
+"Var olan bilgileri yeni hesaba içe aktarmak için kullanılacak geçerli bir "
+"dosya yükleyin."
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:287
+msgid "Import File"
+msgstr "Dosya İçe Aktar"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:297
+#, fuzzy
+msgid "Select File"
+msgstr "Dosya Seç"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:306
+#, fuzzy
+msgid "Clear File"
+msgstr "Yedekleme Klasörünü Temizle"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:320
+msgid "Create"
+msgstr "Oluştur"
+
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:30
@@ -241,7 +453,7 @@ msgid "New Account (Ctrl+N)"
 msgstr "Yeni Hesap (Ctrl+N)"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:132
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:139
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:140
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Aç"
@@ -360,12 +572,8 @@ msgctxt "Shortcut"
 msgid "Account"
 msgstr "Hesap"
 
-#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-msgid "New Account"
-msgstr "Yeni Hesap"
-
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:244
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:249
 msgid "Open Account"
 msgstr "Hesap Aç"
 
@@ -408,42 +616,52 @@ msgstr "Kapat"
 msgid "Result was copied to clipboard."
 msgstr "Sonuç panoya kopyalandı."
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:198
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:28
+msgid "Your system reported that your currency is"
+msgstr "Sisteminiz para biriminizin şu olduğunu bildirdi"
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:266
+#, fuzzy
+msgid "Select Import File"
+msgstr "Dosya İçe Aktar"
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:268
+msgid "All Files (*.csv, *.ofx, *.qif)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:276
+msgid "CSV (*.csv)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:280
+msgid "Open Financial Exchange (*.ofx)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:284
+msgid "Quicken Interchange Format (*.qif)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:199
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "GitHub Deposu"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:246
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:251
 #, fuzzy
 msgid "Nickvision Denaro Account (*.nmoney)"
 msgstr "Nickvision Denaro Hesabı"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:279
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:411
-msgid "Checking"
-msgstr "Çek"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:282
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:414
-msgid "Savings"
-msgstr "Tasarruf"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:285
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:417
-msgid "Business"
-msgstr "Kurumsal"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:313
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:318
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:442
 msgid "Enter password here"
 msgstr "Parolayı buraya girin"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:321
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:326
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:451
 msgid "Cancel"
 msgstr "İptal Et"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:322
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:327
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:450
 msgid "Unlock"
 msgstr "Kilidi Aç"
@@ -582,10 +800,8 @@ msgstr "Tamam"
 msgid "Result (Error)"
 msgstr "Sonuç"
 
-#, fuzzy
-#~ msgctxt "Shortcut"
-#~ msgid "Folder"
-#~ msgstr "Klasör"
+#~ msgid "Password Strength"
+#~ msgstr "Parola Kuvveti"
 
 #, fuzzy
 #~ msgid "Open Folder"
@@ -640,9 +856,6 @@ msgstr "Sonuç"
 #~ msgstr[0] "{0} işlem"
 #~ msgstr[1] "{0} işlem"
 
-#~ msgid "Account Name"
-#~ msgstr "Hesap Adı"
-
 #~ msgid "Account Name (Exists)"
 #~ msgstr "Hesap Adı (Var)"
 
@@ -651,9 +864,6 @@ msgstr "Sonuç"
 
 #~ msgid "Account Settings"
 #~ msgstr "Hesap Ayarları"
-
-#~ msgid "Account Type"
-#~ msgstr "Hesap Türü"
 
 #~ msgid "Add"
 #~ msgstr "Ekle"
@@ -699,9 +909,6 @@ msgstr "Sonuç"
 #~ msgid "Currency Code (Empty)"
 #~ msgstr "Para Birimi Kodu (Boş)"
 
-#~ msgid "Currency Symbol"
-#~ msgstr "Para Birimi Simgesi"
-
 #~ msgid "Currency Symbol (Empty)"
 #~ msgstr "Para Birimi Simgesi (Boş)"
 
@@ -713,9 +920,6 @@ msgstr "Sonuç"
 
 #~ msgid "Date"
 #~ msgstr "Tarih"
-
-#~ msgid "Decimal Separator"
-#~ msgstr "Ondalık Ayırıcı"
 
 #~ msgid "Decimal Separator (Empty)"
 #~ msgstr "Ondalık Ayırıcı (Boş)"
@@ -778,9 +982,6 @@ msgstr "Sonuç"
 #~ msgid "Group Name"
 #~ msgstr "Grup Adı"
 
-#~ msgid "Group Separator"
-#~ msgstr "Grup Ayırıcı"
-
 #~ msgid "Group Separator (Invalid)"
 #~ msgstr "Grup Ayırıcı (Geçersiz)"
 
@@ -813,9 +1014,6 @@ msgstr "Sonuç"
 
 #~ msgid "Name (Exists)"
 #~ msgstr "Ad (Var)"
-
-#~ msgid "Never"
-#~ msgstr "Asla"
 
 #~ msgid "Nicholas Logozzo"
 #~ msgstr "Nicholas Logozzo"
@@ -1006,62 +1204,14 @@ msgstr "Sonuç"
 #~ msgid "Yes"
 #~ msgstr "Evet"
 
-#~ msgid "Your system reported that your currency is"
-#~ msgstr "Sisteminiz para biriminizin şu olduğunu bildirdi"
-
-#~ msgid "Back"
-#~ msgstr "Geri"
-
-#~ msgid "Transaction Reminders Threshold"
-#~ msgstr "İşlem Hatırlatma Eşiği"
-
-#~ msgid "One Day Before"
-#~ msgstr "Bir Gün Önce"
-
-#~ msgid "One Week Before"
-#~ msgstr "Bir Hafta Önce"
-
-#~ msgid "One Month Before"
-#~ msgstr "Bir Ay Önce"
-
-#~ msgid "Two Months Before"
-#~ msgstr "İki Ay Önce"
-
 #~ msgid "Manage the currency used by the account."
 #~ msgstr "Hesap tarafından kullanılan para birimini yönetin."
 
 #~ msgid "Set a new password or remove one."
 #~ msgstr "Yeni bir parola belirleyin veya birini kaldırın."
 
-#~ msgid "Use Custom Currency"
-#~ msgstr "Özel Para Birimi Kullan"
-
-#~ msgid "Amount Display Style"
-#~ msgstr "Miktar Gösterim Biçimi"
-
 #~ msgid "Other"
 #~ msgstr "Diğer"
-
-#~ msgid "None"
-#~ msgstr "Hiçbiri"
-
-#~ msgid "Decimal Digits"
-#~ msgstr "Ondalık Basamaklar"
-
-#~ msgid "Two"
-#~ msgstr "İki"
-
-#~ msgid "Three"
-#~ msgstr "Üç"
-
-#~ msgid "Four"
-#~ msgstr "Dört"
-
-#~ msgid "Five"
-#~ msgstr "Beş"
-
-#~ msgid "Six"
-#~ msgstr "Altı"
 
 #~ msgid "Unlimited"
 #~ msgstr "Sınırsız"
@@ -1071,9 +1221,6 @@ msgstr "Sonuç"
 
 #~ msgid "Confirm Password"
 #~ msgstr "Parolayı Onayla"
-
-#~ msgid "Password Strength"
-#~ msgstr "Parola Kuvveti"
 
 #~ msgid "If the password is lost, there is no way to restore the file!"
 #~ msgstr "Parola kaybolursa, dosyayı geri yüklemenin bir yolu yoktur!"
@@ -1142,18 +1289,11 @@ msgstr "Sonuç"
 #~ msgstr "Aralık Seç"
 
 #~ msgctxt "DateRange"
-#~ msgid "Start"
-#~ msgstr "Başlangıç"
-
-#~ msgctxt "DateRange"
 #~ msgid "End"
 #~ msgstr "Bitiş"
 
 #~ msgid "Visualize"
 #~ msgstr "Görselleştir"
-
-#~ msgid "Next"
-#~ msgstr "Sonraki"
 
 #~ msgid "Sort From First To Last"
 #~ msgstr "Baştan Sona Sırala"
@@ -1189,47 +1329,10 @@ msgstr "Sonuç"
 #~ msgid "Edit Group"
 #~ msgstr "Grubu Düzenle"
 
-#~ msgid "Use this wizard to get the most out of your account"
-#~ msgstr "Hesabınızdan en iyi şekilde yararlanmak için bu sihirbazı kullanın"
-
-#~ msgid "Storage Location"
-#~ msgstr "Depolama Konumu"
-
-#~ msgid "Account Password (Optional)"
-#~ msgstr "Hesap Parolası (İsteğe bağlı)"
-
-#~ msgid "Overwrite Existing Accounts"
-#~ msgstr "Var Olan Hesapların Üzerine Yaz"
-
-#~ msgid "Account Options"
-#~ msgstr "Hesap Seçenekleri"
-
 #~ msgid "This is only a useful label that doesn't affect how the app works."
 #~ msgstr ""
 #~ "Bu sadece uygulamanın nasıl çalıştığını etkilemeyen kullanışlı bir "
 #~ "etikettir."
-
-#~ msgid "Account Currency"
-#~ msgstr "Hesap Para Birimi"
-
-#~ msgid "Import Existing Information"
-#~ msgstr "Var Olan Bilgileri İçe Aktar"
-
-#~ msgid ""
-#~ "Upload a valid file to use to import existing information into the new "
-#~ "account."
-#~ msgstr ""
-#~ "Var olan bilgileri yeni hesaba içe aktarmak için kullanılacak geçerli bir "
-#~ "dosya yükleyin."
-
-#~ msgid "Import File"
-#~ msgstr "Dosya İçe Aktar"
-
-#~ msgid "Select File"
-#~ msgstr "Dosya Seç"
-
-#~ msgid "Create"
-#~ msgstr "Oluştur"
 
 #~ msgid "Enter Password To Login:"
 #~ msgstr "Giriş Yapmak İçin Parolayı Girin:"
@@ -1259,9 +1362,6 @@ msgstr "Sonuç"
 #~ msgstr ""
 #~ "Şifrelenmemiş hesaplar, bir değişiklik yapıldığında kendiliğinden CSV "
 #~ "dosyaları olarak bu klasöre dışa aktarılır."
-
-#~ msgid "Clear Backup Folder"
-#~ msgstr "Yedekleme Klasörünü Temizle"
 
 #~ msgid "No Reminders"
 #~ msgstr "Hatırlatıcı Yok"

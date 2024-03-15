@@ -7,6 +7,7 @@
 #include <libnick/localization/documentation.h>
 #include "controls/currencyconverterdialog.h"
 #include "helpers/builder.h"
+#include "views/newaccountdialog.h"
 #include "views/preferencesdialog.h"
 
 using namespace Nickvision;
@@ -235,7 +236,11 @@ namespace Nickvision::Money::GNOME::Views
 
     void MainWindow::newAccount()
     {
-        
+        NewAccountDialog newAccountDialog{ m_controller->createNewAccountDialogController(), GTK_WINDOW(m_window) };
+        if(newAccountDialog.run())
+        {
+            m_controller->newAccount(newAccountDialog.getController());
+        }
     }
 
     void MainWindow::openAccount()

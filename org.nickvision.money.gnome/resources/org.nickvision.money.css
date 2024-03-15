@@ -174,33 +174,3 @@ row.error button.circular {
 .id-image {
   border-radius: 34px;
 }
-
-/* Recent Account Row */
-.wallet-button {
-  background-color: rgba(0, 0, 0, 0);
-}
-
-.wallet-bg {
-  border-radius: 6px;
-}
-
-/* Password Strength */
-.strength block.veryweak {
-  background-color: @warning_bg_color;
-}
-
-.strength block.weak {
-  background-color: @warning_bg_color;
-}
-
-.strength block.medium {
-  background-color: @accent_bg_color;
-}
-
-.strength block.strong {
-  background-color: @success_bg_color;
-}
-
-.strength block.verystrong {
-  background-color: @success_bg_color;
-}

@@ -91,6 +91,11 @@ namespace Nickvision::Money::Shared::Models
          */
         void setAmountStyle(AmountStyle style);
         /**
+         * @brief Gets the string representation of the Currency. "Symbol (Code)"
+         * @return The string representation of the Currency 
+         */
+        std::string toString() const;
+        /**
          * @brief Gets whether or not the object is valid or not.
          * @return True if valid (check() == CurrencyCheckStatus::Valid), else false 
          */

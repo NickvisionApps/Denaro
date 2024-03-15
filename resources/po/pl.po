@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 00:10-0400\n"
+"POT-Creation-Date: 2024-03-14 22:31-0400\n"
 "PO-Revision-Date: 2023-11-15 07:06+0000\n"
 "Last-Translator: Michał Dominik <fancy0duck@duck.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -55,10 +55,12 @@ msgid "Transfer from {}"
 msgstr "Przelej z {0}"
 
 #: libdenaro/src/models/account.cpp:894
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
 msgid "Income"
 msgstr "Dochód"
 
 #: libdenaro/src/models/account.cpp:894
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
 msgid "Expense"
 msgstr "Wydatek"
 
@@ -184,6 +186,216 @@ msgstr "Kwota"
 msgid "Copy Result Amount"
 msgstr "Kopiuj wynik kwoty"
 
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:22
+msgid "Back"
+msgstr "Cofnij"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:41
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
+msgid "New Account"
+msgstr "Nowe konto"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:42
+#, fuzzy
+msgid "Use this wizard to get the most out of your new account"
+msgstr "Użyj kreatora, aby w pełni wykorzystać swoje konto"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:47
+#, fuzzy
+msgid "Let's Start"
+msgstr "Początek"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:64
+msgid "Storage Location"
+msgstr "Lokalizacja pamięci"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:73
+msgid "Account Name"
+msgstr "Nazwa konta"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:77
+msgid "Account Password (Optional)"
+msgstr "Hasło konta (opcjonalne)"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:81
+#, fuzzy
+msgid "Folder"
+msgstr "Folder"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:88
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:149
+#, fuzzy
+msgid "Select Folder"
+msgstr "Wybierz plik"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:97
+msgid "Overwrite Existing Accounts"
+msgstr "Nadpisuj istniejące konta"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:106
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:159
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:254
+msgid "Next"
+msgstr "Dalej"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:123
+msgid "Account Options"
+msgstr "Opcje konta"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
+msgid "Account Type"
+msgstr "Rodzaj konta"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:284
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:411
+msgid "Checking"
+msgstr "Bieżące"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:287
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:414
+msgid "Savings"
+msgstr "Oszczędnościowe"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:290
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:417
+msgid "Business"
+msgstr "Firmowe"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
+#, fuzzy
+msgid "Default Transaction Type"
+msgstr "Rodzaj domyślnej transakcji"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:146
+msgid "Transaction Reminders Threshold"
+msgstr "Częstotliwość przypomnień o transakcji"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:147
+msgid ""
+"Determines how far in advanced Denaro should remind users of upcoming "
+"transactions in the account."
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "Never"
+msgstr "Nigdy"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "One Day Before"
+msgstr "Dzień przed"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "One Week Before"
+msgstr "Tydzień przed"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "One Month Before"
+msgstr "Miesiąc przed"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+msgid "Two Months Before"
+msgstr "Dwa miesiące przed"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:176
+msgid "Account Currency"
+msgstr "Waluta konta"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:190
+msgid "Use Custom Currency"
+msgstr "Użyj własnej waluty"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:195
+msgid "Symbol"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:199
+msgid "Code"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:203
+msgid "Decimal Separator"
+msgstr "Separator dziesiętny"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:205
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:220
+msgid "Custom"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:218
+msgid "Group Separator"
+msgstr "Separator grup"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:220
+msgid "None"
+msgstr "Brak"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
+msgid "Decimal Digits"
+msgstr "Cyfry dziesiętne"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Two"
+msgstr "Dwa"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Three"
+msgstr "Trzy"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Four"
+msgstr "Cztery"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Five"
+msgstr "Pięć"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+msgid "Six"
+msgstr "Sześć"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:240
+msgid "Amount Display Style"
+msgstr "Styl wyświetlania kwoty"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:241
+#, fuzzy
+msgid "$ is the currency's symbol."
+msgstr "Symbol waluty"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:271
+msgid "Import Existing Information"
+msgstr "Importuj istniejące informacje"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:280
+#, fuzzy
+msgid ""
+"Upload a supported file to use to import existing information into the new "
+"account. Denaro supports CSV, OFX, and QIF files."
+msgstr ""
+"Prześlij odpowiedni plik, aby zaimportować istniejące informacje do nowego "
+"konta."
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:287
+msgid "Import File"
+msgstr "Import pliku"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:297
+#, fuzzy
+msgid "Select File"
+msgstr "Wybierz plik"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:306
+#, fuzzy
+msgid "Clear File"
+msgstr "Wyczyść folder kopii zapasowej"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:320
+msgid "Create"
+msgstr "Stwórz"
+
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:30
@@ -240,7 +452,7 @@ msgid "New Account (Ctrl+N)"
 msgstr "Nowe konto (Ctrl+N)"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:132
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:139
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:140
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 msgid "Open"
 msgstr "Otwórz"
@@ -358,12 +570,8 @@ msgctxt "Shortcut"
 msgid "Account"
 msgstr "Konto"
 
-#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-msgid "New Account"
-msgstr "Nowe konto"
-
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:244
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:249
 msgid "Open Account"
 msgstr "Otwórz konto"
 
@@ -406,42 +614,52 @@ msgstr "Zamknij"
 msgid "Result was copied to clipboard."
 msgstr "Wynik skopiowany do schowka."
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:198
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:28
+msgid "Your system reported that your currency is"
+msgstr "Twój system zgłasza, że twoją walutą jest"
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:266
+#, fuzzy
+msgid "Select Import File"
+msgstr "Import pliku"
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:268
+msgid "All Files (*.csv, *.ofx, *.qif)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:276
+msgid "CSV (*.csv)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:280
+msgid "Open Financial Exchange (*.ofx)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:284
+msgid "Quicken Interchange Format (*.qif)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:199
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
 msgid "GitHub Repo"
 msgstr "Repozytorium na GitHubie"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:246
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:251
 #, fuzzy
 msgid "Nickvision Denaro Account (*.nmoney)"
 msgstr "Konto Nickvision Denaro"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:279
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:411
-msgid "Checking"
-msgstr "Bieżące"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:282
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:414
-msgid "Savings"
-msgstr "Oszczędnościowe"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:285
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:417
-msgid "Business"
-msgstr "Firmowe"
-
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:313
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:318
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:442
 msgid "Enter password here"
 msgstr "Wpisz tutaj hasło"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:321
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:326
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:451
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:322
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:327
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:450
 msgid "Unlock"
 msgstr "Odblokuj"
@@ -580,10 +798,8 @@ msgstr "OK"
 msgid "Result (Error)"
 msgstr "Wynik"
 
-#, fuzzy
-#~ msgctxt "Shortcut"
-#~ msgid "Folder"
-#~ msgstr "Folder"
+#~ msgid "Password Strength"
+#~ msgstr "Siła hasła"
 
 #, fuzzy
 #~ msgid "Open Folder"
@@ -640,9 +856,6 @@ msgstr "Wynik"
 #~ msgstr[1] "transakcje"
 #~ msgstr[2] "transakcji"
 
-#~ msgid "Account Name"
-#~ msgstr "Nazwa konta"
-
 #~ msgid "Account Name (Exists)"
 #~ msgstr "Nazwa konta (już istnieje)"
 
@@ -651,9 +864,6 @@ msgstr "Wynik"
 
 #~ msgid "Account Settings"
 #~ msgstr "Ustawienia konta"
-
-#~ msgid "Account Type"
-#~ msgstr "Rodzaj konta"
 
 #~ msgid "Add"
 #~ msgstr "Dodaj"
@@ -699,9 +909,6 @@ msgstr "Wynik"
 #~ msgid "Currency Code (Empty)"
 #~ msgstr "Kod waluty (pusty)"
 
-#~ msgid "Currency Symbol"
-#~ msgstr "Symbol waluty"
-
 #~ msgid "Currency Symbol (Empty)"
 #~ msgstr "Symbol waluty (pusty)"
 
@@ -713,9 +920,6 @@ msgstr "Wynik"
 
 #~ msgid "Date"
 #~ msgstr "Data"
-
-#~ msgid "Decimal Separator"
-#~ msgstr "Separator dziesiętny"
 
 #~ msgid "Decimal Separator (Empty)"
 #~ msgstr "Separator dziesiętny (pusty)"
@@ -778,9 +982,6 @@ msgstr "Wynik"
 #~ msgid "Group Name"
 #~ msgstr "Nazwa grupy"
 
-#~ msgid "Group Separator"
-#~ msgstr "Separator grup"
-
 #~ msgid "Group Separator (Invalid)"
 #~ msgstr "Separator grup (niepoprawny)"
 
@@ -814,9 +1015,6 @@ msgstr "Wynik"
 
 #~ msgid "Name (Exists)"
 #~ msgstr "Nazwa (już istnieje)"
-
-#~ msgid "Never"
-#~ msgstr "Nigdy"
 
 #~ msgid "Nicholas Logozzo"
 #~ msgstr "Nicholas Logozzo"
@@ -1007,62 +1205,14 @@ msgstr "Wynik"
 #~ msgid "Yes"
 #~ msgstr "Tak"
 
-#~ msgid "Your system reported that your currency is"
-#~ msgstr "Twój system zgłasza, że twoją walutą jest"
-
-#~ msgid "Back"
-#~ msgstr "Cofnij"
-
-#~ msgid "Transaction Reminders Threshold"
-#~ msgstr "Częstotliwość przypomnień o transakcji"
-
-#~ msgid "One Day Before"
-#~ msgstr "Dzień przed"
-
-#~ msgid "One Week Before"
-#~ msgstr "Tydzień przed"
-
-#~ msgid "One Month Before"
-#~ msgstr "Miesiąc przed"
-
-#~ msgid "Two Months Before"
-#~ msgstr "Dwa miesiące przed"
-
 #~ msgid "Manage the currency used by the account."
 #~ msgstr "Zarządzaj walutą używaną przez konto."
 
 #~ msgid "Set a new password or remove one."
 #~ msgstr "Ustaw nowe hasło lub usuń stare."
 
-#~ msgid "Use Custom Currency"
-#~ msgstr "Użyj własnej waluty"
-
-#~ msgid "Amount Display Style"
-#~ msgstr "Styl wyświetlania kwoty"
-
 #~ msgid "Other"
 #~ msgstr "Inny"
-
-#~ msgid "None"
-#~ msgstr "Brak"
-
-#~ msgid "Decimal Digits"
-#~ msgstr "Cyfry dziesiętne"
-
-#~ msgid "Two"
-#~ msgstr "Dwa"
-
-#~ msgid "Three"
-#~ msgstr "Trzy"
-
-#~ msgid "Four"
-#~ msgstr "Cztery"
-
-#~ msgid "Five"
-#~ msgstr "Pięć"
-
-#~ msgid "Six"
-#~ msgstr "Sześć"
 
 #~ msgid "Unlimited"
 #~ msgstr "Bez limitu"
@@ -1072,9 +1222,6 @@ msgstr "Wynik"
 
 #~ msgid "Confirm Password"
 #~ msgstr "Potwierdź hasło"
-
-#~ msgid "Password Strength"
-#~ msgstr "Siła hasła"
 
 #~ msgid "If the password is lost, there is no way to restore the file!"
 #~ msgstr "Jeśli zapomnisz hasła nie ma możliwości przywrócenia pliku!"
@@ -1143,18 +1290,11 @@ msgstr "Wynik"
 #~ msgstr "Wybierz zakres"
 
 #~ msgctxt "DateRange"
-#~ msgid "Start"
-#~ msgstr "Początek"
-
-#~ msgctxt "DateRange"
 #~ msgid "End"
 #~ msgstr "Koniec"
 
 #~ msgid "Visualize"
 #~ msgstr "Wizualizuj"
-
-#~ msgid "Next"
-#~ msgstr "Dalej"
 
 #~ msgid "Sort From First To Last"
 #~ msgstr "Sortuj od najnowszych"
@@ -1190,45 +1330,8 @@ msgstr "Wynik"
 #~ msgid "Edit Group"
 #~ msgstr "Edytuj grupę"
 
-#~ msgid "Use this wizard to get the most out of your account"
-#~ msgstr "Użyj kreatora, aby w pełni wykorzystać swoje konto"
-
-#~ msgid "Storage Location"
-#~ msgstr "Lokalizacja pamięci"
-
-#~ msgid "Account Password (Optional)"
-#~ msgstr "Hasło konta (opcjonalne)"
-
-#~ msgid "Overwrite Existing Accounts"
-#~ msgstr "Nadpisuj istniejące konta"
-
-#~ msgid "Account Options"
-#~ msgstr "Opcje konta"
-
 #~ msgid "This is only a useful label that doesn't affect how the app works."
 #~ msgstr "To tylko przydatna etykieta, nie ma wpływu na działanie aplikacji."
-
-#~ msgid "Account Currency"
-#~ msgstr "Waluta konta"
-
-#~ msgid "Import Existing Information"
-#~ msgstr "Importuj istniejące informacje"
-
-#~ msgid ""
-#~ "Upload a valid file to use to import existing information into the new "
-#~ "account."
-#~ msgstr ""
-#~ "Prześlij odpowiedni plik, aby zaimportować istniejące informacje do "
-#~ "nowego konta."
-
-#~ msgid "Import File"
-#~ msgstr "Import pliku"
-
-#~ msgid "Select File"
-#~ msgstr "Wybierz plik"
-
-#~ msgid "Create"
-#~ msgstr "Stwórz"
 
 #~ msgid "Enter Password To Login:"
 #~ msgstr "Wpisz hasło, aby się zalogować:"
@@ -1256,9 +1359,6 @@ msgstr "Wynik"
 #~ msgstr ""
 #~ "Nieszyfrowane konta będą automatycznie eksportowane jako pliki CSV do "
 #~ "tego folderu po wprowadzeniu zmiany."
-
-#~ msgid "Clear Backup Folder"
-#~ msgstr "Wyczyść folder kopii zapasowej"
 
 #~ msgid "No Reminders"
 #~ msgstr "Brak przypomnień"

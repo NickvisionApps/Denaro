@@ -28,11 +28,29 @@ namespace Nickvision::Money::GNOME::Controls
         void run();
 
     private:
+        /**
+         * @brief Switches the source and result currencies.
+         */
         void switchCurrencies();
+        /**
+         * @brief Handles when the source currency is changed.
+         */
         void onSourceCurrencyChanged();
+        /**
+         * @brief Handles when the result currency is changed.
+         */
         void onResultCurrencyChanged();
+        /**
+         * @brief Handles when the source amount is changed.
+         */
         void onSourceAmountChanged();
+        /**
+         * @brief Copies the result to the clipboard.
+         */
         void copyResult();
+        /**
+         * @brief Handles when the currency is changed.
+         */
         void onCurrencyChange();
         GtkBuilder* m_builder;
         GtkWindow* m_parent;

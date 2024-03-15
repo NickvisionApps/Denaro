@@ -25,6 +25,11 @@ namespace Nickvision::Money::Shared::Controllers
          */
         NewAccountDialogController();
         /**
+         * @brief Gets the application's id.
+         * @return The application's id 
+         */
+        const std::string& getId() const;
+        /**
          * @brief Gets the file path of the new account.
          * @return The file path of the new account
          */
@@ -42,8 +47,9 @@ namespace Nickvision::Money::Shared::Controllers
         /**
          * @brief Sets the folder of the new account path.
          * @param folder The folder of the new account path
+         * @return True if the folder was set, else false (the new folder results in an existing account path and overwrite is off)
          */
-        void setFolder(const std::filesystem::path& folder);
+        bool setFolder(const std::filesystem::path& folder);
         /**
          * @brief Sets the name of the new account.
          * @param name The new name of the new account
