@@ -74,7 +74,7 @@ Adw.Window root {
               }
 
               Adw.PasswordEntryRow accountPasswordRow {
-                title: _("Account Password (Optional)");
+                title: _("Account Password");
               }
 
               Adw.ActionRow accountFolderRow {
@@ -179,7 +179,7 @@ Adw.Window root {
             }
 
             Gtk.Label reportedCurrencyLabel {
-              halign: center;
+              justify: center;
               use-markup: true;
             }
 
@@ -274,7 +274,7 @@ Adw.Window root {
             }
 
             Gtk.Label {
-              halign: center;
+              justify: center;
               wrap: true;
               wrap-mode: char;
               label: _("Upload a supported file to use to import existing information into the new account. Denaro supports CSV, OFX, and QIF files.");

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 22:31-0400\n"
+"POT-Creation-Date: 2024-03-14 22:35-0400\n"
 "PO-Revision-Date: 2024-01-08 06:00+0000\n"
 "Last-Translator: Cassio Gomes Pereira <cassiogomes00@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -216,7 +216,8 @@ msgid "Account Name"
 msgstr "Nome da Conta"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:77
-msgid "Account Password (Optional)"
+#, fuzzy
+msgid "Account Password"
 msgstr "Senha da Conta (Opcional)"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:81
