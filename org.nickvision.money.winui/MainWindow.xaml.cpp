@@ -265,7 +265,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         }
         else if(tag == L"Settings")
         {
-            UserControl page{ winrt::make<SettingsPage>() };
+            WinUI::SettingsPage page{ winrt::make<SettingsPage>() };
             page.as<SettingsPage>()->SetController(m_controller->createPreferencesViewController());
             ViewStack().CurrentPage(L"Custom");
             FrameCustom().Content(winrt::box_value(page));
@@ -321,7 +321,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
 
     Windows::Foundation::IAsyncAction MainWindow::CurrencyConverter(const IInspectable& sender, const TappedRoutedEventArgs& args)
     {
-        ContentDialog dialog{ winrt::make<Controls::implementation::CurrencyConverterDialog>() };
+        Controls::CurrencyConverterDialog dialog{ winrt::make<Controls::implementation::CurrencyConverterDialog>() };
         dialog.XamlRoot(MainGrid().XamlRoot());
         dialog.RequestedTheme(MainGrid().RequestedTheme());
         co_await dialog.ShowAsync();
@@ -341,7 +341,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         ToolTipService::SetToolTip(item, winrt::box_value(winrt::to_hstring(args.getParam()->getPath().string())));
         NavView().MenuItems().Append(winrt::box_value(item));
         //Create view for account
-        UserControl page{ winrt::make<AccountPage>() };
+        WinUI::AccountPage page{ winrt::make<AccountPage>() };
         page.as<AccountPage>()->SetController(args.getParam());
         m_accountPages[args.getParam()->getPath()] = page;
         //Set AccountView
@@ -351,11 +351,11 @@ namespace winrt::Nickvision::Money::WinUI::implementation
     Windows::Foundation::IAsyncAction MainWindow::NewAccount(const IInspectable& sender, const RoutedEventArgs& args)
     {
         std::shared_ptr<NewAccountDialogController> controller{ m_controller->createNewAccountDialogController() };
-        ContentDialog dialog{ winrt::make<implementation::NewAccountDialog>() };
+        WinUI::NewAccountDialog dialog{ winrt::make<NewAccountDialog>() };
         dialog.as<NewAccountDialog>()->SetController(controller, m_hwnd);
         dialog.XamlRoot(MainGrid().XamlRoot());
         dialog.RequestedTheme(MainGrid().RequestedTheme());
-        if(co_await dialog.ShowAsync() == ContentDialogResult::Primary)
+        if((co_await dialog.ShowAsync()) == ContentDialogResult::Primary)
         {
             m_controller->newAccount(controller);
         }
@@ -393,7 +393,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         ListRecentAccounts().Children().Clear();
         if(recentAccounts.size() == 0)
         {
-            UserControl row{ winrt::make<Controls::implementation::SettingsRow>() };
+            Controls::SettingsRow row{ winrt::make<Controls::implementation::SettingsRow>() };
             row.as<Controls::implementation::SettingsRow>()->Glyph(L"\uE121");
             row.as<Controls::implementation::SettingsRow>()->Title(winrt::to_hstring(_("No Recent Accounts")));
             ListRecentAccounts().Children().Append(row);
@@ -415,7 +415,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
                 LoadRecentAccounts();
             });
             ToolTipService::SetToolTip(button, winrt::box_value(winrt::to_hstring(_("Remove"))));
-            UserControl row{ winrt::make<Controls::implementation::ClickableSettingsRow>() };
+            Controls::ClickableSettingsRow row{ winrt::make<Controls::implementation::ClickableSettingsRow>() };
             row.as<Controls::implementation::ClickableSettingsRow>()->Glyph(L"\uE8C7");
             row.as<Controls::implementation::ClickableSettingsRow>()->Title(winrt::to_hstring(recentAccount.getName()));
             switch(recentAccount.getType())
@@ -453,7 +453,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
             PasswordBox txtPassword;
             txtPassword.Width(240);
             txtPassword.PlaceholderText(winrt::to_hstring(_("Enter password here")));
-            UserControl row{ winrt::make<Controls::implementation::SettingsRow>() };
+            Controls::SettingsRow row{ winrt::make<Controls::implementation::SettingsRow>() };
             row.as<Controls::implementation::SettingsRow>()->Glyph(L"\uE72E");
             row.as<Controls::implementation::SettingsRow>()->Title(winrt::to_hstring(path.filename().string()));
             row.as<Controls::implementation::SettingsRow>()->Child(txtPassword);

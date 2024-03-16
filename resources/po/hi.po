@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 15:04-0400\n"
+"POT-Creation-Date: 2024-03-15 22:49-0400\n"
 "PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
@@ -55,13 +55,13 @@ msgstr "{0} से स्थानांतरण"
 
 #: libdenaro/src/models/account.cpp:894
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:41
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "आय"
 
 #: libdenaro/src/models/account.cpp:894
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:42
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
 msgstr "लागत/खर्च"
 
@@ -144,21 +144,22 @@ msgstr "खाते को फाइल में निर्यात कर�
 msgid "The account is already open."
 msgstr "यह खाता पहले ही खोला जा चुका है।"
 
+#. Localize Strings
 #: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:15
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:80
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:20
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
 msgid "Currency Converter"
 msgstr "मुद्रा परिवर्तक"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:28
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:50
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:53
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
 msgid "Currency"
 msgstr "मुद्रा"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:36
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
 #, fuzzy
 msgid "Switch Currencies"
 msgstr "मुद्राएँ बदलें"
@@ -168,23 +169,23 @@ msgid "Switch"
 msgstr "स्विच"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:48
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
 msgid "Source"
 msgstr "स्रोत"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:52
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:100
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
 msgid "Result"
 msgstr "परिणाम"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:57
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
 msgid "Amount"
 msgstr "राशि"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp:67
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:29
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:30
 msgid "Copy Result Amount"
 msgstr "परिणाम राशि कॉपी करें"
 
@@ -195,7 +196,7 @@ msgstr "पीछे"
 #. Localize Strings
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:41
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:22
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:25
 msgid "New Account"
 msgstr "नया खाता"
 
@@ -214,32 +215,32 @@ msgid "Storage Location"
 msgstr "स्टोरेज स्थान"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:73
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:26
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:210
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:29
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:225
 msgid "Account Name"
 msgstr "खाता नाम"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:77
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:28
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:31
 #, fuzzy
 msgid "Account Password"
 msgstr "खाता पासवर्ड (वैकल्पिक)"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:81
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:30
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:33
 #, fuzzy
 msgid "Folder"
 msgstr "फ़ोल्डर"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:88
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:144
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:31
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:34
 #, fuzzy
 msgid "Select Folder"
 msgstr "फाइल का चयन करें"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:97
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:32
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:35
 msgid "Overwrite Existing Accounts"
 msgstr "मौजूदा खातों को अधिलेखित करें"
 
@@ -254,13 +255,13 @@ msgid "Account Options"
 msgstr "खाता विकल्प"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:36
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:39
 msgid "Account Type"
 msgstr "खाते का प्रकार"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:285
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:37
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:40
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:424
 msgid "Checking"
 msgstr "चेकिंग"
@@ -273,51 +274,51 @@ msgstr "जमा पूंजी"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:291
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:39
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:42
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:430
 msgid "Business"
 msgstr "व्यवसाय"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:40
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:43
 #, fuzzy
 msgid "Default Transaction Type"
 msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:146
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:43
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:46
 msgid "Transaction Reminders Threshold"
 msgstr "लेन-देन अनुस्मारक सीमा"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:147
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:47
 msgid ""
 "Determines how far in advanced Denaro should remind users of upcoming "
 "transactions in the account."
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:48
 msgid "Never"
 msgstr "कभी नहीं"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:46
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:49
 msgid "One Day Before"
 msgstr "एक दिन पहले"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:47
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:50
 msgid "One Week Before"
 msgstr "एक सप्ताह पहले"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:48
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:51
 msgid "One Month Before"
 msgstr "एक महीना पहले"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:49
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:52
 msgid "Two Months Before"
 msgstr "दो महीने पहले"
 
@@ -326,73 +327,73 @@ msgid "Account Currency"
 msgstr "खाते का पैसा"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:190
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:53
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:56
 msgid "Use Custom Currency"
 msgstr "कस्टम मुद्रा का प्रयोग करें"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:195
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:56
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:211
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:59
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:226
 msgid "Symbol"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:199
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:58
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:212
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:61
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:227
 msgid "Code"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:203
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:60
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:213
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:63
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:228
 msgid "Decimal Separator"
 msgstr "दशमलव विभाजक"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:205
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:220
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:63
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:69
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:66
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:72
 msgid "Custom"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:218
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:64
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:214
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:67
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:229
 msgid "Group Separator"
 msgstr "समूह विभाजक"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:220
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:68
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:71
 msgid "None"
 msgstr "कोई नहीं"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:70
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:73
 msgid "Decimal Digits"
 msgstr "दशमलव अंक"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:71
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:74
 msgid "Two"
 msgstr "दो"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:72
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:75
 msgid "Three"
 msgstr "तीन"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:73
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:76
 msgid "Four"
 msgstr "चार"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:74
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:77
 msgid "Five"
 msgstr "पाँच"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:75
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:78
 msgid "Six"
 msgstr "छह"
 
@@ -401,7 +402,7 @@ msgid "Amount Display Style"
 msgstr "राशि प्रदर्शन शैली"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:241
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:77
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:80
 #, fuzzy
 msgid "$ is the currency's symbol."
 msgstr "मुद्रा चिन्ह"
@@ -411,7 +412,7 @@ msgid "Import Existing Information"
 msgstr "मौजूदा जानकारी आयात करें"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:280
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:83
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:86
 #, fuzzy
 msgid ""
 "Upload a supported file to use to import existing information into the new "
@@ -420,24 +421,24 @@ msgstr ""
 "मौजूदा जानकारी को नए खाते में आयात करने के लिए उपयोग करने के लिए एक वैध फाइल अपलोड करें।"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:287
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:84
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:87
 msgid "Import File"
 msgstr "फाइल आयात करें"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:297
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:86
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:89
 #, fuzzy
 msgid "Select File"
 msgstr "फाइल का चयन करें"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:306
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:87
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:90
 #, fuzzy
 msgid "Clear File"
 msgstr "बैकअप फ़ोल्डर साफ़ करें"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:320
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:24
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:27
 msgid "Create"
 msgstr "बनाएं"
 
@@ -592,8 +593,8 @@ msgstr ""
 "सेट करें कि कौन सी कुंजी दबाने पर स्थान का दशमलव विभाजक राशि फ़ील्ड में डाला जाएगा।"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:80
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:34
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:55
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:37
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:58
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
 #, fuzzy
@@ -637,12 +638,12 @@ msgid "Quit"
 msgstr "छोड़ें"
 
 #: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:39
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
 msgid "Error"
 msgstr "त्रुटि"
 
 #: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:40
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
 msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
 "report a bug."
@@ -651,8 +652,8 @@ msgstr ""
 "बग की रिपोर्ट करें।"
 
 #: org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp:41
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:23
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:26
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
 msgid "Close"
 msgstr "बंद करें"
 
@@ -662,7 +663,7 @@ msgid "Result was copied to clipboard."
 msgstr "परिणाम को क्लिपबोर्ड पर कॉपी किया गया।"
 
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:28
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:51
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:54
 msgid "Your system reported that your currency is"
 msgstr "आपके सिस्टम ने बताया कि आपकी मुद्रा है"
 
@@ -698,7 +699,7 @@ msgid "Nickvision Denaro Account (*.nmoney)"
 msgstr "Nickvision Denaro खाता"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:319
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:29
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:32
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:455
 msgid "Enter password here"
 msgstr "Enter password here"
@@ -713,103 +714,103 @@ msgstr "रद्द करें"
 msgid "Unlock"
 msgstr "अनलॉक"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:25
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:28
 #, fuzzy
 msgid "Storage"
 msgstr "स्टोरेज स्थान"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:27
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:30
 #, fuzzy
 msgid "Enter name here"
 msgstr "यहां नोट्स दर्ज करें"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:33
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:54
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:36
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:57
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
 #, fuzzy
 msgid "On"
 msgstr "खोलें"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:35
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:38
 #, fuzzy
 msgid "Options"
 msgstr "कार्रवाई"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:38
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:41
 #, fuzzy
 msgid "Saving"
 msgstr "जमा पूंजी"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:57
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:60
 msgid "Enter symbol here"
 msgstr "Enter symbol here"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:59
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:62
 msgid "Enter code here"
 msgstr "Enter code here"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:61
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:65
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:64
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:68
 msgid "."
 msgstr ""
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:62
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:66
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:65
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:69
 msgid ","
 msgstr ""
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:67
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:70
 msgid "'"
 msgstr ""
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:76
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:79
 #, fuzzy
 msgid "Amount Style"
 msgstr "राशि प्रदर्शन शैली"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:82
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:85
 #, fuzzy
 msgid "Import"
 msgstr "फाइल आयात करें"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:85
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:143
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:188
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:88
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:152
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:199
 #, fuzzy
 msgid "No File Selected"
 msgstr "कोई खाता नहीं चुना गया है"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:220
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:235
 #, fuzzy
 msgid "Account Name (Invalid)"
 msgstr "खाता नाम (खुला हुआ)"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:281
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:296
 #, fuzzy
 msgid "Symbol (Empty)"
 msgstr "मुद्रा चिह्न (खाली)"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:285
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:300
 #, fuzzy
 msgid "Code (Empty)"
 msgstr "नाम (खाली)"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:289
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:304
 msgid "Decimal Separator (Empty)"
 msgstr "दशमलव विभाजक (खाली)"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:293
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:299
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:308
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:314
 msgid "Decimal Separator (Invalid)"
 msgstr "दशमलव विभाजक (अमान्य)"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:294
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:304
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:309
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:319
 msgid "Group Separator (Invalid)"
 msgstr "समूह विभाजक (अमान्य)"
 
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:298
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:303
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:313
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:318
 #, fuzzy
 msgid "Symbol (Invalid)"
 msgstr "मुद्रा चिह्न (अमान्य)"
@@ -929,15 +930,15 @@ msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 msgid "Default Group Color"
 msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
 
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:28
 msgid "Enter source amount"
 msgstr ""
 
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:42
 msgid "OK"
 msgstr "ठीक (OK)"
 
-#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:117
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:118
 #, fuzzy
 msgid "Result (Error)"
 msgstr "परिणाम"

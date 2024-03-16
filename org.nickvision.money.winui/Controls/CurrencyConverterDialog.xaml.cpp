@@ -17,6 +17,7 @@ namespace winrt::Nickvision::Money::WinUI::Controls::implementation
     CurrencyConverterDialog::CurrencyConverterDialog()
     {
         InitializeComponent();
+        //Localize Strings
         Title(winrt::box_value(winrt::to_hstring(_("Currency Converter"))));
         CloseButtonText(winrt::to_hstring(_("Close")));
         LblCurrency().Text(winrt::to_hstring(_("Currency")));

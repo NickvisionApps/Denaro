@@ -16,6 +16,9 @@ using namespace winrt::Windows::Storage::Pickers;
 namespace winrt::Nickvision::Money::WinUI::implementation 
 {
     NewAccountDialog::NewAccountDialog()
+        : m_controller{ nullptr },
+        m_hwnd{ 0 },
+        m_constructing{ true }
     {
         InitializeComponent();
         //Localize Strings
@@ -91,8 +94,14 @@ namespace winrt::Nickvision::Money::WinUI::implementation
     {
         m_controller = controller;
         m_hwnd = hwnd;
-        //Load
-        IsPrimaryButtonEnabled(false);
+    }
+
+    void NewAccountDialog::OnOpened(const ContentDialog& sender, const ContentDialogOpenedEventArgs& args)
+    {
+        if (!m_controller)
+        {
+            throw std::logic_error("NewAccountDialog::SetController() must be called before using the dialog.");
+        }
         ViewStack().CurrentPage(L"Storage");
         TxtAccountName().Text(winrt::to_hstring(m_controller->getMetadata().getName()));
         TxtAccountPassword().Password(winrt::to_hstring(m_controller->getPassword()));
@@ -142,6 +151,8 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         CmbCustomAmountStyle().SelectedIndex(static_cast<int>(m_controller->getMetadata().getCustomCurrency().getAmountStyle()));
         LblImportFile().Text(winrt::to_hstring(m_controller->getImportFile().empty() ? _("No File Selected") : m_controller->getImportFile().filename().string()));
         BtnClearImportFile().Visibility(m_controller->getImportFile().empty() ? Visibility::Collapsed : Visibility::Visible);
+        m_constructing = false;
+        ValidateOptions();
     }
 
     void NewAccountDialog::OnPageSelectionChanged(const SelectorBar& sender, const SelectorBarSelectionChangedEventArgs& args)
@@ -206,6 +217,10 @@ namespace winrt::Nickvision::Money::WinUI::implementation
 
     void NewAccountDialog::ValidateOptions()
     {
+        if(m_constructing)
+        {
+            return;
+        }
         bool valid{ true };
         RowAccountName().Title(winrt::to_hstring(_("Account Name")));
         RowCustomSymbol().Title(winrt::to_hstring(_("Symbol")));

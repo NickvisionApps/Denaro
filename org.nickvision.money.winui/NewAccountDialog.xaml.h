@@ -4,7 +4,6 @@
 #include "includes.h"
 #include <memory>
 #include "Controls/SettingsRow.g.h"
-#include "Controls/StatusPage.g.h"
 #include "Controls/ViewStack.g.h"
 #include "Controls/ViewStackPage.g.h"
 #include "NewAccountDialog.g.h"
@@ -28,6 +27,12 @@ namespace winrt::Nickvision::Money::WinUI::implementation
          * @param hwnd The HWND of the parent window
          */
         void SetController(const std::shared_ptr<::Nickvision::Money::Shared::Controllers::NewAccountDialogController>& controller, HWND hwnd);
+        /**
+         * @brief Handles when the dialog is opened.
+         * @param sender ContentDialog
+         * @param args ContentDialogOpenedEventArgs 
+         */
+        void OnOpened(const Microsoft::UI::Xaml::Controls::ContentDialog& sender, const Microsoft::UI::Xaml::Controls::ContentDialogOpenedEventArgs& args);
         /**
          * @brief Handles when the page selection changes. 
          * @param sender SelectorBar
@@ -78,6 +83,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         void ValidateOptions();
         std::shared_ptr<::Nickvision::Money::Shared::Controllers::NewAccountDialogController> m_controller;
         HWND m_hwnd;
+        bool m_constructing;
     };
 }
 

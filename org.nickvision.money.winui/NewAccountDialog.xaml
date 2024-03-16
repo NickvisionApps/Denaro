@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Style="{StaticResource ScrollableContentDialogStyle}"
-    DefaultButton="Primary">
+    DefaultButton="Primary" Opened="OnOpened">
     <StackPanel MinWidth="480" Orientation="Vertical" Spacing="6">
         <SelectorBar SelectionChanged="OnPageSelectionChanged">
             <SelectorBarItem x:Name="SelectorItemStorage" Tag="Storage">
