@@ -1,6 +1,10 @@
 #ifndef DASHBOARDVIEWCONTROLLER_H
 #define DASHBOARDVIEWCONTROLLER_H
 
+#include <memory>
+#include <vector>
+#include "accountviewcontroller.h"
+
 namespace Nickvision::Money::Shared::Controllers
 {
     /**
@@ -11,11 +15,12 @@ namespace Nickvision::Money::Shared::Controllers
     public:
         /**
          * @brief Construct a DashboardViewController.
+         * @param accountViewControllers A vector of the controllers for the accounts to display on the dashboard
          */
-        DashboardViewController();
+        DashboardViewController(const std::vector<std::shared_ptr<AccountViewController>>& accountViewControllers);
         
     private:
-
+        std::vector<std::shared_ptr<AccountViewController>> m_accountViewControllers;
     };
 }
 
