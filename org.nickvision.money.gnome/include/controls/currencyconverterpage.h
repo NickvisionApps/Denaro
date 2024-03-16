@@ -7,25 +7,24 @@
 namespace Nickvision::Money::GNOME::Controls
 {
     /**
-     * @brief A dialog for converting currencies.
+     * @brief A page for converting currencies.
      */
-    class CurrencyConverterDialog
+    class CurrencyConverterPage
     {
     public:
         /**
-         * @brief Constructs a CurrencyConverterDialog.
-         * @param parent The GtkWindow object of the parent window
-         * @param iconName The name of the icon to use for the window 
+         * @brief Constructs a CurrencyConverterPage.
+         * @param parent The parent window
          */
-        CurrencyConverterDialog(GtkWindow* parent, const std::string& iconName);
+        CurrencyConverterPage(GtkWindow* parent);
         /**
-         * @brief Destructs a CurrencyConverterDialog. 
+         * @brief Destructs a CurrencyConverterPage. 
          */
-        ~CurrencyConverterDialog();
+        ~CurrencyConverterPage();
         /**
-         * @brief Shows the CurrencyConverterDialog and waits for it to close.
+         * @brief Gets the gobj of the control
          */
-        void run();
+        AdwClamp* gobj();
 
     private:
         /**
@@ -54,7 +53,7 @@ namespace Nickvision::Money::GNOME::Controls
         void onCurrencyChange();
         GtkBuilder* m_builder;
         GtkWindow* m_parent;
-        AdwWindow* m_window;
+        AdwClamp* m_page;
         GtkStringList* m_currencyList;
     };
 }

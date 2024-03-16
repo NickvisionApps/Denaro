@@ -1,4 +1,4 @@
-#include "controls/currencyconverterdialog.h"
+#include "controls/currencyconverterpage.h"
 #include <libnick/localization/gettext.h>
 #include "helpers/builder.h"
 #include "helpers/currencyhelpers.h"
@@ -9,31 +9,19 @@ using namespace Nickvision::Money::Shared::Models;
 
 namespace Nickvision::Money::GNOME::Controls
 {
-    CurrencyConverterDialog::CurrencyConverterDialog(GtkWindow* parent, const std::string& iconName)
-        : m_builder{ BuilderHelpers::fromBlueprint("currency_converter_dialog") },
+    CurrencyConverterPage::CurrencyConverterPage(GtkWindow* parent)
+        : m_builder{ BuilderHelpers::fromBlueprint("currency_converter_page") },
         m_parent{ parent },
-        m_window{ ADW_WINDOW(gtk_builder_get_object(m_builder, "root")) },
+        m_page{ ADW_CLAMP(gtk_builder_get_object(m_builder, "root")) },
         m_currencyList{ gtk_string_list_new(nullptr) }
     {
-        gtk_window_set_transient_for(GTK_WINDOW(m_window), m_parent);
-        gtk_window_set_icon_name(GTK_WINDOW(m_window), iconName.c_str());
         //Signals
-        g_signal_connect(gtk_builder_get_object(m_builder, "switchButton"), "clicked", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<CurrencyConverterDialog*>(data)->switchCurrencies(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "sourceCurrencyRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<CurrencyConverterDialog*>(data)->onSourceCurrencyChanged(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "resultCurrencyRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<CurrencyConverterDialog*>(data)->onResultCurrencyChanged(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "sourceAmountRow"), "changed", G_CALLBACK(+[](GtkEditable*, gpointer data){ reinterpret_cast<CurrencyConverterDialog*>(data)->onSourceAmountChanged(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "copyResultButton"), "clicked", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<CurrencyConverterDialog*>(data)->copyResult(); }), this);
-    }
-
-    CurrencyConverterDialog::~CurrencyConverterDialog()
-    {
-        g_object_unref(m_currencyList);
-        gtk_window_destroy(GTK_WINDOW(m_window));
-        g_object_unref(m_builder);
-    }
-
-    void CurrencyConverterDialog::run()
-    {
+        g_signal_connect(gtk_builder_get_object(m_builder, "switchButton"), "clicked", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<CurrencyConverterPage*>(data)->switchCurrencies(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "sourceCurrencyRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<CurrencyConverterPage*>(data)->onSourceCurrencyChanged(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "resultCurrencyRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<CurrencyConverterPage*>(data)->onResultCurrencyChanged(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "sourceAmountRow"), "changed", G_CALLBACK(+[](GtkEditable*, gpointer data){ reinterpret_cast<CurrencyConverterPage*>(data)->onSourceAmountChanged(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "copyResultButton"), "clicked", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<CurrencyConverterPage*>(data)->copyResult(); }), this);
+        //Load
         const std::map<std::string, double>& conversionRates{ CurrencyConversionService::getConversionRates("USD") };
         if(conversionRates.empty())
         {
@@ -66,15 +54,21 @@ namespace Nickvision::Money::GNOME::Controls
             adw_combo_row_set_model(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "resultCurrencyRow")), G_LIST_MODEL(m_currencyList));
             adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "sourceCurrencyRow")), usdIndex);
             adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "resultCurrencyRow")), eurIndex);
-            gtk_window_present(GTK_WINDOW(m_window));
-            while(gtk_widget_is_visible(GTK_WIDGET(m_window)))
-            {
-                g_main_context_iteration(g_main_context_default(), false);
-            }
         }
     }
 
-    void CurrencyConverterDialog::switchCurrencies()
+    CurrencyConverterPage::~CurrencyConverterPage()
+    {
+        g_object_unref(m_currencyList);
+        g_object_unref(m_builder);
+    }
+
+    AdwClamp* CurrencyConverterPage::gobj()
+    {
+        return m_page;
+    }
+
+    void CurrencyConverterPage::switchCurrencies()
     {
         unsigned int sourceIndex{ adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "sourceCurrencyRow"))) };
         unsigned int resultIndex{ adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "resultCurrencyRow"))) };
@@ -82,24 +76,24 @@ namespace Nickvision::Money::GNOME::Controls
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "sourceCurrencyRow")), resultIndex);
     }
 
-    void CurrencyConverterDialog::onSourceCurrencyChanged()
+    void CurrencyConverterPage::onSourceCurrencyChanged()
     {
         adw_preferences_row_set_title(ADW_PREFERENCES_ROW(gtk_builder_get_object(m_builder, "sourceAmountRow")), gtk_string_list_get_string(m_currencyList, adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "sourceCurrencyRow")))));
         onCurrencyChange();
     }
 
-    void CurrencyConverterDialog::onResultCurrencyChanged()
+    void CurrencyConverterPage::onResultCurrencyChanged()
     {
         adw_preferences_row_set_title(ADW_PREFERENCES_ROW(gtk_builder_get_object(m_builder, "resultAmountRow")), gtk_string_list_get_string(m_currencyList, adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "resultCurrencyRow")))));
         onCurrencyChange();
     }
 
-    void CurrencyConverterDialog::onSourceAmountChanged()
+    void CurrencyConverterPage::onSourceAmountChanged()
     {
         onCurrencyChange();
     }
 
-    void CurrencyConverterDialog::copyResult()
+    void CurrencyConverterPage::copyResult()
     {
         std::string resultText{ gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "resultAmountRow"))) };
         if(!resultText.empty())
@@ -110,7 +104,7 @@ namespace Nickvision::Money::GNOME::Controls
         }
     }
 
-    void CurrencyConverterDialog::onCurrencyChange()
+    void CurrencyConverterPage::onCurrencyChange()
     {
         std::string sourceText{ gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "sourceAmountRow"))) };
         std::string resultText{ gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "resultAmountRow"))) };

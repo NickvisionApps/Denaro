@@ -5,7 +5,6 @@
 #include <libnick/notifications/shellnotification.h>
 #include <libnick/localization/gettext.h>
 #include <libnick/localization/documentation.h>
-#include "controls/currencyconverterdialog.h"
 #include "helpers/builder.h"
 #include "views/newaccountdialog.h"
 #include "views/preferencesdialog.h"
@@ -25,7 +24,8 @@ namespace Nickvision::Money::GNOME::Views
         : m_controller{ controller },
         m_app{ app },
         m_builder{ BuilderHelpers::fromBlueprint("main_window") },
-        m_window{ ADW_APPLICATION_WINDOW(gtk_builder_get_object(m_builder, "root")) }
+        m_window{ ADW_APPLICATION_WINDOW(gtk_builder_get_object(m_builder, "root")) },
+        m_currencyConverterPage{ GTK_WINDOW(m_window) }
     {
         //Setup Window
         gtk_application_add_window(GTK_APPLICATION(app), GTK_WINDOW(m_window));
@@ -53,10 +53,6 @@ namespace Nickvision::Money::GNOME::Views
         g_signal_connect(actQuit, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->quit(); }), this);
         g_action_map_add_action(G_ACTION_MAP(m_window), G_ACTION(actQuit));
         SET_ACCEL_FOR_ACTION(m_app, "win.quit", "<Ctrl>Q");
-        //Currency Converter Action
-        GSimpleAction* actCurrencyConverter{ g_simple_action_new("currencyConverter", nullptr) };
-        g_signal_connect(actCurrencyConverter, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->currencyConverter(); }), this);
-        g_action_map_add_action(G_ACTION_MAP(m_window), G_ACTION(actCurrencyConverter));
         //Preferences Action
         GSimpleAction* actPreferences{ g_simple_action_new("preferences", nullptr) };
         g_signal_connect(actPreferences, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<MainWindow*>(data)->preferences(); }), this);
@@ -150,12 +146,6 @@ namespace Nickvision::Money::GNOME::Views
         }
     }
 
-    void MainWindow::currencyConverter()
-    {
-        CurrencyConverterDialog currencyConverter{ GTK_WINDOW(m_window), m_controller->getAppInfo().getId() };
-        currencyConverter.run();
-    }
-
     void MainWindow::preferences()
     {
         PreferencesDialog preferences{ m_controller->createPreferencesViewController(), GTK_WINDOW(m_window) };
@@ -239,7 +229,13 @@ namespace Nickvision::Money::GNOME::Views
             adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "home");
             adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Home"));
         }
-        else if(row == gtk_list_box_get_row_at_index(box, 1)) //Dashboard
+        else if(row == gtk_list_box_get_row_at_index(box, 1)) //Currency Converter
+        {
+            adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "custom");
+            adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), GTK_WIDGET(m_currencyConverterPage.gobj()));
+            adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Currency Converter"));
+        }
+        else if(row == gtk_list_box_get_row_at_index(box, 2)) //Dashboard
         {
             adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "custom");
             adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), nullptr);

@@ -1,11 +1,11 @@
 libdenaro/src/models/account.cpp
 libdenaro/src/controllers/mainwindowcontroller.cpp
-org.nickvision.money.gnome/blueprints/currency_converter_dialog.blp
+org.nickvision.money.gnome/blueprints/currency_converter_page.blp
 org.nickvision.money.gnome/blueprints/new_account_dialog.blp
 org.nickvision.money.gnome/blueprints/main_window.blp
 org.nickvision.money.gnome/blueprints/preferences_dialog.blp
 org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp
-org.nickvision.money.gnome/src/controls/currencyconverterdialog.cpp
+org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp
 org.nickvision.money.gnome/src/views/newaccountdialog.cpp
 org.nickvision.money.gnome/src/views/mainwindow.cpp
 org.nickvision.money.winui/AccountPage.xaml.cpp

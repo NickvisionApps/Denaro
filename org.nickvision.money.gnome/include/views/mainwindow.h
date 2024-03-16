@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include <adwaita.h>
+#include "controls/currencyconverterpage.h"
 #include "controllers/mainwindowcontroller.h"
 
 #define SET_ACCEL_FOR_ACTION(App, Action, Accel) { \
@@ -59,10 +60,6 @@ namespace Nickvision::Money::GNOME::Views
          * @param args Nickvision::Notifications::ShellNotificationSentEventArgs
          */
         void onShellNotificationSent(const Nickvision::Notifications::ShellNotificationSentEventArgs& args);
-        /**
-         * @brief Displays the currency converter dialog.
-         */
-        void currencyConverter();
         /**
          * @brief Quits the application. 
          */
@@ -122,6 +119,7 @@ namespace Nickvision::Money::GNOME::Views
         GtkApplication* m_app;
         GtkBuilder* m_builder;
         AdwApplicationWindow* m_window;
+        Controls::CurrencyConverterPage m_currencyConverterPage;
     };
 }
 
