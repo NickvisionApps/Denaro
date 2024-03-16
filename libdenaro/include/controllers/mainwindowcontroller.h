@@ -18,6 +18,7 @@
 #include <libnick/taskbar/taskbaritem.h>
 #include <libnick/update/updater.h>
 #include "controllers/accountviewcontroller.h"
+#include "controllers/dashboardviewcontroller.h"
 #include "controllers/newaccountdialogcontroller.h"
 #include "controllers/preferencesviewcontroller.h"
 #include "models/accounttype.h"
@@ -99,6 +100,11 @@ namespace Nickvision::Money::Shared::Controllers
          * @return The NewAccountDialogController
          */
         std::shared_ptr<NewAccountDialogController> createNewAccountDialogController() const;
+        /**
+         * @brief Gets a DashboardViewController.
+         * @return The DashboardViewController
+         */
+        std::shared_ptr<DashboardViewController> createDashboardViewController() const;
         /**
          * @brief Gets a AccountViewController.
          * @param path The path of the account
