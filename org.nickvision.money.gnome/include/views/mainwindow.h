@@ -84,6 +84,12 @@ namespace Nickvision::Money::GNOME::Views
          */
         void about();
         /**
+         * @brief Handles when a navigation item is selected.
+         * @param box The listNavItems box
+         * @param row The selected row
+         */
+        void onNavItemSelected(GtkListBox* box, GtkListBoxRow* row);
+        /**
          * @brief Handles when an account is added.
          * @param args Nickvision::Events::ParamEventArgs<Nickvision::Money::Shared::Controllers::AccountViewController>
          */

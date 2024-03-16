@@ -13,134 +13,197 @@ menu mainMenu {
 }
 
 Adw.ApplicationWindow root {
+  width-request: 360;
+  height-request: 200;
   default-width: 900;
   default-height: 700;
-
-  Adw.ToolbarView toolbarView {
-    [top]
-    Adw.HeaderBar headerBar {
-      title-widget: Adw.WindowTitle title {};
-      
-      [end]
-      Gtk.MenuButton {
-        direction: none;
-        menu-model: mainMenu;
-        tooltip-text: _("Main Menu");
-        primary: true;
-      }
+  
+  Adw.Breakpoint {
+    condition ("max-width: 400sp")
+    
+    setters {
+      navView.collapsed: true;
     }
+  }
 
-    content: Adw.ToastOverlay toastOverlay {
-      hexpand: true;
-      vexpand: true;
-      
-      Adw.ViewStack viewStack {
-        Adw.ViewStackPage {
-          name: "pageHome";
-          child: Adw.StatusPage statusPageHome {
-            icon-name: "org.nickvision.money";
-            description: _("Create or open an account to get started. You may also drag a file into the app from your file browser.");
-            child: Adw.Clamp {
-              maximum-size: 420;
+  content: Adw.NavigationSplitView navView {
+    show-content: true;
 
-              Gtk.Box {
-                halign: fill;
-                hexpand: true;
-                orientation: vertical;
-                spacing: 6;
+    sidebar: Adw.NavigationPage navPageSidebar {
+      tag: "sidebar";
 
-                Adw.PreferencesGroup {
-                  Adw.ActionRow noRecentAccountsRow {
-                    title: _("No Recent Accounts");
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          [end]
+          Gtk.MenuButton {
+            direction: none;
+            menu-model: mainMenu;
+            tooltip-text: _("Main Menu");
+            primary: true;
+          }
+        }
 
-                    [prefix]
-                    Gtk.Image {
-                      icon-name: "document-open-recent-symbolic";
-                    }
-                  }
+        content: Gtk.ListBox listNavItems {
+          Gtk.ListBoxRow {
+            child: Gtk.Box {
+              orientation: horizontal;
+              spacing: 6;
 
-                  Adw.ActionRow recentAccount1Row {
-                    activatable-widget: recentAccount1Img;
+              Gtk.Image {
+                icon-name: "user-home-symbolic";
+              }
 
-                    [prefix]
-                    Gtk.Image recentAccount1Img {
-                      icon-name: "wallet2-symbolic";
-                    }
-
-                    [suffix]
-                    Gtk.Button removeRecentAccount1Button {
-                      valign: center;
-                      icon-name: "cross-symbolic";
-                      tooltip-text: _("Remove");
-
-                      styles ["flat"]
-                    }
-                  }
-
-                  Adw.ActionRow recentAccount2Row {
-                    activatable-widget: recentAccount2Img;
-
-                    [prefix]
-                    Gtk.Image recentAccount2Img {
-                      icon-name: "wallet2-symbolic";
-                    }
-
-                    [suffix]
-                    Gtk.Button removeRecentAccount2Button {
-                      valign: center;
-                      icon-name: "cross-symbolic";
-                      tooltip-text: _("Remove");
-
-                      styles ["flat"]
-                    }
-                  }
-
-                  Adw.ActionRow recentAccount3Row {
-                    activatable-widget: recentAccount3Img;
-
-                    [prefix]
-                    Gtk.Image recentAccount3Img {
-                      icon-name: "wallet2-symbolic";
-                    }
-
-                    [suffix]
-                    Gtk.Button removeRecentAccount3Button {
-                      valign: center;
-                      icon-name: "cross-symbolic";
-                      tooltip-text: _("Remove");
-
-                      styles ["flat"]
-                    }
-                  }
-                }
-
-                Gtk.Box {
-                  orientation: horizontal;
-                  spacing: 6;
-
-                  Gtk.Button newAccountButton {
-                    hexpand: true;
-                    label: _("New");
-                    tooltip-text: _("New Account (Ctrl+N)");
-                    action-name: "win.newAccount";
-
-                    styles ["pill"]
-                  }
-
-                  Gtk.Button openAccountButton {
-                    hexpand: true;
-                    label: _("Open");
-                    tooltip-text: _("Open Account (Ctrl+O)");
-                    action-name: "win.openAccount";
-
-                    styles ["pill", "suggested-action"]
-                  }
-                }
+              Gtk.Label {
+                label: _("Home");
               }
             };
-          };
-        }
-      }
+          }
+
+          Gtk.ListBoxRow {
+            child: Gtk.Box {
+              orientation: horizontal;
+              spacing: 6;
+
+              Gtk.Image {
+                icon-name: "resources-symbolic";
+              }
+
+              Gtk.Label {
+                label: _("Dashboard");
+              }
+            };
+          }
+
+          styles ["navigation-sidebar"]
+        };
+      };
     };
-  }
+
+    content: Adw.NavigationPage navPageContent {
+      tag: "content";
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {}
+
+        content: Adw.ViewStack viewStack {
+          Adw.ViewStackPage {
+            name: "home";
+            child: Adw.StatusPage statusPageHome {
+              icon-name: "org.nickvision.money";
+              description: _("Create or open an account to get started. You may also drag a file into the app from your file browser.");
+              child: Adw.Clamp {
+                maximum-size: 420;
+
+                Gtk.Box {
+                  halign: fill;
+                  hexpand: true;
+                  orientation: vertical;
+                  spacing: 6;
+
+                  Adw.PreferencesGroup {
+                    Adw.ActionRow noRecentAccountsRow {
+                      title: _("No Recent Accounts");
+
+                      [prefix]
+                      Gtk.Image {
+                        icon-name: "document-open-recent-symbolic";
+                      }
+                    }
+
+                    Adw.ActionRow recentAccount1Row {
+                      activatable-widget: recentAccount1Img;
+
+                      [prefix]
+                      Gtk.Image recentAccount1Img {
+                        icon-name: "wallet2-symbolic";
+                      }
+
+                      [suffix]
+                      Gtk.Button removeRecentAccount1Button {
+                        valign: center;
+                        icon-name: "cross-symbolic";
+                        tooltip-text: _("Remove");
+
+                        styles ["flat"]
+                      }
+                    }
+
+                    Adw.ActionRow recentAccount2Row {
+                      activatable-widget: recentAccount2Img;
+
+                      [prefix]
+                      Gtk.Image recentAccount2Img {
+                        icon-name: "wallet2-symbolic";
+                      }
+
+                      [suffix]
+                      Gtk.Button removeRecentAccount2Button {
+                        valign: center;
+                        icon-name: "cross-symbolic";
+                        tooltip-text: _("Remove");
+
+                        styles ["flat"]
+                      }
+                    }
+
+                    Adw.ActionRow recentAccount3Row {
+                      activatable-widget: recentAccount3Img;
+
+                      [prefix]
+                      Gtk.Image recentAccount3Img {
+                        icon-name: "wallet2-symbolic";
+                      }
+
+                      [suffix]
+                      Gtk.Button removeRecentAccount3Button {
+                        valign: center;
+                        icon-name: "cross-symbolic";
+                        tooltip-text: _("Remove");
+
+                        styles ["flat"]
+                      }
+                    }
+                  }
+
+                  Gtk.Box {
+                    orientation: horizontal;
+                    spacing: 6;
+
+                    Gtk.Button newAccountButton {
+                      hexpand: true;
+                      label: _("New");
+                      tooltip-text: _("New Account (Ctrl+N)");
+                      action-name: "win.newAccount";
+
+                      styles ["pill"]
+                    }
+
+                    Gtk.Button openAccountButton {
+                      hexpand: true;
+                      label: _("Open");
+                      tooltip-text: _("Open Account (Ctrl+O)");
+                      action-name: "win.openAccount";
+
+                      styles ["pill", "suggested-action"]
+                    }
+                  }
+                }
+              };
+
+              styles ["icon-dropshadow"]
+            };
+          }
+
+          Adw.ViewStackPage {
+            name: "custom";
+            child: Adw.Bin customBin {
+
+            };
+          }
+        };
+      };
+    };
+  };
 }

@@ -35,10 +35,12 @@ namespace Nickvision::Money::GNOME::Views
         {
             gtk_widget_add_css_class(GTK_WIDGET(m_window), "devel");
         }
-        adw_window_title_set_title(ADW_WINDOW_TITLE(gtk_builder_get_object(m_builder, "title")), m_controller->getAppInfo().getShortName().c_str());
+        adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageSidebar")), m_controller->getAppInfo().getShortName().c_str());
         adw_status_page_set_title(ADW_STATUS_PAGE(gtk_builder_get_object(m_builder, "statusPageHome")), m_controller->getGreeting().c_str());
         //Register Events
         g_signal_connect(m_window, "close_request", G_CALLBACK(+[](GtkWindow*, gpointer data) -> bool { return reinterpret_cast<MainWindow*>(data)->onCloseRequested(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "listNavItems"), "row-activated", G_CALLBACK(+[](GtkListBox*, GtkListBoxRow*, gpointer data) { adw_navigation_split_view_set_show_content(ADW_NAVIGATION_SPLIT_VIEW(gtk_builder_get_object(reinterpret_cast<MainWindow*>(data)->m_builder, "navView")), true); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "listNavItems"), "row-selected", G_CALLBACK(+[](GtkListBox* self, GtkListBoxRow* row, gpointer data) { reinterpret_cast<MainWindow*>(data)->onNavItemSelected(self, row); }), this);
         m_controller->notificationSent() += [&](const NotificationSentEventArgs& args) { onNotificationSent(args); };
         m_controller->shellNotificationSent() += [&](const ShellNotificationSentEventArgs& args) { onShellNotificationSent(args); };
         m_controller->accountAdded() += [&](const ParamEventArgs<std::shared_ptr<AccountViewController>>& args) { onAccountAdded(args); };
@@ -110,7 +112,7 @@ namespace Nickvision::Money::GNOME::Views
         gtk_window_present(GTK_WINDOW(m_window));
         m_controller->connectTaskbar(m_controller->getAppInfo().getId() + ".desktop");
         m_controller->startup();
-        adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "pageHome");
+        gtk_list_box_select_row(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "listNavItems")), gtk_list_box_get_row_at_index(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "listNavItems")), 0));
         loadRecentAccounts();        
     }
 
@@ -227,6 +229,26 @@ namespace Nickvision::Money::GNOME::Views
         adw_about_window_set_artists(dialog, &urls[0]);
         adw_about_window_set_translator_credits(dialog, m_controller->getAppInfo().getTranslatorCredits().c_str());
         gtk_window_present(GTK_WINDOW(dialog));
+    }
+
+    void MainWindow::onNavItemSelected(GtkListBox* box, GtkListBoxRow* row)
+    {
+        adw_navigation_split_view_set_show_content(ADW_NAVIGATION_SPLIT_VIEW(gtk_builder_get_object(m_builder, "navView")), true);
+        if(row == gtk_list_box_get_row_at_index(box, 0)) //Home
+        {
+            adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "home");
+            adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Home"));
+        }
+        else if(row == gtk_list_box_get_row_at_index(box, 1)) //Dashboard
+        {
+            adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "custom");
+            adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), nullptr);
+            adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Dashboard"));
+        }
+        else //Account
+        {
+
+        }
     }
 
     void MainWindow::onAccountAdded(const ParamEventArgs<std::shared_ptr<AccountViewController>>& args)

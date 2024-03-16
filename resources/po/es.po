@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 22:49-0400\n"
+"POT-Creation-Date: 2024-03-16 00:26-0400\n"
 "PO-Revision-Date: 2023-12-29 06:12+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
 "weblate.org>\n"
@@ -45,12 +45,12 @@ msgid "Two months from now"
 msgstr "Dentro de dos meses"
 
 #: libdenaro/src/models/account.cpp:778
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Transferir a {0}"
 
 #: libdenaro/src/models/account.cpp:795
-#, fuzzy
+#, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Transferir desde {0}"
 
@@ -261,20 +261,20 @@ msgid "Account Type"
 msgstr "Tipo de cuenta"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:285
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:307
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:40
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:424
 msgid "Checking"
 msgstr "Corriente"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:288
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:310
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:427
 msgid "Savings"
 msgstr "Ahorros"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:291
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:313
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:42
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:430
 msgid "Business"
@@ -464,11 +464,23 @@ msgstr "Ayuda"
 msgid "About Denaro"
 msgstr "Acerca de Denaro"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:28
+#: org.nickvision.money.gnome/blueprints/main_window.blp:42
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:42
+#: org.nickvision.money.gnome/blueprints/main_window.blp:58
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:240
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
+msgid "Home"
+msgstr "Inicio"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:73
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:246
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
+msgid "Dashboard"
+msgstr "Panel"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:95
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:111
 msgid ""
 "Create or open an account to get started. You may also drag a file into the "
@@ -477,35 +489,35 @@ msgstr ""
 "Cree o abra una cuenta para empezar. También puede arrastrar un archivo a la "
 "aplicación desde el explorador de archivos."
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:54
+#: org.nickvision.money.gnome/blueprints/main_window.blp:107
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:398
 msgid "No Recent Accounts"
 msgstr "Sin cuentas recientes"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:74
-#: org.nickvision.money.gnome/blueprints/main_window.blp:92
-#: org.nickvision.money.gnome/blueprints/main_window.blp:110
+#: org.nickvision.money.gnome/blueprints/main_window.blp:127
+#: org.nickvision.money.gnome/blueprints/main_window.blp:145
+#: org.nickvision.money.gnome/blueprints/main_window.blp:163
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Remove"
 msgstr "Eliminar"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:123
+#: org.nickvision.money.gnome/blueprints/main_window.blp:176
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #, fuzzy
 msgid "New"
 msgstr "Nuevo"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:124
+#: org.nickvision.money.gnome/blueprints/main_window.blp:177
 msgid "New Account (Ctrl+N)"
 msgstr "Cuenta nueva (Ctrl+N)"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:132
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:140
+#: org.nickvision.money.gnome/blueprints/main_window.blp:185
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:142
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:83
 msgid "Open"
 msgstr "Abrir"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:133
+#: org.nickvision.money.gnome/blueprints/main_window.blp:186
 msgid "Open Account (Ctrl+O)"
 msgstr "Abrir cuenta (Ctrl+O)"
 
@@ -624,7 +636,7 @@ msgid "Account"
 msgstr "Cuenta"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:272
 msgid "Open Account"
 msgstr "Abrir cuenta"
 
@@ -694,28 +706,28 @@ msgstr ""
 msgid "Quicken Interchange Format (*.qif)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:199
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:201
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 msgid "GitHub Repo"
 msgstr "Repositorio de GitHub"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:252
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:274
 #, fuzzy
 msgid "Nickvision Denaro Account (*.nmoney)"
 msgstr "Cuenta Denaro de Nickvision"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:319
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:341
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:32
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:455
 msgid "Enter password here"
 msgstr "Introduzca aquí la contraseña"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:327
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:349
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:464
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:328
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:350
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:463
 msgid "Unlock"
 msgstr "Desbloquear"
@@ -825,14 +837,6 @@ msgstr "Símbolo de la moneda (no válido)"
 msgid "Search"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:69
-msgid "Home"
-msgstr "Inicio"
-
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:70
-msgid "Dashboard"
-msgstr "Panel"
-
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Accounts"
 msgstr "Cuentas"
@@ -874,6 +878,7 @@ msgid "PREVIEW"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:104
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"
@@ -884,6 +889,7 @@ msgid ""
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:108
+#, c++-format
 msgid ""
 "Developers:\n"
 "{}\n"

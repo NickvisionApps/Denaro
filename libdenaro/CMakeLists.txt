@@ -5,6 +5,7 @@ endif()
 include(CTest)
 add_library(libdenaro
     "src/controllers/accountviewcontroller.cpp"
+    "src/controllers/dashboardviewcontroller.cpp"
     "src/controllers/mainwindowcontroller.cpp"
     "src/controllers/newaccountdialogcontroller.cpp"
     "src/controllers/preferencesviewcontroller.cpp"
