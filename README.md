@@ -31,10 +31,10 @@ A C++20 compiler is also required to build Denaro.
 1. Set the `VCPKG_ROOT` environment variable to the path of your vcpkg installation's root directory.
 ### Windows
 1. Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-windows`
-1. Run `vcpkg install boost-date-time libnick matplotplusplus podofo rapidcsv`
+1. Run `vcpkg install boost-date-time gtest libnick matplotplusplus podofo rapidcsv`
 ### Linux
 1. Set the `VCPKG_DEFAULT_TRIPLET` environment variable to `x64-linux`
-1. Run `vcpkg install boost-date-time libnick libxmlpp matplotplusplus podofo rapidcsv`
+1. Run `vcpkg install boost-date-time gtest libnick libxmlpp matplotplusplus podofo rapidcsv`
 
 ## Building
 1. First, clone/download the repo.
