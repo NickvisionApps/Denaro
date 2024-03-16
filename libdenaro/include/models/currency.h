@@ -100,6 +100,18 @@ namespace Nickvision::Money::Shared::Models
          * @return True if valid (check() == CurrencyCheckStatus::Valid), else false 
          */
         operator bool() const;
+        /**
+         * @brief Gets whether or not this currency is same as the compare currency.
+         * @param compare The Currency to compare to
+         * @return True if this Currency == compare Currency 
+         */
+        bool operator==(const Currency& compare) const;
+        /**
+         * @brief Gets whether or not this currency is not equal to the compare currency.
+         * @param compare The Currency to compare to
+         * @return True if this Currency != compare Currency 
+         */
+        bool operator!=(const Currency& compare) const;
 
     private:
         std::string m_symbol;
