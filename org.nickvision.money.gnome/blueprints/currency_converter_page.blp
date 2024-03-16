@@ -46,8 +46,8 @@ Adw.Clamp root {
 
         Adw.EntryRow sourceAmountRow { }
 
-        Adw.EntryRow resultAmountRow {
-          editable: false;
+        Adw.ActionRow resultAmountRow {
+          subtitle-selectable: true;
 
           [suffix]
           Gtk.Button copyResultButton {
@@ -57,6 +57,8 @@ Adw.Clamp root {
 
             styles ["flat"]
           }
+
+          styles ["property"]
         }
       }
     }

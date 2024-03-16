@@ -95,7 +95,7 @@ namespace Nickvision::Money::GNOME::Controls
 
     void CurrencyConverterPage::copyResult()
     {
-        std::string resultText{ gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "resultAmountRow"))) };
+        std::string resultText{ adw_action_row_get_subtitle(ADW_ACTION_ROW(gtk_builder_get_object(m_builder, "resultAmountRow"))) };
         if(!resultText.empty())
         {
             GdkClipboard* clipboard{ gtk_widget_get_clipboard(GTK_WIDGET(gtk_builder_get_object(m_builder, "resultAmountRow"))) };
@@ -107,11 +107,10 @@ namespace Nickvision::Money::GNOME::Controls
     void CurrencyConverterPage::onCurrencyChange()
     {
         std::string sourceText{ gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "sourceAmountRow"))) };
-        std::string resultText{ gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "resultAmountRow"))) };
         gtk_widget_remove_css_class(GTK_WIDGET(gtk_builder_get_object(m_builder, "resultAmountRow")), "error");
         if(sourceText.empty())
         {
-            gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "resultAmountRow")), "");
+            adw_action_row_set_subtitle(ADW_ACTION_ROW(gtk_builder_get_object(m_builder, "resultAmountRow")), "");
         }
         else
         {
@@ -122,7 +121,7 @@ namespace Nickvision::Money::GNOME::Controls
             if (conversion.has_value())
             {
                 std::string resultAmountString{ CurrencyHelpers::toAmountString(conversion->getResultAmount(), CurrencyHelpers::getSystemCurrency(), false, true) };
-                gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "resultAmountRow")), resultAmountString.c_str());
+                adw_action_row_set_subtitle(ADW_ACTION_ROW(gtk_builder_get_object(m_builder, "resultAmountRow")), resultAmountString.c_str());
             }
             else
             {
