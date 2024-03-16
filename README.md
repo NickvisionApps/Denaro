@@ -20,7 +20,7 @@
 # Chat
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
-# Building Manually
+# Building and Installing Manually
 Denaro uses `vcpkg` to manage its dependencies and `cmake` as its build system.
 
 Ensure both `vcpkg` and `cmake` are installed on your system before building.
@@ -42,12 +42,18 @@ A C++20 compiler is also required to build Denaro.
 1. Create a new `build` directory and `cd` into it. 
 ### Windows
 1. From the `build` folder, run `cmake .. -G "Visual Studio 17 2022"`.
+  - To skip building Denaro's test suite, add `-DBUILD_TESTING="OFF"` to the end of the command.
 1. From the `build` folder, run `cmake --build . --config Release`.
 1. After these commands complete, Denaro will be successfully built and its binaries can be found in the `org.nickvision.money.winui/Release` folder of the `build` folder.
 ### Linux
 1. From the `build` folder, run `cmake .. -DCMAKE_BUILD_TYPE=Release`.
+  - To skip building Denaro's test suite, add `-DBUILD_TESTING="OFF"` to the end of the command.
+  - If you plan to install Denaro via CMAKE (supported on Linux only), add `-DCMAKE_INSTALL_PREFIX=PATH_TO_INSTALL_DIR` to the end of the command, replacing `PATH_TO_INSTALL_DIR` with the path of where you'd like Denaro to install to.
 1. From the `build` folder, run `cmake --build .`.
 1. After these commands complete, Denaro will be successfully built and its binaries can be found in the `org.nickvision.money.gnome` folder of the `build` folder.
+
+## Installing (LINUX ONLY)
+1. To install Denaro to the system, from the `build` folder, run `cmake --install .`
 
 # Contributing
 
