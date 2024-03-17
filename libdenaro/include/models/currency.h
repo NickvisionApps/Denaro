@@ -123,4 +123,18 @@ namespace Nickvision::Money::Shared::Models
     };
 }
 
+namespace std
+{
+    template <>
+    struct hash<Nickvision::Money::Shared::Models::Currency>
+    {
+        size_t operator()(const Nickvision::Money::Shared::Models::Currency& currency) const
+        {
+            size_t h1{ hash<string>()(currency.getSymbol()) };
+            size_t h2{ hash<string>()(currency.getCode()) };
+            return h1 ^ (h2 << 1);
+        }
+    };
+}
+
 #endif //CUSTOMCURRENCY_H
