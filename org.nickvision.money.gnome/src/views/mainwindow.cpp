@@ -20,6 +20,13 @@ using namespace Nickvision::Notifications;
 
 namespace Nickvision::Money::GNOME::Views
 {
+    enum Pages
+    {
+        Home = 0,
+        CurrencyConverter = 1,
+        Dashboard = 3
+    };
+
     MainWindow::MainWindow(const std::shared_ptr<MainWindowController>& controller, GtkApplication* app)
         : m_controller{ controller },
         m_app{ app },
@@ -222,22 +229,29 @@ namespace Nickvision::Money::GNOME::Views
     void MainWindow::onNavItemSelected(GtkListBox* box, GtkListBoxRow* row)
     {
         adw_navigation_split_view_set_show_content(ADW_NAVIGATION_SPLIT_VIEW(gtk_builder_get_object(m_builder, "navView")), true);
-        if(row == gtk_list_box_get_row_at_index(box, 0)) //Home
+        if(row == gtk_list_box_get_row_at_index(box, Pages::Home))
         {
-            adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "home");
             adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Home"));
+            adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "home");
         }
-        else if(row == gtk_list_box_get_row_at_index(box, 1)) //Currency Converter
+        else if(row == gtk_list_box_get_row_at_index(box, Pages::CurrencyConverter))
         {
+            adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Currency Converter"));
             adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "custom");
             adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), GTK_WIDGET(m_currencyConverterPage.gobj()));
-            adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Currency Converter"));
         }
-        else if(row == gtk_list_box_get_row_at_index(box, 3)) //Dashboard
+        else if(row == gtk_list_box_get_row_at_index(box, Pages::Dashboard))
         {
-            adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "custom");
-            adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), nullptr);
             adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Dashboard"));
+            if(m_controller->hasOpenAccounts())
+            {
+                adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "custom");
+                adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), nullptr);
+            }
+            else
+            {
+                adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "noAccounts");
+            }
         }
         else //Account
         {

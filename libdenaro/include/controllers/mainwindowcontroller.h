@@ -147,6 +147,11 @@ namespace Nickvision::Money::Shared::Controllers
          */
         bool isAccountPasswordProtected(const std::filesystem::path& path) const;
         /**
+         * @brief Gets whether or not the application has any open accounts.
+         * @return True if there are open accounts, else false
+         */
+        bool hasOpenAccounts() const;
+        /**
          * @brief Creates a new account.
          * @brief This method will invoke the AccountAdded event if the account is successfully created.
          * @param newAccountDialogController The NewAccountDialogController for the new account

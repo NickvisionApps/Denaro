@@ -232,6 +232,16 @@ Adw.ApplicationWindow root {
             }
 
             Adw.ViewStackPage {
+              name: "noAccounts";
+              child: Adw.StatusPage {
+                icon-name: "wallet2-symbolic";
+                title: _("No Accounts Open");
+
+                styles ["compact"]
+              };
+            }
+
+            Adw.ViewStackPage {
               name: "custom";
               child: Adw.Bin customBin {
 

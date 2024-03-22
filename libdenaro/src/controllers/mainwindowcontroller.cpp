@@ -256,6 +256,11 @@ namespace Nickvision::Money::Shared::Controllers
         return a.isEncrypted();
     }
 
+    bool MainWindowController::hasOpenAccounts() const
+    {
+        return !m_accountViewControllers.empty();
+    }
+
     void MainWindowController::newAccount(const std::shared_ptr<NewAccountDialogController>& newAccountDialogController)
     {
         if(std::filesystem::exists(newAccountDialogController->getFilePath()))
