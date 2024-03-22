@@ -9,7 +9,7 @@ namespace Nickvision::Money::GNOME::Views
     PreferencesDialog::PreferencesDialog(const std::shared_ptr<PreferencesViewController>& controller)
         : m_controller{ controller },
         m_builder{ BuilderHelpers::fromBlueprint("preferences_dialog") },
-        m_dialog{ ADW_PREFERENCES_WINDOW(gtk_builder_get_object(m_builder, "root")) }
+        m_dialog{ ADW_PREFERENCES_DIALOG(gtk_builder_get_object(m_builder, "root")) }
     {
         //Build UI
         gtk_color_dialog_button_set_dialog(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "transactionColorButton")), gtk_color_dialog_new());
