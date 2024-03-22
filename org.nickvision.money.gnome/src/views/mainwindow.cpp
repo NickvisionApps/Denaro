@@ -248,6 +248,7 @@ namespace Nickvision::Money::GNOME::Views
     void MainWindow::onAccountAdded(const ParamEventArgs<std::shared_ptr<AccountViewController>>& args)
     {
         loadRecentAccounts();
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "navAccountsLabel")), true);
     }
 
     void MainWindow::newAccount()

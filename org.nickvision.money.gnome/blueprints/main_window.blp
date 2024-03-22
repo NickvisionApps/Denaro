@@ -40,11 +40,18 @@ Adw.ApplicationWindow root {
           }
         }
 
-        content: Gtk.ListBox listNavItems {
-          Gtk.ListBoxRow {
-            child: Gtk.Box {
+        content: Gtk.ScrolledWindow {
+          hscrollbar-policy: never;
+          vscrollbar-policy: automatic;
+
+          Gtk.ListBox listNavItems {
+            Gtk.Box {
+              margin-start: 6;
+              margin-top: 12;
+              margin-end: 6;
+              margin-bottom: 12;
               orientation: horizontal;
-              spacing: 6;
+              spacing: 12;
 
               Gtk.Image {
                 icon-name: "user-home-symbolic";
@@ -53,13 +60,15 @@ Adw.ApplicationWindow root {
               Gtk.Label {
                 label: _("Home");
               }
-            };
-          }
+            }
 
-          Gtk.ListBoxRow {
-            child: Gtk.Box {
+            Gtk.Box {
+              margin-start: 6;
+              margin-top: 12;
+              margin-end: 6;
+              margin-bottom: 12;
               orientation: horizontal;
-              spacing: 6;
+              spacing: 12;
 
               Gtk.Image {
                 icon-name: "bank-symbolic";
@@ -68,13 +77,15 @@ Adw.ApplicationWindow root {
               Gtk.Label {
                 label: _("Currency Converter");
               }
-            };
-          }
+            }
 
-          Gtk.ListBoxRow {
-            child: Gtk.Box {
+            Gtk.Box {
+              margin-start: 6;
+              margin-top: 12;
+              margin-end: 6;
+              margin-bottom: 12;
               orientation: horizontal;
-              spacing: 6;
+              spacing: 12;
 
               Gtk.Image {
                 icon-name: "shell-overview-symbolic";
@@ -83,10 +94,23 @@ Adw.ApplicationWindow root {
               Gtk.Label {
                 label: _("Dashboard");
               }
-            };
-          }
+            }
 
-          styles ["navigation-sidebar"]
+            Gtk.ListBoxRow {
+              selectable: false;
+              activatable: false;
+
+              Gtk.Label navAccountsLabel {
+                halign: start;
+                visible: false;
+                label: _("Accounts");
+
+                styles ["heading"]
+              }
+            }
+
+            styles ["navigation-sidebar"]
+          }
         };
       };
     };
