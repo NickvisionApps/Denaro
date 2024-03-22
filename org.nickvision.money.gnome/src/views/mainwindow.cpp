@@ -233,7 +233,7 @@ namespace Nickvision::Money::GNOME::Views
             adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), GTK_WIDGET(m_currencyConverterPage.gobj()));
             adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Currency Converter"));
         }
-        else if(row == gtk_list_box_get_row_at_index(box, 2)) //Dashboard
+        else if(row == gtk_list_box_get_row_at_index(box, 3)) //Dashboard
         {
             adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "custom");
             adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), nullptr);
@@ -248,7 +248,6 @@ namespace Nickvision::Money::GNOME::Views
     void MainWindow::onAccountAdded(const ParamEventArgs<std::shared_ptr<AccountViewController>>& args)
     {
         loadRecentAccounts();
-        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "navAccountsLabel")), true);
     }
 
     void MainWindow::newAccount()

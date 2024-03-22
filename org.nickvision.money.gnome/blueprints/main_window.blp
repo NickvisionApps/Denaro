@@ -79,6 +79,18 @@ Adw.ApplicationWindow root {
               }
             }
 
+            Gtk.ListBoxRow {
+              selectable: false;
+              activatable: false;
+
+              Gtk.Label navAccountsLabel {
+                halign: start;
+                label: _("Accounts");
+
+                styles ["heading"]
+              }
+            }
+
             Gtk.Box {
               margin-start: 6;
               margin-top: 12;
@@ -93,19 +105,6 @@ Adw.ApplicationWindow root {
 
               Gtk.Label {
                 label: _("Dashboard");
-              }
-            }
-
-            Gtk.ListBoxRow {
-              selectable: false;
-              activatable: false;
-
-              Gtk.Label navAccountsLabel {
-                halign: start;
-                visible: false;
-                label: _("Accounts");
-
-                styles ["heading"]
               }
             }
 
