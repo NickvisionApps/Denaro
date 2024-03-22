@@ -1,14 +1,10 @@
 using Gtk 4.0;
 using Adw 1;
 
-Adw.Window root {
-  height-request: 440;
-  width-request: 320;
-  default-width: 460;
-  modal: true;
-  resizable: true;
+Adw.Dialog root {
+  follows-content-size: true;
 
-  content: Adw.ToolbarView {
+  child: Adw.ToolbarView {
     [top]
     Adw.HeaderBar {
       title-widget: Adw.CarouselIndicatorDots {
@@ -23,314 +19,303 @@ Adw.Window root {
       }
     }
 
-    Gtk.WindowHandle {
-      vexpand: true;
+    Adw.ToastOverlay toastOverlay {
+      Adw.Carousel carousel {
+        vexpand: true;
+        hexpand: true;
+        allow-scroll-wheel: false;
+        allow-mouse-drag: false;
+        allow-long-swipes: false;
 
-      Adw.ToastOverlay toastOverlay {
-        Adw.Carousel carousel {
+        Adw.StatusPage pageStart {
           vexpand: true;
           hexpand: true;
-          allow-scroll-wheel: false;
-          allow-mouse-drag: false;
-          allow-long-swipes: false;
+          icon-name: "org.nickvision.money-symbolic";
+          title: _("New Account");
+          description: _("Use this wizard to get the most out of your new account");
 
-          Adw.StatusPage pageStart {
-            vexpand: true;
-            hexpand: true;
-            icon-name: "org.nickvision.money-symbolic";
-            title: _("New Account");
-            description: _("Use this wizard to get the most out of your new account");
+          child: Gtk.Button startButton {
+            halign: center;
+            valign: center;
+            label: _("Let's Start");
 
-            child: Gtk.Button startButton {
-              halign: center;
-              valign: center;
-              label: _("Let's Start");
+            styles ["pill", "suggested-action"]
+          };
+        }
 
-              styles ["pill", "suggested-action"]
-            };
+        Gtk.Box pageStorage {
+          vexpand: true;
+          hexpand: true;
+          orientation: vertical;
+          spacing: 24;
+          margin-top: 24;
+          margin-start: 24;
+          margin-end: 24;
+          margin-bottom: 24;
+
+          Gtk.Label {
+            label: _("Storage Location");
+  
+            styles ["title-2"]
           }
 
-          Gtk.Box pageStorage {
+          Adw.PreferencesGroup {
             vexpand: true;
-            hexpand: true;
-            orientation: vertical;
-            spacing: 24;
-            margin-top: 24;
-            margin-start: 24;
-            margin-end: 24;
-            margin-bottom: 24;
 
-            Gtk.Label {
-              label: _("Storage Location");
-    
-              styles ["title-2"]
+            Adw.EntryRow accountNameRow {
+              title: _("Account Name");
             }
 
-            Adw.PreferencesGroup {
-              vexpand: true;
+            Adw.PasswordEntryRow accountPasswordRow {
+              title: _("Account Password");
+            }
 
-              Adw.EntryRow accountNameRow {
-                title: _("Account Name");
+            Adw.ActionRow accountFolderRow {
+              title: _("Folder");
+              subtitle-selectable: true;
+
+              [suffix]
+              Gtk.Button selectAccountFolderButton {
+                valign: center;
+                icon-name: "folder-open-symbolic";
+                tooltip-text: _("Select Folder");
+
+                styles ["flat"]
               }
 
-              Adw.PasswordEntryRow accountPasswordRow {
-                title: _("Account Password");
+              styles ["property"]
+            }
+
+            Adw.SwitchRow accountOverwriteRow {
+              title: _("Overwrite Existing Accounts");
+            }
+          }
+
+          Gtk.Button storagePageNextButton {
+            halign: center;
+            valign: center;
+            margin-bottom: 12;
+            sensitive: false;
+            label: _("Next");
+
+            styles ["pill", "suggested-action"] 
+          }
+        }
+
+        Gtk.Box pageAccountOptions {
+          vexpand: true;
+          hexpand: true;
+          orientation: vertical;
+          spacing: 24;
+          margin-top: 24;
+          margin-start: 24;
+          margin-end: 24;
+          margin-bottom: 24;
+
+          Gtk.Label {
+            label: _("Account Options");
+  
+            styles ["title-2"]
+          }
+
+          Adw.PreferencesGroup {
+            vexpand: true;
+
+            Adw.ComboRow accountTypeRow {
+              title: _("Account Type");
+              model: Gtk.StringList {
+                strings [_("Checking"), _("Savings"), _("Business")]
+              };
+            }
+
+            Adw.ComboRow transactionTypeRow {
+              title: _("Default Transaction Type");
+              model: Gtk.StringList {
+                strings [_("Income"), _("Expense")]
+              };
+            }
+
+            Adw.ComboRow transactionRemindersRow {
+              title: _("Transaction Reminders Threshold");
+              subtitle: _("Determines how far in advanced Denaro should remind users of upcoming transactions in the account.");
+              subtitle-lines: 4;
+              model: Gtk.StringList {
+                strings [_("Never"), _("One Day Before"), _("One Week Before"), _("One Month Before"), _("Two Months Before")]
+              };
+            }
+          }
+
+          Gtk.Button accountOptionsPageNextButton {
+            halign: center;
+            valign: center;
+            margin-bottom: 12;
+            label: _("Next");
+
+            styles ["pill", "suggested-action"] 
+          }
+        }
+
+        Gtk.Box pageCustomCurrency {
+          vexpand: true;
+          hexpand: true;
+          orientation: vertical;
+          spacing: 24;
+          margin-top: 24;
+          margin-start: 24;
+          margin-end: 24;
+          margin-bottom: 24;
+
+          Gtk.Label {
+            label: _("Account Currency");
+  
+            styles ["title-2"]
+          }
+
+          Gtk.Label reportedCurrencyLabel {
+            justify: center;
+            use-markup: true;
+          }
+
+          Adw.PreferencesGroup {
+            vexpand: true;
+
+            Adw.ExpanderRow customCurrencyRow {
+              title: _("Use Custom Currency");
+              show-enable-switch: true;
+              enable-expansion: false;
+
+              Adw.EntryRow customSymbolRow {
+                title: _("Symbol");
               }
 
-              Adw.ActionRow accountFolderRow {
-                title: _("Folder");
-                subtitle-selectable: true;
+              Adw.EntryRow customCodeRow {
+                title: _("Code");
+              }
+
+              Adw.ComboRow customDecimalSeparatorRow {
+                title: _("Decimal Separator");
+                model: Gtk.StringList {
+                  strings [" . ", " , ", _("Custom")]
+                };
 
                 [suffix]
-                Gtk.Button selectAccountFolderButton {
+                Gtk.Entry customDecimalSeparatorEntry {
+                  visible: false;
                   valign: center;
-                  icon-name: "folder-open-symbolic";
-                  tooltip-text: _("Select Folder");
+                  max-length: 1;
+                  max-width-chars: 4;
+                }
+              }
+
+              Adw.ComboRow customGroupSeparatorRow {
+                title: _("Group Separator");
+                model: Gtk.StringList {
+                  strings [" . ", " , ", " ' ", _("None"), _("Custom")]
+                };
+
+                [suffix]
+                Gtk.Entry customGroupSeparatorEntry {
+                  visible: false;
+                  valign: center;
+                  max-length: 1;
+                  max-width-chars: 4;
+                }
+              }
+
+              Adw.ComboRow customDecimalDigitsRow {
+                title: _("Decimal Digits");
+                model: Gtk.StringList {
+                  strings [_("Two"), _("Three"), _("Four"), _("Five"), _("Six")]
+                };
+              }
+
+              Adw.ComboRow customAmountStyleRow {
+                title: _("Amount Display Style");
+                subtitle: _("$ is the currency's symbol.");
+                subtitle-lines: 2;
+                model: Gtk.StringList {
+                  strings ["$100", "100$", "$ 100", "100 $"]
+                };
+              }
+            }
+          }
+
+          Gtk.Button customCurrencyPageNextButton {
+            halign: center;
+            valign: center;
+            margin-bottom: 12;
+            label: _("Next");
+
+            styles ["pill", "suggested-action"] 
+          }
+        }
+
+        Gtk.Box pageImport {
+          vexpand: true;
+          hexpand: true;
+          orientation: vertical;
+          spacing: 24;
+          margin-top: 24;
+          margin-start: 24;
+          margin-end: 24;
+          margin-bottom: 24;
+
+          Gtk.Label {
+            label: _("Import Existing Information");
+
+            styles ["title-2"]
+          }
+
+          Gtk.Label {
+            justify: center;
+            wrap: true;
+            wrap-mode: char;
+            label: _("Upload a supported file to use to import existing information into the new account. Denaro supports CSV, OFX, and QIF files.");
+          }
+
+          Adw.PreferencesGroup {
+            vexpand: true;
+
+            Adw.ActionRow importFileRow {
+              title: _("Import File");
+
+              [suffix]
+              Gtk.Box {
+                orientation: horizontal;
+                spacing: 6;
+
+                Gtk.Button selectImportFileButton {
+                  valign: center;
+                  icon-name: "document-open-symbolic";
+                  tooltip-text: _("Select File");
 
                   styles ["flat"]
                 }
 
-                styles ["property"]
+                Gtk.Button clearImportFileButton {
+                  valign: center;
+                  visible: false;
+                  icon-name: "larger-brush-symbolic";
+                  tooltip-text: _("Clear File");
+
+                  styles ["flat"]
+                }
               }
 
-              Adw.SwitchRow accountOverwriteRow {
-                title: _("Overwrite Existing Accounts");
-              }
-            }
-
-            Gtk.Button storagePageNextButton {
-              halign: center;
-              valign: center;
-              margin-bottom: 12;
-              sensitive: false;
-              label: _("Next");
-
-              styles ["pill", "suggested-action"] 
+              styles ["property"]
             }
           }
 
-          Gtk.Box pageAccountOptions {
-            vexpand: true;
-            hexpand: true;
-            orientation: vertical;
-            spacing: 24;
-            margin-top: 24;
-            margin-start: 24;
-            margin-end: 24;
-            margin-bottom: 24;
+          Gtk.Button importPageCreateButton {
+            halign: center;
+            valign: center;
+            margin-bottom: 12;
+            label: _("Create");
 
-            Gtk.Label {
-              label: _("Account Options");
-    
-              styles ["title-2"]
-            }
-
-            Adw.PreferencesGroup {
-              vexpand: true;
-
-              Adw.ComboRow accountTypeRow {
-                title: _("Account Type");
-                model: Gtk.StringList {
-                  strings [_("Checking"), _("Savings"), _("Business")]
-                };
-              }
-
-              Adw.ComboRow transactionTypeRow {
-                title: _("Default Transaction Type");
-                model: Gtk.StringList {
-                  strings [_("Income"), _("Expense")]
-                };
-              }
-
-              Adw.ComboRow transactionRemindersRow {
-                title: _("Transaction Reminders Threshold");
-                subtitle: _("Determines how far in advanced Denaro should remind users of upcoming transactions in the account.");
-                subtitle-lines: 4;
-                model: Gtk.StringList {
-                  strings [_("Never"), _("One Day Before"), _("One Week Before"), _("One Month Before"), _("Two Months Before")]
-                };
-              }
-            }
-
-            Gtk.Button accountOptionsPageNextButton {
-              halign: center;
-              valign: center;
-              margin-bottom: 12;
-              label: _("Next");
-
-              styles ["pill", "suggested-action"] 
-            }
-          }
-
-          Gtk.Box pageCustomCurrency {
-            vexpand: true;
-            hexpand: true;
-            orientation: vertical;
-            spacing: 24;
-            margin-top: 24;
-            margin-start: 24;
-            margin-end: 24;
-            margin-bottom: 24;
-
-            Gtk.Label {
-              label: _("Account Currency");
-    
-              styles ["title-2"]
-            }
-
-            Gtk.Label reportedCurrencyLabel {
-              justify: center;
-              use-markup: true;
-            }
-
-            Adw.PreferencesGroup {
-              vexpand: true;
-
-              Adw.ExpanderRow customCurrencyRow {
-                title: _("Use Custom Currency");
-                show-enable-switch: true;
-                enable-expansion: false;
-
-                Adw.EntryRow customSymbolRow {
-                  title: _("Symbol");
-                }
-
-                Adw.EntryRow customCodeRow {
-                  title: _("Code");
-                }
-
-                Adw.ComboRow customDecimalSeparatorRow {
-                  title: _("Decimal Separator");
-                  model: Gtk.StringList {
-                    strings [" . ", " , ", _("Custom")]
-                  };
-
-                  [suffix]
-                  Gtk.Entry customDecimalSeparatorEntry {
-                    visible: false;
-                    valign: center;
-                    max-length: 1;
-                    max-width-chars: 4;
-                  }
-                }
-
-                Adw.ComboRow customGroupSeparatorRow {
-                  title: _("Group Separator");
-                  model: Gtk.StringList {
-                    strings [" . ", " , ", " ' ", _("None"), _("Custom")]
-                  };
-
-                  [suffix]
-                  Gtk.Entry customGroupSeparatorEntry {
-                    visible: false;
-                    valign: center;
-                    max-length: 1;
-                    max-width-chars: 4;
-                  }
-                }
-
-                Adw.ComboRow customDecimalDigitsRow {
-                  title: _("Decimal Digits");
-                  model: Gtk.StringList {
-                    strings [_("Two"), _("Three"), _("Four"), _("Five"), _("Six")]
-                  };
-                }
-
-                Adw.ComboRow customAmountStyleRow {
-                  title: _("Amount Display Style");
-                  subtitle: _("$ is the currency's symbol.");
-                  subtitle-lines: 2;
-                  model: Gtk.StringList {
-                    strings ["$100", "100$", "$ 100", "100 $"]
-                  };
-                }
-              }
-            }
-
-            Gtk.Button customCurrencyPageNextButton {
-              halign: center;
-              valign: center;
-              margin-bottom: 12;
-              label: _("Next");
-
-              styles ["pill", "suggested-action"] 
-            }
-          }
-
-          Gtk.Box pageImport {
-            vexpand: true;
-            hexpand: true;
-            orientation: vertical;
-            spacing: 24;
-            margin-top: 24;
-            margin-start: 24;
-            margin-end: 24;
-            margin-bottom: 24;
-
-            Gtk.Label {
-              label: _("Import Existing Information");
-
-              styles ["title-2"]
-            }
-
-            Gtk.Label {
-              justify: center;
-              wrap: true;
-              wrap-mode: char;
-              label: _("Upload a supported file to use to import existing information into the new account. Denaro supports CSV, OFX, and QIF files.");
-            }
-
-            Adw.PreferencesGroup {
-              vexpand: true;
-
-              Adw.ActionRow importFileRow {
-                title: _("Import File");
-
-                [suffix]
-                Gtk.Box {
-                  orientation: horizontal;
-                  spacing: 6;
-
-                  Gtk.Button selectImportFileButton {
-                    valign: center;
-                    icon-name: "document-open-symbolic";
-                    tooltip-text: _("Select File");
-
-                    styles ["flat"]
-                  }
-
-                  Gtk.Button clearImportFileButton {
-                    valign: center;
-                    visible: false;
-                    icon-name: "larger-brush-symbolic";
-                    tooltip-text: _("Clear File");
-
-                    styles ["flat"]
-                  }
-                }
-
-                styles ["property"]
-              }
-            }
-
-            Gtk.Button importPageCreateButton {
-              halign: center;
-              valign: center;
-              margin-bottom: 12;
-              label: _("Create");
-
-              styles ["pill", "suggested-action"] 
-            }
+            styles ["pill", "suggested-action"] 
           }
         }
       }
     }
   };
-
-  Gtk.ShortcutController {
-    Gtk.Shortcut {
-      trigger: "Escape";
-      action: "action(window.close)";
-    }
-  }
 }

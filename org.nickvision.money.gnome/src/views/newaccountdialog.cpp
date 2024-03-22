@@ -3,6 +3,7 @@
 #include "helpers/builder.h"
 #include "helpers/currencyhelpers.h"
 
+using namespace Nickvision::Events;
 using namespace Nickvision::Money::Shared;
 using namespace Nickvision::Money::Shared::Controllers;
 using namespace Nickvision::Money::Shared::Models;
@@ -13,8 +14,7 @@ namespace Nickvision::Money::GNOME::Views
         : m_controller{ controller },
         m_builder{ BuilderHelpers::fromBlueprint("new_account_dialog") },
         m_parent{ parent },
-        m_dialog{ ADW_WINDOW(gtk_builder_get_object(m_builder, "root")) },
-        m_finished{ false },
+        m_dialog{ ADW_DIALOG(gtk_builder_get_object(m_builder, "root")) },
         m_currentPageNumber{ 0 }
     {
         gtk_window_set_transient_for(GTK_WINDOW(m_dialog), m_parent);
@@ -69,6 +69,7 @@ namespace Nickvision::Money::GNOME::Views
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customDecimalDigitsRow")), static_cast<unsigned int>(m_controller->getMetadata().getCustomCurrency().getDecimalDigits() - 2));
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customAmountStyleRow")), static_cast<unsigned int>(m_controller->getMetadata().getCustomCurrency().getAmountStyle()));
         //Signals
+        g_signal_connect(m_dialog, "closed", G_CALLBACK(+[](AdwDialog*, gpointer data){ reinterpret_cast<NewAccountDialog*>(data)->onClosed(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "backButton"), "clicked", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<NewAccountDialog*>(data)->goBack(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "startButton"), "clicked", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<NewAccountDialog*>(data)->goForward(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "accountNameRow"), "changed", G_CALLBACK(+[](GtkEditable*, gpointer data){ reinterpret_cast<NewAccountDialog*>(data)->onAccountNameChanged(); }), this);
@@ -91,24 +92,30 @@ namespace Nickvision::Money::GNOME::Views
         g_signal_connect(gtk_builder_get_object(m_builder, "importPageCreateButton"), "clicked", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<NewAccountDialog*>(data)->finish(); }), this);
     }
 
+    NewAccountDialog* NewAccountDialog::create(const std::shared_ptr<NewAccountDialogController>& controller, GtkWindow* parent)
+    {
+        return new NewAccountDialog(controller, parent);
+    }
+
     NewAccountDialog::~NewAccountDialog()
     {
-        gtk_window_destroy(GTK_WINDOW(m_dialog));
+        adw_dialog_force_close(m_dialog);
         g_object_unref(m_builder);
     }
 
-    bool NewAccountDialog::run()
+    Event<ParamEventArgs<std::shared_ptr<NewAccountDialogController>>>& NewAccountDialog::finished()
     {
-        gtk_window_present(GTK_WINDOW(m_dialog));
-        while(gtk_widget_is_visible(GTK_WIDGET(m_dialog)))
-        {
-            g_main_context_iteration(g_main_context_default(), false);
-        }
-        m_controller->setPassword(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "accountPasswordRow"))));
-        m_controller->setAccountType(static_cast<AccountType>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "accountTypeRow")))));
-        m_controller->setDefaultTransactionType(static_cast<TransactionType>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionTypeRow")))));
-        m_controller->setTransactionRemindersThreshold(static_cast<RemindersThreshold>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionRemindersRow")))));
         return m_finished;
+    }
+
+    void NewAccountDialog::present() const
+    {
+        adw_dialog_present(m_dialog, GTK_WIDGET(m_parent));
+    }
+
+    void NewAccountDialog::onClosed()
+    {
+        delete this;
     }
 
     void NewAccountDialog::goBack()
@@ -308,7 +315,11 @@ namespace Nickvision::Money::GNOME::Views
 
     void NewAccountDialog::finish()
     {
-        m_finished = true;
-        gtk_widget_set_visible(GTK_WIDGET(m_dialog), false);
+        m_controller->setPassword(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "accountPasswordRow"))));
+        m_controller->setAccountType(static_cast<AccountType>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "accountTypeRow")))));
+        m_controller->setDefaultTransactionType(static_cast<TransactionType>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionTypeRow")))));
+        m_controller->setTransactionRemindersThreshold(static_cast<RemindersThreshold>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionRemindersRow")))));
+        m_finished.invoke(m_controller);
+        adw_dialog_close(m_dialog);
     }
 }
