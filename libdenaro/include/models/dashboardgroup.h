@@ -1,7 +1,6 @@
 #ifndef DASHBOARDGROUP_H
 #define DASHBOARDGROUP_H
 
-
 #include <string>
 #include <unordered_map>
 #include <utility>
