@@ -16,10 +16,10 @@ namespace Nickvision::Money::Shared::Models
     {
         if(!m_data.contains(currency))
         {
-            m_data.emplace(currency, std::make_pair(amount, currency.getSymbol() + " " + std::to_string(amount) + " from " + accountName));
+            m_data.emplace(currency, std::make_pair(amount, std::vformat("{} from {}", std::make_format_args(Nickvision::Money::Shared::CurrencyHelpers::toAmountString(amount, currency), accountName))));
             return;
         }
         m_data.at(currency).first += amount;
-        m_data.at(currency).second = "\n" + currency.getSymbol() + " " + std::to_string(m_data.at(currency).first) + " from " + accountName;
+        m_data.at(currency).second += std::vformat("\n{} from {}", std::make_format_args(Nickvision::Money::Shared::CurrencyHelpers::toAmountString(amount, currency), accountName));
     }
 }
