@@ -1,10 +1,13 @@
 #ifndef DASHBOARDGROUP_H
 #define DASHBOARDGROUP_H
 
+#include <format>
 #include <string>
+#include <libnick/localization/gettext.h>
 #include <unordered_map>
 #include <utility>
 #include "currency.h"
+#include "helpers/currencyhelpers.h"
 
 namespace Nickvision::Money::Shared::Models
 {
