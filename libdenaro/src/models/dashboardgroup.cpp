@@ -1,3 +1,6 @@
+#include <format>
+#include <libnick/localization/gettext.h>
+#include "helpers/currencyhelpers.h"
 #include "models/dashboardgroup.h"
 
 namespace Nickvision::Money::Shared::Models
@@ -20,6 +23,6 @@ namespace Nickvision::Money::Shared::Models
             return;
         }
         m_data.at(currency).first += amount;
-        m_data.at(currency).second += std::vformat("\n{} from {}", std::make_format_args(Nickvision::Money::Shared::CurrencyHelpers::toAmountString(amount, currency), accountName));
+        m_data.at(currency).second += "\n" + std::vformat("{} from {}", std::make_format_args(Nickvision::Money::Shared::CurrencyHelpers::toAmountString(amount, currency), accountName));
     }
 }
