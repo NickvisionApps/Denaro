@@ -22,17 +22,17 @@ namespace Nickvision::Money::Shared::Models
          * @brief Gets the data of the dashboard group.
          * @return A map of currency and amount, description pairs
          */
-        const std::unordered_map<Nickvision::Money::Shared::Models::Currency, std::pair<double, std::string>>& getData() const;
+        const std::unordered_map<Currency, std::pair<double, std::string>>& getData() const;
         /**
          * @brief Adds an amount to the dashboard group.
-         * @param currency The currency of the amount
          * @param amount The amount to add
+         * @param currency The currency of the amount
          * @param accountName The name of the account the amount is from
          */
-        void addAmount(const Nickvision::Money::Shared::Models::Currency& currency, double amount, const std::string& accountName);
+        void addAmount(double amount, const Currency& currency, const std::string& accountName);
         
     private:
-        std::unordered_map<Nickvision::Money::Shared::Models::Currency, std::pair<double, std::string>> m_data;
+        std::unordered_map<Currency, std::pair<double, std::string>> m_data;
     };
 }
 #endif //DASHBOARDGROUP_H
