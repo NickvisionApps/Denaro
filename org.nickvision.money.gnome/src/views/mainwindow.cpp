@@ -20,6 +20,13 @@ using namespace Nickvision::Notifications;
 
 namespace Nickvision::Money::GNOME::Views
 {
+    enum Pages
+    {
+        Home = 0,
+        CurrencyConverter = 1,
+        Dashboard = 3
+    };
+
     MainWindow::MainWindow(const std::shared_ptr<MainWindowController>& controller, GtkApplication* app)
         : m_controller{ controller },
         m_app{ app },
@@ -148,8 +155,8 @@ namespace Nickvision::Money::GNOME::Views
 
     void MainWindow::preferences()
     {
-        PreferencesDialog preferences{ m_controller->createPreferencesViewController(), GTK_WINDOW(m_window) };
-        preferences.run();
+        PreferencesDialog* dialog{ PreferencesDialog::create(m_controller->createPreferencesViewController()) };
+        dialog->present(GTK_WINDOW(m_window));
     }
 
     void MainWindow::keyboardShortcuts()
@@ -173,25 +180,23 @@ namespace Nickvision::Money::GNOME::Views
         std::string extraDebug;
         extraDebug += "GTK " + std::to_string(gtk_get_major_version()) + "." + std::to_string(gtk_get_minor_version()) + "." + std::to_string(gtk_get_micro_version()) + "\n";
         extraDebug += "libadwaita " + std::to_string(adw_get_major_version()) + "." + std::to_string(adw_get_minor_version()) + "." + std::to_string(adw_get_micro_version());
-        AdwAboutWindow* dialog{ ADW_ABOUT_WINDOW(adw_about_window_new()) };
-        gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(m_window));
-        gtk_window_set_icon_name(GTK_WINDOW(dialog), m_controller->getAppInfo().getId().c_str());
-        adw_about_window_set_application_name(dialog, m_controller->getAppInfo().getShortName().c_str());
-        adw_about_window_set_application_icon(dialog, std::string(m_controller->getAppInfo().getId() + (m_controller->isDevVersion() ? "-devel" : "")).c_str());
-        adw_about_window_set_developer_name(dialog, "Nickvision");
-        adw_about_window_set_version(dialog, m_controller->getAppInfo().getVersion().toString().c_str());
-        adw_about_window_set_release_notes(dialog, m_controller->getAppInfo().getHtmlChangelog().c_str());
-        adw_about_window_set_debug_info(dialog, m_controller->getDebugInformation(extraDebug).c_str());
-        adw_about_window_set_comments(dialog, m_controller->getAppInfo().getDescription().c_str());
-        adw_about_window_set_license_type(dialog, GTK_LICENSE_GPL_3_0);
-        adw_about_window_set_copyright(dialog, "© Nickvision 2021-2024");
-        adw_about_window_set_website(dialog, "https://nickvision.org/");
-        adw_about_window_set_issue_url(dialog, m_controller->getAppInfo().getIssueTracker().c_str());
-        adw_about_window_set_support_url(dialog, m_controller->getAppInfo().getSupportUrl().c_str());
-        adw_about_window_add_link(dialog, _("GitHub Repo"), m_controller->getAppInfo().getSourceRepo().c_str());
+        AdwAboutDialog* dialog{ ADW_ABOUT_DIALOG(adw_about_dialog_new()) };
+        adw_about_dialog_set_application_name(dialog, m_controller->getAppInfo().getShortName().c_str());
+        adw_about_dialog_set_application_icon(dialog, std::string(m_controller->getAppInfo().getId() + (m_controller->isDevVersion() ? "-devel" : "")).c_str());
+        adw_about_dialog_set_developer_name(dialog, "Nickvision");
+        adw_about_dialog_set_version(dialog, m_controller->getAppInfo().getVersion().toString().c_str());
+        adw_about_dialog_set_release_notes(dialog, m_controller->getAppInfo().getHtmlChangelog().c_str());
+        adw_about_dialog_set_debug_info(dialog, m_controller->getDebugInformation(extraDebug).c_str());
+        adw_about_dialog_set_comments(dialog, m_controller->getAppInfo().getDescription().c_str());
+        adw_about_dialog_set_license_type(dialog, GTK_LICENSE_GPL_3_0);
+        adw_about_dialog_set_copyright(dialog, "© Nickvision 2021-2024");
+        adw_about_dialog_set_website(dialog, "https://nickvision.org/");
+        adw_about_dialog_set_issue_url(dialog, m_controller->getAppInfo().getIssueTracker().c_str());
+        adw_about_dialog_set_support_url(dialog, m_controller->getAppInfo().getSupportUrl().c_str());
+        adw_about_dialog_add_link(dialog, _("GitHub Repo"), m_controller->getAppInfo().getSourceRepo().c_str());
         for(const std::pair<std::string, std::string>& pair : m_controller->getAppInfo().getExtraLinks())
         {
-            adw_about_window_add_link(dialog, pair.first.c_str(), pair.second.c_str());
+            adw_about_dialog_add_link(dialog, pair.first.c_str(), pair.second.c_str());
         }
         std::vector<const char*> urls;
         std::vector<std::string> developers{ AppInfo::convertUrlMapToVector(m_controller->getAppInfo().getDevelopers()) };
@@ -200,7 +205,7 @@ namespace Nickvision::Money::GNOME::Views
             urls.push_back(developer.c_str());
         }
         urls.push_back(nullptr);
-        adw_about_window_set_developers(dialog, &urls[0]);
+        adw_about_dialog_set_developers(dialog, &urls[0]);
         urls.clear();
         std::vector<std::string> designers{ AppInfo::convertUrlMapToVector(m_controller->getAppInfo().getDesigners()) };
         for(const std::string& designer : designers)
@@ -208,7 +213,7 @@ namespace Nickvision::Money::GNOME::Views
             urls.push_back(designer.c_str());
         }
         urls.push_back(nullptr);
-        adw_about_window_set_designers(dialog, &urls[0]);
+        adw_about_dialog_set_designers(dialog, &urls[0]);
         urls.clear();
         std::vector<std::string> artists{ AppInfo::convertUrlMapToVector(m_controller->getAppInfo().getArtists()) };
         for(const std::string& artist : artists)
@@ -216,30 +221,37 @@ namespace Nickvision::Money::GNOME::Views
             urls.push_back(artist.c_str());
         }
         urls.push_back(nullptr);
-        adw_about_window_set_artists(dialog, &urls[0]);
-        adw_about_window_set_translator_credits(dialog, m_controller->getAppInfo().getTranslatorCredits().c_str());
-        gtk_window_present(GTK_WINDOW(dialog));
+        adw_about_dialog_set_artists(dialog, &urls[0]);
+        adw_about_dialog_set_translator_credits(dialog, m_controller->getAppInfo().getTranslatorCredits().c_str());
+        adw_dialog_present(ADW_DIALOG(dialog), GTK_WIDGET(m_window));
     }
 
     void MainWindow::onNavItemSelected(GtkListBox* box, GtkListBoxRow* row)
     {
         adw_navigation_split_view_set_show_content(ADW_NAVIGATION_SPLIT_VIEW(gtk_builder_get_object(m_builder, "navView")), true);
-        if(row == gtk_list_box_get_row_at_index(box, 0)) //Home
+        if(row == gtk_list_box_get_row_at_index(box, Pages::Home))
         {
-            adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "home");
             adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Home"));
+            adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "home");
         }
-        else if(row == gtk_list_box_get_row_at_index(box, 1)) //Currency Converter
+        else if(row == gtk_list_box_get_row_at_index(box, Pages::CurrencyConverter))
         {
+            adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Currency Converter"));
             adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "custom");
             adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), GTK_WIDGET(m_currencyConverterPage.gobj()));
-            adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Currency Converter"));
         }
-        else if(row == gtk_list_box_get_row_at_index(box, 2)) //Dashboard
+        else if(row == gtk_list_box_get_row_at_index(box, Pages::Dashboard))
         {
-            adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "custom");
-            adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), nullptr);
             adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Dashboard"));
+            if(m_controller->hasOpenAccounts())
+            {
+                adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "custom");
+                adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), nullptr);
+            }
+            else
+            {
+                adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "noAccounts");
+            }
         }
         else //Account
         {
@@ -254,12 +266,12 @@ namespace Nickvision::Money::GNOME::Views
 
     void MainWindow::newAccount()
     {
-        std::shared_ptr<NewAccountDialogController> controller{ m_controller->createNewAccountDialogController() };
-        NewAccountDialog newAccountDialog{ controller, GTK_WINDOW(m_window) };
-        if(newAccountDialog.run())
+        NewAccountDialog* newAccountDialog{ NewAccountDialog::create(m_controller->createNewAccountDialogController(), GTK_WINDOW(m_window)) };
+        newAccountDialog->finished() += [&](const ParamEventArgs<std::shared_ptr<NewAccountDialogController>>& args)
         {
-            m_controller->newAccount(controller);
-        }
+            m_controller->newAccount(args.getParam());
+        };
+        newAccountDialog->present();
     }
 
     void MainWindow::openAccount()

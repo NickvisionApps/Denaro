@@ -1,4 +1,5 @@
 libdenaro/src/models/account.cpp
+libdenaro/src/models/dashboardgroup.cpp
 libdenaro/src/controllers/mainwindowcontroller.cpp
 org.nickvision.money.gnome/blueprints/currency_converter_page.blp
 org.nickvision.money.gnome/blueprints/new_account_dialog.blp

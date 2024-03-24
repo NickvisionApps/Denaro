@@ -18,6 +18,7 @@
 #include <libnick/taskbar/taskbaritem.h>
 #include <libnick/update/updater.h>
 #include "controllers/accountviewcontroller.h"
+#include "controllers/dashboardviewcontroller.h"
 #include "controllers/newaccountdialogcontroller.h"
 #include "controllers/preferencesviewcontroller.h"
 #include "models/accounttype.h"
@@ -100,6 +101,11 @@ namespace Nickvision::Money::Shared::Controllers
          */
         std::shared_ptr<NewAccountDialogController> createNewAccountDialogController() const;
         /**
+         * @brief Gets a DashboardViewController.
+         * @return The DashboardViewController
+         */
+        std::shared_ptr<DashboardViewController> createDashboardViewController() const;
+        /**
          * @brief Gets a AccountViewController.
          * @param path The path of the account
          * @return The AccountViewController for the account 
@@ -140,6 +146,11 @@ namespace Nickvision::Money::Shared::Controllers
          * @param path The path of the account file 
          */
         bool isAccountPasswordProtected(const std::filesystem::path& path) const;
+        /**
+         * @brief Gets whether or not the application has any open accounts.
+         * @return True if there are open accounts, else false
+         */
+        bool hasOpenAccounts() const;
         /**
          * @brief Creates a new account.
          * @brief This method will invoke the AccountAdded event if the account is successfully created.

@@ -135,4 +135,14 @@ namespace Nickvision::Money::Shared::Models
     {
         return validate() == CurrencyCheckStatus::Valid;
     }
+
+    bool Currency::operator==(const Currency& compare) const
+    {
+        return m_symbol == compare.m_symbol && m_code == compare.m_code;
+    }
+
+    bool Currency::operator!=(const Currency& compare) const
+    {
+        return !operator==(compare);
+    }
 }

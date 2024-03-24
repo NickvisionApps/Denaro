@@ -1,12 +1,10 @@
 using Gtk 4.0;
 using Adw 1;
 
-Adw.PreferencesWindow root {
-  default-width: 600;
-  default-height: 500;
-  width-request: 360;
-  modal: true;
-  destroy-with-parent: false;
+Adw.PreferencesDialog root {
+  content-width: 600;
+  content-height: 500;
+  search-enabled: true;
   title: _("Preferences");
 
   Adw.PreferencesPage {

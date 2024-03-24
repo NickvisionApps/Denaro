@@ -100,6 +100,18 @@ namespace Nickvision::Money::Shared::Models
          * @return True if valid (check() == CurrencyCheckStatus::Valid), else false 
          */
         operator bool() const;
+        /**
+         * @brief Gets whether or not this currency is same as the compare currency.
+         * @param compare The Currency to compare to
+         * @return True if this Currency == compare Currency 
+         */
+        bool operator==(const Currency& compare) const;
+        /**
+         * @brief Gets whether or not this currency is not equal to the compare currency.
+         * @param compare The Currency to compare to
+         * @return True if this Currency != compare Currency 
+         */
+        bool operator!=(const Currency& compare) const;
 
     private:
         std::string m_symbol;
@@ -108,6 +120,20 @@ namespace Nickvision::Money::Shared::Models
         char m_groupSeparator;
         int m_decimalDigits;
         AmountStyle m_amountStyle;
+    };
+}
+
+namespace std
+{
+    template <>
+    struct hash<Nickvision::Money::Shared::Models::Currency>
+    {
+        size_t operator()(const Nickvision::Money::Shared::Models::Currency& currency) const
+        {
+            size_t h1{ hash<string>()(currency.getSymbol()) };
+            size_t h2{ hash<string>()(currency.getCode()) };
+            return h1 ^ (h2 << 1);
+        }
     };
 }
 

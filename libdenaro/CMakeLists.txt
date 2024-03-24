@@ -18,6 +18,7 @@ add_library(libdenaro
     "src/models/currency.cpp"
     "src/models/currencyconversion.cpp"
     "src/models/currencyconversionservice.cpp"
+    "src/models/dashboardgroup.cpp"
     "src/models/group.cpp"
     "src/models/importresult.cpp"
     "src/models/receipt.cpp"

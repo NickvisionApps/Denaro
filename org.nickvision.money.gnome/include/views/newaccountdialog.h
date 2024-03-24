@@ -3,6 +3,8 @@
 
 #include <memory>
 #include <adwaita.h>
+#include <libnick/events/event.h>
+#include <libnick/events/parameventargs.h>
 #include "controllers/newaccountdialogcontroller.h"
 
 namespace Nickvision::Money::GNOME::Views
@@ -14,22 +16,38 @@ namespace Nickvision::Money::GNOME::Views
     {
     public:
         /**
+         * @brief Creates a new NewAccountDialog.
+         * @param controller The NewAccountDialogController
+         * @param parent The GtkWindow object of the parent window
+         * @return NewAccountDialog* (The caller is NOT responsible for deleting the returned pointer)
+         */
+        static NewAccountDialog* create(const std::shared_ptr<Shared::Controllers::NewAccountDialogController>& controller, GtkWindow* parent);
+        /**
+         * @brief Destructs a NewAccountDialog. 
+         */
+        ~NewAccountDialog();
+        /**
+         * @brief Gets the event when the dialog is finished (i.e. the user has created the account)
+         * @return The finished event
+         */
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::shared_ptr<Shared::Controllers::NewAccountDialogController>>>& finished();
+        /**
+         * @brief Presents the NewAccountDialog.
+         * @param parent The GtkWindow object of the parent window
+         */
+        void present() const;
+
+    private:
+        /**
          * @brief Constructs a NewAccountDialog.
          * @param controller NewAccountDialogController
          * @param parent The GtkWindow object of the parent window
          */
         NewAccountDialog(const std::shared_ptr<Shared::Controllers::NewAccountDialogController>& controller, GtkWindow* parent);
         /**
-         * @brief Destructs a NewAccountDialog. 
+         * @brief Handles when the dialog is closed. 
          */
-        ~NewAccountDialog();
-        /**
-         * @brief Shows the NewAccountDialog and waits for it to close.
-         * @return True if the dialog was finished, else false if canceled by the user
-         */
-        bool run();
-
-    private:
+        void onClosed();
         /**
          * @brief Navigates to the previous page.
          */
@@ -67,10 +85,10 @@ namespace Nickvision::Money::GNOME::Views
          */
         void finish();
         std::shared_ptr<Shared::Controllers::NewAccountDialogController> m_controller;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::shared_ptr<Shared::Controllers::NewAccountDialogController>>> m_finished;
         GtkBuilder* m_builder;
         GtkWindow* m_parent;
-        AdwWindow* m_dialog;
-        bool m_finished;
+        AdwDialog* m_dialog;
         int m_currentPageNumber;
     };
 }

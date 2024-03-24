@@ -161,6 +161,16 @@ namespace Nickvision::Money::Shared::Controllers
     {
         return std::make_shared<NewAccountDialogController>();
     }
+    
+    std::shared_ptr<DashboardViewController> MainWindowController::createDashboardViewController() const
+    {
+        std::vector<std::shared_ptr<AccountViewController>> openAccounts;
+        for(const std::pair<const std::filesystem::path, std::shared_ptr<AccountViewController>>& pair : m_accountViewControllers)
+        {
+            openAccounts.push_back(pair.second);
+        }
+        return std::make_shared<DashboardViewController>(openAccounts);
+    }
 
     const std::shared_ptr<AccountViewController>& MainWindowController::getAccountViewController(const std::filesystem::path& path) const
     {
@@ -244,6 +254,11 @@ namespace Nickvision::Money::Shared::Controllers
         }
         Account a{ path }; 
         return a.isEncrypted();
+    }
+
+    bool MainWindowController::hasOpenAccounts() const
+    {
+        return !m_accountViewControllers.empty();
     }
 
     void MainWindowController::newAccount(const std::shared_ptr<NewAccountDialogController>& newAccountDialogController)
