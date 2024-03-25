@@ -262,6 +262,16 @@ namespace Nickvision::Money::GNOME::Views
     void MainWindow::onAccountAdded(const ParamEventArgs<std::shared_ptr<AccountViewController>>& args)
     {
         loadRecentAccounts();
+        //Create sidebar item for account
+        GtkBox* row{ GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 12)) };
+        gtk_widget_set_margin_start(GTK_WIDGET(row), 6);
+        gtk_widget_set_margin_top(GTK_WIDGET(row), 12);
+        gtk_widget_set_margin_end(GTK_WIDGET(row), 6);
+        gtk_widget_set_margin_bottom(GTK_WIDGET(row), 12);
+        gtk_box_append(row, gtk_image_new_from_icon_name("wallet2-symbolic"));
+        gtk_box_append(row, gtk_label_new(args.getParam()->getMetadata().getName().c_str()));
+        gtk_list_box_append(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "listNavItems")), GTK_WIDGET(row));
+        //Create view for account
     }
 
     void MainWindow::newAccount()
@@ -341,6 +351,7 @@ namespace Nickvision::Money::GNOME::Views
         //Get password if needed
         if(m_controller->isAccountPasswordProtected(path))
         {
+            bool done{ false };
             GValue valTrue;
             g_value_init(&valTrue, G_TYPE_BOOLEAN);
             g_value_set_boolean(&valTrue, true);
@@ -352,23 +363,23 @@ namespace Nickvision::Money::GNOME::Views
             g_object_set_property(G_OBJECT(passwordEntry), "activates-default", &valTrue);
             g_object_set_property(G_OBJECT(passwordEntry), "placeholder-text", &valPlaceholderText);
             g_signal_connect(passwordEntry, "changed", G_CALLBACK(+[](GtkEditable* self, gpointer data){ *(reinterpret_cast<std::string*>(data)) = gtk_editable_get_text(self); }), &password);
-            AdwMessageDialog* messageDialog{ ADW_MESSAGE_DIALOG(adw_message_dialog_new(GTK_WINDOW(m_window), path.filename().string().c_str(), nullptr)) };
-            adw_message_dialog_set_extra_child(messageDialog, GTK_WIDGET(passwordEntry));
-            adw_message_dialog_add_response(messageDialog, "cancel", _("Cancel"));
-            adw_message_dialog_add_response(messageDialog, "unlock", _("Unlock"));
-            adw_message_dialog_set_default_response(messageDialog, "unlock");
-            adw_message_dialog_set_close_response(messageDialog, "cancel");
-            adw_message_dialog_set_response_appearance(messageDialog, "unlock", ADW_RESPONSE_SUGGESTED);
-            g_signal_connect(messageDialog, "response", G_CALLBACK(+[](AdwMessageDialog* self, const char* response, gpointer data)
+            AdwAlertDialog* passwordDialog{ ADW_ALERT_DIALOG(adw_alert_dialog_new(path.filename().string().c_str(), nullptr)) };
+            adw_alert_dialog_set_extra_child(passwordDialog, GTK_WIDGET(passwordEntry));
+            adw_alert_dialog_add_responses(passwordDialog, "cancel", _("Cancel"), "unlock", _("Unlock"), nullptr);
+            adw_alert_dialog_set_default_response(passwordDialog, "unlock");
+            adw_alert_dialog_set_close_response(passwordDialog, "cancel");
+            adw_alert_dialog_set_response_appearance(passwordDialog, "unlock", ADW_RESPONSE_SUGGESTED);
+            g_signal_connect(passwordDialog, "response", G_CALLBACK(+[](AdwAlertDialog* self, const char* response, gpointer data)
             { 
                 if(std::string(response) != "unlock")
                 {
                     *(reinterpret_cast<std::string*>(data)) = "";
                 }
-                gtk_window_destroy(GTK_WINDOW(self));
+                adw_dialog_force_close(ADW_DIALOG(self));
             }), &password);
-            gtk_window_present(GTK_WINDOW(messageDialog));
-            while(gtk_widget_is_visible(GTK_WIDGET(messageDialog)))
+            g_signal_connect(passwordDialog, "closed", G_CALLBACK(+[](AdwDialog*,gpointer data){ *(reinterpret_cast<bool*>(data)) = true; }), &done);
+            adw_dialog_present(ADW_DIALOG(passwordDialog), GTK_WIDGET(m_window));
+            while(!done)
             {
                 g_main_context_iteration(g_main_context_default(), false);
             }

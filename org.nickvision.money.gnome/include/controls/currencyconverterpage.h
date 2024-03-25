@@ -52,7 +52,6 @@ namespace Nickvision::Money::GNOME::Controls
          */
         void onCurrencyChange();
         GtkBuilder* m_builder;
-        GtkWindow* m_parent;
         AdwClamp* m_page;
         GtkStringList* m_currencyList;
     };

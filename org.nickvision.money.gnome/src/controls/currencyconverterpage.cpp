@@ -11,7 +11,6 @@ namespace Nickvision::Money::GNOME::Controls
 {
     CurrencyConverterPage::CurrencyConverterPage(GtkWindow* parent)
         : m_builder{ BuilderHelpers::fromBlueprint("currency_converter_page") },
-        m_parent{ parent },
         m_page{ ADW_CLAMP(gtk_builder_get_object(m_builder, "root")) },
         m_currencyList{ gtk_string_list_new(nullptr) }
     {
@@ -25,12 +24,12 @@ namespace Nickvision::Money::GNOME::Controls
         const std::map<std::string, double>& conversionRates{ CurrencyConversionService::getConversionRates("USD") };
         if(conversionRates.empty())
         {
-            AdwMessageDialog* messageDialog{ ADW_MESSAGE_DIALOG(adw_message_dialog_new(m_parent, _("Error"), _("Unable to load currency data. Please try again. If the error still persists, report a bug."))) };
-            adw_message_dialog_add_response(messageDialog, "close", _("Close"));
-            adw_message_dialog_set_default_response(messageDialog, "close");
-            adw_message_dialog_set_close_response(messageDialog, "close");
-            g_signal_connect(messageDialog, "response", G_CALLBACK(+[](AdwMessageDialog* self, const char*, gpointer){ gtk_window_destroy(GTK_WINDOW(self)); }), nullptr);
-            gtk_window_present(GTK_WINDOW(messageDialog));
+            AdwAlertDialog* alertDialog{ ADW_ALERT_DIALOG(adw_alert_dialog_new(_("Error"), _("Unable to load currency data. Please try again. If the error still persists, report a bug."))) };
+            adw_alert_dialog_add_response(alertDialog, "close", _("Close"));
+            adw_alert_dialog_set_default_response(alertDialog, "close");
+            adw_alert_dialog_set_close_response(alertDialog, "close");
+            g_signal_connect(alertDialog, "response", G_CALLBACK(+[](AdwAlertDialog* self, const char*, gpointer){ adw_dialog_force_close(ADW_DIALOG(self)); }), nullptr);
+            adw_dialog_present(ADW_DIALOG(alertDialog), GTK_WIDGET(parent));
         }
         else
         {
