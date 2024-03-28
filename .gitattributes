@@ -1,7 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text eol=lf
-*.csproj eol=crlf
-*.sln eol=crlf
 *.png binary
 *.jpg binary
 *.ico binary
@@ -10,4 +8,4 @@
 *.otf binary
 *.ttf binary
 # Exclude Docs From Stats
-NickvisionMoney.Shared/Docs/** linguist-documentation
+docs/** linguist-documentation

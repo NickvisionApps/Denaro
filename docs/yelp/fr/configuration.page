@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="fr">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Configuration 🔧</title>
+	<credit type="author copyright">
+		<name>Fyodor Sobolev</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Configuration</title>
+<p>Cette page décrit ce que vous pouvez modifier dans la configuration de l’application.</p>
+<p>Dépendant de votre plateforme, la configuration apparaît dans l’interface de l’application sous le vocable <gui>Préférences</gui> ou <gui>Paramètres</gui>.</p>
+<terms>
+	<item>
+		<title>Thème</title>
+		<p>Définissez un thème sombre ou clair, ou faites en sorte que <app>Denaro</app> suive celui du système. Le changement de ce paramètre sous Windows requiert un redémarrage de l’application.</p>
+	</item>
+	<item>
+		<title>Couleur par défaut des transactions</title>
+		<p>Une couleur qui sera sélectionnée par défaut lors de l’ajout d’une nouvelle <link xref="transaction">transaction</link> avec une couleur unique. Changer ce paramètre n’affectera pas les transactions existantes, même si elles utilisaient la couleur par défaut précédemment sélectionnée.</p>
+	</item>
+	<item>
+		<title>Couleur par défaut des transferts</title>
+		<p>Une couleur qui sera utilisée pour les transactions créées par un <link xref="transfer">transfert</link>. Changer ce paramètre n’affectera pas les transactions existantes.</p>
+	</item>
+	<item>
+		<title>Couleur de groupe par défaut</title>
+		<p>Couleur sélectionnée par défaut lorsqu’un nouveau groupe sera ajouté. C’est également la couleur du groupe « Sans groupe ».</p>
+	</item>
+	<item>
+		<title>Insérer un séparateur de décimales</title>
+		<p>Définissez pour quelles touches pressées le séparateur décimal de la langue locale sera inséré lors de la saisie d’un montant : point du pavé numérique, n’importe quel point ou virgule du clavier, ou aucune. Si le séparateur des décimales est déjà présent dans le champ de saisie, il ne sera pas inséré.</p>
+	</item>
+</terms>
+</page>

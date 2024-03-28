@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="es">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Configuración 🔧</title>
+	<credit type="author copyright">
+		<name>Fyodor Sobolev</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Óscar Fernández Díaz</mal:name>
+      <mal:email>oscfdezdz@tuta.io</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
+
+<title>Configuración</title>
+<p>Esta página describe lo que puede cambiar en la configuración de la aplicación.</p>
+<p>Dependiendo de su plataforma, en la interfaz de la aplicación, la configuración se denomina <gui>Preferencias</gui> o <gui>Configuración</gui>.</p>
+<terms>
+	<item>
+		<title>Tema</title>
+		<p>Establezca un tema claro u oscuro, o haga que <app>Denaro</app> siga el tema de su sistema. Cambiar esto en Windows requiere que se reinicie la aplicación para aplicar.</p>
+	</item>
+	<item>
+		<title>Color de transacción predeterminado</title>
+		<p>Un color que se seleccionará por defecto al agregar una <link xref="transaction">transacción</link> nueva con color único. Cambiar esto no afectará las transacciones existentes, incluso si usa el color predeterminado seleccionado previamente.</p>
+	</item>
+	<item>
+		<title>Color predeterminado de la transferencia</title>
+		<p>Un color que se usará para transacciones creadas usando <link xref="transfer">transferencia</link>. Cambiar esto no afectará las transacciones existentes.</p>
+	</item>
+	<item>
+		<title>Color predeterminado del grupo</title>
+		<p>Color que se seleccionará por defecto al añadir un grupo nuevo. También es un color para el grupo "No agrupado".</p>
+	</item>
+	<item>
+		<title>Insertar separador decimal</title>
+		<p>Establece para qué teclas pulsadas se insertará el separador decimal de la configuración regional en un campo de importe: punto del teclado numérico, cualquier punto y coma, o ninguno. Si el separador decimal ya aparece en un campo, no se insertará.</p>
+	</item>
+</terms>
+</page>

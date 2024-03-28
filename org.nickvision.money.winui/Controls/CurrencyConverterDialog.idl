@@ -1,0 +1,8 @@
+namespace Nickvision.Money.WinUI.Controls
+{
+    [default_interface]
+    runtimeclass CurrencyConverterDialog : Microsoft.UI.Xaml.Controls.ContentDialog
+    {
+        CurrencyConverterDialog();
+    }
+}

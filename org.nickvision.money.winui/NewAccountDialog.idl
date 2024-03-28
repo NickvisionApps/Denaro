@@ -1,0 +1,8 @@
+namespace Nickvision.Money.WinUI
+{
+    [default_interface]
+    runtimeclass NewAccountDialog : Microsoft.UI.Xaml.Controls.ContentDialog
+    {
+        NewAccountDialog();
+    }
+}

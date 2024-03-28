@@ -1,0 +1,47 @@
+!Type:Cat
+NJob
+I
+^
+NFood
+E
+^
+NHousing
+E
+^
+NMiscellaneous/Other
+E
+^
+NHealth/Medical
+E
+^
+NTransportation
+E
+^
+NPersonal
+E
+^
+NRecreation
+E
+^
+NUtilities
+E
+^
+NCharity
+E
+^
+NClothing
+E
+^
+!Type:Bank
+D01/22/2023
+T600.00
+CX
+PPay day
+LPay
+^
+D1/22/2023
+MSome food
+T-50.00
+PYour Local Supermarket
+LFood
+^

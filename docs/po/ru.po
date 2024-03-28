@@ -1,0 +1,1151 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2024-03-27 20:18-0400\n"
+"PO-Revision-Date: 2023-08-24 10:19+0000\n"
+"Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
+"docs/ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.0-dev\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr ""
+
+#. (itstool) path: info/title
+#: docs/yelp/C/account.page:8
+msgctxt "link"
+msgid "Account 🏦"
+msgstr "Счёт 🏦"
+
+#. (itstool) path: credit/name
+#: docs/yelp/C/account.page:10 docs/yelp/C/configuration.page:10
+#: docs/yelp/C/import-export.page:10 docs/yelp/C/index.page:10
+#: docs/yelp/C/transaction.page:10 docs/yelp/C/transfer.page:10
+msgid "Fyodor Sobolev"
+msgstr "Фёдор Соболев"
+
+#. (itstool) path: credit/name
+#: docs/yelp/C/account.page:14 docs/yelp/C/configuration.page:14
+#: docs/yelp/C/import-export.page:14 docs/yelp/C/index.page:14
+#: docs/yelp/C/transaction.page:14 docs/yelp/C/transfer.page:14
+msgid "Nicholas Logozzo"
+msgstr "Nicholas Logozzo"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/account.page:20
+msgid "Account"
+msgstr "Счёт"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/account.page:21
+msgid ""
+"This page explains all properties of accounts in <app>Denaro</app>. Most of "
+"them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens "
+"automatically after you create a new account."
+msgstr ""
+"На этой странице перечислены все свойства счетов в <app>Denaro</app>. "
+"Большинство из них отображены в <gui>Диалоге настроек счёта</gui>. Этот "
+"диалог открывается автоматически, когда вы создаёте новый счёт."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/account.page:22
+msgid ""
+"Each account is stored in a single <file>*.nmoney</file> file. Files created "
+"in an older <em>stable</em> version of <app>Denaro</app> can be safely "
+"opened in a more recent <em>stable</em> version of the application. Although "
+"the app can run on different platforms (Windows and Linux), the <file>*."
+"nmoney</file> files are 100% compatible between platforms as long as they "
+"are from the same application version (i.e. V2023.1.0)."
+msgstr ""
+"Каждый счёт хранится в одном файле <file>*.nmoney</file>. Файлы, созданные в "
+"старых <em>стабильных</em> версиях <app>Denaro</app>, могут быть безопасно "
+"открыты в более новых <em>стабильных</em> версиях приложения. Приложение "
+"поддерживает различные платформы (Windows and Linux), и файлы <file>*."
+"nmoney</file> 100% совместимы между платформами, если используется та же "
+"версия приложения (например, V2023.1.0)."
+
+#. (itstool) path: note/p
+#: docs/yelp/C/account.page:24
+msgid ""
+"Unstable (Beta and RC) versions of the application can contain bugs or "
+"unfinished modifications that can cause data loss. DO NOT use account files "
+"that contain real data in unstable versions of the app!"
+msgstr ""
+"Нестабильные (Beta и RC) версии приложения могут содержать ошибки или "
+"незавершённые изменения, который могут привести к потере данных. НЕ "
+"ИСПОЛЬЗУЙТЕ файлы счетов, содержащие важные данные, в нестабильных версиях "
+"приложения!"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:29
+msgid "Name"
+msgstr "Имя"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:30
+msgid ""
+"Account name is shown in the list of recent accounts and in tabs. A name "
+"doesn't have a length limit and it can contain any characters, including "
+"emojis."
+msgstr ""
+"Имя счёта отображается в списке недавних счетов и во вкладках. На количество "
+"символов в имени нет ограничения, и оно может содержать любые символы, "
+"включая эмодзи."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:33
+msgid "Account Type"
+msgstr "Тип счёта"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:34
+msgid ""
+"There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> "
+"and 🟢<em>Business</em>. Account type is only a useful label that is shown "
+"in the list of recent accounts and doesn't affect how the application works "
+"or what you can do with an account. Each account type has its own color, "
+"these colors can be configured in <link xref=\"configuration\">global "
+"settings</link>."
+msgstr ""
+"Доступно 3 типа счетов: 🟣<em>Расчётный</em>, 🔵<em>Сберегательный</em> и 🟢"
+"<em>Бизнес</em>. Тип счёта представляет собой лишь полезную метку, которая "
+"отображается в списке недавних счетов, и никак не влияет на работу "
+"приложения, не меняет ничего в том, как вы можете использовать счёт. У "
+"каждого типа счёта есть свой цвет, цвета можно настроить в <link "
+"xref=\"configuration\">глобальной конфигурации</link>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:37
+msgid "Default Transaction Type"
+msgstr "Тип транзакции по умолчанию"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:38
+msgid ""
+"When you create a new transaction its type by default will be the same as in "
+"this setting."
+msgstr ""
+"Когда вы создаёте новую транзакцию, её тип по умолчанию будет тем же, что "
+"указан этой настройкой."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:41
+msgid "Transaction Reminders Threshold"
+msgstr "Порог напоминаний для транзакций"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:42
+msgid "The threshold used when showing reminders about upcoming transactions."
+msgstr ""
+"Этот порог используется для отображения напоминаний для грядущих транзакций."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:45
+msgid "System Currency"
+msgstr "Системная валюта"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:46
+msgid ""
+"Every time the application starts, it gets data about currency and numbers "
+"formatting from your system locale, and this data is used to show currency "
+"symbol (unless custom currency is used, see below) and to determine in what "
+"format the numbers will be accepted as values for transaction amounts. A few "
+"examples:"
+msgstr ""
+"Каждый раз, когда приложение запускается, оно получает данные о валюте и "
+"формате чисел из региональных настроек вашей системы, и эти данные "
+"используются для отображения символа валюты (если только вы не указали свою "
+"валюту, смотрите ниже), а также для определения того, в каком формате числа "
+"будут приниматься в качестве значения суммы для транзакций. Несколько "
+"примеров:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:48
+msgid ""
+"If your locale is <em>English (US)</em>, currency symbol will be set to "
+"<em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
+msgstr ""
+"Если ваш регион <em>Английский (США)</em>, знак <em>$</em> будет символом "
+"валюты, а <em>1,000.00</em> будет приниматься как корректное число."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:49
+msgid ""
+"If your locale is <em>Italian</em>, currency symbol will be set to <em>€</"
+"em> and <em>1.000,00</em> will be accepted as a valid number."
+msgstr ""
+"Если ваш регион <em>Итальянский</em>, знак <em>€</em> будет символом валюты, "
+"а <em>1.000,00</em> будет приниматься как корректное число."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:50
+msgid ""
+"If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</"
+"em> and <em>1000,00</em> will be accepted as a valid number."
+msgstr ""
+"Если ваш регион <em>Российский</em>, знак <em>₽</em> будет символом валюты, "
+"а <em>1000,00</em> будет приниматься как корректное число."
+
+#. (itstool) path: note/p
+#: docs/yelp/C/account.page:53
+msgid ""
+"On Linux, it is possible to set different locales for system language and "
+"formats. Changing these settings varies depending on the desktop environment "
+"you are using. Despite differences in the location of these settings on the "
+"desktop, changing these settings modify system environment variables, such "
+"as <code>LANG</code>, <code>LC_TIME</code>, and <code>LC_MONETARY</code>. "
+"<app>Denaro</app> will try to use amount and date formats according to these "
+"variables. If the app fails to use the expected formats, please make sure "
+"the variables are set correctly via the <code>locale</code> command in a "
+"terminal. If you found a bug and want to report it, please provide the "
+"output of the <code>locale</code> command to allow developers to reproduce "
+"your issue with the same settings."
+msgstr ""
+"В ОС Linux возможно установить разные региональные настройки отдельно для "
+"языка и форматов. Способ изменения этих настроек зависит от вашего рабочего "
+"окружения. Несмотря на различия в расположении этих настроек, их изменение "
+"приводит к модификации системных переменных окружения, таких как <code>LANG</"
+"code> (формат языка), <code>LC_TIME</code> (формат дат и времени) и "
+"<code>LC_MONETARY</code> (формат чисел и валюты). <app>Denaro</app> "
+"попытается использовать форматы для сумм транзакций и дат в соответствии с "
+"этими переменными. Если приложение не использует ожидаемые форматы, "
+"проверьте корректность значений переменных, используя команду <code>locale</"
+"code> в терминале. Если вы нашли ошибку в приложении и хотите сообщить о "
+"ней, добавьте вывод команды <code>locale</code> в ваше сообщение, чтобы "
+"разработчики смогли воспроизвести ошибку, установив идентичные настройки."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:57
+msgid "Use Custom Currency"
+msgstr "Использование своей валюты"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:58
+msgid ""
+"If this option is enabled, <gui>Custom Currency Symbol</gui> will be used "
+"instead of currency symbol provided by your system locale."
+msgstr ""
+"Если эта опция включена, свой <gui>Символ валюты</gui> будет использоваться "
+"вместо символа, предоставленного региональными настройками вашей системы."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:61
+msgid "Custom Currency Symbol"
+msgstr "Свой символ валюты"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:62
+msgid "Up to 3 characters or 1 emoji. It can't be a number."
+msgstr "До 3 текстовых символов, либо 1 эмодзи. Не может быть числом."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:65
+msgid "Custom Currency Code"
+msgstr "Свой код валюты"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:66
+msgid "Up to 3 characters or 1 emoji."
+msgstr "До 3 текстовых символов, либо 1 эмодзи."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:67
+msgid ""
+"An example to understand the difference between a symbol and a code: <em>$</"
+"em> is a symbol, <em>USD</em> is a code."
+msgstr ""
+"Пример для понимания разницы между символом и кодом: <em>$</em> — символ, "
+"<em>USD</em> — код."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:70
+msgid "Custom Currency Amount Style"
+msgstr "Свой стиль отображения сумм"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:71
+msgid "A choice of displaying an amount in one of the following ways:"
+msgstr "Можно выбрать один из следующих стилей:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:73
+msgid "$n"
+msgstr "₽n"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:74
+msgid "n$"
+msgstr "n₽"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:75
+msgid "$ n"
+msgstr "₽ n"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:76
+msgid "n $"
+msgstr "n ₽"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:80
+msgid "Custom Currency Decimal and Group Separators"
+msgstr "Десятичный разделитель и разделитель групп разрядов"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:81
+msgid "Up to 2 characters or 1 emoji."
+msgstr "До 2 текстовых символов, либо 1 эмодзи."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:84
+msgid "Custom Currency Decimal Digits"
+msgstr "Цифры в дробной части"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:85
+msgid ""
+"The size of decimal part of amount values. With \"Unlimited\" digits there "
+"will be as many numbers in decimal part as required to show the precise "
+"amount, but there will be no decimal part if the amount is an integer number."
+msgstr ""
+"Размер дробной части значений сумм. При выборе неограниченного размера будет "
+"отображаться столько цифр, сколько необходимо для отображения точного "
+"значения, но дробной части не будет, если число целое."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:88
+msgid "Password"
+msgstr "Пароль"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:89
+msgid ""
+"Each account can be password-protected. Adding a password causes an account "
+"to become encrypted (making it impossible to read the data without "
+"decrypting it using the password). Be careful: if the password is lost, you "
+"won't be able to restore the data! A password can also be changed or removed "
+"using the account settings dialog of an open account. Removing a password "
+"will decrypt the account."
+msgstr ""
+"Каждый счёт может быть защищён паролем. Добавление пароля делает счёт "
+"зашифрованным (доступ к данным невозможно получить, не расшифровав файл с "
+"помощью пароля). Будьте осторожны: если вы забудете пароль, вы не сможете "
+"восстановить данные! Пароль может быть изменён или удалён в диалоге настроек "
+"счёта. Удаление пароля расшифровывает данные."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:92
+msgid "Sort by Id, Date or Amount"
+msgstr "Сортировка по номеру, дате или сумме"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:93
+msgid ""
+"Each account stores whether to sort transactions in the main window by their "
+"id, date or amount. Every time you change this, it will be saved to the "
+"account file and restored when you reopen the account."
+msgstr ""
+"Каждый счёт хранит информацию о том, должны ли транзакции в главном окне "
+"быть отсортированы по номеру, дате или сумме. Каждый раз, когда вы меняете "
+"сортировку, она сохраняется для открытого счёта и будет восстановлена, когда "
+"вы снова откроете этот счёт."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:96
+msgid "Sorting Order"
+msgstr "Порядок сортировки"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:97
+msgid ""
+"Each account stores information about the order of transactions in the main "
+"window. Every time you change this, it will be saved to the account file and "
+"restored when you reopen the account."
+msgstr ""
+"Каждый счёт хранит информацию о том, в каком порядке должны отображаться "
+"транзакции в главном окне. Каждый раз, когда вы меняете порядок, он "
+"сохраняется для открытого счёта и будет восстановлен, когда вы снова "
+"откроете этот счёт."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:100
+msgid "Groups Visibility"
+msgstr "Видимость групп"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:101
+msgid ""
+"Each account stores information about whether the groups list in the main "
+"window is hidden or not. Every time you change groups list visibility, it's "
+"saved and then restored when you reopen the account."
+msgstr ""
+"Каждый счёт хранит информацию о том, должен ли список групп быть показан в "
+"главном окне. Каждый раз, когда вы меняете видимость списка групп, "
+"информация об этом сохраняется для открытого счёта и состояние списка групп "
+"будет восстановлено, когда вы снова откроете этот счёт."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:104
+msgid "Tags Visibility"
+msgstr "Видимость меток"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:105
+msgid ""
+"Each account stores information about whether the tags list in the main "
+"window is hidden or not. Every time you change tags list visibility, it's "
+"saved and then restored when you reopen the account."
+msgstr ""
+"Каждый счёт хранит информацию о том, должен ли список меток быть показан в "
+"главном окне. Каждый раз, когда вы меняете видимость списка меток, "
+"информация об этом сохраняется для открытого счёта и состояние списка меток "
+"будет восстановлено, когда вы снова откроете этот счёт."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/configuration.page:8
+msgctxt "link"
+msgid "Configuration 🔧"
+msgstr "Конфигурация 🔧"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/configuration.page:20
+msgid "Configuration"
+msgstr "Конфигурация"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/configuration.page:21
+msgid ""
+"This page describes what you can change in the application configuration."
+msgstr ""
+"На этой странице перечислены настройки, которые вы можете изменить в "
+"конфигурации приложения."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/configuration.page:22
+msgid ""
+"Depending on your platform, in the application interface the configuration "
+"is referred as either <gui>Preferences</gui> or <gui>Settings</gui>."
+msgstr ""
+"В зависимости от вашей ОС, в интерфейсе приложения конфигурация называется "
+"другим термином: <gui>Параметры</gui> или <gui>Настройки</gui>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:25
+msgid "Theme"
+msgstr "Тема"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:26
+msgid ""
+"Set light or dark theme, or make <app>Denaro</app> follow your system theme. "
+"Changing this on Windows requires the application restart to apply."
+msgstr ""
+"Установите, должно ли приложение использовать светлую или тёмную тему, либо "
+"следовать настройкам вашей системы. Для применения темы в ОС Windows "
+"требуется перезапуск программы."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:29
+msgid "Transaction Default Color"
+msgstr "Цвет транзакции по умолчанию"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:30
+msgid ""
+"A color that will be selected by default when adding a new <link "
+"xref=\"transaction\">transaction</link> with unique color. Changing this "
+"will not affect existing transactions, even if they use previously selected "
+"default color."
+msgstr ""
+"Цвет, который будет выбран по умолчанию при создании новой <link "
+"xref=\"transaction\">транзакции</link> с собственным цветом. Изменение цвета "
+"не затронет существующие транзакции, даже если они используют цвет, который "
+"ранее был цветом по умолчанию."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:33
+msgid "Transfer Default Color"
+msgstr "Цвет перевода средств по умолчанию"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:34
+msgid ""
+"A color that will be used for transactions created using <link "
+"xref=\"transfer\">transfer</link>. Changing this will not affect existing "
+"transactions."
+msgstr ""
+"Цвет, который будет использован для транзакций, созданных с помощью <link "
+"xref=\"transfer\">перевода средств</link>. Изменение цвета не затронет "
+"существующие транзакции."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:37
+msgid "Group Default Color"
+msgstr "Цвет группы по умолчанию"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:38
+msgid ""
+"A color that will be selected by default when adding a new group. This is "
+"also a color for «Ungrouped» group."
+msgstr ""
+"Цвет, который будет выбран по умолчанию при создании новой группы. Это также "
+"цвет группы «Несгруппированные»."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:41
+msgid "Insert Decimal Separator"
+msgstr "Вставка десятичного разделителя"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:42
+msgid ""
+"Set for which keys pressed will the locale's decimal separator be inserted "
+"into an amount field: numpad period, any period and comma, or none. If "
+"decimal separator is already presented in a field, it will not be inserted."
+msgstr ""
+"Установите, нажатия каких кнопок будут вставлять десятичный разделитель в "
+"поля сумм: точка на Numpad, любая точка или запятая, либо можно отключить "
+"эту функцию. Если десятичный разделитель уже присутствует в строке, он не "
+"будет добавлен."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/import-export.page:8
+msgctxt "link"
+msgid "Import/Export 📤"
+msgstr "Импорт/Экспорт 📤"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/import-export.page:20
+msgid "Import/Export"
+msgstr "Импорт/Экспорт"
+
+#. (itstool) path: div/title
+#: docs/yelp/C/import-export.page:22
+msgid "Import Formats"
+msgstr "Форматы импорта"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:26
+msgid "Dates should be in <em>YYYYMMDD</em> format."
+msgstr "Даты должны быть в формате <em>ГГГГММДД</em>."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:30
+msgid "Dates should be in English (US) format (<em>MM/DD/YYYY</em>)."
+msgstr "Даты должны быть в Английском (США) формате (<em>ММ/ДД/ГГГГ</em>)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:34
+msgid ""
+"❗ While CSV is a common format and some banks allow their users to export "
+"information as CSV, these files are in fact tables that can contain "
+"arbitrary data. Importing a CSV file created in other program will fail, "
+"because its data will not be compatible with what <app>Denaro</app> tries to "
+"get from a file. The purpose of CSV import/export is to provide a way to add "
+"data to an account using external programs such as text editors and office "
+"suites. Import will only add new transactions without overriding existing "
+"ones. If you want to create a CSV file manually, this is the header that "
+"includes all columns <app>Denaro</app> expects to find:"
+msgstr ""
+"❗ Хотя CSV является распространённым форматом, и некоторые банки "
+"предоставляют возможность своим клиентам экспортировать данные в формате "
+"CSV, такие файлы фактически являются таблицами, которые могут содержать "
+"произвольные данные. Импорт CSV файла, созданного в другой программе, не "
+"удастся, т.к. данные не будут совместимы с тем, что <app>Denaro</app> "
+"ожидает получить из файла. Смысл импорта/экспорта CSV в том, чтобы "
+"предоставить возможность добавлять новые данные в счёт, используя сторонние "
+"программы, например, текстовые редакторы или офисные приложения. При импорте "
+"только создаются новые транзакции, существующие не перезаписываются. Если вы "
+"хотите создать CSV файл вручную, заголовок таблицы со всеми столбцами, "
+"которые <app>Denaro</app> ожидает найти, выглядит следующим образом:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:39
+msgid "Transaction Id, should be unique for a given account. Ids start with 1."
+msgstr ""
+"Номер транзакции, должен быть уникальным для данного счёта. Номера "
+"начинаются с 1."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:43
+msgid ""
+"Transaction date (or start date in case of repeat transaction), should be in "
+"English (US) format (<em>MM/DD/YYYY</em>)."
+msgstr ""
+"Дата транзакции (или дата начала для повторяющейся транзакции), должна быть "
+"в Английском (США) формате (<em>ММ/ДД/ГГГГ</em>)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:47
+msgid ""
+"Transaction description, it can contain any characters except semicolon."
+msgstr ""
+"Описание транзакции, может содержать любые символы, кроме точки с запятой."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:51
+msgid "Transaction type: 0 for income, 1 for expense."
+msgstr "Тип транзакции: 0 - доход, 1 - расход."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:55
+msgid "A number representing transaction repeat interval:"
+msgstr "Число, соответствующее интервалу повтора транзакции:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:56
+msgid "0 - Never"
+msgstr "0 - Никогда"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:57
+msgid "1 - Daily"
+msgstr "1 - Ежедневно"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:58
+msgid "2 - Weekly"
+msgstr "2 - Еженедельно"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:59
+msgid "7 - Biweekly"
+msgstr "7 - Раз в 2 недели"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:60
+msgid "3 - Monthly"
+msgstr "3 - Ежемесячно"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:61
+msgid "4 - Quarterly"
+msgstr "4 - Ежеквартально"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:62
+msgid "5 - Yearly"
+msgstr "5 - Ежегодно"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:63
+msgid "6 - Biyearly"
+msgstr "6 - Раз в два года"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:64
+msgid ""
+"See <em>Repeat Interval</em> in <link xref=\"transaction\">transaction</"
+"link> page for details about repeat transactions."
+msgstr ""
+"Подробности о повторящихся транзакциях смотрите в описании <em>Интервала "
+"Повтора</em> на странице <link xref=\"transaction\">о транзакциях</link>."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:68
+msgid ""
+"Should be either an Id of source transaction or 0 if it's a source "
+"transaction or -1 if it's not repeat transaction."
+msgstr ""
+"Либо номер транзакции-источника, либо 0, если это транзакция-источник, либо "
+"-1, если это не повторящаяся транзакция."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:72
+msgid ""
+"End date for repeat transaction, should be in English (US) format (<em>MM/DD/"
+"YYYY</em>). Leave it empty if it's not repeat transaction."
+msgstr ""
+"Дата окончания повторяющейся транзакции, должна быть в Английском (США) "
+"формате (<em>ММ/ДД/ГГГГ</em>). Оставьте это поле пустым, если транзакция не "
+"повторяющаяся."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:76
+msgid "Transaction amount in English (US) format (<em>123,456.78</em>)."
+msgstr "Сумма транзакции в Английском (США) формате (<em>123,456.78</em>)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:80
+msgid ""
+"Transaction color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, "
+"<em>G</em> and <em>B</em> are integers in range between 0 and 255."
+msgstr ""
+"Цвет транзакции, должен быть в формате <em>rgb(R,G,B)</em>, где <em>R</em> "
+"(красный), <em>G</em> (зелёный) и <em>B</em> (синий) — это целые числа в "
+"диапазоне от 0 до 255."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:84
+msgid "Whether a transaction should use group color: 0 — false, 1 — true."
+msgstr "Должен ли для транзакции использоваться цвет группы: 0 — нет, 1 — да."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:88
+msgid ""
+"Transaction's group Id. Ids start with 1. For ungrouped transaction it "
+"should be -1 (not 0, this is incorrect value for group Id)."
+msgstr ""
+"Номер группы транзакции. Номера начинаются с 1. Для транзакции без группы "
+"укажите -1 (не 0, это некорректное значение для номера группы)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:92
+msgid ""
+"Transaction's group name, should match group Id. It can contain any "
+"characters except semicolon. Leave it empty for ungrouped transaction, in "
+"any other cases it shouldn't be empty."
+msgstr ""
+"Имя группы транзакции, должно соответствовать номеру группы. Может содержать "
+"любые символы, кроме точки с запятой. Оставьте это поле постым для "
+"транзакции без группы, но если транзакция принадлежит к какой-либо группе, "
+"имя не должно быть пустым."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:96
+msgid ""
+"Transaction's group description, should match group Id. It can contain any "
+"characters except semicolon and can be empty. Leave it empty for ungrouped "
+"transaction."
+msgstr ""
+"Описание группы транзакции, должно соответствовать номеру группы. Может "
+"содержать любые символы, кроме точки с запятой, и может быть пустым. "
+"Оставьте это поле постым для транзакции без группы."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:100
+msgid ""
+"Group color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, "
+"<em>G</em> and <em>B</em> are integers in range between 0 and 255."
+msgstr ""
+"Цвет группы, должен быть в формате <em>rgb(R,G,B)</em>, где <em>R</em> "
+"(красный), <em>G</em> (зелёный) и <em>B</em> (синий) — это целые числа в "
+"диапазоне от 0 до 255."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:103
+msgid "Receipt and notes are not present in CSV."
+msgstr "Чек и заметки не присутствуют в формате CSV."
+
+#. (itstool) path: div/title
+#: docs/yelp/C/import-export.page:108
+msgid "Export Formats"
+msgstr "Форматы экспорта"
+
+#. (itstool) path: div/p
+#: docs/yelp/C/import-export.page:109
+msgid ""
+"You can select whether to export all information or only from the current "
+"view. If you select the current view, currently displayed transactions will "
+"be exported in the same order in which they are shown."
+msgstr ""
+"Вы можете выбрать, следует ли экспортировать всю информацию или только из "
+"текущего вида. Если выберите текущий вид, отображаемые в данный момент "
+"транзакции будут экспортированы в том же порядке, в котором они показаны."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:113
+msgid ""
+"A file will contain an account information, a list of transactions and "
+"images of receipts. Transactions are colored like in the application, but "
+"colors are modified by making them half-transparent in order to make black "
+"text always clearly visible. You can set a password for an exported file."
+msgstr ""
+"Файл будет содержать информацию о счёте, список транзакций и изображения "
+"чеков. Транзакции окрашены цветами так же, как в приложении, но цвета "
+"сделаны полупрозрачными, чтобы на них всегда был отчётливо виден чёрный "
+"текст. Вы можете защитить экспортируемый файл паролем."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/index.page:7
+msgctxt "link"
+msgid "Denaro Help"
+msgstr "Справка Denaro"
+
+#. (itstool) path: info/title
+#: docs/yelp/C/index.page:8
+msgctxt "text"
+msgid "Denaro Help"
+msgstr "Справка Denaro"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/index.page:20
+msgid "<_:media-1/> Denaro Help"
+msgstr "<_:media-1/> Справка Denaro"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/index.page:21
+msgid ""
+"This documentation will help you understand how to configure and manage data "
+"in <app>Denaro</app> to get the most of the application."
+msgstr ""
+"Эта документация призвана помочь вам понять, как управлять данными в "
+"<app>Denaro</app>, чтобы использовать приложение максимально эффективно."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/index.page:22
+msgid ""
+"To get support, use <link href=\"https://github.com/NickvisionApps/Denaro/"
+"issues\">issues</link> or <link href=\"https://github.com/NickvisionApps/"
+"Denaro/discussions\">discussions</link> on Github, or <link href=\"https://"
+"bit.ly/3GrfEid\">join our Matrix channel</link>."
+msgstr ""
+"Для получения дополнительной помощи посетите <link href=\"https://github.com/"
+"NickvisionApps/Denaro/issues\">раздел проблем</link> или <link "
+"href=\"https://github.com/NickvisionApps/Denaro/discussions\">обсуждения</"
+"link> на Github, либо <link href=\"https://bit.ly/3GrfEid\">наш канал в "
+"Matrix</link>."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/transaction.page:8
+msgctxt "link"
+msgid "Transaction 🧾"
+msgstr "Транзакция 🧾"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/transaction.page:20
+msgid "Transaction"
+msgstr "Транзакция"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transaction.page:21
+msgid "This page explains all properties of transactions in <app>Denaro</app>."
+msgstr ""
+"На этой странице перечислены все свойства транзакций в <app>Denaro</app>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:25
+msgid "Id"
+msgstr "Номер"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:26
+msgid ""
+"Each transaction has an Id that is unique for a given account. Ids start "
+"with 1 and increase for every transaction added. Ids can't be changed, ids "
+"of removed transactions are not reused."
+msgstr ""
+"Каждой транзакции присваивается идентификационный номер, уникальный в "
+"пределах счёта. Номера начинаются с 1 и увеличиваются с каждой добавленной "
+"транзакцией. Номер нельзя изменить, номера удалённых транзакций не "
+"используются повторно."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:29
+msgid "Description"
+msgstr "Описание"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:30
+msgid "No limit on length. It can't contain semicolon."
+msgstr ""
+"Нет ограничений по длине. Может содержать любые символы, кроме точки с "
+"запятой."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:33
+msgid "Amount"
+msgstr "Сумма"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:34
+msgid ""
+"A number in a format that is valid for your locale, see <em>System Currency</"
+"em> in <link xref=\"account\">Account page</link> for details."
+msgstr ""
+"Число в формате, корректном для ваших региональных настроек, для "
+"подробностей почитайте о <em>Системной валюте</em> на странице <link "
+"xref=\"account\">о счетах</link>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:37
+msgid "Type"
+msgstr "Тип"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:38
+msgid ""
+"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link "
+"xref=\"account\">account settings</link> will be selected when you open a "
+"dialog to add new transaction."
+msgstr ""
+"<em>Доходы</em> или <em>Расходы</em>. По умолчанию при открытии диалога "
+"добавления новой транзакции будет выбран тот тип, что указан в <link "
+"xref=\"account\">настройках счёта</link>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:41
+msgid "Date"
+msgstr "Дата"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:42
+msgid ""
+"Any date can be selected, you can also create transactions for future dates."
+msgstr ""
+"Может быть выбрана любая дата, вы также можете создавать транзакции для "
+"будущих дат."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:45
+msgid "Repeat Interval"
+msgstr "Интервал повтора"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:46
+msgid ""
+"Use this option to create a recurring transaction. After you add transaction "
+"with repeat interval, this transaction will become a <em>source</em> "
+"transaction. <app>Denaro</app> will automatically generate <em>repeat</em> "
+"transactions for the dates up until today or a provided end date if set in "
+"the past. <em>Repeat</em> transactions can't be edited or deleted, only "
+"<em>source</em> can be modified. When you modify <em>source</em> transaction "
+"<app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</"
+"em> transactions. If you choose to disassociate, <em>repeat</em> "
+"transactions become normal transactions and can be edited or deleted "
+"separately."
+msgstr ""
+"Укажите интервал повтора для создания повторяющихся транзакций. После "
+"добавления транзакции с интервалом повтора, эта транзакция становится "
+"<em>транзакцией-источником</em>. <app>Denaro</app> автоматически сгенерирует "
+"<em>транзакции-повторы</em> вплоть до текущего дня, либо до даты окончания "
+"повтора, если она в прошлом. <em>Повторы</em> нельзя редактировать и "
+"удалять, только <em>источник</em> может быть изменён. Когда вы внесёте "
+"изменения в <em>источник</em>, <app>Denaro</app> спросит, хотите ли вы так "
+"же изменить <em>повторы</em>, либо же отвязать их. Если вы отвяжете "
+"<em>транзакции-повторы</em>, они станут обычными транзакциями, которые можно "
+"будет по отдельности редактировать и удалять."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:49
+msgid "Repeat End Date"
+msgstr "Дата окончания повтора"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:50
+msgid ""
+"End date for a transaction with repeat. It can't be earlier than or on the "
+"same day as start date."
+msgstr ""
+"Крайняя дата для транзакции с повтором. Она не может быть раньше или в тот "
+"же день что и дата начала."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:53
+msgid "Group"
+msgstr "Группа"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:54
+msgid ""
+"Each transaction can belong to only one group or none («Ungrouped» group)."
+msgstr ""
+"Каждая транзакция может принадлежать только к одной группе, либо быть без "
+"группы (т.е. принадлежать к группе «Несгруппированные»)."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:57
+msgid "Color"
+msgstr "Цвет"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:58
+msgid ""
+"A color for transaction. Can be set to use either a group color or a unique "
+"color. When selecting unique color, it will be set by default to the color "
+"selected in <link xref=\"configuration\">configuration</link>, but can be "
+"changed to any color."
+msgstr ""
+"Цвет транзакции. Можно либо использовать цвет группы, либо указать "
+"собственный цвет. При выборе собственного цвета, по умолчанию он будет "
+"соответствовать цвету, указанному в <link "
+"xref=\"configuration\">конфигурации</link>, но он может быть изменён на "
+"любой другой цвет."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:61
+msgid "Tags"
+msgstr "Метки"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:62
+msgid ""
+"A list of tags for transaction. A transaction can have unlimited number of "
+"tags (or have no tags). Tags can contain any characters except comma (<code>,"
+"</code>), and have any length, but they are expected to be short keywords. "
+"Tags are meant to be used for additional filtering when using groups is not "
+"enough. Tags are only saved in transactions themselves, and as result unused "
+"tags disappear automatically on account closing."
+msgstr ""
+"Список меток для транзакции. У транзакции может быть сколько угодно меток "
+"(либо не быть меток вовсе). Метки могут содержать любые символы, кроме "
+"запятой (<code>,</code>), и у них может быть любая длина, но предполагается "
+"что это буду короткие ключевые слова. Метки предназначены для дополнительной "
+"фильтрации, когда использования групп недостаточно. Метки сохраняются в "
+"самих транзакциях, в результате чего неиспользованные метки исчезают "
+"автоматически при закрытии счёта."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:65
+msgid "Receipt"
+msgstr "Чек"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:66
+msgid ""
+"An image of a receipt for transaction. You can upload JPEG or PNG image or "
+"PDF document, but no matter the format it will be converted and saved as "
+"JPEG image. In case of PDF, only the first page will be saved. You can "
+"delete or upload another file anytime."
+msgstr ""
+"Изображение чека транзакции. Вы можете загрузить изображение в формате JPEG "
+"или PNG, либо PDF документ, но независимо от формата файл будет "
+"конвертирован и сохранён как изображение JPEG. Если вы загрузил PDF, только "
+"первая страница будет сохранена. Удалить или загрузить другой файл можно в "
+"любой момент."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:69
+msgid "Notes"
+msgstr "Заметки"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:70
+msgid "A freeform text note to attach to transaction."
+msgstr "Текстовая заметка в свободной форме для прикрепления к транзакции."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/transfer.page:8
+msgctxt "link"
+msgid "Transfer 💸"
+msgstr "Перевод средств"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/transfer.page:20
+msgid "Transfer"
+msgstr "Перевод средств"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:21
+msgid ""
+"Transfer is a way to move money from one account to another. After running a "
+"transfer 2 transactions will be created with the following descriptions:"
+msgstr ""
+"Перевод средств — это способ перечислить деньги с одного счёта на другой. "
+"После выполнения перевода будут созданы 2 транзакции со следующими "
+"описаниями:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transfer.page:24
+msgid ""
+"«Transfer to <input>Destination Account Name</input>» on source account."
+msgstr "«Перевод на <input>Имя целевого счёта</input>» на исходном счёте."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transfer.page:27
+msgid ""
+"«Transfer from <input>Source Account Name</input>» on destination account."
+msgstr "«Перевод с <input>Имя исходного счёта</input>» на целевом счёте."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:30
+msgid ""
+"Transactions created using transfer are simple transactions that can be "
+"freely edited or deleted. These transactions are not connected: modifying "
+"transaction on source account will not affect transaction on destination "
+"account, and vice versa."
+msgstr ""
+"Транзакции, созданные с помощью перевода средств, являются простыми "
+"транзакциями, которые можно свободно редактировать и удалять. Эти транзакции "
+"не связаны: изменение транзакции на исходном счёте не изменит транзакцию на "
+"целевом счёте, и наоборот."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:31
+msgid ""
+"Transfer doesn't allow you to create repeating transactions or set any "
+"properties other than the amount. The color selected in <link "
+"xref=\"configuration\">configuration</link> will be used for created "
+"transactions."
+msgstr ""
+"Перевод средств не позволяет создавать повторяющиеся транзакции или задавать "
+"какие-либо другие свойства, кроме суммы. Цвет, выбранный в <link "
+"xref=\"configuration\">конфигурации</link>, будет использован для созданных "
+"транзакций."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:32
+msgid ""
+"If you create a transfer between accounts with different currencies, you "
+"will be asked to provide a conversion rate."
+msgstr ""
+"Если вы производите перевод средств между счетами с разными валютами, "
+"<app>Denaro</app> попросит вас указать обменный курс."
+
+#~ msgid "Checking Account Color"
+#~ msgstr "Цвет расчётного счёта"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Checking</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Цвет, которым отмечаются <em>Расчётные</em> <link xref=\"account\">счета</"
+#~ "link> в списке недавних счетов."
+
+#~ msgid "Savings Account Color"
+#~ msgstr "Цвет сберегательного счёта"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Savings</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Цвет, которым отмечаются <em>Сберегательные</em> <link "
+#~ "xref=\"account\">счета</link> в списке недавних счетов."
+
+#~ msgid "Business Account Color"
+#~ msgstr "Цвет бизнес счёта"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Business</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Цвет, которым отмечаются <em>Бизнес</em> <link xref=\"account\">счета</"
+#~ "link> в списке недавних счетов."
+
+#~ msgid "Use Native Digits"
+#~ msgstr "Использовать местные цифры"
+
+#~ msgid ""
+#~ "Whether to use numerals that are native for your locale instead of latin "
+#~ "digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
+#~ "instead of <em>012</em> for locales that use Eastern Arabic numerals."
+#~ msgstr ""
+#~ "Должно ли приложение использовать цифры, родные для вашего региона, "
+#~ "вместо арабских цифр. Например, если эта настройка включена, <em>٠١٢</em> "
+#~ "будут отображаться вместо <em>012</em> при региональных настройках, "
+#~ "которые используют восточные арабские цифры."
+
+#~ msgid "CSV Backup Folder"
+#~ msgstr "Папка резервных копий CSV"
+
+#~ msgid ""
+#~ "A folder where your data will be automatically <link xref=\"import-"
+#~ "export\">exported to CSV</link> after every change. This feature doesn't "
+#~ "work for password-protected accounts, because CSV files can't be password-"
+#~ "protected."
+#~ msgstr ""
+#~ "Папка, в которую ваши данные будут автоматически <link xref=\"import-"
+#~ "export\">экспортироваться в формате CSV</link> после каждого изменения. "
+#~ "Эта функция не работает для счетов, защищённых паролем, т.к. CSV файлы не "
+#~ "могут быть защищены паролем."

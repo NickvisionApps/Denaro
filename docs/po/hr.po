@@ -1,0 +1,1129 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2024-03-27 20:18-0400\n"
+"PO-Revision-Date: 2023-09-26 13:22+0000\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
+"money/docs/hr/>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.1-dev\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr "Milo Ivir <mail@milotype.de>, 2023"
+
+#. (itstool) path: info/title
+#: docs/yelp/C/account.page:8
+msgctxt "link"
+msgid "Account 🏦"
+msgstr "Račun 🏦"
+
+#. (itstool) path: credit/name
+#: docs/yelp/C/account.page:10 docs/yelp/C/configuration.page:10
+#: docs/yelp/C/import-export.page:10 docs/yelp/C/index.page:10
+#: docs/yelp/C/transaction.page:10 docs/yelp/C/transfer.page:10
+msgid "Fyodor Sobolev"
+msgstr "Fyodor Sobolev"
+
+#. (itstool) path: credit/name
+#: docs/yelp/C/account.page:14 docs/yelp/C/configuration.page:14
+#: docs/yelp/C/import-export.page:14 docs/yelp/C/index.page:14
+#: docs/yelp/C/transaction.page:14 docs/yelp/C/transfer.page:14
+msgid "Nicholas Logozzo"
+msgstr "Nicholas Logozzo"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/account.page:20
+msgid "Account"
+msgstr "Račun"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/account.page:21
+msgid ""
+"This page explains all properties of accounts in <app>Denaro</app>. Most of "
+"them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens "
+"automatically after you create a new account."
+msgstr ""
+"Ova stranica objašnjava sva svojstva računa u aplikaciji <app>Denaro</app>. "
+"Većina se prikazuju u <gui>Dijalog postavki računa</gui>. Ovaj se dijalog "
+"također automatski otvara nakon stvaranja novog računa."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/account.page:22
+msgid ""
+"Each account is stored in a single <file>*.nmoney</file> file. Files created "
+"in an older <em>stable</em> version of <app>Denaro</app> can be safely "
+"opened in a more recent <em>stable</em> version of the application. Although "
+"the app can run on different platforms (Windows and Linux), the <file>*."
+"nmoney</file> files are 100% compatible between platforms as long as they "
+"are from the same application version (i.e. V2023.1.0)."
+msgstr ""
+"Svaki račun se sprema u yasebnu <file>*.nmoney</file> datoteku. Datoteke "
+"stvorene u starijoj <em>stabilnoj</em> verziji <app>Denaro</app> aplikacije "
+"mogu se sigurno otvoriti u novijoj <em>stabilnoj</em> verziji aplikacije. "
+"Iako aplikacija radi na različitim platformama (Windows i Linux), <file>*."
+"nmoney</file> datoteke su 100 % kompatibilne između platformi sve dok su "
+"stvorene s istom verzijom aplikacije (tj. V2023.1.0)."
+
+#. (itstool) path: note/p
+#: docs/yelp/C/account.page:24
+msgid ""
+"Unstable (Beta and RC) versions of the application can contain bugs or "
+"unfinished modifications that can cause data loss. DO NOT use account files "
+"that contain real data in unstable versions of the app!"
+msgstr ""
+"Nestabilne verzije aplikacije (beta i kandidati za izdanje) mogu sadržati "
+"greške ili nedovršene promjene i mogu uzrokovati gubitak podataka. U "
+"nestabilnim verzijama aplikacije NEMOJ koristiti datoteke računa koje sadrže "
+"stvarne podatke!"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:29
+msgid "Name"
+msgstr "Ime"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:30
+msgid ""
+"Account name is shown in the list of recent accounts and in tabs. A name "
+"doesn't have a length limit and it can contain any characters, including "
+"emojis."
+msgstr ""
+"Ime računa se prikazuje u popisu nedavnih računa i na karticama. Dužina "
+"imena nije ograničena i može sadržati bilo koje znakove, uključujući emojije."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:33
+msgid "Account Type"
+msgstr "Vrsta računa"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:34
+msgid ""
+"There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> "
+"and 🟢<em>Business</em>. Account type is only a useful label that is shown "
+"in the list of recent accounts and doesn't affect how the application works "
+"or what you can do with an account. Each account type has its own color, "
+"these colors can be configured in <link xref=\"configuration\">global "
+"settings</link>."
+msgstr ""
+"Postoje 3 vrste računa: 🟣<em>žiro račun</em>, 🔵<em>štedni račun</em> i 🟢"
+"<em>poslovni račun</em>. Vrsta računa je samo korisna oznaka koja se "
+"prikazuje u popisu nedavnih računa i ne utječe na to kako aplikacija radi "
+"ili što možeš učiniti s računom. Svaka vrsta računa ima vlastitu boju. Boje "
+"se mogu odrediti u <link xref=\"configuration\">globalnim postavkama</link>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:37
+msgid "Default Transaction Type"
+msgstr "Standardna vrsta transakcije"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:38
+msgid ""
+"When you create a new transaction its type by default will be the same as in "
+"this setting."
+msgstr ""
+"Kada stvoriš novu transakciju, njezina će vrsta standardno biti ista kao u "
+"ovoj postavci."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:41
+msgid "Transaction Reminders Threshold"
+msgstr "Prag podsjetnika za transakcije"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:42
+msgid "The threshold used when showing reminders about upcoming transactions."
+msgstr ""
+"Prag koji se koristi prilikom prikazivanja podsjetnika o nadolazećim "
+"transakcijama."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:45
+msgid "System Currency"
+msgstr "Valuta sustava"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:46
+msgid ""
+"Every time the application starts, it gets data about currency and numbers "
+"formatting from your system locale, and this data is used to show currency "
+"symbol (unless custom currency is used, see below) and to determine in what "
+"format the numbers will be accepted as values for transaction amounts. A few "
+"examples:"
+msgstr ""
+"Svaki put kada se aplikacija pokrene, ona dobiva podatke o valuti i formatu "
+"brojeva iz postavke jezičnog područja tvog sustava. Ti se podaci koriste za "
+"prikaz simbola valute (osim ako se koristi prilagođena valuta, pogledaj "
+"dolje) i za određivanje formata brojeva koji će se prihvatiti kao "
+"vrijednosti za iznose transakcija. Par primjera:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:48
+msgid ""
+"If your locale is <em>English (US)</em>, currency symbol will be set to "
+"<em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
+msgstr ""
+"Ako je tvoje jezično područje <em>engleski (SAD)</em>, simbol valute će biti "
+"<em>$</em> i <em>1,000.00</em> će se prihvatiti kao valjani broj."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:49
+msgid ""
+"If your locale is <em>Italian</em>, currency symbol will be set to <em>€</"
+"em> and <em>1.000,00</em> will be accepted as a valid number."
+msgstr ""
+"Ako je tvoje jezično područje <em>hrvatski</em>, simbol valute će biti "
+"<em>€</em> i <em>1.000,00</em> će se prihvatiti kao valjani broj."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:50
+msgid ""
+"If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</"
+"em> and <em>1000,00</em> will be accepted as a valid number."
+msgstr ""
+"Ako je tvoje jezično područje <em>ruski</em>, simbol valute će biti <em>₽</"
+"em> i <em>1000,00</em> će se prihvatiti kao valjani broj."
+
+#. (itstool) path: note/p
+#: docs/yelp/C/account.page:53
+msgid ""
+"On Linux, it is possible to set different locales for system language and "
+"formats. Changing these settings varies depending on the desktop environment "
+"you are using. Despite differences in the location of these settings on the "
+"desktop, changing these settings modify system environment variables, such "
+"as <code>LANG</code>, <code>LC_TIME</code>, and <code>LC_MONETARY</code>. "
+"<app>Denaro</app> will try to use amount and date formats according to these "
+"variables. If the app fails to use the expected formats, please make sure "
+"the variables are set correctly via the <code>locale</code> command in a "
+"terminal. If you found a bug and want to report it, please provide the "
+"output of the <code>locale</code> command to allow developers to reproduce "
+"your issue with the same settings."
+msgstr ""
+"Na Linuxu je moguće postaviti različita jezična područja za jezik sustava i "
+"formate. Mijenjanje ovih postavki razlikuje se ovisno o radnoj površini. "
+"Unatoč razlikama u smještaju ovih postavki u okruženju, mijenjanje tih "
+"postavki mijenja varijable okruženja sustava, kao što su <code>LANG</code>, "
+"<code>LC_TIME</code> i <code>LC_MONETARY</code>. <app>Denaro</app> će "
+"pokušati koristiti formate iznosa i datuma u skladu s tim varijablama. Ako "
+"aplikacija ne uspije koristiti očekivane formate, provjeri jesu li varijable "
+"ispravno postavljene putem naredbe <code>locale</code> u terminalu. Ako "
+"naiđeš na grešku i želiš je prijaviti, pošalji rezultat naredbe "
+"<code>locale</code> kako bi programeri mogli reproducirati problem s istim "
+"postavkama."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:57
+msgid "Use Custom Currency"
+msgstr "Koristi prilagođenu valutu"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:58
+msgid ""
+"If this option is enabled, <gui>Custom Currency Symbol</gui> will be used "
+"instead of currency symbol provided by your system locale."
+msgstr ""
+"Ako je ova opcija aktivirana, umjesto simbola valute jezičnog područja tvog "
+"sustava koristit će se <gui>Prilagođeni simbol valute</gui>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:61
+msgid "Custom Currency Symbol"
+msgstr "Simbol prilagođene valute"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:62
+msgid "Up to 3 characters or 1 emoji. It can't be a number."
+msgstr "Do 3 znaka ili 1 emoji. Ne može biti broj."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:65
+msgid "Custom Currency Code"
+msgstr "Kȏd prilagođene valute"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:66
+msgid "Up to 3 characters or 1 emoji."
+msgstr "Do 3 znaka ili 1 emoji."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:67
+msgid ""
+"An example to understand the difference between a symbol and a code: <em>$</"
+"em> is a symbol, <em>USD</em> is a code."
+msgstr ""
+"Primjer za razumijevanje razlike između simbola i koda: <em>$</em> je "
+"simbol, <em>USD</em> je kod."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:70
+msgid "Custom Currency Amount Style"
+msgstr "Prilagođeni stil iznosa valute"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:71
+msgid "A choice of displaying an amount in one of the following ways:"
+msgstr "Izbor prikaza iznosa na jedan od sljedećih načina:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:73
+msgid "$n"
+msgstr "$n"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:74
+msgid "n$"
+msgstr "n$"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:75
+msgid "$ n"
+msgstr "$ n"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:76
+msgid "n $"
+msgstr "n $"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:80
+msgid "Custom Currency Decimal and Group Separators"
+msgstr "Prilagođeni decimalni znakovi i znakovi tisućica valute"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:81
+msgid "Up to 2 characters or 1 emoji."
+msgstr "Do 2 znaka ili 1 emoji."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:84
+msgid "Custom Currency Decimal Digits"
+msgstr "Prilagođeni broj decimala valute"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:85
+msgid ""
+"The size of decimal part of amount values. With \"Unlimited\" digits there "
+"will be as many numbers in decimal part as required to show the precise "
+"amount, but there will be no decimal part if the amount is an integer number."
+msgstr ""
+"Broj decimala za iznose. S opcijom „Neograničeno” prikazat će se onoliko "
+"decimala koliko je potrebno za prikaz točnog iznosa. Decimale se neće "
+"koristiti ako je iznos cijeli broj."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:88
+msgid "Password"
+msgstr "Lozinka"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:89
+msgid ""
+"Each account can be password-protected. Adding a password causes an account "
+"to become encrypted (making it impossible to read the data without "
+"decrypting it using the password). Be careful: if the password is lost, you "
+"won't be able to restore the data! A password can also be changed or removed "
+"using the account settings dialog of an open account. Removing a password "
+"will decrypt the account."
+msgstr ""
+"Svaki račun se može zaštititi lozinkom. Dodavanje lozinke uzrokuje "
+"šifriranje računa (što onemogućuje čitanje podataka bez dešifriranja pomoću "
+"lozinke). Oprez: ako izgubiš lozinku, nećeš moći obnoviti podatke! Lozinka "
+"se također može promijeniti ili ukloniti pomoću dijaloga postavki računa "
+"jednog otvorenog računa. Uklanjanje lozinke će dešifrirati račun."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:92
+msgid "Sort by Id, Date or Amount"
+msgstr "Razvrstaj prema ID-u, datumu ili iznosu"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:93
+msgid ""
+"Each account stores whether to sort transactions in the main window by their "
+"id, date or amount. Every time you change this, it will be saved to the "
+"account file and restored when you reopen the account."
+msgstr ""
+"Svaki račun sprema razvrstavanje transakcija u glavnom prozoru prema ID-u, "
+"datumu ili iznosu. Pri svakoj promjeni će se razvrstavanje spremiti u "
+"datoteku računa i obnoviti kada ponovo otvoriš račun."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:96
+msgid "Sorting Order"
+msgstr "Redoslijed"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:97
+msgid ""
+"Each account stores information about the order of transactions in the main "
+"window. Every time you change this, it will be saved to the account file and "
+"restored when you reopen the account."
+msgstr ""
+"Svaki račun sprema podatke o redoslijedu transakcija u glavnom prozoru. Pri "
+"svakoj promjeni će se redoslijed spremiti u datoteku računa i obnoviti kada "
+"ponovo otvoriš račun."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:100
+msgid "Groups Visibility"
+msgstr "Vidljivost grupa"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:101
+msgid ""
+"Each account stores information about whether the groups list in the main "
+"window is hidden or not. Every time you change groups list visibility, it's "
+"saved and then restored when you reopen the account."
+msgstr ""
+"Svaki račun sprema podatke o prikazivanju ii skrivanju popisa grupa u "
+"glavnom prozoru. Pri svakoj promjeni će se vidljivost popisa grupa spremiti "
+"i obnoviti kada ponovo otvoriš račun."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:104
+msgid "Tags Visibility"
+msgstr "Vidljivost oznaka"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:105
+msgid ""
+"Each account stores information about whether the tags list in the main "
+"window is hidden or not. Every time you change tags list visibility, it's "
+"saved and then restored when you reopen the account."
+msgstr ""
+"Svaki račun sprema podatke o prikazivanju ii skrivanju popisa oznaka u "
+"glavnom prozoru. Pri svakoj promjeni vidljivosti popisa oznaka, promjena će "
+"se spremiti i obnoviti kada ponovo otvoriš račun."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/configuration.page:8
+msgctxt "link"
+msgid "Configuration 🔧"
+msgstr "Konfiguracija 🔧"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/configuration.page:20
+msgid "Configuration"
+msgstr "Konfiguracija"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/configuration.page:21
+msgid ""
+"This page describes what you can change in the application configuration."
+msgstr "Ova stranica opisuje što možeš promijeniti u konfiguraciji aplikacije."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/configuration.page:22
+msgid ""
+"Depending on your platform, in the application interface the configuration "
+"is referred as either <gui>Preferences</gui> or <gui>Settings</gui>."
+msgstr ""
+"Ovisno o platformi, u sučelju aplikacije se konfiguracija zove "
+"<gui>Osobitosti</gui> ili <gui>Postavke</gui>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:25
+msgid "Theme"
+msgstr "Tema"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:26
+msgid ""
+"Set light or dark theme, or make <app>Denaro</app> follow your system theme. "
+"Changing this on Windows requires the application restart to apply."
+msgstr ""
+"Postavi svijetlu ili tamnu temu ili neka <app>Denaro</app> slijedi temu tvog "
+"sustava. Za primjenu promjene teme u Windows sustavu zahtijeva ponovno "
+"pokretanje aplikacije."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:29
+msgid "Transaction Default Color"
+msgstr "Standardna boja transakcija"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:30
+msgid ""
+"A color that will be selected by default when adding a new <link "
+"xref=\"transaction\">transaction</link> with unique color. Changing this "
+"will not affect existing transactions, even if they use previously selected "
+"default color."
+msgstr ""
+"Standardna boja prilikom dodavanja nove <link "
+"xref=\"transaction\">transakcije</link> s jedinstvenom bojom. Mijenjanje "
+"boje neće utjecati na postojeće transakcije, čak i ako koriste prethodno "
+"odabranu standardnu boju."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:33
+msgid "Transfer Default Color"
+msgstr "Standardna boja transfera"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:34
+msgid ""
+"A color that will be used for transactions created using <link "
+"xref=\"transfer\">transfer</link>. Changing this will not affect existing "
+"transactions."
+msgstr ""
+"Standardna boja za transakcije stvorene pomoću <link "
+"xref=\"transfer\">transfera</link>. Mijenjanje boje neće utjecati na "
+"postojeće transakcije."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:37
+msgid "Group Default Color"
+msgstr "Standardna boja grupa"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:38
+msgid ""
+"A color that will be selected by default when adding a new group. This is "
+"also a color for «Ungrouped» group."
+msgstr ""
+"Standardna boja prilikom dodavanja nove grupe. Koristi se i za „negrupirane” "
+"grupe."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:41
+msgid "Insert Decimal Separator"
+msgstr "Umetni decimalni znak"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:42
+msgid ""
+"Set for which keys pressed will the locale's decimal separator be inserted "
+"into an amount field: numpad period, any period and comma, or none. If "
+"decimal separator is already presented in a field, it will not be inserted."
+msgstr ""
+"Odredi tipke za umetanje decimalnog znaka jezičnog područja u polju iznosa: "
+"točka na numeričkoj tipkovnici, bilo koja točka i zarez ili ništa. Ako "
+"decimalni znak već postoji u polju onda se on neće umetnuti."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/import-export.page:8
+msgctxt "link"
+msgid "Import/Export 📤"
+msgstr "Uvoz/Izvoz 📤"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/import-export.page:20
+msgid "Import/Export"
+msgstr "Uvoz/Izvoz"
+
+#. (itstool) path: div/title
+#: docs/yelp/C/import-export.page:22
+msgid "Import Formats"
+msgstr "Formati uvoza"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:26
+msgid "Dates should be in <em>YYYYMMDD</em> format."
+msgstr "Datumi bi trebali biti u formatu <em>YYYYMMDD</em>."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:30
+msgid "Dates should be in English (US) format (<em>MM/DD/YYYY</em>)."
+msgstr ""
+"Datumi bi trebali biti u engleskom (SAD) formatu (<em>MM/DD/YYYY</em>)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:34
+msgid ""
+"❗ While CSV is a common format and some banks allow their users to export "
+"information as CSV, these files are in fact tables that can contain "
+"arbitrary data. Importing a CSV file created in other program will fail, "
+"because its data will not be compatible with what <app>Denaro</app> tries to "
+"get from a file. The purpose of CSV import/export is to provide a way to add "
+"data to an account using external programs such as text editors and office "
+"suites. Import will only add new transactions without overriding existing "
+"ones. If you want to create a CSV file manually, this is the header that "
+"includes all columns <app>Denaro</app> expects to find:"
+msgstr ""
+"❗ Iako je CSV uobičajeni format i neke banke dopuštaju svojim korisnicima "
+"izvoz podataka u CSV formatu, te su datoteke zapravo tablice koje mogu "
+"sadržati proizvoljne podatke. Uvoz CSV datoteke stvorene u jednom drugom "
+"programu neće uspjeti jer njezini podaci neće biti kompatibilni s onim što "
+"<app>Denaro</app> pokušava dobiti iz datoteke. Svrha uvoza/izvoza CSV "
+"datoteka je omogućiti način dodavanja podataka računu pomoću programa kao "
+"što su uređivači teksta i uredski paketi. Uvoz će samo dodati nove "
+"transakcije bez prepisivanja postojećih. Ako želiš ručno izraditi CSV "
+"datoteku, ovo je zaglavlje koje uključuje sve stupce koje <app>Denaro</app> "
+"očekuje pronaći:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:39
+msgid "Transaction Id, should be unique for a given account. Ids start with 1."
+msgstr ""
+"ID transakcije. Mora biti jedinstven za određeni račun. ID-ovi počinju s 1."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:43
+msgid ""
+"Transaction date (or start date in case of repeat transaction), should be in "
+"English (US) format (<em>MM/DD/YYYY</em>)."
+msgstr ""
+"Datum transakcije (ili početni datum u slučaju ponovljajuće transakcije). "
+"Mora biti u engleskom (SAD) formatu (<em>MM/DD/YYYY</em>)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:47
+msgid ""
+"Transaction description, it can contain any characters except semicolon."
+msgstr ""
+"Opis transakcije. Može sadržati bilo koje znakove osim točke sa zarezom (;)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:51
+msgid "Transaction type: 0 for income, 1 for expense."
+msgstr "Vrsta transakcije: 0 za prihod, 1 za rashod."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:55
+msgid "A number representing transaction repeat interval:"
+msgstr "Broj koji predstavlja interval ponavljanja transakcije:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:56
+msgid "0 - Never"
+msgstr "0 – Nikada"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:57
+msgid "1 - Daily"
+msgstr "1 – Dnevno"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:58
+msgid "2 - Weekly"
+msgstr "2 – Tjedno"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:59
+msgid "7 - Biweekly"
+msgstr "7 – Dvotjeno"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:60
+msgid "3 - Monthly"
+msgstr "3 – Mjesečno"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:61
+msgid "4 - Quarterly"
+msgstr "4 – Kvartalno"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:62
+msgid "5 - Yearly"
+msgstr "5 – Godišnje"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:63
+msgid "6 - Biyearly"
+msgstr "6 – Dvogodišnje"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:64
+msgid ""
+"See <em>Repeat Interval</em> in <link xref=\"transaction\">transaction</"
+"link> page for details about repeat transactions."
+msgstr ""
+"Za detalje o ponovljajućim transakcijama pogledaj <em>Interval ponavljanja</"
+"em> na stranici <link xref=\"transaction\">transakcija</link>."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:68
+msgid ""
+"Should be either an Id of source transaction or 0 if it's a source "
+"transaction or -1 if it's not repeat transaction."
+msgstr ""
+"Treba biti ID izvorne transakcije ili 0 ako je izvorna transakcija ili -1 "
+"ako nije ponavljajuća transakcija."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:72
+msgid ""
+"End date for repeat transaction, should be in English (US) format (<em>MM/DD/"
+"YYYY</em>). Leave it empty if it's not repeat transaction."
+msgstr ""
+"Krajnji datum ponavljajuće transakcije. Mora biti u engleskom (SAD) formatu "
+"(<em>MM/DD/YYYY</em>). Ostavi polje praznim ako nije ponavljajuća "
+"transakcija."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:76
+msgid "Transaction amount in English (US) format (<em>123,456.78</em>)."
+msgstr "Iznos transakcije u engleskom (SAD) formatu (<em>123,456.78</em>)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:80
+msgid ""
+"Transaction color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, "
+"<em>G</em> and <em>B</em> are integers in range between 0 and 255."
+msgstr ""
+"Boja transakcije u <em>rgb(R,G,B)</em> formatu, gdje su <em>R</em>, <em>G</"
+"em> i <em>B</em> cijeli brojevi od 0 do 255."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:84
+msgid "Whether a transaction should use group color: 0 — false, 1 — true."
+msgstr "Treba li transakcija koristiti boju grupe: 0 – ne, 1 – da."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:88
+msgid ""
+"Transaction's group Id. Ids start with 1. For ungrouped transaction it "
+"should be -1 (not 0, this is incorrect value for group Id)."
+msgstr ""
+"ID grupe transakcije. ID-ovi počinju s brojem 1. Za negrupirane transakcije "
+"trebao bi biti -1 (ne 0, jer to nije valjana vrijednost za ID grupe)."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:92
+msgid ""
+"Transaction's group name, should match group Id. It can contain any "
+"characters except semicolon. Leave it empty for ungrouped transaction, in "
+"any other cases it shouldn't be empty."
+msgstr ""
+"Ime grupe transakcije treba odgovarati ID-u grupe. Može sadržati bilo koje "
+"znakove osim točke sa zarezom (;). Ostavi polje prazno za negrupirane "
+"transakcije. U svim drugim slučajevima polje ne bi trebalo biti prazno."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:96
+msgid ""
+"Transaction's group description, should match group Id. It can contain any "
+"characters except semicolon and can be empty. Leave it empty for ungrouped "
+"transaction."
+msgstr ""
+"Opis grupe transakcije trebao bi odgovarati ID-u grupe. Može sadržati bilo "
+"koje znakove osim točke sa zarezom (;) i može biti prazan. Ostavi polje "
+"prazno za negrupiranu transakciju."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:100
+msgid ""
+"Group color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, "
+"<em>G</em> and <em>B</em> are integers in range between 0 and 255."
+msgstr ""
+"Boja grupe u <em>rgb(R,G,B)</em> formatu, gdje su <em>R</em>, <em>G</em> i "
+"<em>B</em> cijeli brojevi od 0 do 255."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:103
+msgid "Receipt and notes are not present in CSV."
+msgstr "CSV datoteka ne sadrži podatke o priznanici i bilješke."
+
+#. (itstool) path: div/title
+#: docs/yelp/C/import-export.page:108
+msgid "Export Formats"
+msgstr "Formati izvoza"
+
+#. (itstool) path: div/p
+#: docs/yelp/C/import-export.page:109
+msgid ""
+"You can select whether to export all information or only from the current "
+"view. If you select the current view, currently displayed transactions will "
+"be exported in the same order in which they are shown."
+msgstr ""
+"Odaberi želiš li izvesti sve podatke ili samo podatke iz trenutačnog "
+"prikaza. Ako odabereš trenutačni prikaz, trenutačno prikazane transakcije će "
+"se izvesti u prikazanom redoslijedu."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:113
+msgid ""
+"A file will contain an account information, a list of transactions and "
+"images of receipts. Transactions are colored like in the application, but "
+"colors are modified by making them half-transparent in order to make black "
+"text always clearly visible. You can set a password for an exported file."
+msgstr ""
+"Datoteka će sadržati podatke o računu, popis transakcija i slike priznanica. "
+"Transakcije su obojene kao u aplikaciji, ali su boje poluprozirne, kako bi "
+"crni tekst uvijek bio jasno vidljiv. Za izvezenu datoteku možeš postaviti "
+"lozinku."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/index.page:7
+msgctxt "link"
+msgid "Denaro Help"
+msgstr "Denaro pomoć"
+
+#. (itstool) path: info/title
+#: docs/yelp/C/index.page:8
+msgctxt "text"
+msgid "Denaro Help"
+msgstr "Denaro pomoć"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/index.page:20
+msgid "<_:media-1/> Denaro Help"
+msgstr "<_:media-1/> Denaro pomoć"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/index.page:21
+msgid ""
+"This documentation will help you understand how to configure and manage data "
+"in <app>Denaro</app> to get the most of the application."
+msgstr ""
+"Ova dokumentacija će ti pomoći konfigurirati i upravljati podacima u "
+"aplikaciji <app>Denaro</app> za najbolje iskorištavanje aplikacije."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/index.page:22
+msgid ""
+"To get support, use <link href=\"https://github.com/NickvisionApps/Denaro/"
+"issues\">issues</link> or <link href=\"https://github.com/NickvisionApps/"
+"Denaro/discussions\">discussions</link> on Github, or <link href=\"https://"
+"bit.ly/3GrfEid\">join our Matrix channel</link>."
+msgstr ""
+"Za dobivanje pomoći koristi <link href=\"https://github.com/NickvisionApps/"
+"Denaro/issues\">probleme</link> ili <link href=\"https://github.com/"
+"NickvisionApps/Denaro/discussions\">rasprave</link> na Githubu ili se <link "
+"href=\"https://bit.ly/3GrfEid\">pridruži našem Matrix kanalu</link>."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/transaction.page:8
+msgctxt "link"
+msgid "Transaction 🧾"
+msgstr "Transakcija 🧾"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/transaction.page:20
+msgid "Transaction"
+msgstr "Transakcija"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transaction.page:21
+msgid "This page explains all properties of transactions in <app>Denaro</app>."
+msgstr ""
+"Ova stranica objašnjava sva svojstva transakcija u aplikaciji <app>Denaro</"
+"app>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:25
+msgid "Id"
+msgstr "ID"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:26
+msgid ""
+"Each transaction has an Id that is unique for a given account. Ids start "
+"with 1 and increase for every transaction added. Ids can't be changed, ids "
+"of removed transactions are not reused."
+msgstr ""
+"Svaka transakcija ima ID koji je jedinstven za određeni račun. ID-ovi "
+"počinju s 1 i povećavaju se sa svakom dodanom transakcijom. ID-ovi se ne "
+"mogu mijenjati. ID-ovi uklonjenih transakcija se ne koriste ponovo."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:29
+msgid "Description"
+msgstr "Opis"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:30
+msgid "No limit on length. It can't contain semicolon."
+msgstr ""
+"Dužina opisa nije ograničena. Ne smije sadržati znak točke sa zarezom (;)."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:33
+msgid "Amount"
+msgstr "Iznos"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:34
+msgid ""
+"A number in a format that is valid for your locale, see <em>System Currency</"
+"em> in <link xref=\"account\">Account page</link> for details."
+msgstr ""
+"Broj u ispravnom formatu za tvoje jezično područje. Za detalje pogledaj "
+"<em>Valuta sustava</em> u <link xref=\"account\">Stranica računa</link>."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:37
+msgid "Type"
+msgstr "Vrsta"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:38
+msgid ""
+"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link "
+"xref=\"account\">account settings</link> will be selected when you open a "
+"dialog to add new transaction."
+msgstr ""
+"<em>Prihod</em> ili <em>Rashod</em>. Odabrana opcija u <link "
+"xref=\"account\">postavkama računa</link> će se standardno odabrati kada "
+"otvoriš dijalog za dodavanje nove transakcije."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:41
+msgid "Date"
+msgstr "Datum"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:42
+msgid ""
+"Any date can be selected, you can also create transactions for future dates."
+msgstr ""
+"Možeš odabrati bilo koji datum. Također možeš stvoriti transakcije za buduće "
+"datume."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:45
+msgid "Repeat Interval"
+msgstr "Interval ponavljanja"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:46
+msgid ""
+"Use this option to create a recurring transaction. After you add transaction "
+"with repeat interval, this transaction will become a <em>source</em> "
+"transaction. <app>Denaro</app> will automatically generate <em>repeat</em> "
+"transactions for the dates up until today or a provided end date if set in "
+"the past. <em>Repeat</em> transactions can't be edited or deleted, only "
+"<em>source</em> can be modified. When you modify <em>source</em> transaction "
+"<app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</"
+"em> transactions. If you choose to disassociate, <em>repeat</em> "
+"transactions become normal transactions and can be edited or deleted "
+"separately."
+msgstr ""
+"Koristi ovu opciju za stvaranje ponavljajuće transakcije. Nakon što dodaš "
+"transakciju s intervalom ponavljanja, ova će transakcija postati "
+"<em>izvorna</em> transakcija. <app>Denaro</app> će automatski generirati "
+"<em>ponovljajuće</em> transakcije za datume do danas ili za navedeni krajnji "
+"datum ako je postavljen u prošlosti. <em>Ponovljajuće</em> transakcije se ne "
+"mogu uređivati ili izbrisati, samo se <em>izvor</em> može promijeniti. Kada "
+"promijeniš <em>izvornu</em> transakciju, <app>Denaro</app> će te pitati "
+"želiš li promijeniti ili poništiti vezu <em>ponovljajućih</em> transakcija. "
+"Ako odlučiš poništiti vezu, <em>ponovljajuće</em> transakcije postaju "
+"normalne transakcije i mogu se zasebno uređivati ili brisati."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:49
+msgid "Repeat End Date"
+msgstr "Krajnji datum ponavljanja"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:50
+msgid ""
+"End date for a transaction with repeat. It can't be earlier than or on the "
+"same day as start date."
+msgstr ""
+"Krajnji datum za ponavljajuću transakciju. Ne može biti prije ili na isti "
+"dan kao početni datum."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:53
+msgid "Group"
+msgstr "Grupa"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:54
+msgid ""
+"Each transaction can belong to only one group or none («Ungrouped» group)."
+msgstr ""
+"Svaka transakcija može pripadati samo jednoj grupi ili nijednoj "
+"(„Negrupirana” grupa)."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:57
+msgid "Color"
+msgstr "Boja"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:58
+msgid ""
+"A color for transaction. Can be set to use either a group color or a unique "
+"color. When selecting unique color, it will be set by default to the color "
+"selected in <link xref=\"configuration\">configuration</link>, but can be "
+"changed to any color."
+msgstr ""
+"Boja za transakciju. Može se postaviti da koristi boju grupe ili jedinstvene "
+"boje. Prilikom biranja jedinstvene boje, boja će se standardno postaviti na "
+"odabranu boju u <link xref=\"configuration\">konfiguraciji</link>, ali se "
+"može promijeniti u bilo koju boju."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:61
+msgid "Tags"
+msgstr "Oznake"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:62
+msgid ""
+"A list of tags for transaction. A transaction can have unlimited number of "
+"tags (or have no tags). Tags can contain any characters except comma (<code>,"
+"</code>), and have any length, but they are expected to be short keywords. "
+"Tags are meant to be used for additional filtering when using groups is not "
+"enough. Tags are only saved in transactions themselves, and as result unused "
+"tags disappear automatically on account closing."
+msgstr ""
+"Popis oznaka za transakciju. Transakcija može imati neograničen broj oznaka "
+"(ili ne imati oznake). Oznake mogu sadržati bilo koje znakove osim zareza "
+"(<code>,</code>) i imati bilo koju dužinu, ali se očekuje da budu kratke "
+"ključne riječi. Oznake su namijenjene za dodatno filtriranje kada korištenje "
+"grupa nije dovoljno. Oznake se spremaju samo u samim transakcijama, a kao "
+"rezultat toga nekorištene oznake automatski nestaju pri zatvaranju računa."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:65
+msgid "Receipt"
+msgstr "Priznanica"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:66
+msgid ""
+"An image of a receipt for transaction. You can upload JPEG or PNG image or "
+"PDF document, but no matter the format it will be converted and saved as "
+"JPEG image. In case of PDF, only the first page will be saved. You can "
+"delete or upload another file anytime."
+msgstr ""
+"Slika priznanice za transakciju. Možeš učitati JPEG ili PNG sliku ili PDF "
+"dokument, ali bez obzira na format slika će se pretvorit i spremiti kao JPEG "
+"slika. U slučaju PDF-a će se spremiti samo prva stranica. U bilo kojem "
+"trenutku možeš izbrisati ili prenijeti jednu drugu datoteku."
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:69
+msgid "Notes"
+msgstr "Bilješke"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:70
+msgid "A freeform text note to attach to transaction."
+msgstr "Tekstna bilješka za prilaganje transakciji."
+
+#. (itstool) path: info/title
+#: docs/yelp/C/transfer.page:8
+msgctxt "link"
+msgid "Transfer 💸"
+msgstr "Transfer 💸"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/transfer.page:20
+msgid "Transfer"
+msgstr "Transfer"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:21
+msgid ""
+"Transfer is a way to move money from one account to another. After running a "
+"transfer 2 transactions will be created with the following descriptions:"
+msgstr ""
+"Transfer je način premještanja novca s jednog računa na drugi. Nakon "
+"pokretanja transfera stvorit će se 2 transakcije sa sljedećim opisima:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transfer.page:24
+msgid ""
+"«Transfer to <input>Destination Account Name</input>» on source account."
+msgstr "„Transfer na <input>Ime odredišnog računa</input>” na izvornom računu."
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transfer.page:27
+msgid ""
+"«Transfer from <input>Source Account Name</input>» on destination account."
+msgstr "„Transfer iz <input>Ime izvornog računa</input>” na odredišni račun."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:30
+msgid ""
+"Transactions created using transfer are simple transactions that can be "
+"freely edited or deleted. These transactions are not connected: modifying "
+"transaction on source account will not affect transaction on destination "
+"account, and vice versa."
+msgstr ""
+"Transakcije koje su stvorene korištenjem tranfera su jednostavne transakcije "
+"koje se mogu slobodno urediti ili izbrisati. Ove transakcije nisu povezane: "
+"mijenjanje transakcije u izvornom računu neće utjecati na transakciju u "
+"odredišnom računu, i obratno."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:31
+msgid ""
+"Transfer doesn't allow you to create repeating transactions or set any "
+"properties other than the amount. The color selected in <link "
+"xref=\"configuration\">configuration</link> will be used for created "
+"transactions."
+msgstr ""
+"Transfer ne dozvoljava stvaranje ponavljajućih transakcija niti postavljanje "
+"bilo kojih svojstava osim iznosa. Za stvaranje transakcije će se koristiti "
+"boja koja je odabrana u <link xref=\"configuration\">konfiguraciji</link>."
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:32
+msgid ""
+"If you create a transfer between accounts with different currencies, you "
+"will be asked to provide a conversion rate."
+msgstr ""
+"Ako stvoriš transfer između računa s različitim valutama morat ćeš zadati "
+"stopu konverzije."
+
+#~ msgid "Checking Account Color"
+#~ msgstr "Boja žiro računa"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Checking</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Boja za označavanje <link xref=\"account\">računa</link> vrste <em>žiro "
+#~ "račun</em> u popisu nedavnih računa."
+
+#~ msgid "Savings Account Color"
+#~ msgstr "Boja štednog računa"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Savings</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Boja za označavanje <link xref=\"account\">računa</link> vrste <em>štedni "
+#~ "račun</em> u popisu nedavnih računa."
+
+#~ msgid "Business Account Color"
+#~ msgstr "Boja poslovnog računa"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Business</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "Boja za označavanje <link xref=\"account\">računa</link> vrste "
+#~ "<em>poslovni račun</em> u popisu nedavnih računa."
+
+#~ msgid "Use Native Digits"
+#~ msgstr "Koristi brojke jezika"
+
+#~ msgid ""
+#~ "Whether to use numerals that are native for your locale instead of latin "
+#~ "digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
+#~ "instead of <em>012</em> for locales that use Eastern Arabic numerals."
+#~ msgstr ""
+#~ "Da li umjesto arapskih brojki koristiti brojke tvog tvoje jezičnog "
+#~ "područja. Na primjer, ako je ova postavka deaktivirana, umjesto <em>012</"
+#~ "em> će se koristiti <em>٠١٢</em> za jezična područja koja koriste "
+#~ "istočnoarapske brojeve."
+
+#~ msgid "CSV Backup Folder"
+#~ msgstr "Mapa sigurnosnih kopija u CSV formatu"
+
+#~ msgid ""
+#~ "A folder where your data will be automatically <link xref=\"import-"
+#~ "export\">exported to CSV</link> after every change. This feature doesn't "
+#~ "work for password-protected accounts, because CSV files can't be password-"
+#~ "protected."
+#~ msgstr ""
+#~ "Mapa u kojoj će se tvoji podaci automatski <link xref=\"import-"
+#~ "export\">izvesti u CSV datoteku</link> nakon svake promjene. Ova funkcija "
+#~ "ne radi za račune koji su zaštićeni lozinkom jer CSV datoteke ne mogu "
+#~ "biti zaštićene lozinkom."

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Conti</title>
+<link rel="stylesheet" type="text/css" href="it.css">
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body lang="it" dir="ltr"><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Aiuto di Denaro">Aiuto di Denaro</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Conti</span></h1></div>
+<div class="region">
+<div class="contents pagewide">
+<p class="p">In questa pagina vengono spiegate tutte le proprietà degli account in <span class="app">Denaro</span>. La maggior parte di esse è mostrata nella finestra di dialogo <span class="gui">Impostazioni conto</span>. Questa finestra viene aperta automaticamente alla creazione di un nuovo conto.</p>
+<p class="p">Ciascun conto è registrato in un singolo file <span class="file">*.nmoney</span>. I file creati da una vecchia versione <span class="em">stabile</span> di <span class="app">Denaro</span> possono essere aperti senza rischi con una versione <span class="em">stabile</span> più recente dell'applicazione. Anche se l'applicazione può girare su più piattaforme (Windows e Linux), i file <span class="file">*.nmoney</span> sono compatibili al 100% tra le piattaforme purché provengano dalla stessa versione dell'applicazione (per esempio V2023.1.0).</p>
+<div class="note note-warning" title="Avvertimento">
+<svg height="24" width="24" version="1.1">
+ <path class="yelp-svg-fill" d="m11.92 3.3047a1.3872 1.3872 0 0 0 -1.129 0.6933l-8.6055 14.922a1.3872 1.3872 0 0 0 1.2012 2.08l17.226-0.008a1.3872 1.3872 0 0 0 1.201 -2.08l-8.619-14.916a1.3872 1.3872 0 0 0 -1.136 -0.6913 1.3872 1.3872 0 0 0 -0.139 0zm0.08 4.6953a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1 1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1zm0 9a1 1 0 0 1 1 1 1 1 0 0 1 -1 1 1 1 0 0 1 -1 -1 1 1 0 0 1 1 -1z"></path>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Le versioni instabili (beta ed RC) dell'applicazione possono contenere errori o modifiche non terminate, che possono causare la perdita di dati. È sconsigliato usare versioni instabili l'applicazione con file conto che contengono i propri dati veri.</p></div></div></div>
+</div>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms">Nome</dt>
+<dd class="terms"><p class="p">Il nome del conto viene mostrato nella lista dei conti più recenti e nelle schede. I nomi non hanno un limite di lunghezza e possono contenere qualsiasi carattere, anche gli emoji.</p></dd>
+<dt class="terms">Tipo di conto</dt>
+<dd class="terms"><p class="p">Sono disponibili tre tipi di conto: 🟣<span class="em">conto corrente</span>, 🔵<span class="em">deposito</span> and 🟢<span class="em">aziendale</span>. Il tipo di conto è solo un'etichetta, mostrata nella lista dei conti recenti, che non influisce sul funzionamento dell'applicazione o sulle azioni disponibili per ciascun conto. Ciascun tipo di conto ha il suo colore, che può essere configurato nelle <span class="link"><a href="configuration.html" title="Configurazione">impostazioni generali</a></span>.</p></dd>
+<dt class="terms">Tipo di transazione predefinito</dt>
+<dd class="terms"><p class="p">Questo parametro determina il tipo predefinito di una nuova transazione alla sua creazione.</p></dd>
+<dt class="terms">Soglia per i promemoria delle transazioni</dt>
+<dd class="terms"><p class="p">La soglia utilizzata quando vengono visualizzati promemoria sulle transazioni imminenti.</p></dd>
+<dt class="terms">Valuta di sistema</dt>
+<dd class="terms">
+<p class="p">Ad ogni avvio, l'applicazione recupera i dati sulla valuta e la formattazione dei numeri dai formati di sistema, e usa questi dati per mostrare i simboli delle valute (a meno che sia stata scelta una valuta personalizzata, vedere più sotto) e per determinare in quale formato accettare i valori per l'ammontare delle transazioni. Alcuni esempi:</p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list"><p class="p">Se il proprio formato è <span class="em">Inglese (US)</span>, il simbolo della valuta sarà impostato su <span class="em">$</span> e <span class="em">1,000.00</span> verrà accettato come un valore numerico valido.</p></li>
+<li class="list"><p class="p">Se il proprio formato è <span class="em">Italiano</span>, il simbolo della valuta sarà impostato su <span class="em">€</span> e <span class="em">1.000,00</span> verrà accettato come un valore numerico valido.</p></li>
+<li class="list"><p class="p">Se il proprio formato è <span class="em">Russo</span>, il simbolo della valuta sarà impostato su <span class="em">₽</span> e <span class="em">1000,00</span> verrà accettato come un valore numerico valido.</p></li>
+</ul></div></div></div>
+<div class="note note-advanced" title="Avanzato">
+<svg height="24" width="24" version="1.1">
+ <g>
+  <path class="yelp-svg-fill" d="m5.4473 12.572c-2.039 0.957-3.4473 3.019-3.4473 5.428v4h20v-4c0-2.406-1.406-4.466-3.441-5.424a8 8 0 0 1 -6.559 3.424 8 8 0 0 1 -6.5527 -3.428z"></path>
+  <path class="yelp-svg-fill" d="m12 3a5 5 0 0 0 -5 5 5 5 0 0 0 5 5 5 5 0 0 0 5 -5 5 5 0 0 0 -5 -5zm0 3a2 2 0 0 1 2 2 2 2 0 0 1 -2 2 2 2 0 0 1 -2 -2 2 2 0 0 1 2 -2z"></path>
+  <path class="yelp-svg-fill" d="m15.312 6 3.688 1v2l-3.4688 1z"></path>
+  <path class="yelp-svg-fill" d="m14 11.312-1 3.688h-2l-1-3.469z"></path>
+  <path class="yelp-svg-fill" d="m10 4.6875 1-3.6875h2l1 3.4688z"></path>
+  <path class="yelp-svg-fill" d="m8.6875 10-3.6875-1v-2l3.4688-1z"></path>
+  <path class="yelp-svg-fill" d="m12.928 4.2435 3.3146-1.9003 1.4142 1.4142-1.7457 3.1599z"></path>
+  <path class="yelp-svg-fill" d="m15.757 8.9281 1.9003 3.3146-1.4142 1.4142-3.1599-1.7457z"></path>
+  <path class="yelp-svg-fill" d="m8.2435 7.0719-1.9004-3.3145 1.4143-1.4143 3.1596 1.7457z"></path>
+  <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
+ </g>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Su Linux è possibile impostare diversi formati per la lingua e i valori numerici. Il modo per modificare queste impostazioni varia a seconda dell'ambiente desktop usato. Nonostante queste impostazioni si possano trovare in luoghi diversi del desktop, la loro modifica influisce su alcune variabili d'ambiente di sistema come <span class="code">LANG</span>, <span class="code">LC_TIME</span>, e <span class="code">LC_MONETARY</span>. <span class="app">Denaro</span> tenterà di usare i formati numerici e di data specificati da queste variabili. Se non vengono usati i formati che ci si aspetta, assicurarsi che le variabili siano impostate correttamente usando il comando <span class="code">locale</span> in un terminale. Se si verifica un errore e lo si vuole segnalare, fornire l'output del comando <span class="code">locale</span> per permettere agli sviluppatori di riprodurre tale errore con le medesime impostazioni.</p></div></div></div>
+</div>
+</dd>
+<dt class="terms">Usa valuta personalizzata</dt>
+<dd class="terms"><p class="p">Se abilitata, <span class="gui">simbolo valuta personalizzato</span> verrà usato al posto del simbolo fornito dalle impostazioni del proprio sistema.</p></dd>
+<dt class="terms">Simbolo valuta personalizzato</dt>
+<dd class="terms"><p class="p">Fino a tre caratteri oppure un emoji. Non può essere un numero.</p></dd>
+<dt class="terms">Codice valuta personalizzato</dt>
+<dd class="terms">
+<p class="p">Fino a tre caratteri oppure un emoji.</p>
+<p class="p">Un esempio per capire la differenza tra simbolo e codice: <span class="em">$</span> è un simbolo, <span class="em">USD</span> è un codice.</p>
+</dd>
+<dt class="terms">Stile importo valuta personalizzato</dt>
+<dd class="terms">
+<p class="p">Possibilità di visualizzare un importo in uno dei seguenti modi:</p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list"><p class="p">$n</p></li>
+<li class="list"><p class="p">n$</p></li>
+<li class="list"><p class="p">$ n</p></li>
+<li class="list"><p class="p">n $</p></li>
+</ul></div></div></div>
+</dd>
+<dt class="terms">Separatore decimale e dei gruppi personalizzato</dt>
+<dd class="terms"><p class="p">Fino a due caratteri oppure un emoji.</p></dd>
+<dt class="terms">Cifre decimali personalizzate</dt>
+<dd class="terms"><p class="p">La dimensione della parte decimale degli importi. Con «Illimitata» ci potranno essere tante cifre decimali quante ne serviranno per mostrare l'importo esatto, ma non verrà mostrata la parte decimale se l'importo è un numero intero.</p></dd>
+<dt class="terms">Password</dt>
+<dd class="terms"><p class="p">Ciascun conto può essere protetto da una password. Aggiungere una password rende il conto cifrato (rendendo impossibile leggerne i dati senza decifrarlo con la password). Attenzione: se la password viene dimenticata, non sarà possibile ripristinare i dati. È possibile rimuovere o cambiare la password tramite le impostazioni del conto, una volta aperto. Rimuovere la password decifrerà il conto.</p></dd>
+<dt class="terms">Ordinare per Id, data o importo</dt>
+<dd class="terms"><p class="p">Ogni conto registra se ordina le transazioni nella finestra principale per il loro ID, la data o l'importo. Quando si modifica la modalità di ordinamento, viene salvata nel file del conto e riprisrinata alla riapertura.</p></dd>
+<dt class="terms">Verso dell'ordinamento</dt>
+<dd class="terms"><p class="p">Ogni conto registra il modo in cui ordina le transazioni nella finestra principale. Quando si modifica la modalità di ordinamento, viene salvata nel file del conto e ripristinata alla riapertura.</p></dd>
+<dt class="terms">Visibilità dei gruppi</dt>
+<dd class="terms"><p class="p">Ogni conto registra se la lista dei gruppi nella finestra principale è nascosta o no. Quando si modifica la visibilità dei gruppi, viene salvata e ripristinata alla riapertura del conto.</p></dd>
+<dt class="terms">Visibilità dei tag</dt>
+<dd class="terms"><p class="p">Ogni account memorizza informazioni sul fatto che l'elenco dei tag nella finestra principale sia nascosto o meno. Ogni volta che modifichi la visibilità dell'elenco dei tag, questo viene salvato e quindi ripristinato quando riapri l'account.</p></dd>
+</dl></div></div></div>
+</div>
+<section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">Ulteriori informazioni</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Aiuto di Denaro">Aiuto di Denaro</a></li></ul></div>
+</div></div></div>
+</div></section>
+</div>
+<div class="clear"></div></article><footer><div class="inner pagewide"><div class="about ui-expander" role="contentinfo">
+<div class="yelp-data yelp-data-ui-expander" data-yelp-expanded="false"></div>
+<div class="inner">
+<div class="hgroup"><h2><span class="title">Informazioni</span></h2></div>
+<div class="region"><div class="contents">
+<div class="copyrights">
+<div class="copyright">© 2023 Fyodor Sobolev</div>
+<div class="copyright">© 2023 Nicholas Logozzo</div>
+</div>
+<div class="credits">
+<div class="credits-authors">
+<div class="title"><span class="title">Scritto da</span></div>
+<ul class="credits"><li>Fyodor Sobolev</li></ul>
+</div>
+<div class="credits-publishers">
+<div class="title"><span class="title">Pubblicato da</span></div>
+<ul class="credits"><li>Nicholas Logozzo</li></ul>
+</div>
+<div class="credits-blank"></div>
+<div class="credits-blank"></div>
+</div>
+<div class="license">
+<div class="title"><span class="title">Creative Commons</span></div>
+<div class="contents"><p class="p">Creative Commons Attribution 4.0 International License</p></div>
+</div>
+</div></div>
+</div>
+</div></div></footer>
+</div></main></body>
+</html>

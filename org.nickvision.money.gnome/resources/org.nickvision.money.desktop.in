@@ -1,0 +1,15 @@
+[Desktop Entry]
+Version=1.0
+Name=Denaro
+Comment=Manage your personal finances
+Exec=@CMAKE_INSTALL_FULL_LIBDIR@/@PROJECT_NAME@/@PROJECT_NAME@.gnome
+Icon=@PROJECT_NAME@
+Terminal=false
+Type=Application
+MimeType=application/x-nmoney
+Categories=Office;Finance;
+Keywords=money;finance;wallet;cash;bank;Nickvision;
+X-GNOME-UsesNotifications=true
+StartupNotify=true
+# Translators: Do NOT translate or transliterate this text (these are enum types)!
+X-Purism-FormFactor=Workstation;Mobile;

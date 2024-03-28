@@ -1,0 +1,87 @@
+<UserControl
+    x:Class="Nickvision.Money.WinUI.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nickvision.Money.WinUI"
+    xmlns:nickvision="using:Nickvision.Money.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto">
+        <StackPanel x:Name="StackPanel" Margin="40,24,40,24" Orientation="Vertical" Spacing="6">
+            <TextBlock x:Name="LblTitle" Margin="0,0,0,24" Style="{ThemeResource NavigationViewItemHeaderTextStyle}" FontSize="26"/>
+
+            <TextBlock x:Name="LblUserInterface" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
+
+            <nickvision:SettingsRow x:Name="RowTheme" Glyph="&#xE793;">
+                <nickvision:SettingsRow.Child>
+                    <ComboBox x:Name="CmbTheme" SelectionChanged="OnCmbChanged"/>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+
+            <nickvision:SettingsRow x:Name="RowAutomaticallyCheckForUpdates" Glyph="&#xE117;">
+                <nickvision:SettingsRow.Child>
+                    <ToggleSwitch x:Name="TglAutomaticallyCheckForUpdates" Toggled="OnSwitchToggled"/>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+
+            <TextBlock x:Name="LblColors" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
+
+            <nickvision:SettingsRow x:Name="RowDefaultTransaction" Glyph="&#xE790;">
+                <nickvision:SettingsRow.Child>
+                    <Button>
+                        <Button.Content>
+                            <Rectangle x:Name="RctDefaultTransaction" Width="20" Height="20"/>
+                        </Button.Content>
+
+                        <Button.Flyout>
+                            <Flyout>
+                                <ColorPicker x:Name="ClrDefaultTransaction" ColorChanged="OnColorChanged"/>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+
+            <nickvision:SettingsRow x:Name="RowDefaultTransfer" Glyph="&#xE790;">
+                <nickvision:SettingsRow.Child>
+                    <Button>
+                        <Button.Content>
+                            <Rectangle x:Name="RctDefaultTransfer" Width="20" Height="20"/>
+                        </Button.Content>
+
+                        <Button.Flyout>
+                            <Flyout>
+                                <ColorPicker x:Name="ClrDefaultTransfer" ColorChanged="OnColorChanged"/>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+
+            <nickvision:SettingsRow x:Name="RowDefaultGroup" Glyph="&#xE790;">
+                <nickvision:SettingsRow.Child>
+                    <Button>
+                        <Button.Content>
+                            <Rectangle x:Name="RctDefaultGroup" Width="20" Height="20"/>
+                        </Button.Content>
+
+                        <Button.Flyout>
+                            <Flyout>
+                                <ColorPicker x:Name="ClrDefaultGroup" ColorChanged="OnColorChanged"/>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+
+            <TextBlock x:Name="LblLocale" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
+
+            <nickvision:SettingsRow x:Name="RowInsertSeparator" Glyph="&#xE92E;">
+                <nickvision:SettingsRow.Child>
+                    <ComboBox x:Name="CmbInsertSeparator" SelectionChanged="OnCmbChanged"/>
+                </nickvision:SettingsRow.Child>
+            </nickvision:SettingsRow>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,88 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.PreferencesDialog root {
+  content-width: 600;
+  content-height: 500;
+  search-enabled: true;
+  title: _("Preferences");
+
+  Adw.PreferencesPage {
+    Adw.PreferencesGroup {
+      title: _("User Interface");
+
+      Adw.ComboRow themeRow {
+        title: _("Theme");
+        model: Gtk.StringList {
+          strings [C_("Theme", "Light"), C_("Theme", "Dark"), C_("Theme", "System")]
+        };
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "dark-mode-symbolic";
+        }
+      }
+
+      Adw.ExpanderRow {
+        title: _("Colors");
+        subtitle: _("Customize the colors used by Denaro.");
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "preferences-color-symbolic";
+        }
+        
+        Adw.ActionRow {
+          title: _("Transaction Default Color");
+          subtitle: _("A change in this setting will only be applied to newly added transactions.");
+          activatable-widget: transactionColorButton;
+          
+          [suffix]
+          Gtk.ColorDialogButton transactionColorButton {
+            valign: center;
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("Transfer Default Color");
+          subtitle: _("A change in this setting will only be applied to new transfers.");
+          activatable-widget: transferColorButton;
+          
+          [suffix]
+          Gtk.ColorDialogButton transferColorButton {
+            valign: center;
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("Group Default Color");
+          subtitle: _("A change in this setting will only be applied to newly added groups.");
+          activatable-widget: groupColorButton;
+          
+          [suffix]
+          Gtk.ColorDialogButton groupColorButton {
+            valign: center;
+          }
+        }
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: _("Locale");
+
+      Adw.ComboRow insertSeparatorRow {
+        title: _("Insert Decimal Separator");
+        subtitle: _("For the selected keys, the account's decimal separator will be inserted instead of the keyboard's value.");
+        subtitle-lines: 3;
+        model: Gtk.StringList {
+          strings [_("Off"), _("Numpad period only"), _("Period and Comma")]
+        };
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "input-keyboard-symbolic";
+        }
+      }
+    }
+  }
+}

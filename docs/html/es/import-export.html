@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Importar/Exportar</title>
+<link rel="stylesheet" type="text/css" href="es.css">
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body lang="es" dir="ltr"><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Ayuda de Denaro">Ayuda de Denaro</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Importar/Exportar</span></h1></div>
+<div class="region">
+<div class="contents pagewide">
+<div class="div"><div class="inner">
+<div class="title title-div"><h2><span class="title">Formatos de importación</span></h2></div>
+<div class="region"><div class="contents"><div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list">
+<p class="p">Open Financial Exchange (<span class="file">.ofx</span>)</p>
+<p class="p">Las fechas deben estar en formato <span class="em">AAAMMDD</span>.</p>
+</li>
+<li class="list">
+<p class="p">Quicken Interchange Format (<span class="file">.qif</span>)</p>
+<p class="p">Las fechas deben estar en formato inglés (EE. UU.) (<span class="em">MM/DD/AAAA</span>).</p>
+</li>
+<li class="list">
+<p class="p">Denaro CSV (<span class="file">.csv</span>)</p>
+<p class="p">❗ Si bien CSV es un formato común y algunos bancos permiten a sus usuarios exportar información como CSV, estos archivos son, de hecho, tablas que pueden contener datos arbitrarios. La importación de un archivo CSV creado en otro programa fallará porque sus datos no serán compatibles con lo que <span class="app">Denaro</span> intenta obtener de un archivo. El propósito de importar/exportar CSV es proporcionar una forma de agregar datos a una cuenta mediante programas externos, como editores de texto y paquetes de oficina. La importación solo agregará nuevas transacciones sin anular las existentes. Si desea crear un archivo CSV manualmente, este es el encabezado que incluye todas las columnas que <span class="app">Denaro</span> espera encontrar:</p>
+<p class="p"><span class="code">ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA</span></p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list">
+<div class="title title-item"><h2><span class="title">ID</span></h2></div>
+<p class="p">Id de transacción, debe ser único para una cuenta determinada. Los ids empiezan por 1.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Date</span></h2></div>
+<p class="p">La fecha de la transacción (o fecha de inicio en caso de transacción repetida), debe estar en formato inglés (EE. UU.) (<span class="em">MM/DD/AAAA</span>).</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Description</span></h2></div>
+<p class="p">Descripción de la transacción, puede contener cualquier carácter excepto punto y coma.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Type</span></h2></div>
+<p class="p">Tipo de transacción: 0 para ingresos, 1 para gastos.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">RepeatInterval</span></h2></div>
+<p class="p">Un número que representa el intervalo de repetición de la transacción:</p>
+<p class="p">0 - Nunca</p>
+<p class="p">1 - Diario</p>
+<p class="p">2 - Semanal</p>
+<p class="p">7 - Quincenal</p>
+<p class="p">3 - Mensual</p>
+<p class="p">4 - Trimestral</p>
+<p class="p">5 - Anual</p>
+<p class="p">6 - Bianual</p>
+<p class="p">Véase <span class="em">Intervalo de repetición</span> en la página de <span class="link"><a href="transaction.html" title="Transacción">transacción</a></span> para obtener más información sobre las transacciones repetidas.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">RepeatFrom</span></h2></div>
+<p class="p">Debe ser un id de transacción de origen o 0 si es una transacción de origen o -1 si no es una transacción repetida.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">RepeatEndDate</span></h2></div>
+<p class="p">Fecha de finalización de la transacción repetida, debe estar en formato inglés (EE. UU.) (<span class="em">MM/DD/AAAA</span>). Déjelo vacío si no es una transacción repetida.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Amount</span></h2></div>
+<p class="p">Importe de la transacción en formato inglés (US) (<span class="em">123,456.78</span>).</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">RGBA</span></h2></div>
+<p class="p">Color de la transacción, debe estar en formato <span class="em">rgb(R,G,B)</span> donde <span class="em">R</span>, <span class="em">G</span> y <span class="em">B</span> son enteros en un rango entre 0 y 255.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">UseGroupColor</span></h2></div>
+<p class="p">Si una transacción debe usar el color de grupo: 0 - falso, 1 - verdadero.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">Group</span></h2></div>
+<p class="p">Id de grupo de la transacción. Los ids empiezan por 1. Para una transacción no agrupada debe ser -1 (no 0, este es un valor incorrecto para el id de grupo).</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">GroupName</span></h2></div>
+<p class="p">Nombre del grupo de la transacción, debe coincidir con el id del grupo. Puede contener cualquier carácter excepto punto y coma. Déjelo vacío para transacciones no agrupadas, en cualquier otro caso no debería estar vacío.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">GroupDescription</span></h2></div>
+<p class="p">Descripción del grupo de la transacción, debe coincidir con el id del grupo. Puede contener cualquier carácter excepto punto y coma y puede estar vacía. Déjelo vacío para transacciones no agrupadas.</p>
+</li>
+<li class="list">
+<div class="title title-item"><h2><span class="title">GroupRGBA</span></h2></div>
+<p class="p">Color del grupo, debe estar en formato <span class="em">rgb(R,G,B)</span> donde <span class="em">R</span>, <span class="em">G</span> y <span class="em">B</span> son números enteros comprendidos entre 0 y 255.</p>
+</li>
+</ul></div></div></div>
+<p class="p">Los recibos y notas no están presentes en CSV.</p>
+</li>
+</ul></div></div></div></div></div>
+</div></div>
+<div class="div"><div class="inner">
+<div class="title title-div"><h2><span class="title">Formatos de exportación</span></h2></div>
+<div class="region"><div class="contents">
+<p class="p">Puede seleccionar si desea exportar toda la información o sólo la de la vista actual. Si selecciona la vista actual, las transacciones mostradas actualmente se exportarán en el mismo orden en que se muestran.</p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list">
+<p class="p">Portable Document Format (<span class="file">.pdf</span>)</p>
+<p class="p">Un archivo contendrá la información de una cuenta, una lista de transacciones e imágenes de recibos. Las transacciones están coloreadas como en la aplicación, pero los colores se modifican haciéndolos semitransparentes para que el texto negro siempre sea claramente visible. Puede establecer una contraseña para un archivo exportado.</p>
+</li>
+<li class="list"><p class="p">Denaro CSV (<span class="file">.csv</span>)</p></li>
+</ul></div></div></div>
+</div></div>
+</div></div>
+</div>
+<section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">Más información</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Ayuda de Denaro">Ayuda de Denaro</a></li></ul></div>
+</div></div></div>
+</div></section>
+</div>
+<div class="clear"></div></article><footer><div class="inner pagewide"><div class="about ui-expander" role="contentinfo">
+<div class="yelp-data yelp-data-ui-expander" data-yelp-expanded="false"></div>
+<div class="inner">
+<div class="hgroup"><h2><span class="title">Acerca de</span></h2></div>
+<div class="region"><div class="contents">
+<div class="copyrights">
+<div class="copyright">© 2023 Fyodor Sobolev</div>
+<div class="copyright">© 2023 Nicholas Logozzo</div>
+<div class="copyright">© 2023 Óscar Fernández Díaz</div>
+</div>
+<div class="credits">
+<div class="credits-authors">
+<div class="title"><span class="title">Escrito por</span></div>
+<ul class="credits"><li>Fyodor Sobolev</li></ul>
+</div>
+<div class="credits-translators">
+<div class="title"><span class="title">Traducido por</span></div>
+<ul class="credits"><li>Óscar Fernández Díaz</li></ul>
+</div>
+<div class="credits-publishers">
+<div class="title"><span class="title">Publicado por</span></div>
+<ul class="credits"><li>Nicholas Logozzo</li></ul>
+</div>
+<div class="credits-blank"></div>
+<div class="credits-blank"></div>
+</div>
+<div class="license">
+<div class="title"><span class="title">Creative Commons</span></div>
+<div class="contents"><p class="p">Creative Commons Attribution 4.0 International License</p></div>
+</div>
+</div></div>
+</div>
+</div></div></footer>
+</div></main></body>
+</html>

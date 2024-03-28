@@ -1,0 +1,175 @@
+<ContentDialog
+    x:Class="Nickvision.Money.WinUI.NewAccountDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nickvision.Money.WinUI"
+    xmlns:nickvision="using:Nickvision.Money.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Style="{StaticResource ScrollableContentDialogStyle}"
+    DefaultButton="Primary" Opened="OnOpened">
+    <StackPanel MinWidth="480" Orientation="Vertical" Spacing="6">
+        <SelectorBar SelectionChanged="OnPageSelectionChanged">
+            <SelectorBarItem x:Name="SelectorItemStorage" Tag="Storage">
+                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xEDA2;"/>
+            </SelectorBarItem>
+
+            <SelectorBarItem x:Name="SelectorItemOptions" Tag="Options">
+                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE90F;"/>
+            </SelectorBarItem>
+
+            <SelectorBarItem x:Name="SelectorItemCurrency" Tag="Currency">
+                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE825;"/>
+            </SelectorBarItem>
+
+            <SelectorBarItem x:Name="SelectorItemImport" Tag="Import">
+                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE898;"/>
+            </SelectorBarItem>
+        </SelectorBar>
+
+        <nickvision:ViewStack x:Name="ViewStack" MinHeight="320" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <nickvision:ViewStack.Pages>
+                <nickvision:ViewStackPage PageName="Storage">
+                    <StackPanel Orientation="Vertical" Spacing="6">
+                        <nickvision:SettingsRow x:Name="RowAccountName" Glyph="&#xE8AC;">
+                            <nickvision:SettingsRow.Child>
+                                <TextBox x:Name="TxtAccountName" MinWidth="200" TextChanged="OnValidateOptions"/>
+                            </nickvision:SettingsRow.Child>
+                        </nickvision:SettingsRow>
+
+                        <nickvision:SettingsRow x:Name="RowAccountPassword" Glyph="&#xE72E;">
+                            <nickvision:SettingsRow.Child>
+                                <PasswordBox x:Name="TxtAccountPassword" MinWidth="200" PasswordChanged="OnValidateOptions"/>
+                            </nickvision:SettingsRow.Child>
+                        </nickvision:SettingsRow>
+
+                        <nickvision:SettingsRow x:Name="RowAccountFolder" Glyph="&#xE8B7;">
+                            <nickvision:SettingsRow.Child>
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <TextBlock x:Name="LblAccountFolder" VerticalAlignment="Center"/>
+
+                                    <Button x:Name="BtnSelectAccountFolder" Click="SelectAccountFolder">
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE838;"/>
+                                    </Button>
+                                </StackPanel>
+                            </nickvision:SettingsRow.Child>
+                        </nickvision:SettingsRow>
+
+                        <nickvision:SettingsRow x:Name="RowOverwrite" Glyph="&#xE72C;">
+                            <nickvision:SettingsRow.Child>
+                                <ToggleSwitch x:Name="TglOverwrite" Toggled="OnValidateOptions"/>
+                            </nickvision:SettingsRow.Child>
+                        </nickvision:SettingsRow>
+                    </StackPanel>
+                </nickvision:ViewStackPage>
+
+                <nickvision:ViewStackPage PageName="Options">
+                    <StackPanel Orientation="Vertical" Spacing="6">
+                        <nickvision:SettingsRow x:Name="RowAccountType" Glyph="&#xE8C7;">
+                            <nickvision:SettingsRow.Child>
+                                <ComboBox x:Name="CmbAccountType" SelectionChanged="OnValidateOptions"/>
+                            </nickvision:SettingsRow.Child>
+                        </nickvision:SettingsRow>
+
+                        <nickvision:SettingsRow x:Name="RowTransactionType" Glyph="&#xE8C7;">
+                            <nickvision:SettingsRow.Child>
+                                <ComboBox x:Name="CmbTransactionType" SelectionChanged="OnValidateOptions"/>
+                            </nickvision:SettingsRow.Child>
+                        </nickvision:SettingsRow>
+
+                        <nickvision:SettingsRow x:Name="RowTransactionReminders" Glyph="&#xE91C;">
+                            <nickvision:SettingsRow.Child>
+                                <ComboBox x:Name="CmbTransactionReminders" SelectionChanged="OnValidateOptions"/>
+                            </nickvision:SettingsRow.Child>
+                        </nickvision:SettingsRow>
+                    </StackPanel>
+                </nickvision:ViewStackPage>
+
+                <nickvision:ViewStackPage PageName="Currency">
+                    <StackPanel Orientation="Vertical" Spacing="6">
+                        <TextBlock x:Name="LblSystemCurrencyDescription" TextAlignment="Center" TextWrapping="Wrap" Foreground="Gray"/>
+
+                        <TextBlock x:Name="LblSystemCurrency" Margin="0,0,0,6" TextAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Foreground="Gray"/>
+
+                        <nickvision:SettingsRow x:Name="RowCustomCurrency" Glyph="&#xE825;">
+                            <nickvision:SettingsRow.Child>
+                                <ToggleSwitch x:Name="TglCustomCurrency" Toggled="OnValidateOptions"/>
+                            </nickvision:SettingsRow.Child>
+                        </nickvision:SettingsRow>
+
+                        <StackPanel x:Name="GroupCustomCurrency" Visibility="Collapsed" Orientation="Vertical" Spacing="6">
+                            <nickvision:SettingsRow x:Name="RowCustomSymbol">
+                                <nickvision:SettingsRow.Child>
+                                    <TextBox x:Name="TxtCustomSymbol" MinWidth="140" TextChanged="OnValidateOptions"/>
+                                </nickvision:SettingsRow.Child>
+                            </nickvision:SettingsRow>
+
+
+                            <nickvision:SettingsRow x:Name="RowCustomCode">
+                                <nickvision:SettingsRow.Child>
+                                    <TextBox x:Name="TxtCustomCode" MinWidth="140" TextChanged="OnValidateOptions"/>
+                                </nickvision:SettingsRow.Child>
+                            </nickvision:SettingsRow>
+                            
+                            <nickvision:SettingsRow x:Name="RowCustomDecimalSeparator">
+                                <nickvision:SettingsRow.Child>
+                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <ComboBox x:Name="CmbCustomDecimalSeparator" SelectionChanged="OnValidateOptions"/>
+
+                                        <TextBox x:Name="TxtCustomDecimalSeparator" Visibility="Collapsed" TextChanged="OnValidateOptions"/>
+                                    </StackPanel>
+                                </nickvision:SettingsRow.Child>
+                            </nickvision:SettingsRow>
+
+                            <nickvision:SettingsRow x:Name="RowCustomGroupSeparator">
+                                <nickvision:SettingsRow.Child>
+                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <ComboBox x:Name="CmbCustomGroupSeparator" SelectionChanged="OnValidateOptions"/>
+
+                                        <TextBox x:Name="TxtCustomGroupSeparator" Visibility="Collapsed" TextChanged="OnValidateOptions"/>
+                                    </StackPanel>
+                                </nickvision:SettingsRow.Child>
+                            </nickvision:SettingsRow>
+
+                            <nickvision:SettingsRow x:Name="RowCustomDecimalDigits">
+                                <nickvision:SettingsRow.Child>
+                                    <ComboBox x:Name="CmbCustomDecimalDigits" SelectionChanged="OnValidateOptions"/>
+                                </nickvision:SettingsRow.Child>
+                            </nickvision:SettingsRow>
+
+                            <nickvision:SettingsRow x:Name="RowCustomAmountStyle">
+                                <nickvision:SettingsRow.Child>
+                                    <ComboBox x:Name="CmbCustomAmountStyle" SelectionChanged="OnValidateOptions"/>
+                                </nickvision:SettingsRow.Child>
+                            </nickvision:SettingsRow>
+                        </StackPanel>
+                    </StackPanel>
+                </nickvision:ViewStackPage>
+
+                <nickvision:ViewStackPage PageName="Import">
+                    <StackPanel Orientation="Vertical" Spacing="6">
+                        <TextBlock x:Name="LblImportFileDescription" Margin="0,0,0,6" MaxWidth="400" TextAlignment="Center" TextWrapping="Wrap" Foreground="Gray"/>
+
+                        <nickvision:SettingsRow x:Name="RowImportFile" Glyph="&#xE8A5;">
+                            <nickvision:SettingsRow.Child>
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <TextBlock x:Name="LblImportFile" VerticalAlignment="Center"/>
+
+                                    <Button x:Name="BtnSelectImportFile" Click="SelectImportFile">
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8E5;"/>
+                                    </Button>
+
+                                    <Button x:Name="BtnClearImportFile" Visibility="Collapsed" Click="ClearImportFile">
+                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE894;"/>
+                                    </Button>
+                                </StackPanel>
+                            </nickvision:SettingsRow.Child>
+                        </nickvision:SettingsRow>
+                    </StackPanel>
+                </nickvision:ViewStackPage>
+            </nickvision:ViewStack.Pages>
+        </nickvision:ViewStack>
+
+        <TextBlock x:Name="LblError"/>
+    </StackPanel>
+</ContentDialog>
