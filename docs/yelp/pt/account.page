@@ -35,7 +35,7 @@
 		<p>When you create a new transaction its type by default will be the same as in this setting.</p>
 	</item>
 	<item>
-        <title>Transaction Reminders Threshold</title>
+        <title>Limite de Lembretes de Transação</title>
         <p>The threshold used when showing reminders about upcoming transactions.</p>
     </item>
 	<item>

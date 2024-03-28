@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-16 11:33-0400\n"
+"POT-Creation-Date: 2024-03-27 20:25-0400\n"
 "PO-Revision-Date: 2023-12-29 06:12+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
 "weblate.org>\n"
@@ -55,16 +55,22 @@ msgid "Transfer from {}"
 msgstr "Transferir desde {0}"
 
 #: libdenaro/src/models/account.cpp:894
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Ingresos"
 
 #: libdenaro/src/models/account.cpp:894
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:141
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
 msgstr "Gastos"
+
+#: libdenaro/src/models/dashboardgroup.cpp:22
+#: libdenaro/src/models/dashboardgroup.cpp:26
+#, fuzzy, c++-format
+msgid "{} from {}"
+msgstr "{0} de {1}"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Denaro"
@@ -117,30 +123,29 @@ msgstr "¡Buenas noches!"
 msgid "Good Day!"
 msgstr "¡Buen día!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:203
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:213
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:221
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:231
 msgid "Unable to download and install update"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:256
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:271
 #, fuzzy
 msgid "This account already exists."
 msgstr "Esta cuenta ya está abierta."
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:262
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:277
 #, fuzzy
 msgid "This account cannot be overwritten."
-msgstr "Esta cuenta no tiene dinero disponible para transferir."
+msgstr "Esta cuenta ya está abierta."
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:299
-#, fuzzy
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:314
 msgid "The file is not a Denaro account file."
-msgstr "No se puede exportar la cuenta a un archivo."
+msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:304
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:319
 #, fuzzy
 msgid "The account is already open."
 msgstr "Esta cuenta ya está abierta."
@@ -182,229 +187,225 @@ msgstr "Importe"
 msgid "Copy Result Amount"
 msgstr "Copiar el resultado del importe"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:22
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:18
 msgid "Back"
 msgstr "Volver"
 
 #. Localize Strings
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:41
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:34
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:25
 msgid "New Account"
 msgstr "Cuenta nueva"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:42
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:35
 #, fuzzy
 msgid "Use this wizard to get the most out of your new account"
 msgstr "Use este asistente para sacar el máximo partido a su cuenta"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:47
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:40
 msgid "Let's Start"
-msgstr "Inicio"
+msgstr "Comencemos"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:64
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:57
 msgid "Storage Location"
 msgstr "Ubicación de almacenamiento"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:73
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:66
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:29
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:225
 msgid "Account Name"
 msgstr "Nombre de cuenta"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:77
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:70
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:31
 #, fuzzy
 msgid "Account Password"
 msgstr "Contraseña de la cuenta (opcional)"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:81
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:74
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:33
-#, fuzzy
 msgid "Folder"
 msgstr "Carpeta"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:88
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:144
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:81
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:151
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:34
-#, fuzzy
 msgid "Select Folder"
-msgstr "Seleccionar archivo"
+msgstr "Seleccionar carpeta"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:97
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:90
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:35
 msgid "Overwrite Existing Accounts"
 msgstr "Sobrescribir cuentas existentes"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:106
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:159
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:254
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:99
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:152
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:247
 msgid "Next"
 msgstr "Siguiente"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:123
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:116
 msgid "Account Options"
 msgstr "Opciones de cuenta"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:125
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:39
 msgid "Account Type"
 msgstr "Tipo de cuenta"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:303
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:127
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:332
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:40
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:424
 msgid "Checking"
 msgstr "Corriente"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:306
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:127
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:335
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:427
 msgid "Savings"
 msgstr "Ahorros"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:309
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:127
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:338
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:42
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:430
 msgid "Business"
 msgstr "Empresa"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:43
-#, fuzzy
 msgid "Default Transaction Type"
 msgstr "Tipo de transacción predeterminado"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:146
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:46
 msgid "Transaction Reminders Threshold"
 msgstr "Umbral de recordatorios de las transacciones"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:147
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:140
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:47
 msgid ""
 "Determines how far in advanced Denaro should remind users of upcoming "
 "transactions in the account."
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:143
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:48
 msgid "Never"
 msgstr "Nunca"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:143
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:49
 msgid "One Day Before"
 msgstr "Un día antes"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:143
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:50
 msgid "One Week Before"
 msgstr "Una semana antes"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:143
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:51
 msgid "One Month Before"
 msgstr "Un mes antes"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:150
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:143
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:52
 msgid "Two Months Before"
 msgstr "Dos meses antes"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:176
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:169
 msgid "Account Currency"
 msgstr "Divisa de la cuenta"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:190
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:183
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:56
 msgid "Use Custom Currency"
 msgstr "Usar moneda personalizada"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:195
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:188
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:59
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:226
 msgid "Symbol"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:199
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:192
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:61
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:227
 msgid "Code"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:203
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:196
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:63
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:228
 msgid "Decimal Separator"
 msgstr "Separador de decimales"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:205
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:220
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:198
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:213
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:66
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:72
 msgid "Custom"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:218
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:211
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:67
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:229
 msgid "Group Separator"
 msgstr "Separador de grupos"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:220
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:213
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:71
 msgid "None"
 msgstr "Ninguno"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:226
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:73
 msgid "Decimal Digits"
 msgstr "Dígitos decimales"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:228
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:74
 msgid "Two"
 msgstr "Dos"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:228
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:75
 msgid "Three"
 msgstr "Tres"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:228
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:76
 msgid "Four"
 msgstr "Cuatro"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:228
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:77
 msgid "Five"
 msgstr "Cinco"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:235
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:228
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:78
 msgid "Six"
 msgstr "Seis"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:240
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
 msgid "Amount Display Style"
 msgstr "Estilo de visualización de la cantidad"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:241
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:234
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:80
 #, fuzzy
 msgid "$ is the currency's symbol."
 msgstr "Símbolo de moneda"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:271
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:264
 msgid "Import Existing Information"
 msgstr "Importar información existente"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:280
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:273
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:86
 #, fuzzy
 msgid ""
@@ -414,30 +415,28 @@ msgstr ""
 "Cargue un archivo válido para importar la información existente en la cuenta "
 "nueva."
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:287
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:280
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:87
 msgid "Import File"
 msgstr "Importar archivo"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:297
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:290
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:89
-#, fuzzy
 msgid "Select File"
 msgstr "Seleccionar archivo"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:306
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:299
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:90
-#, fuzzy
 msgid "Clear File"
-msgstr "Borrar la carpeta de copia de seguridad"
+msgstr "Limpiar archivo"
 
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:320
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:313
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:27
 msgid "Create"
 msgstr "Crear"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:10
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:8
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:30
 msgid "Preferences"
 msgstr "Preferencias"
@@ -460,27 +459,32 @@ msgstr "Acerca de Denaro"
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:54
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:230
+#: org.nickvision.money.gnome/blueprints/main_window.blp:61
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:234
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Home"
 msgstr "Inicio"
 
 #. Localize Strings
-#: org.nickvision.money.gnome/blueprints/main_window.blp:69
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:236
+#: org.nickvision.money.gnome/blueprints/main_window.blp:78
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:239
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:80
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
 msgid "Currency Converter"
 msgstr "Conversor de divisas"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:84
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:242
+#: org.nickvision.money.gnome/blueprints/main_window.blp:88
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+msgid "Accounts"
+msgstr "Cuentas"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:107
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:245
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Dashboard"
 msgstr "Panel"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:106
+#: org.nickvision.money.gnome/blueprints/main_window.blp:130
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:111
 msgid ""
 "Create or open an account to get started. You may also drag a file into the "
@@ -489,80 +493,85 @@ msgstr ""
 "Cree o abra una cuenta para empezar. También puede arrastrar un archivo a la "
 "aplicación desde el explorador de archivos."
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:118
+#: org.nickvision.money.gnome/blueprints/main_window.blp:142
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:398
 msgid "No Recent Accounts"
 msgstr "Sin cuentas recientes"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:138
-#: org.nickvision.money.gnome/blueprints/main_window.blp:156
-#: org.nickvision.money.gnome/blueprints/main_window.blp:174
+#: org.nickvision.money.gnome/blueprints/main_window.blp:162
+#: org.nickvision.money.gnome/blueprints/main_window.blp:180
+#: org.nickvision.money.gnome/blueprints/main_window.blp:198
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:417
 msgid "Remove"
 msgstr "Eliminar"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:187
+#: org.nickvision.money.gnome/blueprints/main_window.blp:211
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #, fuzzy
 msgid "New"
 msgstr "Nuevo"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:188
+#: org.nickvision.money.gnome/blueprints/main_window.blp:212
 msgid "New Account (Ctrl+N)"
 msgstr "Cuenta nueva (Ctrl+N)"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:196
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:138
+#: org.nickvision.money.gnome/blueprints/main_window.blp:220
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:145
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:83
 msgid "Open"
 msgstr "Abrir"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:197
+#: org.nickvision.money.gnome/blueprints/main_window.blp:221
 msgid "Open Account (Ctrl+O)"
 msgstr "Abrir cuenta (Ctrl+O)"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:14
+#: org.nickvision.money.gnome/blueprints/main_window.blp:238
+#, fuzzy
+msgid "No Accounts Open"
+msgstr "Tipo de cuenta"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:12
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
 msgstr "Interfaz de usuario"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:15
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
 msgid "Theme"
 msgstr "Tema"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
 msgctxt "Theme"
 msgid "Light"
 msgstr "Claro"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
 msgctxt "Theme"
 msgid "Dark"
 msgstr "Oscuro"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:19
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
 msgctxt "Theme"
 msgid "System"
 msgstr "Sistema"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:29
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:27
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
 msgid "Colors"
 msgstr "Colores"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:30
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:28
 msgid "Customize the colors used by Denaro."
 msgstr "Personalice los colores usados por Denaro."
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:38
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:36
 msgid "Transaction Default Color"
 msgstr "Color de transacción predeterminado"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:39
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:37
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
 msgid ""
 "A change in this setting will only be applied to newly added transactions."
@@ -570,37 +579,37 @@ msgstr ""
 "Un cambio en esta configuración sólo se aplicará a las transacciones recién "
 "añadidas."
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:49
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:47
 msgid "Transfer Default Color"
 msgstr "Color predeterminado de la transferencia"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:50
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:48
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
 msgid "A change in this setting will only be applied to new transfers."
 msgstr ""
 "Un cambio en esta configuración sólo se aplicará a las transferencias nuevas."
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:60
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:58
 msgid "Group Default Color"
 msgstr "Color predeterminado del grupo"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:61
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:59
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
 #, fuzzy
 msgid "A change in this setting will only be applied to newly added groups."
 msgstr "Un cambio en esta configuración sólo se aplicará a los grupos nuevos."
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:73
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:71
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
 msgid "Locale"
 msgstr "Localización"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:76
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:74
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
 msgid "Insert Decimal Separator"
 msgstr "Insertar separador decimal"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:77
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:75
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
 #, fuzzy
 msgid ""
@@ -610,7 +619,7 @@ msgstr ""
 "Establecer para qué teclas pulsadas se insertará el separador decimal de la "
 "configuración regional en un campo de importe."
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:80
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:78
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:37
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:58
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
@@ -619,12 +628,12 @@ msgstr ""
 msgid "Off"
 msgstr "Fuera"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:80
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:78
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:41
 msgid "Numpad period only"
 msgstr "Punto final"
 
-#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:80
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:78
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:42
 msgid "Period and Comma"
 msgstr "Punto y coma"
@@ -636,7 +645,7 @@ msgid "Account"
 msgstr "Cuenta"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:268
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:297
 msgid "Open Account"
 msgstr "Abrir cuenta"
 
@@ -655,12 +664,12 @@ msgstr "Aplicación"
 msgid "Quit"
 msgstr "Salir"
 
-#: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:22
+#: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:27
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
 msgid "Error"
 msgstr "Error"
 
-#: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:22
+#: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:27
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
 msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
@@ -669,14 +678,13 @@ msgstr ""
 "No se han podido cargar los datos de la divisa. Por favor, vuelva a "
 "intentarlo. Si el error persiste, notifique un error."
 
-#: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:23
+#: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:28
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:26
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
 msgid "Close"
 msgstr "Cerrar"
 
-#: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:99
-#, fuzzy
+#: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:102
 msgid "Result was copied to clipboard."
 msgstr "Resultado copiado al portapapeles."
 
@@ -685,49 +693,49 @@ msgstr "Resultado copiado al portapapeles."
 msgid "Your system reported that your currency is"
 msgstr "Su sistema informó de que su moneda es"
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:261
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:268
 #, fuzzy
 msgid "Select Import File"
 msgstr "Importar archivo"
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:263
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:270
 msgid "All Files (*.csv, *.ofx, *.qif)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:271
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:278
 msgid "CSV (*.csv)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:275
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:282
 msgid "Open Financial Exchange (*.ofx)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:279
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:286
 msgid "Quicken Interchange Format (*.qif)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:191
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:196
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 msgid "GitHub Repo"
 msgstr "Repositorio de GitHub"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:270
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:299
 #, fuzzy
 msgid "Nickvision Denaro Account (*.nmoney)"
 msgstr "Cuenta Denaro de Nickvision"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:337
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:367
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:32
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:455
 msgid "Enter password here"
 msgstr "Introduzca aquí la contraseña"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:345
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:375
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:464
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:346
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:375
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:463
 msgid "Unlock"
 msgstr "Desbloquear"
@@ -837,10 +845,6 @@ msgstr "Símbolo de la moneda (no válido)"
 msgid "Search"
 msgstr ""
 
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
-msgid "Accounts"
-msgstr "Cuentas"
-
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Check for Updates"
 msgstr ""
@@ -932,12 +936,12 @@ msgstr "Tipo de transacción predeterminado"
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
 #, fuzzy
 msgid "Default Transfer Color"
-msgstr "Tipo de transacción predeterminado"
+msgstr "Color predeterminado de la transferencia"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
 #, fuzzy
 msgid "Default Group Color"
-msgstr "Tipo de transacción predeterminado"
+msgstr "Color predeterminado del grupo"
 
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:28
 #, fuzzy
@@ -953,56 +957,8 @@ msgstr "Aceptar"
 msgid "Result (Error)"
 msgstr "Resultado"
 
-#~ msgid "Account Name (Exists)"
-#~ msgstr "Nombre de la cuenta (existente)"
-
-#~ msgid "Password"
-#~ msgstr "Contraseña"
-
-#~ msgid "Password Strength"
-#~ msgstr "Fortaleza de la contraseña"
-
-#, fuzzy
-#~ msgid "Open Folder"
-#~ msgstr "Carpeta"
-
-#, fuzzy
-#~ msgid "Close Folder"
-#~ msgstr "Seleccionar carpeta"
-
-#~ msgid "Checking Account Color"
-#~ msgstr "Color de la cuenta corriente"
-
-#~ msgid "Savings Account Color"
-#~ msgstr "Color de la cuenta de ahorro"
-
-#~ msgid "Business Account Color"
-#~ msgstr "Color de la cuenta de la empresa"
-
-#, fuzzy
-#~ msgid "Source (Error)"
-#~ msgstr "Fuente"
-
-#, fuzzy
-#~ msgid ""
-#~ "Unable to login to the account. The provided password may be invalid."
-#~ msgstr ""
-#~ "No se puede acceder a la cuenta. La contraseña proporcionada no es válida."
-
-#, fuzzy
-#~ msgid "Let's get you started."
-#~ msgstr "Comencemos"
-
-#, fuzzy
-#~ msgid "Search for Files"
-#~ msgstr "Limpiar archivo"
-
 #~ msgid "(Copy)"
 #~ msgstr "(Copia)"
-
-#, csharp-format
-#~ msgid "{0} from {1}"
-#~ msgstr "{0} de {1}"
 
 #, csharp-format
 #~ msgid "{0} tag"
@@ -1015,6 +971,9 @@ msgstr "Resultado"
 #~ msgid_plural "{0} transactions"
 #~ msgstr[0] "{0} transacción"
 #~ msgstr[1] "{0} transacciones"
+
+#~ msgid "Account Name (Exists)"
+#~ msgstr "Nombre de la cuenta (existente)"
 
 #~ msgid "Account Settings"
 #~ msgstr "Configuración de la cuenta"
@@ -1250,6 +1209,9 @@ msgstr "Resultado"
 #~ "Se generarán nuevas transacciones de repetición basadas en el nuevo "
 #~ "intervalo."
 
+#~ msgid "This account has no money available to transfer."
+#~ msgstr "Esta cuenta no tiene dinero disponible para transferir."
+
 #~ msgid ""
 #~ "This transaction is a source repeat transaction.\n"
 #~ "What would you like to do with the repeat transactions?\n"
@@ -1291,6 +1253,9 @@ msgstr "Resultado"
 #~ msgid "Type"
 #~ msgstr "Tipo"
 
+#~ msgid "Unable to export account to file."
+#~ msgstr "No se puede exportar la cuenta a un archivo."
+
 #~ msgid ""
 #~ "Unable to import information from the file. Please ensure that the app "
 #~ "has permissions to access the file and try again."
@@ -1300,6 +1265,10 @@ msgstr "Resultado"
 
 #~ msgid "Unable to import transactions from the file."
 #~ msgstr "No se pueden importar las transacciones del archivo."
+
+#~ msgid "Unable to login to account. Provided password is invalid."
+#~ msgstr ""
+#~ "No se puede acceder a la cuenta. La contraseña proporcionada no es válida."
 
 #~ msgid ""
 #~ "Unable to open the account. Please ensure that the app has permissions to "
@@ -1361,6 +1330,9 @@ msgstr "Resultado"
 
 #~ msgid "Confirm Password"
 #~ msgstr "Confirmar contraseña"
+
+#~ msgid "Password Strength"
+#~ msgstr "Fortaleza de la contraseña"
 
 #~ msgid "If the password is lost, there is no way to restore the file!"
 #~ msgstr "Si se pierde la contraseña, ¡no hay forma de restaurar el archivo!"
@@ -1426,6 +1398,10 @@ msgstr "Resultado"
 #~ msgstr "Seleccionar intervalo"
 
 #~ msgctxt "DateRange"
+#~ msgid "Start"
+#~ msgstr "Inicio"
+
+#~ msgctxt "DateRange"
 #~ msgid "End"
 #~ msgstr "Fin"
 
@@ -1474,6 +1450,18 @@ msgstr "Resultado"
 #~ msgid "Enter Password To Login:"
 #~ msgstr "Introduzca la contraseña para iniciar sesión:"
 
+#~ msgid "Password"
+#~ msgstr "Contraseña"
+
+#~ msgid "Checking Account Color"
+#~ msgstr "Color de la cuenta corriente"
+
+#~ msgid "Savings Account Color"
+#~ msgstr "Color de la cuenta de ahorro"
+
+#~ msgid "Business Account Color"
+#~ msgstr "Color de la cuenta de la empresa"
+
 #~ msgid "Use Native Digits"
 #~ msgstr "Usar dígitos nativos"
 
@@ -1496,6 +1484,9 @@ msgstr "Resultado"
 #~ msgstr ""
 #~ "Las cuentas no cifradas se exportarán automáticamente como archivos CSV a "
 #~ "esta carpeta cuando se realice un cambio."
+
+#~ msgid "Clear Backup Folder"
+#~ msgstr "Borrar la carpeta de copia de seguridad"
 
 #~ msgid "No Reminders"
 #~ msgstr "Sin recordatorios"

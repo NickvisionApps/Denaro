@@ -31,7 +31,7 @@ namespace Nickvision::Money::Shared::Controllers
          * @brief Gets the metadata for the account. 
          * @return The account metadata
          */
-        const Models::AccountMetadata getMetadata() const;
+        const Models::AccountMetadata& getMetadata() const;
         /**
          * @brief Gets the RecentAccount representation of this account.
          * @return The RecentAccount representation of this account. 
@@ -39,7 +39,7 @@ namespace Nickvision::Money::Shared::Controllers
         Models::RecentAccount toRecentAccount() const;
 
     private:
-        std::shared_ptr<Models::Account> m_account;
+        std::unique_ptr<Models::Account> m_account;
     };
 }
 

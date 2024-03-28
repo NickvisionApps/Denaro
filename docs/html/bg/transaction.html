@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Transaction</title>
+<link rel="stylesheet" type="text/css" href="bg.css">
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body lang="bg" dir="ltr"><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Transaction</span></h1></div>
+<div class="region">
+<div class="contents pagewide">
+<p class="p">This page explains all properties of transactions in <span class="app">Denaro</span>.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms">Id</dt>
+<dd class="terms"><p class="p">Each transaction has an Id that is unique for a given account. Ids start with 1 and increase for every transaction added. Ids can't be changed, ids of removed transactions are not reused.</p></dd>
+<dt class="terms">Description</dt>
+<dd class="terms"><p class="p">No limit on length. It can't contain semicolon.</p></dd>
+<dt class="terms">Amount</dt>
+<dd class="terms"><p class="p">A number in a format that is valid for your locale, see <span class="em">System Currency</span> in <span class="link"><a href="account.html" title="Account">Account page</a></span> for details.</p></dd>
+<dt class="terms">Type</dt>
+<dd class="terms"><p class="p"><span class="em">Income</span> or <span class="em">Expense</span>. By default the one chosen in <span class="link"><a href="account.html" title="Account">account settings</a></span> will be selected when you open a dialog to add new transaction.</p></dd>
+<dt class="terms">Date</dt>
+<dd class="terms"><p class="p">Any date can be selected, you can also create transactions for future dates.</p></dd>
+<dt class="terms">Repeat Interval</dt>
+<dd class="terms"><p class="p">Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <span class="em">source</span> transaction. <span class="app">Denaro</span> will automatically generate <span class="em">repeat</span> transactions for the dates up until today or a provided end date if set in the past. <span class="em">Repeat</span> transactions can't be edited or deleted, only <span class="em">source</span> can be modified. When you modify <span class="em">source</span> transaction <span class="app">Denaro</span> will ask if you want to modify or disassociate <span class="em">repeat</span> transactions. If you choose to disassociate, <span class="em">repeat</span> transactions become normal transactions and can be edited or deleted separately.</p></dd>
+<dt class="terms">Repeat End Date</dt>
+<dd class="terms"><p class="p">End date for a transaction with repeat. It can't be earlier than or on the same day as start date.</p></dd>
+<dt class="terms">Group</dt>
+<dd class="terms"><p class="p">Each transaction can belong to only one group or none («Ungrouped» group).</p></dd>
+<dt class="terms">Color</dt>
+<dd class="terms"><p class="p">A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <span class="link"><a href="configuration.html" title="Configuration">configuration</a></span>, but can be changed to any color.</p></dd>
+<dt class="terms">Tags</dt>
+<dd class="terms"><p class="p">A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<span class="code">,</span>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p></dd>
+<dt class="terms">Receipt</dt>
+<dd class="terms"><p class="p">An image of a receipt for transaction. You can upload JPEG or PNG image or PDF document, but no matter the format it will be converted and saved as JPEG image. In case of PDF, only the first page will be saved. You can delete or upload another file anytime.</p></dd>
+<dt class="terms">Notes</dt>
+<dd class="terms"><p class="p">A freeform text note to attach to transaction.</p></dd>
+</dl></div></div></div>
+</div>
+<section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">Допълнителна информация</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Denaro Help">Denaro Help</a></li></ul></div>
+</div></div></div>
+</div></section>
+</div>
+<div class="clear"></div></article><footer><div class="inner pagewide"><div class="about ui-expander" role="contentinfo">
+<div class="yelp-data yelp-data-ui-expander" data-yelp-expanded="false"></div>
+<div class="inner">
+<div class="hgroup"><h2><span class="title">Относно</span></h2></div>
+<div class="region"><div class="contents">
+<div class="copyrights">
+<div class="copyright">© 2023 Fyodor Sobolev</div>
+<div class="copyright">© 2023 Nicholas Logozzo</div>
+</div>
+<div class="credits">
+<div class="credits-authors">
+<div class="title"><span class="title">Създадено от</span></div>
+<ul class="credits"><li>Fyodor Sobolev</li></ul>
+</div>
+<div class="credits-publishers">
+<div class="title"><span class="title">Издадено от</span></div>
+<ul class="credits"><li>Nicholas Logozzo</li></ul>
+</div>
+<div class="credits-blank"></div>
+<div class="credits-blank"></div>
+</div>
+<div class="license">
+<div class="title"><span class="title">Криейтив Комънс</span></div>
+<div class="contents"><p class="p">Creative Commons Attribution 4.0 International License</p></div>
+</div>
+</div></div>
+</div>
+</div></div></footer>
+</div></main></body>
+</html>

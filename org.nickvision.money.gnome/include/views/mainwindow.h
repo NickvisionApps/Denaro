@@ -1,11 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <string>
+#include <filesystem>
 #include <memory>
+#include <string>
+#include <unordered_map>
 #include <adwaita.h>
 #include "controls/currencyconverterpage.h"
 #include "controllers/mainwindowcontroller.h"
+#include "views/accountpage.h"
 
 #define SET_ACCEL_FOR_ACTION(App, Action, Accel) { \
 const char* accels[2] { Accel, nullptr }; \
@@ -120,6 +123,7 @@ namespace Nickvision::Money::GNOME::Views
         GtkBuilder* m_builder;
         AdwApplicationWindow* m_window;
         Controls::CurrencyConverterPage m_currencyConverterPage;
+        std::unordered_map<std::filesystem::path, std::shared_ptr<AccountPage>> m_accountPages;
     };
 }
 

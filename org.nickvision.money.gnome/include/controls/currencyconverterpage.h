@@ -23,6 +23,7 @@ namespace Nickvision::Money::GNOME::Controls
         ~CurrencyConverterPage();
         /**
          * @brief Gets the gobj of the control
+         * @return AdwClamp*
          */
         AdwClamp* gobj();
 

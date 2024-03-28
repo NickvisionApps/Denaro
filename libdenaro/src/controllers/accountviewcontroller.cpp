@@ -7,7 +7,7 @@ using namespace Nickvision::Money::Shared::Models;
 namespace Nickvision::Money::Shared::Controllers
 {
     AccountViewController::AccountViewController(const std::filesystem::path& path, const std::string& password)
-        : m_account{ std::make_shared<Account>(path) }
+        : m_account{ std::make_unique<Account>(path) }
     {
         if(!m_account->login(password))
         {
@@ -20,7 +20,7 @@ namespace Nickvision::Money::Shared::Controllers
         return m_account->getPath();
     }
 
-    const AccountMetadata AccountViewController::getMetadata() const
+    const AccountMetadata& AccountViewController::getMetadata() const
     {
         return m_account->getMetadata();
     }
