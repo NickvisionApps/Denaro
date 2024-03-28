@@ -9,7 +9,7 @@ namespace Nickvision::Money::GNOME::Views
         : m_controller(controller),
         m_builder{ BuilderHelpers::fromBlueprint("account_page") },
         m_parent{ parent },
-        m_page{ ADW_CLAMP(gtk_builder_get_object(m_builder, "root")) }
+        m_page{ ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "root")) }
     {
 
     }
@@ -19,7 +19,7 @@ namespace Nickvision::Money::GNOME::Views
         g_object_unref(m_builder);
     }
 
-    AdwClamp* AccountPage::gobj()
+    AdwViewStack* AccountPage::gobj()
     {
         return m_page;
     }

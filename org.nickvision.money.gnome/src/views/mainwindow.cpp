@@ -229,6 +229,9 @@ namespace Nickvision::Money::GNOME::Views
     void MainWindow::onNavItemSelected(GtkListBox* box, GtkListBoxRow* row)
     {
         adw_navigation_split_view_set_show_content(ADW_NAVIGATION_SPLIT_VIEW(gtk_builder_get_object(m_builder, "navView")), true);
+        //Reset content header and switcher bar
+        adw_header_bar_set_title_widget(ADW_HEADER_BAR(gtk_builder_get_object(m_builder, "contentHeaderBar")), nullptr);
+        adw_view_switcher_bar_set_stack(ADW_VIEW_SWITCHER_BAR(gtk_builder_get_object(m_builder, "contentSwitcherBar")), nullptr);
         if(row == gtk_list_box_get_row_at_index(box, Pages::Home))
         {
             adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Home"));
@@ -256,9 +259,19 @@ namespace Nickvision::Money::GNOME::Views
         else //Account
         {
             const std::shared_ptr<AccountPage>& page{ m_accountPages.at(gtk_widget_get_tooltip_text(GTK_WIDGET(row))) };
+            //Set AccountPage as child
             adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), page->getTitle().c_str());
             adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "custom");
             adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), GTK_WIDGET(page->gobj()));
+            //Set content header and switcher bar for AccountPage's viewstack
+            if(!adw_navigation_split_view_get_collapsed(ADW_NAVIGATION_SPLIT_VIEW(gtk_builder_get_object(m_builder, "navView"))))
+            {
+                AdwViewSwitcher* viewSwitcher{ ADW_VIEW_SWITCHER(adw_view_switcher_new()) };
+                adw_view_switcher_set_policy(viewSwitcher, ADW_VIEW_SWITCHER_POLICY_WIDE);
+                adw_view_switcher_set_stack(viewSwitcher, page->gobj());
+                adw_header_bar_set_title_widget(ADW_HEADER_BAR(gtk_builder_get_object(m_builder, "contentHeaderBar")), GTK_WIDGET(viewSwitcher));
+            }
+            adw_view_switcher_bar_set_stack(ADW_VIEW_SWITCHER_BAR(gtk_builder_get_object(m_builder, "contentSwitcherBar")), page->gobj());
         }
     }
 

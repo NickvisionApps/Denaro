@@ -14,11 +14,13 @@ Adw.ApplicationWindow root {
   default-width: 900;
   default-height: 700;
   
-  Adw.Breakpoint {
+  Adw.Breakpoint breakpoint {
     condition ("max-width: 400sp")
     
     setters {
       navView.collapsed: true;
+      contentHeaderBar.title-widget: null;
+      contentSwitcherBar.reveal: true;
     }
   }
 
@@ -119,7 +121,10 @@ Adw.ApplicationWindow root {
 
       child: Adw.ToolbarView {
         [top]
-        Adw.HeaderBar {}
+        Adw.HeaderBar contentHeaderBar {}
+
+        [bottom]
+        Adw.ViewSwitcherBar contentSwitcherBar {}
 
         content: Adw.ToastOverlay toastOverlay {
           child: Adw.ViewStack viewStack {

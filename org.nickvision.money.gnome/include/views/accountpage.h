@@ -26,9 +26,9 @@ namespace Nickvision::Money::GNOME::Views
         ~AccountPage();
         /**
          * @brief Gets the gobj of the control
-         * @return AdwClamp*
+         * @return AdwViewStack*
          */
-        AdwClamp* gobj();
+        AdwViewStack* gobj();
         /**
          * @brief Gets the title of the page
          * @return The page title
@@ -39,7 +39,7 @@ namespace Nickvision::Money::GNOME::Views
         std::shared_ptr<Shared::Controllers::AccountViewController> m_controller;
         GtkBuilder* m_builder;
         GtkWindow* m_parent;
-        AdwClamp* m_page;
+        AdwViewStack* m_page;
     };
 }
 
