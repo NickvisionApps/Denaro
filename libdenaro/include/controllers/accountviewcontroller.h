@@ -37,6 +37,26 @@ namespace Nickvision::Money::Shared::Controllers
          * @return The RecentAccount representation of this account. 
          */
         Models::RecentAccount toRecentAccount() const;
+        /**
+         * @brief Gets the total amount of the account as a string.
+         * @return The total amount string
+         */
+        std::string getTotalAmountString() const;
+        /**
+         * @brief Gets the income amount of the account as a string.
+         * @return The income amount string
+         */
+        std::string getIncomeAmountString() const;
+        /**
+         * @brief Gets the expense amount of the account as a string.
+         * @return The expense amount string
+         */
+        std::string getExpenseAmountString() const;
+        /**
+         * @brief Gets the ungrouped amount of the account as a string.
+         * @return The ungrouped amount string
+         */
+        std::string getUngroupedAmountString() const;
 
     private:
         std::unique_ptr<Models::Account> m_account;

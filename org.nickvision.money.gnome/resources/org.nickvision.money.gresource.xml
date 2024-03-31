@@ -27,10 +27,11 @@
     <file preprocess="xml-stripblanks">month-symbolic.svg</file>
     <file preprocess="xml-stripblanks">newspaper-symbolic.svg</file>
     <file preprocess="xml-stripblanks">profit-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">send-alt-symbolic.svg</file>
     <file preprocess="xml-stripblanks">shell-overview-symbolic.svg</file>
     <file preprocess="xml-stripblanks">today-symbolic.svg</file>
     <file preprocess="xml-stripblanks">update-symbolic.svg</file>
     <file preprocess="xml-stripblanks">wallet2-symbolic.svg</file>
-    <file preprocess="xml-stripblanks" alias="denaro-upload-symbolic.svg">document-send-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">wrench-wide-symbolic.svg</file>
   </gresource>
 </gresources>

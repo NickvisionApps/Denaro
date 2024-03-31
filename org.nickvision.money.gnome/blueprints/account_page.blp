@@ -1,12 +1,131 @@
 using Gtk 4.0;
 using Adw 1;
 
+menu newMenu {
+  item(_("Transaction"), "account.newTransaction")
+  item(_("Group"), "account.newGroup")
+  item(_("Transfer"), "account.transfer")
+}
+
+menu importExportMenu {
+  item(_("Import"), "account.import")
+
+  submenu {
+    label: _("Export");
+
+    item("CSV", "account.exportCSV")
+    item("PDF", "account.exportPDF")
+  }
+}
+
 Adw.ViewStack root {
   Adw.ViewStackPage {
     title: _("Overview");
     icon-name: "newspaper-symbolic";
-    child: Gtk.Box {
+    child: Gtk.Overlay {
+      [overlay]
+      Gtk.MenuButton {
+        halign: center;
+        valign: end;
+        margin-bottom: 12;
+        direction: none;
+        menu-model: newMenu;
 
+        Adw.ButtonContent {
+          icon-name: "list-add-symbolic";
+          label: _("New");
+        }
+
+        styles ["pill", "suggested-action"]
+      }
+
+      child: Gtk.Box {
+        margin-start: 24;
+        margin-end: 24;
+        margin-bottom: 12;
+        orientation: vertical;
+        spacing: 6;
+
+        Adw.PreferencesGroup overviewGroup {
+          header-suffix: Gtk.Box {
+            orientation: horizontal;
+
+            Gtk.Button {
+              icon-name: "send-alt-symbolic";
+              tooltip-text: _("Transfer Money");
+              action-name: "account.transfer";
+            }
+
+            Gtk.MenuButton {
+              icon-name: "mail-send-receive-symbolic";
+              tooltip-text: _("Import and Export");
+              direction: none;
+              menu-model: importExportMenu;
+            }
+
+            Gtk.Button {
+              action-name: "account.settings";
+
+              Adw.ButtonContent {
+                icon-name: "wrench-wide-symbolic";
+                label: _("Settings");
+              }
+            }
+
+            styles ["toolbar"]
+          };
+
+          Adw.ActionRow {
+            title: _("Total");
+
+            Gtk.Label overviewTotalLabel {
+              styles ["accent"]
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Income");
+
+            Gtk.Label overviewIncomeLabel {
+              styles ["success"]
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Expense");
+
+            Gtk.Label overviewExpenseLabel {
+              styles ["error"]
+            }
+          }
+        }
+
+        Adw.PreferencesGroup groupsGroup {
+          title: _("Groups");
+
+          header-suffix: Gtk.Box {
+            orientation: horizontal;
+
+            Gtk.Button {
+              action-name: "account.newGroup";
+
+              Adw.ButtonContent {
+                icon-name: "list-add-symbolic";
+                label: _("New");
+              }
+            }
+
+            styles ["toolbar"]
+          };
+
+          Adw.ActionRow {
+            title: _("Ungrouped");
+            subtitle: _("Transactions without a group");
+
+            Gtk.Label ungroupedLabel {}
+          }
+        }
+      };
     };
   }
 

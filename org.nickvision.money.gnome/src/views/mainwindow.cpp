@@ -241,7 +241,7 @@ namespace Nickvision::Money::GNOME::Views
         {
             adw_navigation_page_set_title(ADW_NAVIGATION_PAGE(gtk_builder_get_object(m_builder, "navPageContent")), _("Currency Converter"));
             adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), "custom");
-            adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBingetParam")), GTK_WIDGET(m_currencyConverterPage.gobj()));
+            adw_bin_set_child(ADW_BIN(gtk_builder_get_object(m_builder, "customBin")), GTK_WIDGET(m_currencyConverterPage.gobj()));
         }
         else if(row == gtk_list_box_get_row_at_index(box, Pages::Dashboard))
         {

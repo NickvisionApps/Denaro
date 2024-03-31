@@ -10,6 +10,7 @@
 #include <vector>
 #include <libnick/database/sqldatabase.h>
 #include "accountmetadata.h"
+#include "currency.h"
 #include "color.h"
 #include "graphtype.h"
 #include "group.h"
@@ -63,6 +64,11 @@ namespace Nickvision::Money::Shared::Models
          * @param metadata The new account metadata 
          */
         void setMetadata(const AccountMetadata& metadata);
+        /**
+         * @brief Gets the currency for the account.
+         * @return The account currency 
+         */
+        const Currency& getCurrency() const;
         /**
          * @brief Gets all the groups for the account.
          * @return The account's groups 

@@ -10,6 +10,7 @@
 #include <libnick/localization/gettext.h>
 #include <matplot/matplot.h>
 #include <rapidcsv.h>
+#include "helpers/currencyhelpers.h"
 #include "helpers/datehelpers.h"
 #include "models/currency.h"
 
@@ -102,10 +103,10 @@ namespace Nickvision::Money::Shared::Models
                 newStatement.step();
             }
             //Get groups
-            Group ungrouped{ 0 };
+            Group ungrouped{ -1 };
             ungrouped.setName(_("Ungrouped"));
             ungrouped.setDescription(_("Transactions without a group"));
-            m_groups.emplace(std::make_pair(0, ungrouped));
+            m_groups.emplace(std::make_pair(ungrouped.getId(), ungrouped));
             SqlStatement groupsStatement{ m_database.createStatement("SELECT * FROM groups") };
             while(groupsStatement.step())
             {
@@ -183,6 +184,18 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(9, static_cast<int>(m_metadata.getSortTransactionsBy()));
         statement.bind(8, m_metadata.getSortFirstToLast());
         statement.step();
+    }
+
+    const Currency& Account::getCurrency() const
+    {
+        if(m_metadata.getUseCustomCurrency())
+        {
+            return m_metadata.getCustomCurrency();
+        }
+        else
+        {
+            return CurrencyHelpers::getSystemCurrency();
+        }
     }
 
     const std::unordered_map<int, Group>& Account::getGroups() const
@@ -491,7 +504,7 @@ namespace Nickvision::Money::Shared::Models
         }
         //Get transactions belonging to the group and remove their association with the group
         std::vector<int> belongingTransactions;
-        SqlStatement updateBelongingStatement{ m_database.createStatement("UPDATE transactions SET gid = -1, useGroupId = 0 WHERE gid = ?") };
+        SqlStatement updateBelongingStatement{ m_database.createStatement("UPDATE transactions SET gid = -1, useGroupColor = 0 WHERE gid = ?") };
         updateBelongingStatement.bind(1, group.getId());
         if(!updateBelongingStatement.step())
         {
