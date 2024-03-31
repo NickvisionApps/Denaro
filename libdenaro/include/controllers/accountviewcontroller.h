@@ -4,6 +4,8 @@
 #include <filesystem>
 #include <memory>
 #include <string>
+#include <utility>
+#include <vector>
 #include "models/account.h"
 #include "models/recentaccount.h"
 
@@ -53,10 +55,10 @@ namespace Nickvision::Money::Shared::Controllers
          */
         std::string getExpenseAmountString() const;
         /**
-         * @brief Gets the ungrouped amount of the account as a string.
-         * @return The ungrouped amount string
+         * @brief Gets the group balances of the account as strings.
+         * @return (std::string GroupName, std::string BalanceString)
          */
-        std::string getUngroupedAmountString() const;
+        std::vector<std::pair<std::string, std::string>> getGroupBalanceStrings() const;
 
     private:
         std::unique_ptr<Models::Account> m_account;

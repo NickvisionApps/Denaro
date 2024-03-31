@@ -41,9 +41,22 @@ namespace Nickvision::Money::Shared::Controllers
         return CurrencyHelpers::toAmountString(m_account->getExpense(), m_account->getCurrency());
     }
 
-    std::string AccountViewController::getUngroupedAmountString() const
+    std::vector<std::pair<std::string, std::string>> AccountViewController::getGroupBalanceStrings() const
     {
-        return CurrencyHelpers::toAmountString(m_account->getGroups().at(-1).getBalance(), m_account->getCurrency());
+        std::vector<std::pair<std::string, std::string>> groupAmounts;
+        for(const std::pair<const int, Group>& pair : m_account->getGroups())
+        {
+            groupAmounts.push_back({ pair.second.getName(), CurrencyHelpers::toAmountString(pair.second.getBalance(), m_account->getCurrency()) });
+        }
+        std::sort(groupAmounts.begin(), groupAmounts.end(), [](const std::pair<std::string, std::string>& a, const std::pair<std::string, std::string>& b) 
+        { 
+            if(a.first == _("Ungrouped"))
+            {
+                return true;
+            }
+            return a.first < b.first; 
+        });
+        return groupAmounts;
     }
 
     RecentAccount AccountViewController::toRecentAccount() const
