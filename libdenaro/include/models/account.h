@@ -119,27 +119,6 @@ namespace Nickvision::Money::Shared::Models
          */
         double getTotal(const std::vector<int>& transactionIds = {}) const;
         /**
-         * @brief Gets the total income amount for the transactions given for a Group.
-         * @param group The group to consider
-         * @param transactionIds The ids of transactions to consider
-         * @return The total income amount 
-         */
-        double getGroupIncome(const Group& group, const std::vector<int>& transactionIds = {}) const;
-        /**
-         * @brief Gets the total expense amount for the transactions given for a Group.
-         * @param group The group to consider
-         * @param transactionIds The ids of transactions to consider
-         * @return The total expense amount 
-         */
-        double getGroupExpense(const Group& group, const std::vector<int>& transactionIds = {}) const;
-        /**
-         * @brief Gets the total amount for the transactions given for a Group.
-         * @param group The group to consider
-         * @param transactionIds The ids of transactions to consider
-         * @return The total amount 
-         */
-        double getGroupTotal(const Group& group, const std::vector<int>& transactionIds = {}) const;
-        /**
          * @brief Adds a group to the account.
          * @param group The group to add
          * @return True if successful, else false 

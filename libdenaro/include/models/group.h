@@ -2,7 +2,10 @@
 #define GROUP_H
 
 #include <string>
+#include <unordered_map>
+#include <vector>
 #include "color.h"
+#include "transaction.h"
 
 namespace Nickvision::Money::Shared::Models 
 {
@@ -53,6 +56,31 @@ namespace Nickvision::Money::Shared::Models
          */
         void setColor(const Color& color);
         /**
+         * @brief Gets the total balance of the group.
+         * @param transactionIds The ids of transactions to consider
+         * @return The group balance. 
+         */
+        double getBalance(const std::vector<int>& transactionIds = {}) const;
+        /**
+         * @brief Updates the balance of the group.
+         * @param transaction The transaction to update the balance with
+         * @param remove Whether or not to remove the transaction from the balance
+         * @return The new balance of the group
+         */
+        double updateBalance(const Transaction& transaction, bool remove = false);
+        /**
+         * @brief Gets the total amount of the income amounts in the group.
+         * @param transactionIds The ids of transactions to consider
+         * @return The group income
+         */
+        double getIncome(const std::vector<int>& transactionIds = {}) const;
+        /**
+         * @brief Gets the total amount of the expense amounts in the group.
+         * @param transactionIds The ids of transactions to consider
+         * @return The group expense
+         */
+        double getExpense(const std::vector<int>& transactionIds = {}) const;
+        /**
          * @brief Gets whether or not this Group is equal to compare Group.
          * @param compare The Group to compare to
          * @return True if this Group == compare Group 
@@ -82,6 +110,8 @@ namespace Nickvision::Money::Shared::Models
         std::string m_name;
         std::string m_description;
         Color m_color;
+        std::unordered_map<int, double> m_amounts;
+        double m_balance;
     };
 }
 #endif //GROUP_H

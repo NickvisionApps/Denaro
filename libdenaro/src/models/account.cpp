@@ -142,6 +142,7 @@ namespace Nickvision::Money::Shared::Models
                     }
                 }
                 m_transactions.emplace(std::make_pair(t.getId(), t));
+                m_groups.at(t.getGroupId()).updateBalance(t);
             }
             //Sync repeat transactions
             syncRepeatTransactions();
@@ -369,79 +370,6 @@ namespace Nickvision::Money::Shared::Models
         return statement.getColumnDouble(0);
     }
 
-    double Account::getGroupIncome(const Group& group, const std::vector<int>& transactionIds) const
-    {
-        std::string query{ "SELECT sum(amount) FROM transactions WHERE type = 0 AND gid = " + std::to_string(group.getId()) };
-        for(size_t i = 0; i < transactionIds.size(); i++)
-        {
-            if(i == 0)
-            {
-                query += " AND id IN (";
-            }
-            query += std::to_string(transactionIds[i]);
-            if(i != transactionIds.size() - 1)
-            {
-                query += ",";
-            }
-            else
-            {
-                query += ")";
-            }
-        }
-        SqlStatement statement{ m_database.createStatement(query) };
-        statement.step();
-        return statement.getColumnDouble(0);
-    }
-
-    double Account::getGroupExpense(const Group& group, const std::vector<int>& transactionIds) const
-    {
-        std::string query{ "SELECT sum(amount) FROM transactions WHERE type = 1 AND gid = " + std::to_string(group.getId()) };
-        for(size_t i = 0; i < transactionIds.size(); i++)
-        {
-            if(i == 0)
-            {
-                query += " AND id IN (";
-            }
-            query += std::to_string(transactionIds[i]);
-            if(i != transactionIds.size() - 1)
-            {
-                query += ",";
-            }
-            else
-            {
-                query += ")";
-            }
-        }
-        SqlStatement statement{ m_database.createStatement(query) };
-        statement.step();
-        return statement.getColumnDouble(0);
-    }
-
-    double Account::getGroupTotal(const Group& group, const std::vector<int>& transactionIds) const
-    {
-        std::string query{ "SELECT sum(modified_amount) FROM (SELECT amount, CASE WHEN type = 0 THEN amount ELSE (amount * -1) END AS modified_amount FROM transactions WHERE gid = " + std::to_string(group.getId()) };
-        for(size_t i = 0; i < transactionIds.size(); i++)
-        {
-            if(i == 0)
-            {
-                query += " AND id IN (";
-            }
-            query += std::to_string(transactionIds[i]);
-            if(i != transactionIds.size() - 1)
-            {
-                query += ",";
-            }
-            else
-            {
-                query += ")";
-            }
-        }
-        query += ")";
-        SqlStatement statement{ m_database.createStatement(query) };
-        statement.step();
-        return statement.getColumnDouble(0);
-    }
-
     bool Account::addGroup(const Group& group)
     {
         if(m_groups.contains(group.getId()) || group.getId() <= 0)
@@ -567,6 +495,7 @@ namespace Nickvision::Money::Shared::Models
         if(!statement.step())
         {
             m_transactions.emplace(std::make_pair(transaction.getId(), transaction));
+            m_groups.at(transaction.getGroupId()).updateBalance(transaction);
             if(transaction.getRepeatInterval() != TransactionRepeatInterval::Never && transaction.getRepeatFrom() == 0)
             {
                 syncRepeatTransactions();
@@ -613,7 +542,12 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(14, transaction.getId());
         if(!statement.step())
         {
+            if(m_transactions.at(transaction.getId()).getGroupId() != transaction.getGroupId())
+            {
+                m_groups.at(m_transactions.at(transaction.getId()).getGroupId()).updateBalance(transaction, true);
+            }
             m_transactions.at(transaction.getId()) = transaction;
+            m_groups.at(transaction.getGroupId()).updateBalance(transaction);
             if(transaction.getRepeatFrom() == 0) //source repeat transaction
             {
                 if(updateGenerated)
@@ -686,6 +620,7 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(1, transaction.getId());
         if(!statement.step())
         {
+            m_groups.at(transaction.getGroupId()).updateBalance(transaction, true);
             if(transaction.getRepeatFrom() == 0) //source repeat transaction
             {
                 if(deleteGenerated)
@@ -699,6 +634,7 @@ namespace Nickvision::Money::Shared::Models
                             if(it->second.getRepeatFrom() == transaction.getId())
                             {
                                 it = m_transactions.erase(it);
+                                m_groups.at(it->second.getGroupId()).updateBalance(it->second, true);
                             }
                             else
                             {
@@ -741,6 +677,7 @@ namespace Nickvision::Money::Shared::Models
                 if(it->second.getRepeatFrom() == sourceId)
                 {
                     it = m_transactions.erase(it);
+                    m_groups.at(it->second.getGroupId()).updateBalance(it->second, true);
                 }
                 else
                 {

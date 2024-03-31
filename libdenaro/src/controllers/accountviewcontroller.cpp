@@ -43,7 +43,7 @@ namespace Nickvision::Money::Shared::Controllers
 
     std::string AccountViewController::getUngroupedAmountString() const
     {
-        return CurrencyHelpers::toAmountString(m_account->getGroupTotal({ -1 }), m_account->getCurrency());
+        return CurrencyHelpers::toAmountString(m_account->getGroups().at(-1).getBalance(), m_account->getCurrency());
     }
 
     RecentAccount AccountViewController::toRecentAccount() const
