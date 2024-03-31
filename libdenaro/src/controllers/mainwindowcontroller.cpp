@@ -27,7 +27,7 @@ namespace Nickvision::Money::Shared::Controllers
     {
         Aura::getActive().init("org.nickvision.money", "Nickvision Denaro", "Denaro");
         AppInfo& appInfo{ Aura::getActive().getAppInfo() };
-        appInfo.setVersion({ "2024.3.0-next" });
+        appInfo.setVersion({ "2024.4.0-next" });
         appInfo.setShortName(_("Denaro"));
         appInfo.setDescription(_("Manage your personal finances"));
         appInfo.setSourceRepo("https://github.com/NickvisionApps/Denaro");

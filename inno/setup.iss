@@ -3,7 +3,7 @@
 
 #define MyAppName "Nickvision Denaro"
 #define MyAppShortName "Denaro"
-#define MyAppVersion "2024.3.0"
+#define MyAppVersion "2024.4.0"
 #define MyAppPublisher "Nickvision"
 #define MyAppURL "https://nickvision.org"
 #define MyAppExeName "org.nickvision.money.winui.exe"
