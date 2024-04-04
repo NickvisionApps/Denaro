@@ -13,6 +13,7 @@ add_library(libdenaro
     "src/helpers/datehelpers.cpp"
     "src/models/account.cpp"
     "src/models/accountmetadata.cpp"
+    "src/models/accountrepository.cpp"
     "src/models/color.cpp"
     "src/models/configuration.cpp"
     "src/models/currency.cpp"

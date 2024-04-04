@@ -1,4 +1,5 @@
 libdenaro/src/models/account.cpp
+libdenaro/src/models/accountrepository.cpp
 libdenaro/src/models/dashboardgroup.cpp
 libdenaro/src/controllers/mainwindowcontroller.cpp
 org.nickvision.money.gnome/blueprints/account_page.blp

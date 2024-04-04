@@ -8,8 +8,8 @@
 #include <tuple>
 #include <unordered_map>
 #include <vector>
-#include <libnick/database/sqldatabase.h>
 #include "accountmetadata.h"
+#include "accountrepository.h"
 #include "currency.h"
 #include "color.h"
 #include "graphtype.h"
@@ -32,8 +32,8 @@ namespace Nickvision::Money::Shared::Models
          */
         Account(std::filesystem::path path);
         /**
-         * @brief Gets the path of the account database file.
-         * @return The path of the account database file
+         * @brief Gets the path of the .nmoney file.
+         * @return The path of the .nmoney file
          */
         const std::filesystem::path& getPath() const;
         /**
@@ -42,7 +42,7 @@ namespace Nickvision::Money::Shared::Models
          */
         bool isEncrypted() const;
         /**
-         * @brief Logins to the account.
+         * @brief Logins in to the account.
          * @brief This method also loads the account's data into memory.
          * @param password The password for the account. If unencrypted, this param must be an empty string
          * @return True if successful, else false
@@ -245,7 +245,7 @@ namespace Nickvision::Money::Shared::Models
         ImportResult importFromQIF(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor);
         std::filesystem::path m_path;
         bool m_loggedIn;
-        mutable Database::SqlDatabase m_database;
+        AccountRepository m_repository;
         AccountMetadata m_metadata;
         std::unordered_map<int, Group> m_groups;
         std::vector<std::string> m_tags;

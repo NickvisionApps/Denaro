@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-01 21:32-0400\n"
+"POT-Creation-Date: 2024-04-03 22:42-0400\n"
 "PO-Revision-Date: 2023-09-16 10:15+0000\n"
 "Last-Translator: Davide <davide.ferracin@protonmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -19,53 +19,53 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.0.2\n"
 
-#: libdenaro/src/models/account.cpp:107
-msgid "Ungrouped"
-msgstr "Senza gruppo"
-
-#: libdenaro/src/models/account.cpp:108
-msgid "Transactions without a group"
-msgstr "Transazioni senza gruppo"
-
-#: libdenaro/src/models/account.cpp:231
+#: libdenaro/src/models/account.cpp:120
 msgid "Tomorrow"
 msgstr "Domani"
 
-#: libdenaro/src/models/account.cpp:235
+#: libdenaro/src/models/account.cpp:124
 msgid "One week from now"
 msgstr "Tra una settimana"
 
-#: libdenaro/src/models/account.cpp:239
+#: libdenaro/src/models/account.cpp:128
 msgid "One month from now"
 msgstr "Tra un mese"
 
-#: libdenaro/src/models/account.cpp:243
+#: libdenaro/src/models/account.cpp:132
 msgid "Two months from now"
 msgstr "Tra due mesi"
 
-#: libdenaro/src/models/account.cpp:728
+#: libdenaro/src/models/account.cpp:483
 #, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Trasferimento a {0}"
 
-#: libdenaro/src/models/account.cpp:745
+#: libdenaro/src/models/account.cpp:500
 #, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Trasferimento da {0}"
 
-#: libdenaro/src/models/account.cpp:844
+#: libdenaro/src/models/account.cpp:599
 #: org.nickvision.money.gnome/blueprints/account_page.blp:87
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Entrata"
 
-#: libdenaro/src/models/account.cpp:844
+#: libdenaro/src/models/account.cpp:599
 #: org.nickvision.money.gnome/blueprints/account_page.blp:95
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
 msgstr "Uscita"
+
+#: libdenaro/src/models/accountrepository.cpp:148
+msgid "Ungrouped"
+msgstr "Senza gruppo"
+
+#: libdenaro/src/models/accountrepository.cpp:149
+msgid "Transactions without a group"
+msgstr "Transazioni senza gruppo"
 
 #: libdenaro/src/models/dashboardgroup.cpp:22
 #: libdenaro/src/models/dashboardgroup.cpp:26
