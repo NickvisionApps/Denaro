@@ -33,6 +33,126 @@ Adw.ApplicationWindow root {
       child: Adw.ToolbarView {
         [top]
         Adw.HeaderBar {
+          [start]
+          Gtk.MenuButton {
+            direction: none;
+            icon-name: "wallet2-symbolic";
+            tooltip-text: _("Account Menu");
+            popover: Gtk.Popover {
+              child: Gtk.Box {
+                orientation: vertical;
+                spacing: 12;
+                margin-start: 6;
+                margin-top: 6;
+                margin-end: 6;
+                margin-bottom: 6;
+                width-request: 320;
+
+                Gtk.Box {
+                  orientation: horizontal;
+                  spacing: 6;
+
+                  Gtk.Label {
+                    halign: start;
+                    hexpand: true;
+                    label: _("Recents");
+
+                    styles ["title-4"]
+                  }
+
+                  Gtk.Box {
+                    orientation: horizontal;
+
+                    Gtk.Button {
+                      icon-name: "document-new-symbolic";
+                      tooltip-text: _("New Account (Ctrl+N)");
+                      action-name: "win.newAccount";
+                    }
+
+                    Gtk.Button {
+                      tooltip-text: _("Open Account (Ctrl+O)");
+                      action-name: "win.openAccount";
+
+                      Adw.ButtonContent {
+                        label: _("Open");
+                        icon-name: "document-open-symbolic";
+                      }
+
+                      styles ["suggested-action"]
+                    }
+
+                    styles ["linked"]
+                  }
+                }
+
+                Adw.PreferencesGroup {
+                  Adw.ActionRow noRecentAccountsPopoverRow {
+                    title: _("No Recent Accounts");
+
+                    [prefix]
+                    Gtk.Image {
+                      icon-name: "document-open-recent-symbolic";
+                    }
+                  }
+
+                  Adw.ActionRow recentAccount1PopoverRow {
+                    activatable-widget: recentAccount1PopoverImg;
+
+                    [prefix]
+                    Gtk.Image recentAccount1PopoverImg {
+                      icon-name: "wallet2-symbolic";
+                    }
+
+                    [suffix]
+                    Gtk.Button removeRecentAccount1PopoverButton {
+                      valign: center;
+                      icon-name: "cross-symbolic";
+                      tooltip-text: _("Remove");
+
+                      styles ["flat"]
+                    }
+                  }
+
+                  Adw.ActionRow recentAccount2PopoverRow {
+                    activatable-widget: recentAccount2PopoverImg;
+
+                    [prefix]
+                    Gtk.Image recentAccount2PopoverImg {
+                      icon-name: "wallet2-symbolic";
+                    }
+
+                    [suffix]
+                    Gtk.Button removeRecentAccount2PopoverButton {
+                      valign: center;
+                      icon-name: "cross-symbolic";
+                      tooltip-text: _("Remove");
+
+                      styles ["flat"]
+                    }
+                  }
+
+                  Adw.ActionRow recentAccount3PopoverRow {
+                    activatable-widget: recentAccount3PopoverImg;
+
+                    [prefix]
+                    Gtk.Image recentAccount3PopoverImg {
+                      icon-name: "wallet2-symbolic";
+                    }
+
+                    [suffix]
+                    Gtk.Button removeRecentAccount3PopoverButton {
+                      valign: center;
+                      icon-name: "cross-symbolic";
+                      tooltip-text: _("Remove");
+
+                      styles ["flat"]
+                    }
+                  }
+                }
+              };
+            };
+          }
+
           [end]
           Gtk.MenuButton {
             direction: none;

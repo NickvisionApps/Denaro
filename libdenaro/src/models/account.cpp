@@ -49,7 +49,11 @@ namespace Nickvision::Money::Shared::Models
             m_metadata = m_repository.getMetadata();
             m_groups = m_repository.getGroups();
             m_tags = m_repository.getTags();
-            m_transactions = m_repository.getTransactions();
+            for(const std::pair<const int, Transaction>& pair : m_repository.getTransactions())
+            {
+                m_transactions.emplace(pair);
+                m_groups.at(pair.second.getGroupId()).updateBalance(pair.second);
+            }
             //Sync repeat transactions
             syncRepeatTransactions();
             m_loggedIn = true;
@@ -145,15 +149,13 @@ namespace Nickvision::Money::Shared::Models
         {
             return 1;
         }
-        int i;
-        for(i = 1; i <= m_groups.size(); i++)
+        for(size_t i = 1; i <= m_groups.size(); i++)
         {
             if(!m_groups.contains(i))
             {
                 return i;
             }
         }
-        return i;
     }
 
     int Account::getNextAvailableTransactionId() const
@@ -162,7 +164,7 @@ namespace Nickvision::Money::Shared::Models
         {
             return 1;
         }
-        for(int i = 1; i <= m_transactions.size(); i++)
+        for(size_t i = 1; i <= m_transactions.size(); i++)
         {
             if(!m_transactions.contains(i))
             {

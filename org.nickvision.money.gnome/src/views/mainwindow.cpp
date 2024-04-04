@@ -91,6 +91,12 @@ namespace Nickvision::Money::GNOME::Views
         g_action_map_add_action(G_ACTION_MAP(m_window), G_ACTION(actOpenAccount));
         SET_ACCEL_FOR_ACTION(m_app, "win.openAccount", "<Ctrl>O");
         //Recent Account Callbacks
+        g_signal_connect(gtk_builder_get_object(m_builder, "recentAccount1PopoverRow"), "activated", G_CALLBACK(+[](AdwActionRow* row, gpointer data){ reinterpret_cast<MainWindow*>(data)->openAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(row))); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "removeRecentAccount1PopoverButton"), "clicked", G_CALLBACK(+[](GtkButton* button, gpointer data){ reinterpret_cast<MainWindow*>(data)->removeRecentAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(gtk_builder_get_object(reinterpret_cast<MainWindow*>(data)->m_builder, "recentAccount1PopoverRow")))); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "recentAccount2PopoverRow"), "activated", G_CALLBACK(+[](AdwActionRow* row, gpointer data){ reinterpret_cast<MainWindow*>(data)->openAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(row))); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "removeRecentAccount2PopoverButton"), "clicked", G_CALLBACK(+[](GtkButton* button, gpointer data){ reinterpret_cast<MainWindow*>(data)->removeRecentAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(gtk_builder_get_object(reinterpret_cast<MainWindow*>(data)->m_builder, "recentAccount2PopoverRow")))); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "recentAccount3PopoverRow"), "activated", G_CALLBACK(+[](AdwActionRow* row, gpointer data){ reinterpret_cast<MainWindow*>(data)->openAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(row))); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "removeRecentAccount3PopoverButton"), "clicked", G_CALLBACK(+[](GtkButton* button, gpointer data){ reinterpret_cast<MainWindow*>(data)->removeRecentAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(gtk_builder_get_object(reinterpret_cast<MainWindow*>(data)->m_builder, "recentAccount3PopoverRow")))); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "recentAccount1Row"), "activated", G_CALLBACK(+[](AdwActionRow* row, gpointer data){ reinterpret_cast<MainWindow*>(data)->openAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(row))); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "removeRecentAccount1Button"), "clicked", G_CALLBACK(+[](GtkButton* button, gpointer data){ reinterpret_cast<MainWindow*>(data)->removeRecentAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(gtk_builder_get_object(reinterpret_cast<MainWindow*>(data)->m_builder, "recentAccount1Row")))); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "recentAccount2Row"), "activated", G_CALLBACK(+[](AdwActionRow* row, gpointer data){ reinterpret_cast<MainWindow*>(data)->openAccount(gtk_widget_get_tooltip_text(GTK_WIDGET(row))); }), this);
@@ -328,6 +334,10 @@ namespace Nickvision::Money::GNOME::Views
     void MainWindow::loadRecentAccounts()
     {
         std::vector<RecentAccount> recentAccounts{ m_controller->getRecentAccounts() };
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "noRecentAccountsPopoverRow")), recentAccounts.size() == 0);
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "recentAccount1PopoverRow")), false);
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "recentAccount2PopoverRow")), false);
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "recentAccount3PopoverRow")), false);
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "noRecentAccountsRow")), recentAccounts.size() == 0);
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "recentAccount1Row")), false);
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "recentAccount2Row")), false);
@@ -335,22 +345,30 @@ namespace Nickvision::Money::GNOME::Views
         for(size_t i = 0; i < recentAccounts.size(); i++)
         {
             RecentAccount& recentAccount{ recentAccounts[i] };
+            std::string popoverRowName{ "recentAccount" + std::to_string(i + 1) + "PopoverRow" };
             std::string rowName{ "recentAccount" + std::to_string(i + 1) + "Row" };
+            AdwActionRow* popoverRow{ ADW_ACTION_ROW(gtk_builder_get_object(m_builder, popoverRowName.c_str())) };
             AdwActionRow* row{ ADW_ACTION_ROW(gtk_builder_get_object(m_builder, rowName.c_str())) };
+            gtk_widget_set_visible(GTK_WIDGET(popoverRow), true);
             gtk_widget_set_visible(GTK_WIDGET(row), true);
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(popoverRow), recentAccount.getName().c_str());
             adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), recentAccount.getName().c_str());
             switch(recentAccount.getType())
             {
             case AccountType::Checking:
+                adw_action_row_set_subtitle(popoverRow, _("Checking"));
                 adw_action_row_set_subtitle(row, _("Checking"));
                 break;
             case AccountType::Savings:
+                adw_action_row_set_subtitle(popoverRow, _("Savings"));
                 adw_action_row_set_subtitle(row, _("Savings"));
                 break;
             case AccountType::Business:
+                adw_action_row_set_subtitle(popoverRow, _("Business"));
                 adw_action_row_set_subtitle(row, _("Business"));
                 break;
             }
+            gtk_widget_set_tooltip_text(GTK_WIDGET(popoverRow), recentAccount.getPath().string().c_str());
             gtk_widget_set_tooltip_text(GTK_WIDGET(row), recentAccount.getPath().string().c_str());
         }
     }

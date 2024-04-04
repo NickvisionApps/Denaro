@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 22:42-0400\n"
+"POT-Creation-Date: 2024-04-04 14:49-0400\n"
 "PO-Revision-Date: 2023-11-17 11:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -19,40 +19,40 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Weblate 5.2\n"
 
-#: libdenaro/src/models/account.cpp:120
+#: libdenaro/src/models/account.cpp:124
 msgid "Tomorrow"
 msgstr "Zítra"
 
-#: libdenaro/src/models/account.cpp:124
+#: libdenaro/src/models/account.cpp:128
 msgid "One week from now"
 msgstr "Jeden týden ode dneška"
 
-#: libdenaro/src/models/account.cpp:128
+#: libdenaro/src/models/account.cpp:132
 msgid "One month from now"
 msgstr "Jeden měsíc ode dneška"
 
-#: libdenaro/src/models/account.cpp:132
+#: libdenaro/src/models/account.cpp:136
 msgid "Two months from now"
 msgstr "Dva měsíce ode dneška"
 
-#: libdenaro/src/models/account.cpp:483
+#: libdenaro/src/models/account.cpp:485
 #, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Převést na {0}"
 
-#: libdenaro/src/models/account.cpp:500
+#: libdenaro/src/models/account.cpp:502
 #, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Převést z {0}"
 
-#: libdenaro/src/models/account.cpp:599
+#: libdenaro/src/models/account.cpp:601
 #: org.nickvision.money.gnome/blueprints/account_page.blp:87
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Příjem"
 
-#: libdenaro/src/models/account.cpp:599
+#: libdenaro/src/models/account.cpp:601
 #: org.nickvision.money.gnome/blueprints/account_page.blp:95
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
@@ -181,7 +181,7 @@ msgstr "Přehled"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:36
 #: org.nickvision.money.gnome/blueprints/account_page.blp:114
-#: org.nickvision.money.gnome/blueprints/main_window.blp:223
+#: org.nickvision.money.gnome/blueprints/main_window.blp:343
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #, fuzzy
 msgid "New"
@@ -323,20 +323,23 @@ msgid "Account Type"
 msgstr "Typ účtu"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:127
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:345
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:359
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:360
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:40
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:424
 msgid "Checking"
 msgstr "Běžný"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:127
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:348
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:363
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:364
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:427
 msgid "Savings"
 msgstr "Spořicí"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:127
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:351
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:367
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:368
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:42
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:430
 msgid "Business"
@@ -523,35 +526,76 @@ msgid "About Denaro"
 msgstr "O aplikaci Denaro"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:40
+msgid "Account Menu"
+msgstr "Nabídka účtu"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:58
+msgid "Recents"
+msgstr "Nedávné"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:68
+#: org.nickvision.money.gnome/blueprints/main_window.blp:344
+msgid "New Account (Ctrl+N)"
+msgstr "Nový účet (Ctrl+N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:73
+#: org.nickvision.money.gnome/blueprints/main_window.blp:353
+msgid "Open Account (Ctrl+O)"
+msgstr "Otevřít účet (Ctrl+O)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:77
+#: org.nickvision.money.gnome/blueprints/main_window.blp:352
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:151
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:83
+msgid "Open"
+msgstr "Otevřít"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:90
+#: org.nickvision.money.gnome/blueprints/main_window.blp:274
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:398
+msgid "No Recent Accounts"
+msgstr "Žádné nedávné účty"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:110
+#: org.nickvision.money.gnome/blueprints/main_window.blp:128
+#: org.nickvision.money.gnome/blueprints/main_window.blp:146
+#: org.nickvision.money.gnome/blueprints/main_window.blp:294
+#: org.nickvision.money.gnome/blueprints/main_window.blp:312
+#: org.nickvision.money.gnome/blueprints/main_window.blp:330
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:417
+msgid "Remove"
+msgstr "Odebrat"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:160
 msgid "Main Menu"
 msgstr "Hlavní nabídka"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:63
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:237
+#: org.nickvision.money.gnome/blueprints/main_window.blp:183
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:243
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:69
 msgid "Home"
 msgstr "Domů"
 
 #. Localize Strings
-#: org.nickvision.money.gnome/blueprints/main_window.blp:80
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:242
+#: org.nickvision.money.gnome/blueprints/main_window.blp:200
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:248
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:80
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
 msgid "Currency Converter"
 msgstr "Převodník měn"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:90
+#: org.nickvision.money.gnome/blueprints/main_window.blp:210
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Accounts"
 msgstr "Účty"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:109
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:248
+#: org.nickvision.money.gnome/blueprints/main_window.blp:229
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:254
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Dashboard"
 msgstr "Nástěnka"
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:142
+#: org.nickvision.money.gnome/blueprints/main_window.blp:262
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:111
 msgid ""
 "Create or open an account to get started. You may also drag a file into the "
@@ -560,33 +604,7 @@ msgstr ""
 "Chcete-li začít, vytvořte si nebo otevřete účet. Do aplikace můžete také "
 "přetáhnout soubor z prohlížeče souborů."
 
-#: org.nickvision.money.gnome/blueprints/main_window.blp:154
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:398
-msgid "No Recent Accounts"
-msgstr "Žádné nedávné účty"
-
-#: org.nickvision.money.gnome/blueprints/main_window.blp:174
-#: org.nickvision.money.gnome/blueprints/main_window.blp:192
-#: org.nickvision.money.gnome/blueprints/main_window.blp:210
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:417
-msgid "Remove"
-msgstr "Odebrat"
-
-#: org.nickvision.money.gnome/blueprints/main_window.blp:224
-msgid "New Account (Ctrl+N)"
-msgstr "Nový účet (Ctrl+N)"
-
-#: org.nickvision.money.gnome/blueprints/main_window.blp:232
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:145
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:83
-msgid "Open"
-msgstr "Otevřít"
-
-#: org.nickvision.money.gnome/blueprints/main_window.blp:233
-msgid "Open Account (Ctrl+O)"
-msgstr "Otevřít účet (Ctrl+O)"
-
-#: org.nickvision.money.gnome/blueprints/main_window.blp:250
+#: org.nickvision.money.gnome/blueprints/main_window.blp:370
 #, fuzzy
 msgid "No Accounts Open"
 msgstr "Typ účtu"
@@ -703,7 +721,7 @@ msgid "Account"
 msgstr "Účet"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:310
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:316
 msgid "Open Account"
 msgstr "Otevřít účet"
 
@@ -772,28 +790,28 @@ msgstr ""
 msgid "Quicken Interchange Format (*.qif)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:196
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:202
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 msgid "GitHub Repo"
 msgstr "Repozitář GitHub"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:312
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:318
 #, fuzzy
 msgid "Nickvision Denaro Account (*.nmoney)"
 msgstr "Účet Nickvision Denaro"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:380
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:398
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:32
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:455
 msgid "Enter password here"
 msgstr "Sem zadejte heslo"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:388
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:406
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:464
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:388
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:406
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:463
 msgid "Unlock"
 msgstr "Odemknout"
@@ -1587,9 +1605,6 @@ msgstr "Výsledek"
 #~ msgid "Recent Accounts"
 #~ msgstr "Nedávné účty"
 
-#~ msgid "Recents"
-#~ msgstr "Nedávné"
-
 #~ msgid "Conversion Needed"
 #~ msgstr "Nutná konverze"
 
@@ -1602,9 +1617,6 @@ msgstr "Výsledek"
 #~ msgctxt "Button"
 #~ msgid "Transfer"
 #~ msgstr "Převod"
-
-#~ msgid "Account Menu"
-#~ msgstr "Nabídka účtu"
 
 #~ msgctxt "Account"
 #~ msgid "New"
