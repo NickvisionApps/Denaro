@@ -144,10 +144,6 @@ namespace Nickvision::Money::Shared::Models
     std::unordered_map<int, Group> AccountRepository::getGroups() const
     {
         std::unordered_map<int, Group> groups;
-        Group ungrouped{ -1 };
-        ungrouped.setName(_("Ungrouped"));
-        ungrouped.setDescription(_("Transactions without a group"));
-        groups.emplace(std::make_pair(ungrouped.getId(), ungrouped));
         SqlStatement groupsStatement{ m_database.createStatement("SELECT * FROM groups") };
         while(groupsStatement.step())
         {

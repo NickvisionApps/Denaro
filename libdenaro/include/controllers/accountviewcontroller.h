@@ -55,10 +55,10 @@ namespace Nickvision::Money::Shared::Controllers
          */
         std::string getExpenseAmountString() const;
         /**
-         * @brief Gets the group balances of the account as strings.
-         * @return (std::string GroupName, std::string BalanceString)
+         * @brief Gets the groups of the account.
+         * @return (Group GroupName, std::string BalanceString)
          */
-        std::vector<std::pair<std::string, std::string>> getGroupBalanceStrings() const;
+        std::vector<std::pair<Models::Group, std::string>> getGroups() const;
 
     private:
         std::unique_ptr<Models::Account> m_account;

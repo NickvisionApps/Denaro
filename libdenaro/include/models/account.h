@@ -45,9 +45,10 @@ namespace Nickvision::Money::Shared::Models
          * @brief Logins in to the account.
          * @brief This method also loads the account's data into memory.
          * @param password The password for the account. If unencrypted, this param must be an empty string
+         * @param defaultGroupColor The default color for groups, if available
          * @return True if successful, else false
          */
-        bool login(const std::string& password);
+        bool login(const std::string& password, const Color& defaultGroupColor = {});
         /**
          * @brief Changes the password of the account.
          * @param password new password for the account. If removing a password from the account

@@ -1,8 +1,11 @@
 #include "controllers/accountviewcontroller.h"
 #include <stdexcept>
+#include <libnick/app/aura.h>
 #include <libnick/localization/gettext.h>
 #include "helpers/currencyhelpers.h"
+#include "models/configuration.h"
 
+using namespace Nickvision::App;
 using namespace Nickvision::Money::Shared::Models;
 
 namespace Nickvision::Money::Shared::Controllers
@@ -10,7 +13,7 @@ namespace Nickvision::Money::Shared::Controllers
     AccountViewController::AccountViewController(const std::filesystem::path& path, const std::string& password)
         : m_account{ std::make_unique<Account>(path) }
     {
-        if(!m_account->login(password))
+        if(!m_account->login(password, Aura::getActive().getConfig<Configuration>("config").getGroupDefaultColor()))
         {
             throw std::runtime_error{ _("Unable to login to the account. The provided password may be invalid.") };
         }
@@ -41,22 +44,26 @@ namespace Nickvision::Money::Shared::Controllers
         return CurrencyHelpers::toAmountString(m_account->getExpense(), m_account->getCurrency());
     }
 
-    std::vector<std::pair<std::string, std::string>> AccountViewController::getGroupBalanceStrings() const
+    std::vector<std::pair<Group, std::string>> AccountViewController::getGroups() const
     {
-        std::vector<std::pair<std::string, std::string>> groupAmounts;
+        std::vector<std::pair<Group, std::string>> groups;
         for(const std::pair<const int, Group>& pair : m_account->getGroups())
         {
-            groupAmounts.push_back({ pair.second.getName(), CurrencyHelpers::toAmountString(pair.second.getBalance(), m_account->getCurrency()) });
+            groups.push_back({ pair.second, CurrencyHelpers::toAmountString(pair.second.getBalance(), m_account->getCurrency()) });
         }
-        std::sort(groupAmounts.begin(), groupAmounts.end(), [](const std::pair<std::string, std::string>& a, const std::pair<std::string, std::string>& b) 
+        std::sort(groups.begin(), groups.end(), [](const std::pair<Group, std::string>& a, const std::pair<Group, std::string>& b) 
         { 
-            if(a.first == _("Ungrouped"))
+            if(a.first.getId() == -1)
             {
                 return true;
             }
-            return a.first < b.first; 
+            if(b.first.getId() == -1)
+            {
+                return false;
+            }
+            return a.first < b.first;
         });
-        return groupAmounts;
+        return groups;
     }
 
     RecentAccount AccountViewController::toRecentAccount() const

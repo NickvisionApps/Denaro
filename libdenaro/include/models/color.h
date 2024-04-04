@@ -84,6 +84,12 @@ namespace Nickvision::Money::Shared::Models
          */
         void setA(unsigned char a);
         /**
+         * @brief Gets the hex value for this Color object.
+         * @param alpha Whether or not to include the alpha value in the hex value
+         * @return The hex value 
+         */
+        unsigned int toHex(bool alpha = true) const;
+        /**
          * @brief Gets the rgb string for this Color object.
          * @param header Whether or not to wrap the string in the header: rgb()
          * @return If header is true, "rgb(r,g,b)" else "r,g,b" 

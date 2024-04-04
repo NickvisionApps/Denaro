@@ -37,7 +37,7 @@ namespace Nickvision::Money::Shared::Models
         return m_repository.isEncrypted();
     }
 
-    bool Account::login(const std::string& password)
+    bool Account::login(const std::string& password, const Color& defaultGroupColor)
     {
         if(!m_loggedIn)
         {
@@ -45,10 +45,18 @@ namespace Nickvision::Money::Shared::Models
             {
                 return false;
             }
-            //Load data into memory
+            //Load metadata into memory
             m_metadata = m_repository.getMetadata();
+            //Load groups into memory
             m_groups = m_repository.getGroups();
+            Group ungrouped{ -1 };
+            ungrouped.setName(_("Ungrouped"));
+            ungrouped.setDescription(_("Transactions without a group"));
+            ungrouped.setColor(defaultGroupColor);
+            m_groups.emplace(std::make_pair(ungrouped.getId(), ungrouped));
+            //Load tags into memory
             m_tags = m_repository.getTags();
+            //Load transactions into memory
             for(const std::pair<const int, Transaction>& pair : m_repository.getTransactions())
             {
                 m_transactions.emplace(pair);

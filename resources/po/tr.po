@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 14:49-0400\n"
+"POT-Creation-Date: 2024-04-04 15:48-0400\n"
 "PO-Revision-Date: 2023-09-10 21:21+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -19,53 +19,54 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.0.1-dev\n"
 
-#: libdenaro/src/models/account.cpp:124
+#: libdenaro/src/models/account.cpp:53
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:34
+msgid "Ungrouped"
+msgstr "Grupsuz"
+
+#: libdenaro/src/models/account.cpp:54
+msgid "Transactions without a group"
+msgstr "Grupsuz işlemler"
+
+#: libdenaro/src/models/account.cpp:132
 msgid "Tomorrow"
 msgstr "Yarın"
 
-#: libdenaro/src/models/account.cpp:128
+#: libdenaro/src/models/account.cpp:136
 msgid "One week from now"
 msgstr "Bu günden, bir hafta sonra"
 
-#: libdenaro/src/models/account.cpp:132
+#: libdenaro/src/models/account.cpp:140
 msgid "One month from now"
 msgstr "Bu günden, bir ay sonra"
 
-#: libdenaro/src/models/account.cpp:136
+#: libdenaro/src/models/account.cpp:144
 msgid "Two months from now"
 msgstr "Bu günden, iki ay sonra"
 
-#: libdenaro/src/models/account.cpp:485
+#: libdenaro/src/models/account.cpp:493
 #, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Şuraya Aktar: {0}"
 
-#: libdenaro/src/models/account.cpp:502
+#: libdenaro/src/models/account.cpp:510
 #, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Şuradan Aktar: {0}"
 
-#: libdenaro/src/models/account.cpp:601
+#: libdenaro/src/models/account.cpp:609
 #: org.nickvision.money.gnome/blueprints/account_page.blp:87
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Gelir"
 
-#: libdenaro/src/models/account.cpp:601
+#: libdenaro/src/models/account.cpp:609
 #: org.nickvision.money.gnome/blueprints/account_page.blp:95
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
 msgstr "Gider"
-
-#: libdenaro/src/models/accountrepository.cpp:148
-msgid "Ungrouped"
-msgstr "Grupsuz"
-
-#: libdenaro/src/models/accountrepository.cpp:149
-msgid "Transactions without a group"
-msgstr "Grupsuz işlemler"
 
 #: libdenaro/src/models/dashboardgroup.cpp:22
 #: libdenaro/src/models/dashboardgroup.cpp:26

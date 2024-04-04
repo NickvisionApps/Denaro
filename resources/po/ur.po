@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 14:49-0400\n"
+"POT-Creation-Date: 2024-04-04 15:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,52 +16,53 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libdenaro/src/models/account.cpp:124
-msgid "Tomorrow"
+#: libdenaro/src/models/account.cpp:53
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:34
+msgid "Ungrouped"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:128
-msgid "One week from now"
+#: libdenaro/src/models/account.cpp:54
+msgid "Transactions without a group"
 msgstr ""
 
 #: libdenaro/src/models/account.cpp:132
-msgid "One month from now"
+msgid "Tomorrow"
 msgstr ""
 
 #: libdenaro/src/models/account.cpp:136
+msgid "One week from now"
+msgstr ""
+
+#: libdenaro/src/models/account.cpp:140
+msgid "One month from now"
+msgstr ""
+
+#: libdenaro/src/models/account.cpp:144
 msgid "Two months from now"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:485
+#: libdenaro/src/models/account.cpp:493
 #, c++-format
 msgid "Transfer to {}"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:502
+#: libdenaro/src/models/account.cpp:510
 #, c++-format
 msgid "Transfer from {}"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:601
+#: libdenaro/src/models/account.cpp:609
 #: org.nickvision.money.gnome/blueprints/account_page.blp:87
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:601
+#: libdenaro/src/models/account.cpp:609
 #: org.nickvision.money.gnome/blueprints/account_page.blp:95
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
-msgstr ""
-
-#: libdenaro/src/models/accountrepository.cpp:148
-msgid "Ungrouped"
-msgstr ""
-
-#: libdenaro/src/models/accountrepository.cpp:149
-msgid "Transactions without a group"
 msgstr ""
 
 #: libdenaro/src/models/dashboardgroup.cpp:22

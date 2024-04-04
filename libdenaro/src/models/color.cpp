@@ -203,6 +203,11 @@ namespace Nickvision::Money::Shared::Models
         m_a = a;
     }
 
+    unsigned int Color::toHex(bool alpha) const
+    {
+        return (m_r << 24) | (m_g << 16) | (m_b << 8) | (alpha ? m_a : 255);
+    }
+
     std::string Color::toRGBString(bool header) const
     {
         std::stringstream builder;
