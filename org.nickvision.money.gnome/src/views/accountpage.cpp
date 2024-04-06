@@ -42,6 +42,19 @@ namespace Nickvision::Money::GNOME::Views
         gtk_label_set_label(GTK_LABEL(gtk_builder_get_object(m_builder, "overviewExpenseLabel")), m_controller->getExpenseAmountString().c_str());
         g_object_unref(expenseColorTexture);
         g_object_unref(expenseColorBuf);
+        //Load overview reminders
+        std::vector<TransactionReminder> reminders{ m_controller->getTransactionReminders() };
+        if(reminders.empty())
+        {
+            AdwActionRow* row{ ADW_ACTION_ROW(adw_action_row_new()) };
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), _("No Transaction Reminders"));
+            adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("bell-outline-symbolic"));
+            adw_preferences_group_add(ADW_PREFERENCES_GROUP(gtk_builder_get_object(m_builder, "remindersGroup")), GTK_WIDGET(row));
+        }
+        for(const TransactionReminder& reminder : reminders)
+        {
+            //TODO: Make reminder rows
+        }
         //Load overview groups
         for(const std::pair<Group, std::string>& pair : m_controller->getGroups())
         {
