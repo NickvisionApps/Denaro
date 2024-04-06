@@ -78,24 +78,45 @@ Adw.ViewStack root {
           Adw.ActionRow {
             title: _("Total");
 
-            Gtk.Label overviewTotalLabel {
-              styles ["accent"]
+            [prefix]
+            Adw.Avatar overviewTotalAvatar {
+              valign: center;
+              size: 8;
+              show-initials: false;
+            }
+
+            Gtk.Label overviewTotalLabel { 
+              valign: center;
             }
           }
 
           Adw.ActionRow {
             title: _("Income");
 
-            Gtk.Label overviewIncomeLabel {
-              styles ["success"]
+            [prefix]
+            Adw.Avatar overviewIncomeAvatar {
+              valign: center;
+              size: 8;
+              show-initials: false;
+            }
+
+            Gtk.Label overviewIncomeLabel { 
+              valign: center;
             }
           }
 
           Adw.ActionRow {
             title: _("Expense");
 
-            Gtk.Label overviewExpenseLabel {
-              styles ["error"]
+            [prefix]
+            Adw.Avatar overviewExpenseAvatar {
+              valign: center;
+              size: 8;
+              show-initials: false;
+            }
+
+            Gtk.Label overviewExpenseLabel { 
+              valign: center;
             }
           }
         }

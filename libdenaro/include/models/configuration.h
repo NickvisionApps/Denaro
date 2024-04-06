@@ -97,16 +97,6 @@ namespace Nickvision::Money::Shared::Models
          * @param separator InsertSeparatorTrigger
          */
         void setInsertSeparator(InsertSeparatorTrigger separator);
-        /**
-         * @brief Gets whether or not to show graphs by default.
-         * @return True to show graphs by default, else false
-         */
-        bool getShowGraphs() const;
-        /**
-         * @brief Sets whether or not to show graphs by default.
-         * @param showGraphs True to show graphs, else false 
-         */
-        void setShowGraphs(bool showGraphs);
 
     private:
         /**

@@ -172,16 +172,6 @@ namespace Nickvision::Money::Shared::Models
         m_json["InsertSeparator"] = static_cast<int>(separator);
     }
 
-    bool Configuration::getShowGraphs() const
-    {
-        return m_json.get("ShowGraphs", true).asBool();
-    }
-
-    void Configuration::setShowGraphs(bool showGraphs)
-    {
-        m_json["ShowGraphs"] = showGraphs;
-    }
-
     RecentAccount Configuration::getRecentAccount(int index) const
     {
         Json::Value recentAccount{ m_json["RecentAccount" + std::to_string(index)] };

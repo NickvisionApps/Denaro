@@ -302,6 +302,7 @@ namespace Nickvision::Money::GNOME::Views
 
     void MainWindow::newAccount()
     {
+        gtk_popover_popdown(GTK_POPOVER(gtk_builder_get_object(m_builder, "accountMenuPopover")));
         NewAccountDialog* newAccountDialog{ NewAccountDialog::create(m_controller->createNewAccountDialogController(), GTK_WINDOW(m_window)) };
         newAccountDialog->finished() += [&](const ParamEventArgs<std::shared_ptr<NewAccountDialogController>>& args)
         {
@@ -312,6 +313,7 @@ namespace Nickvision::Money::GNOME::Views
 
     void MainWindow::openAccount()
     {
+        gtk_popover_popdown(GTK_POPOVER(gtk_builder_get_object(m_builder, "accountMenuPopover")));
         GtkFileDialog* fileDialog{ gtk_file_dialog_new() };
         gtk_file_dialog_set_title(fileDialog, _("Open Account"));
         GtkFileFilter* filter{ gtk_file_filter_new() };
@@ -381,6 +383,7 @@ namespace Nickvision::Money::GNOME::Views
 
     void MainWindow::openAccount(const std::filesystem::path& path)
     {
+        gtk_popover_popdown(GTK_POPOVER(gtk_builder_get_object(m_builder, "accountMenuPopover")));
         if(StringHelpers::toLower(path.extension().string()) != ".nmoney")
         {
             return;
