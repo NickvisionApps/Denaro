@@ -201,11 +201,11 @@ namespace Nickvision::Money::Shared::Models
         return transactions;
     }
 
-    std::vector<Transaction> AccountRepository::getUpcomingTransactions(const boost::gregorian::date& threshold) const
+    std::vector<Transaction> AccountRepository::getFutureTransactions(const boost::gregorian::date& max) const
     {
         std::vector<Transaction> transactions;
         boost::gregorian::date today{ boost::gregorian::day_clock::local_day() };
-        SqlStatement statement{ m_database.createStatement("SELECT * FROM transactions WHERE repeatFrom = -1 AND fixdata(date) > ? UNION SELECT t1.* FROM transactions t1 JOIN (SELECT repeatFrom, MAX(fixdate(date)) AS highest_date FROM transactions WHERE repeatFrom > 0 GROUP BY repeatFrom) t2 ON t1.repeatFrom = t2.repeatFrom AND fixdate(t1.date) = t2.highest_date") };
+        SqlStatement statement{ m_database.createStatement("SELECT * FROM transactions WHERE repeatFrom = -1 AND fixdate(date) > ? UNION SELECT t1.* FROM transactions t1 JOIN (SELECT repeatFrom, MAX(fixdate(date)) AS highest_date FROM transactions WHERE repeatFrom > 0 GROUP BY repeatFrom) t2 ON t1.repeatFrom = t2.repeatFrom AND fixdate(t1.date) = t2.highest_date") };
         statement.bind(1, boost::gregorian::to_iso_string(today));
         while(statement.step())
         {
@@ -226,39 +226,42 @@ namespace Nickvision::Money::Shared::Models
             {
                 t.addTag(tag);
             }
-            boost::gregorian::date upcoming{ t.getDate() };
             if(t.getRepeatFrom() != -1)
             {
                 switch(t.getRepeatInterval())
                 {
                 case TransactionRepeatInterval::Daily:
-                    upcoming += boost::gregorian::days{ 1 };
+                    t.setDate(t.getDate() + boost::gregorian::days{ 1 });
                     break;
                 case TransactionRepeatInterval::Weekly:
-                    upcoming += boost::gregorian::weeks{ 1 };
+                    t.setDate(t.getDate() + boost::gregorian::weeks{ 1 });
                     break;
                 case TransactionRepeatInterval::Biweekly:
-                    upcoming += boost::gregorian::weeks{ 2 };
+                    t.setDate(t.getDate() + boost::gregorian::weeks{ 2 });
                     break;
                 case TransactionRepeatInterval::Monthly:
-                    upcoming += boost::gregorian::months{ 1 };
+                    t.setDate(t.getDate() + boost::gregorian::months{ 1 });
                     break;
                 case TransactionRepeatInterval::Quarterly:
-                    upcoming += boost::gregorian::months{ 3 };
+                    t.setDate(t.getDate() + boost::gregorian::months{ 3 });
                     break;
                 case TransactionRepeatInterval::Yearly:
-                    upcoming += boost::gregorian::years{ 1 };
+                    t.setDate(t.getDate() + boost::gregorian::years{ 1 });
                     break;
                 case TransactionRepeatInterval::Biyearly:
-                    upcoming += boost::gregorian::years{ 2 };
+                    t.setDate(t.getDate() + boost::gregorian::years{ 2 });
                     break;
                 }
             }
-            if(upcoming <= threshold)
+            if(t.getDate() > today && t.getDate() <= max)
             {
                 transactions.push_back(t);
             }
         }
+        std::sort(transactions.begin(), transactions.end(), [](const Transaction& a, const Transaction& b)
+        {
+            return a.getDate() < b.getDate();
+        });
         return transactions;
     }
 

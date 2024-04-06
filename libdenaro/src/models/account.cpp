@@ -116,37 +116,36 @@ namespace Nickvision::Money::Shared::Models
         return m_transactions;
     }
 
-    std::vector<std::tuple<std::string, double, std::string>> Account::getTransactionReminders() const
+    std::vector<TransactionReminder> Account::getTransactionReminders() const
     {
         if(m_metadata.getTransactionRemindersThreshold() == RemindersThreshold::Never)
         {
             return {};
         }
-        std::vector<std::tuple<std::string, double, std::string>> reminders;
+        std::vector<TransactionReminder> reminders;
+        //Calculate threshold date
         boost::gregorian::date threshold{ boost::gregorian::day_clock::local_day() };
-        std::string when;
         switch(m_metadata.getTransactionRemindersThreshold())
         {
         case RemindersThreshold::OneDayBefore:
             threshold += boost::gregorian::days{ 1 };
-            when = _("Tomorrow");
             break;
         case RemindersThreshold::OneWeekBefore:
             threshold += boost::gregorian::weeks{ 1 };
-            when = _("One week from now");
             break;
         case RemindersThreshold::OneMonthBefore:
             threshold += boost::gregorian::months{ 1 };
-            when = _("One month from now");
             break;
         case RemindersThreshold::TwoMonthsBefore:
             threshold += boost::gregorian::months{ 2 };
-            when = _("Two months from now");
             break;
         }
-        for(const Transaction& transaction : m_repository.getUpcomingTransactions(threshold))
+        //Add reminders for future transactions
+        for(const Transaction& transaction : m_repository.getFutureTransactions(threshold))
         {
-            reminders.push_back({ transaction.getDescription(), transaction.getAmount(), when });
+            TransactionReminder reminder{ transaction.getDescription(), transaction.getDate() };
+            reminder.setAmount(transaction.getAmount(), transaction.getType(), getCurrency());
+            reminders.push_back(reminder);
         }
         return reminders;
     }
@@ -224,7 +223,14 @@ namespace Nickvision::Money::Shared::Models
             {
                 continue;
             }
-            total += pair.second.getAmount();
+            if(pair.second.getType() == TransactionType::Income)
+            {
+                total += pair.second.getAmount();
+            }
+            else if(pair.second.getType() == TransactionType::Expense)
+            {
+                total -= pair.second.getAmount();
+            }
         }
         return total;
     }

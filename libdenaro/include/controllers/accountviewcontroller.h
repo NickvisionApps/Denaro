@@ -55,6 +55,11 @@ namespace Nickvision::Money::Shared::Controllers
          */
         std::string getExpenseAmountString() const;
         /**
+         * @brief Gets the transaction reminders for the account.
+         * @return The transaction reminders
+         */
+        std::vector<Models::TransactionReminder> getTransactionReminders() const;
+        /**
          * @brief Gets the groups of the account.
          * @return (Group GroupName, std::string BalanceString)
          */

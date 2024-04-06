@@ -44,6 +44,11 @@ namespace Nickvision::Money::Shared::Controllers
         return CurrencyHelpers::toAmountString(m_account->getExpense(), m_account->getCurrency());
     }
 
+    std::vector<TransactionReminder> AccountViewController::getTransactionReminders() const
+    {
+        return m_account->getTransactionReminders();
+    }
+
     std::vector<std::pair<Group, std::string>> AccountViewController::getGroups() const
     {
         std::vector<std::pair<Group, std::string>> groups;

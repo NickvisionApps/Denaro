@@ -25,6 +25,7 @@ add_library(libdenaro
     "src/models/receipt.cpp"
     "src/models/recentaccount.cpp"
     "src/models/transaction.cpp"
+    "src/models/transactionreminder.cpp"
     "src/models/transfer.cpp")
 target_include_directories(libdenaro PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set_target_properties(libdenaro PROPERTIES VERSION "${PROJECT_VERSION}" SOVERSION "${PROJECT_VERSION}")

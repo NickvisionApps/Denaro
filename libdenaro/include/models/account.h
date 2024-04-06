@@ -5,7 +5,6 @@
 #include <filesystem>
 #include <optional>
 #include <string>
-#include <tuple>
 #include <unordered_map>
 #include <vector>
 #include "accountmetadata.h"
@@ -16,6 +15,7 @@
 #include "group.h"
 #include "importresult.h"
 #include "transaction.h"
+#include "transactionreminder.h"
 #include "transfer.h"
 
 namespace Nickvision::Money::Shared::Models
@@ -86,11 +86,10 @@ namespace Nickvision::Money::Shared::Models
          */
         const std::unordered_map<int, Transaction>& getTransactions() const;
         /**
-         * @brief Gets the transaction reminders for the account.
-         * @brief Each reminder is a tuple of the following: (std::string TransactionDescription, double TransactionAmount, std::string When)
+         * @brief Gets the transaction reminders for the account based on the threshold set in the account's metadata (settings).
          * @return The account's transaction reminders
          */
-        std::vector<std::tuple<std::string, double, std::string>> getTransactionReminders() const;
+        std::vector<TransactionReminder> getTransactionReminders() const;
         /**
          * @brief Gets the next available group id.
          * @return The next available group id 

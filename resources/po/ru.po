@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-06 00:13-0400\n"
+"POT-Creation-Date: 2024-04-06 01:52-0400\n"
 "PO-Revision-Date: 2023-09-08 14:21+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Weblate 5.0.1-dev\n"
 
 #: libdenaro/src/models/account.cpp:53
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:36
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:75
 msgid "Ungrouped"
 msgstr "Несгруппированные"
 
@@ -29,41 +29,25 @@ msgstr "Несгруппированные"
 msgid "Transactions without a group"
 msgstr "Транзакции без группы"
 
-#: libdenaro/src/models/account.cpp:132
-msgid "Tomorrow"
-msgstr "Завтра"
-
-#: libdenaro/src/models/account.cpp:136
-msgid "One week from now"
-msgstr "Через неделю"
-
-#: libdenaro/src/models/account.cpp:140
-msgid "One month from now"
-msgstr "Через месяц"
-
-#: libdenaro/src/models/account.cpp:144
-msgid "Two months from now"
-msgstr "Через два месяца"
-
-#: libdenaro/src/models/account.cpp:493
+#: libdenaro/src/models/account.cpp:499
 #, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Перевод на {0}"
 
-#: libdenaro/src/models/account.cpp:510
+#: libdenaro/src/models/account.cpp:516
 #, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Перевод из {0}"
 
-#: libdenaro/src/models/account.cpp:609
-#: org.nickvision.money.gnome/blueprints/account_page.blp:87
+#: libdenaro/src/models/account.cpp:615
+#: org.nickvision.money.gnome/blueprints/account_page.blp:94
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Доходы"
 
-#: libdenaro/src/models/account.cpp:609
-#: org.nickvision.money.gnome/blueprints/account_page.blp:95
+#: libdenaro/src/models/account.cpp:615
+#: org.nickvision.money.gnome/blueprints/account_page.blp:109
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
@@ -74,6 +58,27 @@ msgstr "Расходы"
 #, fuzzy, c++-format
 msgid "{} from {}"
 msgstr "{0} в {1}"
+
+#: libdenaro/src/models/transactionreminder.cpp:60
+msgid "Tomorrow"
+msgstr "Завтра"
+
+#: libdenaro/src/models/transactionreminder.cpp:64
+msgid "One week from now"
+msgstr "Через неделю"
+
+#: libdenaro/src/models/transactionreminder.cpp:68
+msgid "One month from now"
+msgstr "Через месяц"
+
+#: libdenaro/src/models/transactionreminder.cpp:72
+msgid "Two months from now"
+msgstr "Через два месяца"
+
+#: libdenaro/src/models/transactionreminder.cpp:76
+#, fuzzy, c++-format
+msgid "{} days from now"
+msgstr "Через два месяца"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Denaro"
@@ -182,7 +187,7 @@ msgid "Overview"
 msgstr "Обзор"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:36
-#: org.nickvision.money.gnome/blueprints/account_page.blp:114
+#: org.nickvision.money.gnome/blueprints/account_page.blp:139
 #: org.nickvision.money.gnome/blueprints/main_window.blp:343
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #, fuzzy
@@ -208,15 +213,19 @@ msgstr "Настройки"
 msgid "Total"
 msgstr "Сумма"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:104
+#: org.nickvision.money.gnome/blueprints/account_page.blp:125
+msgid "Reminders"
+msgstr "Напоминания"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:129
 msgid "Groups"
 msgstr "Группы"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:126
+#: org.nickvision.money.gnome/blueprints/account_page.blp:151
 msgid "Visualize"
 msgstr "Визуализация"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:134
+#: org.nickvision.money.gnome/blueprints/account_page.blp:159
 msgid "Transactions"
 msgstr "Транзакции"
 
@@ -327,23 +336,23 @@ msgid "Account Type"
 msgstr "Тип счёта"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:127
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:359
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:360
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:361
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:362
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:40
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:424
 msgid "Checking"
 msgstr "Расчётный"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:127
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:363
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:364
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:365
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:366
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:427
 msgid "Savings"
 msgstr "Сберегательный"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:127
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:367
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:368
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:369
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:370
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:42
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:430
 msgid "Business"
@@ -724,7 +733,7 @@ msgid "Account"
 msgstr "Счёт"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:316
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:318
 msgid "Open Account"
 msgstr "Открыть счёт"
 
@@ -767,6 +776,11 @@ msgstr "Закрыть"
 msgid "Result was copied to clipboard."
 msgstr "Результат скопирован в буфер обмена."
 
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:50
+#, fuzzy
+msgid "No Transaction Reminders"
+msgstr "Нет транзакций"
+
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:28
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:54
 msgid "Your system reported that your currency is"
@@ -798,23 +812,23 @@ msgstr ""
 msgid "GitHub Repo"
 msgstr "Репозиторий GitHub"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:318
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:320
 #, fuzzy
 msgid "Nickvision Denaro Account (*.nmoney)"
 msgstr "Счёт Nickvision Denaro"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:398
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:401
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:32
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:455
 msgid "Enter password here"
 msgstr "Введите пароль"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:406
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:409
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:464
 msgid "Cancel"
 msgstr "Отмена"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:406
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:409
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:463
 msgid "Unlock"
 msgstr "Разблокировать"
@@ -1025,6 +1039,10 @@ msgstr "ОК"
 msgid "Result (Error)"
 msgstr "Результат"
 
+#, fuzzy
+#~ msgid "No reminders"
+#~ msgstr "Нет напоминаний"
+
 #~ msgid "(Copy)"
 #~ msgstr "(Копия)"
 
@@ -1183,9 +1201,6 @@ msgstr "Результат"
 
 #~ msgid "No End Date"
 #~ msgstr "Без даты окончания"
-
-#~ msgid "No Transactions"
-#~ msgstr "Нет транзакций"
 
 #~ msgid "No Transactions Found"
 #~ msgstr "Не найдено транзакций"
@@ -1401,9 +1416,6 @@ msgstr "Результат"
 #~ msgid "Today's Overview"
 #~ msgstr "Обзор на сегодня"
 
-#~ msgid "Reminders"
-#~ msgstr "Напоминания"
-
 #~ msgid "Select All Overview Filters"
 #~ msgstr "Выбрать все фильтры обзора"
 
@@ -1529,9 +1541,6 @@ msgstr "Результат"
 
 #~ msgid "Clear Backup Folder"
 #~ msgstr "Сбросить папку для резервных копий"
-
-#~ msgid "No Reminders"
-#~ msgstr "Нет напоминаний"
 
 #~ msgid "New Group"
 #~ msgstr "Новая группа"

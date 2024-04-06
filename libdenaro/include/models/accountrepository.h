@@ -94,11 +94,12 @@ namespace Nickvision::Money::Shared::Models
          */
         std::unordered_map<int, Transaction> getTransactions() const;
         /**
-         * @brief Fetches the upcoming transactions from the repository.
-         * @param threshold The date threshold for upcoming transactions
-         * @return The upcoming transactions
+         * @brief Fetches the future transactions from the repository before a certain maximum date.
+         * @brief The returned list is sorted by upcoming date.
+         * @param max The maximum date threshold for future transactions
+         * @return The future transactions before the threshold
          */
-        std::vector<Transaction> getUpcomingTransactions(const boost::gregorian::date& threshold) const;
+        std::vector<Transaction> getFutureTransactions(const boost::gregorian::date& max) const;
         /**
          * @brief Adds a transaction to the account
          * @param transaction The transaction to add
