@@ -1,6 +1,14 @@
 if(WIN32)
     cmake_policy(SET CMP0091 NEW)
 
+    set(CMAKE_VS_GLOBALS
+        "AppxPackage=false"
+        "RuntimeIdentifier=win10-x64"
+        "RuntimeIdentifiers=win10-x64"
+        "BaseNuGetRuntimeIdentifier=win10"
+        "AssetTargetFallback=$(AssetTargetFallback);native"
+    )
+
     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Directory.Build.props" "${CMAKE_CURRENT_BINARY_DIR}/Directory.Build.props" COPYONLY)
     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Directory.Build.targets" "${CMAKE_CURRENT_BINARY_DIR}/Directory.Build.targets" COPYONLY)
 
@@ -64,11 +72,13 @@ if(WIN32)
         endif()
     endforeach()
 
-    add_custom_command(TARGET org.nickvision.money.winui POST_BUILD COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_SOURCE_DIR}/resources/org.nickvision.money.ico" "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/resources/org.nickvision.money.ico")
+    add_custom_target(winui_commands ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/__winui.h")
+    add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/__winui.h" "${CMAKE_CURRENT_BINARY_DIR}/winui.h" COMMAND "${CMAKE_COMMAND}" -E touch "${CMAKE_CURRENT_BINARY_DIR}/winui.h")
+    add_custom_command(TARGET winui_commands PRE_BUILD COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_SOURCE_DIR}/resources/org.nickvision.money.ico" "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/resources/org.nickvision.money.ico")
     if(HAS_GETTEXT)
         foreach(LINGUA IN ITEMS ${LINGUAS})
-            add_custom_command(TARGET org.nickvision.money.winui POST_BUILD COMMAND "${CMAKE_COMMAND}" -E make_directory "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/${LINGUA}")
-            add_custom_command(TARGET org.nickvision.money.winui POST_BUILD COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/resources/po/${LINGUA}.po" --output-file="${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/${LINGUA}/${SHORT_NAME}.mo")
+            add_custom_command(TARGET winui_commands PRE_BUILD COMMAND "${CMAKE_COMMAND}" -E make_directory "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/${LINGUA}")
+            add_custom_command(TARGET winui_commands PRE_BUILD COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/resources/po/${LINGUA}.po" --output-file="${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/${LINGUA}/${SHORT_NAME}.mo")
         endforeach()
     endif()
 endif()

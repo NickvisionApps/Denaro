@@ -15,20 +15,23 @@ if(LINUX)
     pkg_check_modules(libxmlpp REQUIRED IMPORTED_TARGET libxml++-5.0)
     target_link_libraries(org.nickvision.money.gnome PRIVATE libdenaro PkgConfig::gtk PkgConfig::adwaita PkgConfig::libxmlpp)
 
+    add_custom_target(gnome_commands ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/__gnome.h")
+    add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/__gnome.h" "${CMAKE_CURRENT_BINARY_DIR}/gnome.h" COMMAND "touch" "${CMAKE_CURRENT_BINARY_DIR}/gnome.h")
+
     find_program(GLIB_COMPULE_RESOURCES_EXECUTABLE glib-compile-resources)
     if(GLIB_COMPULE_RESOURCES_EXECUTABLE)
-        add_custom_command(TARGET org.nickvision.money.gnome POST_BUILD COMMAND "${GLIB_COMPULE_RESOURCES_EXECUTABLE}" --sourcedir "${CMAKE_CURRENT_SOURCE_DIR}/resources" "${CMAKE_CURRENT_SOURCE_DIR}/resources/org.nickvision.money.gresource.xml" --target="${CMAKE_CURRENT_BINARY_DIR}/org.nickvision.money.gresource")
+        add_custom_command(TARGET gnome_commands PRE_BUILD COMMAND "${GLIB_COMPULE_RESOURCES_EXECUTABLE}" --sourcedir "${CMAKE_CURRENT_SOURCE_DIR}/resources" "${CMAKE_CURRENT_SOURCE_DIR}/resources/org.nickvision.money.gresource.xml" --target="${CMAKE_CURRENT_BINARY_DIR}/org.nickvision.money.gresource")
     endif()
 
     find_program(BLUEPRINT_COMPILER_EXECUTABLE blueprint-compiler)
     if(BLUEPRINT_COMPILER_EXECUTABLE)
-        add_custom_command(TARGET org.nickvision.money.gnome POST_BUILD COMMAND "${BLUEPRINT_COMPILER_EXECUTABLE}" batch-compile "${CMAKE_CURRENT_BINARY_DIR}/ui" "${CMAKE_CURRENT_SOURCE_DIR}/blueprints" "${CMAKE_CURRENT_SOURCE_DIR}/blueprints/*.blp")
+        add_custom_command(TARGET gnome_commands PRE_BUILD COMMAND "${BLUEPRINT_COMPILER_EXECUTABLE}" batch-compile "${CMAKE_CURRENT_BINARY_DIR}/ui" "${CMAKE_CURRENT_SOURCE_DIR}/blueprints" "${CMAKE_CURRENT_SOURCE_DIR}/blueprints/*.blp")
     endif()
 
     if(HAS_GETTEXT)
         foreach(LINGUA IN ITEMS ${LINGUAS})
-            add_custom_command(TARGET org.nickvision.money.gnome POST_BUILD COMMAND "${CMAKE_COMMAND}" -E make_directory "${CMAKE_CURRENT_BINARY_DIR}/${LINGUA}")
-            add_custom_command(TARGET org.nickvision.money.gnome POST_BUILD COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/resources/po/${LINGUA}.po" --output-file="${CMAKE_CURRENT_BINARY_DIR}/${LINGUA}/${SHORT_NAME}.mo")
+            add_custom_command(TARGET gnome_commands PRE_BUILD COMMAND "${CMAKE_COMMAND}" -E make_directory "${CMAKE_CURRENT_BINARY_DIR}/${LINGUA}")
+            add_custom_command(TARGET gnome_commands PRE_BUILD COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/resources/po/${LINGUA}.po" --output-file="${CMAKE_CURRENT_BINARY_DIR}/${LINGUA}/${SHORT_NAME}.mo")
         endforeach()
     endif()
 
