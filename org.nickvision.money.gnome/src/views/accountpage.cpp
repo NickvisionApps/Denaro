@@ -48,12 +48,16 @@ namespace Nickvision::Money::GNOME::Views
         {
             AdwActionRow* row{ ADW_ACTION_ROW(adw_action_row_new()) };
             adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), _("No Transaction Reminders"));
-            adw_action_row_add_prefix(ADW_ACTION_ROW(row), gtk_image_new_from_icon_name("bell-outline-symbolic"));
+            adw_action_row_add_prefix(row, gtk_image_new_from_icon_name("bell-outline-symbolic"));
             adw_preferences_group_add(ADW_PREFERENCES_GROUP(gtk_builder_get_object(m_builder, "remindersGroup")), GTK_WIDGET(row));
         }
         for(const TransactionReminder& reminder : reminders)
         {
-            //TODO: Make reminder rows
+            AdwActionRow* row{ ADW_ACTION_ROW(adw_action_row_new()) };
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), reminder.getDescription().c_str());
+            adw_action_row_set_subtitle(row, reminder.getWhenString().c_str());
+            adw_action_row_add_prefix(row, gtk_image_new_from_icon_name("bell-symbolic"));
+            adw_action_row_add_suffix(row, gtk_label_new(reminder.getAmountString().c_str()));
         }
         //Load overview groups
         for(const std::pair<Group, std::string>& pair : m_controller->getGroups())
@@ -70,15 +74,15 @@ namespace Nickvision::Money::GNOME::Views
             {
                 adw_action_row_set_subtitle(row, pair.first.getDescription().c_str());
             }
-            adw_action_row_add_prefix(ADW_ACTION_ROW(row), GTK_WIDGET(colorAvatar));
-            adw_action_row_add_suffix(ADW_ACTION_ROW(row), gtk_label_new(pair.second.c_str()));
+            adw_action_row_add_prefix(row, GTK_WIDGET(colorAvatar));
+            adw_action_row_add_suffix(row, gtk_label_new(pair.second.c_str()));
             if(pair.first.getName() != _("Ungrouped"))
             {
                 GtkButton* editButton{ GTK_BUTTON(gtk_button_new_from_icon_name("document-edit-symbolic")) };
                 gtk_widget_set_valign(GTK_WIDGET(editButton), GTK_ALIGN_CENTER);
                 gtk_widget_add_css_class(GTK_WIDGET(editButton), "flat");
-                adw_action_row_add_suffix(ADW_ACTION_ROW(row), GTK_WIDGET(editButton));
-                adw_action_row_set_activatable_widget(ADW_ACTION_ROW(row), GTK_WIDGET(editButton));
+                adw_action_row_add_suffix(row, GTK_WIDGET(editButton));
+                adw_action_row_set_activatable_widget(row, GTK_WIDGET(editButton));
             }
             adw_preferences_group_add(ADW_PREFERENCES_GROUP(gtk_builder_get_object(m_builder, "groupsGroup")), GTK_WIDGET(row));
             g_object_unref(colorTexture);
