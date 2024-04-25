@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-14 18:59-0400\n"
+"POT-Creation-Date: 2024-04-25 18:13-0400\n"
 "PO-Revision-Date: 2024-02-02 03:01+0000\n"
 "Last-Translator: aerowolf <aerowolf@tom.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -19,33 +19,33 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 5.4-dev\n"
 
-#: libdenaro/src/models/account.cpp:53
+#: libdenaro/src/models/account.cpp:55
 #: org.nickvision.money.gnome/src/views/accountpage.cpp:79
 msgid "Ungrouped"
 msgstr "無組群"
 
-#: libdenaro/src/models/account.cpp:54
+#: libdenaro/src/models/account.cpp:56
 msgid "Transactions without a group"
 msgstr "暫無組群之交易"
 
-#: libdenaro/src/models/account.cpp:499
+#: libdenaro/src/models/account.cpp:501
 #, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "轉帳到 {0}"
 
-#: libdenaro/src/models/account.cpp:516
+#: libdenaro/src/models/account.cpp:518
 #, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "從 {0} 轉帳"
 
-#: libdenaro/src/models/account.cpp:615
+#: libdenaro/src/models/account.cpp:617
 #: org.nickvision.money.gnome/blueprints/account_page.blp:94
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "收入"
 
-#: libdenaro/src/models/account.cpp:615
+#: libdenaro/src/models/account.cpp:617
 #: org.nickvision.money.gnome/blueprints/account_page.blp:109
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45

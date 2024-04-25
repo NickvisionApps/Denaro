@@ -1,8 +1,10 @@
 #include "models/account.h"
 #include <algorithm>
+#include <chrono>
 #include <format>
 #include <fstream>
 #include <regex>
+#include <thread>
 #include <libnick/app/aura.h>
 #include <libnick/filesystem/userdirectories.h>
 #include <libnick/helpers/stringhelpers.h>
@@ -635,13 +637,15 @@ namespace Nickvision::Money::Shared::Models
         }
         //Get graph bytes
         figure->save(tempPath);
-        figure->~figure_type();
+        while(!std::filesystem::exists(tempPath))
+        {
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
         std::ifstream in{ tempPath, std::ios_base::binary };
         std::vector<std::uint8_t> bytes{ std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>() };
         in.close();
         std::filesystem::remove(tempPath);
         return bytes;
-        //TODO: Fix segfault on Linux
     }
 
     ImportResult Account::importFromCSV(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor)

@@ -9,7 +9,7 @@ namespace Nickvision::Money::Shared::Models
     Receipt::Receipt()
         : m_type{ ReceiptType::Unknown }
     {
-        
+
     }
 
     Receipt::Receipt(const std::filesystem::path& pathToFile)
