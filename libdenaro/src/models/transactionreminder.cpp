@@ -1,5 +1,6 @@
 #include "models/transactionreminder.h"
 #include <format>
+#include <libnick/helpers/codehelpers.h>
 #include <libnick/localization/gettext.h>
 #include "helpers/currencyhelpers.h"
 
@@ -73,7 +74,7 @@ namespace Nickvision::Money::Shared::Models
         }
         else
         {
-            m_whenString = std::vformat(_("{} days from now"), std::make_format_args((m_when - today).days()));
+            m_whenString = std::vformat(_("{} days from now"), std::make_format_args(CodeHelpers::unmove((m_when - today).days())));
         }
     }
 }

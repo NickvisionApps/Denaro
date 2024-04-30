@@ -75,7 +75,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/nickvisionapps/libnick",
-                    "tag": "2024.3.0"
+                    "tag": "2024.3.1"
                 }
             ]
         },
@@ -168,7 +168,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/d99kris/rapidcsv",
-                    "tag": "v8.80"
+                    "tag": "v8.82"
                 }
             ]
         },

@@ -3,6 +3,7 @@
 #include "MainWindow.g.cpp"
 #endif
 #include <format>
+#include <libnick/helpers/codehelpers.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/notifications/shellnotification.h>
 #include <libnick/localization/gettext.h>
@@ -101,11 +102,11 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         LblAppChangelog().Text(winrt::to_hstring(m_controller->getAppInfo().getChangelog()));
         if(m_controller->getAppInfo().getTranslatorNames().size() == 1 && m_controller->getAppInfo().getTranslatorNames()[0] == "translator-credits")
         {
-            LblAppCredits().Text(winrt::to_hstring(std::vformat(_("Developers:\n{}\nDesigners:\n{}\nArtists:\n{}"), std::make_format_args(StringHelpers::join(keys(m_controller->getAppInfo().getDevelopers()), "\n"), StringHelpers::join(keys(m_controller->getAppInfo().getDesigners()), "\n"), StringHelpers::join(keys(m_controller->getAppInfo().getArtists()), "\n", false)))));
+            LblAppCredits().Text(winrt::to_hstring(std::vformat(_("Developers:\n{}\nDesigners:\n{}\nArtists:\n{}"), std::make_format_args(CodeHelpers::unmove(StringHelpers::join(keys(m_controller->getAppInfo().getDevelopers()), "\n")), CodeHelpers::unmove(StringHelpers::join(keys(m_controller->getAppInfo().getDesigners()), "\n")), CodeHelpers::unmove(StringHelpers::join(keys(m_controller->getAppInfo().getArtists()), "\n", false))))));
         }
         else
         {
-            LblAppCredits().Text(winrt::to_hstring(std::vformat(_("Developers:\n{}\nDesigners:\n{}\nArtists:\n{}\nTranslators:\n{}"), std::make_format_args(StringHelpers::join(keys(m_controller->getAppInfo().getDevelopers()), "\n"), StringHelpers::join(keys(m_controller->getAppInfo().getDesigners()), "\n"), StringHelpers::join(keys(m_controller->getAppInfo().getArtists()), "\n"), StringHelpers::join(m_controller->getAppInfo().getTranslatorNames(), "\n", false)))));
+            LblAppCredits().Text(winrt::to_hstring(std::vformat(_("Developers:\n{}\nDesigners:\n{}\nArtists:\n{}\nTranslators:\n{}"), std::make_format_args(CodeHelpers::unmove(StringHelpers::join(keys(m_controller->getAppInfo().getDevelopers()), "\n")), CodeHelpers::unmove(StringHelpers::join(keys(m_controller->getAppInfo().getDesigners()), "\n")), CodeHelpers::unmove(StringHelpers::join(keys(m_controller->getAppInfo().getArtists()), "\n")), CodeHelpers::unmove(StringHelpers::join(m_controller->getAppInfo().getTranslatorNames(), "\n", false))))));
         }
         StatusPageHome().Title(winrt::to_hstring(m_controller->getGreeting()));
         StatusPageHome().Description(winrt::to_hstring(_("Create or open an account to get started. You may also drag a file into the app from your file browser.")));

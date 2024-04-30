@@ -1,5 +1,6 @@
 #include "models/dashboardgroup.h"
 #include <format>
+#include <libnick/helpers/codehelpers.h>
 #include <libnick/localization/gettext.h>
 #include "helpers/currencyhelpers.h"
 
@@ -19,10 +20,10 @@ namespace Nickvision::Money::Shared::Models
     {
         if(!m_data.contains(currency))
         {
-            m_data.emplace(currency, std::make_pair(amount, std::vformat(_("{} from {}"), std::make_format_args(CurrencyHelpers::toAmountString(amount, currency), accountName))));
+            m_data.emplace(currency, std::make_pair(amount, std::vformat(_("{} from {}"), std::make_format_args(CodeHelpers::unmove(CurrencyHelpers::toAmountString(amount, currency)), accountName))));
             return;
         }
         m_data.at(currency).first += amount;
-        m_data.at(currency).second += "\n" + std::vformat(_("{} from {}"), std::make_format_args(CurrencyHelpers::toAmountString(amount, currency), accountName));
+        m_data.at(currency).second += "\n" + std::vformat(_("{} from {}"), std::make_format_args(CodeHelpers::unmove(CurrencyHelpers::toAmountString(amount, currency)), accountName));
     }
 }

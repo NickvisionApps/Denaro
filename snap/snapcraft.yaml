@@ -58,7 +58,7 @@ parts:
   libnick:
     after: [maddy, build-deps]
     source: https://github.com/nickvisionapps/libnick.git
-    source-tag: '2024.3.0'
+    source-tag: '2024.3.1'
     source-depth: 1
     plugin: cmake
     cmake-parameters:
@@ -119,7 +119,7 @@ parts:
   rapidcsv:
     after: [build-deps]
     source: https://github.com/d99kris/rapidcsv.git
-    source-tag: 'v8.80'
+    source-tag: 'v8.82'
     source-depth: 1
     plugin: cmake
     cmake-parameters:
