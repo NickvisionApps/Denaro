@@ -165,6 +165,7 @@ namespace Nickvision::Money::Shared::Models
                 return i;
             }
         }
+        return m_groups.size() + 1;
     }
 
     int Account::getNextAvailableTransactionId() const
@@ -180,6 +181,7 @@ namespace Nickvision::Money::Shared::Models
                 return i;
             }
         }
+        return m_transactions.size() + 1;
     }
 
     double Account::getIncome(const std::vector<int>& transactionIds) const
