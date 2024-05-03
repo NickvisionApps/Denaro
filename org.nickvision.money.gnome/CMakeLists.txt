@@ -16,7 +16,7 @@ if(LINUX)
     target_link_libraries(org.nickvision.money.gnome PRIVATE libdenaro PkgConfig::gtk PkgConfig::adwaita PkgConfig::libxmlpp)
 
     add_custom_target(gnome_commands ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/__gnome.h")
-    add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/__gnome.h" "${CMAKE_CURRENT_BINARY_DIR}/gnome.h" COMMAND "touch" "${CMAKE_CURRENT_BINARY_DIR}/gnome.h")
+    add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/__gnome.h" "${CMAKE_CURRENT_BINARY_DIR}/gnome.h" COMMAND "${CMAKE_COMMAND}" -E touch "${CMAKE_CURRENT_BINARY_DIR}/gnome.h")
 
     find_program(GLIB_COMPULE_RESOURCES_EXECUTABLE glib-compile-resources)
     if(GLIB_COMPULE_RESOURCES_EXECUTABLE)
