@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-29 23:11-0400\n"
+"POT-Creation-Date: 2024-05-03 13:13-0400\n"
 "PO-Revision-Date: 2023-08-29 18:53+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
@@ -28,24 +28,24 @@ msgstr "Ungruppiert"
 msgid "Transactions without a group"
 msgstr "Überweisungen ohne Gruppe"
 
-#: libdenaro/src/models/account.cpp:501
+#: libdenaro/src/models/account.cpp:503
 #, fuzzy, c++-format
 msgid "Transfer to {}"
 msgstr "Zu {0} Überweisen"
 
-#: libdenaro/src/models/account.cpp:518
+#: libdenaro/src/models/account.cpp:520
 #, fuzzy, c++-format
 msgid "Transfer from {}"
 msgstr "Von {0} Überweisen"
 
-#: libdenaro/src/models/account.cpp:617
+#: libdenaro/src/models/account.cpp:619
 #: org.nickvision.money.gnome/blueprints/account_page.blp:94
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Einkommen"
 
-#: libdenaro/src/models/account.cpp:617
+#: libdenaro/src/models/account.cpp:619
 #: org.nickvision.money.gnome/blueprints/account_page.blp:109
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45

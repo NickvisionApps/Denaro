@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-29 23:11-0400\n"
+"POT-Creation-Date: 2024-05-03 13:13-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,24 +25,24 @@ msgstr ""
 msgid "Transactions without a group"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:501
+#: libdenaro/src/models/account.cpp:503
 #, c++-format
 msgid "Transfer to {}"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:518
+#: libdenaro/src/models/account.cpp:520
 #, c++-format
 msgid "Transfer from {}"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:617
+#: libdenaro/src/models/account.cpp:619
 #: org.nickvision.money.gnome/blueprints/account_page.blp:94
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr ""
 
-#: libdenaro/src/models/account.cpp:617
+#: libdenaro/src/models/account.cpp:619
 #: org.nickvision.money.gnome/blueprints/account_page.blp:109
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:134
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
