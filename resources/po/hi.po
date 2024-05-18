@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-03 13:13-0400\n"
+"POT-Creation-Date: 2024-05-12 23:58-0400\n"
 "PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
@@ -608,10 +608,10 @@ msgid "Dashboard"
 msgstr "डैशबोर्ड"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:262
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:112
+#, fuzzy
 msgid ""
 "Create or open an account to get started. You may also drag a file into the "
-"app from your file browser."
+"app from your file browser"
 msgstr ""
 "आरंभ करने के लिए एक खाता बनाएं या खोलें। आप अपने फाइल ब्राउज़र से किसी फाइल को ऐप में "
 "खींच भी सकते हैं।"
@@ -986,6 +986,14 @@ msgid ""
 "Translators:\n"
 "{}"
 msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:112
+msgid ""
+"Create or open an account to get started. You may also drag a file into the "
+"app from your file browser."
+msgstr ""
+"आरंभ करने के लिए एक खाता बनाएं या खोलें। आप अपने फाइल ब्राउज़र से किसी फाइल को ऐप में "
+"खींच भी सकते हैं।"
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:172
 #, fuzzy

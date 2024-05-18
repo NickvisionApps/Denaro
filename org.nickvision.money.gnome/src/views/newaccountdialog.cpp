@@ -17,8 +17,6 @@ namespace Nickvision::Money::GNOME::Views
         m_dialog{ ADW_DIALOG(gtk_builder_get_object(m_builder, "root")) },
         m_currentPageNumber{ 0 }
     {
-        gtk_window_set_transient_for(GTK_WINDOW(m_dialog), m_parent);
-        gtk_window_set_icon_name(GTK_WINDOW(m_dialog), m_controller->getId().c_str());
         //Load
         adw_action_row_set_subtitle(ADW_ACTION_ROW(gtk_builder_get_object(m_builder, "accountFolderRow")), m_controller->getFolder().filename().string().c_str());
         adw_switch_row_set_active(ADW_SWITCH_ROW(gtk_builder_get_object(m_builder, "accountOverwriteRow")), m_controller->getOverwriteExisting());

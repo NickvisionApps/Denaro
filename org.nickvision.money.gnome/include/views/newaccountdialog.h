@@ -33,7 +33,6 @@ namespace Nickvision::Money::GNOME::Views
         Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::shared_ptr<Shared::Controllers::NewAccountDialogController>>>& finished();
         /**
          * @brief Presents the NewAccountDialog.
-         * @param parent The GtkWindow object of the parent window
          */
         void present() const;
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-03 13:13-0400\n"
+"POT-Creation-Date: 2024-05-12 23:58-0400\n"
 "PO-Revision-Date: 2023-12-29 06:12+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
 "weblate.org>\n"
@@ -608,10 +608,10 @@ msgid "Dashboard"
 msgstr "Panel"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:262
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:112
+#, fuzzy
 msgid ""
 "Create or open an account to get started. You may also drag a file into the "
-"app from your file browser."
+"app from your file browser"
 msgstr ""
 "Cree o abra una cuenta para empezar. También puede arrastrar un archivo a la "
 "aplicación desde el explorador de archivos."
@@ -989,6 +989,14 @@ msgid ""
 "Translators:\n"
 "{}"
 msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:112
+msgid ""
+"Create or open an account to get started. You may also drag a file into the "
+"app from your file browser."
+msgstr ""
+"Cree o abra una cuenta para empezar. También puede arrastrar un archivo a la "
+"aplicación desde el explorador de archivos."
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:172
 #, fuzzy
