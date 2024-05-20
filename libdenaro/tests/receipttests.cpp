@@ -19,7 +19,7 @@ public:
         WebHelpers::downloadFile("https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png", m_receiptPath);
     }
 
-    static void TearDownTestSuite() 
+    static void TearDownTestSuite()
     {
         std::filesystem::remove(m_receiptPath);
         std::filesystem::remove(m_receiptPath2);

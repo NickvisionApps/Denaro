@@ -44,7 +44,7 @@ namespace Nickvision::Money::GNOME::Views
         void show();
         /**
          * @brief Handles when the window requests to close.
-         * @return True to prevent closing, else false 
+         * @return True to prevent closing, else false
          */
         bool onCloseRequested();
         /**
@@ -91,11 +91,11 @@ namespace Nickvision::Money::GNOME::Views
         void onNavItemSelected(GtkListBox* box, GtkListBoxRow* row);
         /**
          * @brief Handles when an account is added.
-         * @param args Nickvision::Events::ParamEventArgs<Nickvision::Money::Shared::Controllers::AccountViewController>
+         * @param args Nickvision::Events::ParamEventArgs<const Nickvision::Money::Shared::Controllers::AccountViewController&>
          */
-        void onAccountAdded(const ::Nickvision::Events::ParamEventArgs<std::shared_ptr<::Nickvision::Money::Shared::Controllers::AccountViewController>>& args);
+        void onAccountAdded(const Nickvision::Events::ParamEventArgs<const std::shared_ptr<Nickvision::Money::Shared::Controllers::AccountViewController>&>& args);
         /**
-         * @brief Opens the new account dialog for account creation. 
+         * @brief Opens the new account dialog for account creation.
          */
         void newAccount();
         /**
@@ -106,8 +106,9 @@ namespace Nickvision::Money::GNOME::Views
     private:
         /**
          * @brief Loads the recent accounts list.
+         * @param args Nickvision::Events::ParamEventArgs<std::vector<Nickvision::Money::Shared::Models::RecentAccount>>
          */
-        void loadRecentAccounts();
+        void loadRecentAccounts(const Nickvision::Events::ParamEventArgs<std::vector<Shared::Models::RecentAccount>>& args);
         /**
          * @brief Removes a recent account from the list.
          * @param path The path of the account file to remove 
@@ -115,7 +116,7 @@ namespace Nickvision::Money::GNOME::Views
         void removeRecentAccount(const std::filesystem::path& path);
         /**
          * @brief Opens an account.
-         * @param path The path of the account file to open 
+         * @param path The path of the account file to open
          */
         void openAccount(const std::filesystem::path& path);
         std::shared_ptr<Shared::Controllers::MainWindowController> m_controller;

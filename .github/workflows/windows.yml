@@ -27,7 +27,7 @@ jobs:
         uses: johnwason/vcpkg-action@v5
         id: vcpkg
         with:
-          pkgs: boost-date-time libnick matplotplusplus podofo rapidcsv
+          pkgs: boost-date-time libnick podofo rapidcsv
           triplet: x64-windows
           cache-key: windows-latest
           revision: 4af63c6f3ed667437b8fe0789a7fbc29936c9802

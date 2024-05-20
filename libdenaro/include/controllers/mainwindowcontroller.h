@@ -21,8 +21,6 @@
 #include "controllers/dashboardviewcontroller.h"
 #include "controllers/newaccountdialogcontroller.h"
 #include "controllers/preferencesviewcontroller.h"
-#include "models/accounttype.h"
-#include "models/color.h"
 #include "models/recentaccount.h"
 #include "models/theme.h"
 
@@ -55,11 +53,6 @@ namespace Nickvision::Money::Shared::Controllers
          */
         Models::Theme getTheme() const;
         /**
-         * @brief Gets the list of recently opened accounts.
-         * @return The list of recent accounts 
-         */
-        std::vector<Models::RecentAccount> getRecentAccounts() const;
-        /**
          * @brief Gets the Saved event for the application's configuration.
          * @return The configuration Saved event
          */
@@ -75,10 +68,15 @@ namespace Nickvision::Money::Shared::Controllers
          */
         Nickvision::Events::Event<Nickvision::Notifications::ShellNotificationSentEventArgs>& shellNotificationSent();
         /**
+         * @brief Gets the event for when the recent accounts are changed.
+         * @reeturn The recent accounts changed event
+         */
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::vector<Models::RecentAccount>>>& recentAccountsChanged();
+        /**
          * @brief Gets the event for when an account is added.
          * @return The account added event
          */
-        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::shared_ptr<AccountViewController>>>& accountAdded();
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<const std::shared_ptr<AccountViewController>&>>& accountAdded();
         /**
          * @brief Gets the debugging information for the application.
          * @param extraInformation Extra, ui-specific, information to include in the debug info statement
@@ -176,7 +174,8 @@ namespace Nickvision::Money::Shared::Controllers
         Nickvision::Taskbar::TaskbarItem m_taskbar;
         Nickvision::Events::Event<Nickvision::Notifications::NotificationSentEventArgs> m_notificationSent;
         Nickvision::Events::Event<Nickvision::Notifications::ShellNotificationSentEventArgs> m_shellNotificationSent;
-        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::shared_ptr<AccountViewController>>> m_accountAdded;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::vector<Models::RecentAccount>>> m_recentAccountsChanged;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<const std::shared_ptr<AccountViewController>&>> m_accountAdded;
         std::unordered_map<std::filesystem::path, std::shared_ptr<Controllers::AccountViewController>> m_accountViewControllers;
     };
 }

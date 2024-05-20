@@ -60,11 +60,6 @@ namespace Nickvision::Money::Shared::Controllers
         return Aura::getActive().getConfig<Configuration>("config").getTheme();
     }
 
-    std::vector<Models::RecentAccount> MainWindowController::getRecentAccounts() const
-    {
-        return Aura::getActive().getConfig<Configuration>("config").getRecentAccounts();
-    }
-
     Event<EventArgs>& MainWindowController::configurationSaved()
     {
         return Aura::getActive().getConfig<Configuration>("config").saved();
@@ -80,7 +75,12 @@ namespace Nickvision::Money::Shared::Controllers
         return m_shellNotificationSent;
     }
 
-    Event<ParamEventArgs<std::shared_ptr<AccountViewController>>>& MainWindowController::accountAdded()
+    Event<ParamEventArgs<std::vector<RecentAccount>>>& MainWindowController::recentAccountsChanged()
+    {
+        return m_recentAccountsChanged;
+    }
+
+    Event<ParamEventArgs<const std::shared_ptr<AccountViewController>&>>& MainWindowController::accountAdded()
     {
         return m_accountAdded;
     }
@@ -161,7 +161,7 @@ namespace Nickvision::Money::Shared::Controllers
     {
         return std::make_shared<NewAccountDialogController>();
     }
-    
+
     std::shared_ptr<DashboardViewController> MainWindowController::createDashboardViewController() const
     {
         std::vector<std::shared_ptr<AccountViewController>> openAccounts;
@@ -195,6 +195,7 @@ namespace Nickvision::Money::Shared::Controllers
                 checkForUpdates();
             }
 #endif
+            m_recentAccountsChanged.invoke({ Aura::getActive().getConfig<Configuration>("config").getRecentAccounts() });
             m_started = true;
         }
     }
@@ -252,7 +253,7 @@ namespace Nickvision::Money::Shared::Controllers
         {
             return false;
         }
-        Account a{ path }; 
+        Account a{ path };
         return a.isEncrypted();
     }
 
@@ -299,10 +300,11 @@ namespace Nickvision::Money::Shared::Controllers
         }
         if(controller)
         {
-            m_accountViewControllers.emplace(std::make_pair(newAccountDialogController->getFilePath(), controller));
+            m_accountViewControllers[newAccountDialogController->getFilePath()] = controller;
             config.addRecentAccount(controller->toRecentAccount());
             config.save();
-            m_accountAdded.invoke(controller);
+            m_recentAccountsChanged.invoke({ config.getRecentAccounts() });
+            m_accountAdded.invoke({ m_accountViewControllers[newAccountDialogController->getFilePath()] });
         }
     }
 
@@ -332,11 +334,12 @@ namespace Nickvision::Money::Shared::Controllers
             }
             if(controller)
             {
-                m_accountViewControllers.emplace(std::make_pair(path, controller));
+                m_accountViewControllers[path] = controller;
                 Configuration& config{ Aura::getActive().getConfig<Configuration>("config") };
                 config.addRecentAccount(controller->toRecentAccount());
                 config.save();
-                m_accountAdded.invoke(controller);
+                m_recentAccountsChanged.invoke({ config.getRecentAccounts() });
+                m_accountAdded.invoke({ m_accountViewControllers[path] });
             }
         }
     }
@@ -346,5 +349,6 @@ namespace Nickvision::Money::Shared::Controllers
         Configuration& config{ Aura::getActive().getConfig<Configuration>("config") };
         config.removeRecentAccount(account);
         config.save();
+        m_recentAccountsChanged.invoke({ config.getRecentAccounts() });
     }
 }

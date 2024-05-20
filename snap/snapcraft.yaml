@@ -87,21 +87,6 @@ parts:
     prime:
       - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libxml++-5.0*.so*
 
-  matplotplusplus:
-    after: [build-deps]
-    source: https://github.com/alandefreitas/matplotplusplus.git
-    source-tag: 'v1.2.0'
-    source-depth: 1
-    plugin: cmake
-    cmake-parameters:
-      - -DCMAKE_INSTALL_PREFIX=/usr
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DMATPLOTPP_BUILD_EXAMPLES=OFF
-      - -DMATPLOTPP_BUILD_TESTS=OFF
-      - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
-    build-environment:
-      - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
-
   podofo:
     after: [build-deps]
     source: https://github.com/podofo/podofo.git

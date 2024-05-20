@@ -87,7 +87,7 @@ namespace Nickvision::Money::GNOME::Views
             adw_preferences_group_add(ADW_PREFERENCES_GROUP(gtk_builder_get_object(m_builder, "groupsGroup")), GTK_WIDGET(row));
             g_object_unref(colorTexture);
             g_object_unref(colorBuf);
-        }   
+        }
     }
 
     AccountPage::~AccountPage()

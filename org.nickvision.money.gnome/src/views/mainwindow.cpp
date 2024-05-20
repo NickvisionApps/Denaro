@@ -50,7 +50,8 @@ namespace Nickvision::Money::GNOME::Views
         g_signal_connect(gtk_builder_get_object(m_builder, "listNavItems"), "row-selected", G_CALLBACK(+[](GtkListBox* self, GtkListBoxRow* row, gpointer data) { reinterpret_cast<MainWindow*>(data)->onNavItemSelected(self, row); }), this);
         m_controller->notificationSent() += [&](const NotificationSentEventArgs& args) { onNotificationSent(args); };
         m_controller->shellNotificationSent() += [&](const ShellNotificationSentEventArgs& args) { onShellNotificationSent(args); };
-        m_controller->accountAdded() += [&](const ParamEventArgs<std::shared_ptr<AccountViewController>>& args) { onAccountAdded(args); };
+        m_controller->recentAccountsChanged() += [&](const ParamEventArgs<std::vector<RecentAccount>>& args) { loadRecentAccounts(args); };
+        m_controller->accountAdded() += [&](const ParamEventArgs<const std::shared_ptr<AccountViewController>&>& args) { onAccountAdded(args); };
         //Drop Target
         GtkDropTarget* dropTarget{ gtk_drop_target_new(G_TYPE_FILE, GDK_ACTION_COPY) };
         g_signal_connect(dropTarget, "drop", G_CALLBACK(+[](GtkDropTarget*, const GValue* value, double, double, gpointer data) -> bool { return reinterpret_cast<MainWindow*>(data)->onDrop(value); }), this);
@@ -122,7 +123,6 @@ namespace Nickvision::Money::GNOME::Views
         m_controller->connectTaskbar(m_controller->getAppInfo().getId() + ".desktop");
         m_controller->startup();
         gtk_list_box_select_row(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "listNavItems")), gtk_list_box_get_row_at_index(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "listNavItems")), 0));
-        loadRecentAccounts();        
     }
 
     bool MainWindow::onCloseRequested()
@@ -281,9 +281,8 @@ namespace Nickvision::Money::GNOME::Views
         }
     }
 
-    void MainWindow::onAccountAdded(const ParamEventArgs<std::shared_ptr<AccountViewController>>& args)
+    void MainWindow::onAccountAdded(const ParamEventArgs<const std::shared_ptr<AccountViewController>&>& args)
     {
-        loadRecentAccounts();
         //Create sidebar item for account
         GtkBox* row{ GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 12)) };
         gtk_widget_set_margin_start(GTK_WIDGET(row), 6);
@@ -333,20 +332,19 @@ namespace Nickvision::Money::GNOME::Views
         }), this);
     }
 
-    void MainWindow::loadRecentAccounts()
+    void MainWindow::loadRecentAccounts(const ParamEventArgs<std::vector<RecentAccount>>& args)
     {
-        std::vector<RecentAccount> recentAccounts{ m_controller->getRecentAccounts() };
-        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "noRecentAccountsPopoverRow")), recentAccounts.size() == 0);
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "noRecentAccountsPopoverRow")), args.getParam().size() == 0);
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "recentAccount1PopoverRow")), false);
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "recentAccount2PopoverRow")), false);
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "recentAccount3PopoverRow")), false);
-        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "noRecentAccountsRow")), recentAccounts.size() == 0);
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "noRecentAccountsRow")), args.getParam().size() == 0);
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "recentAccount1Row")), false);
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "recentAccount2Row")), false);
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "recentAccount3Row")), false);
-        for(size_t i = 0; i < recentAccounts.size(); i++)
+        for(size_t i = 0; i < args.getParam().size(); i++)
         {
-            RecentAccount& recentAccount{ recentAccounts[i] };
+            const RecentAccount& recentAccount{ args.getParam().at(i) };
             std::string popoverRowName{ "recentAccount" + std::to_string(i + 1) + "PopoverRow" };
             std::string rowName{ "recentAccount" + std::to_string(i + 1) + "Row" };
             AdwActionRow* popoverRow{ ADW_ACTION_ROW(gtk_builder_get_object(m_builder, popoverRowName.c_str())) };
@@ -378,7 +376,6 @@ namespace Nickvision::Money::GNOME::Views
     void MainWindow::removeRecentAccount(const std::filesystem::path& path)
     {
         m_controller->removeRecentAccount(path);
-        loadRecentAccounts();
     }
 
     void MainWindow::openAccount(const std::filesystem::path& path)
@@ -411,7 +408,7 @@ namespace Nickvision::Money::GNOME::Views
             adw_alert_dialog_set_close_response(passwordDialog, "cancel");
             adw_alert_dialog_set_response_appearance(passwordDialog, "unlock", ADW_RESPONSE_SUGGESTED);
             g_signal_connect(passwordDialog, "response", G_CALLBACK(+[](AdwAlertDialog* self, const char* response, gpointer data)
-            { 
+            {
                 if(std::string(response) != "unlock")
                 {
                     *(reinterpret_cast<std::string*>(data)) = "";

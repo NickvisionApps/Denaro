@@ -135,5 +135,5 @@ TEST_F(AccountTest, IncomeExpensePieGraph)
         return;
     }
 #endif
-    ASSERT_TRUE(!m_account->generateGraph(GraphType::IncomeExpensePie, false).empty());
+    ASSERT_FALSE(m_account->generateGraph(GraphType::IncomeExpensePie, false).empty());
 }

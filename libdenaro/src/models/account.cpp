@@ -1,15 +1,13 @@
 #include "models/account.h"
 #include <algorithm>
-#include <chrono>
+#include <filesystem>
 #include <format>
 #include <fstream>
 #include <regex>
-#include <thread>
 #include <libnick/app/aura.h>
 #include <libnick/filesystem/userdirectories.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/localization/gettext.h>
-#include <matplot/matplot.h>
 #include <rapidcsv.h>
 #include "helpers/currencyhelpers.h"
 #include "helpers/datehelpers.h"
@@ -26,7 +24,7 @@ namespace Nickvision::Money::Shared::Models
         m_repository{ m_path },
         m_metadata{ m_path.stem().string(), AccountType::Checking }
     {
-        
+
     }
 
     const std::filesystem::path& Account::getPath() const
@@ -246,10 +244,7 @@ namespace Nickvision::Money::Shared::Models
             return false;
         }
         //Group names must be unique
-        if(std::find_if(m_groups.begin(), m_groups.end(), [&group](const std::pair<const int, Group>& pair) 
-        { 
-            return pair.second.getName() == group.getName(); 
-        }) != m_groups.end())
+        if(std::find_if(m_groups.begin(), m_groups.end(), [&group](const std::pair<const int, Group>& pair){ return pair.second.getName() == group.getName(); }) != m_groups.end())
         {
             return false;
         }
@@ -268,10 +263,7 @@ namespace Nickvision::Money::Shared::Models
             return false;
         }
         //Group names must be unique
-        if(std::find_if(m_groups.begin(), m_groups.end(), [&group](const std::pair<const int, Group>& pair) 
-        { 
-            return pair.second.getName() == group.getName(); 
-        }) != m_groups.end())
+        if(std::find_if(m_groups.begin(), m_groups.end(), [&group](const std::pair<const int, Group>& pair){ return pair.second.getName() == group.getName(); }) != m_groups.end())
         {
             return false;
         }
@@ -605,21 +597,10 @@ namespace Nickvision::Money::Shared::Models
     std::vector<std::uint8_t> Account::generateGraph(GraphType type, bool darkMode, const std::vector<int>& filteredIds, int width, int height) const
     {
         std::string tempPath{ StringHelpers::replace((UserDirectories::getApplicationCache() / "TEMP_DENARO_GRAPH.png").string(), "\\", "/") }; //gnuplot accepts paths with only / as separator
-        matplot::figure_handle figure{ matplot::figure(true) };
-        //Set graph size
-        if(width != -1 && height != -1)
-        {
-            figure->size(static_cast<unsigned int>(width), static_cast<unsigned int>(height));
-        }
-        //TODO: Support dark mode
         //Render graph
         if(type == GraphType::IncomeExpensePie)
         {
-            std::vector<double> values{ getIncome(filteredIds), getExpense(filteredIds) };
-            std::vector<std::string> labels{ _("Income"), _("Expense") };
-            matplot::circles_handle pie{ figure->current_axes()->pie(values, labels) };
-            pie->labels()->color(darkMode ? "white" : "black");
-            //TODO: Change pie colors
+            //TODO Implement
         }
         else if(type == GraphType::IncomeExpensePerGroup)
         {
@@ -638,11 +619,6 @@ namespace Nickvision::Money::Shared::Models
             //TODO: Implement
         }
         //Get graph bytes
-        figure->save(tempPath);
-        while(!std::filesystem::exists(tempPath))
-        {
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-        }
         std::ifstream in{ tempPath, std::ios_base::binary };
         std::vector<std::uint8_t> bytes{ std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>() };
         in.close();
