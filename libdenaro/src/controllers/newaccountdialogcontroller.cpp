@@ -1,8 +1,6 @@
 #include "controllers/newaccountdialogcontroller.h"
-#include <libnick/app/aura.h>
 #include <libnick/filesystem/userdirectories.h>
 
-using namespace Nickvision::App;
 using namespace Nickvision::Filesystem;
 using namespace Nickvision::Money::Shared::Models;
 
@@ -13,12 +11,7 @@ namespace Nickvision::Money::Shared::Controllers
         m_metadata{ "", AccountType::Checking },
         m_overwriteExisting{ false }
     {
-        
-    }
 
-    const std::string& NewAccountDialogController::getId() const
-    {
-        return Aura::getActive().getAppInfo().getId();
     }
 
     const std::filesystem::path& NewAccountDialogController::getFilePath() const
@@ -95,7 +88,7 @@ namespace Nickvision::Money::Shared::Controllers
     void NewAccountDialogController::setCustomCurrencyOff()
     {
         m_metadata.setUseCustomCurrency(false);
-        m_metadata.setCustomCurrency({});   
+        m_metadata.setCustomCurrency({});
     }
 
     CurrencyCheckStatus NewAccountDialogController::setCustomCurrency(const std::string& symbol, const std::string& code, char decimalSeparator, char groupSeparator, int decimalDigits, AmountStyle amountStyle)

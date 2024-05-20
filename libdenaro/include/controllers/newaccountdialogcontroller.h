@@ -3,11 +3,9 @@
 
 #include <filesystem>
 #include <string>
-#include <vector>
 #include "models/accountmetadata.h"
 #include "models/accounttype.h"
 #include "models/amountstyle.h"
-#include "models/currency.h"
 #include "models/currencycheckstatus.h"
 #include "models/remindersthreshold.h"
 #include "models/transactiontype.h"
@@ -24,11 +22,6 @@ namespace Nickvision::Money::Shared::Controllers
          * @brief Constructs a NewAccountDialogController.
          */
         NewAccountDialogController();
-        /**
-         * @brief Gets the application's id.
-         * @return The application's id 
-         */
-        const std::string& getId() const;
         /**
          * @brief Gets the file path of the new account.
          * @return The file path of the new account
