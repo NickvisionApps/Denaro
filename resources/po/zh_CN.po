@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-20 11:33-0400\n"
+"POT-Creation-Date: 2024-05-20 15:36-0400\n"
 "PO-Revision-Date: 2024-02-02 03:01+0000\n"
 "Last-Translator: aerowolf <aerowolf@tom.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -64,6 +64,11 @@ msgstr "从现在起二个月"
 #, fuzzy, c++-format
 msgid "{} days from now"
 msgstr "从现在起二个月"
+
+#: libdenaro/src/controllers/accountviewcontroller.cpp:18
+#, fuzzy
+msgid "Unable to login to the account. The provided password may be invalid."
+msgstr "不能登录到账号。密码无效。"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Denaro"
@@ -1318,9 +1323,6 @@ msgstr "结果"
 
 #~ msgid "Unable to import transactions from the file."
 #~ msgstr "不能从文件中导入交易。"
-
-#~ msgid "Unable to login to account. Provided password is invalid."
-#~ msgstr "不能登录到账号。密码无效。"
 
 #~ msgid ""
 #~ "Unable to open the account. Please ensure that the app has permissions to "

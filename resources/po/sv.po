@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-20 11:33-0400\n"
+"POT-Creation-Date: 2024-05-20 15:36-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,6 +62,11 @@ msgstr ""
 #, c++-format
 msgid "{} days from now"
 msgstr ""
+
+#: libdenaro/src/controllers/accountviewcontroller.cpp:18
+#, fuzzy
+msgid "Unable to login to the account. The provided password may be invalid."
+msgstr "Kan inte logga in till konto. Tilldelat lösenord är fel."
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Denaro"
@@ -1150,9 +1155,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Unable to import transactions from the file."
 #~ msgstr "Kan inte skriva över ett öppet konto."
-
-#~ msgid "Unable to login to account. Provided password is invalid."
-#~ msgstr "Kan inte logga in till konto. Tilldelat lösenord är fel."
 
 #, fuzzy
 #~ msgid "Unable to overwrite an existing account."

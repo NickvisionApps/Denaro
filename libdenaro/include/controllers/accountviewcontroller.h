@@ -66,7 +66,7 @@ namespace Nickvision::Money::Shared::Controllers
         std::vector<std::pair<Models::Group, std::string>> getGroups() const;
 
     private:
-        std::unique_ptr<Models::Account> m_account;
+        std::shared_ptr<Models::Account> m_account;
     };
 }
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-20 11:33-0400\n"
+"POT-Creation-Date: 2024-05-20 15:36-0400\n"
 "PO-Revision-Date: 2023-08-24 20:09+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -64,6 +64,11 @@ msgstr "Kaksi kuukautta tästä hetkestä"
 #, fuzzy, c++-format
 msgid "{} days from now"
 msgstr "Kaksi kuukautta tästä hetkestä"
+
+#: libdenaro/src/controllers/accountviewcontroller.cpp:18
+#, fuzzy
+msgid "Unable to login to the account. The provided password may be invalid."
+msgstr "Kirjautuminen tilille ei onnistu. Annettu salasana on virheellinen."
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Denaro"
@@ -1265,9 +1270,6 @@ msgstr "Tulos"
 #, fuzzy
 #~ msgid "Unable to import transactions from the file."
 #~ msgstr "Lisää uusi tapahtuma tai tuo tapahtumat tiedostosta."
-
-#~ msgid "Unable to login to account. Provided password is invalid."
-#~ msgstr "Kirjautuminen tilille ei onnistu. Annettu salasana on virheellinen."
 
 #~ msgid "Unable to overwrite an existing account."
 #~ msgstr "Olemassa olevan tilin korvaaminen ei onnistu."

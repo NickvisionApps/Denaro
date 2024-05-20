@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-20 11:33-0400\n"
+"POT-Creation-Date: 2024-05-20 15:36-0400\n"
 "PO-Revision-Date: 2023-11-15 11:53+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-money/"
@@ -64,6 +64,13 @@ msgstr "Dans deux mois"
 #, fuzzy, c++-format
 msgid "{} days from now"
 msgstr "Dans deux mois"
+
+#: libdenaro/src/controllers/accountviewcontroller.cpp:18
+#, fuzzy
+msgid "Unable to login to the account. The provided password may be invalid."
+msgstr ""
+"Impossible de se connecter au compte. Le mot de passe fourni n'est pas "
+"valide."
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Denaro"
@@ -1342,11 +1349,6 @@ msgstr "Résultat"
 
 #~ msgid "Unable to import transactions from the file."
 #~ msgstr "Impossible d’importer des transactions depuis le fichier."
-
-#~ msgid "Unable to login to account. Provided password is invalid."
-#~ msgstr ""
-#~ "Impossible de se connecter au compte. Le mot de passe fourni n'est pas "
-#~ "valide."
 
 #~ msgid ""
 #~ "Unable to open the account. Please ensure that the app has permissions to "

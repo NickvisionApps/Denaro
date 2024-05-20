@@ -11,7 +11,7 @@ using namespace Nickvision::Money::Shared::Models;
 namespace Nickvision::Money::Shared::Controllers
 {
     AccountViewController::AccountViewController(const std::filesystem::path& path, const std::string& password)
-        : m_account{ std::make_unique<Account>(path) }
+        : m_account{ std::make_shared<Account>(path) }
     {
         if(!m_account->login(password, Aura::getActive().getConfig<Configuration>("config").getGroupDefaultColor()))
         {

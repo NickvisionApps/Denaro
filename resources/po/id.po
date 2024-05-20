@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-20 11:33-0400\n"
+"POT-Creation-Date: 2024-05-20 15:36-0400\n"
 "PO-Revision-Date: 2023-06-07 19:40+0000\n"
 "Last-Translator: Krindog7337 <igstkrisna2006@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/nickvision-"
@@ -64,6 +64,11 @@ msgstr ""
 #, fuzzy, c++-format
 msgid "{} days from now"
 msgstr "{0} dari {1}"
+
+#: libdenaro/src/controllers/accountviewcontroller.cpp:18
+#, fuzzy
+msgid "Unable to login to the account. The provided password may be invalid."
+msgstr "Tidak dapat masuk ke rekening. Sandi yang diberikan tidak valid."
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Denaro"
@@ -1316,9 +1321,6 @@ msgstr "Hasil"
 #, fuzzy
 #~ msgid "Unable to import transactions from the file."
 #~ msgstr "Tambahkan transaksi baru atau impor transaksi dari berkas."
-
-#~ msgid "Unable to login to account. Provided password is invalid."
-#~ msgstr "Tidak dapat masuk ke rekening. Sandi yang diberikan tidak valid."
 
 #~ msgid ""
 #~ "Unable to open the account. Please ensure that the app has permissions to "
