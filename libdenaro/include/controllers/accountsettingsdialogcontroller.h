@@ -3,7 +3,7 @@
 
 #include <memory>
 #include "models/account.h"
-#include "models/currencycheckstatus"
+#include "models/currencycheckstatus.h"
 
 namespace Nickvision::Money::Shared::Controllers
 {
