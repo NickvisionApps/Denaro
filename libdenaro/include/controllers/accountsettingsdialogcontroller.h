@@ -7,6 +7,9 @@
 
 namespace Nickvision::Money::Shared::Controllers
 {
+    /**
+     * @brief A controller for an AccountSettingsDialog.
+     */
     class AccountSettingsDialogController
     {
     public:

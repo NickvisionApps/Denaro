@@ -33,14 +33,14 @@ namespace Nickvision::Money::Shared::Controllers
         metadata.setType(accountType);
         m_account->setMetadata(metadata);
     }
-    
+
     void AccountSettingsDialogController::setDefaultTransactionType(Models::TransactionType defaultTransactionType)
     {
         AccountMetadata metadata{ m_account->getMetadata() };
         metadata.setDefaultTransactionType(defaultTransactionType);
         m_account->setMetadata(metadata);
     }
-    
+
     void AccountSettingsDialogController::setCustomCurrencyOff()
     {
         AccountMetadata metadata{ m_account->getMetadata() };
@@ -48,7 +48,7 @@ namespace Nickvision::Money::Shared::Controllers
         metadata.setCustomCurrency({});
         m_account->setMetadata(metadata);
     }
-    
+
     Models::CurrencyCheckStatus AccountSettingsDialogController::setCustomCurrency(const std::string& symbol, const std::string& code, char decimalSeparator, char groupSeparator, int decimalDigits, Models::AmountStyle amountStyle)
     {
         Currency currency{ symbol, code };

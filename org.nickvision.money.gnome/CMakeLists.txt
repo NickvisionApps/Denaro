@@ -2,7 +2,9 @@ if(LINUX)
     add_executable(org.nickvision.money.gnome
         "src/controls/currencyconverterpage.cpp"
         "src/helpers/builder.cpp"
+        "src/helpers/dialogbase.cpp"
         "src/views/accountpage.cpp"
+        "src/views/accountsettingsdialog.cpp"
         "src/views/newaccountdialog.cpp"
         "src/views/mainwindow.cpp"
         "src/views/preferencesdialog.cpp"

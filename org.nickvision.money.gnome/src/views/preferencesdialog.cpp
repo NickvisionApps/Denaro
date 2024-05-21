@@ -6,10 +6,9 @@ using namespace Nickvision::Money::Shared::Models;
 
 namespace Nickvision::Money::GNOME::Views
 {
-    PreferencesDialog::PreferencesDialog(const std::shared_ptr<PreferencesViewController>& controller)
-        : m_controller{ controller },
-        m_builder{ BuilderHelpers::fromBlueprint("preferences_dialog") },
-        m_dialog{ ADW_PREFERENCES_DIALOG(gtk_builder_get_object(m_builder, "root")) }
+    PreferencesDialog::PreferencesDialog(const std::shared_ptr<PreferencesViewController>& controller, GtkWindow* parent)
+        : DialogBase{ parent, "preferences_dialog" }, 
+        m_controller{ controller }
     {
         //Build UI
         gtk_color_dialog_button_set_dialog(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "transactionColorButton")), gtk_color_dialog_new());
@@ -29,34 +28,11 @@ namespace Nickvision::Money::GNOME::Views
         gtk_color_dialog_button_set_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "groupColorButton")), &color); 
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "insertSeparatorRow")), static_cast<unsigned int>(m_controller->getInsertSeparator()));
         //Signals
-        g_signal_connect(m_dialog, "closed", G_CALLBACK(+[](AdwDialog*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->onClosed(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "themeRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->onThemeChanged(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "transactionColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "transferColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "groupColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "insertSeparatorRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
-    }
-
-    PreferencesDialog* PreferencesDialog::create(const std::shared_ptr<PreferencesViewController>& controller)
-    {
-        return new PreferencesDialog(controller);
-    }
-
-    PreferencesDialog::~PreferencesDialog()
-    {
-        adw_dialog_force_close(ADW_DIALOG(m_dialog));
-        g_object_unref(m_builder);
-    }
-
-    void PreferencesDialog::present(GtkWindow* parent) const
-    {
-        adw_dialog_present(ADW_DIALOG(m_dialog), GTK_WIDGET(parent));
-    }
-
-    void PreferencesDialog::onClosed()
-    {
-        m_controller->saveConfiguration();
-        delete this;
     }
 
     void PreferencesDialog::applyChanges()
@@ -66,6 +42,7 @@ namespace Nickvision::Money::GNOME::Views
         m_controller->setTransferDefaultColor({ gdk_rgba_to_string(gtk_color_dialog_button_get_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "transferColorButton")))) });
         m_controller->setGroupDefaultColor({ gdk_rgba_to_string(gtk_color_dialog_button_get_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "groupColorButton")))) });
         m_controller->setInsertSeparator(static_cast<InsertSeparatorTrigger>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "insertSeparatorRow")))));
+        m_controller->saveConfiguration();
     }
 
     void PreferencesDialog::onThemeChanged()
@@ -83,5 +60,6 @@ namespace Nickvision::Money::GNOME::Views
             adw_style_manager_set_color_scheme(adw_style_manager_get_default(), ADW_COLOR_SCHEME_DEFAULT);
             break;
         }
+        m_controller->saveConfiguration();
     }
 }

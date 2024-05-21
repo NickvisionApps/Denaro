@@ -1,11 +1,11 @@
 #include "views/mainwindow.h"
-#include <format>
 #include <libnick/app/appinfo.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/notifications/shellnotification.h>
 #include <libnick/localization/gettext.h>
 #include <libnick/localization/documentation.h>
 #include "helpers/builder.h"
+#include "helpers/dialogptr.h"
 #include "views/newaccountdialog.h"
 #include "views/preferencesdialog.h"
 
@@ -14,6 +14,7 @@ using namespace Nickvision::App;
 using namespace Nickvision::Events;
 using namespace Nickvision::Localization;
 using namespace Nickvision::Money::GNOME::Controls;
+using namespace Nickvision::Money::GNOME::Helpers;
 using namespace Nickvision::Money::Shared::Controllers;
 using namespace Nickvision::Money::Shared::Models;
 using namespace Nickvision::Notifications;
@@ -161,8 +162,8 @@ namespace Nickvision::Money::GNOME::Views
 
     void MainWindow::preferences()
     {
-        PreferencesDialog* dialog{ PreferencesDialog::create(m_controller->createPreferencesViewController()) };
-        dialog->present(GTK_WINDOW(m_window));
+        DialogPtr<PreferencesDialog> dialog{ m_controller->createPreferencesViewController(), GTK_WINDOW(m_window) };
+        dialog->present();
     }
 
     void MainWindow::keyboardShortcuts()
@@ -171,6 +172,7 @@ namespace Nickvision::Money::GNOME::Views
         GtkShortcutsWindow* shortcuts{ GTK_SHORTCUTS_WINDOW(gtk_builder_get_object(builderHelp, "root")) };
         gtk_window_set_transient_for(GTK_WINDOW(shortcuts), GTK_WINDOW(m_window));
         gtk_window_set_icon_name(GTK_WINDOW(shortcuts), m_controller->getAppInfo().getId().c_str());
+        g_signal_connect(shortcuts, "close-request", G_CALLBACK(+[](GtkWindow*, gpointer data){ g_object_unref(reinterpret_cast<GtkBuilder*>(data)); }), builderHelp);
         gtk_window_present(GTK_WINDOW(shortcuts));
     }
 
@@ -302,7 +304,7 @@ namespace Nickvision::Money::GNOME::Views
     void MainWindow::newAccount()
     {
         gtk_popover_popdown(GTK_POPOVER(gtk_builder_get_object(m_builder, "accountMenuPopover")));
-        NewAccountDialog* newAccountDialog{ NewAccountDialog::create(m_controller->createNewAccountDialogController(), GTK_WINDOW(m_window)) };
+        DialogPtr<NewAccountDialog> newAccountDialog{ m_controller->createNewAccountDialogController(), GTK_WINDOW(m_window) };
         newAccountDialog->finished() += [&](const ParamEventArgs<std::shared_ptr<NewAccountDialogController>>& args)
         {
             m_controller->newAccount(args.getParam());

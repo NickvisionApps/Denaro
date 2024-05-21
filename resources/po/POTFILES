@@ -5,6 +5,7 @@ libdenaro/src/models/transactionreminder.cpp
 libdenaro/src/controllers/accountviewcontroller.cpp
 libdenaro/src/controllers/mainwindowcontroller.cpp
 org.nickvision.money.gnome/blueprints/account_page.blp
+org.nickvision.money.gnome/blueprints/account_settings_dialog.blp
 org.nickvision.money.gnome/blueprints/currency_converter_page.blp
 org.nickvision.money.gnome/blueprints/new_account_dialog.blp
 org.nickvision.money.gnome/blueprints/main_window.blp

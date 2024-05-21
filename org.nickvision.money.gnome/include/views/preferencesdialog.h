@@ -4,41 +4,24 @@
 #include <memory>
 #include <adwaita.h>
 #include "controllers/preferencesviewcontroller.h"
+#include "helpers/dialogbase.h"
 
 namespace Nickvision::Money::GNOME::Views
 {
     /**
      * @brief The preferences dialog for the application. 
      */
-    class PreferencesDialog
+    class PreferencesDialog : public Helpers::DialogBase
     {
     public:
         /**
-         * @brief Creates a new PreferencesDialog.
-         * @param controller The PreferencesViewController
-         * @return PreferencesDialog* (The caller is NOT responsible for deleting the returned pointer)
-         */
-        static PreferencesDialog* create(const std::shared_ptr<Shared::Controllers::PreferencesViewController>& controller);
-        /**
-         * @brief Destructs a PreferencesDialog.
-         */
-        ~PreferencesDialog();
-        /**
-         * @brief Presents the PreferencesDialog.
-         * @param parent The GtkWindow object of the parent window
-         */
-        void present(GtkWindow* parent) const;
-
-    private:
-        /**
          * @brief Constructs a PreferencesDialog.
          * @param controller The PreferencesViewController
+         * @param parent The GtkWindow object of the parent window
          */
-        PreferencesDialog(const std::shared_ptr<Shared::Controllers::PreferencesViewController>& controller);
-        /**
-         * @brief Handles when the dialog is closed. 
-         */
-        void onClosed();
+        PreferencesDialog(const std::shared_ptr<Shared::Controllers::PreferencesViewController>& controller, GtkWindow* parent);
+
+    private:
         /**
          * @brief Applies the changes to the app's configuration object.
          */
@@ -48,8 +31,6 @@ namespace Nickvision::Money::GNOME::Views
          */
         void onThemeChanged();
         std::shared_ptr<Shared::Controllers::PreferencesViewController> m_controller;
-        GtkBuilder* m_builder;
-        AdwPreferencesDialog* m_dialog;
     };
 }
 
