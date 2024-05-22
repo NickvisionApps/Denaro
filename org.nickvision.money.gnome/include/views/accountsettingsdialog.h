@@ -23,11 +23,6 @@ namespace Nickvision::Money::GNOME::Views
 
     private:
         /**
-         * @brief Navigates to a page.
-         * @param pageName The name of the page to navigate to
-         */
-        void go(const std::string& pageName);
-        /**
          * @brief Handles when the basic account information is changed.
          */
         void onAccountInfoChanged();

@@ -17,7 +17,7 @@ namespace Nickvision::Money::GNOME::Views
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "accountTypeRow")), static_cast<unsigned int>(m_controller->getMetadata().getType()));
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionTypeRow")), static_cast<unsigned int>(m_controller->getMetadata().getDefaultTransactionType()));
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionRemindersRow")), static_cast<unsigned int>(m_controller->getMetadata().getTransactionRemindersThreshold()));
-        gtk_label_set_label(GTK_LABEL(gtk_builder_get_object(m_builder, "reportedCurrencyLabel")), m_controller->getReportedCurrencyString().c_str());
+        adw_preferences_row_set_title(ADW_PREFERENCES_ROW(gtk_builder_get_object(m_builder, "systemCurrencyRow")), m_controller->getReportedCurrencyString().c_str());
         adw_expander_row_set_enable_expansion(ADW_EXPANDER_ROW(gtk_builder_get_object(m_builder, "customCurrencyRow")), m_controller->getMetadata().getUseCustomCurrency());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customSymbolRow")), m_controller->getMetadata().getCustomCurrency().getSymbol().c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customCodeRow")), m_controller->getMetadata().getCustomCurrency().getCode().c_str());
@@ -59,15 +59,12 @@ namespace Nickvision::Money::GNOME::Views
         }
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customDecimalDigitsRow")), static_cast<unsigned int>(m_controller->getMetadata().getCustomCurrency().getDecimalDigits() - 2));
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customAmountStyleRow")), static_cast<unsigned int>(m_controller->getMetadata().getCustomCurrency().getAmountStyle()));
-        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordButton")), m_controller->isEncrypted());
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordGroup")), m_controller->isEncrypted());
         //Signals
-        g_signal_connect(gtk_builder_get_object(m_builder, "backButton"), "clicked", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->go(_("Account Settings")); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "accountNameRow"), "changed", G_CALLBACK(+[](GtkEditable*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onAccountInfoChanged(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "accountTypeRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onAccountInfoChanged(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "transactionTypeRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onAccountInfoChanged(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "transactionRemindersRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onAccountInfoChanged(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "currencyRow"), "activated", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->go(_("Currency")); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "passwordRow"), "activated", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->go(_("Password")); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "customCurrencyRow"), "notify::enable-expansion", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onCurrencyChange(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "customSymbolRow"), "changed", G_CALLBACK(+[](GtkEditable*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onCurrencyChange(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "customCodeRow"), "changed", G_CALLBACK(+[](GtkEditable*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onCurrencyChange(); }), this);
@@ -79,15 +76,8 @@ namespace Nickvision::Money::GNOME::Views
         g_signal_connect(gtk_builder_get_object(m_builder, "customAmountStyleRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onCurrencyChange(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "newPasswordRow"), "changed", G_CALLBACK(+[](GtkEditable*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onNewPasswordChange(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "newPasswordConfirmRow"), "changed", G_CALLBACK(+[](GtkEditable*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onNewPasswordChange(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "changePasswordButton"), "clicked", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->changePassword(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "removePasswordButton"), "clicked", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->removePassword(); }), this);
-    }
-
-    void AccountSettingsDialog::go(const std::string& pageName)
-    {
-        adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), pageName.c_str());
-        adw_window_title_set_title(ADW_WINDOW_TITLE(gtk_builder_get_object(m_builder, "windowTitle")), pageName.c_str());
-        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "backButton")), pageName != std::string(_("Account Settings")));
+        g_signal_connect(gtk_builder_get_object(m_builder, "changePasswordRow"), "activated", G_CALLBACK(+[](AdwActionRow*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->changePassword(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "removePasswordRow"), "activated", G_CALLBACK(+[](AdwActionRow*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->removePassword(); }), this);
     }
 
     void AccountSettingsDialog::onAccountInfoChanged()
@@ -198,29 +188,31 @@ namespace Nickvision::Money::GNOME::Views
         if(newPassword.empty())
         {
             gtk_widget_add_css_class(GTK_WIDGET(gtk_builder_get_object(m_builder, "newPasswordRow")), "error");
-            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "changePasswordButton")), false);
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "changePasswordRow")), false);
         }
         else if(newPassword == newPasswordConfirm)
         {
-            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "changePasswordButton")), true);
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "changePasswordRow")), true);
         }
         else
         {
             gtk_widget_add_css_class(GTK_WIDGET(gtk_builder_get_object(m_builder, "newPasswordConfirmRow")), "error");
-            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "changePasswordButton")), false);
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "changePasswordRow")), false);
         }
     }
 
     void AccountSettingsDialog::changePassword()
     {
-        if(m_controller->setPassword(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "newPaswordRow")))))
+        if(m_controller->setPassword(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "newPasswordRow")))))
         {
-            go(_("Account Settings"));
-            gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordButton")), true);
+            gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordGroup")), true);
+            adw_preferences_dialog_add_toast(ADW_PREFERENCES_DIALOG(m_dialog), adw_toast_new(_("Password changed")));
+            gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "newPasswordRow")), "");
+            gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "newPasswordConfirmRow")), "");
         }
         else
         {
-            adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(gtk_builder_get_object(m_builder, "toasOverlay")), adw_toast_new(_("Unable to change password")));
+            adw_preferences_dialog_add_toast(ADW_PREFERENCES_DIALOG(m_dialog), adw_toast_new(_("Unable to change password")));
         }
     }
 
@@ -228,12 +220,12 @@ namespace Nickvision::Money::GNOME::Views
     {
         if(m_controller->setPassword(""))
         {
-            go(_("Account Settings"));
-            gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordButton")), false);
+            gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordGroup")), false);
+            adw_preferences_dialog_add_toast(ADW_PREFERENCES_DIALOG(m_dialog), adw_toast_new(_("Password removed")));
         }
         else
         {
-            adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(gtk_builder_get_object(m_builder, "toasOverlay")), adw_toast_new(_("Unable to change password")));
+            adw_preferences_dialog_add_toast(ADW_PREFERENCES_DIALOG(m_dialog), adw_toast_new(_("Unable to change password")));
         }
     }
 }

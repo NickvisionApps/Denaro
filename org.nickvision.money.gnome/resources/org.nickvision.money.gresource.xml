@@ -15,6 +15,7 @@
     <file preprocess="xml-stripblanks">bank-symbolic.svg</file>
     <file preprocess="xml-stripblanks">bell-outline-symbolic.svg</file>
     <file preprocess="xml-stripblanks">bell-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">check-plain-symbolic.svg</file>
     <file preprocess="xml-stripblanks">cross-symbolic.svg</file>
     <file preprocess="xml-stripblanks">dark-mode-symbolic.svg</file>
     <file preprocess="xml-stripblanks">dock-top-symbolic.svg</file>
