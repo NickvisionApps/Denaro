@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 19:48-0400\n"
+"POT-Creation-Date: 2024-05-21 20:31-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: libdenaro/src/models/account.cpp:53
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:79
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:112
 msgid "Ungrouped"
 msgstr ""
 
@@ -789,7 +789,7 @@ msgstr "Stäng"
 msgid "Result was copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:50
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:83
 #, fuzzy
 msgid "No Transaction Reminders"
 msgstr "Inga Transaktioner"

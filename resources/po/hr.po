@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 19:48-0400\n"
+"POT-Creation-Date: 2024-05-21 20:31-0400\n"
 "PO-Revision-Date: 2023-09-26 13:22+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Weblate 5.1-dev\n"
 
 #: libdenaro/src/models/account.cpp:53
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:79
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:112
 msgid "Ungrouped"
 msgstr "Negrupirano"
 
@@ -781,7 +781,7 @@ msgstr "Zatvori"
 msgid "Result was copied to clipboard."
 msgstr "Rezultat je kopiran u međuspremnik."
 
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:50
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:83
 #, fuzzy
 msgid "No Transaction Reminders"
 msgstr "Nema transakcija"

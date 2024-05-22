@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 19:48-0400\n"
+"POT-Creation-Date: 2024-05-21 20:31-0400\n"
 "PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 5.4-dev\n"
 
 #: libdenaro/src/models/account.cpp:53
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:79
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:112
 msgid "Ungrouped"
 msgstr "असमूहीकृत"
 
@@ -782,7 +782,7 @@ msgstr "बंद करें"
 msgid "Result was copied to clipboard."
 msgstr "परिणाम को क्लिपबोर्ड पर कॉपी किया गया।"
 
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:50
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:83
 #, fuzzy
 msgid "No Transaction Reminders"
 msgstr "कोई लेनदेन मौजूद नहीं"

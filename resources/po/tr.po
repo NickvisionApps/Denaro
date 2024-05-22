@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 19:48-0400\n"
+"POT-Creation-Date: 2024-05-21 20:31-0400\n"
 "PO-Revision-Date: 2023-09-10 21:21+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 5.0.1-dev\n"
 
 #: libdenaro/src/models/account.cpp:53
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:79
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:112
 msgid "Ungrouped"
 msgstr "Grupsuz"
 
@@ -785,7 +785,7 @@ msgstr "Kapat"
 msgid "Result was copied to clipboard."
 msgstr "Sonuç panoya kopyalandı."
 
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:50
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:83
 #, fuzzy
 msgid "No Transaction Reminders"
 msgstr "İşlem Yok"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 19:48-0400\n"
+"POT-Creation-Date: 2024-05-21 20:31-0400\n"
 "PO-Revision-Date: 2023-06-07 19:40+0000\n"
 "Last-Translator: Krindog7337 <igstkrisna2006@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/nickvision-"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 4.18-dev\n"
 
 #: libdenaro/src/models/account.cpp:53
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:79
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:112
 msgid "Ungrouped"
 msgstr "Tidak digrup"
 
@@ -788,7 +788,7 @@ msgstr "Tutup"
 msgid "Result was copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:50
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:83
 #, fuzzy
 msgid "No Transaction Reminders"
 msgstr "Tidak Ada Transaksi"

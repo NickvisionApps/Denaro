@@ -1,7 +1,10 @@
 #include "views/accountpage.h"
 #include <libnick/localization/gettext.h>
 #include "helpers/builder.h"
+#include "helpers/dialogptr.h"
+#include "views/accountsettingsdialog.h"
 
+using namespace Nickvision::Money::GNOME::Helpers;
 using namespace Nickvision::Money::Shared::Controllers;
 using namespace Nickvision::Money::Shared::Models;
 
@@ -11,8 +14,38 @@ namespace Nickvision::Money::GNOME::Views
         : m_controller(controller),
         m_builder{ BuilderHelpers::fromBlueprint("account_page") },
         m_parent{ parent },
-        m_page{ ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "root")) }
+        m_page{ ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "root")) },
+        m_actionGroup{ g_simple_action_group_new() }
     {
+        gtk_widget_insert_action_group(GTK_WIDGET(m_page), "account", G_ACTION_GROUP(m_actionGroup));
+        //New Transaction Action
+        GSimpleAction* actTransaction{ g_simple_action_new("newTransaction", nullptr) };
+        g_signal_connect(actTransaction, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<AccountPage*>(data)->newTransaction(); }), this);
+        g_action_map_add_action(G_ACTION_MAP(m_actionGroup), G_ACTION(actTransaction));
+        //New Group Action
+        GSimpleAction* actGroup{ g_simple_action_new("newGroup", nullptr) };
+        g_signal_connect(actGroup, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<AccountPage*>(data)->newGroup(); }), this);
+        g_action_map_add_action(G_ACTION_MAP(m_actionGroup), G_ACTION(actGroup));
+        //Transfer Action
+        GSimpleAction* actTransfer{ g_simple_action_new("transfer", nullptr) };
+        g_signal_connect(actTransfer, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<AccountPage*>(data)->transfer(); }), this);
+        g_action_map_add_action(G_ACTION_MAP(m_actionGroup), G_ACTION(actTransfer));
+        //Import From File Action
+        GSimpleAction* actImport{ g_simple_action_new("import", nullptr) };
+        g_signal_connect(actImport, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<AccountPage*>(data)->importFromFile(); }), this);
+        g_action_map_add_action(G_ACTION_MAP(m_actionGroup), G_ACTION(actImport));
+        //Export To CSV Action
+        GSimpleAction* actExportCSV{ g_simple_action_new("exportCSV", nullptr) };
+        g_signal_connect(actExportCSV, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<AccountPage*>(data)->exportToCSV(); }), this);
+        g_action_map_add_action(G_ACTION_MAP(m_actionGroup), G_ACTION(actExportCSV));
+        //Export To PDF Action
+        GSimpleAction* actExportPDF{ g_simple_action_new("exportPDF", nullptr) };
+        g_signal_connect(actExportPDF, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<AccountPage*>(data)->exportToPDF(); }), this);
+        g_action_map_add_action(G_ACTION_MAP(m_actionGroup), G_ACTION(actExportPDF));
+        //Account Settings Action
+        GSimpleAction* actSettings{ g_simple_action_new("settings", nullptr) };
+        g_signal_connect(actSettings, "activate", G_CALLBACK(+[](GSimpleAction*, GVariant*, gpointer data){ reinterpret_cast<AccountPage*>(data)->accountSettings(); }), this);
+        g_action_map_add_action(G_ACTION_MAP(m_actionGroup), G_ACTION(actSettings));
         //Load overview amounts
         adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(gtk_builder_get_object(m_builder, "overviewGroup")), m_controller->getMetadata().getName().c_str());
         //Load account total
@@ -92,6 +125,7 @@ namespace Nickvision::Money::GNOME::Views
 
     AccountPage::~AccountPage()
     {
+        g_object_unref(m_actionGroup);
         g_object_unref(m_builder);
     }
 
@@ -103,5 +137,41 @@ namespace Nickvision::Money::GNOME::Views
     const std::string& AccountPage::getTitle() const
     {
         return m_controller->getMetadata().getName();
+    }
+
+    void AccountPage::newTransaction()
+    {
+
+    }
+
+    void AccountPage::newGroup()
+    {
+
+    }
+
+    void AccountPage::transfer()
+    {
+
+    }
+
+    void AccountPage::importFromFile()
+    {
+
+    }
+
+    void AccountPage::exportToCSV()
+    {
+
+    }
+
+    void AccountPage::exportToPDF()
+    {
+
+    }
+
+    void AccountPage::accountSettings()
+    {
+        DialogPtr<AccountSettingsDialog> settingsDialog{ m_controller->createAccountSettingsDialogController(), m_parent };
+        settingsDialog->present();
     }
 }

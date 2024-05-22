@@ -6,6 +6,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include "controllers/accountsettingsdialogcontroller.h"
 #include "models/account.h"
 #include "models/recentaccount.h"
 
@@ -30,13 +31,18 @@ namespace Nickvision::Money::Shared::Controllers
          */
         const std::filesystem::path& getPath() const;
         /**
-         * @brief Gets the metadata for the account. 
+         * @brief Gets the metadata for the account.
          * @return The account metadata
          */
         const Models::AccountMetadata& getMetadata() const;
         /**
+         * @brief Gets a AccountSettingsDialogController.
+         * @return The AccountSettingsDialogController
+         */
+        std::shared_ptr<AccountSettingsDialogController> createAccountSettingsDialogController() const;
+        /**
          * @brief Gets the RecentAccount representation of this account.
-         * @return The RecentAccount representation of this account. 
+         * @return The RecentAccount representation of this account.
          */
         Models::RecentAccount toRecentAccount() const;
         /**

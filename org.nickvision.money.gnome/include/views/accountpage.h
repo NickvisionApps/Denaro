@@ -34,12 +34,42 @@ namespace Nickvision::Money::GNOME::Views
          * @return The page title
          */
         const std::string& getTitle() const;
+        /**
+         * @brief Opens the TransactionDialog to create a new transaction.
+         */
+        void newTransaction();
+        /**
+         * @brief Opens the GroupDialog to create a new group.
+         */
+        void newGroup();
+        /**
+         * @brief Opens the TransferDialog.
+         */
+        void transfer();
+        /**
+         * @brief Prompts the user to select a file to import.
+         */
+        void importFromFile();
+        /**
+         * @brief Prompts the user to export to a CSV file.
+         */
+        void exportToCSV();
+        /**
+         * @brief Prompts the user to export to a PDF file.
+         */
+        void exportToPDF();
+        /**
+         * @brief Opens the AccountSettingsDialog.
+         */
+        void accountSettings();
+
 
     private:
         std::shared_ptr<Shared::Controllers::AccountViewController> m_controller;
         GtkBuilder* m_builder;
         GtkWindow* m_parent;
         AdwViewStack* m_page;
+        GSimpleActionGroup* m_actionGroup;
     };
 }
 

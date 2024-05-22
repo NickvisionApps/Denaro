@@ -29,6 +29,11 @@ namespace Nickvision::Money::Shared::Controllers
         return m_account->getMetadata();
     }
 
+    std::shared_ptr<AccountSettingsDialogController> AccountViewController::createAccountSettingsDialogController() const
+    {
+        return std::make_shared<AccountSettingsDialogController>(m_account);
+    }
+
     std::string AccountViewController::getTotalAmountString() const
     {
         return CurrencyHelpers::toAmountString(m_account->getTotal(), m_account->getCurrency());
