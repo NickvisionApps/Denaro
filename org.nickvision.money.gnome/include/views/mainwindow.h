@@ -3,7 +3,6 @@
 
 #include <filesystem>
 #include <memory>
-#include <string>
 #include <unordered_map>
 #include <adwaita.h>
 #include "controls/currencyconverterpage.h"
@@ -42,6 +41,8 @@ namespace Nickvision::Money::GNOME::Views
          * @brief Shows the main window. 
          */
         void show();
+
+    private:
         /**
          * @brief Handles when the window requests to close.
          * @return True to prevent closing, else false
@@ -102,8 +103,6 @@ namespace Nickvision::Money::GNOME::Views
          * @brief Prompts the user to open an account.
          */
         void openAccount();
-
-    private:
         /**
          * @brief Loads the recent accounts list.
          * @param args Nickvision::Events::ParamEventArgs<std::vector<Nickvision::Money::Shared::Models::RecentAccount>>

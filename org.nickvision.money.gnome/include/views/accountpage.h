@@ -34,6 +34,8 @@ namespace Nickvision::Money::GNOME::Views
          * @return The page title
          */
         const std::string& getTitle() const;
+
+    private:
         /**
          * @brief Opens the TransactionDialog to create a new transaction.
          */
@@ -62,9 +64,6 @@ namespace Nickvision::Money::GNOME::Views
          * @brief Opens the AccountSettingsDialog.
          */
         void accountSettings();
-
-
-    private:
         std::shared_ptr<Shared::Controllers::AccountViewController> m_controller;
         GtkBuilder* m_builder;
         GtkWindow* m_parent;

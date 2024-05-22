@@ -22,6 +22,27 @@ namespace Nickvision::Money::GNOME::Views
         AccountSettingsDialog(const std::shared_ptr<Shared::Controllers::AccountSettingsDialogController>& controller, GtkWindow* parent);
 
     private:
+        /**
+         * @brief Navigates to a page.
+         * @param pageName The name of the page to navigate to
+         */
+        void go(const std::string& pageName);
+        /**
+         * @brief Handles when the custom currency is changed.
+         */
+        void onCurrencyChange();
+        /**
+         * @brief Handles when the new password is changed.
+         */
+        void onNewPasswordChange();
+        /**
+         * @brief Changes the account password.
+         */
+        void changePassword();
+        /**
+         * @brief Removes the account password.
+         */
+        void removePassword();
         std::shared_ptr<Shared::Controllers::AccountSettingsDialogController> m_controller;
     };
 }

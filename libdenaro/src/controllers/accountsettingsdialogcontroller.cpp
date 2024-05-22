@@ -1,4 +1,6 @@
 #include "controllers/accountsettingsdialogcontroller.h"
+#include <libnick/localization/gettext.h>
+#include "helpers/currencyhelpers.h"
 
 using namespace Nickvision::Money::Shared::Models;
 
@@ -8,6 +10,27 @@ namespace Nickvision::Money::Shared::Controllers
         : m_account{ account }
     {
 
+    }
+
+    const AccountMetadata& AccountSettingsDialogController::getMetadata() const
+    {
+        return m_account->getMetadata();
+    }
+
+    std::string AccountSettingsDialogController::getReportedCurrencyString() const
+    {
+        std::string reportedCurrency{ _("Your system reported that your currency is") };
+#ifdef _WIN32
+        reportedCurrency += CurrencyHelpers::getSystemCurrency().toString();
+#elif defined(__linux__)
+        reportedCurrency += "\n<b>" + CurrencyHelpers::getSystemCurrency().toString() + "</b>";
+#endif
+        return reportedCurrency;
+    }
+
+    bool AccountSettingsDialogController::isEncrypted() const
+    {
+        return m_account->isEncrypted();
     }
 
     bool AccountSettingsDialogController::setName(const std::string& name)

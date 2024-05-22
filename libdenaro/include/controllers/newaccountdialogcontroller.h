@@ -33,6 +33,11 @@ namespace Nickvision::Money::Shared::Controllers
          */
         const Models::AccountMetadata& getMetadata() const;
         /**
+         * @brief Gets the string describing the system's reported currency.
+         * @return The reported currency string
+         */
+        std::string getReportedCurrencyString() const;
+        /**
          * @brief Gets the folder of the new account path.
          * @return The folder of the new account path
          */

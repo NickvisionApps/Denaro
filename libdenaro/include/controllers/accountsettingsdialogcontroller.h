@@ -2,6 +2,7 @@
 #define ACCOUNTSETTINGSDIALOGCONTROLLER_H
 
 #include <memory>
+#include <string>
 #include "models/account.h"
 #include "models/currencycheckstatus.h"
 
@@ -13,7 +14,26 @@ namespace Nickvision::Money::Shared::Controllers
     class AccountSettingsDialogController
     {
     public:
+        /**
+         * @brief Constructs an AccountSettingsDialogController.
+         * @param account The Account model
+         */
         AccountSettingsDialogController(const std::shared_ptr<Models::Account>& account);
+        /**
+         * @brief Gets the metadata of the new account.
+         * @return The metadata of the new account
+         */
+        const Models::AccountMetadata& getMetadata() const;
+        /**
+         * @brief Gets the string describing the system's reported currency.
+         * @return The reported currency string
+         */
+        std::string getReportedCurrencyString() const;
+        /**
+         * @brief Gets whether or not the account is encrypted (a.k.a password-protected).
+         * @return True if encrypted, else false
+         */
+        bool isEncrypted() const;
         /**
          * @brief Sets the name of the account.
          * @param name The new name of the account
@@ -23,6 +43,7 @@ namespace Nickvision::Money::Shared::Controllers
          /**
          * @brief Sets a password for the account.
          * @param password The new password
+         * @return True if the password was changed, else false
          */
         bool setPassword(const std::string& password);
         /**

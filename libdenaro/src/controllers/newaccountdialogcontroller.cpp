@@ -1,5 +1,7 @@
 #include "controllers/newaccountdialogcontroller.h"
 #include <libnick/filesystem/userdirectories.h>
+#include <libnick/localization/gettext.h>
+#include "helpers/currencyhelpers.h"
 
 using namespace Nickvision::Filesystem;
 using namespace Nickvision::Money::Shared::Models;
@@ -22,6 +24,17 @@ namespace Nickvision::Money::Shared::Controllers
     const AccountMetadata& NewAccountDialogController::getMetadata() const
     {
         return m_metadata;
+    }
+
+    std::string NewAccountDialogController::getReportedCurrencyString() const
+    {
+        std::string reportedCurrency{ _("Your system reported that your currency is") };
+#ifdef _WIN32
+        reportedCurrency += CurrencyHelpers::getSystemCurrency().toString();
+#elif defined(__linux__)
+        reportedCurrency += "\n<b>" + CurrencyHelpers::getSystemCurrency().toString() + "</b>";
+#endif
+        return reportedCurrency;
     }
 
     std::filesystem::path NewAccountDialogController::getFolder() const

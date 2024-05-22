@@ -1,10 +1,8 @@
 #include "views/newaccountdialog.h"
 #include <libnick/localization/gettext.h>
-#include "helpers/currencyhelpers.h"
 
 using namespace Nickvision::Events;
 using namespace Nickvision::Money::GNOME::Helpers;
-using namespace Nickvision::Money::Shared;
 using namespace Nickvision::Money::Shared::Controllers;
 using namespace Nickvision::Money::Shared::Models;
 
@@ -21,9 +19,7 @@ namespace Nickvision::Money::GNOME::Views
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "accountTypeRow")), static_cast<unsigned int>(m_controller->getMetadata().getType()));
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionTypeRow")), static_cast<unsigned int>(m_controller->getMetadata().getDefaultTransactionType()));
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionRemindersRow")), static_cast<unsigned int>(m_controller->getMetadata().getTransactionRemindersThreshold()));
-        std::string reportedCurrency{ _("Your system reported that your currency is") };
-        reportedCurrency += "\n<b>" + CurrencyHelpers::getSystemCurrency().toString() + "</b>";
-        gtk_label_set_label(GTK_LABEL(gtk_builder_get_object(m_builder, "reportedCurrencyLabel")), reportedCurrency.c_str());
+        gtk_label_set_label(GTK_LABEL(gtk_builder_get_object(m_builder, "reportedCurrencyLabel")), m_controller->getReportedCurrencyString().c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customSymbolRow")), m_controller->getMetadata().getCustomCurrency().getSymbol().c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "customCodeRow")), m_controller->getMetadata().getCustomCurrency().getCode().c_str());
         switch(m_controller->getMetadata().getCustomCurrency().getDecimalSeparator())

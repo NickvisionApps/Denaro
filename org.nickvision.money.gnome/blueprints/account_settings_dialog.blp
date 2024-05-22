@@ -3,13 +3,230 @@ using Adw 1;
 
 Adw.Dialog root {
   content-width: 420;
+  content-height: 460;
 
   child: Adw.ToolbarView {
     [top]
     Adw.HeaderBar {
-      title-widget: Adw.WindowTitle {
+      title-widget: Adw.WindowTitle windowTitle {
         title: _("Account Settings");
       };
+
+      [start]
+      Gtk.Button backButton {
+        visible: false;
+        icon-name: "go-previous-symbolic";
+        tooltip-text: _("Back");
+      }
+    }
+
+    Adw.ToastOverlay toastOverlay {
+      Gtk.ScrolledWindow {
+        hscrollbar-policy: never;
+        vscrollbar-policy: automatic;
+
+        Adw.ViewStack viewStack {
+          hexpand: true;
+          vexpand: true;
+          margin-top: 12;
+          margin-start: 24;
+          margin-end: 24;
+          margin-bottom: 24;
+
+          Adw.ViewStackPage {
+            name: _("Account Settings");
+            child: Gtk.Box {
+              orientation: vertical;
+              spacing: 12;
+
+              Adw.PreferencesGroup {
+                Adw.EntryRow accountNameRow {
+                  title: _("Account Name");
+                }
+
+                Adw.ComboRow accountTypeRow {
+                  title: _("Account Type");
+                  model: Gtk.StringList {
+                    strings [_("Checking"), _("Savings"), _("Business")]
+                  };
+                }
+
+                Adw.ComboRow transactionTypeRow {
+                  title: _("Default Transaction Type");
+                  model: Gtk.StringList {
+                    strings [_("Income"), _("Expense")]
+                  };
+                }
+
+                Adw.ComboRow transactionRemindersRow {
+                  title: _("Transaction Reminders Threshold");
+                  subtitle: _("Determines how far in advanced Denaro should remind users of upcoming transactions in the account.");
+                  subtitle-lines: 4;
+                  model: Gtk.StringList {
+                    strings [_("Never"), _("One Day Before"), _("One Week Before"), _("One Month Before"), _("Two Months Before")]
+                  };
+                }
+              }
+
+              Adw.PreferencesGroup {
+                Adw.ActionRow currencyRow {
+                  title: _("Currency");
+                  activatable-widget: currencyNextImage;
+
+                  [prefix]
+                  Gtk.Image {
+                    icon-name: "money-symbolic";
+                  }
+
+                  [suffix]
+                  Gtk.Image currencyNextImage {
+                    icon-name: "go-next-symbolic";
+                  }
+                }
+
+                Adw.ActionRow passwordRow {
+                  title: _("Password");
+                  activatable-widget: passwordNextImage;
+
+                  [prefix]
+                  Gtk.Image {
+                    icon-name: "dialog-password-symbolic";
+                  }
+
+                  [suffix]
+                  Gtk.Image passwordNextImage {
+                    icon-name: "go-next-symbolic";
+                  }
+                }
+              }
+            };
+          }
+
+          Adw.ViewStackPage {
+            name: _("Currency");
+            child: Gtk.Box {
+              orientation: vertical;
+              spacing: 24;
+
+              Gtk.Label reportedCurrencyLabel {
+                justify: center;
+                use-markup: true;
+              }
+
+              Adw.PreferencesGroup {
+                Adw.ExpanderRow customCurrencyRow {
+                  title: _("Use Custom Currency");
+                  show-enable-switch: true;
+                  enable-expansion: false;
+
+                  Adw.EntryRow customSymbolRow {
+                    title: _("Symbol");
+                  }
+
+                  Adw.EntryRow customCodeRow {
+                    title: _("Code");
+                  }
+
+                  Adw.ComboRow customDecimalSeparatorRow {
+                    title: _("Decimal Separator");
+                    model: Gtk.StringList {
+                      strings [" . ", " , ", _("Custom")]
+                    };
+
+                    [suffix]
+                    Gtk.Entry customDecimalSeparatorEntry {
+                      visible: false;
+                      valign: center;
+                      max-length: 1;
+                      max-width-chars: 4;
+                    }
+                  }
+
+                  Adw.ComboRow customGroupSeparatorRow {
+                    title: _("Group Separator");
+                    model: Gtk.StringList {
+                      strings [" . ", " , ", " ' ", _("None"), _("Custom")]
+                    };
+
+                    [suffix]
+                    Gtk.Entry customGroupSeparatorEntry {
+                      visible: false;
+                      valign: center;
+                      max-length: 1;
+                      max-width-chars: 4;
+                    }
+                  }
+
+                  Adw.ComboRow customDecimalDigitsRow {
+                    title: _("Decimal Digits");
+                    model: Gtk.StringList {
+                      strings [_("Two"), _("Three"), _("Four"), _("Five"), _("Six")]
+                    };
+                  }
+
+                  Adw.ComboRow customAmountStyleRow {
+                    title: _("Amount Display Style");
+                    subtitle: _("$ is the currency's symbol.");
+                    subtitle-lines: 2;
+                    model: Gtk.StringList {
+                      strings ["$100", "100$", "$ 100", "100 $"]
+                    };
+                  }
+                }
+              }
+            };
+          }
+
+          Adw.ViewStackPage {
+            name: _("Password");
+            child: Gtk.Box {
+              orientation: vertical;
+              spacing: 24;
+
+              Adw.PreferencesGroup {
+                Adw.PasswordEntryRow newPasswordRow {
+                  title: _("New Password");
+
+                  styles ["error"]
+                }
+
+                Adw.PasswordEntryRow newPasswordConfirmRow {
+                  title: _("Confirm Password");
+                }
+              }
+
+              Gtk.Label {
+                halign: center;
+                wrap: true;
+                wrap-mode: word_char;
+
+                label: _("If the password is lost, there is no way to restore the account file!");
+              }
+
+              Gtk.Box {
+                orientation: horizontal;
+                spacing: 12;
+                margin-top: 12;
+
+                Gtk.Button changePasswordButton {
+                  hexpand: true;
+                  sensitive: false;
+                  label: _("Change");
+
+                  styles ["pill", "suggested-action"]
+                }
+
+                Gtk.Button removePasswordButton {
+                  hexpand: true;
+                  label: _("Remove");
+
+                  styles ["pill", "destructive-action"]
+                }
+              }
+            };
+          }
+        }
+      }
     }
   };
 }
