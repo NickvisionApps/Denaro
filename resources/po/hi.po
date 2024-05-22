@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 22:15-0400\n"
+"POT-Creation-Date: 2024-05-21 22:20-0400\n"
 "PO-Revision-Date: 2024-02-13 09:01+0000\n"
 "Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
@@ -64,6 +64,12 @@ msgstr "अब से दो महीने बाद"
 #, fuzzy, c++-format
 msgid "{} days from now"
 msgstr "अब से दो महीने बाद"
+
+#: libdenaro/src/controllers/accountsettingsdialogcontroller.cpp:22
+#: libdenaro/src/controllers/newaccountdialogcontroller.cpp:31
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:54
+msgid "Your system reported that your currency is"
+msgstr "आपके सिस्टम ने बताया कि आपकी मुद्रा है"
 
 #: libdenaro/src/controllers/accountviewcontroller.cpp:18
 #, fuzzy
@@ -234,8 +240,13 @@ msgstr "कल्पना"
 msgid "Transactions"
 msgstr "लेन-देन"
 
+#. Signals
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:12
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:37
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:64
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:86
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:202
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:215
 msgid "Account Settings"
 msgstr "खाता सेटिंग"
 
@@ -336,6 +347,7 @@ msgstr "दो महीने पहले"
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:73
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:106
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:16
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:65
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:53
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
 msgid "Currency"
@@ -343,6 +355,7 @@ msgstr "मुद्रा"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:88
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:181
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:66
 msgid "Password"
 msgstr "पासवर्ड"
 
@@ -840,6 +853,12 @@ msgstr "बंद करें"
 msgid "Result was copied to clipboard."
 msgstr "परिणाम को क्लिपबोर्ड पर कॉपी किया गया।"
 
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:207
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:220
+#, fuzzy
+msgid "Unable to change password"
+msgstr "पासवर्ड बदलें"
+
 #: org.nickvision.money.gnome/src/views/accountpage.cpp:83
 #, fuzzy
 msgid "No Transaction Reminders"
@@ -918,10 +937,6 @@ msgstr "कार्रवाई"
 #, fuzzy
 msgid "Saving"
 msgstr "जमा पूंजी"
-
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:54
-msgid "Your system reported that your currency is"
-msgstr "आपके सिस्टम ने बताया कि आपकी मुद्रा है"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:60
 msgid "Enter symbol here"
@@ -1173,9 +1188,6 @@ msgstr "परिणाम"
 
 #~ msgid "Can't access the selected folder, check Flatpak permissions."
 #~ msgstr "चयनित फ़ोल्डर तक नहीं पहुँच सकते, Flatpak अनुमतियाँ जाँचें।"
-
-#~ msgid "Change Password"
-#~ msgstr "पासवर्ड बदलें"
 
 #~ msgid "Currency Code"
 #~ msgstr "मुद्रा कोड"

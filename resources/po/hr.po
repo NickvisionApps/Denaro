@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 22:15-0400\n"
+"POT-Creation-Date: 2024-05-21 22:20-0400\n"
 "PO-Revision-Date: 2023-09-26 13:22+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -65,6 +65,12 @@ msgstr "Za dva mjeseca"
 #, fuzzy, c++-format
 msgid "{} days from now"
 msgstr "Za dva mjeseca"
+
+#: libdenaro/src/controllers/accountsettingsdialogcontroller.cpp:22
+#: libdenaro/src/controllers/newaccountdialogcontroller.cpp:31
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:54
+msgid "Your system reported that your currency is"
+msgstr "Tvoj sustav je prijavio da je tvoja valuta"
 
 #: libdenaro/src/controllers/accountviewcontroller.cpp:18
 #, fuzzy
@@ -234,8 +240,13 @@ msgstr "Vizualiziraj"
 msgid "Transactions"
 msgstr "Transakcije"
 
+#. Signals
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:12
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:37
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:64
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:86
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:202
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:215
 msgid "Account Settings"
 msgstr "Postavke računa"
 
@@ -336,6 +347,7 @@ msgstr "Dva mjeseca prije"
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:73
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:106
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:16
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:65
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:53
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
 msgid "Currency"
@@ -343,6 +355,7 @@ msgstr "Valuta"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:88
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:181
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:66
 msgid "Password"
 msgstr "Lozinka"
 
@@ -840,6 +853,12 @@ msgstr "Zatvori"
 msgid "Result was copied to clipboard."
 msgstr "Rezultat je kopiran u međuspremnik."
 
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:207
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:220
+#, fuzzy
+msgid "Unable to change password"
+msgstr "Promijeni lozinku"
+
 #: org.nickvision.money.gnome/src/views/accountpage.cpp:83
 #, fuzzy
 msgid "No Transaction Reminders"
@@ -917,10 +936,6 @@ msgstr "Radnje"
 #, fuzzy
 msgid "Saving"
 msgstr "Štedni račun"
-
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:54
-msgid "Your system reported that your currency is"
-msgstr "Tvoj sustav je prijavio da je tvoja valuta"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:60
 msgid "Enter symbol here"
@@ -1175,9 +1190,6 @@ msgstr "Rezultat"
 
 #~ msgid "Can't access the selected folder, check Flatpak permissions."
 #~ msgstr "Nije moguće pristupiti odabranoj mapi, provjeri dozvole za Flatpak."
-
-#~ msgid "Change Password"
-#~ msgstr "Promijeni lozinku"
 
 #~ msgid "Currency Code"
 #~ msgstr "Kôd valute"

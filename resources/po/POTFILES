@@ -2,8 +2,10 @@ libdenaro/src/models/account.cpp
 libdenaro/src/models/accountrepository.cpp
 libdenaro/src/models/dashboardgroup.cpp
 libdenaro/src/models/transactionreminder.cpp
+libdenaro/src/controllers/accountsettingsdialogcontroller.cpp
 libdenaro/src/controllers/accountviewcontroller.cpp
 libdenaro/src/controllers/mainwindowcontroller.cpp
+libdenaro/src/controllers/newaccountdialogcontroller.cpp
 org.nickvision.money.gnome/blueprints/account_page.blp
 org.nickvision.money.gnome/blueprints/account_settings_dialog.blp
 org.nickvision.money.gnome/blueprints/currency_converter_page.blp
@@ -12,6 +14,7 @@ org.nickvision.money.gnome/blueprints/main_window.blp
 org.nickvision.money.gnome/blueprints/preferences_dialog.blp
 org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp
 org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp
+org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp
 org.nickvision.money.gnome/src/views/accountpage.cpp
 org.nickvision.money.gnome/src/views/newaccountdialog.cpp
 org.nickvision.money.gnome/src/views/mainwindow.cpp

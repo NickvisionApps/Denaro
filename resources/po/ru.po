@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 22:15-0400\n"
+"POT-Creation-Date: 2024-05-21 22:20-0400\n"
 "PO-Revision-Date: 2023-09-08 14:21+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -65,6 +65,12 @@ msgstr "Через два месяца"
 #, fuzzy, c++-format
 msgid "{} days from now"
 msgstr "Через два месяца"
+
+#: libdenaro/src/controllers/accountsettingsdialogcontroller.cpp:22
+#: libdenaro/src/controllers/newaccountdialogcontroller.cpp:31
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:54
+msgid "Your system reported that your currency is"
+msgstr "Ваша система сообщила, что ваша валюта"
 
 #: libdenaro/src/controllers/accountviewcontroller.cpp:18
 #, fuzzy
@@ -234,8 +240,13 @@ msgstr "Визуализация"
 msgid "Transactions"
 msgstr "Транзакции"
 
+#. Signals
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:12
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:37
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:64
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:86
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:202
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:215
 msgid "Account Settings"
 msgstr "Настройки счёта"
 
@@ -336,6 +347,7 @@ msgstr "За два месяца"
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:73
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:106
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:16
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:65
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:53
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
 msgid "Currency"
@@ -343,6 +355,7 @@ msgstr "Валюта"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:88
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:181
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:66
 msgid "Password"
 msgstr "Пароль"
 
@@ -842,6 +855,12 @@ msgstr "Закрыть"
 msgid "Result was copied to clipboard."
 msgstr "Результат скопирован в буфер обмена."
 
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:207
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:220
+#, fuzzy
+msgid "Unable to change password"
+msgstr "Изменить пароль"
+
 #: org.nickvision.money.gnome/src/views/accountpage.cpp:83
 #, fuzzy
 msgid "No Transaction Reminders"
@@ -919,10 +938,6 @@ msgstr "Действия"
 #, fuzzy
 msgid "Saving"
 msgstr "Сберегательный"
-
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:54
-msgid "Your system reported that your currency is"
-msgstr "Ваша система сообщила, что ваша валюта"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:60
 msgid "Enter symbol here"
@@ -1177,9 +1192,6 @@ msgstr "Результат"
 
 #~ msgid "Can't access the selected folder, check Flatpak permissions."
 #~ msgstr "Невозможно получить доступ к папке, проверьте разрешения Flatpak."
-
-#~ msgid "Change Password"
-#~ msgstr "Изменить пароль"
 
 #~ msgid "Currency Code"
 #~ msgstr "Код валюты"
