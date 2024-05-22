@@ -4,7 +4,7 @@ namespace Nickvision::Money::Shared::Models
 {
     Currency::Currency()
         : m_decimalSeparator{ '.' },
-        m_groupSeparator{ ',' }, 
+        m_groupSeparator{ ',' },
         m_decimalDigits{ 2 },
         m_amountStyle{ AmountStyle::SymbolNumber }
     {
@@ -13,9 +13,9 @@ namespace Nickvision::Money::Shared::Models
 
     Currency::Currency(const std::string& symbol, const std::string& code)
         : m_symbol{ symbol },
-        m_code{ code }, 
+        m_code{ code },
         m_decimalSeparator{ '.' },
-        m_groupSeparator{ ',' }, 
+        m_groupSeparator{ ',' },
         m_decimalDigits{ 2 },
         m_amountStyle{ AmountStyle::SymbolNumber }
     {

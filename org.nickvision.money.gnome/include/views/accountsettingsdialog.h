@@ -28,6 +28,10 @@ namespace Nickvision::Money::GNOME::Views
          */
         void go(const std::string& pageName);
         /**
+         * @brief Handles when the basic account information is changed.
+         */
+        void onAccountInfoChanged();
+        /**
          * @brief Handles when the custom currency is changed.
          */
         void onCurrencyChange();

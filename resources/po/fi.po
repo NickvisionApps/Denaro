@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 22:20-0400\n"
+"POT-Creation-Date: 2024-05-22 01:39-0400\n"
 "PO-Revision-Date: 2023-08-24 20:09+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 5.0\n"
 
 #: libdenaro/src/models/account.cpp:53
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:112
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:113
 msgid "Ungrouped"
 msgstr "Ryhmittämätön"
 
@@ -71,7 +71,7 @@ msgstr "Kaksi kuukautta tästä hetkestä"
 msgid "Your system reported that your currency is"
 msgstr "Järjestelmä ilmoitti, että käyttämäsi valuutta on"
 
-#: libdenaro/src/controllers/accountviewcontroller.cpp:18
+#: libdenaro/src/controllers/accountviewcontroller.cpp:20
 #, fuzzy
 msgid "Unable to login to the account. The provided password may be invalid."
 msgstr "Kirjautuminen tilille ei onnistu. Annettu salasana on virheellinen."
@@ -154,88 +154,77 @@ msgstr ""
 msgid "The account is already open."
 msgstr "Tämä tili on jo avattu."
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:5
-msgid "Transaction"
-msgstr "Tapahtuma"
-
 #: org.nickvision.money.gnome/blueprints/account_page.blp:6
-msgid "Group"
-msgstr "Ryhmä"
+msgid "Import from File"
+msgstr "Tuo tiedostosta"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:7
+#: org.nickvision.money.gnome/blueprints/account_page.blp:10
 #, fuzzy
-msgid "Transfer"
-msgstr "Siirto"
+msgid "Export to CSV"
+msgstr "Vie tiedostoon"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:11
-#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:85
 #, fuzzy
-msgid "Import"
-msgstr "Tuo tiedosto"
+msgid "Export to PDF"
+msgstr "Vie tiedostoon"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:14
-#, fuzzy
-msgid "Export"
-msgstr "Tuo tiedosto"
-
-#: org.nickvision.money.gnome/blueprints/account_page.blp:23
+#: org.nickvision.money.gnome/blueprints/account_page.blp:17
 msgid "Overview"
 msgstr "Yleisnäkymä"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:36
-#: org.nickvision.money.gnome/blueprints/account_page.blp:139
-#: org.nickvision.money.gnome/blueprints/main_window.blp:343
-#: org.nickvision.money.winui/MainWindow.xaml.cpp:83
-#, fuzzy
-msgid "New"
-msgstr "Uusi"
-
-#: org.nickvision.money.gnome/blueprints/account_page.blp:55
+#: org.nickvision.money.gnome/blueprints/account_page.blp:32
 msgid "Transfer Money"
 msgstr "Siirrä rahaa"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:61
+#: org.nickvision.money.gnome/blueprints/account_page.blp:38
 msgid "Import and Export"
 msgstr ""
 
 #. Localize Strings
-#: org.nickvision.money.gnome/blueprints/account_page.blp:71
+#: org.nickvision.money.gnome/blueprints/account_page.blp:48
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Asetukset"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:79
+#: org.nickvision.money.gnome/blueprints/account_page.blp:56
 msgid "Total"
 msgstr "Yhteensä"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:94
+#: org.nickvision.money.gnome/blueprints/account_page.blp:71
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:57
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Tulo"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:109
+#: org.nickvision.money.gnome/blueprints/account_page.blp:86
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:57
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
 msgstr "Meno"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:125
+#: org.nickvision.money.gnome/blueprints/account_page.blp:102
 msgid "Reminders"
 msgstr "Muistutukset"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:129
+#: org.nickvision.money.gnome/blueprints/account_page.blp:106
 msgid "Groups"
 msgstr "Ryhmät"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:151
+#: org.nickvision.money.gnome/blueprints/account_page.blp:116
+#: org.nickvision.money.gnome/blueprints/main_window.blp:343
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:83
+#, fuzzy
+msgid "New"
+msgstr "Uusi"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:127
 msgid "Visualize"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:159
+#: org.nickvision.money.gnome/blueprints/account_page.blp:135
 msgid "Transactions"
 msgstr "Tapahtumat"
 
@@ -243,9 +232,9 @@ msgstr "Tapahtumat"
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:12
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:37
 #: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:64
-#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:86
-#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:202
-#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:215
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:90
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:218
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:231
 msgid "Account Settings"
 msgstr "Tilin asetukset"
 
@@ -269,8 +258,8 @@ msgstr "Tilin tyyppi"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:50
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:361
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:362
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:366
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:367
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:40
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:425
 msgid "Checking"
@@ -278,16 +267,16 @@ msgstr "Siirto"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:50
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:365
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:366
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:370
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:371
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:428
 msgid "Savings"
 msgstr "Säästöt"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:50
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:369
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:370
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:374
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:375
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:42
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:431
 msgid "Business"
@@ -346,7 +335,7 @@ msgstr ""
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:73
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:106
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:16
-#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:65
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:69
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:53
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
 msgid "Currency"
@@ -354,7 +343,7 @@ msgstr "Valuutta"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:88
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:181
-#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:66
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:70
 msgid "Password"
 msgstr "Salasana"
 
@@ -642,7 +631,7 @@ msgstr "Avaa tili (Ctrl+O)"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:77
 #: org.nickvision.money.gnome/blueprints/main_window.blp:352
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:152
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:153
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:84
 msgid "Open"
 msgstr "Avaa"
@@ -658,14 +647,14 @@ msgid "Main Menu"
 msgstr "Päävalikko"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:183
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:245
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:246
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Home"
 msgstr "Etusivu"
 
 #. Localize Strings
 #: org.nickvision.money.gnome/blueprints/main_window.blp:200
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:251
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:81
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
 #, fuzzy
@@ -678,7 +667,7 @@ msgid "Accounts"
 msgstr "Tilit"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:229
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:256
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:257
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Dashboard"
 msgstr "Kojelauta"
@@ -806,7 +795,7 @@ msgid "Account"
 msgstr "Tili"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:319
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:324
 msgid "Open Account"
 msgstr "Avaa tili"
 
@@ -847,13 +836,13 @@ msgstr "Sulje"
 msgid "Result was copied to clipboard."
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:207
-#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:220
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:223
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:236
 #, fuzzy
 msgid "Unable to change password"
 msgstr "Vaihda salasana"
 
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:83
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:84
 #, fuzzy
 msgid "No Transaction Reminders"
 msgstr "Ei tapahtumia"
@@ -879,28 +868,28 @@ msgstr ""
 msgid "Quicken Interchange Format (*.qif)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:204
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:205
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:77
 msgid "GitHub Repo"
 msgstr "GitHub-tietovarasto"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:321
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:326
 #, fuzzy
 msgid "Nickvision Denaro Account (*.nmoney)"
 msgstr "Nickvision Denaro -tili"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:400
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:405
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:32
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:456
 msgid "Enter password here"
 msgstr "Kirjoita salasana tähän"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:408
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:413
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:465
 msgid "Cancel"
 msgstr "Peru"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:408
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:413
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:464
 msgid "Unlock"
 msgstr "Avaa lukitus"
@@ -958,6 +947,11 @@ msgstr ""
 #, fuzzy
 msgid "Amount Style"
 msgstr "Määrä"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:85
+#, fuzzy
+msgid "Import"
+msgstr "Tuo tiedosto"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:88
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:152
@@ -1119,6 +1113,20 @@ msgstr "OK"
 msgid "Result (Error)"
 msgstr "Tulos"
 
+#~ msgid "Transaction"
+#~ msgstr "Tapahtuma"
+
+#~ msgid "Group"
+#~ msgstr "Ryhmä"
+
+#, fuzzy
+#~ msgid "Transfer"
+#~ msgstr "Siirto"
+
+#, fuzzy
+#~ msgid "Export"
+#~ msgstr "Tuo tiedosto"
+
 #~ msgid "Password Strength"
 #~ msgstr "Salasanan vahvuus"
 
@@ -1223,9 +1231,6 @@ msgstr "Tulos"
 #~ msgid "Destination Account Password (Required)"
 #~ msgstr "Kohdetilin salasana (pakollinen)"
 
-#~ msgid "Export to File"
-#~ msgstr "Vie tiedostoon"
-
 #~ msgid "Exported account to file successfully."
 #~ msgstr "Tili viety tiedostoon onnistuneesti."
 
@@ -1241,9 +1246,6 @@ msgstr "Tulos"
 
 #~ msgid "Import from Account"
 #~ msgstr "Tuo tililtä"
-
-#~ msgid "Import from File"
-#~ msgstr "Tuo tiedostosta"
 
 #, csharp-format
 #~ msgid "Imported {0} transaction from file."

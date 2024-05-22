@@ -62,6 +62,10 @@ namespace Nickvision::Money::GNOME::Views
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordButton")), m_controller->isEncrypted());
         //Signals
         g_signal_connect(gtk_builder_get_object(m_builder, "backButton"), "clicked", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->go(_("Account Settings")); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "accountNameRow"), "changed", G_CALLBACK(+[](GtkEditable*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onAccountInfoChanged(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "accountTypeRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onAccountInfoChanged(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "transactionTypeRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onAccountInfoChanged(); }), this);
+        g_signal_connect(gtk_builder_get_object(m_builder, "transactionRemindersRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onAccountInfoChanged(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "currencyRow"), "activated", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->go(_("Currency")); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "passwordRow"), "activated", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->go(_("Password")); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "customCurrencyRow"), "notify::enable-expansion", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onCurrencyChange(); }), this);
@@ -84,6 +88,18 @@ namespace Nickvision::Money::GNOME::Views
         adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "viewStack")), pageName.c_str());
         adw_window_title_set_title(ADW_WINDOW_TITLE(gtk_builder_get_object(m_builder, "windowTitle")), pageName.c_str());
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "backButton")), pageName != std::string(_("Account Settings")));
+    }
+
+    void AccountSettingsDialog::onAccountInfoChanged()
+    {
+        gtk_widget_remove_css_class(GTK_WIDGET(gtk_builder_get_object(m_builder, "accountNameRow")), "error");
+        if(!m_controller->setName(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "accountNameRow")))))
+        {
+            gtk_widget_add_css_class(GTK_WIDGET(gtk_builder_get_object(m_builder, "accountNameRow")), "error");
+        }
+        m_controller->setAccountType(static_cast<AccountType>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "accountTypeRow")))));
+        m_controller->setDefaultTransactionType(static_cast<TransactionType>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionTypeRow")))));
+        m_controller->setTransactionRemindersThreshold(static_cast<RemindersThreshold>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionRemindersRow")))));
     }
 
     void AccountSettingsDialog::onCurrencyChange()

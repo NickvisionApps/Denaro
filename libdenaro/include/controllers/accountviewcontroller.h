@@ -6,6 +6,8 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <libnick/events/event.h>
+#include <libnick/events/parameventargs.h>
 #include "controllers/accountsettingsdialogcontroller.h"
 #include "models/account.h"
 #include "models/recentaccount.h"
@@ -35,6 +37,11 @@ namespace Nickvision::Money::Shared::Controllers
          * @return The account metadata
          */
         const Models::AccountMetadata& getMetadata() const;
+        /**
+         * @brief Gets the event for when the account name changes.
+         * @return The account name changed event
+         */
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::string>>& accountNameChanged();
         /**
          * @brief Gets a AccountSettingsDialogController.
          * @return The AccountSettingsDialogController
@@ -73,6 +80,7 @@ namespace Nickvision::Money::Shared::Controllers
 
     private:
         std::shared_ptr<Models::Account> m_account;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::string>> m_accountNameChanged;
     };
 }
 

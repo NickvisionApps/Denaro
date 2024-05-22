@@ -57,6 +57,11 @@ namespace Nickvision::Money::Shared::Controllers
          */
         void setDefaultTransactionType(Models::TransactionType defaultTransactionType);
         /**
+         * @brief Sets the transaction reminders threshold of the new account.
+         * @param transactionReminderThreshold The new transaction reminders threshold of the new account
+         */
+        void setTransactionRemindersThreshold(Models::RemindersThreshold transactionReminderThreshold);
+        /**
          * @brief Turns off the custom currency for the account
          */
         void setCustomCurrencyOff();

@@ -2,10 +2,12 @@
 #include <stdexcept>
 #include <libnick/app/aura.h>
 #include <libnick/localization/gettext.h>
+#include "controllers/accountsettingsdialogcontroller.h"
 #include "helpers/currencyhelpers.h"
 #include "models/configuration.h"
 
 using namespace Nickvision::App;
+using namespace Nickvision::Events;
 using namespace Nickvision::Money::Shared::Models;
 
 namespace Nickvision::Money::Shared::Controllers
@@ -29,9 +31,22 @@ namespace Nickvision::Money::Shared::Controllers
         return m_account->getMetadata();
     }
 
+    Event<ParamEventArgs<std::string>>& AccountViewController::accountNameChanged()
+    {
+        return m_accountNameChanged;
+    }
+
     std::shared_ptr<AccountSettingsDialogController> AccountViewController::createAccountSettingsDialogController() const
     {
         return std::make_shared<AccountSettingsDialogController>(m_account);
+    }
+
+    RecentAccount AccountViewController::toRecentAccount() const
+    {
+        RecentAccount recent{ m_account->getPath() };
+        recent.setName(m_account->getMetadata().getName());
+        recent.setType(m_account->getMetadata().getType());
+        return recent;
     }
 
     std::string AccountViewController::getTotalAmountString() const
@@ -76,11 +91,5 @@ namespace Nickvision::Money::Shared::Controllers
         return groups;
     }
 
-    RecentAccount AccountViewController::toRecentAccount() const
-    {
-        RecentAccount recent{ m_account->getPath() };
-        recent.setName(m_account->getMetadata().getName());
-        recent.setType(m_account->getMetadata().getType());
-        return recent;
-    }
+
 }

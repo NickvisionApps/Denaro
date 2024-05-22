@@ -12,7 +12,7 @@ namespace Nickvision::Money::Shared::Models
         : m_database{ path, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE },
         m_transactionInProcess{ false }
     {
-        
+
     }
 
     bool AccountRepository::isEncrypted() const
@@ -105,8 +105,8 @@ namespace Nickvision::Money::Shared::Models
             newStatement.bind(3, metadata.getUseCustomCurrency());
             newStatement.bind(4, metadata.getCustomCurrency().getSymbol());
             newStatement.bind(5, metadata.getCustomCurrency().getCode());
-            newStatement.bind(10, metadata.getCustomCurrency().getDecimalSeparator());
-            newStatement.bind(11, metadata.getCustomCurrency().getGroupSeparator());
+            newStatement.bind(10, std::string(1, metadata.getCustomCurrency().getDecimalSeparator()));
+            newStatement.bind(11, std::string(1, metadata.getCustomCurrency().getGroupSeparator()));
             newStatement.bind(12, metadata.getCustomCurrency().getDecimalDigits());
             newStatement.bind(15, static_cast<int>(metadata.getCustomCurrency().getAmountStyle()));
             newStatement.bind(6, static_cast<int>(metadata.getDefaultTransactionType()));
@@ -128,8 +128,8 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(3, metadata.getUseCustomCurrency());
         statement.bind(4, metadata.getCustomCurrency().getSymbol());
         statement.bind(5, metadata.getCustomCurrency().getCode());
-        statement.bind(10, std::to_string(metadata.getCustomCurrency().getDecimalSeparator()));
-        statement.bind(11, std::to_string(metadata.getCustomCurrency().getGroupSeparator()));
+        statement.bind(10, std::string(1, metadata.getCustomCurrency().getDecimalSeparator()));
+        statement.bind(11, std::string(1, metadata.getCustomCurrency().getGroupSeparator()));
         statement.bind(12, metadata.getCustomCurrency().getDecimalDigits());
         statement.bind(15, static_cast<int>(metadata.getCustomCurrency().getAmountStyle()));
         statement.bind(6, static_cast<int>(metadata.getDefaultTransactionType()));

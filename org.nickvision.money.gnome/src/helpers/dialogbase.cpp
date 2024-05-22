@@ -1,6 +1,8 @@
 #include "helpers/dialogbase.h"
 #include "helpers/builder.h"
 
+using namespace Nickvision::Events;
+
 namespace Nickvision::Money::GNOME::Helpers
 {
     DialogBase::DialogBase(GtkWindow* parent, const std::string& fileName, const std::string& rootName)
@@ -15,11 +17,17 @@ namespace Nickvision::Money::GNOME::Helpers
     {
         adw_dialog_force_close(m_dialog);
         g_object_unref(m_builder);
+        m_closed.invoke({});
     }
 
     AdwDialog* DialogBase::get()
     {
         return m_dialog;
+    }
+
+    Event<EventArgs>& DialogBase::closed()
+    {
+        return m_closed;
     }
 
     void DialogBase::present() const

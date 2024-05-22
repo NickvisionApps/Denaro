@@ -1,4 +1,5 @@
 #include "views/mainwindow.h"
+#include <gtk/gtk.h>
 #include <libnick/app/appinfo.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/notifications/shellnotification.h>
@@ -291,9 +292,13 @@ namespace Nickvision::Money::GNOME::Views
         gtk_widget_set_margin_top(GTK_WIDGET(row), 12);
         gtk_widget_set_margin_end(GTK_WIDGET(row), 6);
         gtk_widget_set_margin_bottom(GTK_WIDGET(row), 12);
-        gtk_box_append(row, gtk_image_new_from_icon_name("wallet2-symbolic"));
-        gtk_box_append(row, gtk_label_new(args.getParam()->getMetadata().getName().c_str()));
+        GtkImage* img{ GTK_IMAGE(gtk_image_new_from_icon_name("wallet2-symbolic")) };
+        gtk_box_append(row, GTK_WIDGET(img));
+        GtkLabel* lbl{ GTK_LABEL(gtk_label_new(args.getParam()->getMetadata().getName().c_str())) };
+        gtk_box_append(row, GTK_WIDGET(lbl));
         gtk_list_box_append(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "listNavItems")), GTK_WIDGET(row));
+        //Handle account name change event
+        args.getParam()->accountNameChanged() += [lbl](const ParamEventArgs<std::string>& args){ gtk_label_set_text(lbl, args.getParam().c_str()); };
         //Create view for account
         m_accountPages[args.getParam()->getPath()] = std::make_shared<AccountPage>(args.getParam(), GTK_WINDOW(m_window));
         GtkListBoxRow* listRow{ gtk_list_box_get_row_at_index(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "listNavItems")), m_accountPages.size() + Pages::Dashboard) };
@@ -305,7 +310,7 @@ namespace Nickvision::Money::GNOME::Views
     {
         gtk_popover_popdown(GTK_POPOVER(gtk_builder_get_object(m_builder, "accountMenuPopover")));
         DialogPtr<NewAccountDialog> newAccountDialog{ m_controller->createNewAccountDialogController(), GTK_WINDOW(m_window) };
-        newAccountDialog->finished() += [&](const ParamEventArgs<std::shared_ptr<NewAccountDialogController>>& args)
+        newAccountDialog->created() += [&](const ParamEventArgs<std::shared_ptr<NewAccountDialogController>>& args)
         {
             m_controller->newAccount(args.getParam());
         };

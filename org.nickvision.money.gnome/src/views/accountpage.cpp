@@ -4,6 +4,7 @@
 #include "helpers/dialogptr.h"
 #include "views/accountsettingsdialog.h"
 
+using namespace Nickvision::Events;
 using namespace Nickvision::Money::GNOME::Helpers;
 using namespace Nickvision::Money::Shared::Controllers;
 using namespace Nickvision::Money::Shared::Models;
@@ -172,6 +173,10 @@ namespace Nickvision::Money::GNOME::Views
     void AccountPage::accountSettings()
     {
         DialogPtr<AccountSettingsDialog> settingsDialog{ m_controller->createAccountSettingsDialogController(), m_parent };
+        settingsDialog->closed() += [&](const EventArgs& args)
+        {
+            m_controller->accountNameChanged().invoke({ m_controller->getMetadata().getName() });
+        };
         settingsDialog->present();
     }
 }

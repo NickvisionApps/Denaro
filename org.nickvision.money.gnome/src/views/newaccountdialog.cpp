@@ -83,9 +83,9 @@ namespace Nickvision::Money::GNOME::Views
         g_signal_connect(gtk_builder_get_object(m_builder, "importPageCreateButton"), "clicked", G_CALLBACK(+[](GtkButton*, gpointer data){ reinterpret_cast<NewAccountDialog*>(data)->finish(); }), this);
     }
 
-    Event<ParamEventArgs<std::shared_ptr<NewAccountDialogController>>>& NewAccountDialog::finished()
+    Event<ParamEventArgs<std::shared_ptr<NewAccountDialogController>>>& NewAccountDialog::created()
     {
-        return m_finished;
+        return m_created;
     }
 
     void NewAccountDialog::goBack()
@@ -289,7 +289,7 @@ namespace Nickvision::Money::GNOME::Views
         m_controller->setAccountType(static_cast<AccountType>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "accountTypeRow")))));
         m_controller->setDefaultTransactionType(static_cast<TransactionType>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionTypeRow")))));
         m_controller->setTransactionRemindersThreshold(static_cast<RemindersThreshold>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "transactionRemindersRow")))));
-        m_finished.invoke(m_controller);
+        m_created.invoke({ m_controller });
         adw_dialog_close(m_dialog);
     }
 }

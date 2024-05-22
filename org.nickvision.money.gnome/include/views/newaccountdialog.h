@@ -23,10 +23,10 @@ namespace Nickvision::Money::GNOME::Views
          */
         NewAccountDialog(const std::shared_ptr<Shared::Controllers::NewAccountDialogController>& controller, GtkWindow* parent);
         /**
-         * @brief Gets the event when the dialog is finished (i.e. the user has created the account)
-         * @return The finished event
+         * @brief Gets the event when the user has created the account
+         * @return The created event
          */
-        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::shared_ptr<Shared::Controllers::NewAccountDialogController>>>& finished();
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::shared_ptr<Shared::Controllers::NewAccountDialogController>>>& created();
 
     private:
         /**
@@ -66,7 +66,7 @@ namespace Nickvision::Money::GNOME::Views
          */
         void finish();
         std::shared_ptr<Shared::Controllers::NewAccountDialogController> m_controller;
-        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::shared_ptr<Shared::Controllers::NewAccountDialogController>>> m_finished;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::shared_ptr<Shared::Controllers::NewAccountDialogController>>> m_created;
         int m_currentPageNumber;
     };
 }

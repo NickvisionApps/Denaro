@@ -1,20 +1,14 @@
 using Gtk 4.0;
 using Adw 1;
 
-menu newMenu {
-  item(_("Transaction"), "account.newTransaction")
-  item(_("Group"), "account.newGroup")
-  item(_("Transfer"), "account.transfer")
-}
-
 menu importExportMenu {
-  item(_("Import"), "account.import")
+  section {
+    item(_("Import from File"), "account.import")
+  }
 
-  submenu {
-    label: _("Export");
-
-    item("CSV", "account.exportCSV")
-    item("PDF", "account.exportPDF")
+  section {
+    item(_("Export to CSV"), "account.exportCSV")
+    item(_("Export to PDF"), "account.exportPDF")
   }
 }
 
@@ -22,128 +16,110 @@ Adw.ViewStack root {
   Adw.ViewStackPage {
     title: _("Overview");
     icon-name: "newspaper-symbolic";
-    child: Gtk.Overlay {
-      [overlay]
-      Gtk.MenuButton {
-        halign: center;
-        valign: end;
-        margin-bottom: 12;
-        direction: none;
-        menu-model: newMenu;
+    child: Gtk.Box {
+      margin-start: 24;
+      margin-end: 24;
+      margin-bottom: 12;
+      orientation: vertical;
+      spacing: 6;
 
-        Adw.ButtonContent {
-          icon-name: "list-add-symbolic";
-          label: _("New");
+      Adw.PreferencesGroup overviewGroup {
+        header-suffix: Gtk.Box {
+          orientation: horizontal;
+
+          Gtk.Button {
+            icon-name: "send-alt-symbolic";
+            tooltip-text: _("Transfer Money");
+            action-name: "account.transfer";
+          }
+
+          Gtk.MenuButton {
+            icon-name: "mail-send-receive-symbolic";
+            tooltip-text: _("Import and Export");
+            direction: none;
+            menu-model: importExportMenu;
+          }
+
+          Gtk.Button {
+            action-name: "account.settings";
+
+            Adw.ButtonContent {
+              icon-name: "wrench-wide-symbolic";
+              label: _("Settings");
+            }
+          }
+
+          styles ["toolbar"]
+        };
+
+        Adw.ActionRow {
+          title: _("Total");
+
+          [prefix]
+          Adw.Avatar overviewTotalAvatar {
+            valign: center;
+            size: 8;
+            show-initials: false;
+          }
+
+          Gtk.Label overviewTotalLabel { 
+            valign: center;
+          }
         }
 
-        styles ["pill", "suggested-action"]
+        Adw.ActionRow {
+          title: _("Income");
+
+          [prefix]
+          Adw.Avatar overviewIncomeAvatar {
+            valign: center;
+            size: 8;
+            show-initials: false;
+          }
+
+          Gtk.Label overviewIncomeLabel { 
+            valign: center;
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("Expense");
+
+          [prefix]
+          Adw.Avatar overviewExpenseAvatar {
+            valign: center;
+            size: 8;
+            show-initials: false;
+          }
+
+          Gtk.Label overviewExpenseLabel { 
+            valign: center;
+          }
+        }
       }
 
-      child: Gtk.Box {
-        margin-start: 24;
-        margin-end: 24;
-        margin-bottom: 12;
-        orientation: vertical;
-        spacing: 6;
+      Adw.PreferencesGroup remindersGroup {
+        title: _("Reminders");
+      }
 
-        Adw.PreferencesGroup overviewGroup {
-          header-suffix: Gtk.Box {
-            orientation: horizontal;
+      Adw.PreferencesGroup groupsGroup {
+        title: _("Groups");
 
-            Gtk.Button {
-              icon-name: "send-alt-symbolic";
-              tooltip-text: _("Transfer Money");
-              action-name: "account.transfer";
-            }
+        header-suffix: Gtk.Box {
+          orientation: horizontal;
 
-            Gtk.MenuButton {
-              icon-name: "mail-send-receive-symbolic";
-              tooltip-text: _("Import and Export");
-              direction: none;
-              menu-model: importExportMenu;
-            }
+          Gtk.Button {
+            action-name: "account.newGroup";
 
-            Gtk.Button {
-              action-name: "account.settings";
-
-              Adw.ButtonContent {
-                icon-name: "wrench-wide-symbolic";
-                label: _("Settings");
-              }
-            }
-
-            styles ["toolbar"]
-          };
-
-          Adw.ActionRow {
-            title: _("Total");
-
-            [prefix]
-            Adw.Avatar overviewTotalAvatar {
-              valign: center;
-              size: 8;
-              show-initials: false;
-            }
-
-            Gtk.Label overviewTotalLabel { 
-              valign: center;
+            Adw.ButtonContent {
+              icon-name: "list-add-symbolic";
+              label: _("New");
             }
           }
 
-          Adw.ActionRow {
-            title: _("Income");
-
-            [prefix]
-            Adw.Avatar overviewIncomeAvatar {
-              valign: center;
-              size: 8;
-              show-initials: false;
-            }
-
-            Gtk.Label overviewIncomeLabel { 
-              valign: center;
-            }
-          }
-
-          Adw.ActionRow {
-            title: _("Expense");
-
-            [prefix]
-            Adw.Avatar overviewExpenseAvatar {
-              valign: center;
-              size: 8;
-              show-initials: false;
-            }
-
-            Gtk.Label overviewExpenseLabel { 
-              valign: center;
-            }
-          }
-        }
-
-        Adw.PreferencesGroup remindersGroup {
-          title: _("Reminders");
-        }
-
-        Adw.PreferencesGroup groupsGroup {
-          title: _("Groups");
-
-          header-suffix: Gtk.Box {
-            orientation: horizontal;
-
-            Gtk.Button {
-              action-name: "account.newGroup";
-
-              Adw.ButtonContent {
-                icon-name: "list-add-symbolic";
-                label: _("New");
-              }
-            }
-
-            styles ["toolbar"]
-          };
-        }
-      };
+          styles ["toolbar"]
+        };
+      }
     };
   }
 

@@ -50,17 +50,24 @@ namespace Nickvision::Money::Shared::Controllers
         return m_account->changePassword(password);
     }
 
-    void AccountSettingsDialogController::setAccountType(Models::AccountType accountType)
+    void AccountSettingsDialogController::setAccountType(AccountType accountType)
     {
         AccountMetadata metadata{ m_account->getMetadata() };
         metadata.setType(accountType);
         m_account->setMetadata(metadata);
     }
 
-    void AccountSettingsDialogController::setDefaultTransactionType(Models::TransactionType defaultTransactionType)
+    void AccountSettingsDialogController::setDefaultTransactionType(TransactionType defaultTransactionType)
     {
         AccountMetadata metadata{ m_account->getMetadata() };
         metadata.setDefaultTransactionType(defaultTransactionType);
+        m_account->setMetadata(metadata);
+    }
+
+    void AccountSettingsDialogController::setTransactionRemindersThreshold(RemindersThreshold remindersThreshold)
+    {
+        AccountMetadata metadata{ m_account->getMetadata() };
+        metadata.setTransactionRemindersThreshold(remindersThreshold);
         m_account->setMetadata(metadata);
     }
 
@@ -72,7 +79,7 @@ namespace Nickvision::Money::Shared::Controllers
         m_account->setMetadata(metadata);
     }
 
-    Models::CurrencyCheckStatus AccountSettingsDialogController::setCustomCurrency(const std::string& symbol, const std::string& code, char decimalSeparator, char groupSeparator, int decimalDigits, Models::AmountStyle amountStyle)
+    Models::CurrencyCheckStatus AccountSettingsDialogController::setCustomCurrency(const std::string& symbol, const std::string& code, char decimalSeparator, char groupSeparator, int decimalDigits, AmountStyle amountStyle)
     {
         Currency currency{ symbol, code };
         currency.setDecimalSeparator(decimalSeparator);
