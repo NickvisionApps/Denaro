@@ -289,9 +289,9 @@ namespace Nickvision::Money::GNOME::Views
         //Create sidebar item for account
         GtkBox* row{ GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 12)) };
         gtk_widget_set_margin_start(GTK_WIDGET(row), 6);
-        gtk_widget_set_margin_top(GTK_WIDGET(row), 12);
+        gtk_widget_set_margin_top(GTK_WIDGET(row), 6);
         gtk_widget_set_margin_end(GTK_WIDGET(row), 6);
-        gtk_widget_set_margin_bottom(GTK_WIDGET(row), 12);
+        gtk_widget_set_margin_bottom(GTK_WIDGET(row), 6);
         GtkImage* img{ GTK_IMAGE(gtk_image_new_from_icon_name("wallet2-symbolic")) };
         gtk_box_append(row, GTK_WIDGET(img));
         GtkLabel* lbl{ GTK_LABEL(gtk_label_new(args.getParam()->getMetadata().getName().c_str())) };
