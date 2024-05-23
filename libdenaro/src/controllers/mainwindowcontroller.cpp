@@ -117,7 +117,15 @@ namespace Nickvision::Money::Shared::Controllers
             builder << StringHelpers::toString(name) << std::endl;
         }
 #elif defined(__linux__)
-        builder << std::locale("").name() << std::endl;
+        std::locale currLocale;
+        try
+        {
+            builder << std::locale("").name() << std::endl;
+        }
+        catch(...)
+        {
+            builder << "Locale not set" << std::endl;
+        }
 #endif
         //Gnuplot
         builder << std::endl << Aura::getActive().sysExec("gnuplot --version");
