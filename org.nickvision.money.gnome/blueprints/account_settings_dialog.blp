@@ -128,7 +128,9 @@ Adw.PreferencesDialog root {
       Adw.PasswordEntryRow newPasswordConfirmRow {
         title: _("Confirm Password");
       }
+    }
 
+    Adw.PreferencesGroup {
       Adw.ActionRow changePasswordRow {
         title: _("Change Password");
         sensitive: false;
@@ -139,9 +141,7 @@ Adw.PreferencesDialog root {
           icon-name: "check-plain-symbolic";
         }
       }
-    }
 
-    Adw.PreferencesGroup removePasswordGroup {
       Adw.ActionRow removePasswordRow {
         title: _("Remove Current Password");
         activatable-widget: removePasswordImage;

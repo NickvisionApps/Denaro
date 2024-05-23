@@ -59,7 +59,7 @@ namespace Nickvision::Money::GNOME::Views
         }
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customDecimalDigitsRow")), static_cast<unsigned int>(m_controller->getMetadata().getCustomCurrency().getDecimalDigits() - 2));
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "customAmountStyleRow")), static_cast<unsigned int>(m_controller->getMetadata().getCustomCurrency().getAmountStyle()));
-        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordGroup")), m_controller->isEncrypted());
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordRow")), m_controller->isEncrypted());
         //Signals
         g_signal_connect(gtk_builder_get_object(m_builder, "accountNameRow"), "changed", G_CALLBACK(+[](GtkEditable*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onAccountInfoChanged(); }), this);
         g_signal_connect(gtk_builder_get_object(m_builder, "accountTypeRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<AccountSettingsDialog*>(data)->onAccountInfoChanged(); }), this);
@@ -205,7 +205,7 @@ namespace Nickvision::Money::GNOME::Views
     {
         if(m_controller->setPassword(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "newPasswordRow")))))
         {
-            gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordGroup")), true);
+            gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordRow")), true);
             adw_preferences_dialog_add_toast(ADW_PREFERENCES_DIALOG(m_dialog), adw_toast_new(_("Password changed")));
             gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "newPasswordRow")), "");
             gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "newPasswordConfirmRow")), "");
@@ -220,7 +220,7 @@ namespace Nickvision::Money::GNOME::Views
     {
         if(m_controller->setPassword(""))
         {
-            gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordGroup")), false);
+            gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "removePasswordRow")), false);
             adw_preferences_dialog_add_toast(ADW_PREFERENCES_DIALOG(m_dialog), adw_toast_new(_("Password removed")));
         }
         else

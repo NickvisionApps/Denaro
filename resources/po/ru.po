@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 02:50-0400\n"
+"POT-Creation-Date: 2024-05-23 15:28-0400\n"
 "PO-Revision-Date: 2023-09-08 14:21+0000\n"
 "Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -173,65 +173,70 @@ msgstr "Экспорт в файл"
 msgid "Overview"
 msgstr "Обзор"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:32
+#: org.nickvision.money.gnome/blueprints/account_page.blp:33
 msgid "Transfer Money"
 msgstr "Перевод средств"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:38
+#: org.nickvision.money.gnome/blueprints/account_page.blp:39
 msgid "Import and Export"
 msgstr ""
 
+#: org.nickvision.money.gnome/blueprints/account_page.blp:46
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:7
+msgid "Account Settings"
+msgstr "Настройки счёта"
+
 #. Localize Strings
-#: org.nickvision.money.gnome/blueprints/account_page.blp:48
+#: org.nickvision.money.gnome/blueprints/account_page.blp:50
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Настройки"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:56
+#: org.nickvision.money.gnome/blueprints/account_page.blp:58
 msgid "Total"
 msgstr "Сумма"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:71
+#: org.nickvision.money.gnome/blueprints/account_page.blp:73
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Доходы"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:86
+#: org.nickvision.money.gnome/blueprints/account_page.blp:88
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
 msgstr "Расходы"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:102
+#: org.nickvision.money.gnome/blueprints/account_page.blp:104
 msgid "Reminders"
 msgstr "Напоминания"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:106
+#: org.nickvision.money.gnome/blueprints/account_page.blp:108
 msgid "Groups"
 msgstr "Группы"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:116
+#: org.nickvision.money.gnome/blueprints/account_page.blp:115
+msgid "New Group"
+msgstr "Новая группа"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:119
 #: org.nickvision.money.gnome/blueprints/main_window.blp:343
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:83
 #, fuzzy
 msgid "New"
 msgstr "Новая"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:127
+#: org.nickvision.money.gnome/blueprints/account_page.blp:131
 msgid "Visualize"
 msgstr "Визуализация"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:135
+#: org.nickvision.money.gnome/blueprints/account_page.blp:139
 msgid "Transactions"
 msgstr "Транзакции"
-
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:7
-msgid "Account Settings"
-msgstr "Настройки счёта"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
 #, fuzzy
@@ -253,8 +258,8 @@ msgstr "Тип счёта"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:20
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:365
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:366
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:367
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:40
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:425
 msgid "Checking"
@@ -262,16 +267,16 @@ msgstr "Расчётный"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:20
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:369
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:370
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:371
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:428
 msgid "Savings"
 msgstr "Сберегательный"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:20
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:373
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:374
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:375
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:42
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:431
 msgid "Business"
@@ -443,7 +448,7 @@ msgstr "Новый пароль"
 msgid "Confirm Password"
 msgstr "Повторите новый пароль"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:133
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:135
 #, fuzzy
 msgid "Change Password"
 msgstr "Новый пароль"
@@ -618,7 +623,7 @@ msgstr "Открыть счёт (Ctrl+O)"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:77
 #: org.nickvision.money.gnome/blueprints/main_window.blp:352
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:153
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:152
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:84
 msgid "Open"
 msgstr "Открыть"
@@ -644,14 +649,14 @@ msgid "Main Menu"
 msgstr "Главное меню"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:183
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:246
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:245
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:70
 msgid "Home"
 msgstr "Домашняя страница"
 
 #. Localize Strings
 #: org.nickvision.money.gnome/blueprints/main_window.blp:200
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:251
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:250
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:81
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
 msgid "Currency Converter"
@@ -663,7 +668,7 @@ msgid "Accounts"
 msgstr "Счета"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:229
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:257
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:256
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Dashboard"
 msgstr "Обзор"
@@ -794,7 +799,7 @@ msgid "Account"
 msgstr "Счёт"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:324
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:323
 msgid "Open Account"
 msgstr "Открыть счёт"
 
@@ -879,28 +884,28 @@ msgstr ""
 msgid "Quicken Interchange Format (*.qif)"
 msgstr ""
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:205
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:204
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:77
 msgid "GitHub Repo"
 msgstr "Репозиторий GitHub"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:326
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:325
 #, fuzzy
 msgid "Nickvision Denaro Account (*.nmoney)"
 msgstr "Счёт Nickvision Denaro"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:405
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:404
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:32
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:456
 msgid "Enter password here"
 msgstr "Введите пароль"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:413
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:412
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:465
 msgid "Cancel"
 msgstr "Отмена"
 
-#: org.nickvision.money.gnome/src/views/mainwindow.cpp:413
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:412
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:464
 msgid "Unlock"
 msgstr "Разблокировать"
@@ -1619,9 +1624,6 @@ msgstr "Результат"
 
 #~ msgid "Clear Backup Folder"
 #~ msgstr "Сбросить папку для резервных копий"
-
-#~ msgid "New Group"
-#~ msgstr "Новая группа"
 
 #~ msgid "New Transaction"
 #~ msgstr "Новая транзакция"

@@ -1,5 +1,4 @@
 #include "views/mainwindow.h"
-#include <gtk/gtk.h>
 #include <libnick/app/appinfo.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/notifications/shellnotification.h>
