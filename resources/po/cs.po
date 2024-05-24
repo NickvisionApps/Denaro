@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 15:28-0400\n"
+"POT-Creation-Date: 2024-05-23 16:41-0400\n"
 "PO-Revision-Date: 2023-11-17 11:26+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 5.2\n"
 
 #: libdenaro/src/models/account.cpp:53
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:113
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:89
 msgid "Ungrouped"
 msgstr "Neseskupené"
 
@@ -172,70 +172,81 @@ msgstr "Export do souboru"
 msgid "Overview"
 msgstr "Přehled"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:33
+#: org.nickvision.money.gnome/blueprints/account_page.blp:31
 msgid "Transfer Money"
 msgstr "Převod peněz"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:39
+#: org.nickvision.money.gnome/blueprints/account_page.blp:37
 msgid "Import and Export"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:46
+#: org.nickvision.money.gnome/blueprints/account_page.blp:44
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:7
 msgid "Account Settings"
 msgstr "Nastavení účtu"
 
 #. Localize Strings
-#: org.nickvision.money.gnome/blueprints/account_page.blp:50
+#: org.nickvision.money.gnome/blueprints/account_page.blp:48
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Nastavení"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:58
+#: org.nickvision.money.gnome/blueprints/account_page.blp:56
 msgid "Total"
 msgstr "Celkem"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:73
+#: org.nickvision.money.gnome/blueprints/account_page.blp:64
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Příjem"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:88
+#: org.nickvision.money.gnome/blueprints/account_page.blp:77
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
 msgstr "Výdaj"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:104
+#: org.nickvision.money.gnome/blueprints/account_page.blp:91
 msgid "Reminders"
 msgstr "Připomínky"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:108
+#: org.nickvision.money.gnome/blueprints/account_page.blp:95
 msgid "Groups"
 msgstr "Skupiny"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:115
+#: org.nickvision.money.gnome/blueprints/account_page.blp:101
 msgid "New Group"
 msgstr "Nová skupina"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:119
+#: org.nickvision.money.gnome/blueprints/account_page.blp:105
 #: org.nickvision.money.gnome/blueprints/main_window.blp:343
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:83
 #, fuzzy
 msgid "New"
 msgstr "Nová"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:131
+#: org.nickvision.money.gnome/blueprints/account_page.blp:117
+msgid "Transactions"
+msgstr "Transakce"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:125
 msgid "Visualize"
 msgstr "Vizualizace"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:139
-msgid "Transactions"
-msgstr "Transakce"
+#: org.nickvision.money.gnome/blueprints/account_page.blp:143
+msgid "Previous"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:155
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:104
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:157
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:252
+msgid "Next"
+msgstr "Další"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
 #, fuzzy
@@ -533,12 +544,6 @@ msgstr "Vybrat složku"
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:35
 msgid "Overwrite Existing Accounts"
 msgstr "Přepsat existující účty"
-
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:104
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:157
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:252
-msgid "Next"
-msgstr "Další"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:121
 msgid "Account Options"
@@ -856,10 +861,14 @@ msgstr "Změnit heslo"
 msgid "Password removed"
 msgstr "Síla hesla"
 
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:84
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:60
 #, fuzzy
 msgid "No Transaction Reminders"
 msgstr "Žádné transakce"
+
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:92
+msgid "Edit Group"
+msgstr "Upravit skupinu"
 
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:238
 #, fuzzy
@@ -1577,9 +1586,6 @@ msgstr "Výsledek"
 
 #~ msgid "Delete"
 #~ msgstr "Odstranit"
-
-#~ msgid "Edit Group"
-#~ msgstr "Upravit skupinu"
 
 #~ msgid "This is only a useful label that doesn't affect how the app works."
 #~ msgstr ""

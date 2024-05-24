@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 15:28-0400\n"
+"POT-Creation-Date: 2024-05-23 16:41-0400\n"
 "PO-Revision-Date: 2023-10-20 04:03+0000\n"
 "Last-Translator: Nicolás Vieites Sueiro <vacamaribu@hotmail.es>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/nickvision-"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 5.1\n"
 
 #: libdenaro/src/models/account.cpp:53
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:113
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:89
 msgid "Ungrouped"
 msgstr ""
 
@@ -170,73 +170,84 @@ msgstr "Exportar a ficheiro"
 msgid "Overview"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:33
+#: org.nickvision.money.gnome/blueprints/account_page.blp:31
 msgid "Transfer Money"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:39
+#: org.nickvision.money.gnome/blueprints/account_page.blp:37
 msgid "Import and Export"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:46
+#: org.nickvision.money.gnome/blueprints/account_page.blp:44
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:7
 #, fuzzy
 msgid "Account Settings"
 msgstr "Nome da conta"
 
 #. Localize Strings
-#: org.nickvision.money.gnome/blueprints/account_page.blp:50
+#: org.nickvision.money.gnome/blueprints/account_page.blp:48
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 #, fuzzy
 msgid "Settings"
 msgstr "Axustes da conta"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:58
+#: org.nickvision.money.gnome/blueprints/account_page.blp:56
 msgid "Total"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:73
+#: org.nickvision.money.gnome/blueprints/account_page.blp:64
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Ingresos"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:88
+#: org.nickvision.money.gnome/blueprints/account_page.blp:77
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
 msgstr "Gastos"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:104
+#: org.nickvision.money.gnome/blueprints/account_page.blp:91
 msgid "Reminders"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:108
+#: org.nickvision.money.gnome/blueprints/account_page.blp:95
 msgid "Groups"
 msgstr "Grupos"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:115
+#: org.nickvision.money.gnome/blueprints/account_page.blp:101
 #, fuzzy
 msgid "New Group"
 msgstr "Grupo"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:119
+#: org.nickvision.money.gnome/blueprints/account_page.blp:105
 #: org.nickvision.money.gnome/blueprints/main_window.blp:343
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:83
 msgid "New"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:131
-msgid "Visualize"
-msgstr ""
-
-#: org.nickvision.money.gnome/blueprints/account_page.blp:139
+#: org.nickvision.money.gnome/blueprints/account_page.blp:117
 #, fuzzy
 msgid "Transactions"
 msgstr "Sen transaccións"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:125
+msgid "Visualize"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:143
+msgid "Previous"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:155
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:104
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:157
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:252
+msgid "Next"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
 #, fuzzy
@@ -534,12 +545,6 @@ msgstr ""
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:95
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:35
 msgid "Overwrite Existing Accounts"
-msgstr ""
-
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:104
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:157
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:252
-msgid "Next"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:121
@@ -845,10 +850,15 @@ msgstr ""
 msgid "Password removed"
 msgstr "Cambiar contrasinal"
 
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:84
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:60
 #, fuzzy
 msgid "No Transaction Reminders"
 msgstr "Non se atoparon transaccións"
+
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:92
+#, fuzzy
+msgid "Edit Group"
+msgstr "Grupo"
 
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:238
 #, fuzzy

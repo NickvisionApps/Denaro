@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 15:28-0400\n"
+"POT-Creation-Date: 2024-05-23 16:41-0400\n"
 "PO-Revision-Date: 2023-09-10 21:21+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 5.0.1-dev\n"
 
 #: libdenaro/src/models/account.cpp:53
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:113
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:89
 msgid "Ungrouped"
 msgstr "Grupsuz"
 
@@ -174,70 +174,81 @@ msgstr "Dosyaya Dışa Aktar"
 msgid "Overview"
 msgstr "Genel Görünüm"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:33
+#: org.nickvision.money.gnome/blueprints/account_page.blp:31
 msgid "Transfer Money"
 msgstr "Para Aktarımı"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:39
+#: org.nickvision.money.gnome/blueprints/account_page.blp:37
 msgid "Import and Export"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:46
+#: org.nickvision.money.gnome/blueprints/account_page.blp:44
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:7
 msgid "Account Settings"
 msgstr "Hesap Ayarları"
 
 #. Localize Strings
-#: org.nickvision.money.gnome/blueprints/account_page.blp:50
+#: org.nickvision.money.gnome/blueprints/account_page.blp:48
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:58
+#: org.nickvision.money.gnome/blueprints/account_page.blp:56
 msgid "Total"
 msgstr "Toplam"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:73
+#: org.nickvision.money.gnome/blueprints/account_page.blp:64
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Gelir"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:88
+#: org.nickvision.money.gnome/blueprints/account_page.blp:77
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
 msgstr "Gider"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:104
+#: org.nickvision.money.gnome/blueprints/account_page.blp:91
 msgid "Reminders"
 msgstr "Hatırlatıcılar"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:108
+#: org.nickvision.money.gnome/blueprints/account_page.blp:95
 msgid "Groups"
 msgstr "Gruplar"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:115
+#: org.nickvision.money.gnome/blueprints/account_page.blp:101
 msgid "New Group"
 msgstr "Yeni Grup"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:119
+#: org.nickvision.money.gnome/blueprints/account_page.blp:105
 #: org.nickvision.money.gnome/blueprints/main_window.blp:343
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:83
 #, fuzzy
 msgid "New"
 msgstr "Yeni"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:131
+#: org.nickvision.money.gnome/blueprints/account_page.blp:117
+msgid "Transactions"
+msgstr "İşlemler"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:125
 msgid "Visualize"
 msgstr "Görselleştir"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:139
-msgid "Transactions"
-msgstr "İşlemler"
+#: org.nickvision.money.gnome/blueprints/account_page.blp:143
+msgid "Previous"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:155
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:104
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:157
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:252
+msgid "Next"
+msgstr "Sonraki"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
 #, fuzzy
@@ -535,12 +546,6 @@ msgstr "Klasör Seç"
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:35
 msgid "Overwrite Existing Accounts"
 msgstr "Var Olan Hesapların Üzerine Yaz"
-
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:104
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:157
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:252
-msgid "Next"
-msgstr "Sonraki"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:121
 msgid "Account Options"
@@ -860,10 +865,14 @@ msgstr "Parola Değiştir"
 msgid "Password removed"
 msgstr "Parola Kuvveti"
 
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:84
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:60
 #, fuzzy
 msgid "No Transaction Reminders"
 msgstr "İşlem Yok"
+
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:92
+msgid "Edit Group"
+msgstr "Grubu Düzenle"
 
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:238
 #, fuzzy
@@ -1577,9 +1586,6 @@ msgstr "Sonuç"
 
 #~ msgid "Delete"
 #~ msgstr "Sil"
-
-#~ msgid "Edit Group"
-#~ msgstr "Grubu Düzenle"
 
 #~ msgid "This is only a useful label that doesn't affect how the app works."
 #~ msgstr ""

@@ -49,33 +49,9 @@ namespace Nickvision::Money::GNOME::Views
         g_action_map_add_action(G_ACTION_MAP(m_actionGroup), G_ACTION(actSettings));
         //Load overview amounts
         adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(gtk_builder_get_object(m_builder, "overviewGroup")), m_controller->getMetadata().getName().c_str());
-        //Load account total
-        Color totalColor{ "#3584e4" };
-        GdkPixbuf* totalColorBuf{ gdk_pixbuf_new(GDK_COLORSPACE_RGB, false, 8, 1, 1) };
-        gdk_pixbuf_fill(totalColorBuf, totalColor.toHex(false));
-        GdkTexture* totalColorTexture{ gdk_texture_new_for_pixbuf(totalColorBuf) };
-        adw_avatar_set_custom_image(ADW_AVATAR(gtk_builder_get_object(m_builder, "overviewTotalAvatar")), GDK_PAINTABLE(totalColorTexture));
         gtk_label_set_label(GTK_LABEL(gtk_builder_get_object(m_builder, "overviewTotalLabel")), m_controller->getTotalAmountString().c_str());
-        g_object_unref(totalColorTexture);
-        g_object_unref(totalColorBuf);
-        //Load account income
-        Color incomeColor{ "#26a269" };
-        GdkPixbuf* incomeColorBuf{ gdk_pixbuf_new(GDK_COLORSPACE_RGB, false, 8, 1, 1) };
-        gdk_pixbuf_fill(incomeColorBuf, incomeColor.toHex(false));
-        GdkTexture* incomeColorTexture{ gdk_texture_new_for_pixbuf(incomeColorBuf) };
-        adw_avatar_set_custom_image(ADW_AVATAR(gtk_builder_get_object(m_builder, "overviewIncomeAvatar")), GDK_PAINTABLE(incomeColorTexture));
         gtk_label_set_label(GTK_LABEL(gtk_builder_get_object(m_builder, "overviewIncomeLabel")), m_controller->getIncomeAmountString().c_str());
-        g_object_unref(incomeColorTexture);
-        g_object_unref(incomeColorBuf);
-        //Load account expense
-        Color expenseColor{ "#c01c28" };
-        GdkPixbuf* expenseColorBuf{ gdk_pixbuf_new(GDK_COLORSPACE_RGB, false, 8, 1, 1) };
-        gdk_pixbuf_fill(expenseColorBuf, expenseColor.toHex(false));
-        GdkTexture* expenseColorTexture{ gdk_texture_new_for_pixbuf(expenseColorBuf) };
-        adw_avatar_set_custom_image(ADW_AVATAR(gtk_builder_get_object(m_builder, "overviewExpenseAvatar")), GDK_PAINTABLE(expenseColorTexture));
         gtk_label_set_label(GTK_LABEL(gtk_builder_get_object(m_builder, "overviewExpenseLabel")), m_controller->getExpenseAmountString().c_str());
-        g_object_unref(expenseColorTexture);
-        g_object_unref(expenseColorBuf);
         //Load overview reminders
         std::vector<TransactionReminder> reminders{ m_controller->getTransactionReminders() };
         if(reminders.empty())
@@ -113,6 +89,7 @@ namespace Nickvision::Money::GNOME::Views
             if(pair.first.getName() != _("Ungrouped"))
             {
                 GtkButton* editButton{ GTK_BUTTON(gtk_button_new_from_icon_name("document-edit-symbolic")) };
+                gtk_widget_set_tooltip_text(GTK_WIDGET(editButton), _("Edit Group"));
                 gtk_widget_set_valign(GTK_WIDGET(editButton), GTK_ALIGN_CENTER);
                 gtk_widget_add_css_class(GTK_WIDGET(editButton), "flat");
                 adw_action_row_add_suffix(row, GTK_WIDGET(editButton));

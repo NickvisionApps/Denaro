@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 15:28-0400\n"
+"POT-Creation-Date: 2024-05-23 16:41-0400\n"
 "PO-Revision-Date: 2023-08-27 17:36+0000\n"
 "Last-Translator: Victor Mihalache <victormihalache@duck.com>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/nickvision-"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Weblate 5.0.1-dev\n"
 
 #: libdenaro/src/models/account.cpp:53
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:113
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:89
 msgid "Ungrouped"
 msgstr ""
 
@@ -173,73 +173,84 @@ msgstr "Exportați în fișier"
 msgid "Overview"
 msgstr "Panoramică"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:33
+#: org.nickvision.money.gnome/blueprints/account_page.blp:31
 #, fuzzy
 msgid "Transfer Money"
 msgstr "Transferă către {0}"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:39
+#: org.nickvision.money.gnome/blueprints/account_page.blp:37
 msgid "Import and Export"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:46
+#: org.nickvision.money.gnome/blueprints/account_page.blp:44
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:7
 #, fuzzy
 msgid "Account Settings"
 msgstr "Numele contului"
 
 #. Localize Strings
-#: org.nickvision.money.gnome/blueprints/account_page.blp:50
+#: org.nickvision.money.gnome/blueprints/account_page.blp:48
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 #, fuzzy
 msgid "Settings"
 msgstr "Setările contului"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:58
+#: org.nickvision.money.gnome/blueprints/account_page.blp:56
 msgid "Total"
 msgstr "Total"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:73
+#: org.nickvision.money.gnome/blueprints/account_page.blp:64
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Venituri"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:88
+#: org.nickvision.money.gnome/blueprints/account_page.blp:77
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
 msgstr "Cheltuieli"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:104
+#: org.nickvision.money.gnome/blueprints/account_page.blp:91
 msgid "Reminders"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:108
+#: org.nickvision.money.gnome/blueprints/account_page.blp:95
 msgid "Groups"
 msgstr "Grupe"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:115
+#: org.nickvision.money.gnome/blueprints/account_page.blp:101
 #, fuzzy
 msgid "New Group"
 msgstr "Grupă"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:119
+#: org.nickvision.money.gnome/blueprints/account_page.blp:105
 #: org.nickvision.money.gnome/blueprints/main_window.blp:343
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:83
 msgid "New"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:131
+#: org.nickvision.money.gnome/blueprints/account_page.blp:117
+msgid "Transactions"
+msgstr "Tranzacții"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:125
 msgid "Visualize"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:139
-msgid "Transactions"
-msgstr "Tranzacții"
+#: org.nickvision.money.gnome/blueprints/account_page.blp:143
+msgid "Previous"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:155
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:104
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:157
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:252
+msgid "Next"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
 #, fuzzy
@@ -537,12 +548,6 @@ msgstr "Selectați folderul"
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:95
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:35
 msgid "Overwrite Existing Accounts"
-msgstr ""
-
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:104
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:157
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:252
-msgid "Next"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:121
@@ -850,10 +855,15 @@ msgstr ""
 msgid "Password removed"
 msgstr "Parola PDF-ului"
 
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:84
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:60
 #, fuzzy
 msgid "No Transaction Reminders"
 msgstr "Nicio tranzacție"
+
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:92
+#, fuzzy
+msgid "Edit Group"
+msgstr "Grupă"
 
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:238
 #, fuzzy
