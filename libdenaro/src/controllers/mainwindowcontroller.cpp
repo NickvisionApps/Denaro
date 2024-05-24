@@ -206,6 +206,7 @@ namespace Nickvision::Money::Shared::Controllers
 #endif
             m_recentAccountsChanged.invoke({ Aura::getActive().getConfig<Configuration>("config").getRecentAccounts() });
             m_started = true;
+            Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Mainwindow started");
         }
     }
 
@@ -213,6 +214,7 @@ namespace Nickvision::Money::Shared::Controllers
     {
         if(m_updater)
         {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Checking for updates...");
             std::thread worker{ [&]()
             {
                 Version latest{ m_updater->fetchCurrentStableVersion() };
@@ -220,8 +222,17 @@ namespace Nickvision::Money::Shared::Controllers
                 {
                     if (latest > Aura::getActive().getAppInfo().getVersion())
                     {
+                        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Updates found. Latest version is " + latest.toString());
                         m_notificationSent.invoke({ _("New update available"), NotificationSeverity::Success, "update" });
                     }
+                    else
+                    {
+                        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "No updates found");
+                    }
+                }
+                else
+                {
+                    Aura::getActive().getLogger().log(Logging::LogLevel::Warning, "Unable to fetch latest app version");
                 }
             } };
             worker.detach();
@@ -233,11 +244,13 @@ namespace Nickvision::Money::Shared::Controllers
     {
         if(m_updater)
         {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Fetching Windows app update...");
             std::thread worker{ [&]()
             {
                 bool res{ m_updater->windowsUpdate(VersionType::Stable) };
                 if (!res)
                 {
+                    Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Unbale to fetch windows app update");
                     m_notificationSent.invoke({ _("Unable to download and install update"), NotificationSeverity::Error, "error" });
                 }
             } };
@@ -292,6 +305,7 @@ namespace Nickvision::Money::Shared::Controllers
             //Check if overwrite is allowed
             if(!newAccountDialogController->getOverwriteExisting())
             {
+                Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Account exists: " + newAccountDialogController->getFilePath().string());
                 m_notificationSent.invoke({ _("This account already exists."), NotificationSeverity::Error });
                 return;
             }
@@ -319,6 +333,7 @@ namespace Nickvision::Money::Shared::Controllers
         }
         catch(const std::exception& e)
         {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Error, std::string (e.what()) + " : " + newAccountDialogController->getFilePath().string());
             m_notificationSent.invoke({ e.what(), NotificationSeverity::Error });
         }
         if(controller)
@@ -326,6 +341,7 @@ namespace Nickvision::Money::Shared::Controllers
             m_accountViewControllers[newAccountDialogController->getFilePath()] = controller;
             config.addRecentAccount(controller->toRecentAccount());
             config.save();
+            Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Config saved");
             m_recentAccountsChanged.invoke({ config.getRecentAccounts() });
             m_accountAdded.invoke({ m_accountViewControllers[newAccountDialogController->getFilePath()] });
         }
@@ -353,6 +369,7 @@ namespace Nickvision::Money::Shared::Controllers
             }
             catch(const std::exception& e)
             {
+                Aura::getActive().getLogger().log(Logging::LogLevel::Error, std::string (e.what()) + " : " + path.string());
                 m_notificationSent.invoke({ e.what(), NotificationSeverity::Error });
             }
             if(controller)
@@ -361,6 +378,7 @@ namespace Nickvision::Money::Shared::Controllers
                 Configuration& config{ Aura::getActive().getConfig<Configuration>("config") };
                 config.addRecentAccount(controller->toRecentAccount());
                 config.save();
+                Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Config saved");
                 m_recentAccountsChanged.invoke({ config.getRecentAccounts() });
                 m_accountAdded.invoke({ m_accountViewControllers[path] });
             }
@@ -372,6 +390,7 @@ namespace Nickvision::Money::Shared::Controllers
         Configuration& config{ Aura::getActive().getConfig<Configuration>("config") };
         config.removeRecentAccount(account);
         config.save();
+        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Config saved");
         m_recentAccountsChanged.invoke({ config.getRecentAccounts() });
     }
 }
