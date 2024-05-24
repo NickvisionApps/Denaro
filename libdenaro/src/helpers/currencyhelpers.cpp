@@ -1,9 +1,9 @@
 #include "helpers/currencyhelpers.h"
 #include <iomanip>
-#include <iostream>
 #include <locale>
 #include <memory>
 #include <sstream>
+#include <libnick/app/aura.h>
 #include <libnick/helpers/stringhelpers.h>
 
 using namespace Nickvision;
@@ -52,7 +52,7 @@ namespace Nickvision::Money::Shared
             }
             catch (...)
             {
-                std::cerr << "Unknown system locale. Reverting to USD currency." << std::endl;
+                App::Aura::getActive().getLogger().log(Logging::LogLevel::Warning, "Unknown system locale. Reverting to USD currency.");
                 systemCurrency->setCode("USD");
                 systemCurrency->setSymbol("$");
                 return *systemCurrency;

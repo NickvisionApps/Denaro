@@ -1,4 +1,5 @@
 #include "application.h"
+#include <stdexcept>
 #include <libnick/app/aura.h>
 
 using namespace Nickvision::App;
