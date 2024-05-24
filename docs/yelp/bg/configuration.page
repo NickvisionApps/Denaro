@@ -19,23 +19,23 @@
 <p>Depending on your platform, in the application interface the configuration is referred as either <gui>Preferences</gui> or <gui>Settings</gui>.</p>
 <terms>
 	<item>
-		<title>Theme</title>
+		<title>Тема</title>
 		<p>Set light or dark theme, or make <app>Denaro</app> follow your system theme. Changing this on Windows requires the application restart to apply.</p>
 	</item>
 	<item>
-		<title>Transaction Default Color</title>
+		<title>Стандартен цвят на операциите</title>
 		<p>A color that will be selected by default when adding a new <link xref="transaction">transaction</link> with unique color. Changing this will not affect existing transactions, even if they use previously selected default color.</p>
 	</item>
 	<item>
-		<title>Transfer Default Color</title>
+		<title>Стандартен цвят на преводите</title>
 		<p>A color that will be used for transactions created using <link xref="transfer">transfer</link>. Changing this will not affect existing transactions.</p>
 	</item>
 	<item>
-		<title>Group Default Color</title>
+		<title>Стандартен цвят на групите</title>
 		<p>A color that will be selected by default when adding a new group. This is also a color for «Ungrouped» group.</p>
 	</item>
 	<item>
-		<title>Insert Decimal Separator</title>
+		<title>Вмъкване на десетичен знак</title>
 		<p>Set for which keys pressed will the locale's decimal separator be inserted into an amount field: numpad period, any period and comma, or none. If decimal separator is already presented in a field, it will not be inserted.</p>
 	</item>
 </terms>

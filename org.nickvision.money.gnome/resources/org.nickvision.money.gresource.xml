@@ -23,11 +23,13 @@
     <file preprocess="xml-stripblanks">edit-select-all-symbolic.svg</file>
     <file preprocess="xml-stripblanks">edit-select-none-symbolic.svg</file>
     <file preprocess="xml-stripblanks">larger-brush-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">left-symbolic.svg</file>
     <file preprocess="xml-stripblanks">money-none-symbolic.svg</file>
     <file preprocess="xml-stripblanks">money-symbolic.svg</file>
     <file preprocess="xml-stripblanks">month-symbolic.svg</file>
     <file preprocess="xml-stripblanks">newspaper-symbolic.svg</file>
     <file preprocess="xml-stripblanks">profit-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">right-symbolic.svg</file>
     <file preprocess="xml-stripblanks">send-alt-symbolic.svg</file>
     <file preprocess="xml-stripblanks">shell-overview-symbolic.svg</file>
     <file preprocess="xml-stripblanks">today-symbolic.svg</file>

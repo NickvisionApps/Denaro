@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 15:28-0400\n"
+"POT-Creation-Date: 2024-05-24 02:00-0400\n"
 "PO-Revision-Date: 2023-08-24 20:09+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 5.0\n"
 
 #: libdenaro/src/models/account.cpp:53
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:113
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:89
 msgid "Ungrouped"
 msgstr "Ryhmittämätön"
 
@@ -172,73 +172,83 @@ msgstr "Vie tiedostoon"
 msgid "Overview"
 msgstr "Yleisnäkymä"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:33
+#: org.nickvision.money.gnome/blueprints/account_page.blp:31
 msgid "Transfer Money"
 msgstr "Siirrä rahaa"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:39
+#: org.nickvision.money.gnome/blueprints/account_page.blp:37
 msgid "Import and Export"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:46
+#: org.nickvision.money.gnome/blueprints/account_page.blp:44
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:7
 msgid "Account Settings"
 msgstr "Tilin asetukset"
 
 #. Localize Strings
-#: org.nickvision.money.gnome/blueprints/account_page.blp:50
+#: org.nickvision.money.gnome/blueprints/account_page.blp:48
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
 msgid "Settings"
 msgstr "Asetukset"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:58
+#: org.nickvision.money.gnome/blueprints/account_page.blp:56
 msgid "Total"
 msgstr "Yhteensä"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:73
+#: org.nickvision.money.gnome/blueprints/account_page.blp:64
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
 msgstr "Tulo"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:88
+#: org.nickvision.money.gnome/blueprints/account_page.blp:77
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
 msgstr "Meno"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:104
+#: org.nickvision.money.gnome/blueprints/account_page.blp:91
 msgid "Reminders"
 msgstr "Muistutukset"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:108
+#: org.nickvision.money.gnome/blueprints/account_page.blp:95
 msgid "Groups"
 msgstr "Ryhmät"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:115
+#: org.nickvision.money.gnome/blueprints/account_page.blp:101
 msgid "New Group"
 msgstr "Uusi ryhmä"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:119
+#: org.nickvision.money.gnome/blueprints/account_page.blp:105
 #: org.nickvision.money.gnome/blueprints/main_window.blp:343
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:83
 #, fuzzy
 msgid "New"
 msgstr "Uusi"
 
-#: org.nickvision.money.gnome/blueprints/account_page.blp:131
-msgid "Visualize"
-msgstr ""
-
-#: org.nickvision.money.gnome/blueprints/account_page.blp:139
+#: org.nickvision.money.gnome/blueprints/account_page.blp:117
 msgid "Transactions"
 msgstr "Tapahtumat"
 
+#: org.nickvision.money.gnome/blueprints/account_page.blp:125
+msgid "Visualize"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:143
+msgid "Previous"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:155
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:104
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:157
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:252
+msgid "Next"
+msgstr "Seuraava"
+
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
-#, fuzzy
 msgid "Account"
 msgstr "Tili"
 
@@ -440,23 +450,25 @@ msgstr "Valuutan symboli"
 msgid "Password"
 msgstr "Salasana"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:123
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:122
+msgid "If the password is lost, there is no way to restore the file!"
+msgstr "Jos salasana häviää, tiedostoa ei ole mahdollista palauttaa!"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:125
 msgid "New Password"
 msgstr "Uusi salasana"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:129
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:131
 msgid "Confirm Password"
 msgstr "Vahvista salasana"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:135
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:137
 msgid "Change Password"
-msgstr "Uusi salasana"
+msgstr "Vaihda salasana"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:146
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:148
 msgid "Remove Current Password"
-msgstr "Tilin salasana (valinnainen)"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:24
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
@@ -533,12 +545,6 @@ msgstr "Valitse kansio"
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:35
 msgid "Overwrite Existing Accounts"
 msgstr "Korvaa olemassa olevat tilit"
-
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:104
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:157
-#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:252
-msgid "Next"
-msgstr "Seuraava"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:121
 msgid "Account Options"
@@ -850,10 +856,14 @@ msgstr "Vaihda salasana"
 msgid "Password removed"
 msgstr "Salasanan vahvuus"
 
-#: org.nickvision.money.gnome/src/views/accountpage.cpp:84
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:60
 #, fuzzy
 msgid "No Transaction Reminders"
 msgstr "Ei tapahtumia"
+
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:92
+msgid "Edit Group"
+msgstr "Muokkaa ryhmää"
 
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:238
 #, fuzzy
@@ -1121,33 +1131,6 @@ msgstr "OK"
 msgid "Result (Error)"
 msgstr "Tulos"
 
-#, fuzzy
-#~ msgid "Change"
-#~ msgstr "Muutosloki"
-
-#, fuzzy
-#~ msgid ""
-#~ "If the password is lost, there is no way to restore the account file!"
-#~ msgstr "Jos salasana häviää, tiedostoa ei ole mahdollista palauttaa!"
-
-#~ msgid "Transaction"
-#~ msgstr "Tapahtuma"
-
-#~ msgid "Group"
-#~ msgstr "Ryhmä"
-
-#, fuzzy
-#~ msgid "Transfer"
-#~ msgstr "Siirto"
-
-#, fuzzy
-#~ msgid "Export"
-#~ msgstr "Tuo tiedosto"
-
-#, fuzzy
-#~ msgid "No reminders"
-#~ msgstr "Muistutukset"
-
 #~ msgid "(Copy)"
 #~ msgstr "(Kopio)"
 
@@ -1247,6 +1230,9 @@ msgstr "Tulos"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "Luotu: {0}"
+
+#~ msgid "Group"
+#~ msgstr "Ryhmä"
 
 #~ msgid "Group Name"
 #~ msgstr "Ryhmän nimi"
@@ -1350,6 +1336,9 @@ msgstr "Tulos"
 
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
+
+#~ msgid "Transaction"
+#~ msgstr "Tapahtuma"
 
 #~ msgid "Type"
 #~ msgstr "Tyyppi"
@@ -1492,9 +1481,6 @@ msgstr "Tulos"
 #~ msgid "Delete"
 #~ msgstr "Poista"
 
-#~ msgid "Edit Group"
-#~ msgstr "Muokkaa ryhmää"
-
 #~ msgid "This is only a useful label that doesn't affect how the app works."
 #~ msgstr ""
 #~ "Tämä on vain hyödyllinen selite, eikä se vaikuta sovelluksen toimintaan."
@@ -1520,6 +1506,10 @@ msgstr "Tulos"
 
 #~ msgid "Clear Backup Folder"
 #~ msgstr "Tyhjennä varmuuskopiokansio"
+
+#~ msgctxt "Title"
+#~ msgid "Transfer"
+#~ msgstr "Siirto"
 
 #~ msgid "New Transaction"
 #~ msgstr "Uusi tapahtuma"
