@@ -1,5 +1,6 @@
 #include "helpers/currencyhelpers.h"
 #include <iomanip>
+#include <iostream>
 #include <locale>
 #include <memory>
 #include <sstream>
@@ -51,7 +52,7 @@ namespace Nickvision::Money::Shared
             }
             catch (...)
             {
-                fprintf(stderr, "Unknown locale on system. Defaulting to USD as the currency");
+                std::cerr << "Unknown system locale. Reverting to USD currency." << std::endl;
                 systemCurrency->setCode("USD");
                 systemCurrency->setSymbol("$");
                 return *systemCurrency;

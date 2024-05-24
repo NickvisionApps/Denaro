@@ -19,11 +19,11 @@ namespace Nickvision::Money::GNOME
         }
         m_controller->getAppInfo().setChangelog("- Initial Release");
         std::filesystem::path resources{ Aura::getActive().getExecutableDirectory() / (m_controller->getAppInfo().getId() + ".gresource") };
-        GError* resourceLoadError{nullptr};
-        GResource* resource = g_resource_load(resources.string().c_str(), &resourceLoadError);
-        if(resourceLoadError != nullptr)
+        GError* resourceLoadError{ nullptr };
+        GResource* resource{ g_resource_load(resources.string().c_str(), &resourceLoadError) };
+        if(resourceLoadError)
         {
-            throw std::runtime_error(resourceLoadError->message); // Panic
+            throw std::runtime_error(resourceLoadError->message);
         }
         g_resources_register(resource);
         g_signal_connect(m_adw, "activate", G_CALLBACK(+[](GtkApplication* app, gpointer data){ reinterpret_cast<Application*>(data)->onActivate(app); }), this);

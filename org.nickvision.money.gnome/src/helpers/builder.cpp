@@ -1,5 +1,6 @@
 #include "helpers/builder.h"
 #include <filesystem>
+#include <iostream>
 #include <libnick/app/aura.h>
 #include <libnick/localization/gettext.h>
 #include <libxml++/libxml++.h>
@@ -13,7 +14,7 @@ namespace Nickvision::Money::GNOME
         std::filesystem::path path{ Aura::getActive().getExecutableDirectory() / "ui" / (blueprint + ".ui") };
         if(!std::filesystem::exists(path))
         {
-            fprintf(stderr, "UI file not found at path: %s", path.c_str());
+            std::cerr << "UI file not found at path: " << path << std::endl;
             return nullptr;
         }
         xmlpp::DomParser xml{ path.string() };
