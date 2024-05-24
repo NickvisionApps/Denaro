@@ -14,8 +14,7 @@ namespace Nickvision::Money::GNOME
         std::filesystem::path path{ Aura::getActive().getExecutableDirectory() / "ui" / (blueprint + ".ui") };
         if(!std::filesystem::exists(path))
         {
-            std::cerr << "UI file not found at path: " << path << std::endl;
-            return nullptr;
+            throw std::invalid_argument("UI file not found at path: " + path.string());
         }
         xmlpp::DomParser xml{ path.string() };
         xmlpp::Element* root{ xml.get_document()->get_root_node() };
