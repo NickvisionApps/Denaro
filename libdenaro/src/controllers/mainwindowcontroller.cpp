@@ -1,8 +1,6 @@
 ﻿#include "controllers/mainwindowcontroller.h"
 #include <ctime>
-#include <format>
 #include <locale>
-#include <stdexcept>
 #include <sstream>
 #include <thread>
 #include <libnick/app/aura.h>
@@ -25,7 +23,11 @@ namespace Nickvision::Money::Shared::Controllers
     MainWindowController::MainWindowController()
         : m_started{ false }
     {
-        Aura::getActive().init("org.nickvision.money", "Nickvision Denaro", "Denaro");
+#ifdef DEBUG
+        Aura::getActive().init("org.nickvision.money", "Nickvision Denaro", "Denaro", Logging::LogLevel::Debug);
+#else
+        Aura::getActive().init("org.nickvision.money", "Nickvision Denaro", "Denaro", Logging::LogLevel::Info);
+#endif
         AppInfo& appInfo{ Aura::getActive().getAppInfo() };
         appInfo.setVersion({ "2024.5.0-next" });
         appInfo.setShortName(_("Denaro"));
