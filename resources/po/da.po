@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 17:27-0400\n"
+"POT-Creation-Date: 2024-05-24 17:49-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,79 +73,79 @@ msgstr "Dit system fortalte at din valuta er"
 msgid "Unable to login to the account. The provided password may be invalid."
 msgstr "Ude af stand til at logge ind på kontoen. Kodeordet er forkert."
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:33
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:35
 msgid "Denaro"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:36
 msgid "Manage your personal finances"
 msgstr "Administrer din privatøkonomi"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
 msgid "Matrix Chat"
 msgstr "Matrix Chat"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:42
 msgid "Contributors on GitHub"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:42
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:44
 msgid "Fyodor Sobolev"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:45
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:47
 msgid "David Lapshin"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:47
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:49
 msgid "translator-credits"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:147
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:149
 msgctxt "Night"
 msgid "Good Morning!"
 msgstr "Godmorgen!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:151
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:153
 msgctxt "Morning"
 msgid "Good Morning!"
 msgstr "Godmorgen!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:155
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:157
 msgid "Good Afternoon!"
 msgstr "God eftermiddag!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:159
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:161
 msgid "Good Evening!"
 msgstr "Godaften!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:161
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:163
 msgid "Good Day!"
 msgstr "God dag!"
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:223
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:225
 msgid "New update available"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:241
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:243
 msgid "Unable to download and install update"
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:281
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:297
 #, fuzzy
 msgid "This account already exists."
 msgstr "Denne konto er allerede åben."
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:287
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:303
 #, fuzzy
 msgid "This account cannot be overwritten."
 msgstr "Denne konto er allerede åben."
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:325
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:341
 msgid "The file is not a Denaro account file."
 msgstr ""
 
-#: libdenaro/src/controllers/mainwindowcontroller.cpp:330
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:346
 #, fuzzy
 msgid "The account is already open."
 msgstr "Denne konto er allerede åben."

@@ -245,14 +245,28 @@ namespace Nickvision::Money::Shared::Controllers
         }
     }
 
-    bool MainWindowController::connectTaskbar(HWND hwnd)
+    void MainWindowController::connectTaskbar(HWND hwnd)
     {
-        return m_taskbar.connect(hwnd);
+        if(m_taskbar.connect(hwnd))
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Connected to Windows taskbar.");
+        }
+        else
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Unable to connect to Windows taskbar.");
+        }
     }
 #elif defined(__linux__)
-    bool MainWindowController::connectTaskbar(const std::string& desktopFile)
+    void MainWindowController::connectTaskbar(const std::string& desktopFile)
     {
-        return m_taskbar.connect(desktopFile);
+        if(m_taskbar.connect(desktopFile))
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Connected to Linux taskbar.");
+        }
+        else
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Unable to connect to Linux taskbar.");
+        }
     }
 #endif
 
