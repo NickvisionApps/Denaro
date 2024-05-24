@@ -36,10 +36,6 @@ namespace Nickvision::Money::GNOME::Views
         m_currencyConverterPage{ GTK_WINDOW(m_window) }
     {
         //Setup Window
-        if(m_window == nullptr)
-        {
-            throw std::runtime_error("Failed to setup window"); // Panic and exit.
-        }
         gtk_application_add_window(GTK_APPLICATION(app), GTK_WINDOW(m_window));
         gtk_window_set_title(GTK_WINDOW(m_window), m_controller->getAppInfo().getShortName().c_str());
         gtk_window_set_icon_name(GTK_WINDOW(m_window), m_controller->getAppInfo().getId().c_str());
