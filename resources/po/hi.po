@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 16:41-0400\n"
-"PO-Revision-Date: 2024-02-13 09:01+0000\n"
-"Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
+"POT-Creation-Date: 2024-05-24 02:00-0400\n"
+"PO-Revision-Date: 2024-03-29 13:01+0000\n"
+"Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
 "app/hi/>\n"
 "Language: hi\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: libdenaro/src/models/account.cpp:53
 #: org.nickvision.money.gnome/src/views/accountpage.cpp:89
@@ -250,7 +250,6 @@ msgid "Next"
 msgstr "अगला"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
-#, fuzzy
 msgid "Account"
 msgstr "खाता"
 
@@ -451,23 +450,25 @@ msgstr "मुद्रा चिन्ह"
 msgid "Password"
 msgstr "पासवर्ड"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:123
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:122
+msgid "If the password is lost, there is no way to restore the file!"
+msgstr "यदि पासवर्ड खो गया है, तो फाइल को पुनर्स्थापित करने का कोई तरीका नहीं है!"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:125
 msgid "New Password"
 msgstr "नया पासवर्ड"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:129
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:131
 msgid "Confirm Password"
 msgstr "पासवर्ड की पुष्टि कीजिये"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:135
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:137
 msgid "Change Password"
-msgstr "नया पासवर्ड"
+msgstr "पासवर्ड बदलें"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:146
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:148
 msgid "Remove Current Password"
-msgstr "खाता पासवर्ड (वैकल्पिक)"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:24
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
@@ -533,7 +534,7 @@ msgstr "खाता पासवर्ड (वैकल्पिक)"
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:79
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:33
 msgid "Folder"
-msgstr "फ़ोल्डर"
+msgstr "फोल्डर"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:86
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:121
@@ -911,7 +912,7 @@ msgstr "Enter password here"
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:412
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:465
 msgid "Cancel"
-msgstr "रद्द करें"
+msgstr "रद्द"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:412
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:464
@@ -1137,29 +1138,6 @@ msgstr "ठीक (OK)"
 msgid "Result (Error)"
 msgstr "परिणाम"
 
-#, fuzzy
-#~ msgid ""
-#~ "If the password is lost, there is no way to restore the account file!"
-#~ msgstr "यदि पासवर्ड खो गया है, तो फाइल को पुनर्स्थापित करने का कोई तरीका नहीं है!"
-
-#~ msgid "Transaction"
-#~ msgstr "लेन-देन"
-
-#~ msgid "Group"
-#~ msgstr "समूह"
-
-#, fuzzy
-#~ msgid "Transfer"
-#~ msgstr "स्थानांतरण"
-
-#, fuzzy
-#~ msgid "Export"
-#~ msgstr "फाइल आयात करें"
-
-#, fuzzy
-#~ msgid "No reminders"
-#~ msgstr "कोई अनुस्मारक नहीं"
-
 #~ msgid "(Copy)"
 #~ msgstr "(प्रतिलिपि)"
 
@@ -1185,7 +1163,7 @@ msgstr "परिणाम"
 #~ msgstr "एक नया लेनदेन जोड़ें या किसी फाइल से लेनदेन आयात करें।"
 
 #~ msgid "Add Password To PDF?"
-#~ msgstr "पीडीएफ में पासवर्ड जोड़ें?"
+#~ msgstr "PDF में पासवर्ड जोड़ें?"
 
 #~ msgid "All files"
 #~ msgstr "सभी फाइलें"
@@ -1211,7 +1189,7 @@ msgstr "परिणाम"
 #~ "यह क्रिया अपरिवर्तनीय है।"
 
 #~ msgid "Can't access the selected folder, check Flatpak permissions."
-#~ msgstr "चयनित फ़ोल्डर तक नहीं पहुँच सकते, Flatpak अनुमतियाँ जाँचें।"
+#~ msgstr "चयनित फोल्डर तक नहीं पहुँच सकते, Flatpak अनुमतियाँ जाँचें।"
 
 #~ msgid "Currency Code"
 #~ msgstr "मुद्रा कोड"
@@ -1253,7 +1231,7 @@ msgstr "परिणाम"
 #~ msgstr "गंतव्य खाता (अमान्य)"
 
 #~ msgid "Destination Account Password"
-#~ msgstr "Destination Account Password"
+#~ msgstr "गंतव्य खाता पासवर्ड"
 
 #~ msgid "Destination Account Password (Invalid)"
 #~ msgstr "गंतव्य खाता पासवर्ड (अमान्य)"
@@ -1270,6 +1248,9 @@ msgstr "परिणाम"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "उत्पन्न: {0}"
+
+#~ msgid "Group"
+#~ msgstr "समूह"
 
 #~ msgid "Group Name"
 #~ msgstr "समूह नाम"
@@ -1293,7 +1274,7 @@ msgstr "परिणाम"
 #~ msgstr "नाम"
 
 #~ msgid "Name (Exists)"
-#~ msgstr "नाम (पहले से मौजूद है)"
+#~ msgstr "नाम (मौजूद)"
 
 #~ msgid "Nicholas Logozzo"
 #~ msgstr "निकोलस लोगोज़ो"
@@ -1317,10 +1298,10 @@ msgstr "परिणाम"
 #~ msgstr "फाइल से आयात करने के लिए कुछ भी नहीं।"
 
 #~ msgid "Page {0}"
-#~ msgstr "Page {0}"
+#~ msgstr "पृष्ठ {0}"
 
 #~ msgid "PDF Password"
-#~ msgstr "पीडीएफ पासवर्ड"
+#~ msgstr "PDF पासवर्ड"
 
 #~ msgid "Receipt"
 #~ msgstr "रसीद"
@@ -1347,13 +1328,13 @@ msgstr "परिणाम"
 #~ msgstr "खाता चुनें"
 
 #~ msgid "Select Backup Folder"
-#~ msgstr "बैकअप फ़ोल्डर का चयन करें"
+#~ msgstr "बैकअप फोल्डर का चयन करें"
 
 #~ msgid "Sort By Amount"
 #~ msgstr "राशि के अनुसार क्रमबद्ध करें"
 
 #~ msgid "Sort By Date"
-#~ msgstr "दिनांक के हिसाब से अलग करे"
+#~ msgstr "दिनांक के अनुसार क्रमबद्ध करें"
 
 #~ msgid "Sort By Id"
 #~ msgstr "Id के अनुसार क्रमबद्ध करें"
@@ -1416,6 +1397,9 @@ msgstr "परिणाम"
 #~ msgid "Tobias Bernard"
 #~ msgstr "टोबियास बर्नार्ड"
 
+#~ msgid "Transaction"
+#~ msgstr "लेन-देन"
+
 #~ msgid "Type"
 #~ msgstr "प्रकार"
 
@@ -1426,7 +1410,7 @@ msgstr "परिणाम"
 #~ "Unable to import information from the file. Please ensure that the app "
 #~ "has permissions to access the file and try again."
 #~ msgstr ""
-#~ "फाइल से जानकारी आयात करने में असमर्थ. कृपया सुनिश्चित करें कि ऐप के पास फ़ाइल तक पहुंचने "
+#~ "फाइल से जानकारी आयात करने में असमर्थ. कृपया सुनिश्चित करें कि ऐप के पास फाइल तक पहुंचने "
 #~ "की अनुमति है और पुनः प्रयास करें।"
 
 #~ msgid "Unable to import transactions from the file."
@@ -1527,7 +1511,7 @@ msgstr "परिणाम"
 #~ msgstr "टैग फ़िल्टर अचयनित करें"
 
 #~ msgid "Calendar"
-#~ msgstr "पंचांग"
+#~ msgstr "कैलेंडर"
 
 #~ msgid "Select Current Month"
 #~ msgstr "चालू माह का चयन करें"
@@ -1569,7 +1553,7 @@ msgstr "परिणाम"
 #~ msgstr "परिवर्तक"
 
 #~ msgid "Loading..."
-#~ msgstr "लोड हो रहा है..।"
+#~ msgstr "लोड हो रहा है…"
 
 #~ msgid "All Accounts"
 #~ msgstr "सभी खाते"
@@ -1608,7 +1592,7 @@ msgstr "परिणाम"
 #~ msgstr "बैकअप"
 
 #~ msgid "CSV Backup Folder"
-#~ msgstr "CSV बैकअप फ़ोल्डर"
+#~ msgstr "CSV बैकअप फोल्डर"
 
 #~ msgid ""
 #~ "Unencrypted accounts will automatically export as CSV files to this "
@@ -1618,7 +1602,14 @@ msgstr "परिणाम"
 #~ "में निर्यात हो जाएंगे।"
 
 #~ msgid "Clear Backup Folder"
-#~ msgstr "बैकअप फ़ोल्डर साफ़ करें"
+#~ msgstr "बैकअप फोल्डर साफ़ करें"
+
+#~ msgid "No Reminders"
+#~ msgstr "कोई अनुस्मारक नहीं"
+
+#~ msgctxt "Title"
+#~ msgid "Transfer"
+#~ msgstr "स्थानांतरण"
 
 #~ msgid "New Transaction"
 #~ msgstr "नई लेनदेन"
@@ -1660,7 +1651,7 @@ msgstr "परिणाम"
 #~ msgstr "अनोखे रंग का प्रयोग करें"
 
 #~ msgid "Enter a new tag name..."
-#~ msgstr "नया टैग नाम दर्ज करें..।"
+#~ msgstr "नया टैग नाम दर्ज करें…"
 
 #~ msgid "Add Tag"
 #~ msgstr "टैग जोड़ें"

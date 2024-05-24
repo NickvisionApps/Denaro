@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 16:41-0400\n"
+"POT-Creation-Date: 2024-05-24 02:00-0400\n"
 "PO-Revision-Date: 2023-09-16 10:15+0000\n"
 "Last-Translator: Davide <davide.ferracin@protonmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-money/"
@@ -251,7 +251,6 @@ msgid "Next"
 msgstr "Successivo"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
-#, fuzzy
 msgid "Account"
 msgstr "Conti"
 
@@ -452,23 +451,26 @@ msgstr "Simbolo della valuta"
 msgid "Password"
 msgstr "Password"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:123
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:122
+msgid "If the password is lost, there is no way to restore the file!"
+msgstr ""
+"Se la password viene dimenticata, non sarà possibile ripristinare il file!"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:125
 msgid "New Password"
 msgstr "Nuova password"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:129
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:131
 msgid "Confirm Password"
 msgstr "Conferma password"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:135
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:137
 msgid "Change Password"
-msgstr "Nuova password"
+msgstr "Modifica password"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:146
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:148
 msgid "Remove Current Password"
-msgstr "Password del conto (facoltativa)"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:24
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
@@ -1139,34 +1141,6 @@ msgstr "Ok"
 msgid "Result (Error)"
 msgstr "Risultato"
 
-#, fuzzy
-#~ msgid "Change"
-#~ msgstr "Novità"
-
-#, fuzzy
-#~ msgid ""
-#~ "If the password is lost, there is no way to restore the account file!"
-#~ msgstr ""
-#~ "Se la password viene dimenticata, non sarà possibile ripristinare il file!"
-
-#~ msgid "Transaction"
-#~ msgstr "Transazione"
-
-#~ msgid "Group"
-#~ msgstr "Gruppo"
-
-#, fuzzy
-#~ msgid "Transfer"
-#~ msgstr "Trasferimento"
-
-#, fuzzy
-#~ msgid "Export"
-#~ msgstr "Importa file"
-
-#, fuzzy
-#~ msgid "No reminders"
-#~ msgstr "Nessun promemoria"
-
 #~ msgid "(Copy)"
 #~ msgstr "(Copia)"
 
@@ -1279,6 +1253,9 @@ msgstr "Risultato"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "Generate: {0}"
+
+#~ msgid "Group"
+#~ msgstr "Gruppo"
 
 #~ msgid "Group Name"
 #~ msgstr "Nome gruppo"
@@ -1426,6 +1403,9 @@ msgstr "Risultato"
 
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
+
+#~ msgid "Transaction"
+#~ msgstr "Transazione"
 
 #~ msgid "Type"
 #~ msgstr "Tipo"
@@ -1632,6 +1612,13 @@ msgstr "Risultato"
 
 #~ msgid "Clear Backup Folder"
 #~ msgstr "Rimuovi cartella di backup"
+
+#~ msgid "No Reminders"
+#~ msgstr "Nessun promemoria"
+
+#~ msgctxt "Title"
+#~ msgid "Transfer"
+#~ msgstr "Trasferimento"
 
 #~ msgid "New Transaction"
 #~ msgstr "Nuova transazione"

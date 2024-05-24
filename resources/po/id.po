@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 16:41-0400\n"
+"POT-Creation-Date: 2024-05-24 02:00-0400\n"
 "PO-Revision-Date: 2023-06-07 19:40+0000\n"
 "Last-Translator: Krindog7337 <igstkrisna2006@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/nickvision-"
@@ -61,9 +61,9 @@ msgid "Two months from now"
 msgstr ""
 
 #: libdenaro/src/models/transactionreminder.cpp:77
-#, fuzzy, c++-format
+#, c++-format
 msgid "{} days from now"
-msgstr "{0} dari {1}"
+msgstr ""
 
 #: libdenaro/src/controllers/accountsettingsdialogcontroller.cpp:22
 #: libdenaro/src/controllers/newaccountdialogcontroller.cpp:31
@@ -251,7 +251,6 @@ msgid "Next"
 msgstr "Selanjutnya"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
-#, fuzzy
 msgid "Account"
 msgstr "Rekening"
 
@@ -453,23 +452,25 @@ msgstr "Simbol Mata Uang"
 msgid "Password"
 msgstr "Kata Sandi"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:123
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:122
+msgid "If the password is lost, there is no way to restore the file!"
+msgstr "Jika kata sandi hilang, tidak ada cara untuk mengembalikan berkas ini!"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:125
 msgid "New Password"
 msgstr "Kata Sandi Baru"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:129
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:131
 msgid "Confirm Password"
 msgstr "Konfirmasi Kata Sandi"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:135
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:137
 msgid "Change Password"
-msgstr "Kata Sandi Baru"
+msgstr "Ubah Kata Sandi"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:146
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:148
 msgid "Remove Current Password"
-msgstr "Kata Sandi Rekening (Opsional)"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:24
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
@@ -1143,30 +1144,6 @@ msgstr "OK"
 msgid "Result (Error)"
 msgstr "Hasil"
 
-#, fuzzy
-#~ msgid "Change"
-#~ msgstr "Perubahan"
-
-#, fuzzy
-#~ msgid ""
-#~ "If the password is lost, there is no way to restore the account file!"
-#~ msgstr ""
-#~ "Jika kata sandi hilang, tidak ada cara untuk mengembalikan berkas ini!"
-
-#~ msgid "Transaction"
-#~ msgstr "Transaksi"
-
-#~ msgid "Group"
-#~ msgstr "Grup"
-
-#, fuzzy
-#~ msgid "Transfer"
-#~ msgstr "Transfer"
-
-#, fuzzy
-#~ msgid "Export"
-#~ msgstr "Impor dari Berkas"
-
 #~ msgid "(Copy)"
 #~ msgstr "(Salin)"
 
@@ -1269,6 +1246,9 @@ msgstr "Hasil"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "Dihasilkan: {0}"
+
+#~ msgid "Group"
+#~ msgstr "Grup"
 
 #~ msgid "Group Name"
 #~ msgstr "Nama Grup"
@@ -1404,6 +1384,9 @@ msgstr "Hasil"
 #~ "\n"
 #~ "Hanya memperbarui transaksi sumber akan memisahkan \n"
 #~ "transaksi yang telah dihasilkan dari sumber."
+
+#~ msgid "Transaction"
+#~ msgstr "Transaksi"
 
 #~ msgid "Type"
 #~ msgstr "Tipe"
@@ -1590,6 +1573,10 @@ msgstr "Hasil"
 
 #~ msgid "Clear Backup Folder"
 #~ msgstr "Bersihkan Folder Cadangan"
+
+#~ msgctxt "Title"
+#~ msgid "Transfer"
+#~ msgstr "Transfer"
 
 #~ msgid "New Transaction"
 #~ msgstr "Transaksi Baru"

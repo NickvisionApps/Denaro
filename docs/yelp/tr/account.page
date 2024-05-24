@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="account" its:version="2.0" xml:lang="tr">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Account 🏦</title>
+	<title type="link">Hesap🏦</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -14,8 +14,8 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Account</title>
-<p>This page explains all properties of accounts in <app>Denaro</app>. Most of them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens automatically after you create a new account.</p>
+<title>Hesap</title>
+<p>Bu sayfa <app>Denaro</app> hesaplarının tüm özelliklerini açıklar. Bu özelliklerin çoğu <gui>Hesap Ayarları Diyaloğu</gui> içerisinde gösterilir. Bu diyalog ayrıca yeni bir hesap oluşturulduktan sonra otomatik olarak da açılır.</p>
 <p>Each account is stored in a single <file>*.nmoney</file> file. Files created in an older <em>stable</em> version of <app>Denaro</app> can be safely opened in a more recent <em>stable</em> version of the application. Although the app can run on different platforms (Windows and Linux), the <file>*.nmoney</file> files are 100% compatible between platforms as long as they are from the same application version (i.e. V2023.1.0).</p>
 <note style="warning">
 	<p>Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p>

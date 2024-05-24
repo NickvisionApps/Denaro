@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 16:41-0400\n"
+"POT-Creation-Date: 2024-05-24 02:00-0400\n"
 "PO-Revision-Date: 2023-10-20 04:03+0000\n"
 "Last-Translator: Nicolás Vieites Sueiro <vacamaribu@hotmail.es>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/nickvision-"
@@ -63,7 +63,7 @@ msgstr ""
 #: libdenaro/src/models/transactionreminder.cpp:77
 #, fuzzy, c++-format
 msgid "{} days from now"
-msgstr "{0} de {1}"
+msgstr "Dentro dunha semana"
 
 #: libdenaro/src/controllers/accountsettingsdialogcontroller.cpp:22
 #: libdenaro/src/controllers/newaccountdialogcontroller.cpp:31
@@ -152,9 +152,8 @@ msgid "The account is already open."
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:6
-#, fuzzy
 msgid "Import from File"
-msgstr "Importar dende conta"
+msgstr "Importar dende ficheiro"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:10
 #, fuzzy
@@ -180,9 +179,8 @@ msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:44
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:7
-#, fuzzy
 msgid "Account Settings"
-msgstr "Nome da conta"
+msgstr "Axustes da conta"
 
 #. Localize Strings
 #: org.nickvision.money.gnome/blueprints/account_page.blp:48
@@ -219,9 +217,8 @@ msgid "Groups"
 msgstr "Grupos"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:101
-#, fuzzy
 msgid "New Group"
-msgstr "Grupo"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:105
 #: org.nickvision.money.gnome/blueprints/main_window.blp:343
@@ -230,9 +227,8 @@ msgid "New"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:117
-#, fuzzy
 msgid "Transactions"
-msgstr "Sen transaccións"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:125
 msgid "Visualize"
@@ -250,9 +246,8 @@ msgid "Next"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
-#, fuzzy
 msgid "Account"
-msgstr "Importe"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:14
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:71
@@ -448,29 +443,28 @@ msgid "$ is the currency's symbol."
 msgstr "Símbolo da moeda"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:118
-#, fuzzy
 msgid "Password"
-msgstr "Cambiar contrasinal"
+msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:123
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:122
+msgid "If the password is lost, there is no way to restore the file!"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:125
 msgid "New Password"
-msgstr "Cambiar contrasinal"
+msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:129
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:131
 msgid "Confirm Password"
-msgstr "Contrasinal da conta de destino"
+msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:135
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:137
 msgid "Change Password"
 msgstr "Cambiar contrasinal"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:146
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:148
 msgid "Remove Current Password"
-msgstr "Contrasinal da conta de destino"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:24
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
@@ -607,9 +601,8 @@ msgid "About Denaro"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:40
-#, fuzzy
 msgid "Account Menu"
-msgstr "Nome da conta"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:58
 msgid "Recents"
@@ -836,29 +829,27 @@ msgid "Result was copied to clipboard."
 msgstr ""
 
 #: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:209
-#, fuzzy
 msgid "Password changed"
-msgstr "Cambiar contrasinal"
+msgstr ""
 
 #: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:215
 #: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:228
+#, fuzzy
 msgid "Unable to change password"
-msgstr ""
+msgstr "Cambiar contrasinal"
 
 #: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:224
-#, fuzzy
 msgid "Password removed"
-msgstr "Cambiar contrasinal"
+msgstr ""
 
 #: org.nickvision.money.gnome/src/views/accountpage.cpp:60
 #, fuzzy
 msgid "No Transaction Reminders"
-msgstr "Non se atoparon transaccións"
+msgstr "Sen transaccións"
 
 #: org.nickvision.money.gnome/src/views/accountpage.cpp:92
-#, fuzzy
 msgid "Edit Group"
-msgstr "Grupo"
+msgstr ""
 
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:238
 #, fuzzy
@@ -1112,10 +1103,6 @@ msgstr ""
 msgid "Result (Error)"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Transaction"
-#~ msgstr "Sen transaccións"
-
 #~ msgid "(Copy)"
 #~ msgstr "(Copia)"
 
@@ -1215,11 +1202,17 @@ msgstr ""
 #~ msgid "Generated: {0}"
 #~ msgstr "Xerado: {0}"
 
+#~ msgid "Group"
+#~ msgstr "Grupo"
+
 #~ msgid "Group Name"
 #~ msgstr "Nome do grupo"
 
 #~ msgid "Id"
 #~ msgstr "ID"
+
+#~ msgid "Import from Account"
+#~ msgstr "Importar dende conta"
 
 #, csharp-format
 #~ msgid "Imported {0} transaction from file."
@@ -1244,6 +1237,9 @@ msgstr ""
 
 #~ msgid "No End Date"
 #~ msgstr "Sen data final"
+
+#~ msgid "No Transactions Found"
+#~ msgstr "Non se atoparon transaccións"
 
 #~ msgid "No transactions match the specified filters."
 #~ msgstr "Ningunha transacción coincide cos filtro especificados."

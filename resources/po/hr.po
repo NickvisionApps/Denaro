@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 16:41-0400\n"
+"POT-Creation-Date: 2024-05-24 02:00-0400\n"
 "PO-Revision-Date: 2023-09-26 13:22+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -250,7 +250,6 @@ msgid "Next"
 msgstr "Dalje"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
-#, fuzzy
 msgid "Account"
 msgstr "Račun"
 
@@ -451,23 +450,25 @@ msgstr "Znak valute"
 msgid "Password"
 msgstr "Lozinka"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:123
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:122
+msgid "If the password is lost, there is no way to restore the file!"
+msgstr "Ako izgubiš lozinku, datoteka se ne može obnoviti!"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:125
 msgid "New Password"
 msgstr "Nova lozinka"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:129
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:131
 msgid "Confirm Password"
 msgstr "Potvrdi lozinku"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:135
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:137
 msgid "Change Password"
-msgstr "Nova lozinka"
+msgstr "Promijeni lozinku"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:146
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:148
 msgid "Remove Current Password"
-msgstr "Lozinka za račun (opcionalno)"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:24
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
@@ -1136,33 +1137,6 @@ msgstr "U redu"
 msgid "Result (Error)"
 msgstr "Rezultat"
 
-#, fuzzy
-#~ msgid "Change"
-#~ msgstr "Dnevnik promjena"
-
-#, fuzzy
-#~ msgid ""
-#~ "If the password is lost, there is no way to restore the account file!"
-#~ msgstr "Ako izgubiš lozinku, datoteka se ne može obnoviti!"
-
-#~ msgid "Transaction"
-#~ msgstr "Transakcija"
-
-#~ msgid "Group"
-#~ msgstr "Grupa"
-
-#, fuzzy
-#~ msgid "Transfer"
-#~ msgstr "Transfer"
-
-#, fuzzy
-#~ msgid "Export"
-#~ msgstr "Uvezi datoteku"
-
-#, fuzzy
-#~ msgid "No reminders"
-#~ msgstr "Bez podsjetnika"
-
 #~ msgid "(Copy)"
 #~ msgstr "(kopija)"
 
@@ -1275,6 +1249,9 @@ msgstr "Rezultat"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "Stvoreno: {0}"
+
+#~ msgid "Group"
+#~ msgstr "Grupa"
 
 #~ msgid "Group Name"
 #~ msgstr "Ime grupe"
@@ -1421,6 +1398,9 @@ msgstr "Rezultat"
 
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
+
+#~ msgid "Transaction"
+#~ msgstr "Transakcija"
 
 #~ msgid "Type"
 #~ msgstr "Vrsta"
@@ -1625,6 +1605,13 @@ msgstr "Rezultat"
 
 #~ msgid "Clear Backup Folder"
 #~ msgstr "Izbriši mapu sigurnosne kopije"
+
+#~ msgid "No Reminders"
+#~ msgstr "Bez podsjetnika"
+
+#~ msgctxt "Title"
+#~ msgid "Transfer"
+#~ msgstr "Transfer"
 
 #~ msgid "New Transaction"
 #~ msgstr "Nova transakcija"

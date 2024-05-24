@@ -14,7 +14,7 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Account</title>
+<title>Сметка</title>
 <p>This page explains all properties of accounts in <app>Denaro</app>. Most of them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens automatically after you create a new account.</p>
 <p>Each account is stored in a single <file>*.nmoney</file> file. Files created in an older <em>stable</em> version of <app>Denaro</app> can be safely opened in a more recent <em>stable</em> version of the application. Although the app can run on different platforms (Windows and Linux), the <file>*.nmoney</file> files are 100% compatible between platforms as long as they are from the same application version (i.e. V2023.1.0).</p>
 <note style="warning">
@@ -23,19 +23,19 @@
 
 <terms>
 	<item>
-		<title>Name</title>
+		<title>Име</title>
 		<p>Account name is shown in the list of recent accounts and in tabs. A name doesn't have a length limit and it can contain any characters, including emojis.</p>
 	</item>
 	<item>
-		<title>Account Type</title>
+		<title>Вид на сметката</title>
 		<p>There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> and 🟢<em>Business</em>. Account type is only a useful label that is shown in the list of recent accounts and doesn't affect how the application works or what you can do with an account. Each account type has its own color, these colors can be configured in <link xref="configuration">global settings</link>.</p>
 	</item>
 	<item>
-		<title>Default Transaction Type</title>
+		<title>Стандартен вид на операциите</title>
 		<p>When you create a new transaction its type by default will be the same as in this setting.</p>
 	</item>
 	<item>
-        <title>Transaction Reminders Threshold</title>
+        <title>Праг на напомнянията за операции</title>
         <p>The threshold used when showing reminders about upcoming transactions.</p>
     </item>
 	<item>
@@ -51,7 +51,7 @@
 		</note>
 	</item>
 	<item>
-		<title>Use Custom Currency</title>
+		<title>Използване на собствена валута</title>
 		<p>If this option is enabled, <gui>Custom Currency Symbol</gui> will be used instead of currency symbol provided by your system locale.</p>
 	</item>
 	<item>
@@ -82,7 +82,7 @@
 		<p>The size of decimal part of amount values. With "Unlimited" digits there will be as many numbers in decimal part as required to show the precise amount, but there will be no decimal part if the amount is an integer number.</p>
 	</item>
 	<item>
-		<title>Password</title>
+		<title>Парола</title>
 		<p>Each account can be password-protected. Adding a password causes an account to become encrypted (making it impossible to read the data without decrypting it using the password). Be careful: if the password is lost, you won't be able to restore the data! A password can also be changed or removed using the account settings dialog of an open account. Removing a password will decrypt the account.</p>
 	</item>
 	<item>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Account</title>
+<title>Сметка</title>
 <link rel="stylesheet" type="text/css" href="bg.css">
 <script type="text/javascript" src="highlight.pack.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body lang="bg" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Account</span></h1></div>
+<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Сметка</span></h1></div>
 <div class="region">
 <div class="contents pagewide">
 <p class="p">This page explains all properties of accounts in <span class="app">Denaro</span>. Most of them are shown in <span class="gui">Account Settings Dialog</span>. This dialog also opens automatically after you create a new account.</p>
@@ -26,13 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
 </svg><div class="inner"><div class="region"><div class="contents"><p class="p">Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p></div></div></div>
 </div>
 <div class="terms"><div class="inner"><div class="region"><dl class="terms">
-<dt class="terms">Name</dt>
+<dt class="terms">Име</dt>
 <dd class="terms"><p class="p">Account name is shown in the list of recent accounts and in tabs. A name doesn't have a length limit and it can contain any characters, including emojis.</p></dd>
-<dt class="terms">Account Type</dt>
+<dt class="terms">Вид на сметката</dt>
 <dd class="terms"><p class="p">There are 3 account types available: 🟣<span class="em">Checking</span>, 🔵<span class="em">Savings</span> and 🟢<span class="em">Business</span>. Account type is only a useful label that is shown in the list of recent accounts and doesn't affect how the application works or what you can do with an account. Each account type has its own color, these colors can be configured in <span class="link"><a href="configuration.html" title="Configuration">global settings</a></span>.</p></dd>
-<dt class="terms">Default Transaction Type</dt>
+<dt class="terms">Стандартен вид на операциите</dt>
 <dd class="terms"><p class="p">When you create a new transaction its type by default will be the same as in this setting.</p></dd>
-<dt class="terms">Transaction Reminders Threshold</dt>
+<dt class="terms">Праг на напомнянията за операции</dt>
 <dd class="terms"><p class="p">The threshold used when showing reminders about upcoming transactions.</p></dd>
 <dt class="terms">System Currency</dt>
 <dd class="terms">
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </svg><div class="inner"><div class="region"><div class="contents"><p class="p">On Linux, it is possible to set different locales for system language and formats. Changing these settings varies depending on the desktop environment you are using. Despite differences in the location of these settings on the desktop, changing these settings modify system environment variables, such as <span class="code">LANG</span>, <span class="code">LC_TIME</span>, and <span class="code">LC_MONETARY</span>. <span class="app">Denaro</span> will try to use amount and date formats according to these variables. If the app fails to use the expected formats, please make sure the variables are set correctly via the <span class="code">locale</span> command in a terminal. If you found a bug and want to report it, please provide the output of the <span class="code">locale</span> command to allow developers to reproduce your issue with the same settings.</p></div></div></div>
 </div>
 </dd>
-<dt class="terms">Use Custom Currency</dt>
+<dt class="terms">Използване на собствена валута</dt>
 <dd class="terms"><p class="p">If this option is enabled, <span class="gui">Custom Currency Symbol</span> will be used instead of currency symbol provided by your system locale.</p></dd>
 <dt class="terms">Custom Currency Symbol</dt>
 <dd class="terms"><p class="p">Up to 3 characters or 1 emoji. It can't be a number.</p></dd>
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <dd class="terms"><p class="p">Up to 2 characters or 1 emoji.</p></dd>
 <dt class="terms">Custom Currency Decimal Digits</dt>
 <dd class="terms"><p class="p">The size of decimal part of amount values. With "Unlimited" digits there will be as many numbers in decimal part as required to show the precise amount, but there will be no decimal part if the amount is an integer number.</p></dd>
-<dt class="terms">Password</dt>
+<dt class="terms">Парола</dt>
 <dd class="terms"><p class="p">Each account can be password-protected. Adding a password causes an account to become encrypted (making it impossible to read the data without decrypting it using the password). Be careful: if the password is lost, you won't be able to restore the data! A password can also be changed or removed using the account settings dialog of an open account. Removing a password will decrypt the account.</p></dd>
 <dt class="terms">Sort by Id, Date or Amount</dt>
 <dd class="terms"><p class="p">Each account stores whether to sort transactions in the main window by their id, date or amount. Every time you change this, it will be saved to the account file and restored when you reopen the account.</p></dd>

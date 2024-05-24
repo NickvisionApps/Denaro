@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 16:41-0400\n"
+"POT-Creation-Date: 2024-05-24 02:00-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -248,7 +248,6 @@ msgid "Next"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
-#, fuzzy
 msgid "Account"
 msgstr "Konto"
 
@@ -453,23 +452,25 @@ msgstr ""
 msgid "Password"
 msgstr "Password"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:123
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:122
+msgid "If the password is lost, there is no way to restore the file!"
+msgstr "If the password is lost, there is no way to restore your account!"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:125
 msgid "New Password"
 msgstr "New Password"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:129
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:131
 msgid "Confirm Password"
 msgstr "Confirm Password"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:135
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:137
 msgid "Change Password"
-msgstr "New Password"
+msgstr "Change Password"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:146
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:148
 msgid "Remove Current Password"
-msgstr "Destination Account Password (Invalid)"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:24
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
@@ -1141,31 +1142,6 @@ msgstr "OK"
 msgid "Result (Error)"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Change"
-#~ msgstr "Vad är nytt"
-
-#, fuzzy
-#~ msgid ""
-#~ "If the password is lost, there is no way to restore the account file!"
-#~ msgstr "If the password is lost, there is no way to restore your account!"
-
-#, fuzzy
-#~ msgid "Transaction"
-#~ msgstr "Transaktioner"
-
-#, fuzzy
-#~ msgid "Group"
-#~ msgstr "Grupper"
-
-#, fuzzy
-#~ msgid "Transfer"
-#~ msgstr "Överför Pengar"
-
-#, fuzzy
-#~ msgid "Export"
-#~ msgstr "Importera från Fil"
-
 #~ msgid "(Copy)"
 #~ msgstr "(Copy)"
 
@@ -1214,6 +1190,10 @@ msgstr ""
 #~ msgstr "Destination Account Password (Required)"
 
 #, fuzzy
+#~ msgid "Group"
+#~ msgstr "Grupper"
+
+#, fuzzy
 #~ msgid "Group Name"
 #~ msgstr "Grupper"
 
@@ -1247,6 +1227,10 @@ msgstr ""
 #, fuzzy
 #~ msgid "The passwords do not match."
 #~ msgstr "The password of the account was changed."
+
+#, fuzzy
+#~ msgid "Transaction"
+#~ msgstr "Transaktioner"
 
 #, fuzzy
 #~ msgid "Unable to export account to file."
@@ -1306,6 +1290,11 @@ msgstr ""
 #, fuzzy
 #~ msgid "Backup"
 #~ msgstr "Tillbaka"
+
+#, fuzzy
+#~ msgctxt "Title"
+#~ msgid "Transfer"
+#~ msgstr "Överför Pengar"
 
 #~ msgid "New Transaction"
 #~ msgstr "Ny Transaktion"

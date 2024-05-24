@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 16:41-0400\n"
+"POT-Creation-Date: 2024-05-24 02:00-0400\n"
 "PO-Revision-Date: 2023-07-09 22:27+0000\n"
 "Last-Translator: Luci Draws <dpkg.luci@protonmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/nickvision-"
@@ -440,19 +440,23 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:123
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:122
+msgid "If the password is lost, there is no way to restore the file!"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:125
 msgid "New Password"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:129
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:131
 msgid "Confirm Password"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:135
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:137
 msgid "Change Password"
 msgstr ""
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:146
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:148
 msgid "Remove Current Password"
 msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 16:41-0400\n"
+"POT-Creation-Date: 2024-05-24 02:00-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -245,7 +245,6 @@ msgid "Next"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
-#, fuzzy
 msgid "Account"
 msgstr "Konto"
 
@@ -448,23 +447,25 @@ msgstr "Valuta symbol"
 msgid "Password"
 msgstr "Kodeord"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:123
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:122
+msgid "If the password is lost, there is no way to restore the file!"
+msgstr "Hvis du glemmer kodeordet kan kontoen ikke blive genskabt!"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:125
 msgid "New Password"
 msgstr "Ny kodeord"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:129
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:131
 msgid "Confirm Password"
 msgstr "Bekræft kodeord"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:135
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:137
 msgid "Change Password"
-msgstr "Ny kodeord"
+msgstr "Skift kodeord"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:146
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:148
 msgid "Remove Current Password"
-msgstr "Kodeord på destinations konto (ugyldig)"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:24
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
@@ -1144,29 +1145,6 @@ msgstr "OK"
 msgid "Result (Error)"
 msgstr "Resultat"
 
-#, fuzzy
-#~ msgid "Change"
-#~ msgstr "Ændringer"
-
-#, fuzzy
-#~ msgid ""
-#~ "If the password is lost, there is no way to restore the account file!"
-#~ msgstr "Hvis du glemmer kodeordet kan kontoen ikke blive genskabt!"
-
-#~ msgid "Transaction"
-#~ msgstr "Overførsel"
-
-#~ msgid "Group"
-#~ msgstr "Gruppe"
-
-#, fuzzy
-#~ msgid "Transfer"
-#~ msgstr "Overførsel"
-
-#, fuzzy
-#~ msgid "Export"
-#~ msgstr "Importer fra fil"
-
 #~ msgid "(Copy)"
 #~ msgstr "(Kopi)"
 
@@ -1264,6 +1242,9 @@ msgstr "Resultat"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "Genereret: {0}"
+
+#~ msgid "Group"
+#~ msgstr "Gruppe"
 
 #~ msgid "Group Name"
 #~ msgstr "Gruppenavn"
@@ -1393,6 +1374,9 @@ msgstr "Resultat"
 #~ "\n"
 #~ "Hvis du ændrer i den oprindelig overførsel, vil den \n"
 #~ "fjerne tilknytningen til samtlige gentagelserne."
+
+#~ msgid "Transaction"
+#~ msgstr "Overførsel"
 
 #~ msgid "Type"
 #~ msgstr "Type"
@@ -1531,6 +1515,11 @@ msgstr "Resultat"
 #, fuzzy
 #~ msgid "Backup"
 #~ msgstr "Tilbage"
+
+#, fuzzy
+#~ msgctxt "Title"
+#~ msgid "Transfer"
+#~ msgstr "Overførsel"
 
 #~ msgid "New Transaction"
 #~ msgstr "Ny overførsel"

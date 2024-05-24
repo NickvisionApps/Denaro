@@ -7,121 +7,125 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 16:41-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2024-05-24 02:00-0400\n"
+"PO-Revision-Date: 2024-04-11 20:57+0000\n"
+"Last-Translator: twlvnn <kraft_werk@tutanota.com>\n"
+"Language-Team: Bulgarian <https://hosted.weblate.org/projects/nickvision-"
+"money/app/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: libdenaro/src/models/account.cpp:53
 #: org.nickvision.money.gnome/src/views/accountpage.cpp:89
 msgid "Ungrouped"
-msgstr ""
+msgstr "Негрупирани"
 
 #: libdenaro/src/models/account.cpp:54
 msgid "Transactions without a group"
-msgstr ""
+msgstr "Операции без група"
 
 #: libdenaro/src/models/account.cpp:495
-#, c++-format
+#, fuzzy, c++-format
 msgid "Transfer to {}"
-msgstr ""
+msgstr "Прехвърляне към {0}"
 
 #: libdenaro/src/models/account.cpp:512
-#, c++-format
+#, fuzzy, c++-format
 msgid "Transfer from {}"
-msgstr ""
+msgstr "Прехвърляне от {0}"
 
 #: libdenaro/src/models/dashboardgroup.cpp:23
 #: libdenaro/src/models/dashboardgroup.cpp:27
-#, c++-format
+#, fuzzy, c++-format
 msgid "{} from {}"
-msgstr ""
+msgstr "{0} от {1}"
 
 #: libdenaro/src/models/transactionreminder.cpp:61
 msgid "Tomorrow"
-msgstr ""
+msgstr "Утре"
 
 #: libdenaro/src/models/transactionreminder.cpp:65
 msgid "One week from now"
-msgstr ""
+msgstr "Една седмица от сега"
 
 #: libdenaro/src/models/transactionreminder.cpp:69
 msgid "One month from now"
-msgstr ""
+msgstr "Един месец от сега"
 
 #: libdenaro/src/models/transactionreminder.cpp:73
 msgid "Two months from now"
-msgstr ""
+msgstr "Два месеца от сега"
 
 #: libdenaro/src/models/transactionreminder.cpp:77
-#, c++-format
+#, fuzzy, c++-format
 msgid "{} days from now"
-msgstr ""
+msgstr "Два месеца от сега"
 
 #: libdenaro/src/controllers/accountsettingsdialogcontroller.cpp:22
 #: libdenaro/src/controllers/newaccountdialogcontroller.cpp:31
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:54
 msgid "Your system reported that your currency is"
-msgstr ""
+msgstr "Системата ви съобщи, че валутата ви е"
 
 #: libdenaro/src/controllers/accountviewcontroller.cpp:20
+#, fuzzy
 msgid "Unable to login to the account. The provided password may be invalid."
-msgstr ""
+msgstr "Неуспешно вписване в сметката. Дадената парола е неправилна."
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:31
 msgid "Denaro"
-msgstr ""
+msgstr "Denaro"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:32
 msgid "Manage your personal finances"
-msgstr ""
+msgstr "Управлявайте личните си финанси"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:36
 msgid "Matrix Chat"
-msgstr ""
+msgstr "Matrix чат"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+#, fuzzy
 msgid "Contributors on GitHub"
-msgstr ""
+msgstr "Сътрудници в GitHub ❤️"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:40
 msgid "Fyodor Sobolev"
-msgstr ""
+msgstr "Fyodor Sobolev"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:43
 msgid "David Lapshin"
-msgstr ""
+msgstr "David Lapshin"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:45
 msgid "translator-credits"
-msgstr ""
+msgstr "twlvnn <kraft_werk@tutanota.com>"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:138
 msgctxt "Night"
 msgid "Good Morning!"
-msgstr ""
+msgstr "Добро утро!"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:142
 msgctxt "Morning"
 msgid "Good Morning!"
-msgstr ""
+msgstr "Добро утро!"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:146
 msgid "Good Afternoon!"
-msgstr ""
+msgstr "Добър ден!"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:150
 msgid "Good Evening!"
-msgstr ""
+msgstr "Добър вечер!"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:152
 msgid "Good Day!"
-msgstr ""
+msgstr "Добър ден!"
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:214
 msgid "New update available"
@@ -132,40 +136,45 @@ msgid "Unable to download and install update"
 msgstr ""
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:272
+#, fuzzy
 msgid "This account already exists."
-msgstr ""
+msgstr "Тази сметка вече е открита."
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:278
+#, fuzzy
 msgid "This account cannot be overwritten."
-msgstr ""
+msgstr "Тази сметка вече е открита."
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:316
 msgid "The file is not a Denaro account file."
 msgstr ""
 
 #: libdenaro/src/controllers/mainwindowcontroller.cpp:321
+#, fuzzy
 msgid "The account is already open."
-msgstr ""
+msgstr "Тази сметка вече е открита."
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:6
 msgid "Import from File"
-msgstr ""
+msgstr "Внасяне от файл"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:10
+#, fuzzy
 msgid "Export to CSV"
-msgstr ""
+msgstr "Изнасяне във файл"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:11
+#, fuzzy
 msgid "Export to PDF"
-msgstr ""
+msgstr "Изнасяне във файл"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:17
 msgid "Overview"
-msgstr ""
+msgstr "Преглед"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:31
 msgid "Transfer Money"
-msgstr ""
+msgstr "Прехвърляне на пари"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:37
 msgid "Import and Export"
@@ -174,58 +183,60 @@ msgstr ""
 #: org.nickvision.money.gnome/blueprints/account_page.blp:44
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:7
 msgid "Account Settings"
-msgstr ""
+msgstr "Настройки на сметката"
 
 #. Localize Strings
 #: org.nickvision.money.gnome/blueprints/account_page.blp:48
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:82
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
+#, fuzzy
 msgid "Settings"
-msgstr ""
+msgstr "Настройки на сметката"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:56
 msgid "Total"
-msgstr ""
+msgstr "Общо"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:64
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
 msgid "Income"
-msgstr ""
+msgstr "Доходи"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:77
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
 msgid "Expense"
-msgstr ""
+msgstr "Разходи"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:91
 msgid "Reminders"
-msgstr ""
+msgstr "Напомняния"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:95
 msgid "Groups"
-msgstr ""
+msgstr "Групи"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:101
 msgid "New Group"
-msgstr ""
+msgstr "Нова група"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:105
 #: org.nickvision.money.gnome/blueprints/main_window.blp:343
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:83
+#, fuzzy
 msgid "New"
-msgstr ""
+msgstr "Нова"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:117
 msgid "Transactions"
-msgstr ""
+msgstr "Операции"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:125
 msgid "Visualize"
-msgstr ""
+msgstr "Визуализиране"
 
 #: org.nickvision.money.gnome/blueprints/account_page.blp:143
 msgid "Previous"
@@ -236,24 +247,24 @@ msgstr ""
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:157
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:252
 msgid "Next"
-msgstr ""
+msgstr "Следващо"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
 msgid "Account"
-msgstr ""
+msgstr "Сметка"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:14
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:71
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:29
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:225
 msgid "Account Name"
-msgstr ""
+msgstr "Име на сметката"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:18
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:130
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:39
 msgid "Account Type"
-msgstr ""
+msgstr "Вид на сметката"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:20
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
@@ -262,7 +273,7 @@ msgstr ""
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:40
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:425
 msgid "Checking"
-msgstr ""
+msgstr "Разплащателна"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:20
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
@@ -270,7 +281,7 @@ msgstr ""
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:370
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:428
 msgid "Savings"
-msgstr ""
+msgstr "Спестовна"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:20
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
@@ -279,19 +290,19 @@ msgstr ""
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:42
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:431
 msgid "Business"
-msgstr ""
+msgstr "Бизнес"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:27
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:137
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:43
 msgid "Default Transaction Type"
-msgstr ""
+msgstr "Стандартен вид на операциите"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:34
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:144
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:46
 msgid "Transaction Reminders Threshold"
-msgstr ""
+msgstr "Праг на напомнянията за операции"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:35
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:145
@@ -305,44 +316,44 @@ msgstr ""
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:148
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:48
 msgid "Never"
-msgstr ""
+msgstr "Никога"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:38
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:148
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:49
 msgid "One Day Before"
-msgstr ""
+msgstr "Един ден по-рано"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:38
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:148
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:50
 msgid "One Week Before"
-msgstr ""
+msgstr "Една седмица по-рано"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:38
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:148
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:51
 msgid "One Month Before"
-msgstr ""
+msgstr "Един месец по-рано"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:38
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:148
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:52
 msgid "Two Months Before"
-msgstr ""
+msgstr "Два месеца по-рано"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:45
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:16
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:53
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
 msgid "Currency"
-msgstr ""
+msgstr "Валута"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:56
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:188
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:56
 msgid "Use Custom Currency"
-msgstr ""
+msgstr "Използване на собствена валута"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:61
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:193
@@ -363,7 +374,7 @@ msgstr ""
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:63
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:228
 msgid "Decimal Separator"
-msgstr ""
+msgstr "Десетичен знак"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:71
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:86
@@ -379,244 +390,257 @@ msgstr ""
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:67
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:229
 msgid "Group Separator"
-msgstr ""
+msgstr "Разделител на група"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:86
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:218
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:71
 msgid "None"
-msgstr ""
+msgstr "Без"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:99
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:231
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:73
 msgid "Decimal Digits"
-msgstr ""
+msgstr "Десетични цифри"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:101
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:74
 msgid "Two"
-msgstr ""
+msgstr "Две"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:101
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:75
 msgid "Three"
-msgstr ""
+msgstr "Три"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:101
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:76
 msgid "Four"
-msgstr ""
+msgstr "Четири"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:101
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:77
 msgid "Five"
-msgstr ""
+msgstr "Пет"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:101
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:78
 msgid "Six"
-msgstr ""
+msgstr "Шест"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:106
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:238
 msgid "Amount Display Style"
-msgstr ""
+msgstr "Стил на показване на сумата"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:107
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:239
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:80
+#, fuzzy
 msgid "$ is the currency's symbol."
-msgstr ""
+msgstr "Символ на валутата"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:118
 msgid "Password"
-msgstr ""
+msgstr "Парола"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:123
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:122
+msgid "If the password is lost, there is no way to restore the file!"
+msgstr "Ако паролата е загубена, няма как да се възстанови файлът!"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:125
 msgid "New Password"
-msgstr ""
+msgstr "Нова парола"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:129
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:131
 msgid "Confirm Password"
-msgstr ""
+msgstr "Потвърждаване на нова парола"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:135
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:137
 msgid "Change Password"
-msgstr ""
+msgstr "Смяна на паролата"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:146
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:148
 msgid "Remove Current Password"
 msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:24
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+#, fuzzy
 msgid "Switch Currencies"
-msgstr ""
+msgstr "Разменяне на валутите"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:27
 msgid "Switch"
-msgstr ""
+msgstr "Разменяне"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:36
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
 msgid "Source"
-msgstr ""
+msgstr "Източник"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:40
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
 msgid "Result"
-msgstr ""
+msgstr "Резултат"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:45
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
 msgid "Amount"
-msgstr ""
+msgstr "Сума"
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:55
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:30
 msgid "Copy Result Amount"
-msgstr ""
+msgstr "Копиране на сумата на резултата"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:19
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 #. Localize Strings
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:39
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:25
 msgid "New Account"
-msgstr ""
+msgstr "Нова сметка"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:40
+#, fuzzy
 msgid "Use this wizard to get the most out of your new account"
 msgstr ""
+"Използвайте този съветник, за да се възползвате възможно най-много от "
+"сметката си"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:45
 msgid "Let's Start"
-msgstr ""
+msgstr "Да започнем"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:62
 msgid "Storage Location"
-msgstr ""
+msgstr "Място за съхранение"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:75
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:31
+#, fuzzy
 msgid "Account Password"
-msgstr ""
+msgstr "Парола на сметката (незадължителен)"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:79
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:33
 msgid "Folder"
-msgstr ""
+msgstr "Папка"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:86
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:121
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:34
 msgid "Select Folder"
-msgstr ""
+msgstr "Избиране на папка"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:95
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:35
 msgid "Overwrite Existing Accounts"
-msgstr ""
+msgstr "Презаписване на съществуващи сметки"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:121
 msgid "Account Options"
-msgstr ""
+msgstr "Настройки на сметката"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:174
 msgid "Account Currency"
-msgstr ""
+msgstr "Валута на сметката"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:269
 msgid "Import Existing Information"
-msgstr ""
+msgstr "Внасяне на съществуваща информация"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:278
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:86
+#, fuzzy
 msgid ""
 "Upload a supported file to use to import existing information into the new "
 "account. Denaro supports CSV, OFX, and QIF files."
 msgstr ""
+"Качете валиден файл, който да използвате за внасяне на съществуваща "
+"информация в новия акаунт."
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:285
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:87
 msgid "Import File"
-msgstr ""
+msgstr "Внасяне на файл"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:295
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:89
 msgid "Select File"
-msgstr ""
+msgstr "Избиране на файл"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:304
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:90
 msgid "Clear File"
-msgstr ""
+msgstr "Изчистване на файл"
 
 #: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:318
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:27
 msgid "Create"
-msgstr ""
+msgstr "Създаване"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:5
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:8
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:30
 msgid "Preferences"
-msgstr ""
+msgstr "Настройки"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:6
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:35
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Клавишни комбинации"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:7
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:73
 msgid "Help"
-msgstr ""
+msgstr "Помощ"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:8
 msgid "About Denaro"
-msgstr ""
+msgstr "Относно „Denaro“"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:40
 msgid "Account Menu"
-msgstr ""
+msgstr "Меню на сметката"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:58
 msgid "Recents"
-msgstr ""
+msgstr "Скорошни"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:68
 #: org.nickvision.money.gnome/blueprints/main_window.blp:344
 msgid "New Account (Ctrl+N)"
-msgstr ""
+msgstr "Нова сметка (Ctrl+N)"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:73
 #: org.nickvision.money.gnome/blueprints/main_window.blp:353
 msgid "Open Account (Ctrl+O)"
-msgstr ""
+msgstr "Отваряне на сметка (Ctrl+O)"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:77
 #: org.nickvision.money.gnome/blueprints/main_window.blp:352
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:152
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:84
 msgid "Open"
-msgstr ""
+msgstr "Отваряне"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:90
 #: org.nickvision.money.gnome/blueprints/main_window.blp:274
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:399
 msgid "No Recent Accounts"
-msgstr ""
+msgstr "Няма скорошни сметки"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:110
 #: org.nickvision.money.gnome/blueprints/main_window.blp:128
@@ -626,11 +650,11 @@ msgstr ""
 #: org.nickvision.money.gnome/blueprints/main_window.blp:330
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:418
 msgid "Remove"
-msgstr ""
+msgstr "Премахване"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:160
 msgid "Main Menu"
-msgstr ""
+msgstr "Основно меню"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:183
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:245
@@ -644,156 +668,170 @@ msgstr ""
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:81
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
 msgid "Currency Converter"
-msgstr ""
+msgstr "Преобразувател на валути"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:210
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+#, fuzzy
 msgid "Accounts"
-msgstr ""
+msgstr "Сметка"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:229
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:256
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:71
 msgid "Dashboard"
-msgstr ""
+msgstr "Табло"
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:262
+#, fuzzy
 msgid ""
 "Create or open an account to get started. You may also drag a file into the "
 "app from your file browser"
 msgstr ""
+"Създадете или отворете сметка, за да започнете. Можете също така да "
+"изтеглите файл в приложението от файловия си браузър."
 
 #: org.nickvision.money.gnome/blueprints/main_window.blp:370
+#, fuzzy
 msgid "No Accounts Open"
-msgstr ""
+msgstr "Вид на сметката"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:12
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
 msgid "User Interface"
-msgstr ""
+msgstr "Потребителски интерфейс"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:15
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
 msgid "Theme"
-msgstr ""
+msgstr "Тема"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
 msgctxt "Theme"
 msgid "Light"
-msgstr ""
+msgstr "Светла"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
 msgctxt "Theme"
 msgid "Dark"
-msgstr ""
+msgstr "Тъмна"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
 msgctxt "Theme"
 msgid "System"
-msgstr ""
+msgstr "Система"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:27
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
 msgid "Colors"
-msgstr ""
+msgstr "Цветове"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:28
 msgid "Customize the colors used by Denaro."
-msgstr ""
+msgstr "Персонализирайте цветовете, използвани от „Denaro“."
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:36
 msgid "Transaction Default Color"
-msgstr ""
+msgstr "Стандартен цвят на операциите"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:37
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
 msgid ""
 "A change in this setting will only be applied to newly added transactions."
 msgstr ""
+"Промяната на тази настройка ще се прилага само за новодобавени операции."
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:47
 msgid "Transfer Default Color"
-msgstr ""
+msgstr "Стандартен цвят на преводите"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:48
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
 msgid "A change in this setting will only be applied to new transfers."
-msgstr ""
+msgstr "Промяната на тази настройка ще се прилага само за нови прехвърляния."
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:58
 msgid "Group Default Color"
-msgstr ""
+msgstr "Стандартен цвят на групите"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:59
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
+#, fuzzy
 msgid "A change in this setting will only be applied to newly added groups."
-msgstr ""
+msgstr "Промяната на тази настройка ще се прилага само за нови групи."
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:71
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
 msgid "Locale"
-msgstr ""
+msgstr "Местоположение"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:74
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
 msgid "Insert Decimal Separator"
-msgstr ""
+msgstr "Вмъкване на десетичен знак"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:75
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
+#, fuzzy
 msgid ""
 "For the selected keys, the account's decimal separator will be inserted "
 "instead of the keyboard's value."
 msgstr ""
+"Зададете за кои натиснати клавиши да бъде вмъкнат десетичният знак на "
+"местоположението в полето за сумата."
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:78
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:37
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:58
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
+#, fuzzy
 msgid "Off"
-msgstr ""
+msgstr "Изкл."
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:78
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:41
 msgid "Numpad period only"
-msgstr ""
+msgstr "Само точка на цифровата клавиатура"
 
 #: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:78
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:42
 msgid "Period and Comma"
-msgstr ""
+msgstr "Точка и запетая"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
+#, fuzzy
 msgctxt "Shortcut"
 msgid "Account"
-msgstr ""
+msgstr "Сметка"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:323
 msgid "Open Account"
-msgstr ""
+msgstr "Отваряне на сметка"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
+#, fuzzy
 msgctxt "Shortcut"
 msgid "Application"
-msgstr ""
+msgstr "Програма"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:40
+#, fuzzy
 msgid "About Application"
-msgstr ""
+msgstr "Програма"
 
 #: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:45
 msgid "Quit"
-msgstr ""
+msgstr "Спиране на програмата"
 
 #: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:27
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
 msgid "Error"
-msgstr ""
+msgstr "Грешка"
 
 #: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:27
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
@@ -801,41 +839,48 @@ msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
 "report a bug."
 msgstr ""
+"Неуспешно зареждане на данните за валутата. Моля, опитайте отново. "
+"Докладвайте за грешка ако продължава да се появява."
 
 #: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:28
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:26
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
 msgid "Close"
-msgstr ""
+msgstr "Затваряне"
 
 #: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:102
 msgid "Result was copied to clipboard."
-msgstr ""
+msgstr "Резултатът е копиран в буфера за обмен."
 
 #: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:209
+#, fuzzy
 msgid "Password changed"
-msgstr ""
+msgstr "Сила на паролата"
 
 #: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:215
 #: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:228
+#, fuzzy
 msgid "Unable to change password"
-msgstr ""
+msgstr "Смяна на паролата"
 
 #: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:224
+#, fuzzy
 msgid "Password removed"
-msgstr ""
+msgstr "Сила на паролата"
 
 #: org.nickvision.money.gnome/src/views/accountpage.cpp:60
+#, fuzzy
 msgid "No Transaction Reminders"
-msgstr ""
+msgstr "Няма операции"
 
 #: org.nickvision.money.gnome/src/views/accountpage.cpp:92
 msgid "Edit Group"
-msgstr ""
+msgstr "Редактиране на групата"
 
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:238
+#, fuzzy
 msgid "Select Import File"
-msgstr ""
+msgstr "Внасяне на файл"
 
 #: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:240
 msgid "All Files (*.csv, *.ofx, *.qif)"
@@ -856,57 +901,66 @@ msgstr ""
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:204
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:77
 msgid "GitHub Repo"
-msgstr ""
+msgstr "GitHub проект"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:325
+#, fuzzy
 msgid "Nickvision Denaro Account (*.nmoney)"
-msgstr ""
+msgstr "„Nickvision Denaro“ сметка"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:404
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:32
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:456
+#, fuzzy
 msgid "Enter password here"
-msgstr ""
+msgstr "Въведете бележките тук"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:412
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:465
 msgid "Cancel"
-msgstr ""
+msgstr "Отказване"
 
 #: org.nickvision.money.gnome/src/views/mainwindow.cpp:412
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:464
 msgid "Unlock"
-msgstr ""
+msgstr "Отключване"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:28
+#, fuzzy
 msgid "Storage"
-msgstr ""
+msgstr "Място за съхранение"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:30
+#, fuzzy
 msgid "Enter name here"
-msgstr ""
+msgstr "Въведете бележките тук"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:36
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:57
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+#, fuzzy
 msgid "On"
-msgstr ""
+msgstr "Отваряне"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:38
+#, fuzzy
 msgid "Options"
-msgstr ""
+msgstr "Действия"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:41
+#, fuzzy
 msgid "Saving"
-msgstr ""
+msgstr "Спестовна"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:60
+#, fuzzy
 msgid "Enter symbol here"
-msgstr ""
+msgstr "Въведете бележките тук"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:62
+#, fuzzy
 msgid "Enter code here"
-msgstr ""
+msgstr "Въведете бележките тук"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:64
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:68
@@ -923,49 +977,56 @@ msgid "'"
 msgstr ""
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:79
+#, fuzzy
 msgid "Amount Style"
-msgstr ""
+msgstr "Стил на показване на сумата"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:85
+#, fuzzy
 msgid "Import"
-msgstr ""
+msgstr "Внасяне на файл"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:88
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:152
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:199
+#, fuzzy
 msgid "No File Selected"
-msgstr ""
+msgstr "Няма избрана сметка"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:235
+#, fuzzy
 msgid "Account Name (Invalid)"
-msgstr ""
+msgstr "Име на сметката (отворена)"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:296
+#, fuzzy
 msgid "Symbol (Empty)"
-msgstr ""
+msgstr "Символ на валутата (празен)"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:300
+#, fuzzy
 msgid "Code (Empty)"
-msgstr ""
+msgstr "Име (празен)"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:304
 msgid "Decimal Separator (Empty)"
-msgstr ""
+msgstr "Десетичен знак (празен)"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:308
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:314
 msgid "Decimal Separator (Invalid)"
-msgstr ""
+msgstr "Десетичен знак (неправилен)"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:309
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:319
 msgid "Group Separator (Invalid)"
-msgstr ""
+msgstr "Разделител на група (неправилен)"
 
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:313
 #: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:318
+#, fuzzy
 msgid "Symbol (Invalid)"
-msgstr ""
+msgstr "Символ на валутата (неправилен)"
 
 #. Localize Strings
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:69
@@ -977,8 +1038,9 @@ msgid "Check for Updates"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+#, fuzzy
 msgid "Copy Debug Information"
-msgstr ""
+msgstr "Изнасяне на всичката информация"
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:76
 msgid "Changelog"
@@ -1030,38 +1092,46 @@ msgid ""
 "Create or open an account to get started. You may also drag a file into the "
 "app from your file browser."
 msgstr ""
+"Създадете или отворете сметка, за да започнете. Можете също така да "
+"изтеглите файл в приложението от файловия си браузър."
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:172
+#, fuzzy
 msgid "Drop here to open account"
-msgstr ""
+msgstr "Неуспешно презаписване на отворена сметка."
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:236
 msgid "Update"
 msgstr ""
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:305
+#, fuzzy
 msgid "Debug information copied to clipboard."
-msgstr ""
+msgstr "Резултатът е копиран в буфера за обмен."
 
 #: org.nickvision.money.winui/MainWindow.xaml.cpp:462
+#, fuzzy
 msgid "Unlock Account"
-msgstr ""
+msgstr "Затваряне на сметката"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
 msgid "Automatically Check for Updates"
 msgstr ""
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
+#, fuzzy
 msgid "Default Transaction Color"
-msgstr ""
+msgstr "Стандартен вид на операциите"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
+#, fuzzy
 msgid "Default Transfer Color"
-msgstr ""
+msgstr "Стандартен цвят на преводите"
 
 #: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
+#, fuzzy
 msgid "Default Group Color"
-msgstr ""
+msgstr "Стандартен цвят на групите"
 
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:28
 msgid "Enter source amount"
@@ -1072,5 +1142,570 @@ msgid "OK"
 msgstr ""
 
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:118
+#, fuzzy
 msgid "Result (Error)"
-msgstr ""
+msgstr "Резултат"
+
+#~ msgid "(Copy)"
+#~ msgstr "(Копиране)"
+
+#, csharp-format
+#~ msgid "{0} tag"
+#~ msgid_plural "{0} tags"
+#~ msgstr[0] "{0} етикет"
+#~ msgstr[1] "{0} етикети"
+
+#, csharp-format
+#~ msgid "{0} transaction"
+#~ msgid_plural "{0} transactions"
+#~ msgstr[0] "{0} операция"
+#~ msgstr[1] "{0} операции"
+
+#~ msgid "Account Name (Exists)"
+#~ msgstr "Име на сметката (съществува)"
+
+#~ msgid "Add"
+#~ msgstr "Добавяне"
+
+#~ msgid "Add a new transaction or import transactions from a file."
+#~ msgstr "Добавете нова операция или внесете операции от файл."
+
+#~ msgid "Add Password To PDF?"
+#~ msgstr "Искате ли да добавите парола към този PDF?"
+
+#~ msgid "All files"
+#~ msgstr "Всички файлове"
+
+#~ msgid "Amount (Invalid)"
+#~ msgstr "Сума (неправилен)"
+
+#~ msgid "Apply"
+#~ msgstr "Прилагане"
+
+#~ msgid ""
+#~ "Are you sure you want to delete this group?\n"
+#~ "This action is irreversible."
+#~ msgstr ""
+#~ "Сигурни ли сте, че искате да премахнете тази група?\n"
+#~ "Това действие е необратимо."
+
+#~ msgid ""
+#~ "Are you sure you want to delete this transaction?\n"
+#~ "This action is irreversible."
+#~ msgstr ""
+#~ "Сигурни ли сте, че искате да премахнете тази операция?\n"
+#~ "Това действие е необратимо."
+
+#~ msgid "Can't access the selected folder, check Flatpak permissions."
+#~ msgstr "Няма достъп до избраната папка, проверете правата на Flatpak."
+
+#~ msgid "Currency Code"
+#~ msgstr "Код на валутата"
+
+#~ msgid "Currency Code (Empty)"
+#~ msgstr "Код на валутата (празен)"
+
+#~ msgid "DaPigGuy"
+#~ msgstr "DaPigGuy"
+
+#~ msgid "Date"
+#~ msgstr "Дата"
+
+#~ msgid "Delete Existing"
+#~ msgstr "Премахване на съществуващ"
+
+#~ msgid "Delete Group"
+#~ msgstr "Премахване на групата"
+
+#~ msgid "Delete Only Source"
+#~ msgstr "Премахване само на източника"
+
+#~ msgid "Delete Source and Generated"
+#~ msgstr "Премахване на източника и генерирания"
+
+#~ msgid "Delete Transaction"
+#~ msgstr "Премахване на операцията"
+
+#~ msgid "Description"
+#~ msgstr "Описание"
+
+#~ msgid "Description (Empty)"
+#~ msgstr "Описание (празен)"
+
+#~ msgid "Destination Account"
+#~ msgstr "Целева сметка"
+
+#~ msgid "Destination Account (Invalid)"
+#~ msgstr "Целева сметка (неправилен)"
+
+#~ msgid "Destination Account Password"
+#~ msgstr "Парола на целевата сметка"
+
+#~ msgid "Destination Account Password (Invalid)"
+#~ msgstr "Парола на целевата сметка (неправилен)"
+
+#~ msgid "Destination Account Password (Required)"
+#~ msgstr "Парола на целевата сметка (задължителен)"
+
+#~ msgid "Disassociate Existing"
+#~ msgstr "Прекъсване на връзката на съществуващото"
+
+#~ msgid "Exported account to file successfully."
+#~ msgstr "Сметката е изнесена във файла успешно."
+
+#, csharp-format
+#~ msgid "Generated: {0}"
+#~ msgstr "Генерирано: {0}"
+
+#~ msgid "Group"
+#~ msgstr "Група"
+
+#~ msgid "Group Name"
+#~ msgstr "Име на група"
+
+#~ msgid "Id"
+#~ msgstr "Идентификатор"
+
+#~ msgid "Import from Account"
+#~ msgstr "Внасяне от сметка"
+
+#, csharp-format
+#~ msgid "Imported {0} transaction from file."
+#~ msgid_plural "Imported {0} transactions from file."
+#~ msgstr[0] "Внесена е {0} операция от файл."
+#~ msgstr[1] "Внесени са {0} операции от файл."
+
+#~ msgid "N/A"
+#~ msgstr "Липсва"
+
+#~ msgid "Name"
+#~ msgstr "Име"
+
+#~ msgid "Name (Exists)"
+#~ msgstr "Име (съществува)"
+
+#~ msgid "Nicholas Logozzo"
+#~ msgstr "Nicholas Logozzo"
+
+#~ msgid "No"
+#~ msgstr "Не"
+
+#~ msgid "No End Date"
+#~ msgstr "Без крайна дата"
+
+#~ msgid "No Transactions Found"
+#~ msgstr "Няма намерени операции"
+
+#~ msgid "No transactions match the specified filters."
+#~ msgstr "Няма транзакции, които да отговарят на зададените филтри."
+
+#~ msgid "Notes"
+#~ msgstr "Бележки"
+
+#~ msgid "Nothing to import from the file."
+#~ msgstr "Няма какво да се внесе от файла."
+
+#~ msgid "Page {0}"
+#~ msgstr "Страница {0}"
+
+#~ msgid "PDF Password"
+#~ msgstr "PDF парола"
+
+#~ msgid "Receipt"
+#~ msgstr "Разписка"
+
+#~ msgid "Receipt (File Inaccessible)"
+#~ msgstr "Разписка (файлът е недостъпен)"
+
+#~ msgid "Receipts"
+#~ msgstr "Разписки"
+
+#~ msgid "Repeat End Date"
+#~ msgstr "Крайна дата на повторение"
+
+#~ msgid "Repeat End Date (Invalid)"
+#~ msgstr "Крайна дата на повторение (неправилен)"
+
+#~ msgid "Repeat Interval"
+#~ msgstr "Интервал на повторение"
+
+#~ msgid "Repeat Interval Changed"
+#~ msgstr "Интервалът на повторение е променен"
+
+#~ msgid "Select Account"
+#~ msgstr "Избиране на сметка"
+
+#~ msgid "Select Backup Folder"
+#~ msgstr "Избиране на папка за резерв"
+
+#~ msgid "Sort By Amount"
+#~ msgstr "Подреждане по сума"
+
+#~ msgid "Sort By Date"
+#~ msgstr "Подреждане по дата"
+
+#~ msgid "Sort By Id"
+#~ msgstr "Подреждане по идентификатор"
+
+#~ msgid "Tags"
+#~ msgstr "Етикети"
+
+#~ msgid "The password of the account was changed."
+#~ msgstr "Паролата на сметката е променена."
+
+#~ msgid "The password of the account was removed."
+#~ msgstr "Паролата на сметката е премахната."
+
+#~ msgid "The password will be removed upon closing this dialog."
+#~ msgstr "Паролата ще бъде премахната след затварянето на този прозорец."
+
+#~ msgid "The passwords do not match."
+#~ msgstr "Паролите не съвпадат."
+
+#~ msgid ""
+#~ "The repeat interval was changed.\n"
+#~ "What would you like to do with existing generated transactions?\n"
+#~ "\n"
+#~ "New repeat transactions will be generated based off the new interval."
+#~ msgstr ""
+#~ "Интервалът на повтаряне е променен.\n"
+#~ "Какво искате да направите със съществуващите генерирани операции?\n"
+#~ "\n"
+#~ "Нови повтарящи се операции ще бъдат генерирани въз основа на новия "
+#~ "интервал."
+
+#~ msgid "This account has no money available to transfer."
+#~ msgstr "В тази сметка няма налични средства за прехвърляне."
+
+#~ msgid ""
+#~ "This transaction is a source repeat transaction.\n"
+#~ "What would you like to do with the repeat transactions?\n"
+#~ "\n"
+#~ "Deleting only the source transaction will allow individual\n"
+#~ "generated transactions to be modifiable."
+#~ msgstr ""
+#~ "Тази операция се повтаря в източника.\n"
+#~ "Какво искате да направите с повтарящите се операции?\n"
+#~ "\n"
+#~ "Премахването само на операцията от източника ще позволи на\n"
+#~ "отделните генерирани операции да може да се променят."
+
+#~ msgid ""
+#~ "This transaction is a source repeat transaction.\n"
+#~ "What would you like to do with the repeat transactions?\n"
+#~ "\n"
+#~ "Updating only the source transaction will disassociate\n"
+#~ "generated transactions from the source."
+#~ msgstr ""
+#~ "Тази операция се повтаря в източника.\n"
+#~ "Какво искате да направите с повтарящите се операции?\n"
+#~ "\n"
+#~ "Обновяването само на операцията от източника ще прекъсне\n"
+#~ "връзката на генерираните операции от източника."
+
+#~ msgid "Tobias Bernard"
+#~ msgstr "Tobias Bernard"
+
+#~ msgid "Transaction"
+#~ msgstr "Операция"
+
+#~ msgid "Type"
+#~ msgstr "Вид"
+
+#~ msgid "Unable to export account to file."
+#~ msgstr "Неуспешно изнасяне на сметката във файла."
+
+#~ msgid ""
+#~ "Unable to import information from the file. Please ensure that the app "
+#~ "has permissions to access the file and try again."
+#~ msgstr ""
+#~ "Неуспешно внасяне на информацията от файла. Уверете се, че приложението "
+#~ "има правата да достъпи файла и опитайте отново."
+
+#~ msgid "Unable to import transactions from the file."
+#~ msgstr "Неуспешно внасяне на операциите от файла."
+
+#~ msgid ""
+#~ "Unable to open the account. Please ensure that the app has permissions to "
+#~ "access the file and try again."
+#~ msgstr ""
+#~ "Неуспешно отваряне на сметката. Уверете се, че приложението има правата "
+#~ "да достъпи файла и опитайте отново."
+
+#~ msgid "Unable to overwrite an existing account."
+#~ msgstr "Неуспешно презаписване на съществуваща сметка."
+
+#~ msgid "Untagged"
+#~ msgstr "Без етикет"
+
+#~ msgid "Upcoming transactions"
+#~ msgstr "Предстоящи операции"
+
+#~ msgid "Update Only Source"
+#~ msgstr "Обновяване само на източника"
+
+#~ msgid "Update Source and Generated"
+#~ msgstr "Обновяване на източника и генерирания"
+
+#~ msgid "Update Transaction"
+#~ msgstr "Обновяване на операцията"
+
+#~ msgid "Upload"
+#~ msgstr "Качване"
+
+#~ msgid "View"
+#~ msgstr "Изглед"
+
+#~ msgid ""
+#~ "Would you like to password-protect the PDF file?\n"
+#~ "\n"
+#~ "If the password is lost, the PDF will be inaccessible."
+#~ msgstr ""
+#~ "Искате ли да защитите PDF файла с парола?\n"
+#~ "\n"
+#~ "Ако паролата е загубена, PDF файлът ще бъде дедостъпен."
+
+#~ msgid "Yes"
+#~ msgstr "Да"
+
+#~ msgid "Manage the currency used by the account."
+#~ msgstr "Управлявайте валутата, използвана от сметката."
+
+#~ msgid "Set a new password or remove one."
+#~ msgstr "Задайте нова парола или премахнете такава."
+
+#~ msgid "Other"
+#~ msgstr "Друго"
+
+#~ msgid "Unlimited"
+#~ msgstr "Неограничено"
+
+#~ msgid "CSV"
+#~ msgstr "CSV"
+
+#~ msgid "Export Current View"
+#~ msgstr "Изнасяне на текущия изглед"
+
+#~ msgid "PDF"
+#~ msgstr "PDF"
+
+#~ msgid "Search by description"
+#~ msgstr "Търсене по описание"
+
+#~ msgid "Today's Overview"
+#~ msgstr "Днешният преглее"
+
+#~ msgid "Select All Overview Filters"
+#~ msgstr "Избиране на всички филтри за преглед"
+
+#~ msgid "New Group (Ctrl+G)"
+#~ msgstr "Нова група (Ctrl+G)"
+
+#~ msgid "Toggle Groups Visibility"
+#~ msgstr "Превключване на видимостта на групите"
+
+#~ msgid "Select All Groups Filters"
+#~ msgstr "Избиране на всички филтри за групите"
+
+#~ msgid "Unselect Groups Filters"
+#~ msgstr "Демаркиране на филтрите за групите"
+
+#~ msgid "Toggle Tags Visibility"
+#~ msgstr "Превключване на видимостта на етикетите"
+
+#~ msgid "Select All Tags Filters"
+#~ msgstr "Избиране на всички филтри за етикетите"
+
+#~ msgid "Unselect Tags Filters"
+#~ msgstr "Демаркиране на филтрите за етикети"
+
+#~ msgid "Calendar"
+#~ msgstr "Календар"
+
+#~ msgid "Select Current Month"
+#~ msgstr "Избиране на текущия месец"
+
+#~ msgid "Reset To Today"
+#~ msgstr "Връщане до днес"
+
+#~ msgid "Today"
+#~ msgstr "Днес"
+
+#~ msgid "Select Range"
+#~ msgstr "Избиране на диапазон"
+
+#~ msgctxt "DateRange"
+#~ msgid "Start"
+#~ msgstr "Начало"
+
+#~ msgctxt "DateRange"
+#~ msgid "End"
+#~ msgstr "Край"
+
+#~ msgid "Sort From First To Last"
+#~ msgstr "Сортиране от първо към последно"
+
+#~ msgid "Sort From Last To First"
+#~ msgstr "Сортиране от последно към първо"
+
+#~ msgid "New Transaction (Ctrl+Shift+N)"
+#~ msgstr "Нова операция (Ctrl+Shift+N)"
+
+#~ msgctxt "Transaction"
+#~ msgid "New"
+#~ msgstr "Нова"
+
+#~ msgid "Suggestions"
+#~ msgstr "Предложения"
+
+#~ msgid "Converter"
+#~ msgstr "Преобразувател"
+
+#~ msgid "Loading..."
+#~ msgstr "Зареждане..."
+
+#~ msgid "All Accounts"
+#~ msgstr "Всички сметки"
+
+#~ msgid "Color"
+#~ msgstr "Цвят"
+
+#~ msgid "Delete"
+#~ msgstr "Изтриване"
+
+#~ msgid "This is only a useful label that doesn't affect how the app works."
+#~ msgstr ""
+#~ "Това е само полезен етикет, който не влияе на работата на приложението."
+
+#~ msgid "Enter Password To Login:"
+#~ msgstr "Въведете паролата, за да се впишете:"
+
+#~ msgid "Checking Account Color"
+#~ msgstr "Цвят на разплащателната сметка"
+
+#~ msgid "Savings Account Color"
+#~ msgstr "Цвят на спестовната сметка"
+
+#~ msgid "Business Account Color"
+#~ msgstr "Цвят на бизнес сметка"
+
+#~ msgid "Use Native Digits"
+#~ msgstr "Използване на собствени цифри"
+
+#~ msgid ""
+#~ "Whether to use numerals that are native for your locale instead of latin "
+#~ "digits."
+#~ msgstr ""
+#~ "Дали да се използват цифри, които са за вашия регион вместо латински "
+#~ "цифри."
+
+#~ msgid "Backup"
+#~ msgstr "Резерв"
+
+#~ msgid "CSV Backup Folder"
+#~ msgstr "Папка за CSV резерв"
+
+#~ msgid ""
+#~ "Unencrypted accounts will automatically export as CSV files to this "
+#~ "folder when a change is made."
+#~ msgstr ""
+#~ "Нешифрирани сметки автоматично се изнасят като CSV файлове в тази папка, "
+#~ "когато се направи промяна."
+
+#~ msgid "Clear Backup Folder"
+#~ msgstr "Изчистване на резервната папка"
+
+#~ msgid "No Reminders"
+#~ msgstr "Няма напомняния"
+
+#~ msgctxt "Title"
+#~ msgid "Transfer"
+#~ msgstr "Превод"
+
+#~ msgid "New Transaction"
+#~ msgstr "Нова операция"
+
+#~ msgid "Toggle Sidebar"
+#~ msgstr "Превключване на страничната лента"
+
+#~ msgid "Make a Copy"
+#~ msgstr "Направете копие"
+
+#~ msgid "Clear End Date"
+#~ msgstr "Изчистване на крайната дата"
+
+#~ msgid "Daily"
+#~ msgstr "Ежедневно"
+
+#~ msgid "Weekly"
+#~ msgstr "Седмично"
+
+#~ msgid "Biweekly"
+#~ msgstr "Двуседмично"
+
+#~ msgid "Monthly"
+#~ msgstr "Месечно"
+
+#~ msgid "Quarterly"
+#~ msgstr "Тримесечно"
+
+#~ msgid "Yearly"
+#~ msgstr "Годишно"
+
+#~ msgid "Biyearly"
+#~ msgstr "Двугодишно"
+
+#~ msgid "Use group color"
+#~ msgstr "Използване на групов цвят"
+
+#~ msgid "Use unique color"
+#~ msgstr "Използване на собствен цвят"
+
+#~ msgid "Enter a new tag name..."
+#~ msgstr "Въведете ново име на етикет..."
+
+#~ msgid "Add Tag"
+#~ msgstr "Добавяне на етикет"
+
+#~ msgid "Extras"
+#~ msgstr "Допълнения"
+
+#~ msgid "Manage extra fields of the transaction."
+#~ msgstr "Управлявайте допълнителните полета на операцията."
+
+#~ msgid "Edit Transaction"
+#~ msgstr "Редактиране на операцията"
+
+#~ msgid ""
+#~ "Transferring money will create an expense transaction with the given "
+#~ "amount in this account and an income transaction with the given amount in "
+#~ "the account to transfer to."
+#~ msgstr ""
+#~ "Прехвърлянето на пари ще създаде разходна операция с дадената сума в тази "
+#~ "сметка и доходна операция с дадената сума в сметката за прехвърляне."
+
+#~ msgid "Select a destination account"
+#~ msgstr "Изберете целева сметка"
+
+#~ msgid "Recent Accounts"
+#~ msgstr "Скоро ползвани сметки"
+
+#~ msgid "Conversion Needed"
+#~ msgstr "Необходимо е преобразуване"
+
+#~ msgid "Use Custom Rates"
+#~ msgstr "Използване на собствени коефициенти"
+
+#~ msgid "Enter the conversion rates manually"
+#~ msgstr "Въведете коефициентите на преобразуване ръчно"
+
+#~ msgctxt "Button"
+#~ msgid "Transfer"
+#~ msgstr "Превеждане"
+
+#~ msgctxt "Account"
+#~ msgid "New"
+#~ msgstr "Нова"
+
+#~ msgid "Toggle Graphs"
+#~ msgstr "Превключване на графиките"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 16:41-0400\n"
+"POT-Creation-Date: 2024-05-24 02:00-0400\n"
 "PO-Revision-Date: 2023-09-10 21:21+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
@@ -251,7 +251,6 @@ msgid "Next"
 msgstr "Sonraki"
 
 #: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
-#, fuzzy
 msgid "Account"
 msgstr "Hesap"
 
@@ -452,23 +451,25 @@ msgstr "Para Birimi Simgesi"
 msgid "Password"
 msgstr "Parola"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:123
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:122
+msgid "If the password is lost, there is no way to restore the file!"
+msgstr "Parola kaybolursa, dosyayı geri yüklemenin bir yolu yoktur!"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:125
 msgid "New Password"
 msgstr "Yeni Parola"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:129
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:131
 msgid "Confirm Password"
 msgstr "Parolayı Onayla"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:135
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:137
 msgid "Change Password"
-msgstr "Yeni Parola"
+msgstr "Parola Değiştir"
 
-#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:146
-#, fuzzy
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:148
 msgid "Remove Current Password"
-msgstr "Hesap Parolası (İsteğe bağlı)"
+msgstr ""
 
 #: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:24
 #: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
@@ -1140,33 +1141,6 @@ msgstr "Tamam"
 msgid "Result (Error)"
 msgstr "Sonuç"
 
-#, fuzzy
-#~ msgid "Change"
-#~ msgstr "Değişim günlüğü"
-
-#, fuzzy
-#~ msgid ""
-#~ "If the password is lost, there is no way to restore the account file!"
-#~ msgstr "Parola kaybolursa, dosyayı geri yüklemenin bir yolu yoktur!"
-
-#~ msgid "Transaction"
-#~ msgstr "İşlem"
-
-#~ msgid "Group"
-#~ msgstr "Grup"
-
-#, fuzzy
-#~ msgid "Transfer"
-#~ msgstr "Aktar"
-
-#, fuzzy
-#~ msgid "Export"
-#~ msgstr "Dosya İçe Aktar"
-
-#, fuzzy
-#~ msgid "No reminders"
-#~ msgstr "Hatırlatıcı Yok"
-
 #~ msgid "(Copy)"
 #~ msgstr "(Kopya)"
 
@@ -1277,6 +1251,9 @@ msgstr "Sonuç"
 #, csharp-format
 #~ msgid "Generated: {0}"
 #~ msgstr "Oluşturuldu: {0}"
+
+#~ msgid "Group"
+#~ msgstr "Grup"
 
 #~ msgid "Group Name"
 #~ msgstr "Grup Adı"
@@ -1422,6 +1399,9 @@ msgstr "Sonuç"
 
 #~ msgid "Tobias Bernard"
 #~ msgstr "Tobias Bernard"
+
+#~ msgid "Transaction"
+#~ msgstr "İşlem"
 
 #~ msgid "Type"
 #~ msgstr "Tür"
@@ -1629,6 +1609,13 @@ msgstr "Sonuç"
 
 #~ msgid "Clear Backup Folder"
 #~ msgstr "Yedekleme Klasörünü Temizle"
+
+#~ msgid "No Reminders"
+#~ msgstr "Hatırlatıcı Yok"
+
+#~ msgctxt "Title"
+#~ msgid "Transfer"
+#~ msgstr "Aktar"
 
 #~ msgid "New Transaction"
 #~ msgstr "Yeni İşlem"
