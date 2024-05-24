@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2024-02-13 09:01+0000\n"
-"Last-Translator: Nitin Khalia <weblate.scrambled777@simplelogin.com>\n"
+"PO-Revision-Date: 2024-03-29 13:01+0000\n"
+"Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
 "app/hi/>\n"
 "Language: hi\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -86,7 +86,7 @@ msgstr "एक नया लेनदेन जोड़ें या किस�
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:830
 msgid "Add Password To PDF?"
-msgstr "पीडीएफ में पासवर्ड जोड़ें?"
+msgstr "PDF में पासवर्ड जोड़ें?"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:743
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:440
@@ -137,13 +137,13 @@ msgstr "व्यवसाय"
 
 #: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:161
 msgid "Can't access the selected folder, check Flatpak permissions."
-msgstr "चयनित फ़ोल्डर तक नहीं पहुँच सकते, Flatpak अनुमतियाँ जाँचें।"
+msgstr "चयनित फोल्डर तक नहीं पहुँच सकते, Flatpak अनुमतियाँ जाँचें।"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:940
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:972
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1005
 msgid "Cancel"
-msgstr "रद्द करें"
+msgstr "रद्द"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:249
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:110
@@ -284,7 +284,7 @@ msgstr "गंतव्य खाता (अमान्य)"
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:157
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:67
 msgid "Destination Account Password"
-msgstr "Destination Account Password"
+msgstr "गंतव्य खाता पासवर्ड"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:188
 msgid "Destination Account Password (Invalid)"
@@ -446,7 +446,7 @@ msgstr "नाम (खाली)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:160
 msgid "Name (Exists)"
-msgstr "नाम (पहले से मौजूद है)"
+msgstr "नाम (मौजूद)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:573
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:85
@@ -523,11 +523,11 @@ msgstr "अवलोकन"
 
 #: ../../../Models/Account.cs:1822
 msgid "Page {0}"
-msgstr "Page {0}"
+msgstr "पृष्ठ {0}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:842
 msgid "PDF Password"
-msgstr "पीडीएफ पासवर्ड"
+msgstr "PDF पासवर्ड"
 
 #: ../../../Models/Account.cs:1791
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:497
@@ -579,7 +579,7 @@ msgstr "खाता चुनें"
 #: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:154
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:149
 msgid "Select Backup Folder"
-msgstr "बैकअप फ़ोल्डर का चयन करें"
+msgstr "बैकअप फोल्डर का चयन करें"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:265
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:110
@@ -592,7 +592,7 @@ msgstr "राशि के अनुसार क्रमबद्ध कर�
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:279
 msgid "Sort By Date"
-msgstr "दिनांक के हिसाब से अलग करे"
+msgstr "दिनांक के अनुसार क्रमबद्ध करें"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:279
 msgid "Sort By Id"
@@ -727,8 +727,8 @@ msgid ""
 "Unable to import information from the file. Please ensure that the app has "
 "permissions to access the file and try again."
 msgstr ""
-"फाइल से जानकारी आयात करने में असमर्थ. कृपया सुनिश्चित करें कि ऐप के पास फ़ा"
-"इल तक पहुंचने की अनुमति है और पुनः प्रयास करें।"
+"फाइल से जानकारी आयात करने में असमर्थ. कृपया सुनिश्चित करें कि ऐप के पास फाइल "
+"तक पहुंचने की अनुमति है और पुनः प्रयास करें।"
 
 #: ../../../Controllers/AccountViewController.cs:973
 msgid "Unable to import transactions from the file."
@@ -1048,7 +1048,7 @@ msgstr "टैग फ़िल्टर अचयनित करें"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:238
 msgid "Calendar"
-msgstr "पंचांग"
+msgstr "कैलेंडर"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:243
 msgid "Select Current Month"
@@ -1122,7 +1122,7 @@ msgstr "स्विच"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:60
 msgid "Loading..."
-msgstr "लोड हो रहा है..।"
+msgstr "लोड हो रहा है…"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:70
 msgid "Source"
@@ -1180,7 +1180,7 @@ msgstr "खाता पासवर्ड (वैकल्पिक)"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:103
 msgid "Folder"
-msgstr "फ़ोल्डर"
+msgstr "फोल्डर"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:117
 msgid "Overwrite Existing Accounts"
@@ -1361,7 +1361,7 @@ msgstr "बैकअप"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:137
 msgid "CSV Backup Folder"
-msgstr "CSV बैकअप फ़ोल्डर"
+msgstr "CSV बैकअप फोल्डर"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:138
 msgid ""
@@ -1373,7 +1373,7 @@ msgstr ""
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:159
 msgid "Clear Backup Folder"
-msgstr "बैकअप फ़ोल्डर साफ़ करें"
+msgstr "बैकअप फोल्डर साफ़ करें"
 
 #: NickvisionMoney.GNOME/Blueprints/reminders_dialog.blp:41
 msgid "No Reminders"
@@ -1465,7 +1465,7 @@ msgstr "अनोखे रंग का प्रयोग करें"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:228
 msgid "Enter a new tag name..."
-msgstr "नया टैग नाम दर्ज करें..।"
+msgstr "नया टैग नाम दर्ज करें…"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:233
 msgid "Add Tag"
