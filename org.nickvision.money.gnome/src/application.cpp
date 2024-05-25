@@ -24,6 +24,7 @@ namespace Nickvision::Money::GNOME
         GResource* resource{ g_resource_load(resources.string().c_str(), &resourceLoadError) };
         if(resourceLoadError)
         {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Critical, "Unable to load GResource. " + std::string(resourceLoadError->message));
             throw std::runtime_error(resourceLoadError->message);
         }
         g_resources_register(resource);
@@ -32,6 +33,7 @@ namespace Nickvision::Money::GNOME
 
     int Application::run()
     {
+        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Started GTK application.");
         return g_application_run(G_APPLICATION(m_adw), static_cast<int>(m_args.size()), &m_args[0]);
     }
 

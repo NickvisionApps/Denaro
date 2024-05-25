@@ -75,5 +75,6 @@ namespace Nickvision::Money::Shared::Controllers
     void PreferencesViewController::saveConfiguration()
     {
         Aura::getActive().getConfig<Configuration>("config").save();
+        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Config saved.");
     }
 }

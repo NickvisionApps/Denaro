@@ -632,9 +632,11 @@ namespace Nickvision::Money::Shared::Models
          * CSV Header:
          * ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA
          */
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Starting CSV import... (" + m_path.string() + ")");
         rapidcsv::Document csv{ path.string(), rapidcsv::LabelParams(0, -1), rapidcsv::SeparatorParams(';'), rapidcsv::ConverterParams(true), rapidcsv::LineReaderParams(true, '#', true) };
         if(csv.GetColumnCount() != 14)
         {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Error, "CSV import failed. Invalid number of columns. (" + m_path.string() + ")");
             return {};
         }
         ImportResult result;
@@ -643,6 +645,7 @@ namespace Nickvision::Money::Shared::Models
         {
             if(m_transactions.contains(csv.GetCell<int>(0, i))) //Transaction IDs must be unique
             {
+                Aura::getActive().getLogger().log(Logging::LogLevel::Warning, "Skipping row " + std::to_string(i) + ". ID already exists. (" + m_path.string() + ")");
                 continue;
             }
             Transaction t{ csv.GetCell<int>(0, i) };
@@ -688,11 +691,15 @@ namespace Nickvision::Money::Shared::Models
             }
         }
         m_repository.commitTransaction();
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Imported " + std::to_string(result.getNewTransactionIds().size()) + " transaction(s) from CSV. (" + m_path.string() + ")");
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Imported " + std::to_string(result.getNewGroupIds().size()) + " groups(s) from CSV. (" + m_path.string() + ")");
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Imported " + std::to_string(result.getNewTags().size()) + " tags(s) from CSV. (" + m_path.string() + ")");
         return result;
     }
 
     ImportResult Account::importFromOFX(const std::filesystem::path& path, const Color& defaultTransactionColor)
     {
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Starting OFX import... (" + m_path.string() + ")");
         ImportResult result;
         //Read all lines from ofx file
         std::ifstream file{ path };
@@ -773,11 +780,13 @@ namespace Nickvision::Money::Shared::Models
             }
             m_repository.commitTransaction();
         }
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Imported " + std::to_string(result.getNewTransactionIds().size()) + " transaction(s) from OFX. (" + m_path.string() + ")");
         return result;
     }
 
     ImportResult Account::importFromQIF(const std::filesystem::path& path, const Color& defaultTransactionColor, const Color& defaultGroupColor)
     {
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Starting QIF import... (" + m_path.string() + ")");
         ImportResult result;
         //Parse qif file
         std::ifstream file{ path };
@@ -882,6 +891,8 @@ namespace Nickvision::Money::Shared::Models
             }
             m_repository.commitTransaction();
         }
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Imported " + std::to_string(result.getNewTransactionIds().size()) + " transaction(s) from QIF. (" + m_path.string() + ")");
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Imported " + std::to_string(result.getNewGroupIds().size()) + " groups(s) from QIF. (" + m_path.string() + ")");
         return result;
     }
 

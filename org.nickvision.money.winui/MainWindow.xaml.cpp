@@ -3,6 +3,7 @@
 #include "MainWindow.g.cpp"
 #endif
 #include <format>
+#include <libnick/app/aura.h>
 #include <libnick/helpers/codehelpers.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/notifications/shellnotification.h>
@@ -16,6 +17,7 @@
 #include "Helpers/WinUI.h"
 
 using namespace ::Nickvision;
+using namespace ::Nickvision::App;
 using namespace ::Nickvision::Events;
 using namespace ::Nickvision::Notifications;
 using namespace ::Nickvision::Money::Shared::Controllers;
@@ -36,7 +38,7 @@ using namespace winrt::Windows::Storage;
 using namespace winrt::Windows::Storage::Pickers;
 using namespace winrt::Windows::System;
 
-namespace winrt::Nickvision::Money::WinUI::implementation 
+namespace winrt::Nickvision::Money::WinUI::implementation
 {
     static std::vector<std::string> keys(const std::unordered_map<std::string, std::string>& m)
     {
@@ -118,7 +120,8 @@ namespace winrt::Nickvision::Money::WinUI::implementation
         {
             if (!m_controller)
             {
-                throw std::logic_error("MainWindow::SetController() must be called before using the window.");
+                Aura::getActive().getLogger().log(Logging::LogLevel::Critical, "MainWindow::SetController() must be called before using the window.");
+                throw std::logic_error("Controller not set.");
             }
             m_controller->connectTaskbar(m_hwnd);
             m_controller->startup();
@@ -243,6 +246,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
 
     void MainWindow::OnShellNotificationSent(const ShellNotificationSentEventArgs& args)
     {
+        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "ShellNotification sent.");
         ShellNotification::send(args, m_hwnd);
     }
 

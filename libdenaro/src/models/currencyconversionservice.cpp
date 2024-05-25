@@ -5,9 +5,11 @@
 #include <fstream>
 #include <unordered_map>
 #include <json/json.h>
+#include <libnick/app/aura.h>
 #include <libnick/filesystem/userdirectories.h>
 #include <libnick/helpers/webhelpers.h>
 
+using namespace Nickvision::App;
 using namespace Nickvision::Filesystem;
 
 namespace Nickvision::Money::Shared::Models
@@ -43,12 +45,13 @@ namespace Nickvision::Money::Shared::Models
                 needsUpdate = true;
                 json.clear();
                 cache[sourceCurrency].clear();
+                Aura::getActive().getLogger().log(Logging::LogLevel::Debug, sourceCurrency + " rates on disk out-of-date.");
             }
             else if(!cache[sourceCurrency].empty())
             {
+                Aura::getActive().getLogger().log(Logging::LogLevel::Debug, sourceCurrency + " rates fetched from cache.");
                 return cache[sourceCurrency];
             }
-            //empty: load from file
         }
         if(needsUpdate)
         {
@@ -58,6 +61,7 @@ namespace Nickvision::Money::Shared::Models
             {
                 Json::Reader reader;
                 reader.parse(response, json, false);
+                Aura::getActive().getLogger().log(Logging::LogLevel::Debug, sourceCurrency + " rates fetched from internet.");
             }
         }
         if(!json.empty())
@@ -71,10 +75,12 @@ namespace Nickvision::Money::Shared::Models
                 {
                     rates[rate] = sourceRate / ratesJson.get(rate, 0.0).asDouble();
                 }
+                Aura::getActive().getLogger().log(Logging::LogLevel::Debug, sourceCurrency + " rates cached.");
                 if(needsUpdate)
                 {
                     std::ofstream out{ path };
                     out << json;
+                    Aura::getActive().getLogger().log(Logging::LogLevel::Debug, sourceCurrency + " rates saved to disk.");
                 }
             }
         }

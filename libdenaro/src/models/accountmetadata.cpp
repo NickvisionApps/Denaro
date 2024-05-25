@@ -90,7 +90,7 @@ namespace Nickvision::Money::Shared::Models
     {
         return m_showTagsList;
     }
-    
+
     void AccountMetadata::setShowTagsList(bool showTagsList)
     {
         m_showTagsList = showTagsList;
