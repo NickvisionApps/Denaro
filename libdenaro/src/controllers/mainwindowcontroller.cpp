@@ -305,16 +305,18 @@ namespace Nickvision::Money::Shared::Controllers
             //Check if overwrite is allowed
             if(!newAccountDialogController->getOverwriteExisting())
             {
-                Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Account exists: " + newAccountDialogController->getFilePath().string());
+                Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Account exists and overwrite is disabled: " + newAccountDialogController->getFilePath().string());
                 m_notificationSent.invoke({ _("This account already exists."), NotificationSeverity::Error });
                 return;
             }
             //Check if the account is open in the app (cannot delete if open)
             if(m_accountViewControllers.contains(newAccountDialogController->getFilePath()))
             {
+                Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Cannot overwrite, account already in use:  " + newAccountDialogController->getFilePath().string());
                 m_notificationSent.invoke({ _("This account cannot be overwritten."), NotificationSeverity::Error });
                 return;
             }
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Overwriting existing account file: " + newAccountDialogController->getFilePath().string());
             std::filesystem::remove(newAccountDialogController->getFilePath());
         }
         Configuration& config{ Aura::getActive().getConfig<Configuration>("config") };
@@ -344,6 +346,7 @@ namespace Nickvision::Money::Shared::Controllers
             Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Config saved.");
             m_recentAccountsChanged.invoke({ config.getRecentAccounts() });
             m_accountAdded.invoke({ m_accountViewControllers[newAccountDialogController->getFilePath()] });
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Account created: " + newAccountDialogController->getFilePath().string());
         }
     }
 
@@ -352,11 +355,13 @@ namespace Nickvision::Money::Shared::Controllers
         //Check if the file is a Denaro account file
         if(StringHelpers::toLower(path.extension().string()) != ".nmoney")
         {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Invalid file extension: " + path.string());
             m_notificationSent.invoke({ _("The file is not a Denaro account file."), NotificationSeverity::Error });
         }
         //Check if the account is already open
         else if(m_accountViewControllers.contains(path))
         {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Account already open: " + path.string());
             m_notificationSent.invoke({ _("The account is already open."), NotificationSeverity::Warning });
         }
         //Create the controller and open the account
@@ -381,6 +386,7 @@ namespace Nickvision::Money::Shared::Controllers
                 Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Config saved.");
                 m_recentAccountsChanged.invoke({ config.getRecentAccounts() });
                 m_accountAdded.invoke({ m_accountViewControllers[path] });
+                Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Account opened: " + path.string());
             }
         }
     }
@@ -392,5 +398,6 @@ namespace Nickvision::Money::Shared::Controllers
         config.save();
         Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Config saved.");
         m_recentAccountsChanged.invoke({ config.getRecentAccounts() });
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Account removed: " + account.getName());
     }
 }
