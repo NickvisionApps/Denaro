@@ -2,7 +2,10 @@
 #include <fstream>
 #include <iterator>
 #include <stdexcept>
+#include <libnick/app/aura.h>
 #include <libnick/helpers/stringhelpers.h>
+
+using namespace Nickvision::App;
 
 namespace Nickvision::Money::Shared::Models
 {
@@ -47,14 +50,15 @@ namespace Nickvision::Money::Shared::Models
     }
 
     Receipt::Receipt(const std::vector<std::uint8_t>& bytes)
-        : m_type{ ReceiptType::Unknown }, 
-        m_bytes{ bytes }, 
+        : m_type{ ReceiptType::Unknown },
+        m_bytes{ bytes },
         m_base64{ StringHelpers::toBase64(bytes) }
     {
         if(!bytes.empty())
         {
             if(m_base64.empty())
             {
+                Aura::getActive().getLogger().log(Logging::LogLevel::Critical, "Unable to convert bytes vector to base64 string.");
                 throw std::invalid_argument("Invalid bytes vector");
             }
             //Get type
@@ -85,7 +89,7 @@ namespace Nickvision::Money::Shared::Models
     }
 
     Receipt::Receipt(const std::string& base64)
-        : m_type{ ReceiptType::Unknown }, 
+        : m_type{ ReceiptType::Unknown },
         m_base64{ base64 }
     {
         if(!m_base64.empty())
@@ -94,7 +98,8 @@ namespace Nickvision::Money::Shared::Models
             m_bytes = StringHelpers::toByteList(base64);
             if(m_bytes.empty())
             {
-                throw std::invalid_argument("Invalid receipt base64 string");
+                Aura::getActive().getLogger().log(Logging::LogLevel::Critical, "Unable to convert base64 string to bytes vector.");
+                throw std::invalid_argument("Invalid base64 string");
             }
             //Get type
             if(m_bytes[0] == 'J')

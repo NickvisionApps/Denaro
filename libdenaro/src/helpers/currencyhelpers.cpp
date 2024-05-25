@@ -3,6 +3,7 @@
 #include <locale>
 #include <memory>
 #include <sstream>
+#include <libnick/app/aura.h>
 #include <libnick/helpers/stringhelpers.h>
 
 using namespace Nickvision;
@@ -44,24 +45,36 @@ namespace Nickvision::Money::Shared
         if(!systemCurrency)
         {
             systemCurrency = std::make_unique<Currency>();
-            systemCurrency->setSymbol(std::use_facet<std::moneypunct<char>>(std::locale("")).curr_symbol());
-            systemCurrency->setCode(std::use_facet<std::moneypunct<char, true>>(std::locale("")).curr_symbol());
-            systemCurrency->setDecimalSeparator(std::use_facet<std::moneypunct<char>>(std::locale("")).decimal_point());
-            systemCurrency->setGroupSeparator(std::use_facet<std::moneypunct<char>>(std::locale("")).thousands_sep());
+            std::locale locale;
+            try
+            {
+                locale = std::locale("");
+            }
+            catch (...)
+            {
+                App::Aura::getActive().getLogger().log(Logging::LogLevel::Warning, "Unknown system locale. Reverting to USD currency.");
+                systemCurrency->setCode("USD");
+                systemCurrency->setSymbol("$");
+                return *systemCurrency;
+            }
+            systemCurrency->setSymbol(std::use_facet<std::moneypunct<char>>(locale).curr_symbol());
+            systemCurrency->setCode(std::use_facet<std::moneypunct<char, true>>(locale).curr_symbol());
+            systemCurrency->setDecimalSeparator(std::use_facet<std::moneypunct<char>>(locale).decimal_point());
+            systemCurrency->setGroupSeparator(std::use_facet<std::moneypunct<char>>(locale).thousands_sep());
             int numberIndex{ -1 };
             int signIndex{ -1 };
             int spaceIndex{ -1 };
             for(int i = 0; i < 4; i++)
             {
-                if(std::use_facet<std::moneypunct<char>>(std::locale("")).pos_format().field[i] == std::moneypunct<char>::value)
+                if(std::use_facet<std::moneypunct<char>>(locale).pos_format().field[i] == std::moneypunct<char>::value)
                 {
                     numberIndex = i;
                 }
-                if(std::use_facet<std::moneypunct<char>>(std::locale("")).pos_format().field[i] == std::moneypunct<char>::sign)
+                if(std::use_facet<std::moneypunct<char>>(locale).pos_format().field[i] == std::moneypunct<char>::sign)
                 {
                     signIndex = i;
                 }
-                if(std::use_facet<std::moneypunct<char>>(std::locale("")).pos_format().field[i] == std::moneypunct<char>::space)
+                if(std::use_facet<std::moneypunct<char>>(locale).pos_format().field[i] == std::moneypunct<char>::space)
                 {
                     spaceIndex = i;
                 }

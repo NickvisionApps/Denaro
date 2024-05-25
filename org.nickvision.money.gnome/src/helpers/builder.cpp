@@ -1,5 +1,6 @@
 #include "helpers/builder.h"
 #include <filesystem>
+#include <stdexcept>
 #include <libnick/app/aura.h>
 #include <libnick/localization/gettext.h>
 #include <libxml++/libxml++.h>
@@ -13,7 +14,8 @@ namespace Nickvision::Money::GNOME
         std::filesystem::path path{ Aura::getActive().getExecutableDirectory() / "ui" / (blueprint + ".ui") };
         if(!std::filesystem::exists(path))
         {
-            return nullptr;
+            Aura::getActive().getLogger().log(Logging::LogLevel::Critical, "UI file not found. (" + path.string() + ")");
+            throw std::runtime_error("UI file not found: " + path.string());
         }
         xmlpp::DomParser xml{ path.string() };
         xmlpp::Element* root{ xml.get_document()->get_root_node() };
@@ -36,6 +38,7 @@ namespace Nickvision::Money::GNOME
                 }
             }
         }
+        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Loaded builder from blueprint " + blueprint + ".");
         return gtk_builder_new_from_string(xml.get_document()->write_to_string().c_str(), -1);
     }
 }

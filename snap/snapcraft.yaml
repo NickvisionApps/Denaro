@@ -53,12 +53,12 @@ parts:
     source-tag: '1.3.0'
     plugin: dump
     source-depth: 1
-    override-prime: '' 
+    override-prime: ''
 
   libnick:
     after: [maddy, build-deps]
     source: https://github.com/nickvisionapps/libnick.git
-    source-tag: '2024.3.1'
+    source-tag: '2024.5.1'
     source-depth: 1
     plugin: cmake
     cmake-parameters:

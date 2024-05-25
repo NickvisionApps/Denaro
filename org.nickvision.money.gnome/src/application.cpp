@@ -1,4 +1,5 @@
 #include "application.h"
+#include <stdexcept>
 #include <libnick/app/aura.h>
 
 using namespace Nickvision::App;
@@ -19,12 +20,20 @@ namespace Nickvision::Money::GNOME
         }
         m_controller->getAppInfo().setChangelog("- Initial Release");
         std::filesystem::path resources{ Aura::getActive().getExecutableDirectory() / (m_controller->getAppInfo().getId() + ".gresource") };
-        g_resources_register(g_resource_load(resources.string().c_str(), nullptr));
+        GError* resourceLoadError{ nullptr };
+        GResource* resource{ g_resource_load(resources.string().c_str(), &resourceLoadError) };
+        if(resourceLoadError)
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Critical, "Unable to load GResource. " + std::string(resourceLoadError->message));
+            throw std::runtime_error(resourceLoadError->message);
+        }
+        g_resources_register(resource);
         g_signal_connect(m_adw, "activate", G_CALLBACK(+[](GtkApplication* app, gpointer data){ reinterpret_cast<Application*>(data)->onActivate(app); }), this);
     }
 
     int Application::run()
     {
+        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "Started GTK application.");
         return g_application_run(G_APPLICATION(m_adw), static_cast<int>(m_args.size()), &m_args[0]);
     }
 

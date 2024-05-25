@@ -1,4 +1,5 @@
 #include "views/mainwindow.h"
+#include <libnick/app/aura.h>
 #include <libnick/app/appinfo.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/notifications/shellnotification.h>
@@ -149,6 +150,7 @@ namespace Nickvision::Money::GNOME::Views
 
     void MainWindow::onShellNotificationSent(const ShellNotificationSentEventArgs& args)
     {
+        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "ShellNotification sent.");
         ShellNotification::send(args, _("Open"));
     }
 

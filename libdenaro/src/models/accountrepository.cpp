@@ -1,9 +1,11 @@
 #include "models/accountrepository.h"
+#include <libnick/app/aura.h>
 #include <libnick/database/sqlstatement.h>
 #include <libnick/helpers/stringhelpers.h>
 #include <libnick/localization/gettext.h>
 #include "helpers/datehelpers.h"
 
+using namespace Nickvision::App;
 using namespace Nickvision::Database;
 
 namespace Nickvision::Money::Shared::Models
@@ -25,6 +27,7 @@ namespace Nickvision::Money::Shared::Models
         //Unlock database
         if(!m_database.unlock(password))
         {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Invalid database password (" + m_database.getPath().string() + ")");
             return false;
         }
         //Register fixdata sql function
@@ -41,12 +44,29 @@ namespace Nickvision::Money::Shared::Models
         //Setup transactions table
         m_database.exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY, date TEXT, description TEXT, type INTEGER, repeat INTEGER, amount TEXT, gid INTEGER, rgba TEXT, receipt TEXT, repeatFrom INTEGER, repeatEndDate TEXT, useGroupColor INTEGER, notes TEXT, tags TEXT)");
         m_database.exec("ALTER TABLE transactions ADD COLUMN IF NOT EXISTS gid INTEGER, ADD COLUMN IF NOT EXISTS rgba TEXT, ADD COLUMN IF NOT EXISTS receipt TEXT, ADD COLUMN IF NOT EXISTS repeatFrom INTEGER, ADD COLUMN IF NOT EXISTS repeatEndDate TEXT, ADD COLUMN IF NOT EXISTS useGroupColor INTEGER, ADD COLUMN IF NOT EXISTS notes TEXT, ADD COLUMN IF NOT EXISTS tags TEXT");
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Connected to database (" + m_database.getPath().string() + ")");
         return true;
     }
 
     bool AccountRepository::changePassword(const std::string& password)
     {
-        return m_database.changePassword(password);
+        if(m_database.changePassword(password))
+        {
+            if(password.empty())
+            {
+                Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Decrypted database. (" + m_database.getPath().string() + ")");
+            }
+            else
+            {
+                Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Encrypted database with password. (" + m_database.getPath().string() + ")");
+            }
+            return true;
+        }
+        else
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Unable to change account password. (" + m_database.getPath().string() + ")");
+            return false;
+        }
     }
 
     bool AccountRepository::beginTransaction()
@@ -96,6 +116,7 @@ namespace Nickvision::Money::Shared::Models
             metadata.setShowTagsList(statement.getColumnBool(13));
             metadata.setSortTransactionsBy(static_cast<SortBy>(statement.getColumnInt(9)));
             metadata.setSortFirstToLast(statement.getColumnBool(8));
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Fetched account metadata from database. (" + m_database.getPath().string() + ")");
         }
         else
         {
@@ -116,6 +137,7 @@ namespace Nickvision::Money::Shared::Models
             newStatement.bind(9, static_cast<int>(metadata.getSortTransactionsBy()));
             newStatement.bind(8, metadata.getSortFirstToLast());
             newStatement.step();
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Created default account metadata in database. (" + m_database.getPath().string() + ")");
         }
         return metadata;
     }
@@ -138,7 +160,14 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(13, metadata.getShowTagsList());
         statement.bind(9, static_cast<int>(metadata.getSortTransactionsBy()));
         statement.bind(8, metadata.getSortFirstToLast());
-        statement.step();
+        if(!statement.step())
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Updated account metadata. (" + m_database.getPath().string() + ")");
+        }
+        else
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Unable to update account metadata. (" + m_database.getPath().string() + ")");
+        }
     }
 
     std::unordered_map<int, Group> AccountRepository::getGroups() const
@@ -153,6 +182,7 @@ namespace Nickvision::Money::Shared::Models
             g.setColor({ groupsStatement.getColumnString(3) });
             groups.emplace(std::make_pair(g.getId(), g));
         }
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Fetched " + std::to_string(groups.size()) + " group(s) from database. (" + m_database.getPath().string() + ")");
         return groups;
     }
 
@@ -170,6 +200,7 @@ namespace Nickvision::Money::Shared::Models
                 }
             }
         }
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Fetched " + std::to_string(tags.size()) + " tag(s) from database. (" + m_database.getPath().string() + ")");
         return tags;
     }
 
@@ -198,6 +229,7 @@ namespace Nickvision::Money::Shared::Models
             }
             transactions.emplace(std::make_pair(t.getId(), t));
         }
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Fetched " + std::to_string(transactions.size()) + " transaction(s) from database. (" + m_database.getPath().string() + ")");
         return transactions;
     }
 
@@ -262,6 +294,7 @@ namespace Nickvision::Money::Shared::Models
         {
             return a.getDate() < b.getDate();
         });
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Fetched " + std::to_string(transactions.size()) + " future transactions(s) from database. (" + m_database.getPath().string() + ")");
         return transactions;
     }
 
@@ -272,7 +305,16 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(2, group.getName());
         statement.bind(3, group.getDescription());
         statement.bind(4, group.getColor().toRGBAHexString());
-        return !statement.step();
+        if(!statement.step())
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Added Group " + std::to_string(group.getId()) + ". (" + m_database.getPath().string() + ")");
+            return true;
+        }
+        else
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Failed to add Group " + std::to_string(group.getId()) + ". (" + m_database.getPath().string() + ")");
+            return false;
+        }
     }
 
     bool AccountRepository::updateGroup(const Group& group)
@@ -282,7 +324,16 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(2, group.getDescription());
         statement.bind(3, group.getColor().toRGBAHexString());
         statement.bind(4, group.getId());
-        return !statement.step();
+        if(!statement.step())
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Updated Group " + std::to_string(group.getId()) + ". (" + m_database.getPath().string() + ")");
+            return true;
+        }
+        else
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Failed to update Group " + std::to_string(group.getId()) + ". (" + m_database.getPath().string() + ")");
+            return false;
+        }
     }
 
     bool AccountRepository::deleteGroup(const Group& group)
@@ -291,10 +342,21 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(1, group.getId());
         if(!statement.step())
         {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Deleted Group " + std::to_string(group.getId()) + ". (" + m_database.getPath().string() + ")");
             SqlStatement updateStatement{ m_database.createStatement("UPDATE transactions SET gid = -1, useGroupColor = 0 WHERE gid = ?") };
             updateStatement.bind(1, group.getId());
-            return !updateStatement.step();
+            if(!updateStatement.step())
+            {
+                Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Disassociated transactions from Group " + std::to_string(group.getId()) + ". (" + m_database.getPath().string() + ")");
+                return true;
+            }
+            else
+            {
+                Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Failed to dissassociate transactions from Group " + std::to_string(group.getId()) + ". (" + m_database.getPath().string() + ")");
+                return false;
+            }
         }
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Failed to delete Group " + std::to_string(group.getId()) + ". (" + m_database.getPath().string() + ")");
         return false;
     }
 
@@ -325,7 +387,16 @@ namespace Nickvision::Money::Shared::Models
             }
         }
         statement.bind(14, tags);
-        return !statement.step();
+        if(!statement.step())
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Added Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
+            return true;
+        }
+        else
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Failed to add Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
+            return false;
+        }
     }
 
     bool AccountRepository::updateTransaction(const Transaction& transaction, bool updateGenerated)
@@ -357,6 +428,7 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(14, transaction.getId());
         if(!statement.step())
         {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Updated Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
             if(transaction.getRepeatFrom() == 0) //source repeat transaction
             {
                 if(updateGenerated)
@@ -374,17 +446,36 @@ namespace Nickvision::Money::Shared::Models
                     updateStatement.bind(10, transaction.getNotes());
                     updateStatement.bind(11, tags);
                     updateStatement.bind(12, transaction.getId());
-                    return !updateStatement.step();
+                    if(!updateStatement.step())
+                    {
+                        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Updated repeat transactions of Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
+                        return true;
+                    }
+                    else
+                    {
+                        Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Failed to update repeat transactions of Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
+                        return false;
+                    }
                 }
                 else
                 {
                     SqlStatement disassociateStatement{ m_database.createStatement("UPDATE transactions SET repeat = 0, repeatFrom = -1, repeatEndDate = '' WHERE repeatFrom = ?") };
                     disassociateStatement.bind(1, transaction.getId());
-                    return !disassociateStatement.step();
+                    if(!disassociateStatement.step())
+                    {
+                        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Disassociated repeat transactions from Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
+                        return true;
+                    }
+                    else
+                    {
+                        Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Failed to disassociated repeat transactions from Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
+                        return false;
+                    }
                 }
             }
             return true;
         }
+        Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Failed to update Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
         return false;
     }
 
@@ -394,23 +485,43 @@ namespace Nickvision::Money::Shared::Models
         statement.bind(1, transaction.getId());
         if(!statement.step())
         {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Deleted Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
             if(transaction.getRepeatFrom() == 0) //source repeat transaction
             {
                 if(deleteGenerated)
                 {
                     SqlStatement deleteStatement{ m_database.createStatement("DELETE FROM transactions WHERE repeatFrom = ?") };
                     deleteStatement.bind(1, transaction.getId());
-                    return !deleteStatement.step();
+                    if(!deleteStatement.step())
+                    {
+                        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Deleted repeat transactions of Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
+                        return true;
+                    }
+                    else
+                    {
+                        Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Failed to delete repeat transactions of Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
+                        return false;
+                    }
                 }
                 else
                 {
                     SqlStatement disassociateStatement{ m_database.createStatement("UPDATE transactions SET repeat = 0, repeatFrom = -1, repeatEndDate = '' WHERE repeatFrom = ?") };
                     disassociateStatement.bind(1, transaction.getId());
-                    return !disassociateStatement.step();
+                    if(!disassociateStatement.step())
+                    {
+                        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Disassociated repeat transactions from Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
+                        return true;
+                    }
+                    else
+                    {
+                        Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Failed to disassociate repeat transactions from Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
+                        return false;
+                    }
                 }
             }
             return true;
         }
+        Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Failed to delete Transaction " + std::to_string(transaction.getId()) + ". (" + m_database.getPath().string() + ")");
         return false;
     }
 
@@ -418,6 +529,15 @@ namespace Nickvision::Money::Shared::Models
     {
         SqlStatement statement{ m_database.createStatement("DELETE FROM transactions WHERE repeatFrom = ?") };
         statement.bind(1, sourceId);
-        return !statement.step();
+        if(!statement.step())
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Info, "Deleted repeat transactions of Transaction " + std::to_string(sourceId) + ". (" + m_database.getPath().string() + ")");
+            return true;
+        }
+        else
+        {
+            Aura::getActive().getLogger().log(Logging::LogLevel::Error, "Failed to delete repeat transactions of Transaction " + std::to_string(sourceId) + ". (" + m_database.getPath().string() + ")");
+            return false;
+        }
     }
 }
