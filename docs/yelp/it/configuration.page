@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="it">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Configurazione 🔧</title>
+	<credit type="author copyright">
+		<name>Fyodor Sobolev</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Configurazione</title>
+<p>Questa pagina descrive cosa è possibile cambiare nella configurazione dell'applicazione.</p>
+<p>A seconda della propria piattaforma, è possibile trovare la configurazione nell'interfaccia dell'applicazione sotto <gui>Preferenze</gui> oppure <gui>Impostazioni</gui>.</p>
+<terms>
+	<item>
+		<title>Stile</title>
+		<p>Impostare lo stile chiaro o scuro, oppure dire a <app>Denaro</app> di seguire lo stile di sistema. Cambiare lo stile su Windows richiede il riavvio dell'applicazione per applicare le modifiche.</p>
+	</item>
+	<item>
+		<title>Colore predefinito delle transazioni</title>
+		<p>Un colore che verrà selezionato inizialmente all'aggiunta di una nuova <link xref="transaction">transazione</link> con colore speciale. Cambiare questo colore non avrà effetto sulle transazioni esistenti, anche se usavano un colore predefinito precedentemente selezionato.</p>
+	</item>
+	<item>
+		<title>Colore predefinito dei trasferimenti</title>
+		<p>Un colore che verrà usato per le transazioni create usando i <link xref="transfer">trasferimenti</link>. Cambiare questo colore non avrà effetto sulle transazioni esistenti.</p>
+	</item>
+	<item>
+		<title>Colore dei gruppi predefinito</title>
+		<p>Un colore che verrà selezionato inizialmente all'aggiunta di un nuovo gruppo. È anche il colore per il gruppo «Senza gruppo».</p>
+	</item>
+	<item>
+		<title>Inserimento separatore decimale</title>
+		<p>Imposta per quali tasti, quando premuti, verrà inserito al loro posto il separatore decimale durante la digitazione di un importo: il punto del tastierino numerico, un punto qualsiasi e una virgola, o nessuno di essi. Se il separatore decimale è già presente nel campo di inserimento, non verrà inserito nuovamente.</p>
+	</item>
+</terms>
+</page>

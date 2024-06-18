@@ -1,0 +1,183 @@
+using Gtk 4.0;
+using Adw 1;
+
+menu importExportMenu {
+  section {
+    item(_("Import from File"), "account.import")
+  }
+
+  section {
+    item(_("Export to CSV"), "account.exportCSV")
+    item(_("Export to PDF"), "account.exportPDF")
+  }
+}
+
+Adw.ViewStack root {
+  Adw.ViewStackPage {
+    title: _("Overview");
+    icon-name: "newspaper-symbolic";
+    child: Adw.Clamp {
+      margin-bottom: 12;
+      child: Gtk.Box {
+        orientation: vertical;
+        spacing: 6;
+
+        Adw.PreferencesGroup overviewGroup {
+          header-suffix: Gtk.Box {
+            orientation: horizontal;
+
+            Gtk.Button {
+              icon-name: "send-alt-symbolic";
+              tooltip-text: _("Transfer Money");
+              action-name: "account.transfer";
+            }
+
+            Gtk.MenuButton {
+              icon-name: "mail-send-receive-symbolic";
+              tooltip-text: _("Import and Export");
+              direction: none;
+              menu-model: importExportMenu;
+            }
+
+            Gtk.Button {
+              action-name: "account.settings";
+              tooltip-text: _("Account Settings");
+
+              Adw.ButtonContent {
+                icon-name: "wrench-wide-symbolic";
+                label: _("Settings");
+              }
+            }
+
+            styles ["toolbar"]
+          };
+
+          Adw.ActionRow {
+            title: _("Total");
+
+            Gtk.Label overviewTotalLabel {
+              valign: center;
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Income");
+
+            [prefix]
+            Gtk.Image {
+              icon-name: "list-add-symbolic";
+            }
+
+            Gtk.Label overviewIncomeLabel {
+              valign: center;
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Expense");
+
+            [prefix]
+            Gtk.Image {
+              icon-name: "list-remove-symbolic";
+            }
+
+            Gtk.Label overviewExpenseLabel {
+              valign: center;
+            }
+          }
+        }
+
+        Adw.PreferencesGroup remindersGroup {
+          title: _("Reminders");
+        }
+
+        Adw.PreferencesGroup groupsGroup {
+          title: _("Groups");
+          header-suffix: Gtk.Box {
+            orientation: horizontal;
+
+            Gtk.Button {
+              action-name: "account.newGroup";
+              tooltip-text: _("New Group");
+
+              Adw.ButtonContent {
+                icon-name: "list-add-symbolic";
+                label: _("New");
+              }
+            }
+
+            styles ["toolbar"]
+          };
+        }
+      };
+    };
+  }
+
+  Adw.ViewStackPage {
+    title: _("Transactions");
+    icon-name: "money-symbolic";
+    child: Gtk.Box {
+
+    };
+  }
+
+  Adw.ViewStackPage {
+    title: _("Visualize");
+    icon-name: "profit-symbolic";
+    child: Gtk.Box {
+      orientation: vertical;
+      spacing: 6;
+      margin-start: 12;
+      margin-top: 12;
+      margin-end: 12;
+      margin-bottom: 12;
+
+      Gtk.Overlay {
+        [overlay]
+        Gtk.Button {
+          margin-start: 6;
+          icon-name: "left-symbolic";
+          action-name: "account.graphPrevious";
+          halign: start;
+          valign: center;
+          tooltip-text: _("Previous");
+
+          styles ["circular", "flat"]
+        }
+
+        [overlay]
+        Gtk.Button {
+          margin-end: 6;
+          icon-name: "right-symbolic";
+          action-name: "account.graphNext";
+          halign: end;
+          valign: center;
+          tooltip-text: _("Next");
+
+          styles ["circular", "flat"]
+        }
+
+        Adw.Carousel carousel {
+          hexpand: true;
+          vexpand: true;
+
+          Gtk.Image incomeExpensePie { }
+
+          Gtk.Image incomeExpensePerGroup { }
+
+          Gtk.Image incomeExpenseOverTime { }
+
+          Gtk.Image incomeByGroup { }
+
+          Gtk.Image expenseByGroup { }
+
+          styles ["card"]
+        }
+      }
+
+      Adw.CarouselIndicatorDots {
+        carousel: carousel;
+      }
+    };
+  }
+}

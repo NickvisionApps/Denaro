@@ -1,76 +1,150 @@
 name: denaro 
-base: core22 
+base: core22
 adopt-info: denaro
-source-code: https://github.com/nlogozzo/NickvisionMoney
-issues: https://github.com/nlogozzo/NickvisionMoney/issues
-donation: https://github.com/sponsors/nlogozzo
-contact: https://matrix.to/#/#nickvision:matrix.org
-grade: stable 
-confinement: strict 
-architectures:
-  - build-on: amd64
-  - build-on: arm64
-  - build-on: armhf
+grade: stable
+confinement: strict
+compression: lzo
+
+package-repositories:
+ - type: apt
+   ppa: ubuntu-toolchain-r/test
+   priority: always
+
+lint:
+  ignore:
+    - classic
+    - library
 
 parts:
-  # When the snap of `blueprint-compiler` comes up, we can remove this part upto L21
-  blueprint-compiler:
+  build-deps:
+    plugin: nil
+    build-packages:
+      - g++-13
+      - gcc-13
+      - libjsoncpp-dev
+      - libidn-dev
+      - libjpeg-dev
+      - libtiff-dev
+      - libpng-dev
+      - libfreetype-dev
+      - libblas-dev 
+      - liblapack-dev
+    override-build: |
+      cp -r ${CRAFT_PART_SRC}/ ${CRAFT_STAGE}/
+      update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100 --slave /usr/bin/g++ g++ /usr/bin/g++-13 --slave /usr/bin/gcov gcov /usr/bin/gcov-13
+
+  deps:
+    after: [build-deps]
+    plugin: nil
+    stage-packages:
+      - libjsoncpp25
+      - libboost-date-time1.74.0
+      - libstdc++6
+      - gnuplot
+    prime:
+      - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libstdc++*.so*
+      - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libjsoncpp*
+      - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libboost_date_time.so.1.74.0
+      - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libboost_thread.so.1.74.0
+
+  maddy:
+    after: [build-deps]
+    source: https://github.com/progsource/maddy.git
+    source-tag: '1.3.0'
+    plugin: dump
     source-depth: 1
-    source: https://gitlab.gnome.org/jwestman/blueprint-compiler.git
-    source-tag: 'v0.10.0'
+    override-prime: ''
+
+  libnick:
+    after: [maddy, build-deps]
+    source: https://github.com/nickvisionapps/libnick.git
+    source-tag: '2024.5.1'
+    source-depth: 1
+    plugin: cmake
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DBUILD_TESTING=OFF
+      - -DCMAKE_BUILD_TYPE=Release
+    build-environment:
+      - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
+    build-packages:
+      - libboost-all-dev
+      - libssl-dev
+      - uuid-dev
+    override-prime: ''
+
+  libxmlplusplus:
+    after: [build-deps]
+    source: https://github.com/libxmlplusplus/libxmlplusplus.git
+    source-tag: '5.2.0'
+    source-depth: 1
     plugin: meson
+    build-packages:
+      - libicu-dev
     meson-parameters:
       - --prefix=/usr
-    override-prime: ''
-  denaro:
-    after:  # remove this and next line too when the snap of `blueprint-compiler` comes up
-      - blueprint-compiler
-    plugin: nil
-    source: .
-    parse-info: [ usr/share/metainfo/org.nickvision.money.metainfo.xml ]
+      - -Dmaintainer-mode=false
+    prime:
+      - usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/libxml++-5.0*.so*
+
+  podofo:
+    after: [build-deps]
+    source: https://github.com/podofo/podofo.git
+    source-tag: '0.10.3'
+    source-depth: 1
+    plugin: cmake
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DPODOFO_BUILD_TEST=OFF
+      - -DPODOFO_BUILD_EXAMPLES=OFF
     build-environment:
-      - DOTNET_CLI_TELEMETRY_OPTOUT: '1'
-      - PATH: $HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin:$PATH
-      - DOTNET_ROOT: $HOME/.dotnet
-      - PYTHONPATH: $CRAFT_STAGE/usr/lib/python3/dist-packages:$PYTHONPATH
-      - GI_TYPELIB_PATH: /snap/gnome-42-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0:/snap/gnome-42-2204-sdk/current/usr/lib/girepository-1.0 
-    build-packages:
-      - wget
-    override-pull: |
-      craftctl default
-      wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
-      chmod +x ./dotnet-install.sh
-      ./dotnet-install.sh --channel 8.0
-      patch -p1 < $CRAFT_PROJECT_DIR/snap/denaro.patch
-    override-build: |
-      craftctl default
-      cd $CRAFT_PART_SRC
-      dotnet tool restore
-      dotnet cake --target=Publish --prefix=/snap/denaro/current/usr --ui=gnome --self-contained
-      dotnet cake --target=Install --destdir=$CRAFT_PART_INSTALL
-      mkdir -p $CRAFT_PART_INSTALL/meta/gui
-      cp -r $CRAFT_PART_INSTALL/snap/denaro/current/usr/share/icons $CRAFT_PART_INSTALL/meta/gui/
-      for i in `find $CRAFT_PART_INSTALL/meta/gui/icons -name "*.svg" -o -name "*.png"`; do
-        mv $i "`dirname $i`/snap.$CRAFT_PROJECT_NAME.`basename $i`"
-      done
+      - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
+
+  rapidcsv:
+    after: [build-deps]
+    source: https://github.com/d99kris/rapidcsv.git
+    source-tag: 'v8.82'
+    source-depth: 1
+    plugin: cmake
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_BUILD_TYPE=Release
+    build-environment:
+      - CPLUS_INCLUDE_PATH: ${CRAFT_STAGE}/include
+
+  denaro:
+    after: [build-deps, maddy, libnick, libxmlplusplus, matplotplusplus, podofo, rapidcsv]
+    plugin: cmake
+    source: .
+    build-snaps:
+      - cmake
+      - blueprint-compiler
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/snap/denaro/current/usr
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DBUILD_TESTING=OFF
+    stage-packages:
+      - libstdc++6
+    build-environment:
+      - CMAKE_PREFIX_PATH: ${CRAFT_STAGE}/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/cmake${CMAKE_PREFIX_PATH:+:$CMAKE_PREFIX_PATH}
+    parse-info: [usr/share/metainfo/org.nickvision.money.metainfo.xml]
     organize:
       snap/denaro/current: .
-    prime:
-      - -snap/current
 
 slots:
   denaro:
     interface: dbus
     bus: session
-    name: org.nickvision.denaro
-
+    name: org.nickvision.money
 
 apps:
   denaro:
-    command: usr/bin/org.nickvision.money
-    extensions: [gnome]
+    command: usr/lib/org.nickvision.money/org.nickvision.money.gnome
+    desktop: usr/share/money/org.nickvision.money.desktop
     common-id: org.nickvision.money
+    extensions: [gnome]
     plugs:
-      - home
+      - unity7
       - network
       - network-status

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="guide" id="index" its:version="2.0" xml:lang="hi">
+<info>
+	<title type="link">Denaro सहायता</title>
+	<title type="text">Denaro सहायता</title>
+	<credit type="author copyright">
+		<name>फ्योडोर सोबोलेव</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>निकोलस लोगोज़ो</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title><media its:translate="no" type="image" src="figures/denaro.png"/> Denaro सहायता</title>
+<p>यह दस्तावेज़ आपको यह समझने में सहायता करेगा कि एप्लिकेशन का अधिकतम लाभ उठाने के लिए <app>Denaro</app> में डेटा को कैसे कॉन्फ़िगर और प्रबंधित किया जाए।</p>
+<p>समर्थन पाने के लिए, <link href="https://github.com/NickvisionApps/Denaro/issues">समस्याएँ</link> या <link href="https://github.com/NickvisionApps/Denaro/discussions"> चर्चाएँ</link>का उपयोग करें Github पर, या <link href="https://bit.ly/3GrfEid">हमारे Matrix चैनल से जुड़ें</link>।</p>
+</page>

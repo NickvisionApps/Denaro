@@ -1,0 +1,1807 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-24 21:54-0400\n"
+"PO-Revision-Date: 2024-02-02 03:01+0000\n"
+"Last-Translator: aerowolf <aerowolf@tom.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"nickvision-money/app/zh_CN/>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.4-dev\n"
+
+#: libdenaro/src/models/account.cpp:53
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:89
+msgid "Ungrouped"
+msgstr "無組群"
+
+#: libdenaro/src/models/account.cpp:54
+msgid "Transactions without a group"
+msgstr "暫無組群之交易"
+
+#: libdenaro/src/models/account.cpp:495
+#, fuzzy, c++-format
+msgid "Transfer to {}"
+msgstr "轉帳到 {0}"
+
+#: libdenaro/src/models/account.cpp:512
+#, fuzzy, c++-format
+msgid "Transfer from {}"
+msgstr "從 {0} 轉帳"
+
+#: libdenaro/src/models/dashboardgroup.cpp:23
+#: libdenaro/src/models/dashboardgroup.cpp:27
+#, fuzzy, c++-format
+msgid "{} from {}"
+msgstr "{0} 从 {1}"
+
+#: libdenaro/src/models/transactionreminder.cpp:61
+msgid "Tomorrow"
+msgstr "明天"
+
+#: libdenaro/src/models/transactionreminder.cpp:65
+msgid "One week from now"
+msgstr "从现在起一周"
+
+#: libdenaro/src/models/transactionreminder.cpp:69
+msgid "One month from now"
+msgstr "从现在起一个月"
+
+#: libdenaro/src/models/transactionreminder.cpp:73
+msgid "Two months from now"
+msgstr "从现在起二个月"
+
+#: libdenaro/src/models/transactionreminder.cpp:77
+#, fuzzy, c++-format
+msgid "{} days from now"
+msgstr "从现在起二个月"
+
+#: libdenaro/src/controllers/accountsettingsdialogcontroller.cpp:22
+#: libdenaro/src/controllers/newaccountdialogcontroller.cpp:31
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:54
+msgid "Your system reported that your currency is"
+msgstr "系统报告，您的货币类型为"
+
+#: libdenaro/src/controllers/accountviewcontroller.cpp:20
+#, fuzzy
+msgid "Unable to login to the account. The provided password may be invalid."
+msgstr "不能登录到账号。密码无效。"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:33
+msgid "Denaro"
+msgstr "Denaro"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:34
+msgid "Manage your personal finances"
+msgstr "管理你的个人财务"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:38
+msgid "Matrix Chat"
+msgstr "Matrix Chat"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:40
+#, fuzzy
+msgid "Contributors on GitHub"
+msgstr "GitHub 上的贡献者 ❤️"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:42
+msgid "Fyodor Sobolev"
+msgstr "Fyodor Sobolev"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:45
+msgid "David Lapshin"
+msgstr "David Lapshin"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:47
+msgid "translator-credits"
+msgstr "翻译者荣誉榜"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:147
+msgctxt "Night"
+msgid "Good Morning!"
+msgstr "早上好！"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:151
+msgctxt "Morning"
+msgid "Good Morning!"
+msgstr "早上好！"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:155
+msgid "Good Afternoon!"
+msgstr "下午好!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:159
+msgid "Good Evening!"
+msgstr "晚上好!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:161
+msgid "Good Day!"
+msgstr "祝你有美好的一天!"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:226
+msgid "New update available"
+msgstr ""
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:254
+msgid "Unable to download and install update"
+msgstr ""
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:309
+#, fuzzy
+msgid "This account already exists."
+msgstr "此账户已经开启。"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:316
+#, fuzzy
+msgid "This account cannot be overwritten."
+msgstr "此账户已经开启。"
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:359
+msgid "The file is not a Denaro account file."
+msgstr ""
+
+#: libdenaro/src/controllers/mainwindowcontroller.cpp:365
+#, fuzzy
+msgid "The account is already open."
+msgstr "此账户已经开启。"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:6
+msgid "Import from File"
+msgstr "从文件导入"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:10
+#, fuzzy
+msgid "Export to CSV"
+msgstr "导出到文件"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:11
+#, fuzzy
+msgid "Export to PDF"
+msgstr "导出到文件"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:17
+msgid "Overview"
+msgstr "概要"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:31
+msgid "Transfer Money"
+msgstr "转账"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:37
+msgid "Import and Export"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:44
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:7
+msgid "Account Settings"
+msgstr "账户设置"
+
+#. Localize Strings
+#: org.nickvision.money.gnome/blueprints/account_page.blp:48
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:84
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:21
+msgid "Settings"
+msgstr "設定"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:56
+msgid "Total"
+msgstr "總額"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:64
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:44
+msgid "Income"
+msgstr "收入"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:77
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:29
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:139
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:45
+msgid "Expense"
+msgstr "支出"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:91
+msgid "Reminders"
+msgstr "提醒"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:95
+msgid "Groups"
+msgstr "群组"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:101
+msgid "New Group"
+msgstr "新建群组"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:105
+#: org.nickvision.money.gnome/blueprints/main_window.blp:343
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:85
+#, fuzzy
+msgid "New"
+msgstr "新建"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:117
+msgid "Transactions"
+msgstr "交易"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:125
+msgid "Visualize"
+msgstr "可见"
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:143
+msgid "Previous"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_page.blp:155
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:104
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:157
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:252
+msgid "Next"
+msgstr "继续"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:10
+msgid "Account"
+msgstr "账户"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:14
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:71
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:29
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:225
+msgid "Account Name"
+msgstr "账户名称"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:18
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:130
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:39
+msgid "Account Type"
+msgstr "账户类型"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:20
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:367
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:368
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:40
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:429
+msgid "Checking"
+msgstr "支票"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:20
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:371
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:372
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:432
+msgid "Savings"
+msgstr "储蓄"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:20
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:132
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:375
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:376
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:42
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:435
+msgid "Business"
+msgstr "商务"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:27
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:137
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:43
+msgid "Default Transaction Type"
+msgstr "默认的交易类型"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:34
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:144
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:46
+msgid "Transaction Reminders Threshold"
+msgstr "交易提醒阈值"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:35
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:145
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:47
+msgid ""
+"Determines how far in advanced Denaro should remind users of upcoming "
+"transactions in the account."
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:38
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:148
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:48
+msgid "Never"
+msgstr "永不"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:38
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:148
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:49
+msgid "One Day Before"
+msgstr "一天前"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:38
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:148
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:50
+msgid "One Week Before"
+msgstr "一周前"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:38
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:148
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:51
+msgid "One Month Before"
+msgstr "一月前"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:38
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:148
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:52
+msgid "Two Months Before"
+msgstr "两月前"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:45
+#: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:16
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:53
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:23
+msgid "Currency"
+msgstr "货币"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:56
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:188
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:56
+msgid "Use Custom Currency"
+msgstr "使用自定义货币"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:61
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:193
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:59
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:226
+msgid "Symbol"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:65
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:197
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:61
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:227
+msgid "Code"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:69
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:201
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:63
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:228
+msgid "Decimal Separator"
+msgstr "小数点分隔符"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:71
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:86
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:203
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:218
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:66
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:72
+msgid "Custom"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:84
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:216
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:67
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:229
+msgid "Group Separator"
+msgstr "组别分隔符"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:86
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:218
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:71
+msgid "None"
+msgstr "无"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:99
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:231
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:73
+msgid "Decimal Digits"
+msgstr "十进制数字"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:101
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:74
+msgid "Two"
+msgstr "2"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:101
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:75
+msgid "Three"
+msgstr "3"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:101
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:76
+msgid "Four"
+msgstr "4"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:101
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:77
+msgid "Five"
+msgstr "5"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:101
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:233
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:78
+msgid "Six"
+msgstr "6"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:106
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:238
+msgid "Amount Display Style"
+msgstr "金额显示样式"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:107
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:239
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:80
+#, fuzzy
+msgid "$ is the currency's symbol."
+msgstr "货币符号"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:118
+msgid "Password"
+msgstr "密码"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:122
+msgid "If the password is lost, there is no way to restore the file!"
+msgstr "如果忘记密码，将无法恢复为您的账号！"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:125
+msgid "New Password"
+msgstr "新的密码"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:131
+msgid "Confirm Password"
+msgstr "确认密码"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:137
+msgid "Change Password"
+msgstr "更改密码"
+
+#: org.nickvision.money.gnome/blueprints/account_settings_dialog.blp:148
+msgid "Remove Current Password"
+msgstr ""
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:24
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:26
+#, fuzzy
+msgid "Switch Currencies"
+msgstr "切换货币"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:27
+msgid "Switch"
+msgstr "切换"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:36
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:24
+msgid "Source"
+msgstr "源交易"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:40
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:25
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:101
+msgid "Result"
+msgstr "结果"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:45
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:27
+msgid "Amount"
+msgstr "金额"
+
+#: org.nickvision.money.gnome/blueprints/currency_converter_page.blp:55
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:30
+msgid "Copy Result Amount"
+msgstr "复制结果金额"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:19
+msgid "Back"
+msgstr "后退"
+
+#. Localize Strings
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:39
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:16
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:25
+msgid "New Account"
+msgstr "新建账户"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:40
+#, fuzzy
+msgid "Use this wizard to get the most out of your new account"
+msgstr "使用此向导可更好利用你的账户"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:45
+msgid "Let's Start"
+msgstr "开始！"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:62
+msgid "Storage Location"
+msgstr "存储位置"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:75
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:31
+#, fuzzy
+msgid "Account Password"
+msgstr "账户密码(可选)"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:79
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:33
+msgid "Folder"
+msgstr "文件夹"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:86
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:121
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:34
+msgid "Select Folder"
+msgstr "选择文件夹"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:95
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:35
+msgid "Overwrite Existing Accounts"
+msgstr "覆盖已有账户"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:121
+msgid "Account Options"
+msgstr "账户选项"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:174
+msgid "Account Currency"
+msgstr "账户货币"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:269
+msgid "Import Existing Information"
+msgstr "导入已有信息"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:278
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:86
+#, fuzzy
+msgid ""
+"Upload a supported file to use to import existing information into the new "
+"account. Denaro supports CSV, OFX, and QIF files."
+msgstr "上传一个有效文件，用于将现有信息导入新账户。"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:285
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:87
+msgid "Import File"
+msgstr "导入文件"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:295
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:89
+msgid "Select File"
+msgstr "选择文件"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:304
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:90
+msgid "Clear File"
+msgstr "清除文件"
+
+#: org.nickvision.money.gnome/blueprints/new_account_dialog.blp:318
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:27
+msgid "Create"
+msgstr "创建"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:5
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:8
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:30
+msgid "Preferences"
+msgstr "偏好設定"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:6
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:35
+msgid "Keyboard Shortcuts"
+msgstr "键盘快捷键"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:7
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:75
+msgid "Help"
+msgstr "帮助"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:8
+msgid "About Denaro"
+msgstr "关于Denaro"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:40
+msgid "Account Menu"
+msgstr "账户菜单"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:58
+msgid "Recents"
+msgstr "近期"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:68
+#: org.nickvision.money.gnome/blueprints/main_window.blp:344
+msgid "New Account (Ctrl+N)"
+msgstr "新建账户 (Ctrl+N)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:73
+#: org.nickvision.money.gnome/blueprints/main_window.blp:353
+msgid "Open Account (Ctrl+O)"
+msgstr "打开账户 (Ctrl+O)"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:77
+#: org.nickvision.money.gnome/blueprints/main_window.blp:352
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:154
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:86
+msgid "Open"
+msgstr "开启"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:90
+#: org.nickvision.money.gnome/blueprints/main_window.blp:274
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:403
+msgid "No Recent Accounts"
+msgstr "无近期账户"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:110
+#: org.nickvision.money.gnome/blueprints/main_window.blp:128
+#: org.nickvision.money.gnome/blueprints/main_window.blp:146
+#: org.nickvision.money.gnome/blueprints/main_window.blp:294
+#: org.nickvision.money.gnome/blueprints/main_window.blp:312
+#: org.nickvision.money.gnome/blueprints/main_window.blp:330
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:422
+msgid "Remove"
+msgstr "删除"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:160
+msgid "Main Menu"
+msgstr "主菜单"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:183
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:247
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:72
+msgid "Home"
+msgstr "目錄"
+
+#. Localize Strings
+#: org.nickvision.money.gnome/blueprints/main_window.blp:200
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:252
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:83
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:21
+msgid "Currency Converter"
+msgstr "汇率换算"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:210
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:74
+#, fuzzy
+msgid "Accounts"
+msgstr "账户"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:229
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:258
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:73
+msgid "Dashboard"
+msgstr "显示看板"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:262
+#, fuzzy
+msgid ""
+"Create or open an account to get started. You may also drag a file into the "
+"app from your file browser"
+msgstr ""
+"要开始，请创建或打开账户。您也可以从文件浏览器中拖动一个文件到此应用中。"
+
+#: org.nickvision.money.gnome/blueprints/main_window.blp:370
+#, fuzzy
+msgid "No Accounts Open"
+msgstr "账户类型"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:12
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:22
+msgid "User Interface"
+msgstr "用户界面"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:15
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:23
+msgid "Theme"
+msgstr "主题"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:24
+msgctxt "Theme"
+msgid "Light"
+msgstr "亮色"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:25
+msgctxt "Theme"
+msgid "Dark"
+msgstr "暗色"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:17
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:26
+msgctxt "Theme"
+msgid "System"
+msgstr "跟随系统"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:27
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:30
+msgid "Colors"
+msgstr "颜色"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:28
+msgid "Customize the colors used by Denaro."
+msgstr "自定义界面颜色。"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:36
+msgid "Transaction Default Color"
+msgstr "默认交易颜色"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:37
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:32
+msgid ""
+"A change in this setting will only be applied to newly added transactions."
+msgstr "对此设置的修改仅影响后续新的交易。"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:47
+msgid "Transfer Default Color"
+msgstr "默认转账颜色"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:48
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:34
+msgid "A change in this setting will only be applied to new transfers."
+msgstr "对此设置的修改仅影响新的交易。"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:58
+msgid "Group Default Color"
+msgstr "群组默认颜色"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:59
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:36
+#, fuzzy
+msgid "A change in this setting will only be applied to newly added groups."
+msgstr "对此设置的修改将仅影响以后新建的群组。"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:71
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:37
+msgid "Locale"
+msgstr "本地"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:74
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:38
+msgid "Insert Decimal Separator"
+msgstr "插入十进制分隔符"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:75
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:39
+#, fuzzy
+msgid ""
+"For the selected keys, the account's decimal separator will be inserted "
+"instead of the keyboard's value."
+msgstr "设置按键，用于将区域设置的十进制分隔符插入金额字段。"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:78
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:37
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:58
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:29
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:40
+#, fuzzy
+msgid "Off"
+msgstr "关闭"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:78
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:41
+msgid "Numpad period only"
+msgstr "仅数字键盘区域的句号"
+
+#: org.nickvision.money.gnome/blueprints/preferences_dialog.blp:78
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:42
+msgid "Period and Comma"
+msgstr "句号和逗号"
+
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:13
+#, fuzzy
+msgctxt "Shortcut"
+msgid "Account"
+msgstr "账户"
+
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:21
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:325
+msgid "Open Account"
+msgstr "开设账户"
+
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:27
+#, fuzzy
+msgctxt "Shortcut"
+msgid "Application"
+msgstr "应用"
+
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:40
+#, fuzzy
+msgid "About Application"
+msgstr "应用"
+
+#: org.nickvision.money.gnome/blueprints/shortcuts_dialog.blp:45
+msgid "Quit"
+msgstr "退出"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:27
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:40
+msgid "Error"
+msgstr "错误"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:27
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:41
+msgid ""
+"Unable to load currency data. Please try again. If the error still persists, "
+"report a bug."
+msgstr "不能载入货币数据。请重试。如果错误依旧，请报告bug。"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:28
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:26
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:22
+msgid "Close"
+msgstr "关闭"
+
+#: org.nickvision.money.gnome/src/controls/currencyconverterpage.cpp:102
+msgid "Result was copied to clipboard."
+msgstr "结果已复制到剪贴板。"
+
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:209
+#, fuzzy
+msgid "Password changed"
+msgstr "密码强度"
+
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:215
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:228
+#, fuzzy
+msgid "Unable to change password"
+msgstr "更改密码"
+
+#: org.nickvision.money.gnome/src/views/accountsettingsdialog.cpp:224
+#, fuzzy
+msgid "Password removed"
+msgstr "密码强度"
+
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:60
+#, fuzzy
+msgid "No Transaction Reminders"
+msgstr "没有交易"
+
+#: org.nickvision.money.gnome/src/views/accountpage.cpp:92
+msgid "Edit Group"
+msgstr "编辑群组"
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:238
+#, fuzzy
+msgid "Select Import File"
+msgstr "导入文件"
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:240
+msgid "All Files (*.csv, *.ofx, *.qif)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:248
+msgid "CSV (*.csv)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:252
+msgid "Open Financial Exchange (*.ofx)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/newaccountdialog.cpp:256
+msgid "Quicken Interchange Format (*.qif)"
+msgstr ""
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:206
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:79
+msgid "GitHub Repo"
+msgstr "GitHub 仓库"
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:327
+#, fuzzy
+msgid "Nickvision Denaro Account (*.nmoney)"
+msgstr "Nickvision的Denaro账户"
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:406
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:32
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:460
+msgid "Enter password here"
+msgstr "Enter password here"
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:414
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:469
+msgid "Cancel"
+msgstr "取消"
+
+#: org.nickvision.money.gnome/src/views/mainwindow.cpp:414
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:468
+msgid "Unlock"
+msgstr "解锁"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:28
+#, fuzzy
+msgid "Storage"
+msgstr "存储位置"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:30
+#, fuzzy
+msgid "Enter name here"
+msgstr "在此处输入备注"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:36
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:57
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:28
+#, fuzzy
+msgid "On"
+msgstr "开启"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:38
+#, fuzzy
+msgid "Options"
+msgstr "操作"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:41
+#, fuzzy
+msgid "Saving"
+msgstr "储蓄"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:60
+msgid "Enter symbol here"
+msgstr "Enter symbol here"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:62
+msgid "Enter code here"
+msgstr "Enter code here"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:64
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:68
+msgid "."
+msgstr ""
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:65
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:69
+msgid ","
+msgstr ""
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:70
+msgid "'"
+msgstr ""
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:79
+#, fuzzy
+msgid "Amount Style"
+msgstr "金额显示样式"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:85
+#, fuzzy
+msgid "Import"
+msgstr "导入文件"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:88
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:152
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:199
+#, fuzzy
+msgid "No File Selected"
+msgstr "未选择账户"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:235
+#, fuzzy
+msgid "Account Name (Invalid)"
+msgstr "账户名称(已启用)"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:296
+#, fuzzy
+msgid "Symbol (Empty)"
+msgstr "货币符号 (空)"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:300
+#, fuzzy
+msgid "Code (Empty)"
+msgstr "名称 (空)"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:304
+msgid "Decimal Separator (Empty)"
+msgstr "小数点分隔符 (空)"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:308
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:314
+msgid "Decimal Separator (Invalid)"
+msgstr "小数点分隔符 (无效)"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:309
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:319
+msgid "Group Separator (Invalid)"
+msgstr "组别分隔符 (无效)"
+
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:313
+#: org.nickvision.money.winui/NewAccountDialog.xaml.cpp:318
+#, fuzzy
+msgid "Symbol (Invalid)"
+msgstr "货币符号 (无效)"
+
+#. Localize Strings
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:71
+msgid "Search"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:76
+msgid "Check for Updates"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:77
+#, fuzzy
+msgid "Copy Debug Information"
+msgstr "导出所有信息"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:78
+msgid "Changelog"
+msgstr "變更日誌"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:80
+msgid "Report a Bug"
+msgstr "Report a Bug"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:81
+msgid "Discussions"
+msgstr "Discussions"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:82
+msgid "Credits"
+msgstr "鳴謝"
+
+#. Localize Strings
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:100
+msgid "PREVIEW"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:107
+#, c++-format
+msgid ""
+"Developers:\n"
+"{}\n"
+"Designers:\n"
+"{}\n"
+"Artists:\n"
+"{}"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:111
+#, c++-format
+msgid ""
+"Developers:\n"
+"{}\n"
+"Designers:\n"
+"{}\n"
+"Artists:\n"
+"{}\n"
+"Translators:\n"
+"{}"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:114
+msgid ""
+"Create or open an account to get started. You may also drag a file into the "
+"app from your file browser."
+msgstr ""
+"要开始，请创建或打开账户。您也可以从文件浏览器中拖动一个文件到此应用中。"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:175
+#, fuzzy
+msgid "Drop here to open account"
+msgstr "不能覆盖打开的账号。"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:239
+msgid "Update"
+msgstr ""
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:309
+#, fuzzy
+msgid "Debug information copied to clipboard."
+msgstr "结果已复制到剪贴板。"
+
+#: org.nickvision.money.winui/MainWindow.xaml.cpp:466
+#, fuzzy
+msgid "Unlock Account"
+msgstr "关闭账户"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:27
+msgid "Automatically Check for Updates"
+msgstr ""
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:31
+#, fuzzy
+msgid "Default Transaction Color"
+msgstr "默认的交易类型"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:33
+#, fuzzy
+msgid "Default Transfer Color"
+msgstr "默认转账颜色"
+
+#: org.nickvision.money.winui/SettingsPage.xaml.cpp:35
+#, fuzzy
+msgid "Default Group Color"
+msgstr "群组默认颜色"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:28
+#, fuzzy
+msgid "Enter source amount"
+msgstr "請在此輸入數額"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:42
+msgid "OK"
+msgstr "OK"
+
+#: org.nickvision.money.winui/Controls/CurrencyConverterDialog.xaml.cpp:118
+#, fuzzy
+msgid "Result (Error)"
+msgstr "结果"
+
+#~ msgid "(Copy)"
+#~ msgstr "(复制)"
+
+#, csharp-format
+#~ msgid "{0} tag"
+#~ msgid_plural "{0} tags"
+#~ msgstr[0] "{0}个标签"
+
+#, csharp-format
+#~ msgid "{0} transaction"
+#~ msgid_plural "{0} transactions"
+#~ msgstr[0] "{0}笔交易"
+
+#~ msgid "Account Name (Exists)"
+#~ msgstr "账户名称 (已存在)"
+
+#~ msgid "Add"
+#~ msgstr "添加"
+
+#~ msgid "Add a new transaction or import transactions from a file."
+#~ msgstr "添加交易或从文件中导入交易。"
+
+#~ msgid "Add Password To PDF?"
+#~ msgstr "添加密码至PDF?"
+
+#~ msgid "All files"
+#~ msgstr "所有文件"
+
+#~ msgid "Amount (Invalid)"
+#~ msgstr "金额 (无效)"
+
+#~ msgid "Apply"
+#~ msgstr "应用"
+
+#~ msgid ""
+#~ "Are you sure you want to delete this group?\n"
+#~ "This action is irreversible."
+#~ msgstr ""
+#~ "是否确认删除此组？\n"
+#~ "该操作不可逆。"
+
+#~ msgid ""
+#~ "Are you sure you want to delete this transaction?\n"
+#~ "This action is irreversible."
+#~ msgstr ""
+#~ "確認刪除交易?\n"
+#~ "此操作不可逆轉。"
+
+#~ msgid "Can't access the selected folder, check Flatpak permissions."
+#~ msgstr "没有所选文件夹的权限，请检查Flatpak权限。"
+
+#~ msgid "Currency Code"
+#~ msgstr "货币代码"
+
+#~ msgid "Currency Code (Empty)"
+#~ msgstr "货币代码 (空)"
+
+#~ msgid "DaPigGuy"
+#~ msgstr "DaPigGuy"
+
+#~ msgid "Date"
+#~ msgstr "日期"
+
+#~ msgid "Delete Existing"
+#~ msgstr "删除已存在的"
+
+#~ msgid "Delete Group"
+#~ msgstr "删除组"
+
+#~ msgid "Delete Only Source"
+#~ msgstr "删除唯一源"
+
+#~ msgid "Delete Source and Generated"
+#~ msgstr "删除源和内容"
+
+#~ msgid "Delete Transaction"
+#~ msgstr "删除交易"
+
+#~ msgid "Description"
+#~ msgstr "描述"
+
+#~ msgid "Description (Empty)"
+#~ msgstr "描述 (空)"
+
+#~ msgid "Destination Account"
+#~ msgstr "目标账户"
+
+#~ msgid "Destination Account (Invalid)"
+#~ msgstr "目标账户 (无效)"
+
+#~ msgid "Destination Account Password"
+#~ msgstr "目标账户密码"
+
+#~ msgid "Destination Account Password (Invalid)"
+#~ msgstr "目标账户密码 (无效)"
+
+#~ msgid "Destination Account Password (Required)"
+#~ msgstr "目标账户密码 (必要)"
+
+#~ msgid "Disassociate Existing"
+#~ msgstr "解除已有关联"
+
+#~ msgid "Exported account to file successfully."
+#~ msgstr "成功将账户导出到文件。"
+
+#, csharp-format
+#~ msgid "Generated: {0}"
+#~ msgstr "已生成: {0}"
+
+#~ msgid "Group"
+#~ msgstr "群组"
+
+#~ msgid "Group Name"
+#~ msgstr "组名"
+
+#~ msgid "Id"
+#~ msgstr "ID"
+
+#~ msgid "Import from Account"
+#~ msgstr "从账户导入"
+
+#, csharp-format
+#~ msgid "Imported {0} transaction from file."
+#~ msgid_plural "Imported {0} transactions from file."
+#~ msgstr[0] "从文件导入 {0} 笔交易。"
+
+#~ msgid "N/A"
+#~ msgstr "N/A"
+
+#~ msgid "Name"
+#~ msgstr "名称"
+
+#~ msgid "Name (Exists)"
+#~ msgstr "名称 (已存在)"
+
+#~ msgid "Nicholas Logozzo"
+#~ msgstr "Nicholas Logozzo"
+
+#~ msgid "No"
+#~ msgstr "否"
+
+#~ msgid "No End Date"
+#~ msgstr "没有结束日期"
+
+#~ msgid "No Transactions Found"
+#~ msgstr "没有找到交易"
+
+#~ msgid "No transactions match the specified filters."
+#~ msgstr "没有符合条件的交易。"
+
+#~ msgid "Notes"
+#~ msgstr "注释"
+
+#~ msgid "Nothing to import from the file."
+#~ msgstr "从文件未能导入内容。"
+
+#~ msgid "Page {0}"
+#~ msgstr "第 {0} 页"
+
+#~ msgid "PDF Password"
+#~ msgstr "PDF 密码"
+
+#~ msgid "Receipt"
+#~ msgstr "收据"
+
+#~ msgid "Receipt (File Inaccessible)"
+#~ msgstr "收据（文件无法访问）"
+
+#~ msgid "Receipts"
+#~ msgstr "收据"
+
+#~ msgid "Repeat End Date"
+#~ msgstr "重复结束日期"
+
+#~ msgid "Repeat End Date (Invalid)"
+#~ msgstr "重复结束日期（无效）"
+
+#~ msgid "Repeat Interval"
+#~ msgstr "重复间隔"
+
+#~ msgid "Repeat Interval Changed"
+#~ msgstr "重复间隔已更改"
+
+#~ msgid "Select Account"
+#~ msgstr "选择账户"
+
+#~ msgid "Select Backup Folder"
+#~ msgstr "选择备份文件夹"
+
+#~ msgid "Sort By Amount"
+#~ msgstr "按金额排序"
+
+#~ msgid "Sort By Date"
+#~ msgstr "按日期排序"
+
+#~ msgid "Sort By Id"
+#~ msgstr "按 ID 排序"
+
+#~ msgid "Tags"
+#~ msgstr "标签"
+
+#~ msgid "The password of the account was changed."
+#~ msgstr "账户密码已更改。"
+
+#~ msgid "The password of the account was removed."
+#~ msgstr "账户密码已被删除。"
+
+#~ msgid "The password will be removed upon closing this dialog."
+#~ msgstr "关闭此对话框后，密码将被删除。"
+
+#~ msgid "The passwords do not match."
+#~ msgstr "密码不匹配。"
+
+#~ msgid ""
+#~ "The repeat interval was changed.\n"
+#~ "What would you like to do with existing generated transactions?\n"
+#~ "\n"
+#~ "New repeat transactions will be generated based off the new interval."
+#~ msgstr ""
+#~ "重复间隔已更改。\n"
+#~ "您想如何处理已生成的交易？\n"
+#~ "\n"
+#~ "新的重复交易将是使用新的间隔。"
+
+#~ msgid "This account has no money available to transfer."
+#~ msgstr "该账户没有足够资金完成转账。"
+
+#~ msgid ""
+#~ "This transaction is a source repeat transaction.\n"
+#~ "What would you like to do with the repeat transactions?\n"
+#~ "\n"
+#~ "Deleting only the source transaction will allow individual\n"
+#~ "generated transactions to be modifiable."
+#~ msgstr ""
+#~ "此交易是重复交易的来源。\n"
+#~ "希望如何更改重复交易?\n"
+#~ "\n"
+#~ "只删去此源交易，将保留后续生成的交易。"
+
+#~ msgid ""
+#~ "This transaction is a source repeat transaction.\n"
+#~ "What would you like to do with the repeat transactions?\n"
+#~ "\n"
+#~ "Updating only the source transaction will disassociate\n"
+#~ "generated transactions from the source."
+#~ msgstr ""
+#~ "此交易是重复交易的来源。\n"
+#~ "想要如何处理已经生成的交易？\n"
+#~ "\n"
+#~ "仅更新源交易，会将后续生成的交易与源交易分开。"
+
+#~ msgid "Tobias Bernard"
+#~ msgstr "Tobias Bernard"
+
+#~ msgid "Transaction"
+#~ msgstr "交易"
+
+#~ msgid "Type"
+#~ msgstr "类型"
+
+#~ msgid "Unable to export account to file."
+#~ msgstr "无法将账号导出到文件。"
+
+#~ msgid ""
+#~ "Unable to import information from the file. Please ensure that the app "
+#~ "has permissions to access the file and try again."
+#~ msgstr "不能从文件导入信息。请确定应用具有访问该文件的权限，然后重试。"
+
+#~ msgid "Unable to import transactions from the file."
+#~ msgstr "不能从文件中导入交易。"
+
+#~ msgid ""
+#~ "Unable to open the account. Please ensure that the app has permissions to "
+#~ "access the file and try again."
+#~ msgstr "不能打开账号。请确定此应用有文件访问权限，然后重试。"
+
+#~ msgid "Unable to overwrite an existing account."
+#~ msgstr "不能覆盖已有的账号。"
+
+#~ msgid "Untagged"
+#~ msgstr "未加标签"
+
+#~ msgid "Upcoming transactions"
+#~ msgstr "即将发生的交易"
+
+#~ msgid "Update Only Source"
+#~ msgstr "仅更新源交易"
+
+#~ msgid "Update Source and Generated"
+#~ msgstr "更新源交易和后续交易"
+
+#~ msgid "Update Transaction"
+#~ msgstr "更新交易"
+
+#~ msgid "Upload"
+#~ msgstr "上传"
+
+#~ msgid "View"
+#~ msgstr "查看"
+
+#~ msgid ""
+#~ "Would you like to password-protect the PDF file?\n"
+#~ "\n"
+#~ "If the password is lost, the PDF will be inaccessible."
+#~ msgstr ""
+#~ "想要给PDF文件添加密码保护吗？\n"
+#~ "\n"
+#~ "如果忘记密码，就无法访问该PDF文件了。"
+
+#~ msgid "Yes"
+#~ msgstr "是"
+
+#~ msgid "Manage the currency used by the account."
+#~ msgstr "管理账号使用的货币。"
+
+#~ msgid "Set a new password or remove one."
+#~ msgstr "设置新密码或者删除原密码。"
+
+#~ msgid "Other"
+#~ msgstr "其他"
+
+#~ msgid "Unlimited"
+#~ msgstr "无限制"
+
+#~ msgid "CSV"
+#~ msgstr "CSV"
+
+#~ msgid "Export Current View"
+#~ msgstr "导出当前视图"
+
+#~ msgid "PDF"
+#~ msgstr "PDF"
+
+#~ msgid "Search by description"
+#~ msgstr "按详情搜索"
+
+#~ msgid "Today's Overview"
+#~ msgstr "今日概况"
+
+#~ msgid "Select All Overview Filters"
+#~ msgstr "选择所有概况筛选器"
+
+#~ msgid "New Group (Ctrl+G)"
+#~ msgstr "新建群組 (Ctrl+G)"
+
+#~ msgid "Toggle Groups Visibility"
+#~ msgstr "切换群组可见性"
+
+#~ msgid "Select All Groups Filters"
+#~ msgstr "选择所有群组筛选器"
+
+#~ msgid "Unselect Groups Filters"
+#~ msgstr "取消选择群组筛选器"
+
+#~ msgid "Toggle Tags Visibility"
+#~ msgstr "切换标签可见性"
+
+#~ msgid "Select All Tags Filters"
+#~ msgstr "选择所有标签筛选器"
+
+#~ msgid "Unselect Tags Filters"
+#~ msgstr "取消选择标签筛选器"
+
+#~ msgid "Calendar"
+#~ msgstr "日历"
+
+#~ msgid "Select Current Month"
+#~ msgstr "选择当前月"
+
+#~ msgid "Reset To Today"
+#~ msgstr "重置到今天"
+
+#~ msgid "Today"
+#~ msgstr "今天"
+
+#~ msgid "Select Range"
+#~ msgstr "选择范围"
+
+#~ msgctxt "DateRange"
+#~ msgid "Start"
+#~ msgstr "开始"
+
+#~ msgctxt "DateRange"
+#~ msgid "End"
+#~ msgstr "结束"
+
+#~ msgid "Sort From First To Last"
+#~ msgstr "排序：从最先到最后"
+
+#~ msgid "Sort From Last To First"
+#~ msgstr "排序：从最后到最先"
+
+#~ msgid "New Transaction (Ctrl+Shift+N)"
+#~ msgstr "新建交易 (Ctrl+Shift+N)"
+
+#~ msgctxt "Transaction"
+#~ msgid "New"
+#~ msgstr "新建"
+
+#~ msgid "Suggestions"
+#~ msgstr "建议"
+
+#~ msgid "Converter"
+#~ msgstr "换算器"
+
+#~ msgid "Loading..."
+#~ msgstr "正在载入……"
+
+#~ msgid "All Accounts"
+#~ msgstr "所有账户"
+
+#~ msgid "Color"
+#~ msgstr "顏色"
+
+#~ msgid "Delete"
+#~ msgstr "删除"
+
+#~ msgid "This is only a useful label that doesn't affect how the app works."
+#~ msgstr "这是一个有用的标签，不影响应用运行。"
+
+#~ msgid "Enter Password To Login:"
+#~ msgstr "输入登录密码："
+
+#~ msgid "Checking Account Color"
+#~ msgstr "支票账户颜色"
+
+#~ msgid "Savings Account Color"
+#~ msgstr "储蓄账户颜色"
+
+#~ msgid "Business Account Color"
+#~ msgstr "商务账户颜色"
+
+#~ msgid "Use Native Digits"
+#~ msgstr "使用原生数字"
+
+#~ msgid ""
+#~ "Whether to use numerals that are native for your locale instead of latin "
+#~ "digits."
+#~ msgstr "是否使用您所在地区的原生数字，而不是拉丁数字。"
+
+#~ msgid "Backup"
+#~ msgstr "备份"
+
+#~ msgid "CSV Backup Folder"
+#~ msgstr "CVS备份文件夹"
+
+#~ msgid ""
+#~ "Unencrypted accounts will automatically export as CSV files to this "
+#~ "folder when a change is made."
+#~ msgstr "修改之后，未加密的账户将自动导出为CVS文件，保存到此文件夹中。"
+
+#~ msgid "Clear Backup Folder"
+#~ msgstr "清除备份文件夹"
+
+#~ msgid "No Reminders"
+#~ msgstr "不提醒"
+
+#~ msgctxt "Title"
+#~ msgid "Transfer"
+#~ msgstr "转账"
+
+#~ msgid "New Transaction"
+#~ msgstr "新建交易"
+
+#~ msgid "Toggle Sidebar"
+#~ msgstr "切换侧边栏"
+
+#~ msgid "Make a Copy"
+#~ msgstr "制作复本"
+
+#~ msgid "Clear End Date"
+#~ msgstr "清除结束日期"
+
+#~ msgid "Daily"
+#~ msgstr "每日"
+
+#~ msgid "Weekly"
+#~ msgstr "每周"
+
+#~ msgid "Biweekly"
+#~ msgstr "双周"
+
+#~ msgid "Monthly"
+#~ msgstr "每月"
+
+#~ msgid "Quarterly"
+#~ msgstr "每季"
+
+#~ msgid "Yearly"
+#~ msgstr "每年"
+
+#~ msgid "Biyearly"
+#~ msgstr "每两年"
+
+#~ msgid "Use group color"
+#~ msgstr "使用群组颜色"
+
+#~ msgid "Use unique color"
+#~ msgstr "使用独特颜色"
+
+#~ msgid "Enter a new tag name..."
+#~ msgstr "请输入新的标签名称……"
+
+#~ msgid "Add Tag"
+#~ msgstr "添加标签"
+
+#~ msgid "Extras"
+#~ msgstr "额外"
+
+#~ msgid "Manage extra fields of the transaction."
+#~ msgstr "管理交易的额外字段。"
+
+#~ msgid "Edit Transaction"
+#~ msgstr "编辑交易"
+
+#~ msgid ""
+#~ "Transferring money will create an expense transaction with the given "
+#~ "amount in this account and an income transaction with the given amount in "
+#~ "the account to transfer to."
+#~ msgstr ""
+#~ "转账将会在此账户的收入合计中产生一笔支出，并在转入的账户的收入合计中产生一"
+#~ "笔收入。"
+
+#~ msgid "Select a destination account"
+#~ msgstr "选择目标账户"
+
+#~ msgid "Recent Accounts"
+#~ msgstr "近期账户"
+
+#~ msgid "Conversion Needed"
+#~ msgstr "需要换算"
+
+#~ msgid "Use Custom Rates"
+#~ msgstr "使用自定义费率"
+
+#~ msgid "Enter the conversion rates manually"
+#~ msgstr "手动输入换算费率"
+
+#~ msgctxt "Button"
+#~ msgid "Transfer"
+#~ msgstr "转账"
+
+#~ msgctxt "Account"
+#~ msgid "New"
+#~ msgstr "新建"
+
+#~ msgid "Toggle Graphs"
+#~ msgstr "切换图表"
+
+#, fuzzy
+#~ msgid "result"
+#~ msgstr "Result"
+
+#, fuzzy
+#~ msgid "money;finance;wallet;cash;bank;Nickvision;"
+#~ msgstr "money;finance;wallet;cash;bank;GTK;Nickvision;"
+
+#~ msgid "Please wait while transactions import..."
+#~ msgstr "正在导入交易，请稍候..."
+
+#, csharp-format
+#~ msgid ""
+#~ "David Lapshin {0}\n"
+#~ "Tobias Bernard {1}"
+#~ msgstr ""
+#~ "David Lapshin {0}\n"
+#~ "Tobias Bernard {1}"
+
+#, csharp-format
+#~ msgid ""
+#~ "Nicholas Logozzo {0}\n"
+#~ "Fyodor Sobolev {1}\n"
+#~ "DaPigGuy {2}"
+#~ msgstr ""
+#~ "Nicholas Logozzo {0}\n"
+#~ "Fyodor Sobolev {1}\n"
+#~ "DaPigGuy {2}"
+
+#~ msgid "Customize the application's user interface."
+#~ msgstr "自訂介面"
+
+#~ msgid "Customize how Denaro uses locale settings."
+#~ msgstr "Customize how Denaro uses locale settings."
+
+#, fuzzy
+#~ msgid "Customize backup locations for Denaro accounts."
+#~ msgstr "自訂介面"
+
+#~ msgid "Save"
+#~ msgstr "儲存"
+
+#~ msgid "Hide"
+#~ msgstr "隱藏"
+
+#~ msgid "Show"
+#~ msgstr "Show"
+
+#~ msgid "Reset Dates Filters"
+#~ msgstr "重置時間篩選條件"
+
+#~ msgid "Delete Group?"
+#~ msgstr "刪除組群?"
+
+#~ msgid "Delete Transaction?"
+#~ msgstr "刪除此交易?"
+
+#, fuzzy
+#~ msgid "AccountSettings"
+#~ msgstr "Account Settings"
+
+#~ msgid "Version: {0}"
+#~ msgstr "版本: {0}"
+
+#~ msgid "About {0}"
+#~ msgstr "關於{0}"
+
+#~ msgid ""
+#~ "Nicholas Logozzo https://github.com/nlogozzo\n"
+#~ "Contributors on GitHub ❤️ https://github.com/NickvisionApps/Denaro/graphs/"
+#~ "contributors"
+#~ msgstr ""
+#~ "Nicholas Logozzo https://github.com/nlogozzo\n"
+#~ "GitHub上的開發者 ❤️ https://github.com/NickvisionApps/Denaro/graphs/"
+#~ "contributors"
+
+#~ msgid ""
+#~ "Nicholas Logozzo https://github.com/nlogozzo\n"
+#~ "Fyodor Sobolev https://github.com/fsobolev\n"
+#~ "DaPigGuy https://github.com/DaPigGuy"
+#~ msgstr ""
+#~ "Nicholas Logozzo https://github.com/nlogozzo\n"
+#~ "Fyodor Sobolev https://github.com/fsobolev"
+
+#~ msgid ""
+#~ "David Lapshin https://github.com/daudix-UFO\n"
+#~ "Tobias Bernard https://github.com/bertob"
+#~ msgstr "David Lapshin https://github.com/daudix-UFO"
+
+#~ msgid "Transfer Money (Ctrl+T)"
+#~ msgstr "轉帳 (Ctrl+T)"
+
+#~ msgid "Import from File (Ctrl+I)"
+#~ msgstr "從檔案導入 (Ctrl+I)"
+
+#~ msgid "Filters"
+#~ msgstr "篩選"
+
+#~ msgid "Imported {0} transactions from file."
+#~ msgstr "從檔案中導入 {0} 筆交易"
+
+#~ msgid "Enter description here"
+#~ msgstr "請在此輸入資料"
+
+#~ msgid "Money Account (*.nmoney)"
+#~ msgstr "軟體Money的帳戶 (*.nmoney)"
+
+#~ msgid "Hide Groups"
+#~ msgstr "Hide Groups"
+
+#~ msgid "Show Groups"
+#~ msgstr "Show Groups"
+
+#~ msgid ""
+#~ "— Manage multiple accounts at a time, with a familiar tab interface\n"
+#~ "— Easily filter transactions by type, group, or date\n"
+#~ "— Easily repeat transactions, such as bills that occur every month\n"
+#~ "— Transfer money from one account to another\n"
+#~ "— Export an account as a CSV file and import a CSV, OFX or QIF file to "
+#~ "bulk add transactions to an account"
+#~ msgstr "Manage your personal finances"
+
+#~ msgid "New Window"
+#~ msgstr "New Window"

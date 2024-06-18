@@ -1,0 +1,389 @@
+using Gtk 4.0;
+using Adw 1;
+
+menu mainMenu {
+  item(_("Preferences"), "win.preferences")
+  item(_("Keyboard Shortcuts"), "win.keyboardShortcuts")
+  item(_("Help"), "win.help")
+  item(_("About Denaro"), "win.about")
+}
+
+Adw.ApplicationWindow root {
+  width-request: 360;
+  height-request: 200;
+  default-width: 900;
+  default-height: 700;
+  
+  Adw.Breakpoint breakpoint {
+    condition ("max-width: 400sp")
+    
+    setters {
+      navView.collapsed: true;
+      contentHeaderBar.title-widget: null;
+      contentSwitcherBar.reveal: true;
+    }
+  }
+
+  content: Adw.NavigationSplitView navView {
+    show-content: true;
+
+    sidebar: Adw.NavigationPage navPageSidebar {
+      tag: "sidebar";
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          [start]
+          Gtk.MenuButton {
+            direction: none;
+            icon-name: "wallet2-symbolic";
+            tooltip-text: _("Account Menu");
+            popover: Gtk.Popover accountMenuPopover {
+              child: Gtk.Box {
+                orientation: vertical;
+                spacing: 12;
+                margin-start: 6;
+                margin-top: 6;
+                margin-end: 6;
+                margin-bottom: 6;
+                width-request: 320;
+
+                Gtk.Box {
+                  orientation: horizontal;
+                  spacing: 6;
+
+                  Gtk.Label {
+                    halign: start;
+                    hexpand: true;
+                    label: _("Recents");
+
+                    styles ["title-4"]
+                  }
+
+                  Gtk.Box {
+                    orientation: horizontal;
+
+                    Gtk.Button {
+                      icon-name: "document-new-symbolic";
+                      tooltip-text: _("New Account (Ctrl+N)");
+                      action-name: "win.newAccount";
+                    }
+
+                    Gtk.Button {
+                      tooltip-text: _("Open Account (Ctrl+O)");
+                      action-name: "win.openAccount";
+
+                      Adw.ButtonContent {
+                        label: _("Open");
+                        icon-name: "document-open-symbolic";
+                      }
+
+                      styles ["suggested-action"]
+                    }
+
+                    styles ["linked"]
+                  }
+                }
+
+                Adw.PreferencesGroup {
+                  Adw.ActionRow noRecentAccountsPopoverRow {
+                    title: _("No Recent Accounts");
+
+                    [prefix]
+                    Gtk.Image {
+                      icon-name: "document-open-recent-symbolic";
+                    }
+                  }
+
+                  Adw.ActionRow recentAccount1PopoverRow {
+                    activatable-widget: recentAccount1PopoverImg;
+
+                    [prefix]
+                    Gtk.Image recentAccount1PopoverImg {
+                      icon-name: "wallet2-symbolic";
+                    }
+
+                    [suffix]
+                    Gtk.Button removeRecentAccount1PopoverButton {
+                      valign: center;
+                      icon-name: "cross-symbolic";
+                      tooltip-text: _("Remove");
+
+                      styles ["flat"]
+                    }
+                  }
+
+                  Adw.ActionRow recentAccount2PopoverRow {
+                    activatable-widget: recentAccount2PopoverImg;
+
+                    [prefix]
+                    Gtk.Image recentAccount2PopoverImg {
+                      icon-name: "wallet2-symbolic";
+                    }
+
+                    [suffix]
+                    Gtk.Button removeRecentAccount2PopoverButton {
+                      valign: center;
+                      icon-name: "cross-symbolic";
+                      tooltip-text: _("Remove");
+
+                      styles ["flat"]
+                    }
+                  }
+
+                  Adw.ActionRow recentAccount3PopoverRow {
+                    activatable-widget: recentAccount3PopoverImg;
+
+                    [prefix]
+                    Gtk.Image recentAccount3PopoverImg {
+                      icon-name: "wallet2-symbolic";
+                    }
+
+                    [suffix]
+                    Gtk.Button removeRecentAccount3PopoverButton {
+                      valign: center;
+                      icon-name: "cross-symbolic";
+                      tooltip-text: _("Remove");
+
+                      styles ["flat"]
+                    }
+                  }
+                }
+              };
+            };
+          }
+
+          [end]
+          Gtk.MenuButton {
+            direction: none;
+            menu-model: mainMenu;
+            tooltip-text: _("Main Menu");
+            primary: true;
+          }
+        }
+
+        content: Gtk.ScrolledWindow {
+          hscrollbar-policy: never;
+          vscrollbar-policy: automatic;
+
+          Gtk.ListBox listNavItems {
+            Gtk.Box {
+              margin-start: 6;
+              margin-top: 6;
+              margin-end: 6;
+              margin-bottom: 6;
+              orientation: horizontal;
+              spacing: 12;
+
+              Gtk.Image {
+                icon-name: "user-home-symbolic";
+              }
+
+              Gtk.Label {
+                label: _("Home");
+              }
+            }
+
+            Gtk.Box {
+              margin-start: 6;
+              margin-top: 6;
+              margin-end: 6;
+              margin-bottom: 6;
+              orientation: horizontal;
+              spacing: 12;
+
+              Gtk.Image {
+                icon-name: "bank-symbolic";
+              }
+
+              Gtk.Label {
+                label: _("Currency Converter");
+              }
+            }
+
+            Gtk.ListBoxRow {
+              selectable: false;
+              activatable: false;
+
+              Gtk.Label navAccountsLabel {
+                halign: start;
+                label: _("Accounts");
+
+                styles ["heading"]
+              }
+            }
+
+            Gtk.Box {
+              margin-start: 6;
+              margin-top: 6;
+              margin-end: 6;
+              margin-bottom: 6;
+              orientation: horizontal;
+              spacing: 12;
+
+              Gtk.Image {
+                icon-name: "shell-overview-symbolic";
+              }
+
+              Gtk.Label {
+                label: _("Dashboard");
+              }
+            }
+
+            styles ["navigation-sidebar"]
+          }
+        };
+      };
+    };
+
+    content: Adw.NavigationPage navPageContent {
+      tag: "content";
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar contentHeaderBar {}
+
+        [bottom]
+        Adw.ViewSwitcherBar contentSwitcherBar {}
+
+        content: Adw.ToastOverlay toastOverlay {
+          child: Gtk.ScrolledWindow {
+            hscrollbar-policy: automatic;
+            vscrollbar-policy: automatic;
+
+            child: Adw.ViewStack viewStack {
+              hexpand: true;
+              vexpand: true;
+
+              Adw.ViewStackPage {
+                name: "home";
+                child: Adw.StatusPage statusPageHome {
+                  icon-name: "org.nickvision.money";
+                  description: _("Create or open an account to get started. You may also drag a file into the app from your file browser");
+                  child: Adw.Clamp {
+                    maximum-size: 420;
+
+                    Gtk.Box {
+                      halign: fill;
+                      hexpand: true;
+                      orientation: vertical;
+                      spacing: 6;
+
+                      Adw.PreferencesGroup {
+                        Adw.ActionRow noRecentAccountsRow {
+                          title: _("No Recent Accounts");
+
+                          [prefix]
+                          Gtk.Image {
+                            icon-name: "document-open-recent-symbolic";
+                          }
+                        }
+
+                        Adw.ActionRow recentAccount1Row {
+                          activatable-widget: recentAccount1Img;
+
+                          [prefix]
+                          Gtk.Image recentAccount1Img {
+                            icon-name: "wallet2-symbolic";
+                          }
+
+                          [suffix]
+                          Gtk.Button removeRecentAccount1Button {
+                            valign: center;
+                            icon-name: "cross-symbolic";
+                            tooltip-text: _("Remove");
+
+                            styles ["flat"]
+                          }
+                        }
+
+                        Adw.ActionRow recentAccount2Row {
+                          activatable-widget: recentAccount2Img;
+
+                          [prefix]
+                          Gtk.Image recentAccount2Img {
+                            icon-name: "wallet2-symbolic";
+                          }
+
+                          [suffix]
+                          Gtk.Button removeRecentAccount2Button {
+                            valign: center;
+                            icon-name: "cross-symbolic";
+                            tooltip-text: _("Remove");
+
+                            styles ["flat"]
+                          }
+                        }
+
+                        Adw.ActionRow recentAccount3Row {
+                          activatable-widget: recentAccount3Img;
+
+                          [prefix]
+                          Gtk.Image recentAccount3Img {
+                            icon-name: "wallet2-symbolic";
+                          }
+
+                          [suffix]
+                          Gtk.Button removeRecentAccount3Button {
+                            valign: center;
+                            icon-name: "cross-symbolic";
+                            tooltip-text: _("Remove");
+
+                            styles ["flat"]
+                          }
+                        }
+                      }
+
+                      Gtk.Box {
+                        orientation: horizontal;
+                        spacing: 6;
+
+                        Gtk.Button newAccountButton {
+                          hexpand: true;
+                          label: _("New");
+                          tooltip-text: _("New Account (Ctrl+N)");
+                          action-name: "win.newAccount";
+
+                          styles ["pill"]
+                        }
+
+                        Gtk.Button openAccountButton {
+                          hexpand: true;
+                          label: _("Open");
+                          tooltip-text: _("Open Account (Ctrl+O)");
+                          action-name: "win.openAccount";
+
+                          styles ["pill", "suggested-action"]
+                        }
+                      }
+                    }
+                  };
+
+                  styles ["icon-dropshadow"]
+                };
+              }
+
+              Adw.ViewStackPage {
+                name: "noAccounts";
+                child: Adw.StatusPage {
+                  icon-name: "wallet2-symbolic";
+                  title: _("No Accounts Open");
+
+                  styles ["compact"]
+                };
+              }
+
+              Adw.ViewStackPage {
+                name: "custom";
+                child: Adw.Bin customBin {
+                  hexpand: true;
+                  vexpand: true;
+                };
+              }
+            };
+          };
+        };
+      };
+    };
+  };
+}

@@ -10,28 +10,21 @@ permissions:
   id-token: write
   contents: read
 jobs:
-  snap:
+  gnome-snap:
     name: "GNOME on Snap"
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        arch: [x86_64]
-      fail-fast: false
     steps:
-      - name: Checkout Git repository
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-      - name: Build Snap
+      - uses: actions/checkout@v4
+      - name: Build
         uses: snapcore/action-build@v1
         id: snapcraft-build
         with:
           snapcraft-args: "-v"
       - uses: actions/upload-artifact@v4
         with:
-          name: denaro-amd64-snap
-          path: ${{ steps.snapcraft-build.outputs.snap }} 
-      - name: Upload and release Denaro Snap
+          name: application-snap
+          path: ${{ steps.snapcraft-build.outputs.snap }}    
+      - name: Upload and Release Edge
         uses: snapcore/action-publish@v1
         if: ${{ github.event_name != 'pull_request' }}
         env:

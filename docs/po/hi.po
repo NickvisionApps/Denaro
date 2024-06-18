@@ -1,0 +1,1101 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2024-05-24 01:58-0400\n"
+"PO-Revision-Date: 2024-03-29 13:01+0000\n"
+"Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
+"Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
+"docs/hi/>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr "Scrambled777 <weblate.scrambled777@simplelogin.com>"
+
+#. (itstool) path: info/title
+#: docs/yelp/C/account.page:8
+msgctxt "link"
+msgid "Account 🏦"
+msgstr "खाता 🏦"
+
+#. (itstool) path: credit/name
+#: docs/yelp/C/account.page:10 docs/yelp/C/configuration.page:10
+#: docs/yelp/C/import-export.page:10 docs/yelp/C/index.page:10
+#: docs/yelp/C/transaction.page:10 docs/yelp/C/transfer.page:10
+msgid "Fyodor Sobolev"
+msgstr "फ्योडोर सोबोलेव"
+
+#. (itstool) path: credit/name
+#: docs/yelp/C/account.page:14 docs/yelp/C/configuration.page:14
+#: docs/yelp/C/import-export.page:14 docs/yelp/C/index.page:14
+#: docs/yelp/C/transaction.page:14 docs/yelp/C/transfer.page:14
+msgid "Nicholas Logozzo"
+msgstr "निकोलस लोगोज़ो"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/account.page:20
+msgid "Account"
+msgstr "खाता"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/account.page:21
+msgid ""
+"This page explains all properties of accounts in <app>Denaro</app>. Most of "
+"them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens "
+"automatically after you create a new account."
+msgstr ""
+"यह पृष्ठ <app>Denaro</app> में खातों की सभी संपत्तियों की व्याख्या करता है। उनमें से "
+"अधिकांश <gui>खाता सेटिंग डायलॉग</gui> में दिखाए गए हैं। नया खाता बनाने के बाद यह संवाद "
+"भी स्वतः खुल जाता है।"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/account.page:22
+msgid ""
+"Each account is stored in a single <file>*.nmoney</file> file. Files created "
+"in an older <em>stable</em> version of <app>Denaro</app> can be safely "
+"opened in a more recent <em>stable</em> version of the application. Although "
+"the app can run on different platforms (Windows and Linux), the <file>*."
+"nmoney</file> files are 100% compatible between platforms as long as they "
+"are from the same application version (i.e. V2023.1.0)."
+msgstr ""
+"प्रत्येक खाता एक एकल <file>*.nmoney</file> फ़ाइल में संग्रहीत है। <app>Denaro</app> के "
+"पुराने <em>स्थिर</em> वर्शन में बनाई गई फाइलें एप्लिकेशन के नवीनतम <em>स्थिर</em> वर्शन में "
+"सुरक्षित रूप से खोली जा सकती हैं। हालाँकि ऐप विभिन्न प्लेटफ़ॉर्म (Windows और Linux) पर "
+"चल सकता है, <file>*.nmoney</file> फाइलें प्लेटफ़ॉर्म के बीच 100% संगत हैं, जब तक कि वे "
+"एक ही एप्लिकेशन वर्शन (यानी V2023.1.0) से हैं।"
+
+#. (itstool) path: note/p
+#: docs/yelp/C/account.page:24
+msgid ""
+"Unstable (Beta and RC) versions of the application can contain bugs or "
+"unfinished modifications that can cause data loss. DO NOT use account files "
+"that contain real data in unstable versions of the app!"
+msgstr ""
+"एप्लिकेशन के अस्थिर (Beta और RC) वर्शन में बग या अधूरे संशोधन हो सकते हैं जो डेटा हानि का "
+"कारण बन सकते हैं। ऐप के अस्थिर वर्शन में वास्तविक डेटा वाली खाता फाइलों का उपयोग न करें!"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:29
+msgid "Name"
+msgstr "नाम"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:30
+msgid ""
+"Account name is shown in the list of recent accounts and in tabs. A name "
+"doesn't have a length limit and it can contain any characters, including "
+"emojis."
+msgstr ""
+"खाते का नाम हाल के खातों की सूची और टैब में दिखाया गया है। नाम की लंबाई की कोई सीमा "
+"नहीं होती और इसमें इमोजी सहित कोई भी अक्षर हो सकता है।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:33
+msgid "Account Type"
+msgstr "खाते का प्रकार"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:34
+msgid ""
+"There are 3 account types available: 🟣<em>Checking</em>, 🔵<em>Savings</em> "
+"and 🟢<em>Business</em>. Account type is only a useful label that is shown "
+"in the list of recent accounts and doesn't affect how the application works "
+"or what you can do with an account. Each account type has its own color, "
+"these colors can be configured in <link xref=\"configuration\">global "
+"settings</link>."
+msgstr ""
+"3 खाता प्रकार उपलब्ध हैं: 🟣<em>चेकिंग</em>, 🔵<em>बचत</em> और 🟢<em>व्यवसाय</em>। "
+"खाता प्रकार केवल एक उपयोगी लेबल है जो हाल के खातों की सूची में दिखाया गया है और यह "
+"प्रभावित नहीं करता है कि एप्लिकेशन कैसे काम करता है या आप किसी खाते के साथ क्या कर सकते "
+"हैं। प्रत्येक खाता प्रकार का अपना रंग होता है, इन रंगों को <link "
+"xref=\"configuration\">वैश्विक सेटिंग्स</link> में कॉन्फ़िगर किया जा सकता है।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:37
+msgid "Default Transaction Type"
+msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:38
+msgid ""
+"When you create a new transaction its type by default will be the same as in "
+"this setting."
+msgstr ""
+"जब आप कोई नया लेनदेन बनाते हैं तो डिफ़ॉल्ट रूप से उसका प्रकार इस सेटिंग के समान ही होगा।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:41
+msgid "Transaction Reminders Threshold"
+msgstr "लेन-देन अनुस्मारक सीमा"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:42
+msgid "The threshold used when showing reminders about upcoming transactions."
+msgstr "आगामी लेनदेन के बारे में अनुस्मारक दिखाते समय उपयोग की जाने वाली सीमा।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:45
+msgid "System Currency"
+msgstr "सिस्टम मुद्रा"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:46
+msgid ""
+"Every time the application starts, it gets data about currency and numbers "
+"formatting from your system locale, and this data is used to show currency "
+"symbol (unless custom currency is used, see below) and to determine in what "
+"format the numbers will be accepted as values for transaction amounts. A few "
+"examples:"
+msgstr ""
+"हर बार जब एप्लिकेशन शुरू होता है, तो उसे आपके सिस्टम लोकेल से मुद्रा और संख्या स्वरूपण के बारे "
+"में डेटा मिलता है, और इस डेटा का उपयोग मुद्रा प्रतीक दिखाने के लिए किया जाता है (जब तक "
+"कि कस्टम मुद्रा का उपयोग नहीं किया जाता है, नीचे देखें) और यह निर्धारित करने के लिए कि "
+"संख्याओं को किस प्रारूप में स्वीकार किया जाएगा लेन-देन की रकम के लिए मान. कुछ उदाहरण:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:48
+msgid ""
+"If your locale is <em>English (US)</em>, currency symbol will be set to "
+"<em>$</em> and <em>1,000.00</em> will be accepted as a valid number."
+msgstr ""
+"यदि आपका स्थान <em>अंग्रेजी (US)</em> है, तो मुद्रा प्रतीक <em>$</em> पर सेट किया "
+"जाएगा और <em>1,000.00</em> को एक वैध संख्या के रूप में स्वीकार किया जाएगा।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:49
+msgid ""
+"If your locale is <em>Italian</em>, currency symbol will be set to <em>€</"
+"em> and <em>1.000,00</em> will be accepted as a valid number."
+msgstr ""
+"यदि आपका स्थान <em>इतालवी</em> है, तो मुद्रा प्रतीक <em>€</em> पर सेट किया जाएगा "
+"और <em>1.000,00</em> को एक वैध संख्या के रूप में स्वीकार किया जाएगा।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:50
+msgid ""
+"If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</"
+"em> and <em>1000,00</em> will be accepted as a valid number."
+msgstr ""
+"यदि आपका स्थान <em>रूसी</em> है, तो मुद्रा प्रतीक <em>₽</em> पर सेट किया जाएगा और "
+"<em>1000,00</em> को एक वैध संख्या के रूप में स्वीकार किया जाएगा।"
+
+#. (itstool) path: note/p
+#: docs/yelp/C/account.page:53
+msgid ""
+"On Linux, it is possible to set different locales for system language and "
+"formats. Changing these settings varies depending on the desktop environment "
+"you are using. Despite differences in the location of these settings on the "
+"desktop, changing these settings modify system environment variables, such "
+"as <code>LANG</code>, <code>LC_TIME</code>, and <code>LC_MONETARY</code>. "
+"<app>Denaro</app> will try to use amount and date formats according to these "
+"variables. If the app fails to use the expected formats, please make sure "
+"the variables are set correctly via the <code>locale</code> command in a "
+"terminal. If you found a bug and want to report it, please provide the "
+"output of the <code>locale</code> command to allow developers to reproduce "
+"your issue with the same settings."
+msgstr ""
+"Linux पर, सिस्टम भाषा और प्रारूपों के लिए अलग-अलग स्थान सेट करना संभव है। इन सेटिंग्स को "
+"बदलना आपके द्वारा उपयोग किए जा रहे डेस्कटॉप वातावरण के आधार पर भिन्न होता है। डेस्कटॉप "
+"पर इन सेटिंग्स के स्थान में अंतर के बावजूद, इन सेटिंग्स को बदलने से सिस्टम पर्यावरण चर, जैसे "
+"<code>LANG</code>, <code>LC_TIME</code>, और <code>LC_MONETARY</code> को "
+"संशोधित किया जाता है। <app>Denaro</app> इन चरों के अनुसार राशि और दिनांक प्रारूपों का "
+"उपयोग करने का प्रयास करेगा। यदि ऐप अपेक्षित प्रारूपों का उपयोग करने में विफल रहता है, तो "
+"कृपया सुनिश्चित करें कि टर्मिनल में <code>लोकेल</code> कमांड के माध्यम से वेरिएबल सही ढंग से "
+"सेट किए गए हैं। यदि आपको कोई बग मिला है और आप इसकी रिपोर्ट करना चाहते हैं, तो कृपया "
+"<code>लोकेल</code> कमांड का आउटपुट प्रदान करें ताकि डेवलपर्स उसी सेटिंग्स के साथ आपकी "
+"समस्या को पुन: उत्पन्न कर सकें।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:57
+msgid "Use Custom Currency"
+msgstr "कस्टम मुद्रा का प्रयोग करें"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:58
+msgid ""
+"If this option is enabled, <gui>Custom Currency Symbol</gui> will be used "
+"instead of currency symbol provided by your system locale."
+msgstr ""
+"यदि यह विकल्प सक्षम है, तो आपके सिस्टम लोकेल द्वारा प्रदान किए गए मुद्रा प्रतीक के बजाय "
+"<gui>कस्टम मुद्रा प्रतीक</gui> का उपयोग किया जाएगा।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:61
+msgid "Custom Currency Symbol"
+msgstr "कस्टम मुद्रा चिह्न"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:62
+msgid "Up to 3 characters or 1 emoji. It can't be a number."
+msgstr "अधिकतम 3 अक्षर या 1 इमोजी. यह कोई संख्या नहीं हो सकती।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:65
+msgid "Custom Currency Code"
+msgstr "कस्टम मुद्रा कोड"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:66
+msgid "Up to 3 characters or 1 emoji."
+msgstr "अधिकतम 3 अक्षर या 1 इमोजी।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:67
+msgid ""
+"An example to understand the difference between a symbol and a code: <em>$</"
+"em> is a symbol, <em>USD</em> is a code."
+msgstr ""
+"प्रतीक और कोड के बीच अंतर को समझने के लिए एक उदाहरण: <em>$</em> एक प्रतीक है, "
+"<em>USD</em> एक कोड है।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:70
+msgid "Custom Currency Amount Style"
+msgstr "कस्टम मुद्रा राशि शैली"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:71
+msgid "A choice of displaying an amount in one of the following ways:"
+msgstr "निम्नलिखित तरीकों में से किसी एक में राशि प्रदर्शित करने का विकल्प:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:73
+msgid "$n"
+msgstr "$n"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:74
+msgid "n$"
+msgstr "n$"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:75
+msgid "$ n"
+msgstr "$ n"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:76
+msgid "n $"
+msgstr "n $"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:80
+msgid "Custom Currency Decimal and Group Separators"
+msgstr "कस्टम मुद्रा दशमलव और समूह विभाजक"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:81
+msgid "Up to 2 characters or 1 emoji."
+msgstr "अधिकतम 2 अक्षर या 1 इमोजी।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:84
+msgid "Custom Currency Decimal Digits"
+msgstr "कस्टम मुद्रा दशमलव अंक"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:85
+msgid ""
+"The size of decimal part of amount values. With \"Unlimited\" digits there "
+"will be as many numbers in decimal part as required to show the precise "
+"amount, but there will be no decimal part if the amount is an integer number."
+msgstr ""
+"राशि मानों के दशमलव भाग का आकार. \"असीमित\" अंकों के साथ दशमलव भाग में उतनी ही "
+"संख्याएँ होंगी जितनी सटीक राशि दिखाने के लिए आवश्यक हैं, लेकिन यदि राशि एक पूर्णांक संख्या "
+"है तो कोई दशमलव भाग नहीं होगा।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:88
+msgid "Password"
+msgstr "पासवर्ड"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:89
+msgid ""
+"Each account can be password-protected. Adding a password causes an account "
+"to become encrypted (making it impossible to read the data without "
+"decrypting it using the password). Be careful: if the password is lost, you "
+"won't be able to restore the data! A password can also be changed or removed "
+"using the account settings dialog of an open account. Removing a password "
+"will decrypt the account."
+msgstr ""
+"प्रत्येक खाते को पासवर्ड से सुरक्षित किया जा सकता है। पासवर्ड जोड़ने से खाता एन्क्रिप्ट हो "
+"जाता है (पासवर्ड का उपयोग करके डिक्रिप्ट किए बिना डेटा को पढ़ना असंभव हो जाता है)। "
+"सावधान रहें: यदि पासवर्ड खो गया है, तो आप डेटा पुनर्स्थापित नहीं कर पाएंगे! किसी खुले खाते "
+"के खाता सेटिंग संवाद का उपयोग करके पासवर्ड को बदला या हटाया भी जा सकता है। पासवर्ड "
+"हटाने से खाता डिक्रिप्ट हो जाएगा।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:92
+msgid "Sort by Id, Date or Amount"
+msgstr "Id, दिनांक या राशि के अनुसार क्रमबद्ध करें"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:93
+msgid ""
+"Each account stores whether to sort transactions in the main window by their "
+"id, date or amount. Every time you change this, it will be saved to the "
+"account file and restored when you reopen the account."
+msgstr ""
+"प्रत्येक खाता यह संग्रहीत करता है कि लेन-देन को उनकी आईडी, दिनांक या राशि के आधार पर "
+"मुख्य विंडो में क्रमबद्ध किया जाए या नहीं। हर बार जब आप इसे बदलते हैं, तो यह खाता फाइल में "
+"सहेजा जाएगा और खाता दोबारा खोलने पर पुनर्स्थापित हो जाएगा।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:96
+msgid "Sorting Order"
+msgstr "छँटाई क्रम"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:97
+msgid ""
+"Each account stores information about the order of transactions in the main "
+"window. Every time you change this, it will be saved to the account file and "
+"restored when you reopen the account."
+msgstr ""
+"प्रत्येक खाता मुख्य विंडो में लेनदेन के क्रम के बारे में जानकारी संग्रहीत करता है। हर बार जब आप "
+"इसे बदलते हैं, तो यह खाता फाइल में सहेजा जाएगा और खाता दोबारा खोलने पर पुनर्स्थापित हो "
+"जाएगा।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:100
+msgid "Groups Visibility"
+msgstr "समूह दृश्यता"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:101
+msgid ""
+"Each account stores information about whether the groups list in the main "
+"window is hidden or not. Every time you change groups list visibility, it's "
+"saved and then restored when you reopen the account."
+msgstr ""
+"प्रत्येक खाता इस बारे में जानकारी संग्रहीत करता है कि मुख्य विंडो में समूह सूची छिपी हुई है या "
+"नहीं। हर बार जब आप समूह सूची की दृश्यता बदलते हैं, तो इसे सहेजा जाता है और फिर जब आप "
+"खाता दोबारा खोलते हैं तो इसे बहाल कर दिया जाता है।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/account.page:104
+msgid "Tags Visibility"
+msgstr "टैग दृश्यता"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/account.page:105
+msgid ""
+"Each account stores information about whether the tags list in the main "
+"window is hidden or not. Every time you change tags list visibility, it's "
+"saved and then restored when you reopen the account."
+msgstr ""
+"प्रत्येक खाता इस बारे में जानकारी संग्रहीत करता है कि मुख्य विंडो में टैग सूची छिपी हुई है या "
+"नहीं। हर बार जब आप टैग सूची दृश्यता बदलते हैं, तो इसे सहेजा जाता है और फिर खाता दोबारा "
+"खोलने पर इसे पुनर्स्थापित कर दिया जाता है।"
+
+#. (itstool) path: info/title
+#: docs/yelp/C/configuration.page:8
+msgctxt "link"
+msgid "Configuration 🔧"
+msgstr "कॉन्फ़िगरेशन 🔧"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/configuration.page:20
+msgid "Configuration"
+msgstr "कॉन्फ़िगरेशन"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/configuration.page:21
+msgid ""
+"This page describes what you can change in the application configuration."
+msgstr "यह पृष्ठ वर्णन करता है कि आप एप्लिकेशन कॉन्फ़िगरेशन में क्या बदल सकते हैं।"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/configuration.page:22
+msgid ""
+"Depending on your platform, in the application interface the configuration "
+"is referred as either <gui>Preferences</gui> or <gui>Settings</gui>."
+msgstr ""
+"आपके प्लेटफ़ॉर्म के आधार पर, एप्लिकेशन इंटरफ़ेस में कॉन्फ़िगरेशन को <gui>प्राथमिकताएं</gui> या "
+"<gui>सेटिंग्स</gui> के रूप में संदर्भित किया जाता है।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:25
+msgid "Theme"
+msgstr "थीम"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:26
+msgid ""
+"Set light or dark theme, or make <app>Denaro</app> follow your system theme. "
+"Changing this on Windows requires the application restart to apply."
+msgstr ""
+"प्रकाश या गहरे रंग की थीम सेट करें, या <app>Denaro</app> को अपने सिस्टम थीम का अनुसरण "
+"करें। विंडोज़ पर इसे बदलने के लिए आवेदन को पुनः आरंभ करने की आवश्यकता है।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:29
+msgid "Transaction Default Color"
+msgstr "लेन-देन डिफ़ॉल्ट रंग"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:30
+msgid ""
+"A color that will be selected by default when adding a new <link "
+"xref=\"transaction\">transaction</link> with unique color. Changing this "
+"will not affect existing transactions, even if they use previously selected "
+"default color."
+msgstr ""
+"एक रंग जो अद्वितीय रंग के साथ एक नया <link xref=\"transaction\">transaction</"
+"link> जोड़ते समय डिफ़ॉल्ट रूप से चुना जाएगा। इसे बदलने से मौजूदा लेनदेन प्रभावित नहीं होंगे, "
+"भले ही वे पहले से चयनित डिफ़ॉल्ट रंग का उपयोग करें।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:33
+msgid "Transfer Default Color"
+msgstr "डिफ़ॉल्ट रंग स्थानांतरित करें"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:34
+msgid ""
+"A color that will be used for transactions created using <link "
+"xref=\"transfer\">transfer</link>. Changing this will not affect existing "
+"transactions."
+msgstr ""
+"एक रंग जिसका उपयोग <link xref=\"transfer\">transfer</link> का उपयोग करके किए "
+"गए लेनदेन के लिए किया जाएगा। इसे बदलने से मौजूदा लेनदेन पर कोई असर नहीं पड़ेगा।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:37
+msgid "Group Default Color"
+msgstr "समूह डिफ़ॉल्ट रंग"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:38
+msgid ""
+"A color that will be selected by default when adding a new group. This is "
+"also a color for «Ungrouped» group."
+msgstr ""
+"एक रंग जो नया समूह जोड़ते समय डिफ़ॉल्ट रूप से चुना जाएगा। यह «अनग्रुप्ड» समूह के लिए भी एक "
+"रंग है।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/configuration.page:41
+msgid "Insert Decimal Separator"
+msgstr "दशमलव विभाजक डालें"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/configuration.page:42
+msgid ""
+"Set for which keys pressed will the locale's decimal separator be inserted "
+"into an amount field: numpad period, any period and comma, or none. If "
+"decimal separator is already presented in a field, it will not be inserted."
+msgstr ""
+"सेट करें कि कौन सी कुंजी दबाए जाने पर लोकेल का दशमलव विभाजक राशि फ़ील्ड में डाला जाएगा: "
+"संख्यापैड अवधि, कोई भी अवधि और अल्पविराम, या कोई नहीं। यदि दशमलव विभाजक पहले से ही "
+"किसी फ़ील्ड में प्रस्तुत किया गया है, तो इसे सम्मिलित नहीं किया जाएगा।"
+
+#. (itstool) path: info/title
+#: docs/yelp/C/import-export.page:8
+msgctxt "link"
+msgid "Import/Export 📤"
+msgstr "आयात/निर्यात 📤"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/import-export.page:20
+msgid "Import/Export"
+msgstr "आयात/निर्यात"
+
+#. (itstool) path: div/title
+#: docs/yelp/C/import-export.page:22
+msgid "Import Formats"
+msgstr "प्रारूप आयात करें"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:26
+msgid "Dates should be in <em>YYYYMMDD</em> format."
+msgstr "तिथियाँ <em>YYYYMMDD</em> प्रारूप में होनी चाहिए।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:30
+msgid "Dates should be in English (US) format (<em>MM/DD/YYYY</em>)."
+msgstr "तारीखें अंग्रेजी (US) प्रारूप (<em>MM/DD/YYYY</em>) में होनी चाहिए।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:34
+msgid ""
+"❗ While CSV is a common format and some banks allow their users to export "
+"information as CSV, these files are in fact tables that can contain "
+"arbitrary data. Importing a CSV file created in other program will fail, "
+"because its data will not be compatible with what <app>Denaro</app> tries to "
+"get from a file. The purpose of CSV import/export is to provide a way to add "
+"data to an account using external programs such as text editors and office "
+"suites. Import will only add new transactions without overriding existing "
+"ones. If you want to create a CSV file manually, this is the header that "
+"includes all columns <app>Denaro</app> expects to find:"
+msgstr ""
+"❗ जबकि CSV एक सामान्य प्रारूप है और कुछ बैंक अपने उपयोगकर्ताओं को CSV के रूप में जानकारी "
+"निर्यात करने की अनुमति देते हैं, ये फाइलें वास्तव में तालिकाएं हैं जिनमें मनमाना डेटा हो सकता "
+"है। अन्य प्रोग्राम में बनाई गई CSV फाइल को आयात करना विफल हो जाएगा, क्योंकि इसका डेटा "
+"<app>Denaro</app> किसी फाइल से प्राप्त करने का प्रयास करने के साथ संगत नहीं होगा। CSV "
+"आयात/निर्यात का उद्देश्य टेक्स्ट एडिटर्स और ऑफिस सुइट्स जैसे इक्स्टर्नल प्रोग्रामों का उपयोग "
+"करके किसी खाते में डेटा जोड़ने का एक तरीका प्रदान करना है। आयात केवल मौजूदा लेन-देन को "
+"ओवरराइड किए बिना नए लेन-देन जोड़ेगा। यदि आप मैन्युअल रूप से एक CSV फाइल बनाना चाहते हैं, "
+"तो यह वह हेडर है जिसमें वे सभी कॉलम शामिल हैं जिन्हें <app>Denaro</app> ढूंढने की अपेक्षा "
+"करता है:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:39
+msgid "Transaction Id, should be unique for a given account. Ids start with 1."
+msgstr "लेनदेन Id, किसी दिए गए खाते के लिए अद्वितीय होनी चाहिए। Ids 1 से शुरू होती हैं।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:43
+msgid ""
+"Transaction date (or start date in case of repeat transaction), should be in "
+"English (US) format (<em>MM/DD/YYYY</em>)."
+msgstr ""
+"लेन-देन की तारीख (या दोबारा लेन-देन के मामले में आरंभ की तारीख), अंग्रेजी (US) प्रारूप "
+"(<em>MM/DD/YYYY</em>) में होनी चाहिए।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:47
+msgid ""
+"Transaction description, it can contain any characters except semicolon."
+msgstr "लेन-देन विवरण, इसमें अर्धविराम को छोड़कर कोई भी वर्ण हो सकता है।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:51
+msgid "Transaction type: 0 for income, 1 for expense."
+msgstr "लेन-देन प्रकार: आय के लिए 0, व्यय के लिए 1।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:55
+msgid "A number representing transaction repeat interval:"
+msgstr "लेन-देन दोहराव अंतराल का प्रतिनिधित्व करने वाली एक संख्या:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:56
+msgid "0 - Never"
+msgstr "0 - कभी नहीं"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:57
+msgid "1 - Daily"
+msgstr "1 - प्रतिदिन"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:58
+msgid "2 - Weekly"
+msgstr "2 - साप्ताहिक"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:59
+msgid "7 - Biweekly"
+msgstr "7 - द्विसाप्ताहिक"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:60
+msgid "3 - Monthly"
+msgstr "3 - मासिक"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:61
+msgid "4 - Quarterly"
+msgstr "4 - त्रैमासिक"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:62
+msgid "5 - Yearly"
+msgstr "5 - वार्षिक"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:63
+msgid "6 - Biyearly"
+msgstr "6 - द्विवार्षिक"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:64
+msgid ""
+"See <em>Repeat Interval</em> in <link xref=\"transaction\">transaction</"
+"link> page for details about repeat transactions."
+msgstr ""
+"बार-बार होने वाले लेनदेन के विवरण के लिए <link xref=\"transaction\">transaction</"
+"link> पेज में <em>Repeat Interval</em> देखें।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:68
+msgid ""
+"Should be either an Id of source transaction or 0 if it's a source "
+"transaction or -1 if it's not repeat transaction."
+msgstr ""
+"या तो स्रोत लेनदेन की Id होनी चाहिए या यदि यह स्रोत लेनदेन है तो 0 या यदि यह दोहराव "
+"लेनदेन नहीं है तो -1 होना चाहिए।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:72
+msgid ""
+"End date for repeat transaction, should be in English (US) format (<em>MM/DD/"
+"YYYY</em>). Leave it empty if it's not repeat transaction."
+msgstr ""
+"दोबारा लेन-देन की अंतिम तिथि अंग्रेजी (US) प्रारूप (<em>MM/DD/YYYY</em>) में होनी "
+"चाहिए। यदि यह दोबारा लेनदेन नहीं है तो इसे खाली छोड़ दें।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:76
+msgid "Transaction amount in English (US) format (<em>123,456.78</em>)."
+msgstr "अंग्रेजी (US) प्रारूप में लेनदेन राशि (<em>123,456.78</em>)।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:80
+msgid ""
+"Transaction color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, "
+"<em>G</em> and <em>B</em> are integers in range between 0 and 255."
+msgstr ""
+"लेन-देन का रंग, <em>rgb(R,G,B)</em> प्रारूप में होना चाहिए जहां <em>R</em>, <em>G</"
+"em> और <em>B</em> हैं 0 और 255 के बीच की सीमा में पूर्णांक।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:84
+msgid "Whether a transaction should use group color: 0 — false, 1 — true."
+msgstr "क्या लेन-देन में समूह रंग का उपयोग किया जाना चाहिए: 0 - गलत, 1 - सत्य।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:88
+msgid ""
+"Transaction's group Id. Ids start with 1. For ungrouped transaction it "
+"should be -1 (not 0, this is incorrect value for group Id)."
+msgstr ""
+"लेन-देन का समूह Id. Ids 1 से शुरू होती हैं। असमूहीकृत लेनदेन के लिए यह -1 होना चाहिए (0 "
+"नहीं, यह समूह Id के लिए गलत मान है)।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:92
+msgid ""
+"Transaction's group name, should match group Id. It can contain any "
+"characters except semicolon. Leave it empty for ungrouped transaction, in "
+"any other cases it shouldn't be empty."
+msgstr ""
+"लेन-देन का समूह नाम, समूह Id से मेल खाना चाहिए। इसमें अर्धविराम को छोड़कर कोई भी वर्ण "
+"हो सकता है। असमूहीकृत लेन-देन के लिए इसे खाली छोड़ दें, किसी भी अन्य स्थिति में यह खाली "
+"नहीं होना चाहिए।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:96
+msgid ""
+"Transaction's group description, should match group Id. It can contain any "
+"characters except semicolon and can be empty. Leave it empty for ungrouped "
+"transaction."
+msgstr ""
+"लेन-देन का समूह विवरण, समूह Id से मेल खाना चाहिए। इसमें अर्धविराम को छोड़कर कोई भी "
+"अक्षर हो सकता है और यह खाली हो सकता है। असमूहीकृत लेनदेन के लिए इसे खाली छोड़ दें।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:100
+msgid ""
+"Group color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, "
+"<em>G</em> and <em>B</em> are integers in range between 0 and 255."
+msgstr ""
+"समूह का रंग, <em>rgb(R,G,B)</em> प्रारूप में होना चाहिए जहां <em>R</em>, <em>G</em> "
+"और <em>B</em> हैं 0 और 255 के बीच की सीमा में पूर्णांक।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:103
+msgid "Receipt and notes are not present in CSV."
+msgstr "रसीद और नोट्स CSV में मौजूद नहीं हैं।"
+
+#. (itstool) path: div/title
+#: docs/yelp/C/import-export.page:108
+msgid "Export Formats"
+msgstr "निर्यात प्रारूप"
+
+#. (itstool) path: div/p
+#: docs/yelp/C/import-export.page:109
+msgid ""
+"You can select whether to export all information or only from the current "
+"view. If you select the current view, currently displayed transactions will "
+"be exported in the same order in which they are shown."
+msgstr ""
+"आप चुन सकते हैं कि सारी जानकारी निर्यात करनी है या केवल वर्तमान दृश्य से। यदि आप वर्तमान "
+"दृश्य का चयन करते हैं, तो वर्तमान में प्रदर्शित लेनदेन उसी क्रम में निर्यात किए जाएंगे जिसमें वे "
+"दिखाए गए हैं।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/import-export.page:113
+msgid ""
+"A file will contain an account information, a list of transactions and "
+"images of receipts. Transactions are colored like in the application, but "
+"colors are modified by making them half-transparent in order to make black "
+"text always clearly visible. You can set a password for an exported file."
+msgstr ""
+"एक फाइल में खाते की जानकारी, लेनदेन की एक सूची और प्राप्तियों की छवियां होंगी। लेन-देन "
+"एप्लिकेशन की तरह रंगीन होते हैं, लेकिन काले पाठ को हमेशा स्पष्ट रूप से दिखाई देने के लिए रंगों "
+"को आधा-पारदर्शी बनाकर संशोधित किया जाता है। आप किसी निर्यातित फाइल के लिए पासवर्ड "
+"सेट कर सकते हैं।"
+
+#. (itstool) path: info/title
+#: docs/yelp/C/index.page:7
+msgctxt "link"
+msgid "Denaro Help"
+msgstr "Denaro सहायता"
+
+#. (itstool) path: info/title
+#: docs/yelp/C/index.page:8
+msgctxt "text"
+msgid "Denaro Help"
+msgstr "Denaro सहायता"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/index.page:20
+msgid "<_:media-1/> Denaro Help"
+msgstr "<_:media-1/> Denaro सहायता"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/index.page:21
+msgid ""
+"This documentation will help you understand how to configure and manage data "
+"in <app>Denaro</app> to get the most of the application."
+msgstr ""
+"यह दस्तावेज़ आपको यह समझने में सहायता करेगा कि एप्लिकेशन का अधिकतम लाभ उठाने के लिए "
+"<app>Denaro</app> में डेटा को कैसे कॉन्फ़िगर और प्रबंधित किया जाए।"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/index.page:22
+msgid ""
+"To get support, use <link href=\"https://github.com/NickvisionApps/Denaro/"
+"issues\">issues</link> or <link href=\"https://github.com/NickvisionApps/"
+"Denaro/discussions\">discussions</link> on Github, or <link href=\"https://"
+"bit.ly/3GrfEid\">join our Matrix channel</link>."
+msgstr ""
+"समर्थन पाने के लिए, <link href=\"https://github.com/NickvisionApps/Denaro/"
+"issues\">समस्याएँ</link> या <link href=\"https://github.com/NickvisionApps/"
+"Denaro/discussions\"> चर्चाएँ</link>का उपयोग करें Github पर, या <link "
+"href=\"https://bit.ly/3GrfEid\">हमारे Matrix चैनल से जुड़ें</link>।"
+
+#. (itstool) path: info/title
+#: docs/yelp/C/transaction.page:8
+msgctxt "link"
+msgid "Transaction 🧾"
+msgstr "लेनदेन 🧾"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/transaction.page:20
+msgid "Transaction"
+msgstr "लेन-देन"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transaction.page:21
+msgid "This page explains all properties of transactions in <app>Denaro</app>."
+msgstr "यह पृष्ठ <app>Denaro</app> में लेनदेन के सभी गुणों की व्याख्या करता है।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:25
+msgid "Id"
+msgstr "Id"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:26
+msgid ""
+"Each transaction has an Id that is unique for a given account. Ids start "
+"with 1 and increase for every transaction added. Ids can't be changed, ids "
+"of removed transactions are not reused."
+msgstr ""
+"प्रत्येक लेनदेन में एक Id होती है जो किसी दिए गए खाते के लिए अद्वितीय होती है। Id 1 से शुरू "
+"होती हैं और जोड़े गए प्रत्येक लेनदेन के लिए बढ़ती हैं। Id को बदला नहीं जा सकता, हटाए गए "
+"लेनदेन की Id का पुन: उपयोग नहीं किया जाता है।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:29
+msgid "Description"
+msgstr "विवरण"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:30
+msgid "No limit on length. It can't contain semicolon."
+msgstr "लंबाई की कोई सीमा नहीं. इसमें अर्धविराम नहीं हो सकता।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:33
+msgid "Amount"
+msgstr "राशि"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:34
+msgid ""
+"A number in a format that is valid for your locale, see <em>System Currency</"
+"em> in <link xref=\"account\">Account page</link> for details."
+msgstr ""
+"प्रारूप में एक संख्या जो आपके स्थान के लिए मान्य है, विवरण के लिए <link "
+"xref=\"account\">खाता पृष्ठ</link> में <em>सिस्टम मुद्रा</em> देखें।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:37
+msgid "Type"
+msgstr "प्रकार"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:38
+msgid ""
+"<em>Income</em> or <em>Expense</em>. By default the one chosen in <link "
+"xref=\"account\">account settings</link> will be selected when you open a "
+"dialog to add new transaction."
+msgstr ""
+"<em>आय</em> या <em>व्यय</em>. जब आप नया लेन-देन जोड़ने के लिए एक संवाद खोलेंगे तो "
+"डिफ़ॉल्ट रूप से <link xref=\"account\">खाता सेटिंग</link> में से एक चुना जाएगा।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:41
+msgid "Date"
+msgstr "तारीख"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:42
+msgid ""
+"Any date can be selected, you can also create transactions for future dates."
+msgstr ""
+"कोई भी तारीख चुनी जा सकती है, आप भविष्य की तारीखों के लिए लेनदेन भी बना सकते हैं।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:45
+msgid "Repeat Interval"
+msgstr "अंतराल दोहराएँ"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:46
+msgid ""
+"Use this option to create a recurring transaction. After you add transaction "
+"with repeat interval, this transaction will become a <em>source</em> "
+"transaction. <app>Denaro</app> will automatically generate <em>repeat</em> "
+"transactions for the dates up until today or a provided end date if set in "
+"the past. <em>Repeat</em> transactions can't be edited or deleted, only "
+"<em>source</em> can be modified. When you modify <em>source</em> transaction "
+"<app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</"
+"em> transactions. If you choose to disassociate, <em>repeat</em> "
+"transactions become normal transactions and can be edited or deleted "
+"separately."
+msgstr ""
+"आवर्ती लेनदेन बनाने के लिए इस विकल्प का उपयोग करें। आपके द्वारा दोहराव अंतराल के साथ "
+"लेनदेन जोड़ने के बाद, यह लेनदेन एक <em>स्रोत</em> लेनदेन बन जाएगा। <app>Denaro</app> "
+"स्वचालित रूप से आज तक की तारीखों के लिए या अतीत में सेट की गई अंतिम तिथि के लिए "
+"<em>दोहराया</em> लेनदेन उत्पन्न करेगा। <em>दोहराएँ</em> लेनदेन को संपादित या हटाया "
+"नहीं जा सकता, केवल <em>स्रोत</em> को संशोधित किया जा सकता है। जब आप <em>स्रोत</em> "
+"लेनदेन को संशोधित करते हैं तो <app>Denaro</app> आपसे पूछेगा कि क्या आप <em>दोहराएँ</em> "
+"लेनदेन को संशोधित या अलग करना चाहते हैं। यदि आप अलग होना चुनते हैं, तो <em>दोहराएँ</em> "
+"लेनदेन सामान्य लेनदेन बन जाते हैं और इन्हें अलग से संपादित या हटाया जा सकता है।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:49
+msgid "Repeat End Date"
+msgstr "समाप्ति तिथि दोहराएँ"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:50
+msgid ""
+"End date for a transaction with repeat. It can't be earlier than or on the "
+"same day as start date."
+msgstr ""
+"दोहराव वाले लेन-देन की समाप्ति तिथि। यह प्रारंभ दिनांक से पहले या उसी दिन नहीं हो सकता।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:53
+msgid "Group"
+msgstr "समूह"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:54
+msgid ""
+"Each transaction can belong to only one group or none («Ungrouped» group)."
+msgstr ""
+"प्रत्येक लेन-देन केवल एक समूह से संबंधित हो सकता है या किसी से भी नहीं («अनग्रुप्ड» समूह) से "
+"संबंधित हो सकता है।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:57
+msgid "Color"
+msgstr "रंग"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:58
+msgid ""
+"A color for transaction. Can be set to use either a group color or a unique "
+"color. When selecting unique color, it will be set by default to the color "
+"selected in <link xref=\"configuration\">configuration</link>, but can be "
+"changed to any color."
+msgstr ""
+"लेन-देन के लिए एक रंग. समूह रंग या अद्वितीय रंग का उपयोग करने के लिए सेट किया जा सकता "
+"है। अद्वितीय रंग का चयन करते समय, इसे डिफ़ॉल्ट रूप से <link "
+"xref=\"configuration\">कॉन्फ़िगरेशन</link> में चयनित रंग पर सेट किया जाएगा, लेकिन इसे "
+"किसी भी रंग में बदला जा सकता है।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:61
+msgid "Tags"
+msgstr "टैग्स"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:62
+msgid ""
+"A list of tags for transaction. A transaction can have unlimited number of "
+"tags (or have no tags). Tags can contain any characters except comma (<code>,"
+"</code>), and have any length, but they are expected to be short keywords. "
+"Tags are meant to be used for additional filtering when using groups is not "
+"enough. Tags are only saved in transactions themselves, and as result unused "
+"tags disappear automatically on account closing."
+msgstr ""
+"लेन-देन के लिए टैग की एक सूची. किसी लेन-देन में असीमित संख्या में टैग हो सकते हैं (या कोई टैग "
+"नहीं)। टैग में अल्पविराम (<code>,</code>) को छोड़कर कोई भी वर्ण हो सकता है, और उनकी "
+"लंबाई कोई भी हो सकती है, लेकिन उनसे छोटे कीवर्ड होने की उम्मीद की जाती है। टैग का "
+"उपयोग अतिरिक्त फ़िल्टरिंग के लिए किया जाता है जब समूहों का उपयोग पर्याप्त नहीं होता है। "
+"टैग केवल लेनदेन में ही सहेजे जाते हैं, और परिणामस्वरूप अप्रयुक्त टैग खाता बंद होने पर स्वचालित "
+"रूप से गायब हो जाते हैं।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:65
+msgid "Receipt"
+msgstr "रसीद"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:66
+msgid ""
+"An image of a receipt for transaction. You can upload JPEG or PNG image or "
+"PDF document, but no matter the format it will be converted and saved as "
+"JPEG image. In case of PDF, only the first page will be saved. You can "
+"delete or upload another file anytime."
+msgstr ""
+"लेन-देन की रसीद की एक छवि. आप JPEG या PNG छवि या PDF दस्तावेज़ अपलोड कर सकते हैं, "
+"लेकिन प्रारूप कोई भी हो, इसे JPEG छवि के रूप में परिवर्तित और सहेजा जाएगा। PDF के मामले "
+"में, केवल पहला पृष्ठ ही सहेजा जाएगा। आप किसी भी समय दूसरी फाइल को हटा या अपलोड कर "
+"सकते हैं।"
+
+#. (itstool) path: item/title
+#: docs/yelp/C/transaction.page:69
+msgid "Notes"
+msgstr "नोट्स"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transaction.page:70
+msgid "A freeform text note to attach to transaction."
+msgstr "लेन-देन के साथ संलग्न करने के लिए एक फ्रीफॉर्म टेक्स्ट नोट।"
+
+#. (itstool) path: info/title
+#: docs/yelp/C/transfer.page:8
+msgctxt "link"
+msgid "Transfer 💸"
+msgstr "स्थानांतरण 💸"
+
+#. (itstool) path: page/title
+#: docs/yelp/C/transfer.page:20
+msgid "Transfer"
+msgstr "स्थानांतरण"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:21
+msgid ""
+"Transfer is a way to move money from one account to another. After running a "
+"transfer 2 transactions will be created with the following descriptions:"
+msgstr ""
+"ट्रांसफर पैसे को एक खाते से दूसरे खाते में स्थानांतरित करने का एक तरीका है। स्थानांतरण चलाने के "
+"बाद निम्नलिखित विवरण के साथ 2 लेनदेन बनाए जाएंगे:"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transfer.page:24
+msgid ""
+"«Transfer to <input>Destination Account Name</input>» on source account."
+msgstr "स्रोत खाते पर <input>गंतव्य खाता नाम</input> पर स्थानांतरण करें।"
+
+#. (itstool) path: item/p
+#: docs/yelp/C/transfer.page:27
+msgid ""
+"«Transfer from <input>Source Account Name</input>» on destination account."
+msgstr "गंतव्य खाते पर <input>स्रोत खाता नाम</input> से स्थानांतरण।"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:30
+msgid ""
+"Transactions created using transfer are simple transactions that can be "
+"freely edited or deleted. These transactions are not connected: modifying "
+"transaction on source account will not affect transaction on destination "
+"account, and vice versa."
+msgstr ""
+"स्थानांतरण का उपयोग करके बनाए गए लेनदेन सरल लेनदेन हैं जिन्हें स्वतंत्र रूप से संपादित या "
+"हटाया जा सकता है। ये लेनदेन जुड़े नहीं हैं: स्रोत खाते पर लेनदेन को संशोधित करने से गंतव्य खाते "
+"पर लेनदेन प्रभावित नहीं होगा, और इसके विपरीत।"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:31
+msgid ""
+"Transfer doesn't allow you to create repeating transactions or set any "
+"properties other than the amount. The color selected in <link "
+"xref=\"configuration\">configuration</link> will be used for created "
+"transactions."
+msgstr ""
+"स्थानांतरण आपको बार-बार लेनदेन करने या राशि के अलावा कोई संपत्ति निर्धारित करने की "
+"अनुमति नहीं देता है। <link xref=\"configuration\">कॉन्फ़िगरेशन</link> में चयनित रंग का "
+"उपयोग बनाए गए लेनदेन के लिए किया जाएगा।"
+
+#. (itstool) path: page/p
+#: docs/yelp/C/transfer.page:32
+msgid ""
+"If you create a transfer between accounts with different currencies, you "
+"will be asked to provide a conversion rate."
+msgstr ""
+"यदि आप विभिन्न मुद्राओं वाले खातों के बीच स्थानांतरण करते हैं, तो आपसे रूपांतरण दर प्रदान "
+"करने के लिए कहा जाएगा।"
+
+#~ msgid "Checking Account Color"
+#~ msgstr "खाते का रंग जांचा जा रहा है"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Checking</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "हाल की खातों की सूची में <link xref=\"account\">खातों</link> को <em>चेकिंग</em> "
+#~ "प्रकार से चिह्नित करने के लिए उपयोग किया जाने वाला रंग।"
+
+#~ msgid "Savings Account Color"
+#~ msgstr "बचत खाते का रंग"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Savings</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "हाल की खातों की सूची में <link xref=\"account\">खातों</link> को <em>बचत</em> "
+#~ "प्रकार से चिह्नित करने के लिए उपयोग किया जाने वाला रंग।"
+
+#~ msgid "Business Account Color"
+#~ msgstr "बिजनेस अकाउंट का रंग"
+
+#~ msgid ""
+#~ "A color used to mark <link xref=\"account\">accounts</link> with the "
+#~ "<em>Business</em> type in a recent accounts list."
+#~ msgstr ""
+#~ "हाल की खातों की सूची में <link xref=\"account\">खातों</link> को <em>व्यवसाय</"
+#~ "em> प्रकार से चिह्नित करने के लिए उपयोग किया जाने वाला रंग।"
+
+#~ msgid "Use Native Digits"
+#~ msgstr "मूल अंकों का प्रयोग करें"
+
+#~ msgid ""
+#~ "Whether to use numerals that are native for your locale instead of latin "
+#~ "digits. For example, if this setting is enabled <em>٠١٢</em> will be used "
+#~ "instead of <em>012</em> for locales that use Eastern Arabic numerals."
+#~ msgstr ""
+#~ "क्या लैटिन अंकों के बजाय उन अंकों का उपयोग करना चाहिए जो आपके स्थान के मूल निवासी हैं। "
+#~ "उदाहरण के लिए, यदि यह सेटिंग सक्षम है तो पूर्वी अरबी अंकों का उपयोग करने वाले स्थानों "
+#~ "के लिए <em>012</em> के बजाय <em>٠١٢</em> का उपयोग किया जाएगा।"
+
+#~ msgid "CSV Backup Folder"
+#~ msgstr "CSV बैकअप फोल्डर"
+
+#~ msgid ""
+#~ "A folder where your data will be automatically <link xref=\"import-"
+#~ "export\">exported to CSV</link> after every change. This feature doesn't "
+#~ "work for password-protected accounts, because CSV files can't be password-"
+#~ "protected."
+#~ msgstr ""
+#~ "एक फोल्डर जहां आपका डेटा प्रत्येक परिवर्तन के बाद स्वचालित रूप से <link "
+#~ "xref=\"import-export\">CSV में निर्यात किया जाएगा</link>। यह सुविधा पासवर्ड-"
+#~ "सुरक्षित खातों के लिए काम नहीं करती, क्योंकि CSV फाइलें पासवर्ड-सुरक्षित नहीं की जा "
+#~ "सकतीं।"

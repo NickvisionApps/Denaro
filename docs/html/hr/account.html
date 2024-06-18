@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Račun</title>
+<link rel="stylesheet" type="text/css" href="hr.css">
+<script type="text/javascript" src="highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body lang="hr" dir="ltr"><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Denaro pomoć">Denaro pomoć</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Račun</span></h1></div>
+<div class="region">
+<div class="contents pagewide">
+<p class="p">Ova stranica objašnjava sva svojstva računa u aplikaciji <span class="app">Denaro</span>. Većina se prikazuju u <span class="gui">Dijalog postavki računa</span>. Ovaj se dijalog također automatski otvara nakon stvaranja novog računa.</p>
+<p class="p">Svaki račun se sprema u yasebnu <span class="file">*.nmoney</span> datoteku. Datoteke stvorene u starijoj <span class="em">stabilnoj</span> verziji <span class="app">Denaro</span> aplikacije mogu se sigurno otvoriti u novijoj <span class="em">stabilnoj</span> verziji aplikacije. Iako aplikacija radi na različitim platformama (Windows i Linux), <span class="file">*.nmoney</span> datoteke su 100 % kompatibilne između platformi sve dok su stvorene s istom verzijom aplikacije (tj. V2023.1.0).</p>
+<div class="note note-warning" title="Upozorenje">
+<svg height="24" width="24" version="1.1">
+ <path class="yelp-svg-fill" d="m11.92 3.3047a1.3872 1.3872 0 0 0 -1.129 0.6933l-8.6055 14.922a1.3872 1.3872 0 0 0 1.2012 2.08l17.226-0.008a1.3872 1.3872 0 0 0 1.201 -2.08l-8.619-14.916a1.3872 1.3872 0 0 0 -1.136 -0.6913 1.3872 1.3872 0 0 0 -0.139 0zm0.08 4.6953a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1 1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1zm0 9a1 1 0 0 1 1 1 1 1 0 0 1 -1 1 1 1 0 0 1 -1 -1 1 1 0 0 1 1 -1z"></path>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Nestabilne verzije aplikacije (beta i kandidati za izdanje) mogu sadržati greške ili nedovršene promjene i mogu uzrokovati gubitak podataka. U nestabilnim verzijama aplikacije NEMOJ koristiti datoteke računa koje sadrže stvarne podatke!</p></div></div></div>
+</div>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms">Ime</dt>
+<dd class="terms"><p class="p">Ime računa se prikazuje u popisu nedavnih računa i na karticama. Dužina imena nije ograničena i može sadržati bilo koje znakove, uključujući emojije.</p></dd>
+<dt class="terms">Vrsta računa</dt>
+<dd class="terms"><p class="p">Postoje 3 vrste računa: 🟣<span class="em">žiro račun</span>, 🔵<span class="em">štedni račun</span> i 🟢<span class="em">poslovni račun</span>. Vrsta računa je samo korisna oznaka koja se prikazuje u popisu nedavnih računa i ne utječe na to kako aplikacija radi ili što možeš učiniti s računom. Svaka vrsta računa ima vlastitu boju. Boje se mogu odrediti u <span class="link"><a href="configuration.html" title="Konfiguracija">globalnim postavkama</a></span>.</p></dd>
+<dt class="terms">Standardna vrsta transakcije</dt>
+<dd class="terms"><p class="p">Kada stvoriš novu transakciju, njezina će vrsta standardno biti ista kao u ovoj postavci.</p></dd>
+<dt class="terms">Prag podsjetnika za transakcije</dt>
+<dd class="terms"><p class="p">Prag koji se koristi prilikom prikazivanja podsjetnika o nadolazećim transakcijama.</p></dd>
+<dt class="terms">Valuta sustava</dt>
+<dd class="terms">
+<p class="p">Svaki put kada se aplikacija pokrene, ona dobiva podatke o valuti i formatu brojeva iz postavke jezičnog područja tvog sustava. Ti se podaci koriste za prikaz simbola valute (osim ako se koristi prilagođena valuta, pogledaj dolje) i za određivanje formata brojeva koji će se prihvatiti kao vrijednosti za iznose transakcija. Par primjera:</p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list"><p class="p">Ako je tvoje jezično područje <span class="em">engleski (SAD)</span>, simbol valute će biti <span class="em">$</span> i <span class="em">1,000.00</span> će se prihvatiti kao valjani broj.</p></li>
+<li class="list"><p class="p">Ako je tvoje jezično područje <span class="em">hrvatski</span>, simbol valute će biti <span class="em">€</span> i <span class="em">1.000,00</span> će se prihvatiti kao valjani broj.</p></li>
+<li class="list"><p class="p">Ako je tvoje jezično područje <span class="em">ruski</span>, simbol valute će biti <span class="em">₽</span> i <span class="em">1000,00</span> će se prihvatiti kao valjani broj.</p></li>
+</ul></div></div></div>
+<div class="note note-advanced" title="Napredna">
+<svg height="24" width="24" version="1.1">
+ <g>
+  <path class="yelp-svg-fill" d="m5.4473 12.572c-2.039 0.957-3.4473 3.019-3.4473 5.428v4h20v-4c0-2.406-1.406-4.466-3.441-5.424a8 8 0 0 1 -6.559 3.424 8 8 0 0 1 -6.5527 -3.428z"></path>
+  <path class="yelp-svg-fill" d="m12 3a5 5 0 0 0 -5 5 5 5 0 0 0 5 5 5 5 0 0 0 5 -5 5 5 0 0 0 -5 -5zm0 3a2 2 0 0 1 2 2 2 2 0 0 1 -2 2 2 2 0 0 1 -2 -2 2 2 0 0 1 2 -2z"></path>
+  <path class="yelp-svg-fill" d="m15.312 6 3.688 1v2l-3.4688 1z"></path>
+  <path class="yelp-svg-fill" d="m14 11.312-1 3.688h-2l-1-3.469z"></path>
+  <path class="yelp-svg-fill" d="m10 4.6875 1-3.6875h2l1 3.4688z"></path>
+  <path class="yelp-svg-fill" d="m8.6875 10-3.6875-1v-2l3.4688-1z"></path>
+  <path class="yelp-svg-fill" d="m12.928 4.2435 3.3146-1.9003 1.4142 1.4142-1.7457 3.1599z"></path>
+  <path class="yelp-svg-fill" d="m15.757 8.9281 1.9003 3.3146-1.4142 1.4142-3.1599-1.7457z"></path>
+  <path class="yelp-svg-fill" d="m8.2435 7.0719-1.9004-3.3145 1.4143-1.4143 3.1596 1.7457z"></path>
+  <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
+ </g>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Na Linuxu je moguće postaviti različita jezična područja za jezik sustava i formate. Mijenjanje ovih postavki razlikuje se ovisno o radnoj površini. Unatoč razlikama u smještaju ovih postavki u okruženju, mijenjanje tih postavki mijenja varijable okruženja sustava, kao što su <span class="code">LANG</span>, <span class="code">LC_TIME</span> i <span class="code">LC_MONETARY</span>. <span class="app">Denaro</span> će pokušati koristiti formate iznosa i datuma u skladu s tim varijablama. Ako aplikacija ne uspije koristiti očekivane formate, provjeri jesu li varijable ispravno postavljene putem naredbe <span class="code">locale</span> u terminalu. Ako naiđeš na grešku i želiš je prijaviti, pošalji rezultat naredbe <span class="code">locale</span> kako bi programeri mogli reproducirati problem s istim postavkama.</p></div></div></div>
+</div>
+</dd>
+<dt class="terms">Koristi prilagođenu valutu</dt>
+<dd class="terms"><p class="p">Ako je ova opcija aktivirana, umjesto simbola valute jezičnog područja tvog sustava koristit će se <span class="gui">Prilagođeni simbol valute</span>.</p></dd>
+<dt class="terms">Simbol prilagođene valute</dt>
+<dd class="terms"><p class="p">Do 3 znaka ili 1 emoji. Ne može biti broj.</p></dd>
+<dt class="terms">Kȏd prilagođene valute</dt>
+<dd class="terms">
+<p class="p">Do 3 znaka ili 1 emoji.</p>
+<p class="p">Primjer za razumijevanje razlike između simbola i koda: <span class="em">$</span> je simbol, <span class="em">USD</span> je kod.</p>
+</dd>
+<dt class="terms">Prilagođeni stil iznosa valute</dt>
+<dd class="terms">
+<p class="p">Izbor prikaza iznosa na jedan od sljedećih načina:</p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list"><p class="p">$n</p></li>
+<li class="list"><p class="p">n$</p></li>
+<li class="list"><p class="p">$ n</p></li>
+<li class="list"><p class="p">n $</p></li>
+</ul></div></div></div>
+</dd>
+<dt class="terms">Prilagođeni decimalni znakovi i znakovi tisućica valute</dt>
+<dd class="terms"><p class="p">Do 2 znaka ili 1 emoji.</p></dd>
+<dt class="terms">Prilagođeni broj decimala valute</dt>
+<dd class="terms"><p class="p">Broj decimala za iznose. S opcijom „Neograničeno” prikazat će se onoliko decimala koliko je potrebno za prikaz točnog iznosa. Decimale se neće koristiti ako je iznos cijeli broj.</p></dd>
+<dt class="terms">Lozinka</dt>
+<dd class="terms"><p class="p">Svaki račun se može zaštititi lozinkom. Dodavanje lozinke uzrokuje šifriranje računa (što onemogućuje čitanje podataka bez dešifriranja pomoću lozinke). Oprez: ako izgubiš lozinku, nećeš moći obnoviti podatke! Lozinka se također može promijeniti ili ukloniti pomoću dijaloga postavki računa jednog otvorenog računa. Uklanjanje lozinke će dešifrirati račun.</p></dd>
+<dt class="terms">Razvrstaj prema ID-u, datumu ili iznosu</dt>
+<dd class="terms"><p class="p">Svaki račun sprema razvrstavanje transakcija u glavnom prozoru prema ID-u, datumu ili iznosu. Pri svakoj promjeni će se razvrstavanje spremiti u datoteku računa i obnoviti kada ponovo otvoriš račun.</p></dd>
+<dt class="terms">Redoslijed</dt>
+<dd class="terms"><p class="p">Svaki račun sprema podatke o redoslijedu transakcija u glavnom prozoru. Pri svakoj promjeni će se redoslijed spremiti u datoteku računa i obnoviti kada ponovo otvoriš račun.</p></dd>
+<dt class="terms">Vidljivost grupa</dt>
+<dd class="terms"><p class="p">Svaki račun sprema podatke o prikazivanju ii skrivanju popisa grupa u glavnom prozoru. Pri svakoj promjeni će se vidljivost popisa grupa spremiti i obnoviti kada ponovo otvoriš račun.</p></dd>
+<dt class="terms">Vidljivost oznaka</dt>
+<dd class="terms"><p class="p">Svaki račun sprema podatke o prikazivanju ii skrivanju popisa oznaka u glavnom prozoru. Pri svakoj promjeni vidljivosti popisa oznaka, promjena će se spremiti i obnoviti kada ponovo otvoriš račun.</p></dd>
+</dl></div></div></div>
+</div>
+<section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">Više informacija</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Denaro pomoć">Denaro pomoć</a></li></ul></div>
+</div></div></div>
+</div></section>
+</div>
+<div class="clear"></div></article><footer><div class="inner pagewide"><div class="about ui-expander" role="contentinfo">
+<div class="yelp-data yelp-data-ui-expander" data-yelp-expanded="false"></div>
+<div class="inner">
+<div class="hgroup"><h2><span class="title">O programu</span></h2></div>
+<div class="region"><div class="contents">
+<div class="copyrights">
+<div class="copyright">© 2023 Fyodor Sobolev</div>
+<div class="copyright">© 2023 Nicholas Logozzo</div>
+<div class="copyright">© 2023 Milo Ivir</div>
+</div>
+<div class="credits">
+<div class="credits-authors">
+<div class="title"><span class="title">Napisao/la</span></div>
+<ul class="credits"><li>Fyodor Sobolev</li></ul>
+</div>
+<div class="credits-translators">
+<div class="title"><span class="title">Preveo/la</span></div>
+<ul class="credits"><li>Milo Ivir</li></ul>
+</div>
+<div class="credits-publishers">
+<div class="title"><span class="title">Objavio</span></div>
+<ul class="credits"><li>Nicholas Logozzo</li></ul>
+</div>
+<div class="credits-blank"></div>
+<div class="credits-blank"></div>
+</div>
+<div class="license">
+<div class="title"><span class="title">Creative Commons</span></div>
+<div class="contents"><p class="p">Creative Commons Attribution 4.0 International License</p></div>
+</div>
+</div></div>
+</div>
+</div></div></footer>
+</div></main></body>
+</html>

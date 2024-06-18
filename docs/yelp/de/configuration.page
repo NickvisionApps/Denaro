@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="de">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Konfiguration 🔧</title>
+	<credit type="author copyright">
+		<name>Fyodor Sobolev</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Jummit</mal:name>
+      <mal:email>jummit@web.de</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
+
+<title>Konfiguration</title>
+<p>Diese Seite beschreibt, was Sie in der Anwendungskonfiguration ändern können.</p>
+<p>Depending on your platform, in the application interface the configuration is referred as either <gui>Preferences</gui> or <gui>Settings</gui>.</p>
+<terms>
+	<item>
+		<title>Thema</title>
+		<p>Set light or dark theme, or make <app>Denaro</app> follow your system theme. Changing this on Windows requires the application restart to apply.</p>
+	</item>
+	<item>
+		<title>Standardfarbe für Überweisungen</title>
+		<p>A color that will be selected by default when adding a new <link xref="transaction">transaction</link> with unique color. Changing this will not affect existing transactions, even if they use previously selected default color.</p>
+	</item>
+	<item>
+		<title>Transfer Default Color</title>
+		<p>A color that will be used for transactions created using <link xref="transfer">transfer</link>. Changing this will not affect existing transactions.</p>
+	</item>
+	<item>
+		<title>Standardfarbe der Gruppe</title>
+		<p>A color that will be selected by default when adding a new group. This is also a color for «Ungrouped» group.</p>
+	</item>
+	<item>
+		<title>Dezimaltrennzeichen einfügen</title>
+		<p>Set for which keys pressed will the locale's decimal separator be inserted into an amount field: numpad period, any period and comma, or none. If decimal separator is already presented in a field, it will not be inserted.</p>
+	</item>
+</terms>
+</page>

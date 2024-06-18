@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/nickvision/money">
+    <file alias="style.css">org.nickvision.money.css</file>
+    <file alias="style-dark.css">org.nickvision.money-dark.css</file>
+  </gresource>
+  <gresource prefix="/org/nickvision/money/icons/scalable/apps/">
+    <file alias="org.nickvision.money.svg" preprocess="xml-stripblanks">../../resources/org.nickvision.money.svg</file>
+    <file alias="org.nickvision.money-devel.svg" preprocess="xml-stripblanks">../../resources/org.nickvision.money-devel.svg</file>
+  </gresource>
+  <gresource prefix="/org/nickvision/money/icons/symbolic/apps/">
+    <file alias="org.nickvision.money-symbolic.svg" preprocess="xml-stripblanks">../../resources/org.nickvision.money-symbolic.svg</file>
+  </gresource>
+  <gresource prefix="/org/nickvision/money/icons/scalable/status/">
+    <file preprocess="xml-stripblanks">bank-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">bell-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">bell-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">check-plain-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">cross-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">dark-mode-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">dock-top-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">document-send-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">edit-select-all-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">edit-select-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">larger-brush-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">money-none-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">money-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">month-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">newspaper-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">profit-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">right-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">send-alt-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">shell-overview-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">today-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">update-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">wallet2-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">wrench-wide-symbolic.svg</file>
+  </gresource>
+</gresources>

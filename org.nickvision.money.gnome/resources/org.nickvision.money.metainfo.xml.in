@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>@PROJECT_NAME@</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>@SHORT_NAME@</name>
+  <project_group>Nickvision</project_group>
+  <developer_name>Nickvision</developer_name>
+  <summary>Manage your personal finances</summary>
+  <description>
+    <p>— Manage multiple accounts at a time, with a familiar tab interface</p>
+    <p>— Easily filter transactions by type, group, or date</p>
+    <p>— Easily repeat transactions, such as bills that occur every month</p>
+    <p>— Transfer money from one account to another</p>
+    <p>— Export an account as a CSV file and import a CSV, OFX or QIF file to bulk add transactions to an account</p>
+  </description>
+  <launchable type="desktop-id">@PROJECT_NAME@.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/MainWindow.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/OpenAccount.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/OpenAccountDark.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/CompactMode.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/Transaction.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/AccountSettings.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Denaro/master/NickvisionMoney.GNOME/Screenshots/CurrencyConverter.png</image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://github.com/NickvisionApps/@SHORT_NAME@</url>
+  <url type="bugtracker">https://github.com/NickvisionApps/@SHORT_NAME@/issues</url>
+  <url type="donation">https://github.com/sponsors/nlogozzo</url>
+  <url type="translate">https://github.com/NickvisionApps/@SHORT_NAME@/blob/master/CONTRIBUTING.md#providing-translations</url>
+  <provides>
+    <binary>@PROJECT_NAME@</binary>
+    <mediatype>application/x-nmoney</mediatype>
+  </provides>
+  <releases>
+    <release version="2024.5.0-next" date="2024-05-01">
+      <description translatable="no">
+        <p>- Initial Release</p>
+      </description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1" />
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+  <custom>
+    <value key="Purism::form_factor">mobile</value>
+  </custom>
+</component>
