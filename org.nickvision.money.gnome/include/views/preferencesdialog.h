@@ -23,9 +23,9 @@ namespace Nickvision::Money::GNOME::Views
 
     private:
         /**
-         * @brief Applies the changes to the app's configuration object.
+         * @brief Handles when the dialog is closed.
          */
-        void applyChanges();
+        void onClosed();
         /**
          * @brief Handles when the theme preference is changed. 
          */

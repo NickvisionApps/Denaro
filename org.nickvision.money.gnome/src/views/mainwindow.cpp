@@ -150,7 +150,7 @@ namespace Nickvision::Money::GNOME::Views
 
     void MainWindow::onShellNotificationSent(const ShellNotificationSentEventArgs& args)
     {
-        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "ShellNotification sent.");
+        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "ShellNotification sent. (" + args.getMessage() + ")");
         ShellNotification::send(args, _("Open"));
     }
 
@@ -182,7 +182,11 @@ namespace Nickvision::Money::GNOME::Views
     {
         std::string helpUrl{ Documentation::getHelpUrl("index") };
         GtkUriLauncher* launcher{ gtk_uri_launcher_new(helpUrl.c_str()) };
-        gtk_uri_launcher_launch(launcher, GTK_WINDOW(m_window), nullptr, GAsyncReadyCallback(+[](GObject* source, GAsyncResult* res, gpointer) { gtk_uri_launcher_launch_finish(GTK_URI_LAUNCHER(source), res, nullptr); }), nullptr);
+        gtk_uri_launcher_launch(launcher, GTK_WINDOW(m_window), nullptr, GAsyncReadyCallback(+[](GObject* source, GAsyncResult* res, gpointer)
+        { 
+            gtk_uri_launcher_launch_finish(GTK_URI_LAUNCHER(source), res, nullptr); 
+            g_object_unref(source);
+        }), nullptr);
     }
 
     void MainWindow::about()

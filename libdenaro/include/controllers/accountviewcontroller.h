@@ -15,7 +15,7 @@
 namespace Nickvision::Money::Shared::Controllers
 {
     /**
-     * @brief A controller for an AccountView. 
+     * @brief A controller for an AccountView.
      */
     class AccountViewController
     {
@@ -80,7 +80,13 @@ namespace Nickvision::Money::Shared::Controllers
 
     private:
         std::shared_ptr<Models::Account> m_account;
-        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<std::string>> m_accountNameChanged;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<const Models::AccountMetadata&>> m_accountMetadataChanged;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<const Models::Group&>> m_groupAdded;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<const Models::Group&>> m_groupUpdated;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<int>> m_groupDeleted;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<const Models::Transaction&>> m_transactionAdded;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<const Models::Transaction&>> m_transactionUpdated;
+        Nickvision::Events::Event<Nickvision::Events::ParamEventArgs<int>> m_transactionDeleted;
     };
 }
 

@@ -28,26 +28,22 @@ namespace Nickvision::Money::GNOME::Views
         gtk_color_dialog_button_set_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "groupColorButton")), &color); 
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "insertSeparatorRow")), static_cast<unsigned int>(m_controller->getInsertSeparator()));
         //Signals
-        m_closed += [&](const EventArgs&){ m_controller->saveConfiguration(); };
+        m_closed += [&](const EventArgs&){ onClosed(); };
         g_signal_connect(gtk_builder_get_object(m_builder, "themeRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->onThemeChanged(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "transactionColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "transferColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "groupColorButton"), "notify::rgba", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
-        g_signal_connect(gtk_builder_get_object(m_builder, "insertSeparatorRow"), "notify::selected-item", G_CALLBACK(+[](GObject*, GParamSpec*, gpointer data){ reinterpret_cast<PreferencesDialog*>(data)->applyChanges(); }), this);
     }
 
-    void PreferencesDialog::applyChanges()
-    {
-        m_controller->setTheme(static_cast<Theme>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "themeRow")))));
+    void PreferencesDialog::onClosed()
+    {   
         m_controller->setTransactionDefaultColor({ gdk_rgba_to_string(gtk_color_dialog_button_get_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "transactionColorButton")))) });
         m_controller->setTransferDefaultColor({ gdk_rgba_to_string(gtk_color_dialog_button_get_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "transferColorButton")))) });
         m_controller->setGroupDefaultColor({ gdk_rgba_to_string(gtk_color_dialog_button_get_rgba(GTK_COLOR_DIALOG_BUTTON(gtk_builder_get_object(m_builder, "groupColorButton")))) });
         m_controller->setInsertSeparator(static_cast<InsertSeparatorTrigger>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "insertSeparatorRow")))));
+        m_controller->saveConfiguration();
     }
 
     void PreferencesDialog::onThemeChanged()
     {
-        applyChanges();
+        m_controller->setTheme(static_cast<Theme>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "themeRow")))));
         switch (m_controller->getTheme())
         {
         case Theme::Light:

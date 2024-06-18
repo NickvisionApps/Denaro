@@ -246,7 +246,7 @@ namespace winrt::Nickvision::Money::WinUI::implementation
 
     void MainWindow::OnShellNotificationSent(const ShellNotificationSentEventArgs& args)
     {
-        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "ShellNotification sent.");
+        Aura::getActive().getLogger().log(Logging::LogLevel::Debug, "ShellNotification sent. (" + args.getMessage() + ")");
         ShellNotification::send(args, m_hwnd);
     }
 

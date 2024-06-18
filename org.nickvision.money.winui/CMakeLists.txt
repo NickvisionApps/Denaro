@@ -6,8 +6,7 @@ if(WIN32)
         "RuntimeIdentifier=win10-x64"
         "RuntimeIdentifiers=win10-x64"
         "BaseNuGetRuntimeIdentifier=win10"
-        "AssetTargetFallback=$(AssetTargetFallback);native"
-    )
+        "AssetTargetFallback=$(AssetTargetFallback);native")
 
     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Directory.Build.props" "${CMAKE_CURRENT_BINARY_DIR}/Directory.Build.props" COPYONLY)
     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Directory.Build.targets" "${CMAKE_CURRENT_BINARY_DIR}/Directory.Build.targets" COPYONLY)
