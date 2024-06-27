@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-23 18:35-0400\n"
-"PO-Revision-Date: 2023-12-31 00:09+0000\n"
+"PO-Revision-Date: 2024-05-30 21:09+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/nl/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -373,7 +373,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:29
 msgid "Transaction Default Color"
-msgstr "Standaard­transactiekleur"
+msgstr "Standaard­kleur van transacties"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
@@ -387,7 +387,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:33
 msgid "Transfer Default Color"
-msgstr "Standaard­overdrachtkleur"
+msgstr "Standaard­kleur van overdrachten"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
@@ -400,7 +400,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:37
 msgid "Group Default Color"
-msgstr "Standaard­groepskleur"
+msgstr "Standaard­groeps­kleur"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:38
