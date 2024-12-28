@@ -148,7 +148,7 @@ public partial class AccountView : Adw.BreakpointBin
         btnGraphToggle.BindProperty("active", _visualizeSeparator, "visible", GObject.BindingFlags.Bidirectional | GObject.BindingFlags.SyncCreate);
         //Compact Breakpoint
         _compactBreakpoint = Adw.Breakpoint.New(Adw.BreakpointCondition.Parse("max-width: 450sp"));
-        _compactBreakpoint.AddSetter(_splitView, "collapsed", GObject.Value.From(true));
+        _compactBreakpoint.AddSetter(_splitView, "collapsed", new GObject.Value(true));
         _compactBreakpoint.OnApply += (sender, e) =>
         {
             _transactionsGroup.SetTitle("");
