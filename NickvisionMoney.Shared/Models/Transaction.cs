@@ -54,7 +54,7 @@ public class Transaction : ICloneable, IComparable<Transaction>, IDisposable, IE
     /// </summary>
     public TransactionType Type { get; set; }
     /// <summary>
-    /// The repeat inerval of the transaction
+    /// The repeat interval of the transaction
     /// </summary>
     public TransactionRepeatInterval RepeatInterval { get; set; }
     /// <summary>
