@@ -932,10 +932,52 @@ public class Account : IDisposable
         var newTags = new List<string>();
         if (updateGenerated)
         {
+            var endDate = transaction.RepeatEndDate ?? DateOnly.FromDateTime(DateTime.Today);
+            var dates = new List<DateOnly>();
+            for (var date = transaction.Date; date <= endDate; date = date.AddDays(0)) //calculate needed repeat transaction dates up until today
+            {
+                if (date != transaction.Date)
+                {
+                    dates.Add(date);
+                }
+                if (transaction.RepeatInterval == TransactionRepeatInterval.Daily)
+                {
+                    date = date.AddDays(1);
+                }
+                else if (transaction.RepeatInterval == TransactionRepeatInterval.Weekly)
+                {
+                    date = date.AddDays(7);
+                }
+                else if (transaction.RepeatInterval == TransactionRepeatInterval.Biweekly)
+                {
+                    date = date.AddDays(14);
+                }
+                else if (transaction.RepeatInterval == TransactionRepeatInterval.Monthly)
+                {
+                    date = date.AddMonths(1);
+                }
+                else if (transaction.RepeatInterval == TransactionRepeatInterval.Quarterly)
+                {
+                    date = date.AddMonths(3);
+                }
+                else if (transaction.RepeatInterval == TransactionRepeatInterval.Yearly)
+                {
+                    date = date.AddYears(1);
+                }
+                else if (transaction.RepeatInterval == TransactionRepeatInterval.Biyearly)
+                {
+                    date = date.AddYears(2);
+                }
+            }
             foreach (var t in transactions)
             {
                 if (t.RepeatFrom == (int)transaction.Id)
                 {
+                    if(transaction.RepeatEndDate < t.Date || transaction.Date >= t.Date || !dates.Contains(t.Date))
+                    {
+                        await DeleteTransactionAsync(t.Id);
+                        continue;
+                    }
                     var tt = (Transaction)t.Clone();
                     tt.Description = transaction.Description;
                     tt.Type = transaction.Type;
