@@ -43,6 +43,8 @@ public partial class Program
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
             @"* Updated dependencies
+              * Fixed an icon conflict with GNOME System Monitor
+              * Fixed an issue where repeated transactions would not be updated correctly after updating the source transaction
               * Updated and added translations (Thanks to everyone on Weblate)!";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.money.gresource"))

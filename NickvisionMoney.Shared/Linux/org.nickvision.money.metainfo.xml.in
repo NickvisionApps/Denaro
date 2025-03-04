@@ -51,6 +51,8 @@
     <release version="2024.2.0" date="2024-02-02">
       <description translatable="no">
         <p>- Updated dependencies</p>
+        <p>- Fixed an icon conflict with GNOME System Monitor</p>
+        <p>- Fixed an issue where repeated transactions would not be updated correctly after updating the source transaction</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>
