@@ -48,7 +48,7 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2024.2.0" date="2024-02-02">
+    <release version="2025.3.0" date="2025-03-05">
       <description translatable="no">
         <p>- Updated dependencies</p>
         <p>- Fixed an icon conflict with GNOME System Monitor</p>

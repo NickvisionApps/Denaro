@@ -85,7 +85,7 @@ public class MainWindowController : IDisposable
             catch (IOException) { }
             Directory.Delete($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", true);
         }
-        AppInfo.Version = "2024.2.0";
+        AppInfo.Version = "2025.3.0";
         AppInfo.ShortName = _("Denaro");
         AppInfo.Description = _("Manage your personal finances");
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Denaro");
