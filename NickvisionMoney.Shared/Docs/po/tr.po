@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-23 18:35-0400\n"
-"PO-Revision-Date: 2024-04-21 16:07+0000\n"
-"Last-Translator: Ahmed selim üzüm <ahmedselimuzum@gmail.com>\n"
+"PO-Revision-Date: 2024-08-27 15:09+0000\n"
+"Last-Translator: Murteza Y <weblate@murtezayesil.me>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/tr/>\n"
 "Language: tr\n"
@@ -11,18 +11,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.7.1-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+#, fuzzy
 msgctxt "_"
 msgid "translator-credits"
-msgstr ""
+msgstr "Murteza Yesil <hire@murtezayesil.me>, 2024"
 
 #. (itstool) path: info/title
 #: yelp/C/account.page:8
 msgctxt "link"
 msgid "Account 🏦"
-msgstr "Hesap🏦"
+msgstr "Hesap 🏦"
 
 #. (itstool) path: credit/name
 #: yelp/C/account.page:10 yelp/C/configuration.page:10
@@ -65,6 +66,13 @@ msgid ""
 "nmoney</file> files are 100% compatible between platforms as long as they "
 "are from the same application version (i.e. V2023.1.0)."
 msgstr ""
+"Her hesap <file>*.nmoney</file> tipinde ki bir dosyada tutulmaktadır. "
+"<app>Denaro</app> uygulamasının eski bir <em>sabit</em> bir sürümünde "
+"oluşturulmuş bu hesap dosyaları daha yeni bir <em>sabit</em> sürümde "
+"açılabilir. Uygulama farklı işletim sistemlerini desteklesede (Windows ve "
+"Linux), farklı bir sistemde oluşturulmuş <file>*.nmoney</file> dosyalarının "
+"tam uyumluluğu ancak ve ancak uygulama sürümüleri de aynıysa (örnek: V2023.1."
+"0) sağlanabilir."
 
 #. (itstool) path: note/p
 #: yelp/C/account.page:24
@@ -73,11 +81,15 @@ msgid ""
 "unfinished modifications that can cause data loss. DO NOT use account files "
 "that contain real data in unstable versions of the app!"
 msgstr ""
+"Sabit olmayan sürümler (Beta veya RC etiketliler) tam bitmiş olmadığından "
+"yazılımda henüz çözülmemiş hatalar olabilir. Sakın ama sakın gerçek finansal "
+"bilgi taşıyan hesap dosyalarını bu sürümlerde açmayın. Bilgi kaybı "
+"yaşayabilirsiniz!"
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:29
 msgid "Name"
-msgstr ""
+msgstr "Ad"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:30
@@ -139,6 +151,9 @@ msgid ""
 "format the numbers will be accepted as values for transaction amounts. A few "
 "examples:"
 msgstr ""
+"Uygulama, işlem miktarlarını ve gösterilecek para birimini belirlemek için "
+"her açılışta sistemin yerel ayarlarına bakar. Eğer özel para birimi ayarı "
+"kullanıyorsanız, bu kısmına atlayın. Örnekler:"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:48
@@ -146,6 +161,8 @@ msgid ""
 "If your locale is <em>English (US)</em>, currency symbol will be set to <em>"
 "$</em> and <em>1,000.00</em> will be accepted as a valid number."
 msgstr ""
+"Eğer bölge ayarınız <em>İngilizce (ABD)</em> ise, <em>$</em> para birimi "
+"sembolü olup <em>1,000.00</em> sayı formatı kabul edilecek."
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:49
@@ -153,6 +170,8 @@ msgid ""
 "If your locale is <em>Italian</em>, currency symbol will be set to <em>€</"
 "em> and <em>1.000,00</em> will be accepted as a valid number."
 msgstr ""
+"Eğer bölge ayarınız <em>İtalya</em> ise, <em>€</em> para birimi sembolü olup "
+"<em>1.000,00</em> sayı formatı kabul edilecek."
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:50
@@ -160,6 +179,8 @@ msgid ""
 "If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</"
 "em> and <em>1000,00</em> will be accepted as a valid number."
 msgstr ""
+"Eğer bölge ayarınız <em>Rusya</em> ise, <em>₽</em> para birimi sembolü olup "
+"<em>1000,00</em> sayı formatı kabul edilecek."
 
 #. (itstool) path: note/p
 #: yelp/C/account.page:53
@@ -180,7 +201,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:57
 msgid "Use Custom Currency"
-msgstr ""
+msgstr "Özel Para Birimi Kullan"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:58
@@ -765,7 +786,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:33
 msgid "Amount"
-msgstr ""
+msgstr "Tutar"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:34
@@ -833,7 +854,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:53
 msgid "Group"
-msgstr ""
+msgstr "Grup"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:54
