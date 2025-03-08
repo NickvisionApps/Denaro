@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-23 18:35-0400\n"
-"PO-Revision-Date: 2023-09-17 18:01+0000\n"
+"PO-Revision-Date: 2024-12-22 15:00+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/de/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0.2\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -147,6 +147,8 @@ msgstr "Schwellenwert für Überweisungserinnerungen"
 #: yelp/C/account.page:42
 msgid "The threshold used when showing reminders about upcoming transactions."
 msgstr ""
+"Der Schwellenwert, zum Anzeigen von Erinnerungen an bevorstehende "
+"Transaktionen."
 
 #. (itstool) path: item/title
 #: yelp/C/account.page:45
@@ -423,7 +425,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:33
 msgid "Transfer Default Color"
-msgstr ""
+msgstr "Standardfarbe der Überweisung"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
@@ -448,7 +450,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:41
 msgid "Checking Account Color"
-msgstr ""
+msgstr "Girokontofarbe"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:42
@@ -460,7 +462,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:45
 msgid "Savings Account Color"
-msgstr ""
+msgstr "Sparkontofarbe"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:46
@@ -581,47 +583,47 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:51
 msgid "Transaction type: 0 for income, 1 for expense."
-msgstr ""
+msgstr "Transaktionsart: 0 für Einnahmen, 1 für Ausgaben."
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:55
 msgid "A number representing transaction repeat interval:"
-msgstr ""
+msgstr "Eine Zahl, die das Intervall der Transaktionswiederholung angibt:"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:56
 msgid "0 - Never"
-msgstr ""
+msgstr "0 - Nie"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:57
 msgid "1 - Daily"
-msgstr ""
+msgstr "1 - Täglich"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:58
 msgid "2 - Weekly"
-msgstr ""
+msgstr "2 - Wöchentlich"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:59
 msgid "7 - Biweekly"
-msgstr ""
+msgstr "7 - Zweiwöchentlich"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:60
 msgid "3 - Monthly"
-msgstr ""
+msgstr "3 - Monatlich"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:61
 msgid "4 - Quarterly"
-msgstr ""
+msgstr "4 - Vierteljährlich"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:62
 msgid "5 - Yearly"
-msgstr ""
+msgstr "5 - Jährlich"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:63
