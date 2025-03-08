@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2024-04-11 20:57+0000\n"
+"PO-Revision-Date: 2024-11-09 23:00+0000\n"
 "Last-Translator: twlvnn <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <https://hosted.weblate.org/projects/"
 "nickvision-money/app/bg/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -259,7 +259,7 @@ msgstr "Премахване на операцията"
 
 #: ../../../Controllers/MainWindowController.cs:90
 msgid "Denaro"
-msgstr "Denaro"
+msgstr "Денаро"
 
 #: ../../../Models/Account.cs:1686 ../../../Models/Account.cs:1719
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:491
@@ -296,7 +296,7 @@ msgstr "Парола на целевата сметка (задължителе�
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:943
 msgid "Disassociate Existing"
-msgstr "Прекъсване на връзката на съществуващото"
+msgstr "Прекъсване на съществуващата връзка"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/CurrencyConverterDialog.cs:109
 msgid "Error"
@@ -464,7 +464,7 @@ msgstr "Nicholas Logozzo"
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:308
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:223
 msgid "Nickvision Denaro Account"
-msgstr "„Nickvision Denaro“ сметка"
+msgstr "Денаро сметка"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:832
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1031
@@ -1274,7 +1274,7 @@ msgstr "Цветове"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:33
 msgid "Customize the colors used by Denaro."
-msgstr "Персонализирайте цветовете, използвани от „Denaro“."
+msgstr "Персонализирайте цветовете, използвани от „Денаро“."
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:41
 msgid "Transaction Default Color"
@@ -1537,7 +1537,7 @@ msgstr "Преобразувател на валути"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:11
 msgid "About Denaro"
-msgstr "Относно „Denaro“"
+msgstr "Относно „Денаро“"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:28
 msgid "Account Menu"
