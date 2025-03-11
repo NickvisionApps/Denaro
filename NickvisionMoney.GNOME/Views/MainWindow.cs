@@ -11,6 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -52,7 +53,7 @@ public partial class MainWindow : Adw.ApplicationWindow
 
     public bool CompactMode { get; private set; }
 
-    private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
+    private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetObject("_root").Handle as ApplicationWindowHandle)
     {
         //Window Settings
         _controller = controller;
@@ -494,7 +495,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">Gtk.DropTarget.DropSignalArgs</param>
     private bool OnDrop(Gtk.DropTarget sender, Gtk.DropTarget.DropSignalArgs e)
     {
-        var file = new Gio.FileHelper(e.Value.GetObject()!.Handle, false);
+        var file = new Gio.FileHelper(e.Value.GetObject()!.Handle);
         var path = file.GetPath() ?? "";
         if (File.Exists(path))
         {

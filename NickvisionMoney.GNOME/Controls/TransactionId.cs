@@ -1,5 +1,7 @@
 using NickvisionMoney.GNOME.Helpers;
 using System.Globalization;
+using Gtk.Internal;
+using Builder = NickvisionMoney.GNOME.Helpers.Builder;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -15,7 +17,7 @@ public partial class TransactionId : Gtk.Overlay
     [Gtk.Connect] private readonly Gtk.Image _colorImage;
     [Gtk.Connect] private readonly Gtk.Label _idLabel;
 
-    private TransactionId(Gtk.Builder builder, uint id) : base(builder.GetPointer("_root"), false)
+    private TransactionId(Gtk.Builder builder, uint id) : base(builder.GetObject("_root").Handle as OverlayHandle)
     {
         _id = id;
         builder.Connect(this);

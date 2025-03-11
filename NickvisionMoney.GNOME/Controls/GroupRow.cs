@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Globalization;
+using Adw.Internal;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -37,7 +38,7 @@ public partial class GroupRow : Adw.ActionRow
     /// </summary>
     public event EventHandler<uint>? EditTriggered;
 
-    private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, bool useNativeDigits, bool filterActive, string defaultColor) : base(builder.GetPointer("_root"), false)
+    private GroupRow(Gtk.Builder builder, Group group, CultureInfo cultureAmount, bool useNativeDigits, bool filterActive, string defaultColor) : base(builder.GetObject("_root").Handle as ActionRowHandle)
     {
         _cultureAmount = cultureAmount;
         _defaultColor = defaultColor;

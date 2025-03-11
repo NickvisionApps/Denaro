@@ -1,10 +1,11 @@
-using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Gtk.Internal;
 using static Nickvision.Aura.Localization.Gettext;
+using Builder = NickvisionMoney.GNOME.Helpers.Builder;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -45,7 +46,7 @@ public partial class TransactionRow : Gtk.FlowBoxChild
     /// <param name="cultureAmount">The CultureInfo to use for the amount string</param>
     /// <param name="useNativeDigits">Whether to use native digits</param>
     /// <param name="defaultColor">Default transaction color</param>
-    private TransactionRow(Gtk.Builder builder, Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, bool useNativeDigits, string defaultColor) : base(builder.GetPointer("_root"), false)
+    private TransactionRow(Gtk.Builder builder, Transaction transaction, Dictionary<uint, Group> groups, CultureInfo cultureAmount, bool useNativeDigits, string defaultColor) : base(builder.GetObject("_root").Handle as FlowBoxChildHandle)
     {
         _transaction = transaction;
         _defaultColor = defaultColor;

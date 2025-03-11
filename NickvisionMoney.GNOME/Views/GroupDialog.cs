@@ -2,6 +2,7 @@ using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using System;
 using System.Globalization;
+using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -34,7 +35,7 @@ public partial class GroupDialog : Adw.Window
     /// </summary>
     public event EventHandler? OnDelete;
 
-    private GroupDialog(Gtk.Builder builder, GroupDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
+    private GroupDialog(Gtk.Builder builder, GroupDialogController controller, Gtk.Window parent) : base(builder.GetObject("_root").Handle as WindowHandle)
     {
         _constructing = true;
         _controller = controller;

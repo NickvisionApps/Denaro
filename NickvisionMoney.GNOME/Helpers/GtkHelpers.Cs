@@ -24,7 +24,7 @@ public unsafe static partial class GtkHelpers
     /// </summary>
     /// <param name="button">Color button</param>
     /// <param name="color">Color as GdkHelpers.RGBA</param>
-    public static void SetExtRgba(this Gtk.ColorDialogButton button, GdkHelpers.RGBA color) => gtk_color_dialog_button_set_rgba(button.Handle, ref color);
+    public static void SetExtRgba(this Gtk.ColorDialogButton button, GdkHelpers.RGBA color) => gtk_color_dialog_button_set_rgba(button.Handle.DangerousGetHandle(), ref color);
 
     /// <summary>
     /// Extension method for Gtk.ColorDialog to choose a color
@@ -45,7 +45,7 @@ public unsafe static partial class GtkHelpers
             }
             else
             {
-                var color = Gtk.Internal.ColorDialog.ChooseRgbaFinish(sourceObject.Handle, res.Handle, out var error);
+                var color = Gtk.Internal.ColorDialog.ChooseRgbaFinish(sourceObject.Handle.DangerousGetHandle(), res.Handle.DangerousGetHandle(), out var error);
                 if (!error.IsInvalid)
                 {
                     tcs.SetException(new Exception(error.ToString() ?? ""));
@@ -62,8 +62,8 @@ public unsafe static partial class GtkHelpers
         });
 
         Gtk.Internal.ColorDialog.ChooseRgba(
-            self: dialog.Handle,
-            parent: parent.Handle,
+            self: dialog.Handle.DangerousGetHandle(),
+            parent: parent.Handle.DangerousGetHandle(),
             initialColor: new Gdk.Internal.RGBAOwnedHandle(IntPtr.Zero),
             cancellable: IntPtr.Zero,
             callback: callback.NativeCallback,

@@ -1,6 +1,7 @@
 using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
+using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Controls;
@@ -30,7 +31,7 @@ public partial class RecentAccountRow : Adw.ActionRow
     /// <param name="colorString">The color string of the recent account</param>
     /// <param name="onStartScreen">Whether or not the row is being shown on the start screen</param>
     /// <param name="canRemove">Whether or not the recent account can be removed</param>
-    private RecentAccountRow(Gtk.Builder builder, RecentAccount account, string colorString, bool onStartScreen, bool canRemove) : base(builder.GetPointer("_root"), false)
+    private RecentAccountRow(Gtk.Builder builder, RecentAccount account, string colorString, bool onStartScreen, bool canRemove) : base(builder.GetObject("_root").Handle as ActionRowHandle)
     {
         _recentAccount = account;
         builder.Connect(this);

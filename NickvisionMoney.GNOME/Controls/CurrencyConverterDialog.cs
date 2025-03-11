@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Controls;
@@ -31,7 +32,7 @@ public class CurrencyConverterDialog : Adw.Window
     /// <param name="parent">Gtk.Window</param>
     /// <param name="iconName">The name of the icon for the dialog</param>
     /// <param name="useNativeDigits">Whether or not to use native digits when displaying the result amount</param>
-    private CurrencyConverterDialog(Gtk.Builder builder, Gtk.Window parent, string iconName, bool useNativeDigits) : base(builder.GetPointer("_root"), false)
+    private CurrencyConverterDialog(Gtk.Builder builder, Gtk.Window parent, string iconName, bool useNativeDigits) : base(builder.GetObject("_root").Handle as WindowHandle)
     {
         _iconName = iconName;
         _useNativeDigits = useNativeDigits;

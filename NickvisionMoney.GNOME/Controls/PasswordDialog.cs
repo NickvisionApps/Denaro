@@ -1,5 +1,6 @@
 using NickvisionMoney.GNOME.Helpers;
 using System.Threading.Tasks;
+using Adw.Internal;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -12,7 +13,7 @@ public partial class PasswordDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _passwordEntry;
     [Gtk.Connect] private readonly Gtk.Button _unlockButton;
 
-    private PasswordDialog(Gtk.Builder builder, Gtk.Window parent, string accountTitle, TaskCompletionSource<string?> tcs) : base(builder.GetPointer("_root"), false)
+    private PasswordDialog(Gtk.Builder builder, Gtk.Window parent, string accountTitle, TaskCompletionSource<string?> tcs) : base(builder.GetObject("_root").Handle as WindowHandle)
     {
         var unlock = false;
         builder.Connect(this);

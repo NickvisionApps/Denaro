@@ -1,8 +1,9 @@
 using NickvisionMoney.GNOME.Controls;
-using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
 using System.Globalization;
+using Gtk.Internal;
+using Builder = NickvisionMoney.GNOME.Helpers.Builder;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -19,7 +20,7 @@ public class DashboardView : Gtk.ScrolledWindow
     [Gtk.Connect] private readonly Gtk.Label _totalSuffix;
     [Gtk.Connect] private readonly Gtk.FlowBox _groupsFlowbox;
 
-    public DashboardView(Gtk.Builder builder, DashboardViewController controller) : base(builder.GetPointer("_root"), false)
+    public DashboardView(Gtk.Builder builder, DashboardViewController controller) : base(builder.GetObject("_root").Handle as ScrolledWindowHandle)
     {
         builder.Connect(this);
         var culture = new CultureInfo(CultureInfo.CurrentCulture.Name, true);

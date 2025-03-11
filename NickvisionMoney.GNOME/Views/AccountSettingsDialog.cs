@@ -4,6 +4,7 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
+using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -46,7 +47,7 @@ public partial class AccountSettingsDialog : Adw.Window
 
     public event EventHandler? OnApply;
 
-    private AccountSettingsDialog(Gtk.Builder builder, AccountSettingsDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
+    private AccountSettingsDialog(Gtk.Builder builder, AccountSettingsDialogController controller, Gtk.Window parent) : base(builder.GetObject("_root").Handle as WindowHandle)
     {
         _constructing = true;
         _controller = controller;

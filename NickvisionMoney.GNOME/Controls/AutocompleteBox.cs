@@ -1,6 +1,7 @@
-using NickvisionMoney.GNOME.Helpers;
 using System;
 using System.Collections.Generic;
+using Gtk.Internal;
+using Builder = NickvisionMoney.GNOME.Helpers.Builder;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -24,7 +25,7 @@ public class AutocompleteBox<T> : Gtk.Box
     /// </summary>
     /// <param name="builder">Gtk.Builder</param>
     /// <param name="parent">Adw.EntryRow</param>
-    private AutocompleteBox(Gtk.Builder builder, Adw.EntryRow parent) : base(builder.GetPointer("_root"), false)
+    private AutocompleteBox(Gtk.Builder builder, Adw.EntryRow parent) : base(builder.GetObject("_root").Handle as BoxHandle)
     {
         _parent = parent;
         _rows = new List<Gtk.Widget>();

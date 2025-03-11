@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -122,7 +123,7 @@ public partial class TransactionDialog : Adw.Window
     /// </summary>
     public event EventHandler<EventArgs>? OnDelete;
 
-    private TransactionDialog(Gtk.Builder builder, TransactionDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
+    private TransactionDialog(Gtk.Builder builder, TransactionDialogController controller, Gtk.Window parent) : base(builder.GetObject("_root").Handle as WindowHandle)
     {
         _constructing = true;
         _controller = controller;
@@ -388,7 +389,7 @@ public partial class TransactionDialog : Adw.Window
         })));
         AddController(_shortcutController);
         //Load Transaction
-        gtk_calendar_select_day(_dateCalendar.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
+        gtk_calendar_select_day(_dateCalendar.Handle.DangerousGetHandle(), ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
         OnDateChanged(_dateCalendar, EventArgs.Empty);
         _descriptionRow.SetText(_controller.Transaction.Description);
         _amountRow.SetText(_controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, _controller.UseNativeDigits, false));
@@ -398,7 +399,7 @@ public partial class TransactionDialog : Adw.Window
         _repeatEndDateCalendarButton.SetVisible(_controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never);
         if (_controller.Transaction.RepeatEndDate != null)
         {
-            gtk_calendar_select_day(_repeatEndDateCalendar.Handle, ref g_date_time_new_local(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day, 0, 0, 0.0));
+            gtk_calendar_select_day(_repeatEndDateCalendar.Handle.DangerousGetHandle(), ref g_date_time_new_local(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day, 0, 0, 0.0));
             OnRepeatEndDateChanged(_repeatEndDateCalendar, EventArgs.Empty);
         }
         else
@@ -473,20 +474,20 @@ public partial class TransactionDialog : Adw.Window
     /// </summary>
     private void Validate()
     {
-        var selectedDay = gtk_calendar_get_date(_dateCalendar.Handle);
+        var selectedDay = gtk_calendar_get_date(_dateCalendar.Handle.DangerousGetHandle());
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
         var repeatEndDate = default(DateOnly?);
         if (_repeatEndDateCalendarButton.GetLabel() != _("No End Date"))
         {
-            var selectedEndDay = gtk_calendar_get_date(_repeatEndDateCalendar.Handle);
+            var selectedEndDay = gtk_calendar_get_date(_repeatEndDateCalendar.Handle.DangerousGetHandle());
             repeatEndDate = new DateOnly(g_date_time_get_year(ref selectedEndDay), g_date_time_get_month(ref selectedEndDay), g_date_time_get_day_of_month(ref selectedEndDay));
         }
         var groupObject = (Gtk.StringObject)_groupRow.GetSelectedItem()!;
         var tags = _tags.Where(x => x.Value).Select(x => x.Key).ToList();
         var iterStart = new TextIter();
         var iterEnd = new TextIter();
-        gtk_text_buffer_get_bounds(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd);
-        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetExtRgba().ToString(), _colorDropDown.GetSelected() == 0, tags, _amountRow.GetText(), _receipt, repeatEndDate, gtk_text_buffer_get_text(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd, false));
+        gtk_text_buffer_get_bounds(_notesView.GetBuffer().Handle.DangerousGetHandle(), ref iterStart, ref iterEnd);
+        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetExtRgba().ToString(), _colorDropDown.GetSelected() == 0, tags, _amountRow.GetText(), _receipt, repeatEndDate, gtk_text_buffer_get_text(_notesView.GetBuffer().Handle.DangerousGetHandle(), ref iterStart, ref iterEnd, false));
         _descriptionRow.RemoveCssClass("error");
         _descriptionRow.SetTitle(_("Description"));
         _amountRow.RemoveCssClass("error");
@@ -556,7 +557,7 @@ public partial class TransactionDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void OnDateChanged(Gtk.Calendar sender, EventArgs e)
     {
-        var selectedDay = gtk_calendar_get_date(sender.Handle);
+        var selectedDay = gtk_calendar_get_date(sender.Handle.DangerousGetHandle());
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
         _dateCalendarButton.SetLabel(date.ToString("d", CultureHelpers.DateCulture));
         if (!_constructing)
@@ -586,7 +587,7 @@ public partial class TransactionDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void OnRepeatEndDateChanged(Gtk.Calendar sender, EventArgs e)
     {
-        var selectedDay = gtk_calendar_get_date(sender.Handle);
+        var selectedDay = gtk_calendar_get_date(sender.Handle.DangerousGetHandle());
         var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
         _repeatEndDateCalendarButton.SetLabel(date.ToString("d", CultureHelpers.DateCulture));
         if (!_constructing)

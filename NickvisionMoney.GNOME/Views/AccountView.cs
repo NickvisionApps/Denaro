@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -110,7 +111,7 @@ public partial class AccountView : Adw.BreakpointBin
     /// </summary>
     public Adw.TabPage Page { get; init; }
 
-    public AccountView(Gtk.Builder builder, AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Gtk.ToggleButton btnGraphToggle, Action<string> updateSubtitle) : base(builder.GetPointer("_root"), false)
+    public AccountView(Gtk.Builder builder, AccountViewController controller, MainWindow parentWindow, Adw.TabView parentTabView, Gtk.ToggleButton btnFlapToggle, Gtk.ToggleButton btnGraphToggle, Action<string> updateSubtitle) : base(builder.GetObject("_root").Handle as BreakpointBinHandle)
     {
         _controller = controller;
         _parentWindow = parentWindow;
@@ -1193,7 +1194,7 @@ public partial class AccountView : Adw.BreakpointBin
     private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)
     {
         _calendar.ClearMarks();
-        var selectedDay = gtk_calendar_get_date(_calendar.Handle);
+        var selectedDay = gtk_calendar_get_date(_calendar.Handle.DangerousGetHandle());
         foreach (var date in _controller.DatesInAccount)
         {
             if (date.Month == g_date_time_get_month(ref selectedDay) && date.Year == g_date_time_get_year(ref selectedDay))
@@ -1201,8 +1202,8 @@ public partial class AccountView : Adw.BreakpointBin
                 _calendar.MarkDay((uint)date.Day);
             }
         }
-        gtk_calendar_select_day(_calendar.Handle, ref g_date_time_add_years(ref selectedDay, -1)); // workaround bug to show marks
-        gtk_calendar_select_day(_calendar.Handle, ref g_date_time_add_years(ref selectedDay, 0));
+        gtk_calendar_select_day(_calendar.Handle.DangerousGetHandle(), ref g_date_time_add_years(ref selectedDay, -1)); // workaround bug to show marks
+        gtk_calendar_select_day(_calendar.Handle.DangerousGetHandle(), ref g_date_time_add_years(ref selectedDay, 0));
     }
 
     /// <summary>
@@ -1214,7 +1215,7 @@ public partial class AccountView : Adw.BreakpointBin
     {
         if (!_isAccountLoading)
         {
-            var selectedDay = gtk_calendar_get_date(_calendar.Handle);
+            var selectedDay = gtk_calendar_get_date(_calendar.Handle.DangerousGetHandle());
             _controller.SetSingleDateFilter(new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay)));
         }
     }
@@ -1226,7 +1227,7 @@ public partial class AccountView : Adw.BreakpointBin
     /// <param name="e">EventArgs</param>
     private void OnSelectCurrentMonth(Gtk.Button sender, EventArgs e)
     {
-        var selectedDay = gtk_calendar_get_date(_calendar.Handle);
+        var selectedDay = gtk_calendar_get_date(_calendar.Handle.DangerousGetHandle());
         var selectedMonth = (uint)(g_date_time_get_month(ref selectedDay) - 1);
         var selectedYear = g_date_time_get_year(ref selectedDay);
         var selectedYearIndex = _controller.YearsForRangeFilter.IndexOf(selectedYear.ToString());
@@ -1249,7 +1250,7 @@ public partial class AccountView : Adw.BreakpointBin
     /// <param name="e">EventArgs</param>
     private void OnResetCalendarFilter(Gtk.Button sender, EventArgs e)
     {
-        gtk_calendar_select_day(_calendar.Handle, ref g_date_time_new_now_local());
+        gtk_calendar_select_day(_calendar.Handle.DangerousGetHandle(), ref g_date_time_new_now_local());
         OnCalendarMonthYearChanged(null, e);
         _rangeExpander.SetEnableExpansion(false);
     }
