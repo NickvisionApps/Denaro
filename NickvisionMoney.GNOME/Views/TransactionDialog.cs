@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
 using DateTime = GLib.DateTime;
@@ -20,30 +19,6 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class TransactionDialog : Adw.Window
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct TextIter
-    {
-        public nint dummy1;
-        public nint dummy2;
-        public int dummy3;
-        public int dummy4;
-        public int dummy5;
-        public int dummy6;
-        public int dummy7;
-        public int dummy8;
-        public nint dummy9;
-        public nint dummy10;
-        public int dummy11;
-        public int dummy12;
-        public int dummy13;
-        public nint dummy14;
-    }
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_text_buffer_get_bounds(nint buffer, ref TextIter startIter, ref TextIter endIter);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string gtk_text_buffer_get_text(nint buffer, ref TextIter startIter, ref TextIter endIter, [MarshalAs(UnmanagedType.I1)] bool include_hidden_chars);
-
     private bool _constructing;
     private readonly TransactionDialogController _controller;
     private Image? _receipt;
@@ -463,10 +438,8 @@ public partial class TransactionDialog : Adw.Window
         }
         var groupObject = (Gtk.StringObject)_groupRow.GetSelectedItem()!;
         var tags = _tags.Where(x => x.Value).Select(x => x.Key).ToList();
-        var iterStart = new TextIter();
-        var iterEnd = new TextIter();
-        gtk_text_buffer_get_bounds(_notesView.GetBuffer().Handle.DangerousGetHandle(), ref iterStart, ref iterEnd);
-        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetExtRgba().ToString(), _colorDropDown.GetSelected() == 0, tags, _amountRow.GetText(), _receipt, repeatEndDate, gtk_text_buffer_get_text(_notesView.GetBuffer().Handle.DangerousGetHandle(), ref iterStart, ref iterEnd, false));
+        var text = _notesView.GetBuffer().Text ?? "";
+        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetExtRgba().ToString(), _colorDropDown.GetSelected() == 0, tags, _amountRow.GetText(), _receipt, repeatEndDate, text);
         _descriptionRow.RemoveCssClass("error");
         _descriptionRow.SetTitle(_("Description"));
         _amountRow.RemoveCssClass("error");
