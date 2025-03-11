@@ -111,17 +111,17 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     /// <param name="e">EventArgs</param>
     private void Hide(Gtk.Widget sender, EventArgs e)
     {
-        var color = _transactionColorButton.GetExtRgba();
+        var color = _transactionColorButton.GetRgba();
         _controller.TransactionDefaultColor = color.ToString();
-        color = _transferColorButton.GetExtRgba();
+        color = _transferColorButton.GetRgba();
         _controller.TransferDefaultColor = color.ToString();
-        color = _groupColorButton.GetExtRgba();
+        color = _groupColorButton.GetRgba();
         _controller.GroupDefaultColor = color.ToString();
-        color = _accountCheckingColorButton.GetExtRgba();
+        color = _accountCheckingColorButton.GetRgba();
         _controller.AccountCheckingColor = color.ToString();
-        color = _accountSavingsColorButton.GetExtRgba();
+        color = _accountSavingsColorButton.GetRgba();
         _controller.AccountSavingsColor = color.ToString();
-        color = _accountBusinessColorButton.GetExtRgba();
+        color = _accountBusinessColorButton.GetRgba();
         _controller.AccountBusinessColor = color.ToString();
         _controller.UseNativeDigits = _nativeDigitsRow.GetActive();
         _controller.InsertSeparator = (InsertSeparator)_insertSeparatorRow.GetSelected();

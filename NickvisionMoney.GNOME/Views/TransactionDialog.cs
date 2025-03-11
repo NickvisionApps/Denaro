@@ -439,7 +439,7 @@ public partial class TransactionDialog : Adw.Window
         var groupObject = (Gtk.StringObject)_groupRow.GetSelectedItem()!;
         var tags = _tags.Where(x => x.Value).Select(x => x.Key).ToList();
         var text = _notesView.GetBuffer().Text ?? "";
-        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetExtRgba().ToString(), _colorDropDown.GetSelected() == 0, tags, _amountRow.GetText(), _receipt, repeatEndDate, text);
+        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetRgba().ToString(), _colorDropDown.GetSelected() == 0, tags, _amountRow.GetText(), _receipt, repeatEndDate, text);
         _descriptionRow.RemoveCssClass("error");
         _descriptionRow.SetTitle(_("Description"));
         _amountRow.RemoveCssClass("error");
