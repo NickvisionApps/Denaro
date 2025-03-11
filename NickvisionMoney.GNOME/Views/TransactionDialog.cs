@@ -11,6 +11,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
+using DateTime = GLib.DateTime;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -19,16 +20,6 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class TransactionDialog : Adw.Window
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct MoneyDateTime
-    {
-        ulong Usec;
-        nint Tz;
-        int Interval;
-        int Days;
-        int RefCount;
-    }
-
     [StructLayout(LayoutKind.Sequential)]
     public struct TextIter
     {
@@ -48,18 +39,6 @@ public partial class TransactionDialog : Adw.Window
         public nint dummy14;
     }
 
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial int g_date_time_get_month(ref MoneyDateTime datetime);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial int g_date_time_get_day_of_month(ref MoneyDateTime datetime);
-    [DllImport("libadwaita-1.so.0")]
-    private static extern ref MoneyDateTime g_date_time_new_local(int year, int month, int day, int hour, int minute, double seconds);
-    [DllImport("libadwaita-1.so.0")]
-    private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_calendar_select_day(nint calendar, ref MoneyDateTime datetime);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_text_buffer_get_bounds(nint buffer, ref TextIter startIter, ref TextIter endIter);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -389,7 +368,7 @@ public partial class TransactionDialog : Adw.Window
         })));
         AddController(_shortcutController);
         //Load Transaction
-        gtk_calendar_select_day(_dateCalendar.Handle.DangerousGetHandle(), ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
+        _dateCalendar.SelectDay(DateTime.NewLocal(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0)!);
         OnDateChanged(_dateCalendar, EventArgs.Empty);
         _descriptionRow.SetText(_controller.Transaction.Description);
         _amountRow.SetText(_controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, _controller.UseNativeDigits, false));
@@ -399,7 +378,7 @@ public partial class TransactionDialog : Adw.Window
         _repeatEndDateCalendarButton.SetVisible(_controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never);
         if (_controller.Transaction.RepeatEndDate != null)
         {
-            gtk_calendar_select_day(_repeatEndDateCalendar.Handle.DangerousGetHandle(), ref g_date_time_new_local(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day, 0, 0, 0.0));
+            _repeatEndDateCalendar.SelectDay(DateTime.NewLocal(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day, 0, 0, 0.0)!);
             OnRepeatEndDateChanged(_repeatEndDateCalendar, EventArgs.Empty);
         }
         else
@@ -474,13 +453,13 @@ public partial class TransactionDialog : Adw.Window
     /// </summary>
     private void Validate()
     {
-        var selectedDay = gtk_calendar_get_date(_dateCalendar.Handle.DangerousGetHandle());
-        var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
+        var selectedDay = _dateCalendar.GetDate();
+        var date = new DateOnly(selectedDay.GetYear(), selectedDay.GetMonth(), selectedDay.GetDayOfMonth());
         var repeatEndDate = default(DateOnly?);
         if (_repeatEndDateCalendarButton.GetLabel() != _("No End Date"))
         {
-            var selectedEndDay = gtk_calendar_get_date(_repeatEndDateCalendar.Handle.DangerousGetHandle());
-            repeatEndDate = new DateOnly(g_date_time_get_year(ref selectedEndDay), g_date_time_get_month(ref selectedEndDay), g_date_time_get_day_of_month(ref selectedEndDay));
+            var selectedEndDay = _repeatEndDateCalendar.GetDate();
+            repeatEndDate = new DateOnly(selectedEndDay.GetYear(), selectedEndDay.GetMonth(), selectedEndDay.GetDayOfMonth());
         }
         var groupObject = (Gtk.StringObject)_groupRow.GetSelectedItem()!;
         var tags = _tags.Where(x => x.Value).Select(x => x.Key).ToList();
@@ -557,8 +536,8 @@ public partial class TransactionDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void OnDateChanged(Gtk.Calendar sender, EventArgs e)
     {
-        var selectedDay = gtk_calendar_get_date(sender.Handle.DangerousGetHandle());
-        var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
+        var selectedDay = sender.GetDate();
+        var date = new DateOnly(selectedDay.GetYear(), selectedDay.GetMonth(), selectedDay.GetDayOfMonth());
         _dateCalendarButton.SetLabel(date.ToString("d", CultureHelpers.DateCulture));
         if (!_constructing)
         {
@@ -587,8 +566,8 @@ public partial class TransactionDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void OnRepeatEndDateChanged(Gtk.Calendar sender, EventArgs e)
     {
-        var selectedDay = gtk_calendar_get_date(sender.Handle.DangerousGetHandle());
-        var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
+        var selectedDay = sender.GetDate();
+        var date = new DateOnly(selectedDay.GetYear(), selectedDay.GetMonth(), selectedDay.GetDayOfMonth());
         _repeatEndDateCalendarButton.SetLabel(date.ToString("d", CultureHelpers.DateCulture));
         if (!_constructing)
         {

@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
@@ -21,31 +20,6 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class AccountView : Adw.BreakpointBin
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct MoneyDateTime
-    {
-        ulong Usec;
-        nint Tz;
-        int Interval;
-        int Days;
-        int RefCount;
-    }
-
-    [DllImport("libadwaita-1.so.0")]
-    private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_calendar_select_day(nint calendar, ref MoneyDateTime datetime);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial int g_date_time_get_month(ref MoneyDateTime datetime);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial int g_date_time_get_day_of_month(ref MoneyDateTime datetime);
-    [DllImport("libadwaita-1.so.0")]
-    private static extern ref MoneyDateTime g_date_time_add_years(ref MoneyDateTime datetime, int years);
-    [DllImport("libadwaita-1.so.0")]
-    private static extern ref MoneyDateTime g_date_time_new_now_local();
-
     private readonly AccountViewController _controller;
     private bool _isAccountLoading;
     private readonly MainWindow _parentWindow;
@@ -1194,16 +1168,16 @@ public partial class AccountView : Adw.BreakpointBin
     private void OnCalendarMonthYearChanged(Gtk.Calendar? sender, EventArgs e)
     {
         _calendar.ClearMarks();
-        var selectedDay = gtk_calendar_get_date(_calendar.Handle.DangerousGetHandle());
+        var selectedDay = _calendar.GetDate();
         foreach (var date in _controller.DatesInAccount)
         {
-            if (date.Month == g_date_time_get_month(ref selectedDay) && date.Year == g_date_time_get_year(ref selectedDay))
+            if (date.Month == selectedDay.GetMonth() && date.Year == selectedDay.GetYear())
             {
                 _calendar.MarkDay((uint)date.Day);
             }
         }
-        gtk_calendar_select_day(_calendar.Handle.DangerousGetHandle(), ref g_date_time_add_years(ref selectedDay, -1)); // workaround bug to show marks
-        gtk_calendar_select_day(_calendar.Handle.DangerousGetHandle(), ref g_date_time_add_years(ref selectedDay, 0));
+        _calendar.SelectDay( selectedDay.AddYears(-1)!); // workaround bug to show marks
+        _calendar.SelectDay(selectedDay.AddYears(0)!);
     }
 
     /// <summary>
@@ -1215,8 +1189,8 @@ public partial class AccountView : Adw.BreakpointBin
     {
         if (!_isAccountLoading)
         {
-            var selectedDay = gtk_calendar_get_date(_calendar.Handle.DangerousGetHandle());
-            _controller.SetSingleDateFilter(new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay)));
+            var selectedDay = _calendar.GetDate();
+            _controller.SetSingleDateFilter(new DateOnly(selectedDay.GetYear(), selectedDay.GetMonth(), selectedDay.GetDayOfMonth()));
         }
     }
 
@@ -1227,9 +1201,8 @@ public partial class AccountView : Adw.BreakpointBin
     /// <param name="e">EventArgs</param>
     private void OnSelectCurrentMonth(Gtk.Button sender, EventArgs e)
     {
-        var selectedDay = gtk_calendar_get_date(_calendar.Handle.DangerousGetHandle());
-        var selectedMonth = (uint)(g_date_time_get_month(ref selectedDay) - 1);
-        var selectedYear = g_date_time_get_year(ref selectedDay);
+        var selectedMonth = (uint)(_calendar.GetMonth() - 1);
+        var selectedYear = _calendar.GetYear();
         var selectedYearIndex = _controller.YearsForRangeFilter.IndexOf(selectedYear.ToString());
         if (selectedYearIndex != -1)
         {
@@ -1250,7 +1223,7 @@ public partial class AccountView : Adw.BreakpointBin
     /// <param name="e">EventArgs</param>
     private void OnResetCalendarFilter(Gtk.Button sender, EventArgs e)
     {
-        gtk_calendar_select_day(_calendar.Handle.DangerousGetHandle(), ref g_date_time_new_now_local());
+        _calendar.SelectDay(GLib.DateTime.NewNowLocal()!);
         OnCalendarMonthYearChanged(null, e);
         _rangeExpander.SetEnableExpansion(false);
     }
