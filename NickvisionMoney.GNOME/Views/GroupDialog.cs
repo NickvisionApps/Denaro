@@ -120,8 +120,9 @@ public partial class GroupDialog : Adw.Window
         //Load Group
         _nameRow.SetText(_controller.Group.Name);
         _descriptionRow.SetText(_controller.Group.Description);
-        GdkHelpers.RGBA.Parse(out var color, _controller.Group.RGBA);
-        _colorButton.SetExtRgba(color!.Value);
+        var color = new Gdk.RGBA();
+        color.Parse(_controller.Group.RGBA);
+        _colorButton.SetRgba(color);
         Validate();
         _constructing = false;
     }

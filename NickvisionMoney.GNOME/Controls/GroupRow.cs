@@ -106,24 +106,25 @@ public partial class GroupRow : Adw.ActionRow
         _filterActive = filterActive;
         _cultureAmount = cultureAmount;
         //Color
-        if (!GdkHelpers.RGBA.Parse(out var color, _group.RGBA))
+        var color = new Gdk.RGBA();
+        if (!color.Parse(_group.RGBA))
         {
-            GdkHelpers.RGBA.Parse(out color, _defaultColor);
+            color.Parse(_defaultColor);
         }
         //Row Settings
         SetTitle(_group.Name);
         SetSubtitle(_group.Description);
         //Filter Checkbox
-        var red = (int)(color!.Value.Red * 255);
-        var green = (int)(color.Value.Green * 255);
-        var blue = (int)(color.Value.Blue * 255);
+        var red = (int)(color.Red * 255);
+        var green = (int)(color.Green * 255);
+        var blue = (int)(color.Blue * 255);
         using var pixbuf = GdkPixbuf.Pixbuf.New(GdkPixbuf.Colorspace.Rgb, false, 8, 1, 1);
         if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", NumberStyles.HexNumber, null, out var colorPixbuf))
         {
             pixbuf.Fill(colorPixbuf);
             _filterCheckBackground.SetFromPixbuf(pixbuf);
         }
-        var luma = color.Value.Red * 0.2126 + color.Value.Green * 0.7152 + color.Value.Blue * 0.0722;
+        var luma = color.Red * 0.2126 + color.Green * 0.7152 + color.Blue * 0.0722;
         _filterCheckButton.AddCssClass(luma > 0.5 ? "group-filter-check-dark" : "group-filter-check-light");
         _filterCheckButton.RemoveCssClass(luma > 0.5 ? "group-filter-check-light" : "group-filter-check-dark");
         _filterCheckButton.SetActive(_filterActive);

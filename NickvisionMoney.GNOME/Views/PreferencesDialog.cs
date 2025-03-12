@@ -74,18 +74,24 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         OnHide += Hide;
         //Load Config
         _themeRow.SetSelected((uint)_controller.Theme);
-        GdkHelpers.RGBA.Parse(out var transactionColor, _controller.TransactionDefaultColor);
-        _transactionColorButton.SetExtRgba(transactionColor!.Value);
-        GdkHelpers.RGBA.Parse(out var transferColor, _controller.TransferDefaultColor);
-        _transferColorButton.SetExtRgba(transferColor!.Value);
-        GdkHelpers.RGBA.Parse(out var groupColor, _controller.GroupDefaultColor);
-        _groupColorButton.SetExtRgba(groupColor!.Value);
-        GdkHelpers.RGBA.Parse(out var accountCheckingColor, _controller.AccountCheckingColor);
-        _accountCheckingColorButton.SetExtRgba(accountCheckingColor!.Value);
-        GdkHelpers.RGBA.Parse(out var accountSavingsColor, _controller.AccountSavingsColor);
-        _accountSavingsColorButton.SetExtRgba(accountSavingsColor!.Value);
-        GdkHelpers.RGBA.Parse(out var accountBusinessColor, _controller.AccountBusinessColor);
-        _accountBusinessColorButton.SetExtRgba(accountBusinessColor!.Value);
+        var transactionColor = new Gdk.RGBA();
+        transactionColor.Parse(_controller.TransactionDefaultColor);
+        _transactionColorButton.SetRgba(transactionColor);
+        var transferColor = new Gdk.RGBA();
+        transferColor.Parse(_controller.TransferDefaultColor);
+        _transferColorButton.SetRgba(transferColor);
+        var groupColor = new Gdk.RGBA();
+        groupColor.Parse(_controller.GroupDefaultColor);
+        _groupColorButton.SetRgba(groupColor);
+        var accountCheckingColor = new Gdk.RGBA();
+        accountCheckingColor.Parse(_controller.AccountCheckingColor);
+        _accountCheckingColorButton.SetRgba(accountCheckingColor);
+        var accountSavingsColor = new Gdk.RGBA();
+        accountSavingsColor.Parse(_controller.AccountSavingsColor);
+        _accountSavingsColorButton.SetRgba(accountSavingsColor);
+        var accountBusinessColor = new Gdk.RGBA();
+        accountBusinessColor.Parse(_controller.AccountBusinessColor);
+        _accountBusinessColorButton.SetRgba(accountBusinessColor);
         _nativeDigitsRow.SetActive(_controller.UseNativeDigits);
         _insertSeparatorRow.SetSelected((uint)_controller.InsertSeparator);
         if (File.Exists(_controller.CSVBackupFolder))

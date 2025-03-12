@@ -12,7 +12,7 @@ namespace NickvisionMoney.GNOME.Controls;
 public partial class RecentAccountRow : Adw.ActionRow
 {
     private readonly RecentAccount _recentAccount;
-    private readonly GdkHelpers.RGBA _color;
+    private readonly Gdk.RGBA _color;
 
     [Gtk.Connect] private readonly Gtk.Image _prefixColor;
     [Gtk.Connect] private readonly Gtk.Button _prefixButton;
@@ -40,8 +40,8 @@ public partial class RecentAccountRow : Adw.ActionRow
         _prefixButton.OnClicked += (sender, e) => Selected?.Invoke(this, _recentAccount);
         _removeButton.SetVisible(canRemove);
         _removeButton.OnClicked += (sender, e) => RemoveRequested?.Invoke(this, _recentAccount);
-        GdkHelpers.RGBA.Parse(out var color, colorString);
-        _color = color!.Value;
+        _color = new Gdk.RGBA();
+        _color.Parse(colorString);
         var luma = _color.Red * 0.2126 + _color.Green * 0.7152 + _color.Blue * 0.0722;
         if (onStartScreen)
         {

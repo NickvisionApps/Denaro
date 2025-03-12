@@ -166,8 +166,9 @@ public partial class TransactionDialog : Adw.Window
                 _colorDropDown.SetSelected((e.Item2.UseGroupColor && _groupRow.GetSelected() != 0) ? 0u : 1u);
                 _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
                 _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
-                GdkHelpers.RGBA.Parse(out var transactionColor, e.Item2.RGBA);
-                _colorButton.SetExtRgba(transactionColor!.Value);
+                var transactionColor = new Gdk.RGBA();
+                transactionColor.Parse(e.Item2.RGBA);
+                _colorButton.SetRgba(transactionColor);
             }
         };
         _overlay.AddOverlay(_autocompleteBox);
@@ -371,8 +372,9 @@ public partial class TransactionDialog : Adw.Window
         _colorDropDown.SetSelected((_controller.Transaction.UseGroupColor && _groupRow.GetSelected() != 0) ? 0u : 1u);
         _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
         _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
-        GdkHelpers.RGBA.Parse(out var transactionColor, _controller.Transaction.RGBA);
-        _colorButton.SetExtRgba(transactionColor!.Value);
+        var transactionColor = new Gdk.RGBA();
+        transactionColor.Parse(_controller.Transaction.RGBA);
+        _colorButton.SetRgba(transactionColor);
         UpdateTagsList();
         _receipt = _controller.Transaction.Receipt;
         _viewReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
