@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-23 18:35-0400\n"
-"PO-Revision-Date: 2024-03-29 13:01+0000\n"
+"PO-Revision-Date: 2024-07-07 17:09+0000\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/hi/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -122,7 +122,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:37
 msgid "Default Transaction Type"
-msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
+msgstr "तयशुदा लेनदेन प्रकार"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:38
@@ -221,7 +221,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:57
 msgid "Use Custom Currency"
-msgstr "कस्टम मुद्रा का प्रयोग करें"
+msgstr "तदनुकूल मुद्रा का प्रयोग करें"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:58
@@ -451,7 +451,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:29
 msgid "Transaction Default Color"
-msgstr "लेन-देन डिफ़ॉल्ट रंग"
+msgstr "लेन-देन का तयशुदा रंग"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:30
@@ -468,7 +468,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:33
 msgid "Transfer Default Color"
-msgstr "डिफ़ॉल्ट रंग स्थानांतरित करें"
+msgstr "स्थानांतरण का तयशुदा रंग"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:34
@@ -484,7 +484,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:37
 msgid "Group Default Color"
-msgstr "समूह डिफ़ॉल्ट रंग"
+msgstr "समूह का तयशुदा रंग"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:38
@@ -526,7 +526,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:49
 msgid "Business Account Color"
-msgstr "बिजनेस अकाउंट का रंग"
+msgstr "व्यवसाय खाता रंग"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:50
@@ -888,7 +888,7 @@ msgstr "यह पृष्ठ <app>Denaro</app> में लेनदेन �
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:25
 msgid "Id"
-msgstr "Id"
+msgstr "आईडी"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:26
@@ -957,7 +957,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:45
 msgid "Repeat Interval"
-msgstr "अंतराल दोहराएँ"
+msgstr "अंतराल दोहराएं"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:46
@@ -986,7 +986,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:49
 msgid "Repeat End Date"
-msgstr "समाप्ति तिथि दोहराएँ"
+msgstr "समाप्ति तिथि दोहराएं"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:50
@@ -1031,7 +1031,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/transaction.page:61
 msgid "Tags"
-msgstr "टैग्स"
+msgstr "टैग"
 
 #. (itstool) path: item/p
 #: yelp/C/transaction.page:62

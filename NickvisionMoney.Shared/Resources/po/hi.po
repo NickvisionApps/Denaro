@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2024-03-29 13:01+0000\n"
+"PO-Revision-Date: 2024-07-07 17:09+0000\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-money/"
 "app/hi/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -105,7 +105,7 @@ msgstr "राशि"
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:512
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:194
 msgid "Amount (Invalid)"
-msgstr "धनराशि (अवैध)"
+msgstr "धनराशि (अमान्य)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:107
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:179
@@ -118,16 +118,16 @@ msgid ""
 "Are you sure you want to delete this group?\n"
 "This action is irreversible."
 msgstr ""
-"क्या आप वाकई इस समूह को हटाना चाहते हैं?\n"
-"यह क्रिया अपरिवर्तनीय है।"
+"क्या आप वाकई इस समूह को मिटाना चाहते हैं?\n"
+"यह कार्रवाई अपरिवर्तनीय है।"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1029
 msgid ""
 "Are you sure you want to delete this transaction?\n"
 "This action is irreversible."
 msgstr ""
-"क्या आप वाकई इस लेनदेन को हटाना चाहते हैं?\n"
-"यह क्रिया अपरिवर्तनीय है।"
+"क्या आप वाकई इस लेनदेन को मिटाना चाहते हैं?\n"
+"यह कार्रवाई अपरिवर्तनीय है।"
 
 #: ../../../Models/Account.cs:1661
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:58
@@ -137,13 +137,13 @@ msgstr "व्यवसाय"
 
 #: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:161
 msgid "Can't access the selected folder, check Flatpak permissions."
-msgstr "चयनित फोल्डर तक नहीं पहुँच सकते, Flatpak अनुमतियाँ जाँचें।"
+msgstr "चयनित फोल्डर तक नहीं पहुंच सकते, फ्लैटपैक अनुमतियां जांचें।"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:940
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:972
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1005
 msgid "Cancel"
-msgstr "रद्द"
+msgstr "रद्द करें"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:249
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:110
@@ -162,7 +162,7 @@ msgstr "बंद करें"
 
 #: ../../../Controllers/MainWindowController.cs:97
 msgid "Contributors on GitHub ❤️"
-msgstr "GitHub पर योगदानकर्ता ❤️"
+msgstr "गिटहब पर योगदानकर्ता ❤️"
 
 #: ../../../Models/Account.cs:1655
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:122
@@ -238,28 +238,28 @@ msgstr "दशमलव विभाजक (अमान्य)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:944
 msgid "Delete Existing"
-msgstr "मौजूदा हटाएं"
+msgstr "मौजूदा मिटाएं"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1099
 msgid "Delete Group"
-msgstr "समूह हटाएँ"
+msgstr "समूह मिटाएं"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1008
 msgid "Delete Only Source"
-msgstr "केवल स्रोत हटाएँ"
+msgstr "केवल स्रोत मिटाएं"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1009
 msgid "Delete Source and Generated"
-msgstr "स्रोत हटाएं और जेनरेट करें"
+msgstr "स्रोत मिटाएं और उत्पन्न करें"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1003
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1029
 msgid "Delete Transaction"
-msgstr "लेन-देन हटाएँ"
+msgstr "लेन-देन मिटाएं"
 
 #: ../../../Controllers/MainWindowController.cs:90
 msgid "Denaro"
-msgstr "Denaro"
+msgstr "डेनारो"
 
 #: ../../../Models/Account.cs:1686 ../../../Models/Account.cs:1719
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:491
@@ -335,7 +335,7 @@ msgstr "उत्पन्न: {0}"
 
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:478
 msgid "GitHub Repo"
-msgstr "GitHub रेपो"
+msgstr "गिटहब रेपो"
 
 #: ../../../Controllers/MainWindowController.cs:134
 msgid "Good Afternoon!"
@@ -388,7 +388,7 @@ msgstr "सहायता"
 
 #: ../../../Models/Account.cs:1717 ../../../Models/Account.cs:1790
 msgid "Id"
-msgstr "Id"
+msgstr "आईडी"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:438
 msgid "Import from Account"
@@ -424,7 +424,7 @@ msgstr "अपने व्यक्तिगत वित्त का प्�
 
 #: ../../../Controllers/MainWindowController.cs:95
 msgid "Matrix Chat"
-msgstr "Matrix Chat"
+msgstr "मैट्रिक्स चैट"
 
 #: ../../../Models/Account.cs:1435 ../../../Models/Account.cs:1497
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:203
@@ -464,7 +464,7 @@ msgstr "निकोलस लोगोज़ो"
 #: ../../../../NickvisionMoney.GNOME/Views/MainWindow.cs:308
 #: ../../../../NickvisionMoney.GNOME/Views/TransferDialog.cs:223
 msgid "Nickvision Denaro Account"
-msgstr "Nickvision Denaro खाता"
+msgstr "निकविज़न डेनारो खाता"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:832
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1031
@@ -488,7 +488,7 @@ msgstr "कोई लेनदेन मौजूद नहीं"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:488
 msgid "No transactions match the specified filters."
-msgstr "कोई लेनदेन दिए गए फ़िल्टर से मेल नहीं खाता।"
+msgstr "कोई लेनदेन दिए गए फिल्टर से मेल नहीं खाता।"
 
 #: ../../../Models/Account.cs:1723
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:360
@@ -547,16 +547,16 @@ msgstr "रसीदें"
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:495
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:132
 msgid "Repeat End Date"
-msgstr "समाप्ति तिथि दोहराएँ"
+msgstr "समाप्ति तिथि दोहराएं"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:517
 msgid "Repeat End Date (Invalid)"
-msgstr "अंतिम तिथि दोहराएँ (अमान्य)"
+msgstr "अंतिम तिथि दोहराएं (अमान्य)"
 
 #: ../../../../NickvisionMoney.GNOME/Controls/TransactionRow.cs:114
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:159
 msgid "Repeat Interval"
-msgstr "अंतराल दोहराएँ"
+msgstr "अंतराल दोहराएं"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:938
 msgid "Repeat Interval Changed"
@@ -579,30 +579,30 @@ msgstr "खाता चुनें"
 #: ../../../../NickvisionMoney.GNOME/Views/PreferencesDialog.cs:154
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:149
 msgid "Select Backup Folder"
-msgstr "बैकअप फोल्डर का चयन करें"
+msgstr "बैकअप फोल्डर चुनें"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:265
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:110
 msgid "Select Folder"
-msgstr "फोल्डर का चयन करें"
+msgstr "फोल्डर चुनें"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:279
 msgid "Sort By Amount"
-msgstr "राशि के अनुसार क्रमबद्ध करें"
+msgstr "राशि के अनुसार छांटे"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:279
 msgid "Sort By Date"
-msgstr "दिनांक के अनुसार क्रमबद्ध करें"
+msgstr "दिनांक के अनुसार छांटे"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:279
 msgid "Sort By Id"
-msgstr "Id के अनुसार क्रमबद्ध करें"
+msgstr "Id के अनुसार छांटे"
 
 #: ../../../Models/Account.cs:1722
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:197
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:196
 msgid "Tags"
-msgstr "टैग्स"
+msgstr "टैग"
 
 #: ../../../Controllers/AccountViewController.cs:580
 msgid "The password of the account was changed."
@@ -618,7 +618,7 @@ msgstr "इस संवाद को बंद करने पर पासव
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:442
 msgid "The passwords do not match."
-msgstr "पासवर्ड्स मेल नहीं खा रहे।"
+msgstr "पासवर्ड मेल नहीं खाते।"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:938
 msgid ""
@@ -627,14 +627,14 @@ msgid ""
 "\n"
 "New repeat transactions will be generated based off the new interval."
 msgstr ""
-"दोहराव अंतराल बदल दिया गया था.\n"
-"आप मौजूदा जेनरेट किए गए लेनदेन के साथ क्या करना चाहेंगे?\n"
+"दोहराव अंतराल बदल दिया गया था।\n"
+"आप मौजूदा उत्पन्न किए गए लेनदेन के साथ क्या करना चाहेंगे?\n"
 "\n"
 "नए दोहराव वाले लेनदेन नए अंतराल के आधार पर उत्पन्न होंगे।"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:729
 msgid "This account has no money available to transfer."
-msgstr "इस खाते में ट्रांसफ़र करने के लिए कोई धनराशि उपलब्ध नहीं है।"
+msgstr "इस खाते में स्थानान्तरण हेतु कोई धनराशि उपलब्ध नहीं है।"
 
 #: ../../../Controllers/MainWindowController.cs:356
 msgid "This account is already opened."
@@ -727,7 +727,7 @@ msgid ""
 "Unable to import information from the file. Please ensure that the app has "
 "permissions to access the file and try again."
 msgstr ""
-"फाइल से जानकारी आयात करने में असमर्थ. कृपया सुनिश्चित करें कि ऐप के पास फाइल "
+"फाइल से जानकारी आयात करने में असमर्थ। कृपया सुनिश्चित करें कि ऐप के पास फाइल "
 "तक पहुंचने की अनुमति है और पुनः प्रयास करें।"
 
 #: ../../../Controllers/AccountViewController.cs:973
@@ -739,12 +739,12 @@ msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
 "report a bug."
 msgstr ""
-"मुद्रा डेटा लोड करने में असमर्थ. कृपया पुन: प्रयास करें। यदि त्रुटि अभी भी "
+"मुद्रा डेटा लोड करने में असमर्थ। कृपया पुन: प्रयास करें। यदि त्रुटि अभी भी "
 "बनी रहती है, तो बग की रिपोर्ट करें।"
 
 #: ../../../Controllers/MainWindowController.cs:338
 msgid "Unable to login to account. Provided password is invalid."
-msgstr "खाते में लॉग इन करने में असमर्थ. प्रदान किया गया पासवर्ड अमान्य है।"
+msgstr "खाते में लॉग इन करने में असमर्थ। प्रदान किया गया पासवर्ड अमान्य है।"
 
 #: ../../../Controllers/MainWindowController.cs:292
 #: ../../../Controllers/MainWindowController.cs:345
@@ -752,7 +752,7 @@ msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
 msgstr ""
-"खाता खोलने में असमर्थ. कृपया सुनिश्चित करें कि ऐप के पास फाइल तक पहुंचने की "
+"खाता खोलने में असमर्थ। कृपया सुनिश्चित करें कि ऐप के पास फाइल तक पहुंचने की "
 "अनुमति है और पुनः प्रयास करें।"
 
 #: ../../../Controllers/MainWindowController.cs:280
@@ -788,15 +788,15 @@ msgstr "आगामी लेनदेन"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:975
 msgid "Update Only Source"
-msgstr "केवल स्रोत अपडेट करें"
+msgstr "केवल स्रोत अद्यतन करें"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:976
 msgid "Update Source and Generated"
-msgstr "अपडेट स्रोत और जनरेट किया गया"
+msgstr "अद्यतन स्रोत और उत्पन्न"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:970
 msgid "Update Transaction"
-msgstr "लेन-देन अपडेट करें"
+msgstr "लेन-देन अद्यतन करें"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:431
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:660
@@ -825,7 +825,7 @@ msgstr ""
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1034
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1104
 msgid "Yes"
-msgstr "हाँ"
+msgstr "हां"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:115
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:221
@@ -852,7 +852,7 @@ msgstr "पीछे"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:63
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:161
 msgid "Default Transaction Type"
-msgstr "डिफ़ॉल्ट लेनदेन प्रकार"
+msgstr "तयशुदा लेनदेन प्रकार"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:83
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:181
@@ -885,12 +885,12 @@ msgstr "खाते द्वारा उपयोग की जाने व�
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:111
 msgid "Set a new password or remove one."
-msgstr "नया पासवर्ड सेट करें या एक हटा दें।"
+msgstr "नया पासवर्ड निर्धारित करें या एक हटा दें।"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:153
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:223
 msgid "Use Custom Currency"
-msgstr "कस्टम मुद्रा का प्रयोग करें"
+msgstr "तदनुकूल मुद्रा का प्रयोग करें"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:169
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:236
@@ -932,7 +932,7 @@ msgstr "चार"
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:210
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:277
 msgid "Five"
-msgstr "पाँच"
+msgstr "पांच"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:210
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:277
@@ -967,11 +967,11 @@ msgstr ""
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:250
 #: NickvisionMoney.GNOME/Blueprints/recent_account_row.blp:50
 msgid "Remove"
-msgstr "हटाएँ"
+msgstr "हटाएं"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:5
 msgid "Transfer Money"
-msgstr "धनराशि ट्रांसफ़र करें"
+msgstr "धनराशि हस्तांतरित करें"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:14
 msgid "CSV"
@@ -1011,7 +1011,7 @@ msgstr "कार्रवाई"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:92
 msgid "Select All Overview Filters"
-msgstr "सभी अवलोकन फ़िल्टर चुनें"
+msgstr "सभी अवलोकन फिल्टर चुनें"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:156
 msgid "New Group (Ctrl+G)"
@@ -1028,11 +1028,11 @@ msgstr "समूह दृश्यता टॉगल करें"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:176
 msgid "Select All Groups Filters"
-msgstr "सभी समूह फ़िल्टर चुनें"
+msgstr "सभी समूह फिल्टर चुनें"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:183
 msgid "Unselect Groups Filters"
-msgstr "समूह फ़िल्टर अचयनित करें"
+msgstr "समूह फिल्टर अचयनित करें"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:200
 msgid "Toggle Tags Visibility"
@@ -1040,11 +1040,11 @@ msgstr "टैग दृश्यता टॉगल करें"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:208
 msgid "Select All Tags Filters"
-msgstr "सभी टैग फ़िल्टर चुनें"
+msgstr "सभी टैग फिल्टर चुनें"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:215
 msgid "Unselect Tags Filters"
-msgstr "टैग फ़िल्टर अचयनित करें"
+msgstr "टैग फिल्टर अचयनित करें"
 
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:238
 msgid "Calendar"
@@ -1114,7 +1114,7 @@ msgstr "परिवर्तक"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:40
 msgid "Switch currencies"
-msgstr "मुद्राएँ बदलें"
+msgstr "मुद्राएं बदलें"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:43
 msgid "Switch"
@@ -1150,7 +1150,7 @@ msgstr "रंग"
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:283
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:336
 msgid "Delete"
-msgstr "हटाएँ"
+msgstr "मिटाएं"
 
 #: NickvisionMoney.GNOME/Blueprints/group_row.blp:51
 msgid "Edit Group"
@@ -1209,8 +1209,8 @@ msgid ""
 "Upload a valid file to use to import existing information into the new "
 "account."
 msgstr ""
-"मौजूदा जानकारी को नए खाते में आयात करने के लिए उपयोग करने के लिए एक वैध फाइल "
-"अपलोड करें।"
+"मौजूदा जानकारी को नए खाते में आयात करने के लिए उपयोग करने के लिए एक मान्य फा"
+"इल अपलोड करें।"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:320
 msgid "Import File"
@@ -1218,7 +1218,7 @@ msgstr "फाइल आयात करें"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:327
 msgid "Select File"
-msgstr "फाइल का चयन करें"
+msgstr "फाइल चुनें"
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:337
 msgid "Clear File"
@@ -1257,12 +1257,12 @@ msgstr "थीम"
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:22
 msgctxt "Theme"
 msgid "Light"
-msgstr "हल्का"
+msgstr "हल्की"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:22
 msgctxt "Theme"
 msgid "Dark"
-msgstr "गहरा"
+msgstr "गहरी"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:22
 msgctxt "Theme"
@@ -1275,11 +1275,11 @@ msgstr "रंग"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:33
 msgid "Customize the colors used by Denaro."
-msgstr "Denaro द्वारा उपयोग किए गए रंगों को अनुकूलित करें।"
+msgstr "डेनारो द्वारा उपयोग किए गए रंगों को अनुकूलित करें।"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:41
 msgid "Transaction Default Color"
-msgstr "लेन-देन डिफ़ॉल्ट रंग"
+msgstr "लेन-देन का तयशुदा रंग"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:42
 msgid ""
@@ -1288,7 +1288,7 @@ msgstr "इस सेटिंग में बदलाव केवल नए 
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:52
 msgid "Transfer Default Color"
-msgstr "डिफ़ॉल्ट रंग स्थानांतरित करें"
+msgstr "स्थानांतरण का तयशुदा रंग"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:53
 msgid "A change in this setting will only be applied to new transfers."
@@ -1296,7 +1296,7 @@ msgstr "इस सेटिंग में बदलाव केवल नए 
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:63
 msgid "Group Default Color"
-msgstr "समूह डिफ़ॉल्ट रंग"
+msgstr "समूह का तयशुदा रंग"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:64
 msgid "A change in this setting will only be applied to new groups."
@@ -1312,7 +1312,7 @@ msgstr "बचत खाते का रंग"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:94
 msgid "Business Account Color"
-msgstr "बिजनेस अकाउंट का रंग"
+msgstr "व्यवसाय खाता रंग"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:106
 msgid "Locale"
@@ -1339,8 +1339,8 @@ msgid ""
 "Set for which keys pressed will the locale's decimal separator be inserted "
 "into an amount field."
 msgstr ""
-"सेट करें कि कौन सी कुंजी दबाने पर स्थान का दशमलव विभाजक राशि फ़ील्ड में डाला "
-"जाएगा।"
+"निर्धारित करें कि कौन सी कुंजी दबाने पर स्थान का दशमलव विभाजक राशि क्षेत्र "
+"में डाला जाएगा।"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:123
 msgctxt "InsertSeparator"
@@ -1368,8 +1368,8 @@ msgid ""
 "Unencrypted accounts will automatically export as CSV files to this folder "
 "when a change is made."
 msgstr ""
-"परिवर्तन किए जाने पर अनएन्क्रिप्टेड खाते स्वचालित रूप से इस फोल्डर में CSV "
-"फाइलों के रूप में निर्यात हो जाएंगे।"
+"परिवर्तन किए जाने पर अकूटलेखित खाते स्वचालित रूप से इस फोल्डर में CSV फाइलों "
+"के रूप में निर्यात हो जाएंगे।"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:159
 msgid "Clear Backup Folder"
@@ -1403,7 +1403,7 @@ msgstr "नई लेनदेन"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:64
 msgid "Application"
-msgstr "एप्लिकेशन"
+msgstr "अनुप्रयोग"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:73
 #: NickvisionMoney.GNOME/Blueprints/window.blp:9
@@ -1413,7 +1413,7 @@ msgstr "कीबोर्ड शॉर्टकट"
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:83
 #: NickvisionMoney.GNOME/Blueprints/window.blp:107
 msgid "Toggle Sidebar"
-msgstr "बाजू पट्टी को बंद करें/खोलें"
+msgstr "पार्श्वपट्टी टॉगल करें"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:88
 msgid "Quit"
@@ -1421,7 +1421,7 @@ msgstr "छोड़ें"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:27
 msgid "Make a Copy"
-msgstr "एक प्रति बनाएँ"
+msgstr "प्रतिलिपि बनाएं"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:143
 msgid "Clear End Date"
@@ -1478,7 +1478,7 @@ msgstr "अतिरिक्त"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:251
 msgid "Manage extra fields of the transaction."
-msgstr "लेन-देन के अतिरिक्त फ़ील्ड प्रबंधित करें।"
+msgstr "लेन-देन के अतिरिक्त क्षेत्र प्रबंधित करें।"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:361
 msgid "Enter notes here"
@@ -1503,17 +1503,17 @@ msgstr "कोई खाता नहीं चुना गया है"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:47
 msgid "Select a destination account"
-msgstr "एक गंतव्य खाता चुनें"
+msgstr "गंतव्य खाता चुनें"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:52
 #: NickvisionMoney.GNOME/Blueprints/window.blp:177
 msgid "Recent Accounts"
-msgstr "हाल ही में उपयोग किए गए खाते"
+msgstr "हालिया खाते"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:55
 #: NickvisionMoney.GNOME/Blueprints/window.blp:47
 msgid "Recents"
-msgstr "हाल ही के"
+msgstr "हालिया"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:85
 msgid "Conversion Needed"
@@ -1521,11 +1521,11 @@ msgstr "रूपांतरण की आवश्यकता"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:89
 msgid "Use Custom Rates"
-msgstr "कस्टम दरों का प्रयोग करें"
+msgstr "तदनुकूल दरों का प्रयोग करें"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:90
 msgid "Enter the conversion rates manually"
-msgstr "रूपांतरण दरें मैन्युअल रूप से दर्ज करें"
+msgstr "रूपांतरण दरें हस्तचालित रूप से दर्ज करें"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:117
 msgctxt "Button"
@@ -1538,11 +1538,11 @@ msgstr "मुद्रा परिवर्तक"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:11
 msgid "About Denaro"
-msgstr "Denaro के बारे में"
+msgstr "डेनारो के बारे में"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:28
 msgid "Account Menu"
-msgstr "खाता मेन्यू"
+msgstr "खाता मेनू"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:57
 msgid "New Account (Ctrl+N)"
@@ -1567,7 +1567,7 @@ msgstr "ग्राफ़ टॉगल करें"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:125
 msgid "Main Menu"
-msgstr "मुख्य मेन्यू"
+msgstr "मुख्य मेनू"
 
 #: NickvisionMoney.GNOME/Blueprints/window.blp:132
 msgid "Dashboard"

@@ -8,17 +8,20 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2025-03-08 19:26+0000\n"
+"Last-Translator: Henri <contact@hen.ee>\n"
+"Language-Team: Estonian <https://hosted.weblate.org/projects/"
+"nickvision-money/app/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.3-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
-msgstr ""
+msgstr "(Koopia)"
 
 #: ../../../Controllers/DashboardViewController.cs:83
 #: ../../../Controllers/DashboardViewController.cs:92
@@ -26,55 +29,50 @@ msgstr ""
 #: ../../../Controllers/DashboardViewController.cs:121
 #, csharp-format
 msgid "{0} from {1}"
-msgstr ""
+msgstr "{0} {1}-ni"
 
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:633
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:639
 #, csharp-format
 msgid "{0} tag"
 msgid_plural "{0} tags"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} silt"
+msgstr[1] "{0} sildid"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:161
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:474
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "{0} transaction"
 msgid_plural "{0} transactions"
-msgstr[0] "Tehingud"
-msgstr[1] "Tehingud"
+msgstr[0] "{0} tehing"
+msgstr[1] "{0} tehingud"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:287
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:82
-#, fuzzy
 msgid "Account Name"
-msgstr "Konto"
+msgstr "Konto nimi"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:303
-#, fuzzy
 msgid "Account Name (Exists)"
-msgstr "Konto"
+msgstr "Konto nimi (olemas)"
 
 #: ../../../../NickvisionMoney.GNOME/Views/NewAccountDialog.cs:298
-#, fuzzy
 msgid "Account Name (Opened)"
-msgstr "Konto"
+msgstr "Konto nimi (avatud)"
 
 #: ../../../Models/Account.cs:1653
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:74
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:493
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:32
 #: NickvisionMoney.GNOME/Blueprints/account_view.blp:30
-#, fuzzy
 msgid "Account Settings"
-msgstr "Sätted"
+msgstr "Konto sätted"
 
 #: ../../../Models/Account.cs:1654
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:56
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:152
-#, fuzzy
 msgid "Account Type"
-msgstr "Konto"
+msgstr "Konto tüüp"
 
 #: ../../../../NickvisionMoney.GNOME/Views/GroupDialog.cs:107
 #: ../../../../NickvisionMoney.GNOME/Views/TransactionDialog.cs:179
@@ -84,7 +82,7 @@ msgstr "Lisa"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:498
 msgid "Add a new transaction or import transactions from a file."
-msgstr ""
+msgstr "Lisa uus tehing või impordi tehingud failist."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:830
 msgid "Add Password To PDF?"

@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2023-11-17 11:26+0000\n"
-"Last-Translator: Fjuro <ifjuro@proton.me>\n"
+"PO-Revision-Date: 2024-09-04 15:09+0000\n"
+"Last-Translator: Fjuro <fjuro@alius.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-money/"
 "app/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.2\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.7.2-rc\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -711,7 +711,7 @@ msgstr "Převést na {0}"
 
 #: ../../../Controllers/MainWindowController.cs:103
 msgid "translator-credits"
-msgstr "Jonáš Loskot <jonas.loskot@pm.me>, 2023"
+msgstr "Jonáš Loskot <osobni@jonasloskot.cz>, 2023"
 
 #: ../../../Models/Account.cs:2111
 msgid "Two months from now"

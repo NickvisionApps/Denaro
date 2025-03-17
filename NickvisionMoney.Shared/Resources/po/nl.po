@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2024-03-01 15:00+0000\n"
-"Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
+"PO-Revision-Date: 2025-01-18 10:00+0000\n"
+"Last-Translator: coeneisma <coeneisma@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-money/"
 "app/nl/>\n"
 "Language: nl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -82,7 +82,7 @@ msgstr "Toevoegen"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:498
 msgid "Add a new transaction or import transactions from a file."
-msgstr "Voeg een transactie toe of importeer deze uit een bestand"
+msgstr "Voeg een transactie toe of importeer deze uit een bestand."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:830
 msgid "Add Password To PDF?"
@@ -607,19 +607,19 @@ msgstr "Tags"
 
 #: ../../../Controllers/AccountViewController.cs:580
 msgid "The password of the account was changed."
-msgstr "Het wachtwoord van het account is gewijzigd"
+msgstr "Het wachtwoord van het account is gewĳzigd."
 
 #: ../../../Controllers/AccountViewController.cs:576
 msgid "The password of the account was removed."
-msgstr "Het wachtwoord van het account is verwijderd"
+msgstr "Het wachtwoord van het account is verwĳderd."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:496
 msgid "The password will be removed upon closing this dialog."
-msgstr "Het wachtwoord zal worden verwijderd bij het sluiten van deze dialoog"
+msgstr "Het wachtwoord zal worden verwĳderd bĳ het sluiten van deze dialoog."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountSettingsDialog.cs:442
 msgid "The passwords do not match."
-msgstr "Wachtwoorden komen niet overeen"
+msgstr "De wachtwoorden komen niet overeen."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:938
 msgid ""
@@ -640,10 +640,9 @@ msgstr "Er staat geen geld op deze rekening."
 
 #: ../../../Controllers/MainWindowController.cs:356
 msgid "This account is already opened."
-msgstr "Dit account is al geopend"
+msgstr "Dit account is al geopend."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1003
-#, fuzzy
 msgid ""
 "This transaction is a source repeat transaction.\n"
 "What would you like to do with the repeat transactions?\n"
@@ -651,11 +650,11 @@ msgid ""
 "Deleting only the source transaction will allow individual\n"
 "generated transactions to be modifiable."
 msgstr ""
-"Bij deze transactie is een herhaalperiode ingesteld.\n"
-"Welke actie wilt u ondernemen op de opeenvolgende transacties?\n"
+"Deze transactie is een bron­herhaal­transactie. Wat wilt u doen met de "
+"herhaal­transacties?\n"
 "\n"
-"Als u alleen de eerste transactie verwijdert, blijven\n"
-"de opeenvolgende aanpasbaar."
+"Door alleen de bron­transactie te verwĳderen, kunnen individueel "
+"gegenereerde transacties worden gewĳzigd."
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:970
 msgid ""
@@ -730,6 +729,8 @@ msgid ""
 "Unable to import information from the file. Please ensure that the app has "
 "permissions to access the file and try again."
 msgstr ""
+"Kan informatie uit het bestand niet importeren. Zorg ervoor dat de app "
+"toestemming heeft om het bestand te openen en probeer het opnieuw."
 
 #: ../../../Controllers/AccountViewController.cs:973
 msgid "Unable to import transactions from the file."
@@ -740,6 +741,8 @@ msgid ""
 "Unable to load currency data. Please try again. If the error still persists, "
 "report a bug."
 msgstr ""
+"Kan valuta­gegevens niet laden. Probeer het opnieuw. Als de fout zich blĳft "
+"voordoen, rapporteer dan een probleem."
 
 #: ../../../Controllers/MainWindowController.cs:338
 msgid "Unable to login to account. Provided password is invalid."
@@ -751,6 +754,8 @@ msgid ""
 "Unable to open the account. Please ensure that the app has permissions to "
 "access the file and try again."
 msgstr ""
+"Kan het account niet openen. Zorg ervoor dat de app toestemming heeft om het "
+"bestand te openen en probeer het opnieuw."
 
 #: ../../../Controllers/MainWindowController.cs:280
 msgid "Unable to overwrite an existing account."
@@ -883,7 +888,7 @@ msgstr "Beheer de valuta die door de rekening wordt gebruikt."
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:111
 msgid "Set a new password or remove one."
-msgstr "Stel een nieuw wachtwoord in of verwijder een wachtwoord"
+msgstr "Stel een nieuw wachtwoord in of verwĳder een wachtwoord."
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:153
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:223
@@ -1193,7 +1198,7 @@ msgstr "Accountopties"
 msgid "This is only a useful label that doesn't affect how the app works."
 msgstr ""
 "Dit is slechts een handig label dat de werking van het programma niet "
-"beïnvloedt"
+"beïnvloedt."
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:209
 msgid "Account Currency"
@@ -1208,6 +1213,8 @@ msgid ""
 "Upload a valid file to use to import existing information into the new "
 "account."
 msgstr ""
+"Upload een geldig bestand om bestaande informatie in het nieuwe account te "
+"importeren."
 
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:320
 msgid "Import File"
@@ -1272,11 +1279,11 @@ msgstr "Kleuren"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:33
 msgid "Customize the colors used by Denaro."
-msgstr "Pas de door Denaro gebruikte kleuren aan"
+msgstr "Pas de door Denaro gebruikte kleuren aan."
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:41
 msgid "Transaction Default Color"
-msgstr "Standaardkleur van transacties"
+msgstr "Standaard­kleur van transacties"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:42
 msgid ""
@@ -1285,7 +1292,7 @@ msgstr "Let op: wijzigingen worden alléén toegepast op nieuwe overboekingen."
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:52
 msgid "Transfer Default Color"
-msgstr "Standaardkleur van overdrachten"
+msgstr "Standaard­kleur van overdrachten"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:53
 msgid "A change in this setting will only be applied to new transfers."
@@ -1293,7 +1300,7 @@ msgstr "Let op: wijzigingen worden alléén toegepast op nieuwe overboekingen."
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:63
 msgid "Group Default Color"
-msgstr "Standaardgroepskleur"
+msgstr "Standaard­groeps­kleur"
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:64
 msgid "A change in this setting will only be applied to new groups."
@@ -1337,7 +1344,8 @@ msgid ""
 "Set for which keys pressed will the locale's decimal separator be inserted "
 "into an amount field."
 msgstr ""
-"Stelt in voor welke toetsen het decimale scheidingsteken zal worden ingevoerd"
+"Stelt in voor welke toetsen het decimale scheidings­teken zal worden "
+"ingevoerd."
 
 #: NickvisionMoney.GNOME/Blueprints/preferences_dialog.blp:123
 msgctxt "InsertSeparator"
@@ -1378,7 +1386,7 @@ msgstr "Geen herinneringen"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:13
 msgid "Account"
-msgstr "Account"
+msgstr "Rekening"
 
 #: NickvisionMoney.GNOME/Blueprints/shortcuts_dialog.blp:26
 msgid "Close Account"
@@ -1475,7 +1483,7 @@ msgstr "Extra's"
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:251
 msgid "Manage extra fields of the transaction."
-msgstr "Beheer extra velden van de transactie"
+msgstr "Beheer extra velden van de transactie."
 
 #: NickvisionMoney.GNOME/Blueprints/transaction_dialog.blp:361
 msgid "Enter notes here"
