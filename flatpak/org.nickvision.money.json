@@ -1,15 +1,15 @@
 {
     "app-id" : "org.nickvision.money",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "45",
+    "runtime-version" : "47",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions": [
-        "org.freedesktop.Sdk.Extension.dotnet8"
+        "org.freedesktop.Sdk.Extension.dotnet9"
     ],
     "build-options": {
-        "append-path": "/usr/lib/sdk/dotnet8/bin",
-        "append-ld-library-path": "/usr/lib/sdk/dotnet8/lib",
-        "append-pkg-config-path": "/usr/lib/sdk/dotnet8/lib/pkgconfig"
+        "append-path": "/usr/lib/sdk/dotnet9/bin",
+        "append-ld-library-path": "/usr/lib/sdk/dotnet9/lib",
+        "append-pkg-config-path": "/usr/lib/sdk/dotnet9/lib/pkgconfig"
     },
     "command" : "org.nickvision.money",
     "finish-args":[

@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GirCore.Adw-1" Version="0.5.0-preview.3" />
+    <PackageReference Include="GirCore.Adw-1" Version="0.6.3" />
     <PackageReference Include="Nickvision.Aura" Version="2023.11.4" />
-    <PackageReference Include="HarfBuzzSharp.NativeAssets.Linux" Version="7.3.0" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.6" />
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.Linux" Version="8.3.0.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.9" />
   </ItemGroup>
 
   <ItemGroup>

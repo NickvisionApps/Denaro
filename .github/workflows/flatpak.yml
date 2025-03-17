@@ -15,17 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.user.login != 'weblate' }}
     container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-45
+      image: bilelmoussaoui/flatpak-github-actions:gnome-47
       options: --privileged
     strategy:
       matrix:
         arch: [x86_64]
       fail-fast: false
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6.3
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6.4
         with:
           bundle: org.nickvision.money.flatpak
           manifest-path: flatpak/org.nickvision.money.json

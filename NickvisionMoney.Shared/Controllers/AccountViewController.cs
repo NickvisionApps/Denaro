@@ -698,12 +698,14 @@ public class AccountViewController : IDisposable
     {
         var originalGroupId = _account.Transactions[transaction.Id].GroupId == -1 ? 0u : (uint)_account.Transactions[transaction.Id].GroupId;
         var newGroupId = transaction.GroupId == -1 ? 0u : (uint)transaction.GroupId;
+        var deletedKeys = _account.Transactions.Keys.ToHashSet();
         var res = await _account.UpdateSourceTransactionAsync(transaction, updateGenerated);
         if (res.Successful)
         {
             TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(transaction, null, true));
             foreach (var pair in _account.Transactions)
             {
+                deletedKeys.Remove(pair.Key); // Account still has this transaction. So, remove.
                 if (updateGenerated && pair.Value.RepeatFrom == transaction.Id)
                 {
                     TransactionUpdated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
@@ -719,10 +721,11 @@ public class AccountViewController : IDisposable
                         TransactionCreated?.Invoke(this, new ModelEventArgs<Transaction>(pair.Value, null, true));
                     }
                 }
-                if (!_account.Transactions.ContainsKey(pair.Key))
-                {
-                    TransactionDeleted?.Invoke(this, pair.Key);
-                }
+            }
+
+            foreach (var key in deletedKeys)
+            {
+                TransactionDeleted?.Invoke(this, key);
             }
             GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[originalGroupId], null, _groupFilters[(int)originalGroupId]));
             GroupUpdated?.Invoke(this, new ModelEventArgs<Group>(_account.Groups[newGroupId], null, _groupFilters[(int)newGroupId]));

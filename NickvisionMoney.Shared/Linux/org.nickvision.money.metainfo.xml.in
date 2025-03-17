@@ -48,10 +48,11 @@
     <mediatype>application/x-nmoney</mediatype>
   </provides>
   <releases>
-    <release version="2024.2.0" date="2024-02-02">
+    <release version="2025.3.0" date="2025-03-05">
       <description translatable="no">
-        <p>- Improved importing of QIF files</p>
-        <p>- Fixed a bug where the app would crash when filtering transactions for certain dates</p>
+        <p>- Updated dependencies</p>
+        <p>- Fixed an icon conflict with GNOME System Monitor</p>
+        <p>- Fixed an issue where repeated transactions would not be updated correctly after updating the source transaction</p>
         <p>- Updated translations (Thanks to everyone on Weblate)!</p>
       </description>
     </release>

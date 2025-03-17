@@ -2,6 +2,7 @@ using NickvisionMoney.GNOME.Helpers;
 using NickvisionMoney.Shared.Controllers;
 using System;
 using System.Globalization;
+using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -34,7 +35,7 @@ public partial class GroupDialog : Adw.Window
     /// </summary>
     public event EventHandler? OnDelete;
 
-    private GroupDialog(Gtk.Builder builder, GroupDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
+    private GroupDialog(Gtk.Builder builder, GroupDialogController controller, Gtk.Window parent) : base(builder.GetObject("_root").Handle as WindowHandle)
     {
         _constructing = true;
         _controller = controller;
@@ -119,8 +120,9 @@ public partial class GroupDialog : Adw.Window
         //Load Group
         _nameRow.SetText(_controller.Group.Name);
         _descriptionRow.SetText(_controller.Group.Description);
-        GdkHelpers.RGBA.Parse(out var color, _controller.Group.RGBA);
-        _colorButton.SetExtRgba(color!.Value);
+        var color = new Gdk.RGBA();
+        color.Parse(_controller.Group.RGBA);
+        _colorButton.SetRgba(color);
         Validate();
         _constructing = false;
     }
@@ -139,7 +141,7 @@ public partial class GroupDialog : Adw.Window
     /// </summary>
     private void Validate()
     {
-        var color = _colorButton.GetExtRgba();
+        var color = _colorButton.GetRgba();
         var checkStatus = _controller.UpdateGroup(_nameRow.GetText().Trim(), _descriptionRow.GetText().Trim(), color.ToString());
         _nameRow.RemoveCssClass("error");
         _nameRow.SetTitle(_("Name"));

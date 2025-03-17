@@ -3,6 +3,7 @@ using NickvisionMoney.Shared.Controllers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.IO;
+using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -34,7 +35,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Gtk.Button _selectBackupFolderButton;
     [Gtk.Connect] private readonly Gtk.Button _unsetBackupFolderButton;
 
-    private PreferencesDialog(Gtk.Builder builder, PreferencesViewController controller, Adw.Application application, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
+    private PreferencesDialog(Gtk.Builder builder, PreferencesViewController controller, Adw.Application application, Gtk.Window parent) : base(builder.GetObject("_root").Handle as PreferencesWindowHandle)
     {
         //Window Settings
         _controller = controller;
@@ -73,18 +74,24 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         OnHide += Hide;
         //Load Config
         _themeRow.SetSelected((uint)_controller.Theme);
-        GdkHelpers.RGBA.Parse(out var transactionColor, _controller.TransactionDefaultColor);
-        _transactionColorButton.SetExtRgba(transactionColor!.Value);
-        GdkHelpers.RGBA.Parse(out var transferColor, _controller.TransferDefaultColor);
-        _transferColorButton.SetExtRgba(transferColor!.Value);
-        GdkHelpers.RGBA.Parse(out var groupColor, _controller.GroupDefaultColor);
-        _groupColorButton.SetExtRgba(groupColor!.Value);
-        GdkHelpers.RGBA.Parse(out var accountCheckingColor, _controller.AccountCheckingColor);
-        _accountCheckingColorButton.SetExtRgba(accountCheckingColor!.Value);
-        GdkHelpers.RGBA.Parse(out var accountSavingsColor, _controller.AccountSavingsColor);
-        _accountSavingsColorButton.SetExtRgba(accountSavingsColor!.Value);
-        GdkHelpers.RGBA.Parse(out var accountBusinessColor, _controller.AccountBusinessColor);
-        _accountBusinessColorButton.SetExtRgba(accountBusinessColor!.Value);
+        var transactionColor = new Gdk.RGBA();
+        transactionColor.Parse(_controller.TransactionDefaultColor);
+        _transactionColorButton.SetRgba(transactionColor);
+        var transferColor = new Gdk.RGBA();
+        transferColor.Parse(_controller.TransferDefaultColor);
+        _transferColorButton.SetRgba(transferColor);
+        var groupColor = new Gdk.RGBA();
+        groupColor.Parse(_controller.GroupDefaultColor);
+        _groupColorButton.SetRgba(groupColor);
+        var accountCheckingColor = new Gdk.RGBA();
+        accountCheckingColor.Parse(_controller.AccountCheckingColor);
+        _accountCheckingColorButton.SetRgba(accountCheckingColor);
+        var accountSavingsColor = new Gdk.RGBA();
+        accountSavingsColor.Parse(_controller.AccountSavingsColor);
+        _accountSavingsColorButton.SetRgba(accountSavingsColor);
+        var accountBusinessColor = new Gdk.RGBA();
+        accountBusinessColor.Parse(_controller.AccountBusinessColor);
+        _accountBusinessColorButton.SetRgba(accountBusinessColor);
         _nativeDigitsRow.SetActive(_controller.UseNativeDigits);
         _insertSeparatorRow.SetSelected((uint)_controller.InsertSeparator);
         if (File.Exists(_controller.CSVBackupFolder))
@@ -110,17 +117,17 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     /// <param name="e">EventArgs</param>
     private void Hide(Gtk.Widget sender, EventArgs e)
     {
-        var color = _transactionColorButton.GetExtRgba();
+        var color = _transactionColorButton.GetRgba();
         _controller.TransactionDefaultColor = color.ToString();
-        color = _transferColorButton.GetExtRgba();
+        color = _transferColorButton.GetRgba();
         _controller.TransferDefaultColor = color.ToString();
-        color = _groupColorButton.GetExtRgba();
+        color = _groupColorButton.GetRgba();
         _controller.GroupDefaultColor = color.ToString();
-        color = _accountCheckingColorButton.GetExtRgba();
+        color = _accountCheckingColorButton.GetRgba();
         _controller.AccountCheckingColor = color.ToString();
-        color = _accountSavingsColorButton.GetExtRgba();
+        color = _accountSavingsColorButton.GetRgba();
         _controller.AccountSavingsColor = color.ToString();
-        color = _accountBusinessColorButton.GetExtRgba();
+        color = _accountBusinessColorButton.GetRgba();
         _controller.AccountBusinessColor = color.ToString();
         _controller.UseNativeDigits = _nativeDigitsRow.GetActive();
         _controller.InsertSeparator = (InsertSeparator)_insertSeparatorRow.GetSelected();

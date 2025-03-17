@@ -8,8 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices;
+using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
+using DateTime = GLib.DateTime;
 
 namespace NickvisionMoney.GNOME.Views;
 
@@ -18,52 +19,6 @@ namespace NickvisionMoney.GNOME.Views;
 /// </summary>
 public partial class TransactionDialog : Adw.Window
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct MoneyDateTime
-    {
-        ulong Usec;
-        nint Tz;
-        int Interval;
-        int Days;
-        int RefCount;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct TextIter
-    {
-        public nint dummy1;
-        public nint dummy2;
-        public int dummy3;
-        public int dummy4;
-        public int dummy5;
-        public int dummy6;
-        public int dummy7;
-        public int dummy8;
-        public nint dummy9;
-        public nint dummy10;
-        public int dummy11;
-        public int dummy12;
-        public int dummy13;
-        public nint dummy14;
-    }
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial int g_date_time_get_year(ref MoneyDateTime datetime);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial int g_date_time_get_month(ref MoneyDateTime datetime);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial int g_date_time_get_day_of_month(ref MoneyDateTime datetime);
-    [DllImport("libadwaita-1.so.0")]
-    private static extern ref MoneyDateTime g_date_time_new_local(int year, int month, int day, int hour, int minute, double seconds);
-    [DllImport("libadwaita-1.so.0")]
-    private static extern ref MoneyDateTime gtk_calendar_get_date(nint calendar);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_calendar_select_day(nint calendar, ref MoneyDateTime datetime);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_text_buffer_get_bounds(nint buffer, ref TextIter startIter, ref TextIter endIter);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string gtk_text_buffer_get_text(nint buffer, ref TextIter startIter, ref TextIter endIter, [MarshalAs(UnmanagedType.I1)] bool include_hidden_chars);
-
     private bool _constructing;
     private readonly TransactionDialogController _controller;
     private Image? _receipt;
@@ -122,7 +77,7 @@ public partial class TransactionDialog : Adw.Window
     /// </summary>
     public event EventHandler<EventArgs>? OnDelete;
 
-    private TransactionDialog(Gtk.Builder builder, TransactionDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
+    private TransactionDialog(Gtk.Builder builder, TransactionDialogController controller, Gtk.Window parent) : base(builder.GetObject("_root").Handle as WindowHandle)
     {
         _constructing = true;
         _controller = controller;
@@ -211,8 +166,9 @@ public partial class TransactionDialog : Adw.Window
                 _colorDropDown.SetSelected((e.Item2.UseGroupColor && _groupRow.GetSelected() != 0) ? 0u : 1u);
                 _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
                 _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
-                GdkHelpers.RGBA.Parse(out var transactionColor, e.Item2.RGBA);
-                _colorButton.SetExtRgba(transactionColor!.Value);
+                var transactionColor = new Gdk.RGBA();
+                transactionColor.Parse(e.Item2.RGBA);
+                _colorButton.SetRgba(transactionColor);
             }
         };
         _overlay.AddOverlay(_autocompleteBox);
@@ -388,7 +344,7 @@ public partial class TransactionDialog : Adw.Window
         })));
         AddController(_shortcutController);
         //Load Transaction
-        gtk_calendar_select_day(_dateCalendar.Handle, ref g_date_time_new_local(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0));
+        _dateCalendar.SelectDay(DateTime.NewLocal(_controller.Transaction.Date.Year, _controller.Transaction.Date.Month, _controller.Transaction.Date.Day, 0, 0, 0.0)!);
         OnDateChanged(_dateCalendar, EventArgs.Empty);
         _descriptionRow.SetText(_controller.Transaction.Description);
         _amountRow.SetText(_controller.Transaction.Amount.ToAmountString(_controller.CultureForNumberString, _controller.UseNativeDigits, false));
@@ -398,7 +354,7 @@ public partial class TransactionDialog : Adw.Window
         _repeatEndDateCalendarButton.SetVisible(_controller.Transaction.RepeatInterval != TransactionRepeatInterval.Never);
         if (_controller.Transaction.RepeatEndDate != null)
         {
-            gtk_calendar_select_day(_repeatEndDateCalendar.Handle, ref g_date_time_new_local(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day, 0, 0, 0.0));
+            _repeatEndDateCalendar.SelectDay(DateTime.NewLocal(_controller.Transaction.RepeatEndDate.Value.Year, _controller.Transaction.RepeatEndDate.Value.Month, _controller.Transaction.RepeatEndDate.Value.Day, 0, 0, 0.0)!);
             OnRepeatEndDateChanged(_repeatEndDateCalendar, EventArgs.Empty);
         }
         else
@@ -416,8 +372,9 @@ public partial class TransactionDialog : Adw.Window
         _colorDropDown.SetSelected((_controller.Transaction.UseGroupColor && _groupRow.GetSelected() != 0) ? 0u : 1u);
         _colorDropDown.SetVisible(_groupRow.GetSelected() != 0);
         _colorButton.SetVisible(_colorDropDown.GetSelected() == 1);
-        GdkHelpers.RGBA.Parse(out var transactionColor, _controller.Transaction.RGBA);
-        _colorButton.SetExtRgba(transactionColor!.Value);
+        var transactionColor = new Gdk.RGBA();
+        transactionColor.Parse(_controller.Transaction.RGBA);
+        _colorButton.SetRgba(transactionColor);
         UpdateTagsList();
         _receipt = _controller.Transaction.Receipt;
         _viewReceiptButton.SetSensitive(_controller.Transaction.Receipt != null);
@@ -473,20 +430,18 @@ public partial class TransactionDialog : Adw.Window
     /// </summary>
     private void Validate()
     {
-        var selectedDay = gtk_calendar_get_date(_dateCalendar.Handle);
-        var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
+        var selectedDay = _dateCalendar.GetDate();
+        var date = new DateOnly(selectedDay.GetYear(), selectedDay.GetMonth(), selectedDay.GetDayOfMonth());
         var repeatEndDate = default(DateOnly?);
         if (_repeatEndDateCalendarButton.GetLabel() != _("No End Date"))
         {
-            var selectedEndDay = gtk_calendar_get_date(_repeatEndDateCalendar.Handle);
-            repeatEndDate = new DateOnly(g_date_time_get_year(ref selectedEndDay), g_date_time_get_month(ref selectedEndDay), g_date_time_get_day_of_month(ref selectedEndDay));
+            var selectedEndDay = _repeatEndDateCalendar.GetDate();
+            repeatEndDate = new DateOnly(selectedEndDay.GetYear(), selectedEndDay.GetMonth(), selectedEndDay.GetDayOfMonth());
         }
         var groupObject = (Gtk.StringObject)_groupRow.GetSelectedItem()!;
         var tags = _tags.Where(x => x.Value).Select(x => x.Key).ToList();
-        var iterStart = new TextIter();
-        var iterEnd = new TextIter();
-        gtk_text_buffer_get_bounds(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd);
-        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetExtRgba().ToString(), _colorDropDown.GetSelected() == 0, tags, _amountRow.GetText(), _receipt, repeatEndDate, gtk_text_buffer_get_text(_notesView.GetBuffer().Handle, ref iterStart, ref iterEnd, false));
+        var text = _notesView.GetBuffer().Text ?? "";
+        var checkStatus = _controller.UpdateTransaction(date, _descriptionRow.GetText(), _incomeButton.GetActive() ? TransactionType.Income : TransactionType.Expense, (int)_repeatIntervalRow.GetSelected(), groupObject.GetString(), _colorButton.GetRgba().ToString(), _colorDropDown.GetSelected() == 0, tags, _amountRow.GetText(), _receipt, repeatEndDate, text);
         _descriptionRow.RemoveCssClass("error");
         _descriptionRow.SetTitle(_("Description"));
         _amountRow.RemoveCssClass("error");
@@ -556,8 +511,8 @@ public partial class TransactionDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void OnDateChanged(Gtk.Calendar sender, EventArgs e)
     {
-        var selectedDay = gtk_calendar_get_date(sender.Handle);
-        var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
+        var selectedDay = sender.GetDate();
+        var date = new DateOnly(selectedDay.GetYear(), selectedDay.GetMonth(), selectedDay.GetDayOfMonth());
         _dateCalendarButton.SetLabel(date.ToString("d", CultureHelpers.DateCulture));
         if (!_constructing)
         {
@@ -586,8 +541,8 @@ public partial class TransactionDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void OnRepeatEndDateChanged(Gtk.Calendar sender, EventArgs e)
     {
-        var selectedDay = gtk_calendar_get_date(sender.Handle);
-        var date = new DateOnly(g_date_time_get_year(ref selectedDay), g_date_time_get_month(ref selectedDay), g_date_time_get_day_of_month(ref selectedDay));
+        var selectedDay = sender.GetDate();
+        var date = new DateOnly(selectedDay.GetYear(), selectedDay.GetMonth(), selectedDay.GetDayOfMonth());
         _repeatEndDateCalendarButton.SetLabel(date.ToString("d", CultureHelpers.DateCulture));
         if (!_constructing)
         {

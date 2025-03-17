@@ -1,5 +1,7 @@
 using NickvisionMoney.GNOME.Helpers;
 using System.Globalization;
+using Gtk.Internal;
+using Builder = NickvisionMoney.GNOME.Helpers.Builder;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -15,7 +17,7 @@ public partial class TransactionId : Gtk.Overlay
     [Gtk.Connect] private readonly Gtk.Image _colorImage;
     [Gtk.Connect] private readonly Gtk.Label _idLabel;
 
-    private TransactionId(Gtk.Builder builder, uint id) : base(builder.GetPointer("_root"), false)
+    private TransactionId(Gtk.Builder builder, uint id) : base(builder.GetObject("_root").Handle as OverlayHandle)
     {
         _id = id;
         builder.Connect(this);
@@ -41,13 +43,14 @@ public partial class TransactionId : Gtk.Overlay
     /// <param name="defaultColor">A default color</param>
     public void UpdateColor(string colorString, string defaultColor, bool useNativeDigits)
     {
-        if (!GdkHelpers.RGBA.Parse(out var color, colorString))
+        var color = new Gdk.RGBA();
+        if (!color.Parse(colorString))
         {
-            GdkHelpers.RGBA.Parse(out color, defaultColor);
+            color.Parse(defaultColor);
         }
-        var red = (int)(color!.Value.Red * 255);
-        var green = (int)(color.Value.Green * 255);
-        var blue = (int)(color.Value.Blue * 255);
+        var red = (int)(color.Red * 255);
+        var green = (int)(color.Green * 255);
+        var blue = (int)(color.Blue * 255);
         var idString = _id.ToString();
         var nativeDigits = CultureInfo.CurrentCulture.NumberFormat.NativeDigits;
         if (useNativeDigits && "0" != nativeDigits[0])
@@ -63,7 +66,7 @@ public partial class TransactionId : Gtk.Overlay
                                .Replace("8", nativeDigits[8])
                                .Replace("9", nativeDigits[9]);
         }
-        var luma = color.Value.Red * 0.2126 + color.Value.Green * 0.7152 + color.Value.Blue * 0.0722;
+        var luma = color.Red * 0.2126 + color.Green * 0.7152 + color.Blue * 0.0722;
         var fgcolor = luma > 0.5 ? "#000000cc" : "#ffffff";
         _idLabel.SetLabel($"<span size=\"10pt\" weight=\"bold\" color=\"{fgcolor}\">{idString}</span>");
         if (uint.TryParse(red.ToString("X2") + green.ToString("X2") + blue.ToString("X2") + "FF", System.Globalization.NumberStyles.HexNumber, null, out var colorPixbuf))

@@ -1,6 +1,7 @@
 
 using NickvisionMoney.GNOME.Helpers;
 using System.Collections.Generic;
+using Adw.Internal;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -22,7 +23,7 @@ public partial class RemindersDialog : Adw.Window
     /// <param name="iconName">Icon name for the window</param>
     /// <param name="description">The description of the reminders</param>
     /// <param name="reminders">The list of reminders</param>
-    private RemindersDialog(Gtk.Builder builder, Gtk.Window parent, string iconName, string description, List<(string Title, string Subtitle)> reminders) : base(builder.GetPointer("_root"), false)
+    private RemindersDialog(Gtk.Builder builder, Gtk.Window parent, string iconName, string description, List<(string Title, string Subtitle)> reminders) : base(builder.GetObject("_root").Handle as WindowHandle)
     {
         builder.Connect(this);
         //Dialog Settings

@@ -5,6 +5,7 @@ using NickvisionMoney.Shared.Helpers;
 using NickvisionMoney.Shared.Models;
 using System;
 using System.IO;
+using Adw.Internal;
 using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionMoney.GNOME.Views;
@@ -57,7 +58,7 @@ public partial class NewAccountDialog : Adw.Window
     /// <param name="builder">Gtk.Builder</param>
     /// <param name="controller">NewAccountDialogController</param>
     /// <param name="parent">Gtk.Window</param>
-    private NewAccountDialog(Gtk.Builder builder, NewAccountDialogController controller, Gtk.Window parent) : base(builder.GetPointer("_root"), false)
+    private NewAccountDialog(Gtk.Builder builder, NewAccountDialogController controller, Gtk.Window parent) : base(builder.GetObject("_root").Handle as WindowHandle)
     {
         _controller = controller;
         _currentPageNumber = 0;

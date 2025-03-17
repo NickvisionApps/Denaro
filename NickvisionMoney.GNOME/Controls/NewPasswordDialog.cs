@@ -1,5 +1,6 @@
 ﻿using NickvisionMoney.GNOME.Helpers;
 using System.Threading.Tasks;
+using Adw.Internal;
 
 namespace NickvisionMoney.GNOME.Controls;
 
@@ -13,7 +14,7 @@ public partial class NewPasswordDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.PasswordEntryRow _confirmPasswordEntry;
     [Gtk.Connect] private readonly Gtk.Button _addButton;
 
-    private NewPasswordDialog(Gtk.Builder builder, Gtk.Window parent, string title, TaskCompletionSource<string?> tcs) : base(builder.GetPointer("_root"), false)
+    private NewPasswordDialog(Gtk.Builder builder, Gtk.Window parent, string title, TaskCompletionSource<string?> tcs) : base(builder.GetObject("_root").Handle as WindowHandle)
     {
         var setPassword = false;
         builder.Connect(this);
