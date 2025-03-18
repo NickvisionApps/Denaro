@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Transaction</title>
+<title>பரிவர்த்தனை</title>
 <link rel="stylesheet" type="text/css" href="../C/C.css">
 <script type="text/javascript" src="../C/highlight.pack.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,42 +15,42 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body lang="ta" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Transaction</span></h1></div>
+<a class="trail" href="index.html" title="டெனாரோ உதவி">டெனாரோ உதவி</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">பரிவர்த்தனை</span></h1></div>
 <div class="region">
 <div class="contents pagewide">
-<p class="p">This page explains all properties of transactions in <span class="app">Denaro</span>.</p>
+<p class="p">இந்த பக்கம் <span class="app"> டெனாரோ </span> இல் உள்ள பரிவர்த்தனைகளின் அனைத்து பண்புகளையும் விளக்குகிறது.</p>
 <div class="terms"><div class="inner"><div class="region"><dl class="terms">
-<dt class="terms">Id</dt>
-<dd class="terms"><p class="p">Each transaction has an Id that is unique for a given account. Ids start with 1 and increase for every transaction added. Ids can't be changed, ids of removed transactions are not reused.</p></dd>
-<dt class="terms">Description</dt>
-<dd class="terms"><p class="p">No limit on length. It can't contain semicolon.</p></dd>
-<dt class="terms">Amount</dt>
-<dd class="terms"><p class="p">A number in a format that is valid for your locale, see <span class="em">System Currency</span> in <span class="link"><a href="account.html" title="Account">Account page</a></span> for details.</p></dd>
-<dt class="terms">Type</dt>
-<dd class="terms"><p class="p"><span class="em">Income</span> or <span class="em">Expense</span>. By default the one chosen in <span class="link"><a href="account.html" title="Account">account settings</a></span> will be selected when you open a dialog to add new transaction.</p></dd>
-<dt class="terms">Date</dt>
-<dd class="terms"><p class="p">Any date can be selected, you can also create transactions for future dates.</p></dd>
-<dt class="terms">Repeat Interval</dt>
+<dt class="terms">ஐடி</dt>
+<dd class="terms"><p class="p">ஒவ்வொரு பரிவர்த்தனையிலும் கொடுக்கப்பட்ட கணக்கிற்கு தனித்துவமான ஒரு ஐடி உள்ளது. ஐடிகள் 1 உடன் தொடங்கி சேர்க்கப்பட்ட ஒவ்வொரு பரிவர்த்தனைக்கும் அதிகரிக்கும். ஐடிகளை மாற்ற முடியாது, அகற்றப்பட்ட பரிவர்த்தனைகளின் ஐடிகள் மீண்டும் பயன்படுத்தப்படவில்லை.</p></dd>
+<dt class="terms">விவரம்</dt>
+<dd class="terms"><p class="p">நீளத்திற்கு வரம்பு இல்லை. அதில் அரைக்காற்புள்ளி இருக்க முடியாது.</p></dd>
+<dt class="terms">தொகை</dt>
+<dd class="terms"><p class="p">A number in a format that is valid for your locale, see <span class="em">System Currency</span> in <span class="link"><a href="account.html" title="கணக்கு">Account page</a></span> for details.</p></dd>
+<dt class="terms">வகை</dt>
+<dd class="terms"><p class="p"><span class="em"> வருமானம் </span> அல்லது <span class="em"> செலவு </span>. இயல்பாக  கணக்கு அமைப்புகள்  இல் தேர்ந்தெடுக்கப்பட்டவை புதிய பரிவர்த்தனையைச் சேர்க்க உரையாடலைத் திறக்கும்போது தேர்ந்தெடுக்கப்படும்.</p></dd>
+<dt class="terms">திகதி</dt>
+<dd class="terms"><p class="p">எந்த தேதியையும் தேர்ந்தெடுக்கலாம், எதிர்கால தேதிகளுக்கான பரிவர்த்தனைகளையும் நீங்கள் உருவாக்கலாம்.</p></dd>
+<dt class="terms">இடைவெளி மீண்டும்</dt>
 <dd class="terms"><p class="p">Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <span class="em">source</span> transaction. <span class="app">Denaro</span> will automatically generate <span class="em">repeat</span> transactions for the dates up until today or a provided end date if set in the past. <span class="em">Repeat</span> transactions can't be edited or deleted, only <span class="em">source</span> can be modified. When you modify <span class="em">source</span> transaction <span class="app">Denaro</span> will ask if you want to modify or disassociate <span class="em">repeat</span> transactions. If you choose to disassociate, <span class="em">repeat</span> transactions become normal transactions and can be edited or deleted separately.</p></dd>
-<dt class="terms">Repeat End Date</dt>
-<dd class="terms"><p class="p">End date for a transaction with repeat. It can't be earlier than or on the same day as start date.</p></dd>
-<dt class="terms">Group</dt>
-<dd class="terms"><p class="p">Each transaction can belong to only one group or none («Ungrouped» group).</p></dd>
-<dt class="terms">Color</dt>
-<dd class="terms"><p class="p">A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <span class="link"><a href="configuration.html" title="Configuration">configuration</a></span>, but can be changed to any color.</p></dd>
-<dt class="terms">Tags</dt>
-<dd class="terms"><p class="p">A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<span class="code">,</span>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p></dd>
-<dt class="terms">Receipt</dt>
-<dd class="terms"><p class="p">An image of a receipt for transaction. You can upload JPEG or PNG image or PDF document, but no matter the format it will be converted and saved as JPEG image. In case of PDF, only the first page will be saved. You can delete or upload another file anytime.</p></dd>
-<dt class="terms">Notes</dt>
-<dd class="terms"><p class="p">A freeform text note to attach to transaction.</p></dd>
+<dt class="terms">இறுதி தேதியை மீண்டும் செய்யவும்</dt>
+<dd class="terms"><p class="p">மீண்டும் மீண்டும் ஒரு பரிவர்த்தனைக்கான இறுதி தேதி. இது தொடக்க தேதியின் அதே நாளில் அல்லது அதே நாளில் இருக்க முடியாது.</p></dd>
+<dt class="terms">குழு</dt>
+<dd class="terms"><p class="p">ஒவ்வொரு பரிவர்த்தனையும் ஒரே ஒரு குழுவிற்கு மட்டுமே சொந்தமானது அல்லது எதுவுமில்லை («Ungrouped» குழு).</p></dd>
+<dt class="terms">நிறம்</dt>
+<dd class="terms"><p class="p">A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <span class="link"><a href="configuration.html" title="உள்ளமைவு">configuration</a></span>, but can be changed to any color.</p></dd>
+<dt class="terms">குறிச்சொற்கள்</dt>
+<dd class="terms"><p class="p">பரிவர்த்தனைக்கான குறிச்சொற்களின் பட்டியல். ஒரு பரிவர்த்தனைக்கு வரம்பற்ற குறிச்சொற்கள் இருக்கலாம் (அல்லது குறிச்சொற்கள் இல்லை). குறிச்சொற்களில் கமா (<span class="code">, </span>) தவிர வேறு எந்த எழுத்துக்களும் இருக்கலாம், மேலும் எந்த நீளமும் கொண்டிருக்கலாம், ஆனால் அவை குறுகிய முக்கிய வார்த்தைகளாக இருக்கும் என்று எதிர்பார்க்கப்படுகிறது. குழுக்களைப் பயன்படுத்தும் போது கூடுதல் வடிகட்டலுக்கு குறிச்சொற்கள் பயன்படுத்தப்பட வேண்டும். குறிச்சொற்கள் பரிவர்த்தனைகளில் மட்டுமே சேமிக்கப்படுகின்றன, இதன் விளைவாக பயன்படுத்தப்படாத குறிச்சொற்கள் கணக்கு மூடுவதில் தானாக மறைந்துவிடும்.</p></dd>
+<dt class="terms">பற்றுச்சீட்டு</dt>
+<dd class="terms"><p class="p">பரிவர்த்தனைக்கான ரசீதின் படம். நீங்கள் JPEG அல்லது PNG படம் அல்லது PDF ஆவணத்தை பதிவேற்றலாம், ஆனால் வடிவமாக இருந்தாலும் அது மாற்றப்பட்டு JPEG படமாக சேமிக்கப்படும். PDF ஐப் பொறுத்தவரை, முதல் பக்கம் மட்டுமே சேமிக்கப்படும். நீங்கள் எப்போது வேண்டுமானாலும் மற்றொரு கோப்பை நீக்கலாம் அல்லது பதிவேற்றலாம்.</p></dd>
+<dt class="terms">குறிப்புகள்</dt>
+<dd class="terms"><p class="p">பரிவர்த்தனையுடன் இணைக்க ஒரு ஃப்ரீஃபார்ம் உரை குறிப்பு.</p></dd>
 </dl></div></div></div>
 </div>
 <section class="links" role="navigation"><div class="inner">
 <div class="hgroup pagewide"></div>
 <div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">மேலும் தகவல்கள்</span></h2></div>
-<div class="region"><ul><li class="links "><a href="index.html" title="Denaro Help">Denaro Help</a></li></ul></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="டெனாரோ உதவி">டெனாரோ உதவி</a></li></ul></div>
 </div></div></div>
 </div></section>
 </div>
@@ -60,17 +60,17 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="hgroup"><h2><span class="title">இதனைப்பற்றி</span></h2></div>
 <div class="region"><div class="contents">
 <div class="copyrights">
-<div class="copyright">© 2023 Fyodor Sobolev</div>
-<div class="copyright">© 2023 Nicholas Logozzo</div>
+<div class="copyright">© 2023 ஃபெடோர் சோபோலெவ்</div>
+<div class="copyright">© 2023 நிக்கோலச் லோகோச்சோ</div>
 </div>
 <div class="credits">
 <div class="credits-authors">
 <div class="title"><span class="title">எழுதியது</span></div>
-<ul class="credits"><li>Fyodor Sobolev</li></ul>
+<ul class="credits"><li>ஃபெடோர் சோபோலெவ்</li></ul>
 </div>
 <div class="credits-publishers">
 <div class="title"><span class="title">வெளியிட்டோர்</span></div>
-<ul class="credits"><li>Nicholas Logozzo</li></ul>
+<ul class="credits"><li>நிக்கோலச் லோகோச்சோ</li></ul>
 </div>
 <div class="credits-blank"></div>
 <div class="credits-blank"></div>

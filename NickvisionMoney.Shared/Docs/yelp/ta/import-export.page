@@ -2,29 +2,29 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="import-export" its:version="2.0" xml:lang="ta">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Import/Export 📤</title>
+	<title type="link">இறக்குமதி/ஏற்றுமதி</title>
 	<credit type="author copyright">
-		<name>Fyodor Sobolev</name>
+		<name>ஃபெடோர் சோபோலெவ்</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
-		<name>Nicholas Logozzo</name>
+		<name>நிக்கோலச் லோகோச்சோ</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Import/Export</title>
+<title>இறக்குமதி/ஏற்றுமதி</title>
 <div>
-	<title>Import Formats</title>
+	<title>இறக்குமதி வடிவங்கள்</title>
 	<list>
 		<item>
 			<p its:translate="no">Open Financial Exchange (<file>.ofx</file>)</p>
-			<p>Dates should be in <em>YYYYMMDD</em> format.</p>
+			<p>தேதிகள் <em> yyyymmdd </em> வடிவத்தில் இருக்க வேண்டும்.</p>
 		</item>
 		<item>
 			<p its:translate="no">Quicken Interchange Format (<file>.qif</file>)</p>
-			<p>Dates should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
+			<p>தேதிகள் ஆங்கில (யுஎச்) வடிவத்தில் இருக்க வேண்டும் (<em> மிமீ/டிடி/யை </em>).</p>
 		</item>
 		<item>
 			<p its:translate="no">Denaro CSV (<file>.csv</file>)</p>
@@ -33,81 +33,81 @@
 			<list>
 				<item>
 					<title its:translate="no">ID</title>
-					<p>Transaction Id, should be unique for a given account. Ids start with 1.</p>
+					<p>பரிவர்த்தனை ஐடி, கொடுக்கப்பட்ட கணக்கிற்கு தனித்துவமாக இருக்க வேண்டும். ஐடிஎச் 1 உடன் தொடங்குகிறது.</p>
 				</item>
 				<item>
 					<title its:translate="no">Date</title>
-					<p>Transaction date (or start date in case of repeat transaction), should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
+					<p>பரிவர்த்தனை தேதி (அல்லது மீண்டும் மீண்டும் பரிவர்த்தனை ஏற்பட்டால் தொடக்க தேதி), ஆங்கிலம் (யுஎச்) வடிவத்தில் இருக்க வேண்டும் (<em> மிமீ/டிடி/யை </em>).</p>
 				</item>
 				<item>
 					<title its:translate="no">Description</title>
-					<p>Transaction description, it can contain any characters except semicolon.</p>
+					<p>பரிவர்த்தனை விளக்கம், இது அரைக்காற்புள்ளியைத் தவிர வேறு எந்த எழுத்துக்களையும் கொண்டிருக்கலாம்.</p>
 				</item>
 				<item>
 					<title its:translate="no">Type</title>
-					<p>Transaction type: 0 for income, 1 for expense.</p>
+					<p>பரிவர்த்தனை வகை: வருமானத்திற்கு 0, செலவுக்கு 1.</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatInterval</title>
-					<p>A number representing transaction repeat interval:</p>
-					<p>0 - Never</p>
-					<p>1 - Daily</p>
-					<p>2 - Weekly</p>
-					<p>7 - Biweekly</p>
-					<p>3 - Monthly</p>
-					<p>4 - Quarterly</p>
-					<p>5 - Yearly</p>
-					<p>6 - Biyearly</p>
+					<p>பரிவர்த்தனை மீண்டும் இடைவெளியைக் குறிக்கும் எண்:</p>
+					<p>0 - ஒருபோதும்</p>
+					<p>1 - நாள்தோறும்</p>
+					<p>2 - வாராந்திர</p>
+					<p>7 - இரு வாராந்திர</p>
+					<p>3 - மாதாந்திர</p>
+					<p>4 - காலாண்டு</p>
+					<p>5 - ஆண்டு</p>
+					<p>6 - BIYERLY</p>
 					<p>See <em>Repeat Interval</em> in <link xref="transaction">transaction</link> page for details about repeat transactions.</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatFrom</title>
-					<p>Should be either an Id of source transaction or 0 if it's a source transaction or -1 if it's not repeat transaction.</p>
+					<p>மூல பரிவர்த்தனையின் ஐடி அல்லது 0 இது ஒரு மூல பரிவர்த்தனையாக இருந்தால் அல்லது -1 அது மீண்டும் பரிவர்த்தனை இல்லையென்றால் 0 ஆக இருக்க வேண்டும்.</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatEndDate</title>
-					<p>End date for repeat transaction, should be in English (US) format (<em>MM/DD/YYYY</em>). Leave it empty if it's not repeat transaction.</p>
+					<p>மீண்டும் மீண்டும் பரிவர்த்தனைக்கான இறுதி தேதி, ஆங்கிலம் (யுஎச்) வடிவத்தில் இருக்க வேண்டும் (<em> மிமீ/டிடி/யை </em>). இது மீண்டும் பரிவர்த்தனை இல்லையென்றால் காலியாக விடவும்.</p>
 				</item>
 				<item>
 					<title its:translate="no">Amount</title>
-					<p>Transaction amount in English (US) format (<em>123,456.78</em>).</p>
+					<p>ஆங்கிலத்தில் பரிவர்த்தனை தொகை (யுஎச்) வடிவத்தில் (<em> 123,456.78 </em>).</p>
 				</item>
 				<item>
 					<title its:translate="no">RGBA</title>
-					<p>Transaction color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, <em>G</em> and <em>B</em> are integers in range between 0 and 255.</p>
+					<p>பரிவர்த்தனை நிறம், <em> rgb (r, g, b) </em> வடிவத்தில் இருக்க வேண்டும், அங்கு <em> r </em>, <em> ஐயா </em> மற்றும் <em> பி </em> 0 முதல் 255 வரை முழு எண்கள்.</p>
 				</item>
 				<item>
 					<title its:translate="no">UseGroupColor</title>
-					<p>Whether a transaction should use group color: 0 — false, 1 — true.</p>
+					<p>ஒரு பரிவர்த்தனை குழு நிறத்தைப் பயன்படுத்த வேண்டுமா: 0 - பொய், 1 - உண்மை.</p>
 				</item>
 				<item>
 					<title its:translate="no">Group</title>
-					<p>Transaction's group Id. Ids start with 1. For ungrouped transaction it should be -1 (not 0, this is incorrect value for group Id).</p>
+					<p>பரிவர்த்தனையின் குழு ஐடி. ஐடிஎச் 1 உடன் தொடங்குகிறது. குழுவாக பரிவர்த்தனைக்கு இது -1 ஆக இருக்க வேண்டும் (0 அல்ல, இது குழு ஐடிக்கு தவறான மதிப்பு).</p>
 				</item>
 				<item>
 					<title its:translate="no">GroupName</title>
-					<p>Transaction's group name, should match group Id. It can contain any characters except semicolon. Leave it empty for ungrouped transaction, in any other cases it shouldn't be empty.</p>
+					<p>பரிவர்த்தனையின் குழு பெயர், குழு ஐடியுடன் பொருந்த வேண்டும். இது அரைக்காற்புள்ளியைத் தவிர வேறு எந்த கதாபாத்திரங்களையும் கொண்டிருக்கலாம். குழுவாக பரிவர்த்தனைக்கு அதை காலியாக விடுங்கள், வேறு எந்த சந்தர்ப்பங்களிலும் அது காலியாக இருக்கக்கூடாது.</p>
 				</item>
 				<item>
 					<title its:translate="no">GroupDescription</title>
-					<p>Transaction's group description, should match group Id. It can contain any characters except semicolon and can be empty. Leave it empty for ungrouped transaction.</p>
+					<p>பரிவர்த்தனையின் குழு விளக்கம், குழு ஐடியுடன் பொருந்த வேண்டும். இது அரைக்காற்புள்ளியைத் தவிர வேறு எந்த கதாபாத்திரங்களையும் கொண்டிருக்கலாம் மற்றும் காலியாக இருக்கலாம். குழுவாக பரிவர்த்தனைக்கு காலியாக விடவும்.</p>
 				</item>
 				<item>
 					<title its:translate="no">GroupRGBA</title>
-					<p>Group color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, <em>G</em> and <em>B</em> are integers in range between 0 and 255.</p>
+					<p>குழு நிறம், <em> rgb (r, g, b) </em> வடிவத்தில் இருக்க வேண்டும், அங்கு <em> r </em>, <em> g </em> மற்றும் <em> b </em> 0 முதல் 255 வரை முழு எண்கள்.</p>
 				</item>
 			</list>
-			<p>Receipt and notes are not present in CSV.</p>
+			<p>காபிம இல் ரசீது மற்றும் குறிப்புகள் இல்லை.</p>
 		</item>
 	</list>
 </div>
 <div>
-	<title>Export Formats</title>
-	<p>You can select whether to export all information or only from the current view. If you select the current view, currently displayed transactions will be exported in the same order in which they are shown.</p>
+	<title>ஏற்றுமதி வடிவங்கள்</title>
+	<p>எல்லா தகவல்களையும் ஏற்றுமதி செய்யலாமா அல்லது தற்போதைய பார்வையில் இருந்து மட்டுமே நீங்கள் தேர்ந்தெடுக்கலாம். தற்போதைய பார்வையைத் தேர்ந்தெடுத்தால், தற்போது காட்டப்படும் பரிவர்த்தனைகள் அவை காண்பிக்கப்படும் அதே வரிசையில் ஏற்றுமதி செய்யப்படும்.</p>
 	<list>
 		<item>
 			<p its:translate="no">Portable Document Format (<file>.pdf</file>)</p>
-			<p>A file will contain an account information, a list of transactions and images of receipts. Transactions are colored like in the application, but colors are modified by making them half-transparent in order to make black text always clearly visible. You can set a password for an exported file.</p>
+			<p>ஒரு கோப்பில் ஒரு கணக்கு செய்தி, பரிவர்த்தனைகளின் பட்டியல் மற்றும் ரசீதுகளின் படங்கள் இருக்கும். பரிவர்த்தனைகள் பயன்பாட்டில் உள்ளதைப் போலவே வண்ணமயமானவை, ஆனால் கருப்பு உரையை எப்போதும் தெளிவாகக் காண்பிப்பதற்காக வண்ணங்கள் அரை வெளிப்படையானதாக மாற்றுவதன் மூலம் மாற்றியமைக்கப்படுகின்றன. ஏற்றுமதி செய்யப்பட்ட கோப்பிற்கான கடவுச்சொல்லை அமைக்கலாம்.</p>
 		</item>
 		<item>
 			<p its:translate="no">Denaro CSV (<file>.csv</file>)</p>

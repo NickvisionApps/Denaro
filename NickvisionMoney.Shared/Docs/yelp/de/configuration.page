@@ -33,7 +33,7 @@
 		<p>A color that will be selected by default when adding a new <link xref="transaction">transaction</link> with unique color. Changing this will not affect existing transactions, even if they use previously selected default color.</p>
 	</item>
 	<item>
-		<title>Transfer Default Color</title>
+		<title>Standardfarbe der Überweisung</title>
 		<p>A color that will be used for transactions created using <link xref="transfer">transfer</link>. Changing this will not affect existing transactions.</p>
 	</item>
 	<item>
@@ -41,11 +41,11 @@
 		<p>A color that will be selected by default when adding a new group. This is also a color for «Ungrouped» group.</p>
 	</item>
 	<item>
-		<title>Checking Account Color</title>
+		<title>Girokontofarbe</title>
 		<p>A color used to mark <link xref="account">accounts</link> with the <em>Checking</em> type in a recent accounts list.</p>
 	</item>
 	<item>
-		<title>Savings Account Color</title>
+		<title>Sparkontofarbe</title>
 		<p>A color used to mark <link xref="account">accounts</link> with the <em>Savings</em> type in a recent accounts list.</p>
 	</item>
 	<item>

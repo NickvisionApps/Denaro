@@ -42,7 +42,7 @@
 	</item>
 	<item>
         <title>Schwellenwert für Überweisungserinnerungen</title>
-        <p>The threshold used when showing reminders about upcoming transactions.</p>
+        <p>Der Schwellenwert, zum Anzeigen von Erinnerungen an bevorstehende Transaktionen.</p>
     </item>
 	<item>
 		<title>Systemwährung</title>

@@ -2,112 +2,112 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="import-export" its:version="2.0" xml:lang="hi">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Import/Export 📤</title>
+	<title type="link">आयात/निर्यात 📤</title>
 	<credit type="author copyright">
-		<name>Fyodor Sobolev</name>
+		<name>फ्योडोर सोबोलेव</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
-		<name>Nicholas Logozzo</name>
+		<name>निकोलस लोगोज़ो</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Import/Export</title>
+<title>आयात/निर्यात</title>
 <div>
-	<title>Import Formats</title>
+	<title>प्रारूप आयात करें</title>
 	<list>
 		<item>
 			<p its:translate="no">Open Financial Exchange (<file>.ofx</file>)</p>
-			<p>Dates should be in <em>YYYYMMDD</em> format.</p>
+			<p>तिथियाँ <em>YYYYMMDD</em> प्रारूप में होनी चाहिए।</p>
 		</item>
 		<item>
 			<p its:translate="no">Quicken Interchange Format (<file>.qif</file>)</p>
-			<p>Dates should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
+			<p>तारीखें अंग्रेजी (US) प्रारूप (<em>MM/DD/YYYY</em>) में होनी चाहिए।</p>
 		</item>
 		<item>
 			<p its:translate="no">Denaro CSV (<file>.csv</file>)</p>
-			<p>❗ While CSV is a common format and some banks allow their users to export information as CSV, these files are in fact tables that can contain arbitrary data. Importing a CSV file created in other program will fail, because its data will not be compatible with what <app>Denaro</app> tries to get from a file. The purpose of CSV import/export is to provide a way to add data to an account using external programs such as text editors and office suites. Import will only add new transactions without overriding existing ones. If you want to create a CSV file manually, this is the header that includes all columns <app>Denaro</app> expects to find:</p>
+			<p>❗ जबकि CSV एक सामान्य प्रारूप है और कुछ बैंक अपने उपयोगकर्ताओं को CSV के रूप में जानकारी निर्यात करने की अनुमति देते हैं, ये फाइलें वास्तव में तालिकाएं हैं जिनमें मनमाना डेटा हो सकता है। अन्य प्रोग्राम में बनाई गई CSV फाइल को आयात करना विफल हो जाएगा, क्योंकि इसका डेटा <app>Denaro</app> किसी फाइल से प्राप्त करने का प्रयास करने के साथ संगत नहीं होगा। CSV आयात/निर्यात का उद्देश्य टेक्स्ट एडिटर्स और ऑफिस सुइट्स जैसे इक्स्टर्नल प्रोग्रामों का उपयोग करके किसी खाते में डेटा जोड़ने का एक तरीका प्रदान करना है। आयात केवल मौजूदा लेन-देन को ओवरराइड किए बिना नए लेन-देन जोड़ेगा। यदि आप मैन्युअल रूप से एक CSV फाइल बनाना चाहते हैं, तो यह वह हेडर है जिसमें वे सभी कॉलम शामिल हैं जिन्हें <app>Denaro</app> ढूंढने की अपेक्षा करता है:</p>
 			<p its:translate="no"><code>ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA</code></p>
 			<list>
 				<item>
 					<title its:translate="no">ID</title>
-					<p>Transaction Id, should be unique for a given account. Ids start with 1.</p>
+					<p>लेनदेन Id, किसी दिए गए खाते के लिए अद्वितीय होनी चाहिए। Ids 1 से शुरू होती हैं।</p>
 				</item>
 				<item>
 					<title its:translate="no">Date</title>
-					<p>Transaction date (or start date in case of repeat transaction), should be in English (US) format (<em>MM/DD/YYYY</em>).</p>
+					<p>लेन-देन की तारीख (या दोबारा लेन-देन के मामले में आरंभ की तारीख), अंग्रेजी (US) प्रारूप (<em>MM/DD/YYYY</em>) में होनी चाहिए।</p>
 				</item>
 				<item>
 					<title its:translate="no">Description</title>
-					<p>Transaction description, it can contain any characters except semicolon.</p>
+					<p>लेन-देन विवरण, इसमें अर्धविराम को छोड़कर कोई भी वर्ण हो सकता है।</p>
 				</item>
 				<item>
 					<title its:translate="no">Type</title>
-					<p>Transaction type: 0 for income, 1 for expense.</p>
+					<p>लेन-देन प्रकार: आय के लिए 0, व्यय के लिए 1।</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatInterval</title>
-					<p>A number representing transaction repeat interval:</p>
-					<p>0 - Never</p>
-					<p>1 - Daily</p>
-					<p>2 - Weekly</p>
-					<p>7 - Biweekly</p>
-					<p>3 - Monthly</p>
-					<p>4 - Quarterly</p>
-					<p>5 - Yearly</p>
-					<p>6 - Biyearly</p>
-					<p>See <em>Repeat Interval</em> in <link xref="transaction">transaction</link> page for details about repeat transactions.</p>
+					<p>लेन-देन दोहराव अंतराल का प्रतिनिधित्व करने वाली एक संख्या:</p>
+					<p>0 - कभी नहीं</p>
+					<p>1 - प्रतिदिन</p>
+					<p>2 - साप्ताहिक</p>
+					<p>7 - द्विसाप्ताहिक</p>
+					<p>3 - मासिक</p>
+					<p>4 - त्रैमासिक</p>
+					<p>5 - वार्षिक</p>
+					<p>6 - द्विवार्षिक</p>
+					<p>बार-बार होने वाले लेनदेन के विवरण के लिए <link xref="transaction">transaction</link> पेज में <em>Repeat Interval</em> देखें।</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatFrom</title>
-					<p>Should be either an Id of source transaction or 0 if it's a source transaction or -1 if it's not repeat transaction.</p>
+					<p>या तो स्रोत लेनदेन की Id होनी चाहिए या यदि यह स्रोत लेनदेन है तो 0 या यदि यह दोहराव लेनदेन नहीं है तो -1 होना चाहिए।</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatEndDate</title>
-					<p>End date for repeat transaction, should be in English (US) format (<em>MM/DD/YYYY</em>). Leave it empty if it's not repeat transaction.</p>
+					<p>दोबारा लेन-देन की अंतिम तिथि अंग्रेजी (US) प्रारूप (<em>MM/DD/YYYY</em>) में होनी चाहिए। यदि यह दोबारा लेनदेन नहीं है तो इसे खाली छोड़ दें।</p>
 				</item>
 				<item>
 					<title its:translate="no">Amount</title>
-					<p>Transaction amount in English (US) format (<em>123,456.78</em>).</p>
+					<p>अंग्रेजी (US) प्रारूप में लेनदेन राशि (<em>123,456.78</em>)।</p>
 				</item>
 				<item>
 					<title its:translate="no">RGBA</title>
-					<p>Transaction color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, <em>G</em> and <em>B</em> are integers in range between 0 and 255.</p>
+					<p>लेन-देन का रंग, <em>rgb(R,G,B)</em> प्रारूप में होना चाहिए जहां <em>R</em>, <em>G</em> और <em>B</em> हैं 0 और 255 के बीच की सीमा में पूर्णांक।</p>
 				</item>
 				<item>
 					<title its:translate="no">UseGroupColor</title>
-					<p>Whether a transaction should use group color: 0 — false, 1 — true.</p>
+					<p>क्या लेन-देन में समूह रंग का उपयोग किया जाना चाहिए: 0 - गलत, 1 - सत्य।</p>
 				</item>
 				<item>
 					<title its:translate="no">Group</title>
-					<p>Transaction's group Id. Ids start with 1. For ungrouped transaction it should be -1 (not 0, this is incorrect value for group Id).</p>
+					<p>लेन-देन का समूह Id. Ids 1 से शुरू होती हैं। असमूहीकृत लेनदेन के लिए यह -1 होना चाहिए (0 नहीं, यह समूह Id के लिए गलत मान है)।</p>
 				</item>
 				<item>
 					<title its:translate="no">GroupName</title>
-					<p>Transaction's group name, should match group Id. It can contain any characters except semicolon. Leave it empty for ungrouped transaction, in any other cases it shouldn't be empty.</p>
+					<p>लेन-देन का समूह नाम, समूह Id से मेल खाना चाहिए। इसमें अर्धविराम को छोड़कर कोई भी वर्ण हो सकता है। असमूहीकृत लेन-देन के लिए इसे खाली छोड़ दें, किसी भी अन्य स्थिति में यह खाली नहीं होना चाहिए।</p>
 				</item>
 				<item>
 					<title its:translate="no">GroupDescription</title>
-					<p>Transaction's group description, should match group Id. It can contain any characters except semicolon and can be empty. Leave it empty for ungrouped transaction.</p>
+					<p>लेन-देन का समूह विवरण, समूह Id से मेल खाना चाहिए। इसमें अर्धविराम को छोड़कर कोई भी अक्षर हो सकता है और यह खाली हो सकता है। असमूहीकृत लेनदेन के लिए इसे खाली छोड़ दें।</p>
 				</item>
 				<item>
 					<title its:translate="no">GroupRGBA</title>
-					<p>Group color, should be in <em>rgb(R,G,B)</em> format where <em>R</em>, <em>G</em> and <em>B</em> are integers in range between 0 and 255.</p>
+					<p>समूह का रंग, <em>rgb(R,G,B)</em> प्रारूप में होना चाहिए जहां <em>R</em>, <em>G</em> और <em>B</em> हैं 0 और 255 के बीच की सीमा में पूर्णांक।</p>
 				</item>
 			</list>
-			<p>Receipt and notes are not present in CSV.</p>
+			<p>रसीद और नोट्स CSV में मौजूद नहीं हैं।</p>
 		</item>
 	</list>
 </div>
 <div>
-	<title>Export Formats</title>
-	<p>You can select whether to export all information or only from the current view. If you select the current view, currently displayed transactions will be exported in the same order in which they are shown.</p>
+	<title>निर्यात प्रारूप</title>
+	<p>आप चुन सकते हैं कि सारी जानकारी निर्यात करनी है या केवल वर्तमान दृश्य से। यदि आप वर्तमान दृश्य का चयन करते हैं, तो वर्तमान में प्रदर्शित लेनदेन उसी क्रम में निर्यात किए जाएंगे जिसमें वे दिखाए गए हैं।</p>
 	<list>
 		<item>
 			<p its:translate="no">Portable Document Format (<file>.pdf</file>)</p>
-			<p>A file will contain an account information, a list of transactions and images of receipts. Transactions are colored like in the application, but colors are modified by making them half-transparent in order to make black text always clearly visible. You can set a password for an exported file.</p>
+			<p>एक फाइल में खाते की जानकारी, लेनदेन की एक सूची और प्राप्तियों की छवियां होंगी। लेन-देन एप्लिकेशन की तरह रंगीन होते हैं, लेकिन काले पाठ को हमेशा स्पष्ट रूप से दिखाई देने के लिए रंगों को आधा-पारदर्शी बनाकर संशोधित किया जाता है। आप किसी निर्यातित फाइल के लिए पासवर्ड सेट कर सकते हैं।</p>
 		</item>
 		<item>
 			<p its:translate="no">Denaro CSV (<file>.csv</file>)</p>

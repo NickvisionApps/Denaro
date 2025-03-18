@@ -2,20 +2,20 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transfer" its:version="2.0" xml:lang="ta">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Transfer 💸</title>
+	<title type="link">இடமாற்றம் 💸</title>
 	<credit type="author copyright">
-		<name>Fyodor Sobolev</name>
+		<name>ஃபெடோர் சோபோலெவ்</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
-		<name>Nicholas Logozzo</name>
+		<name>நிக்கோலச் லோகோச்சோ</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Transfer</title>
-<p>Transfer is a way to move money from one account to another. After running a transfer 2 transactions will be created with the following descriptions:</p>
+<title>இடமாற்றம்</title>
+<p>பரிமாற்றம் என்பது ஒரு கணக்கிலிருந்து இன்னொரு கணக்கிலிருந்து பணத்தை நகர்த்துவதற்கான ஒரு வழியாகும். பரிமாற்றத்தை இயக்கிய பிறகு 2 பரிவர்த்தனைகள் பின்வரும் விளக்கங்களுடன் உருவாக்கப்படும்:</p>
 <list>
 	<item>
 		<p>«Transfer to <input>Destination Account Name</input>» on source account.</p>
@@ -24,7 +24,7 @@
 		<p>«Transfer from <input>Source Account Name</input>» on destination account.</p>
 	</item>
 </list>
-<p>Transactions created using transfer are simple transactions that can be freely edited or deleted. These transactions are not connected: modifying transaction on source account will not affect transaction on destination account, and vice versa.</p>
-<p>Transfer doesn't allow you to create repeating transactions or set any properties other than the amount. The color selected in <link xref="configuration">configuration</link> will be used for created transactions.</p>
-<p>If you create a transfer between accounts with different currencies, you will be asked to provide a conversion rate.</p>
+<p>பரிமாற்றத்தைப் பயன்படுத்தி உருவாக்கப்பட்ட பரிவர்த்தனைகள் எளிய பரிவர்த்தனைகள், அவை இலவசமாக திருத்தப்படலாம் அல்லது நீக்கப்படலாம். இந்த பரிவர்த்தனைகள் இணைக்கப்படவில்லை: மூல கணக்கில் பரிவர்த்தனையை மாற்றியமைப்பது இலக்கு கணக்கில் பரிவர்த்தனையை பாதிக்காது, நேர்மாறாகவும்.</p>
+<p>மீண்டும் மீண்டும் பரிவர்த்தனைகளை உருவாக்க அல்லது தொகையைத் தவிர வேறு எந்த பண்புகளையும் அமைக்க இடமாற்றம் உங்களை அனுமதிக்காது. <இணைப்பு XREF="உள்ளமைவு"> உள்ளமைவு </இணைப்பு> இல் தேர்ந்தெடுக்கப்பட்ட வண்ணம் உருவாக்கப்பட்ட பரிவர்த்தனைகளுக்கு பயன்படுத்தப்படும்.</p>
+<p>வெவ்வேறு நாணயங்களைக் கொண்ட கணக்குகளுக்கு இடையில் பரிமாற்றத்தை உருவாக்கினால், மாற்று விகிதத்தை வழங்குமாறு கேட்கப்படுவீர்கள்.</p>
 </page>

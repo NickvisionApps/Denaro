@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Account</title>
+<title>Hesap</title>
 <link rel="stylesheet" type="text/css" href="../C/C.css">
 <script type="text/javascript" src="../C/highlight.pack.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,18 +15,18 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body lang="tr" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Account</span></h1></div>
+<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Hesap</span></h1></div>
 <div class="region">
 <div class="contents pagewide">
-<p class="p">This page explains all properties of accounts in <span class="app">Denaro</span>. Most of them are shown in <span class="gui">Account Settings Dialog</span>. This dialog also opens automatically after you create a new account.</p>
-<p class="p">Each account is stored in a single <span class="file">*.nmoney</span> file. Files created in an older <span class="em">stable</span> version of <span class="app">Denaro</span> can be safely opened in a more recent <span class="em">stable</span> version of the application. Although the app can run on different platforms (Windows and Linux), the <span class="file">*.nmoney</span> files are 100% compatible between platforms as long as they are from the same application version (i.e. V2023.1.0).</p>
+<p class="p">Bu sayfa <span class="app">Denaro</span> hesaplarının tüm özelliklerini açıklar. Bu özelliklerin çoğu <span class="gui">Hesap Ayarları Diyaloğu</span> içerisinde gösterilir. Bu diyalog ayrıca yeni bir hesap oluşturulduktan sonra otomatik olarak da açılır.</p>
+<p class="p">Her hesap <span class="file">*.nmoney</span> tipinde ki bir dosyada tutulmaktadır. <span class="app">Denaro</span> uygulamasının eski bir <span class="em">sabit</span> bir sürümünde oluşturulmuş bu hesap dosyaları daha yeni bir <span class="em">sabit</span> sürümde açılabilir. Uygulama farklı işletim sistemlerini desteklesede (Windows ve Linux), farklı bir sistemde oluşturulmuş <span class="file">*.nmoney</span> dosyalarının tam uyumluluğu ancak ve ancak uygulama sürümüleri de aynıysa (örnek: V2023.1.0) sağlanabilir.</p>
 <div class="note note-warning" title="Uyarı">
 <svg height="24" width="24" version="1.1">
  <path class="yelp-svg-fill" d="m11.92 3.3047a1.3872 1.3872 0 0 0 -1.129 0.6933l-8.6055 14.922a1.3872 1.3872 0 0 0 1.2012 2.08l17.226-0.008a1.3872 1.3872 0 0 0 1.201 -2.08l-8.619-14.916a1.3872 1.3872 0 0 0 -1.136 -0.6913 1.3872 1.3872 0 0 0 -0.139 0zm0.08 4.6953a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1 1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1zm0 9a1 1 0 0 1 1 1 1 1 0 0 1 -1 1 1 1 0 0 1 -1 -1 1 1 0 0 1 1 -1z"></path>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p></div></div></div>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Sabit olmayan sürümler (Beta veya RC etiketliler) tam bitmiş olmadığından yazılımda henüz çözülmemiş hatalar olabilir. Sakın ama sakın gerçek finansal bilgi taşıyan hesap dosyalarını bu sürümlerde açmayın. Bilgi kaybı yaşayabilirsiniz!</p></div></div></div>
 </div>
 <div class="terms"><div class="inner"><div class="region"><dl class="terms">
-<dt class="terms">Name</dt>
+<dt class="terms">Ad</dt>
 <dd class="terms"><p class="p">Account name is shown in the list of recent accounts and in tabs. A name doesn't have a length limit and it can contain any characters, including emojis.</p></dd>
 <dt class="terms">Account Type</dt>
 <dd class="terms"><p class="p">There are 3 account types available: 🟣<span class="em">Checking</span>, 🔵<span class="em">Savings</span> and 🟢<span class="em">Business</span>. Account type is only a useful label that is shown in the list of recent accounts and doesn't affect how the application works or what you can do with an account. Each account type has its own color, these colors can be configured in <span class="link"><a href="configuration.html" title="Configuration">global settings</a></span>.</p></dd>
@@ -36,11 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <dd class="terms"><p class="p">The threshold used when showing reminders about upcoming transactions.</p></dd>
 <dt class="terms">System Currency</dt>
 <dd class="terms">
-<p class="p">Every time the application starts, it gets data about currency and numbers formatting from your system locale, and this data is used to show currency symbol (unless custom currency is used, see below) and to determine in what format the numbers will be accepted as values for transaction amounts. A few examples:</p>
+<p class="p">Uygulama, işlem miktarlarını ve gösterilecek para birimini belirlemek için her açılışta sistemin yerel ayarlarına bakar. Eğer özel para birimi ayarı kullanıyorsanız, bu kısmına atlayın. Örnekler:</p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
-<li class="list"><p class="p">If your locale is <span class="em">English (US)</span>, currency symbol will be set to <span class="em">$</span> and <span class="em">1,000.00</span> will be accepted as a valid number.</p></li>
-<li class="list"><p class="p">If your locale is <span class="em">Italian</span>, currency symbol will be set to <span class="em">€</span> and <span class="em">1.000,00</span> will be accepted as a valid number.</p></li>
-<li class="list"><p class="p">If your locale is <span class="em">Russian</span>, currency symbol will be set to <span class="em">₽</span> and <span class="em">1000,00</span> will be accepted as a valid number.</p></li>
+<li class="list"><p class="p">Eğer bölge ayarınız <span class="em">İngilizce (ABD)</span> ise, <span class="em">$</span> para birimi sembolü olup <span class="em">1,000.00</span> sayı formatı kabul edilecek.</p></li>
+<li class="list"><p class="p">Eğer bölge ayarınız <span class="em">İtalya</span> ise, <span class="em">€</span> para birimi sembolü olup <span class="em">1.000,00</span> sayı formatı kabul edilecek.</p></li>
+<li class="list"><p class="p">Eğer bölge ayarınız <span class="em">Rusya</span> ise, <span class="em">₽</span> para birimi sembolü olup <span class="em">1000,00</span> sayı formatı kabul edilecek.</p></li>
 </ul></div></div></div>
 <div class="note note-advanced" title="Gelişmiş">
 <svg height="24" width="24" version="1.1">
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </svg><div class="inner"><div class="region"><div class="contents"><p class="p">On Linux, it is possible to set different locales for system language and formats. Changing these settings varies depending on the desktop environment you are using. Despite differences in the location of these settings on the desktop, changing these settings modify system environment variables, such as <span class="code">LANG</span>, <span class="code">LC_TIME</span>, and <span class="code">LC_MONETARY</span>. <span class="app">Denaro</span> will try to use amount and date formats according to these variables. If the app fails to use the expected formats, please make sure the variables are set correctly via the <span class="code">locale</span> command in a terminal. If you found a bug and want to report it, please provide the output of the <span class="code">locale</span> command to allow developers to reproduce your issue with the same settings.</p></div></div></div>
 </div>
 </dd>
-<dt class="terms">Use Custom Currency</dt>
+<dt class="terms">Özel Para Birimi Kullan</dt>
 <dd class="terms"><p class="p">If this option is enabled, <span class="gui">Custom Currency Symbol</span> will be used instead of currency symbol provided by your system locale.</p></dd>
 <dt class="terms">Custom Currency Symbol</dt>
 <dd class="terms"><p class="p">Up to 3 characters or 1 emoji. It can't be a number.</p></dd>
