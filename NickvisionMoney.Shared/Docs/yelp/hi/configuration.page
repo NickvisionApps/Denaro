@@ -2,61 +2,61 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="hi">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Configuration 🔧</title>
+	<title type="link">कॉन्फ़िगरेशन 🔧</title>
 	<credit type="author copyright">
-		<name>Fyodor Sobolev</name>
+		<name>फ्योडोर सोबोलेव</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
-		<name>Nicholas Logozzo</name>
+		<name>निकोलस लोगोज़ो</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Configuration</title>
-<p>This page describes what you can change in the application configuration.</p>
-<p>Depending on your platform, in the application interface the configuration is referred as either <gui>Preferences</gui> or <gui>Settings</gui>.</p>
+<title>कॉन्फ़िगरेशन</title>
+<p>यह पृष्ठ वर्णन करता है कि आप एप्लिकेशन कॉन्फ़िगरेशन में क्या बदल सकते हैं।</p>
+<p>आपके प्लेटफ़ॉर्म के आधार पर, एप्लिकेशन इंटरफ़ेस में कॉन्फ़िगरेशन को <gui>प्राथमिकताएं</gui> या <gui>सेटिंग्स</gui> के रूप में संदर्भित किया जाता है।</p>
 <terms>
 	<item>
-		<title>Theme</title>
-		<p>Set light or dark theme, or make <app>Denaro</app> follow your system theme. Changing this on Windows requires the application restart to apply.</p>
+		<title>थीम</title>
+		<p>प्रकाश या गहरे रंग की थीम सेट करें, या <app>Denaro</app> को अपने सिस्टम थीम का अनुसरण करें। विंडोज़ पर इसे बदलने के लिए आवेदन को पुनः आरंभ करने की आवश्यकता है।</p>
 	</item>
 	<item>
-		<title>Transaction Default Color</title>
-		<p>A color that will be selected by default when adding a new <link xref="transaction">transaction</link> with unique color. Changing this will not affect existing transactions, even if they use previously selected default color.</p>
+		<title>लेन-देन का तयशुदा रंग</title>
+		<p>एक रंग जो अद्वितीय रंग के साथ एक नया <link xref="transaction">transaction</link> जोड़ते समय डिफ़ॉल्ट रूप से चुना जाएगा। इसे बदलने से मौजूदा लेनदेन प्रभावित नहीं होंगे, भले ही वे पहले से चयनित डिफ़ॉल्ट रंग का उपयोग करें।</p>
 	</item>
 	<item>
-		<title>Transfer Default Color</title>
-		<p>A color that will be used for transactions created using <link xref="transfer">transfer</link>. Changing this will not affect existing transactions.</p>
+		<title>स्थानांतरण का तयशुदा रंग</title>
+		<p>एक रंग जिसका उपयोग <link xref="transfer">transfer</link> का उपयोग करके किए गए लेनदेन के लिए किया जाएगा। इसे बदलने से मौजूदा लेनदेन पर कोई असर नहीं पड़ेगा।</p>
 	</item>
 	<item>
-		<title>Group Default Color</title>
-		<p>A color that will be selected by default when adding a new group. This is also a color for «Ungrouped» group.</p>
+		<title>समूह का तयशुदा रंग</title>
+		<p>एक रंग जो नया समूह जोड़ते समय डिफ़ॉल्ट रूप से चुना जाएगा। यह «अनग्रुप्ड» समूह के लिए भी एक रंग है।</p>
 	</item>
 	<item>
-		<title>Checking Account Color</title>
-		<p>A color used to mark <link xref="account">accounts</link> with the <em>Checking</em> type in a recent accounts list.</p>
+		<title>खाते का रंग जांचा जा रहा है</title>
+		<p>हाल की खातों की सूची में <link xref="account">खातों</link> को <em>चेकिंग</em> प्रकार से चिह्नित करने के लिए उपयोग किया जाने वाला रंग।</p>
 	</item>
 	<item>
-		<title>Savings Account Color</title>
-		<p>A color used to mark <link xref="account">accounts</link> with the <em>Savings</em> type in a recent accounts list.</p>
+		<title>बचत खाते का रंग</title>
+		<p>हाल की खातों की सूची में <link xref="account">खातों</link> को <em>बचत</em> प्रकार से चिह्नित करने के लिए उपयोग किया जाने वाला रंग।</p>
 	</item>
 	<item>
-		<title>Business Account Color</title>
-		<p>A color used to mark <link xref="account">accounts</link> with the <em>Business</em> type in a recent accounts list.</p>
+		<title>व्यवसाय खाता रंग</title>
+		<p>हाल की खातों की सूची में <link xref="account">खातों</link> को <em>व्यवसाय</em> प्रकार से चिह्नित करने के लिए उपयोग किया जाने वाला रंग।</p>
 	</item>
 	<item>
-		<title>Use Native Digits</title>
-		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numerals.</p>
+		<title>मूल अंकों का प्रयोग करें</title>
+		<p>क्या लैटिन अंकों के बजाय उन अंकों का उपयोग करना चाहिए जो आपके स्थान के मूल निवासी हैं। उदाहरण के लिए, यदि यह सेटिंग सक्षम है तो पूर्वी अरबी अंकों का उपयोग करने वाले स्थानों के लिए <em>012</em> के बजाय <em>٠١٢</em> का उपयोग किया जाएगा।</p>
 	</item>
 	<item>
-		<title>Insert Decimal Separator</title>
-		<p>Set for which keys pressed will the locale's decimal separator be inserted into an amount field: numpad period, any period and comma, or none. If decimal separator is already presented in a field, it will not be inserted.</p>
+		<title>दशमलव विभाजक डालें</title>
+		<p>सेट करें कि कौन सी कुंजी दबाए जाने पर लोकेल का दशमलव विभाजक राशि फ़ील्ड में डाला जाएगा: संख्यापैड अवधि, कोई भी अवधि और अल्पविराम, या कोई नहीं। यदि दशमलव विभाजक पहले से ही किसी फ़ील्ड में प्रस्तुत किया गया है, तो इसे सम्मिलित नहीं किया जाएगा।</p>
 	</item>
 	<item>
-		<title>CSV Backup Folder</title>
-		<p>A folder where your data will be automatically <link xref="import-export">exported to CSV</link> after every change. This feature doesn't work for password-protected accounts, because CSV files can't be password-protected.</p>
+		<title>CSV बैकअप फोल्डर</title>
+		<p>एक फोल्डर जहां आपका डेटा प्रत्येक परिवर्तन के बाद स्वचालित रूप से <link xref="import-export">CSV में निर्यात किया जाएगा</link>। यह सुविधा पासवर्ड-सुरक्षित खातों के लिए काम नहीं करती, क्योंकि CSV फाइलें पासवर्ड-सुरक्षित नहीं की जा सकतीं।</p>
 	</item>
 </terms>
 </page>

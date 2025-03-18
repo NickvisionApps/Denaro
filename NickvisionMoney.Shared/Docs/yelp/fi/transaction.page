@@ -63,7 +63,7 @@
 		<p>An image of a receipt for transaction. You can upload JPEG or PNG image or PDF document, but no matter the format it will be converted and saved as JPEG image. In case of PDF, only the first page will be saved. You can delete or upload another file anytime.</p>
 	</item>
 	<item>
-		<title>Notes</title>
+		<title>Muistiinpanot</title>
 		<p>A freeform text note to attach to transaction.</p>
 	</item>
 </terms>

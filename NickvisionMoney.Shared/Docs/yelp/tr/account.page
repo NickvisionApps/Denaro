@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="account" its:version="2.0" xml:lang="tr">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Account 🏦</title>
+	<title type="link">Hesap 🏦</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -14,16 +14,16 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Account</title>
-<p>This page explains all properties of accounts in <app>Denaro</app>. Most of them are shown in <gui>Account Settings Dialog</gui>. This dialog also opens automatically after you create a new account.</p>
-<p>Each account is stored in a single <file>*.nmoney</file> file. Files created in an older <em>stable</em> version of <app>Denaro</app> can be safely opened in a more recent <em>stable</em> version of the application. Although the app can run on different platforms (Windows and Linux), the <file>*.nmoney</file> files are 100% compatible between platforms as long as they are from the same application version (i.e. V2023.1.0).</p>
+<title>Hesap</title>
+<p>Bu sayfa <app>Denaro</app> hesaplarının tüm özelliklerini açıklar. Bu özelliklerin çoğu <gui>Hesap Ayarları Diyaloğu</gui> içerisinde gösterilir. Bu diyalog ayrıca yeni bir hesap oluşturulduktan sonra otomatik olarak da açılır.</p>
+<p>Her hesap <file>*.nmoney</file> tipinde ki bir dosyada tutulmaktadır. <app>Denaro</app> uygulamasının eski bir <em>sabit</em> bir sürümünde oluşturulmuş bu hesap dosyaları daha yeni bir <em>sabit</em> sürümde açılabilir. Uygulama farklı işletim sistemlerini desteklesede (Windows ve Linux), farklı bir sistemde oluşturulmuş <file>*.nmoney</file> dosyalarının tam uyumluluğu ancak ve ancak uygulama sürümüleri de aynıysa (örnek: V2023.1.0) sağlanabilir.</p>
 <note style="warning">
-	<p>Unstable (Beta and RC) versions of the application can contain bugs or unfinished modifications that can cause data loss. DO NOT use account files that contain real data in unstable versions of the app!</p>
+	<p>Sabit olmayan sürümler (Beta veya RC etiketliler) tam bitmiş olmadığından yazılımda henüz çözülmemiş hatalar olabilir. Sakın ama sakın gerçek finansal bilgi taşıyan hesap dosyalarını bu sürümlerde açmayın. Bilgi kaybı yaşayabilirsiniz!</p>
 </note>
 
 <terms>
 	<item>
-		<title>Name</title>
+		<title>Ad</title>
 		<p>Account name is shown in the list of recent accounts and in tabs. A name doesn't have a length limit and it can contain any characters, including emojis.</p>
 	</item>
 	<item>
@@ -40,18 +40,18 @@
     </item>
 	<item>
 		<title>System Currency</title>
-		<p>Every time the application starts, it gets data about currency and numbers formatting from your system locale, and this data is used to show currency symbol (unless custom currency is used, see below) and to determine in what format the numbers will be accepted as values for transaction amounts. A few examples:</p>
+		<p>Uygulama, işlem miktarlarını ve gösterilecek para birimini belirlemek için her açılışta sistemin yerel ayarlarına bakar. Eğer özel para birimi ayarı kullanıyorsanız, bu kısmına atlayın. Örnekler:</p>
 		<list>
-			<item><p>If your locale is <em>English (US)</em>, currency symbol will be set to <em>$</em> and <em>1,000.00</em> will be accepted as a valid number.</p></item>
-			<item><p>If your locale is <em>Italian</em>, currency symbol will be set to <em>€</em> and <em>1.000,00</em> will be accepted as a valid number.</p></item>
-			<item><p>If your locale is <em>Russian</em>, currency symbol will be set to <em>₽</em> and <em>1000,00</em> will be accepted as a valid number.</p></item>
+			<item><p>Eğer bölge ayarınız <em>İngilizce (ABD)</em> ise, <em>$</em> para birimi sembolü olup <em>1,000.00</em> sayı formatı kabul edilecek.</p></item>
+			<item><p>Eğer bölge ayarınız <em>İtalya</em> ise, <em>€</em> para birimi sembolü olup <em>1.000,00</em> sayı formatı kabul edilecek.</p></item>
+			<item><p>Eğer bölge ayarınız <em>Rusya</em> ise, <em>₽</em> para birimi sembolü olup <em>1000,00</em> sayı formatı kabul edilecek.</p></item>
 		</list>
 		<note style="advanced">
 			<p>On Linux, it is possible to set different locales for system language and formats. Changing these settings varies depending on the desktop environment you are using. Despite differences in the location of these settings on the desktop, changing these settings modify system environment variables, such as <code>LANG</code>, <code>LC_TIME</code>, and <code>LC_MONETARY</code>. <app>Denaro</app> will try to use amount and date formats according to these variables. If the app fails to use the expected formats, please make sure the variables are set correctly via the <code>locale</code> command in a terminal. If you found a bug and want to report it, please provide the output of the <code>locale</code> command to allow developers to reproduce your issue with the same settings.</p>
 		</note>
 	</item>
 	<item>
-		<title>Use Custom Currency</title>
+		<title>Özel Para Birimi Kullan</title>
 		<p>If this option is enabled, <gui>Custom Currency Symbol</gui> will be used instead of currency symbol provided by your system locale.</p>
 	</item>
 	<item>

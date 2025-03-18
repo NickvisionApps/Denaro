@@ -51,18 +51,18 @@
 				</item>
 				<item>
 					<title its:translate="no">Type</title>
-					<p>Transaction type: 0 for income, 1 for expense.</p>
+					<p>Transaktionsart: 0 für Einnahmen, 1 für Ausgaben.</p>
 				</item>
 				<item>
 					<title its:translate="no">RepeatInterval</title>
-					<p>A number representing transaction repeat interval:</p>
-					<p>0 - Never</p>
-					<p>1 - Daily</p>
-					<p>2 - Weekly</p>
-					<p>7 - Biweekly</p>
-					<p>3 - Monthly</p>
-					<p>4 - Quarterly</p>
-					<p>5 - Yearly</p>
+					<p>Eine Zahl, die das Intervall der Transaktionswiederholung angibt:</p>
+					<p>0 - Nie</p>
+					<p>1 - Täglich</p>
+					<p>2 - Wöchentlich</p>
+					<p>7 - Zweiwöchentlich</p>
+					<p>3 - Monatlich</p>
+					<p>4 - Vierteljährlich</p>
+					<p>5 - Jährlich</p>
 					<p>6 - Biyearly</p>
 					<p>See <em>Repeat Interval</em> in <link xref="transaction">transaction</link> page for details about repeat transactions.</p>
 				</item>

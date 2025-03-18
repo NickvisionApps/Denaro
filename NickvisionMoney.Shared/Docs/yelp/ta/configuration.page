@@ -2,60 +2,60 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="ta">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Configuration 🔧</title>
+	<title type="link">உள்ளமைவு</title>
 	<credit type="author copyright">
-		<name>Fyodor Sobolev</name>
+		<name>ஃபெடோர் சோபோலெவ்</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
-		<name>Nicholas Logozzo</name>
+		<name>நிக்கோலச் லோகோச்சோ</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Configuration</title>
-<p>This page describes what you can change in the application configuration.</p>
-<p>Depending on your platform, in the application interface the configuration is referred as either <gui>Preferences</gui> or <gui>Settings</gui>.</p>
+<title>உள்ளமைவு</title>
+<p>பயன்பாட்டு உள்ளமைவில் நீங்கள் எதை மாற்றலாம் என்பதை இந்த பக்கம் விவரிக்கிறது.</p>
+<p>உங்கள் தளத்தைப் பொறுத்து, பயன்பாட்டு இடைமுகத்தில் உள்ளமைவு <gui> விருப்பத்தேர்வுகள் </gui> அல்லது <gui> அமைப்புகள் </gui> என குறிப்பிடப்படுகிறது.</p>
 <terms>
 	<item>
-		<title>Theme</title>
-		<p>Set light or dark theme, or make <app>Denaro</app> follow your system theme. Changing this on Windows requires the application restart to apply.</p>
+		<title>கருப்பொருள்</title>
+		<p>ஒளி அல்லது இருண்ட கருப்பொருளை அமைக்கவும் அல்லது <app> டெனாரோ </app> உங்கள் கணினி கருப்பொருளைப் பின்பற்றவும். சாளரங்களில் இதை மாற்றுவதற்கு விண்ணப்பிக்க விண்ணப்பிக்க வேண்டும்.</p>
 	</item>
 	<item>
-		<title>Transaction Default Color</title>
+		<title>பரிவர்த்தனை இயல்புநிலை நிறம்</title>
 		<p>A color that will be selected by default when adding a new <link xref="transaction">transaction</link> with unique color. Changing this will not affect existing transactions, even if they use previously selected default color.</p>
 	</item>
 	<item>
-		<title>Transfer Default Color</title>
-		<p>A color that will be used for transactions created using <link xref="transfer">transfer</link>. Changing this will not affect existing transactions.</p>
+		<title>இயல்புநிலை நிறத்தை மாற்றவும்</title>
+		<p><இணைப்பு XREF="பரிமாற்றம்"> பரிமாற்றம் </இணைப்பு> ஐப் பயன்படுத்தி உருவாக்கப்பட்ட பரிவர்த்தனைகளுக்கு பயன்படுத்தப்படும் வண்ணம். இதை மாற்றுவது தற்போதுள்ள பரிவர்த்தனைகளை பாதிக்காது.</p>
 	</item>
 	<item>
-		<title>Group Default Color</title>
-		<p>A color that will be selected by default when adding a new group. This is also a color for «Ungrouped» group.</p>
+		<title>குழு இயல்புநிலை நிறம்</title>
+		<p>புதிய குழுவைச் சேர்க்கும்போது இயல்பாகவே தேர்ந்தெடுக்கப்படும் வண்ணம். இது «ungrouped» குழுவிற்கும் ஒரு வண்ணம்.</p>
 	</item>
 	<item>
-		<title>Checking Account Color</title>
+		<title>கணக்கு நிறத்தை சரிபார்க்கிறது</title>
 		<p>A color used to mark <link xref="account">accounts</link> with the <em>Checking</em> type in a recent accounts list.</p>
 	</item>
 	<item>
-		<title>Savings Account Color</title>
+		<title>சேமிப்பு கணக்கு நிறம்</title>
 		<p>A color used to mark <link xref="account">accounts</link> with the <em>Savings</em> type in a recent accounts list.</p>
 	</item>
 	<item>
-		<title>Business Account Color</title>
+		<title>வணிக கணக்கு நிறம்</title>
 		<p>A color used to mark <link xref="account">accounts</link> with the <em>Business</em> type in a recent accounts list.</p>
 	</item>
 	<item>
-		<title>Use Native Digits</title>
-		<p>Whether to use numerals that are native for your locale instead of latin digits. For example, if this setting is enabled <em>٠١٢</em> will be used instead of <em>012</em> for locales that use Eastern Arabic numerals.</p>
+		<title>சொந்த இலக்கங்களைப் பயன்படுத்துங்கள்</title>
+		<p>லத்தீன் இலக்கங்களுக்கு பதிலாக உங்கள் இருப்பிடத்திற்கு சொந்தமான எண்களைப் பயன்படுத்த வேண்டுமா. எடுத்துக்காட்டாக, இந்த அமைப்பு இயக்கப்பட்டிருந்தால் <em> ٠١٢ </em> கிழக்கு அரபு எண்களைப் பயன்படுத்தும் இடங்களுக்கு <em> 012 </em> க்கு பதிலாக பயன்படுத்தப்படும்.</p>
 	</item>
 	<item>
-		<title>Insert Decimal Separator</title>
-		<p>Set for which keys pressed will the locale's decimal separator be inserted into an amount field: numpad period, any period and comma, or none. If decimal separator is already presented in a field, it will not be inserted.</p>
+		<title>தசம பிரிப்பான் செருகவும்</title>
+		<p>எந்த விசைகள் அழுத்தின. தசம பிரிப்பான் ஏற்கனவே ஒரு துறையில் வழங்கப்பட்டால், அது செருகப்படாது.</p>
 	</item>
 	<item>
-		<title>CSV Backup Folder</title>
+		<title>காபிம காப்புப்பிரதி கோப்புறை</title>
 		<p>A folder where your data will be automatically <link xref="import-export">exported to CSV</link> after every change. This feature doesn't work for password-protected accounts, because CSV files can't be password-protected.</p>
 	</item>
 </terms>

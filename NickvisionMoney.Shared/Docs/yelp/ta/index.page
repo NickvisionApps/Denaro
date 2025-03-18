@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="guide" id="index" its:version="2.0" xml:lang="ta">
 <info>
-	<title type="link">Denaro Help</title>
-	<title type="text">Denaro Help</title>
+	<title type="link">டெனாரோ உதவி</title>
+	<title type="text">டெனாரோ உதவி</title>
 	<credit type="author copyright">
-		<name>Fyodor Sobolev</name>
+		<name>ஃபெடோர் சோபோலெவ்</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
-		<name>Nicholas Logozzo</name>
+		<name>நிக்கோலச் லோகோச்சோ</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>

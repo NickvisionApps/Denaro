@@ -2,69 +2,69 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transaction" its:version="2.0" xml:lang="ta">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Transaction 🧾</title>
+	<title type="link">பரிவர்த்தனை</title>
 	<credit type="author copyright">
-		<name>Fyodor Sobolev</name>
+		<name>ஃபெடோர் சோபோலெவ்</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
-		<name>Nicholas Logozzo</name>
+		<name>நிக்கோலச் லோகோச்சோ</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Transaction</title>
-<p>This page explains all properties of transactions in <app>Denaro</app>.</p>
+<title>பரிவர்த்தனை</title>
+<p>இந்த பக்கம் <app> டெனாரோ </app> இல் உள்ள பரிவர்த்தனைகளின் அனைத்து பண்புகளையும் விளக்குகிறது.</p>
 
 <terms>
 	<item>
-		<title>Id</title>
-		<p>Each transaction has an Id that is unique for a given account. Ids start with 1 and increase for every transaction added. Ids can't be changed, ids of removed transactions are not reused.</p>
+		<title>ஐடி</title>
+		<p>ஒவ்வொரு பரிவர்த்தனையிலும் கொடுக்கப்பட்ட கணக்கிற்கு தனித்துவமான ஒரு ஐடி உள்ளது. ஐடிகள் 1 உடன் தொடங்கி சேர்க்கப்பட்ட ஒவ்வொரு பரிவர்த்தனைக்கும் அதிகரிக்கும். ஐடிகளை மாற்ற முடியாது, அகற்றப்பட்ட பரிவர்த்தனைகளின் ஐடிகள் மீண்டும் பயன்படுத்தப்படவில்லை.</p>
 	</item>
 	<item>
-		<title>Description</title>
-		<p>No limit on length. It can't contain semicolon.</p>
+		<title>விவரம்</title>
+		<p>நீளத்திற்கு வரம்பு இல்லை. அதில் அரைக்காற்புள்ளி இருக்க முடியாது.</p>
 	</item>
 	<item>
-		<title>Amount</title>
+		<title>தொகை</title>
 		<p>A number in a format that is valid for your locale, see <em>System Currency</em> in <link xref="account">Account page</link> for details.</p>
 	</item>
 	<item>
-		<title>Type</title>
-		<p><em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="account">account settings</link> will be selected when you open a dialog to add new transaction.</p>
+		<title>வகை</title>
+		<p><em> வருமானம் </em> அல்லது <em> செலவு </em>. இயல்பாக <இணைப்பு xref="கணக்கு"> கணக்கு அமைப்புகள் </இணைப்பு> இல் தேர்ந்தெடுக்கப்பட்டவை புதிய பரிவர்த்தனையைச் சேர்க்க உரையாடலைத் திறக்கும்போது தேர்ந்தெடுக்கப்படும்.</p>
 	</item>
 	<item>
-		<title>Date</title>
-		<p>Any date can be selected, you can also create transactions for future dates.</p>
+		<title>திகதி</title>
+		<p>எந்த தேதியையும் தேர்ந்தெடுக்கலாம், எதிர்கால தேதிகளுக்கான பரிவர்த்தனைகளையும் நீங்கள் உருவாக்கலாம்.</p>
 	</item>
 	<item>
-		<title>Repeat Interval</title>
+		<title>இடைவெளி மீண்டும்</title>
 		<p>Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <em>source</em> transaction. <app>Denaro</app> will automatically generate <em>repeat</em> transactions for the dates up until today or a provided end date if set in the past. <em>Repeat</em> transactions can't be edited or deleted, only <em>source</em> can be modified. When you modify <em>source</em> transaction <app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</em> transactions. If you choose to disassociate, <em>repeat</em> transactions become normal transactions and can be edited or deleted separately.</p>
 	</item>
 	<item>
-		<title>Repeat End Date</title>
-		<p>End date for a transaction with repeat. It can't be earlier than or on the same day as start date.</p>
+		<title>இறுதி தேதியை மீண்டும் செய்யவும்</title>
+		<p>மீண்டும் மீண்டும் ஒரு பரிவர்த்தனைக்கான இறுதி தேதி. இது தொடக்க தேதியின் அதே நாளில் அல்லது அதே நாளில் இருக்க முடியாது.</p>
 	</item>
 	<item>
-		<title>Group</title>
-		<p>Each transaction can belong to only one group or none («Ungrouped» group).</p>
+		<title>குழு</title>
+		<p>ஒவ்வொரு பரிவர்த்தனையும் ஒரே ஒரு குழுவிற்கு மட்டுமே சொந்தமானது அல்லது எதுவுமில்லை («Ungrouped» குழு).</p>
 	</item>
 	<item>
-		<title>Color</title>
+		<title>நிறம்</title>
 		<p>A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <link xref="configuration">configuration</link>, but can be changed to any color.</p>
 	</item>
     <item>
-        <title>Tags</title>
-        <p>A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<code>,</code>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p>
+        <title>குறிச்சொற்கள்</title>
+        <p>பரிவர்த்தனைக்கான குறிச்சொற்களின் பட்டியல். ஒரு பரிவர்த்தனைக்கு வரம்பற்ற குறிச்சொற்கள் இருக்கலாம் (அல்லது குறிச்சொற்கள் இல்லை). குறிச்சொற்களில் கமா (<code>, </code>) தவிர வேறு எந்த எழுத்துக்களும் இருக்கலாம், மேலும் எந்த நீளமும் கொண்டிருக்கலாம், ஆனால் அவை குறுகிய முக்கிய வார்த்தைகளாக இருக்கும் என்று எதிர்பார்க்கப்படுகிறது. குழுக்களைப் பயன்படுத்தும் போது கூடுதல் வடிகட்டலுக்கு குறிச்சொற்கள் பயன்படுத்தப்பட வேண்டும். குறிச்சொற்கள் பரிவர்த்தனைகளில் மட்டுமே சேமிக்கப்படுகின்றன, இதன் விளைவாக பயன்படுத்தப்படாத குறிச்சொற்கள் கணக்கு மூடுவதில் தானாக மறைந்துவிடும்.</p>
     </item>
 	<item>
-		<title>Receipt</title>
-		<p>An image of a receipt for transaction. You can upload JPEG or PNG image or PDF document, but no matter the format it will be converted and saved as JPEG image. In case of PDF, only the first page will be saved. You can delete or upload another file anytime.</p>
+		<title>பற்றுச்சீட்டு</title>
+		<p>பரிவர்த்தனைக்கான ரசீதின் படம். நீங்கள் JPEG அல்லது PNG படம் அல்லது PDF ஆவணத்தை பதிவேற்றலாம், ஆனால் வடிவமாக இருந்தாலும் அது மாற்றப்பட்டு JPEG படமாக சேமிக்கப்படும். PDF ஐப் பொறுத்தவரை, முதல் பக்கம் மட்டுமே சேமிக்கப்படும். நீங்கள் எப்போது வேண்டுமானாலும் மற்றொரு கோப்பை நீக்கலாம் அல்லது பதிவேற்றலாம்.</p>
 	</item>
 	<item>
-		<title>Notes</title>
-		<p>A freeform text note to attach to transaction.</p>
+		<title>குறிப்புகள்</title>
+		<p>பரிவர்த்தனையுடன் இணைக்க ஒரு ஃப்ரீஃபார்ம் உரை குறிப்பு.</p>
 	</item>
 </terms>
 </page>

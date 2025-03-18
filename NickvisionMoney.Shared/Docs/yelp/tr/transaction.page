@@ -27,7 +27,7 @@
 		<p>No limit on length. It can't contain semicolon.</p>
 	</item>
 	<item>
-		<title>Amount</title>
+		<title>Tutar</title>
 		<p>A number in a format that is valid for your locale, see <em>System Currency</em> in <link xref="account">Account page</link> for details.</p>
 	</item>
 	<item>
@@ -47,7 +47,7 @@
 		<p>End date for a transaction with repeat. It can't be earlier than or on the same day as start date.</p>
 	</item>
 	<item>
-		<title>Group</title>
+		<title>Grup</title>
 		<p>Each transaction can belong to only one group or none («Ungrouped» group).</p>
 	</item>
 	<item>

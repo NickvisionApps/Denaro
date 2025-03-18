@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Import/Export</title>
+<title>आयात/निर्यात</title>
 <link rel="stylesheet" type="text/css" href="../C/C.css">
 <script type="text/javascript" src="../C/highlight.pack.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,103 +15,103 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body lang="hi" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Denaro Help">Denaro Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Import/Export</span></h1></div>
+<a class="trail" href="index.html" title="Denaro सहायता">Denaro सहायता</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">आयात/निर्यात</span></h1></div>
 <div class="region">
 <div class="contents pagewide">
 <div class="div"><div class="inner">
-<div class="title title-div"><h2><span class="title">Import Formats</span></h2></div>
+<div class="title title-div"><h2><span class="title">प्रारूप आयात करें</span></h2></div>
 <div class="region"><div class="contents"><div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
 <p class="p">Open Financial Exchange (<span class="file">.ofx</span>)</p>
-<p class="p">Dates should be in <span class="em">YYYYMMDD</span> format.</p>
+<p class="p">तिथियाँ <span class="em">YYYYMMDD</span> प्रारूप में होनी चाहिए।</p>
 </li>
 <li class="list">
 <p class="p">Quicken Interchange Format (<span class="file">.qif</span>)</p>
-<p class="p">Dates should be in English (US) format (<span class="em">MM/DD/YYYY</span>).</p>
+<p class="p">तारीखें अंग्रेजी (US) प्रारूप (<span class="em">MM/DD/YYYY</span>) में होनी चाहिए।</p>
 </li>
 <li class="list">
 <p class="p">Denaro CSV (<span class="file">.csv</span>)</p>
-<p class="p">❗ While CSV is a common format and some banks allow their users to export information as CSV, these files are in fact tables that can contain arbitrary data. Importing a CSV file created in other program will fail, because its data will not be compatible with what <span class="app">Denaro</span> tries to get from a file. The purpose of CSV import/export is to provide a way to add data to an account using external programs such as text editors and office suites. Import will only add new transactions without overriding existing ones. If you want to create a CSV file manually, this is the header that includes all columns <span class="app">Denaro</span> expects to find:</p>
+<p class="p">❗ जबकि CSV एक सामान्य प्रारूप है और कुछ बैंक अपने उपयोगकर्ताओं को CSV के रूप में जानकारी निर्यात करने की अनुमति देते हैं, ये फाइलें वास्तव में तालिकाएं हैं जिनमें मनमाना डेटा हो सकता है। अन्य प्रोग्राम में बनाई गई CSV फाइल को आयात करना विफल हो जाएगा, क्योंकि इसका डेटा <span class="app">Denaro</span> किसी फाइल से प्राप्त करने का प्रयास करने के साथ संगत नहीं होगा। CSV आयात/निर्यात का उद्देश्य टेक्स्ट एडिटर्स और ऑफिस सुइट्स जैसे इक्स्टर्नल प्रोग्रामों का उपयोग करके किसी खाते में डेटा जोड़ने का एक तरीका प्रदान करना है। आयात केवल मौजूदा लेन-देन को ओवरराइड किए बिना नए लेन-देन जोड़ेगा। यदि आप मैन्युअल रूप से एक CSV फाइल बनाना चाहते हैं, तो यह वह हेडर है जिसमें वे सभी कॉलम शामिल हैं जिन्हें <span class="app">Denaro</span> ढूंढने की अपेक्षा करता है:</p>
 <p class="p"><span class="code">ID;Date;Description;Type;RepeatInterval;RepeatFrom;RepeatEndDate;Amount;RGBA;UseGroupColor;Group;GroupName;GroupDescription;GroupRGBA</span></p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
 <div class="title title-item"><h2><span class="title">ID</span></h2></div>
-<p class="p">Transaction Id, should be unique for a given account. Ids start with 1.</p>
+<p class="p">लेनदेन Id, किसी दिए गए खाते के लिए अद्वितीय होनी चाहिए। Ids 1 से शुरू होती हैं।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">Date</span></h2></div>
-<p class="p">Transaction date (or start date in case of repeat transaction), should be in English (US) format (<span class="em">MM/DD/YYYY</span>).</p>
+<p class="p">लेन-देन की तारीख (या दोबारा लेन-देन के मामले में आरंभ की तारीख), अंग्रेजी (US) प्रारूप (<span class="em">MM/DD/YYYY</span>) में होनी चाहिए।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">Description</span></h2></div>
-<p class="p">Transaction description, it can contain any characters except semicolon.</p>
+<p class="p">लेन-देन विवरण, इसमें अर्धविराम को छोड़कर कोई भी वर्ण हो सकता है।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">Type</span></h2></div>
-<p class="p">Transaction type: 0 for income, 1 for expense.</p>
+<p class="p">लेन-देन प्रकार: आय के लिए 0, व्यय के लिए 1।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">RepeatInterval</span></h2></div>
-<p class="p">A number representing transaction repeat interval:</p>
-<p class="p">0 - Never</p>
-<p class="p">1 - Daily</p>
-<p class="p">2 - Weekly</p>
-<p class="p">7 - Biweekly</p>
-<p class="p">3 - Monthly</p>
-<p class="p">4 - Quarterly</p>
-<p class="p">5 - Yearly</p>
-<p class="p">6 - Biyearly</p>
-<p class="p">See <span class="em">Repeat Interval</span> in <span class="link"><a href="transaction.html" title="Transaction">transaction</a></span> page for details about repeat transactions.</p>
+<p class="p">लेन-देन दोहराव अंतराल का प्रतिनिधित्व करने वाली एक संख्या:</p>
+<p class="p">0 - कभी नहीं</p>
+<p class="p">1 - प्रतिदिन</p>
+<p class="p">2 - साप्ताहिक</p>
+<p class="p">7 - द्विसाप्ताहिक</p>
+<p class="p">3 - मासिक</p>
+<p class="p">4 - त्रैमासिक</p>
+<p class="p">5 - वार्षिक</p>
+<p class="p">6 - द्विवार्षिक</p>
+<p class="p">बार-बार होने वाले लेनदेन के विवरण के लिए <span class="link"><a href="transaction.html" title="लेन-देन">transaction</a></span> पेज में <span class="em">Repeat Interval</span> देखें।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">RepeatFrom</span></h2></div>
-<p class="p">Should be either an Id of source transaction or 0 if it's a source transaction or -1 if it's not repeat transaction.</p>
+<p class="p">या तो स्रोत लेनदेन की Id होनी चाहिए या यदि यह स्रोत लेनदेन है तो 0 या यदि यह दोहराव लेनदेन नहीं है तो -1 होना चाहिए।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">RepeatEndDate</span></h2></div>
-<p class="p">End date for repeat transaction, should be in English (US) format (<span class="em">MM/DD/YYYY</span>). Leave it empty if it's not repeat transaction.</p>
+<p class="p">दोबारा लेन-देन की अंतिम तिथि अंग्रेजी (US) प्रारूप (<span class="em">MM/DD/YYYY</span>) में होनी चाहिए। यदि यह दोबारा लेनदेन नहीं है तो इसे खाली छोड़ दें।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">Amount</span></h2></div>
-<p class="p">Transaction amount in English (US) format (<span class="em">123,456.78</span>).</p>
+<p class="p">अंग्रेजी (US) प्रारूप में लेनदेन राशि (<span class="em">123,456.78</span>)।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">RGBA</span></h2></div>
-<p class="p">Transaction color, should be in <span class="em">rgb(R,G,B)</span> format where <span class="em">R</span>, <span class="em">G</span> and <span class="em">B</span> are integers in range between 0 and 255.</p>
+<p class="p">लेन-देन का रंग, <span class="em">rgb(R,G,B)</span> प्रारूप में होना चाहिए जहां <span class="em">R</span>, <span class="em">G</span> और <span class="em">B</span> हैं 0 और 255 के बीच की सीमा में पूर्णांक।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">UseGroupColor</span></h2></div>
-<p class="p">Whether a transaction should use group color: 0 — false, 1 — true.</p>
+<p class="p">क्या लेन-देन में समूह रंग का उपयोग किया जाना चाहिए: 0 - गलत, 1 - सत्य।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">Group</span></h2></div>
-<p class="p">Transaction's group Id. Ids start with 1. For ungrouped transaction it should be -1 (not 0, this is incorrect value for group Id).</p>
+<p class="p">लेन-देन का समूह Id. Ids 1 से शुरू होती हैं। असमूहीकृत लेनदेन के लिए यह -1 होना चाहिए (0 नहीं, यह समूह Id के लिए गलत मान है)।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">GroupName</span></h2></div>
-<p class="p">Transaction's group name, should match group Id. It can contain any characters except semicolon. Leave it empty for ungrouped transaction, in any other cases it shouldn't be empty.</p>
+<p class="p">लेन-देन का समूह नाम, समूह Id से मेल खाना चाहिए। इसमें अर्धविराम को छोड़कर कोई भी वर्ण हो सकता है। असमूहीकृत लेन-देन के लिए इसे खाली छोड़ दें, किसी भी अन्य स्थिति में यह खाली नहीं होना चाहिए।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">GroupDescription</span></h2></div>
-<p class="p">Transaction's group description, should match group Id. It can contain any characters except semicolon and can be empty. Leave it empty for ungrouped transaction.</p>
+<p class="p">लेन-देन का समूह विवरण, समूह Id से मेल खाना चाहिए। इसमें अर्धविराम को छोड़कर कोई भी अक्षर हो सकता है और यह खाली हो सकता है। असमूहीकृत लेनदेन के लिए इसे खाली छोड़ दें।</p>
 </li>
 <li class="list">
 <div class="title title-item"><h2><span class="title">GroupRGBA</span></h2></div>
-<p class="p">Group color, should be in <span class="em">rgb(R,G,B)</span> format where <span class="em">R</span>, <span class="em">G</span> and <span class="em">B</span> are integers in range between 0 and 255.</p>
+<p class="p">समूह का रंग, <span class="em">rgb(R,G,B)</span> प्रारूप में होना चाहिए जहां <span class="em">R</span>, <span class="em">G</span> और <span class="em">B</span> हैं 0 और 255 के बीच की सीमा में पूर्णांक।</p>
 </li>
 </ul></div></div></div>
-<p class="p">Receipt and notes are not present in CSV.</p>
+<p class="p">रसीद और नोट्स CSV में मौजूद नहीं हैं।</p>
 </li>
 </ul></div></div></div></div></div>
 </div></div>
 <div class="div"><div class="inner">
-<div class="title title-div"><h2><span class="title">Export Formats</span></h2></div>
+<div class="title title-div"><h2><span class="title">निर्यात प्रारूप</span></h2></div>
 <div class="region"><div class="contents">
-<p class="p">You can select whether to export all information or only from the current view. If you select the current view, currently displayed transactions will be exported in the same order in which they are shown.</p>
+<p class="p">आप चुन सकते हैं कि सारी जानकारी निर्यात करनी है या केवल वर्तमान दृश्य से। यदि आप वर्तमान दृश्य का चयन करते हैं, तो वर्तमान में प्रदर्शित लेनदेन उसी क्रम में निर्यात किए जाएंगे जिसमें वे दिखाए गए हैं।</p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
 <p class="p">Portable Document Format (<span class="file">.pdf</span>)</p>
-<p class="p">A file will contain an account information, a list of transactions and images of receipts. Transactions are colored like in the application, but colors are modified by making them half-transparent in order to make black text always clearly visible. You can set a password for an exported file.</p>
+<p class="p">एक फाइल में खाते की जानकारी, लेनदेन की एक सूची और प्राप्तियों की छवियां होंगी। लेन-देन एप्लिकेशन की तरह रंगीन होते हैं, लेकिन काले पाठ को हमेशा स्पष्ट रूप से दिखाई देने के लिए रंगों को आधा-पारदर्शी बनाकर संशोधित किया जाता है। आप किसी निर्यातित फाइल के लिए पासवर्ड सेट कर सकते हैं।</p>
 </li>
 <li class="list"><p class="p">Denaro CSV (<span class="file">.csv</span>)</p></li>
 </ul></div></div></div>
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="hgroup pagewide"></div>
 <div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">अधिक जानकारी</span></h2></div>
-<div class="region"><ul><li class="links "><a href="index.html" title="Denaro Help">Denaro Help</a></li></ul></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Denaro सहायता">Denaro सहायता</a></li></ul></div>
 </div></div></div>
 </div></section>
 </div>
@@ -132,17 +132,17 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="hgroup"><h2><span class="title">के बारे में</span></h2></div>
 <div class="region"><div class="contents">
 <div class="copyrights">
-<div class="copyright">© 2023 Fyodor Sobolev</div>
-<div class="copyright">© 2023 Nicholas Logozzo</div>
+<div class="copyright">© 2023 फ्योडोर सोबोलेव</div>
+<div class="copyright">© 2023 निकोलस लोगोज़ो</div>
 </div>
 <div class="credits">
 <div class="credits-authors">
 <div class="title"><span class="title">लेखक</span></div>
-<ul class="credits"><li>Fyodor Sobolev</li></ul>
+<ul class="credits"><li>फ्योडोर सोबोलेव</li></ul>
 </div>
 <div class="credits-publishers">
 <div class="title"><span class="title">द्वारा प्रकाशित</span></div>
-<ul class="credits"><li>Nicholas Logozzo</li></ul>
+<ul class="credits"><li>निकोलस लोगोज़ो</li></ul>
 </div>
 <div class="credits-blank"></div>
 <div class="credits-blank"></div>

@@ -2,69 +2,69 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="transaction" its:version="2.0" xml:lang="hi">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Transaction 🧾</title>
+	<title type="link">लेनदेन 🧾</title>
 	<credit type="author copyright">
-		<name>Fyodor Sobolev</name>
+		<name>फ्योडोर सोबोलेव</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<credit type="publisher copyright">
-		<name>Nicholas Logozzo</name>
+		<name>निकोलस लोगोज़ो</name>
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Transaction</title>
-<p>This page explains all properties of transactions in <app>Denaro</app>.</p>
+<title>लेन-देन</title>
+<p>यह पृष्ठ <app>Denaro</app> में लेनदेन के सभी गुणों की व्याख्या करता है।</p>
 
 <terms>
 	<item>
-		<title>Id</title>
-		<p>Each transaction has an Id that is unique for a given account. Ids start with 1 and increase for every transaction added. Ids can't be changed, ids of removed transactions are not reused.</p>
+		<title>आईडी</title>
+		<p>प्रत्येक लेनदेन में एक Id होती है जो किसी दिए गए खाते के लिए अद्वितीय होती है। Id 1 से शुरू होती हैं और जोड़े गए प्रत्येक लेनदेन के लिए बढ़ती हैं। Id को बदला नहीं जा सकता, हटाए गए लेनदेन की Id का पुन: उपयोग नहीं किया जाता है।</p>
 	</item>
 	<item>
-		<title>Description</title>
-		<p>No limit on length. It can't contain semicolon.</p>
+		<title>विवरण</title>
+		<p>लंबाई की कोई सीमा नहीं. इसमें अर्धविराम नहीं हो सकता।</p>
 	</item>
 	<item>
-		<title>Amount</title>
-		<p>A number in a format that is valid for your locale, see <em>System Currency</em> in <link xref="account">Account page</link> for details.</p>
+		<title>राशि</title>
+		<p>प्रारूप में एक संख्या जो आपके स्थान के लिए मान्य है, विवरण के लिए <link xref="account">खाता पृष्ठ</link> में <em>सिस्टम मुद्रा</em> देखें।</p>
 	</item>
 	<item>
-		<title>Type</title>
-		<p><em>Income</em> or <em>Expense</em>. By default the one chosen in <link xref="account">account settings</link> will be selected when you open a dialog to add new transaction.</p>
+		<title>प्रकार</title>
+		<p><em>आय</em> या <em>व्यय</em>. जब आप नया लेन-देन जोड़ने के लिए एक संवाद खोलेंगे तो डिफ़ॉल्ट रूप से <link xref="account">खाता सेटिंग</link> में से एक चुना जाएगा।</p>
 	</item>
 	<item>
-		<title>Date</title>
-		<p>Any date can be selected, you can also create transactions for future dates.</p>
+		<title>तारीख</title>
+		<p>कोई भी तारीख चुनी जा सकती है, आप भविष्य की तारीखों के लिए लेनदेन भी बना सकते हैं।</p>
 	</item>
 	<item>
-		<title>Repeat Interval</title>
-		<p>Use this option to create a recurring transaction. After you add transaction with repeat interval, this transaction will become a <em>source</em> transaction. <app>Denaro</app> will automatically generate <em>repeat</em> transactions for the dates up until today or a provided end date if set in the past. <em>Repeat</em> transactions can't be edited or deleted, only <em>source</em> can be modified. When you modify <em>source</em> transaction <app>Denaro</app> will ask if you want to modify or disassociate <em>repeat</em> transactions. If you choose to disassociate, <em>repeat</em> transactions become normal transactions and can be edited or deleted separately.</p>
+		<title>अंतराल दोहराएं</title>
+		<p>आवर्ती लेनदेन बनाने के लिए इस विकल्प का उपयोग करें। आपके द्वारा दोहराव अंतराल के साथ लेनदेन जोड़ने के बाद, यह लेनदेन एक <em>स्रोत</em> लेनदेन बन जाएगा। <app>Denaro</app> स्वचालित रूप से आज तक की तारीखों के लिए या अतीत में सेट की गई अंतिम तिथि के लिए <em>दोहराया</em> लेनदेन उत्पन्न करेगा। <em>दोहराएँ</em> लेनदेन को संपादित या हटाया नहीं जा सकता, केवल <em>स्रोत</em> को संशोधित किया जा सकता है। जब आप <em>स्रोत</em> लेनदेन को संशोधित करते हैं तो <app>Denaro</app> आपसे पूछेगा कि क्या आप <em>दोहराएँ</em> लेनदेन को संशोधित या अलग करना चाहते हैं। यदि आप अलग होना चुनते हैं, तो <em>दोहराएँ</em> लेनदेन सामान्य लेनदेन बन जाते हैं और इन्हें अलग से संपादित या हटाया जा सकता है।</p>
 	</item>
 	<item>
-		<title>Repeat End Date</title>
-		<p>End date for a transaction with repeat. It can't be earlier than or on the same day as start date.</p>
+		<title>समाप्ति तिथि दोहराएं</title>
+		<p>दोहराव वाले लेन-देन की समाप्ति तिथि। यह प्रारंभ दिनांक से पहले या उसी दिन नहीं हो सकता।</p>
 	</item>
 	<item>
-		<title>Group</title>
-		<p>Each transaction can belong to only one group or none («Ungrouped» group).</p>
+		<title>समूह</title>
+		<p>प्रत्येक लेन-देन केवल एक समूह से संबंधित हो सकता है या किसी से भी नहीं («अनग्रुप्ड» समूह) से संबंधित हो सकता है।</p>
 	</item>
 	<item>
-		<title>Color</title>
-		<p>A color for transaction. Can be set to use either a group color or a unique color. When selecting unique color, it will be set by default to the color selected in <link xref="configuration">configuration</link>, but can be changed to any color.</p>
+		<title>रंग</title>
+		<p>लेन-देन के लिए एक रंग. समूह रंग या अद्वितीय रंग का उपयोग करने के लिए सेट किया जा सकता है। अद्वितीय रंग का चयन करते समय, इसे डिफ़ॉल्ट रूप से <link xref="configuration">कॉन्फ़िगरेशन</link> में चयनित रंग पर सेट किया जाएगा, लेकिन इसे किसी भी रंग में बदला जा सकता है।</p>
 	</item>
     <item>
-        <title>Tags</title>
-        <p>A list of tags for transaction. A transaction can have unlimited number of tags (or have no tags). Tags can contain any characters except comma (<code>,</code>), and have any length, but they are expected to be short keywords. Tags are meant to be used for additional filtering when using groups is not enough. Tags are only saved in transactions themselves, and as result unused tags disappear automatically on account closing.</p>
+        <title>टैग</title>
+        <p>लेन-देन के लिए टैग की एक सूची. किसी लेन-देन में असीमित संख्या में टैग हो सकते हैं (या कोई टैग नहीं)। टैग में अल्पविराम (<code>,</code>) को छोड़कर कोई भी वर्ण हो सकता है, और उनकी लंबाई कोई भी हो सकती है, लेकिन उनसे छोटे कीवर्ड होने की उम्मीद की जाती है। टैग का उपयोग अतिरिक्त फ़िल्टरिंग के लिए किया जाता है जब समूहों का उपयोग पर्याप्त नहीं होता है। टैग केवल लेनदेन में ही सहेजे जाते हैं, और परिणामस्वरूप अप्रयुक्त टैग खाता बंद होने पर स्वचालित रूप से गायब हो जाते हैं।</p>
     </item>
 	<item>
-		<title>Receipt</title>
-		<p>An image of a receipt for transaction. You can upload JPEG or PNG image or PDF document, but no matter the format it will be converted and saved as JPEG image. In case of PDF, only the first page will be saved. You can delete or upload another file anytime.</p>
+		<title>रसीद</title>
+		<p>लेन-देन की रसीद की एक छवि. आप JPEG या PNG छवि या PDF दस्तावेज़ अपलोड कर सकते हैं, लेकिन प्रारूप कोई भी हो, इसे JPEG छवि के रूप में परिवर्तित और सहेजा जाएगा। PDF के मामले में, केवल पहला पृष्ठ ही सहेजा जाएगा। आप किसी भी समय दूसरी फाइल को हटा या अपलोड कर सकते हैं।</p>
 	</item>
 	<item>
-		<title>Notes</title>
-		<p>A freeform text note to attach to transaction.</p>
+		<title>नोट्स</title>
+		<p>लेन-देन के साथ संलग्न करने के लिए एक फ्रीफॉर्म टेक्स्ट नोट।</p>
 	</item>
 </terms>
 </page>
