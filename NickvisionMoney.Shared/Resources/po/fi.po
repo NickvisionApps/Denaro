@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 22:10-0500\n"
-"PO-Revision-Date: 2025-02-21 09:55+0000\n"
+"PO-Revision-Date: 2025-03-24 19:02+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
 "app/fi/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.1-dev\n"
+"X-Generator: Weblate 5.11-dev\n"
 
 #: ../../../Controllers/AccountViewController.cs:508
 msgid "(Copy)"
@@ -771,9 +771,8 @@ msgstr "Ilman tunnistetta"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:450
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:1131
-#, fuzzy
 msgid "Upcoming transactions"
-msgstr "Ei tapahtumia"
+msgstr "Tulevat tapahtumat"
 
 #: ../../../../NickvisionMoney.GNOME/Views/AccountView.cs:975
 msgid "Update Only Source"
@@ -879,7 +878,7 @@ msgstr "Aseta uusi salasana tai poista salasana."
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:153
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:223
 msgid "Use Custom Currency"
-msgstr "Käytä mukautettua valuuttaa"
+msgstr "Käytä omavalintaista valuuttaa"
 
 #: NickvisionMoney.GNOME/Blueprints/account_settings_dialog.blp:169
 #: NickvisionMoney.GNOME/Blueprints/new_account_dialog.blp:236
@@ -1128,9 +1127,8 @@ msgid "Result"
 msgstr "Tulos"
 
 #: NickvisionMoney.GNOME/Blueprints/currency_converter_dialog.blp:87
-#, fuzzy
 msgid "Copy Result Amount"
-msgstr "Ei viimeisimpiä tilejä"
+msgstr "Kopioi tuloksen summa"
 
 #: NickvisionMoney.GNOME/Blueprints/dashboard_view.blp:13
 msgid "All Accounts"
@@ -1520,7 +1518,6 @@ msgid "Enter the conversion rates manually"
 msgstr "Kirjoita muunnos tähän"
 
 #: NickvisionMoney.GNOME/Blueprints/transfer_dialog.blp:117
-#, fuzzy
 msgctxt "Button"
 msgid "Transfer"
 msgstr "Siirto"
