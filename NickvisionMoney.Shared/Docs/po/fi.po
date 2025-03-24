@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2025-03-18 12:22-0400\n"
-"PO-Revision-Date: 2025-02-21 09:55+0000\n"
+"PO-Revision-Date: 2025-03-24 19:02+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-money/"
 "docs/fi/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.1-dev\n"
+"X-Generator: Weblate 5.11-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -73,7 +73,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:29
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:30
@@ -86,7 +86,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:33
 msgid "Account Type"
-msgstr ""
+msgstr "Tilin tyyppi"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:34
@@ -124,7 +124,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:45
 msgid "System Currency"
-msgstr ""
+msgstr "Järjestelmän valuutta"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:46
@@ -176,7 +176,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:57
 msgid "Use Custom Currency"
-msgstr ""
+msgstr "Käytä omavalintaista valuuttaa"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:58
@@ -188,7 +188,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:61
 msgid "Custom Currency Symbol"
-msgstr ""
+msgstr "Omavalintaisen valuutan symboli"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:62
@@ -198,7 +198,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:65
 msgid "Custom Currency Code"
-msgstr ""
+msgstr "Omavalintaisen valuutan koodi"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:66
@@ -268,7 +268,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/account.page:88
 msgid "Password"
-msgstr ""
+msgstr "Salasana"
 
 #. (itstool) path: item/p
 #: yelp/C/account.page:89
@@ -337,12 +337,12 @@ msgstr ""
 #: yelp/C/configuration.page:8
 msgctxt "link"
 msgid "Configuration 🔧"
-msgstr ""
+msgstr "Määritys 🔧"
 
 #. (itstool) path: page/title
 #: yelp/C/configuration.page:20
 msgid "Configuration"
-msgstr ""
+msgstr "Määritys"
 
 #. (itstool) path: page/p
 #: yelp/C/configuration.page:21
@@ -360,7 +360,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:25
 msgid "Theme"
-msgstr ""
+msgstr "Teema"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:26
@@ -423,7 +423,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:45
 msgid "Savings Account Color"
-msgstr ""
+msgstr "Säästötilin väri"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:46
@@ -435,7 +435,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:49
 msgid "Business Account Color"
-msgstr ""
+msgstr "Yritystilin väri"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:50
@@ -488,17 +488,17 @@ msgstr ""
 #: yelp/C/import-export.page:8
 msgctxt "link"
 msgid "Import/Export 📤"
-msgstr ""
+msgstr "Tuo/vie 📤"
 
 #. (itstool) path: page/title
 #: yelp/C/import-export.page:20
 msgid "Import/Export"
-msgstr ""
+msgstr "Tuo/vie"
 
 #. (itstool) path: div/title
 #: yelp/C/import-export.page:22
 msgid "Import Formats"
-msgstr ""
+msgstr "Tuontimuodot"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:26
@@ -555,42 +555,42 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:56
 msgid "0 - Never"
-msgstr ""
+msgstr "0 - Ei koskaan"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:57
 msgid "1 - Daily"
-msgstr ""
+msgstr "1 - Päivittäin"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:58
 msgid "2 - Weekly"
-msgstr ""
+msgstr "2 - Viikottain"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:59
 msgid "7 - Biweekly"
-msgstr ""
+msgstr "7 - Kahden viikon välein"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:60
 msgid "3 - Monthly"
-msgstr ""
+msgstr "3 - Kuukausittain"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:61
 msgid "4 - Quarterly"
-msgstr ""
+msgstr "4 - Neljännesvuosittain"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:62
 msgid "5 - Yearly"
-msgstr ""
+msgstr "5 - Vuosittain"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:63
 msgid "6 - Biyearly"
-msgstr ""
+msgstr "6 - Kahden vuoden välein"
 
 #. (itstool) path: item/p
 #: yelp/C/import-export.page:64
@@ -668,7 +668,7 @@ msgstr ""
 #. (itstool) path: div/title
 #: yelp/C/import-export.page:108
 msgid "Export Formats"
-msgstr ""
+msgstr "Vientimuodot"
 
 #. (itstool) path: div/p
 #: yelp/C/import-export.page:109
@@ -691,18 +691,18 @@ msgstr ""
 #: yelp/C/index.page:7
 msgctxt "link"
 msgid "Denaro Help"
-msgstr ""
+msgstr "Denaro-ohje"
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:8
 msgctxt "text"
 msgid "Denaro Help"
-msgstr ""
+msgstr "Denaro-ohje"
 
 #. (itstool) path: page/title
 #: yelp/C/index.page:20
 msgid "<_:media-1/> Denaro Help"
-msgstr ""
+msgstr "<_:media-1/> Denaro-ohje"
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:21
